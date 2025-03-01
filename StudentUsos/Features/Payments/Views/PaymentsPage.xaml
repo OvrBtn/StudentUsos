@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:CustomContentPageNotAnimated
+    x:Class="StudentUsos.Features.Payments.Views.PaymentsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:StudentUsos.Controls"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:DataType="views:PaymentsViewModel"
+    xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
+    xmlns:views="using:StudentUsos.Features.Payments.Views"
+    xmlns:models="using:StudentUsos.Features.Payments.Models">
+
+    <controls:CustomContentPageNotAnimated.Resources>
+        <ResourceDictionary>
+            <Style x:Key="additionalInfo" TargetType="Label">
+                <Setter Property="FontSize" Value="13" />
+                <Setter Property="TextColor" Value="{StaticResource Gray300}" />
+            </Style>
+        </ResourceDictionary>
+    </controls:CustomContentPageNotAnimated.Resources>
+
+    <StackLayout toolkit:StateContainer.CurrentState="{Binding MainStateKey}">
+        <toolkit:StateContainer.StateViews>
+
+            <ActivityIndicator toolkit:StateView.StateKey="Loading" />
+
+            <Label toolkit:StateView.StateKey="Empty" Style="{StaticResource CenteredLabel}" Text="{x:Static strings:LocalizedStrings.PaymentsPage_NoPayments}" />
+
+            <CollectionView toolkit:StateView.StateKey="Loaded" ItemsSource="{Binding Payments}" VerticalOptions="FillAndExpand">
+                <CollectionView.Header>
+                    <Label Margin="30,30,30,10" FontSize="18" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.Payments}" />
+                </CollectionView.Header>
+                <CollectionView.Footer>
+                    <StackLayout Margin="30,0,30,30" />
+                </CollectionView.Footer>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Payment">
+                        <Frame Margin="30,10,30,10" Padding="0">
+                            <Grid ColumnDefinitions="7.5,*">
+                                <StackLayout Grid.Column="0" BackgroundColor="{StaticResource PaymentPaid}" IsVisible="{Binding IsPaid}" />
+                                <StackLayout Grid.Column="1" Margin="20,20,20,20">
+                                    <Label Margin="0,0,0,5" Text="{Binding Description}" />
+                                    <StackLayout Orientation="Horizontal" Spacing="5">
+                                        <Label Text="{x:Static strings:LocalizedStrings.PaymentsPage_Amount}" />
+                                        <Label Text="{Binding TotalAmount}" />
+                                        <Label Text="{Binding CurrencyId}" />
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Spacing="5">
+                                        <Label Text="{x:Static strings:LocalizedStrings.PaymentsPage_PaymentDeadline}" />
+                                        <Label Text="{Binding PaymentDeadlineDateTime, StringFormat='{0:dd.MM.yyyy}'}" />
+                                    </StackLayout>
+                                    <Grid ColumnDefinitions="auto, auto" ColumnSpacing="5">
+                                        <Label Grid.Column="0" Style="{StaticResource additionalInfo}" Text="{x:Static strings:LocalizedStrings.Type}" />
+                                        <Label Grid.Column="1" Style="{StaticResource additionalInfo}" Text="{Binding TypeDescription}" />
+                                    </Grid>
+                                    <Label Style="{StaticResource additionalInfo}" Text="{Binding FacultyName}" />
+                                    <StackLayout Margin="0,5,0,0">
+                                        <Label Margin="0,0,0,-6" Text="{x:Static strings:LocalizedStrings.PaymentsPage_AccountNumber}" />
+                                        <Grid ColumnDefinitions="*,30">
+                                            <Label Grid.Column="0" Text="{Binding AccountNumber}" />
+                                            <controls:CustomButton Grid.Column="1" Command="{Binding CopyAccountNumberToClipboardCommand}" WidthRequest="40">
+                                                <Image Margin="5" Source="copy_to_clipboard.png" VerticalOptions="CenterAndExpand" WidthRequest="20" />
+                                            </controls:CustomButton>
+                                        </Grid>
+                                    </StackLayout>
+                                </StackLayout>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </toolkit:StateContainer.StateViews>
+    </StackLayout>
+
+</controls:CustomContentPageNotAnimated>

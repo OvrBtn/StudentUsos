@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:CustomContentPageNotAnimated
+    x:Class="StudentUsos.Features.Groups.Views.GroupsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:StudentUsos.Controls"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
+    xmlns:views="using:StudentUsos.Features.Groups.Views"
+    xmlns:models="using:StudentUsos.Features.Groups.Models"
+    xmlns:personModels="using:StudentUsos.Features.Person.Models"
+    x:DataType="views:GroupsViewModel">
+
+    <StackLayout toolkit:StateContainer.CurrentState="{Binding GroupsListStateKey}" VerticalOptions="FillAndExpand" CompressedLayout.IsHeadless="True">
+        <toolkit:StateContainer.StateViews>
+
+            <ActivityIndicator toolkit:StateView.StateKey="Loading" />
+
+            <Label toolkit:StateView.StateKey="LoadingError" Padding="20" Style="{StaticResource CenteredLabel}" Text="{x:Static strings:LocalizedStrings.Errors_LoadingError}" />
+
+            <CollectionView Margin="0,0,0,0" toolkit:StateView.StateKey="Loaded" ItemsSource="{Binding GroupsGroupedObservable}" VerticalOptions="FillAndExpand" 
+                            IsGrouped="True" CompressedLayout.IsHeadless="True">
+                <CollectionView.Footer>
+                    <StackLayout Margin="15" CompressedLayout.IsHeadless="True"></StackLayout>
+                </CollectionView.Footer>
+
+                <CollectionView.GroupHeaderTemplate>
+                    <DataTemplate x:DataType="models:GroupsGrouped">
+                        <Label Text="{Binding TermName, Mode=OneTime}" Margin="30,30,30,20" FontAttributes="Bold" FontSize="16" 
+                               HorizontalOptions="Center"/>
+                    </DataTemplate>
+                </CollectionView.GroupHeaderTemplate>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Group">
+                        <Border Margin="30,5,30,5" Padding="0">
+                            <Grid>
+
+                                <StackLayout Padding="15" BackgroundColor="{StaticResource BackgroundColor2}">
+                                    <Label Text="{Binding CourseName, Mode=OneTime}" />
+                                    <!--replaced with single property binding for better performance-->
+                                    <Label FontSize="12" Text="{Binding ClassTypeAndGroupNumber, Mode=OneTime}" />
+                                    <!--<StackLayout Orientation="Horizontal">
+                                    <Label FontSize="12" Text="{Binding ClassType}" />
+                                    <Label FontSize="12" Text=", " />
+                                    <Label FontSize="12" Text="{x:Static strings:LocalizedStrings.Group}" TextTransform="Lowercase"/>
+                                    <Label FontSize="12" Text=": " />
+                                    <Label FontSize="12" Text="{Binding GroupNumber}" />
+                                </StackLayout>-->
+                                    <StackLayout Margin="0,5,0,0" BindableLayout.ItemsSource="{Binding Lecturers, Mode=OneTime}">
+                                        <BindableLayout.ItemTemplate>
+                                            <DataTemplate x:DataType="personModels:Lecturer">
+                                                <Label FontSize="12" LineHeight="0" Text="{Binding FullName, Mode=OneTime}" TextColor="{StaticResource Gray300}" />
+                                            </DataTemplate>
+                                        </BindableLayout.ItemTemplate>
+                                    </StackLayout>
+                                </StackLayout>
+
+                                <Button  Command="{Binding ClickedCommand, Mode=OneTime}" BackgroundColor="Transparent"/>
+
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </toolkit:StateContainer.StateViews>
+    </StackLayout>
+
+</controls:CustomContentPageNotAnimated>

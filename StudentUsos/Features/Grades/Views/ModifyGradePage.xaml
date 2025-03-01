@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:CustomBottomSheet
+    x:Class="StudentUsos.Features.Grades.Views.ModifyGradePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:StudentUsos.Controls"
+    x:DataType="views:ModifyGradeViewModel"
+    xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
+    xmlns:views="using:StudentUsos.Features.Grades.Views">
+
+    <StackLayout Margin="0" HorizontalOptions="CenterAndExpand">
+
+        <StackLayout Orientation="Horizontal" Spacing="5" Margin="30,0,30,10" HorizontalOptions="CenterAndExpand">
+            <Label Text="{x:Static strings:LocalizedStrings.GradesPage_FirstTerm}"></Label>
+            <Frame Margin="3,3,5,3" Padding="8" BackgroundColor="{Binding FinalGradeGroup.FirstTermGrade.ValueSymbol, Converter={StaticResource GradeSymbolToColorConverter}}" 
+                   BorderColor="Transparent">
+                <Label Text="{Binding FinalGradeGroup.FirstTermGrade.ValueSymbol, Converter={StaticResource EmptyStringToStringConverter}, ConverterParameter={x:Static strings:LocalizedStrings.LackOf}}" />
+            </Frame>
+        </StackLayout>
+        <CollectionView ItemsSource="{Binding Options}">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"></LinearItemsLayout>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="views:Option">
+                    <Button Text="{Binding Value}" BackgroundColor="{StaticResource Primary}" 
+                            Command="{Binding EditFirstTermCommand, Source={RelativeSource AncestorType={x:Type views:ModifyGradeViewModel}}}" 
+                            CommandParameter="{Binding Value}" CornerRadius="15"/>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <StackLayout Orientation="Horizontal" Spacing="5" Margin="30,20,30,10" HorizontalOptions="CenterAndExpand">
+            <Label Text="{x:Static strings:LocalizedStrings.GradesPage_SecondTerm}"></Label>
+            <Frame Margin="3,3,5,3" Padding="8" BackgroundColor="{Binding FinalGradeGroup.SecondTermGrade.ValueSymbol, Converter={StaticResource GradeSymbolToColorConverter}}" 
+                   IsVisible="True" BorderColor="Transparent">
+                <Label Text="{Binding FinalGradeGroup.SecondTermGrade.ValueSymbol, Converter={StaticResource EmptyStringToStringConverter}, ConverterParameter={x:Static strings:LocalizedStrings.LackOf}}" />
+            </Frame>
+        </StackLayout>
+        <CollectionView ItemsSource="{Binding Options}">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"></LinearItemsLayout>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="views:Option">
+                    <Button Text="{Binding Value}" BackgroundColor="{StaticResource Primary}" 
+                       Command="{Binding EditSecondTermCommand, Source={RelativeSource AncestorType={x:Type views:ModifyGradeViewModel}}}" 
+                       CommandParameter="{Binding Value}" CornerRadius="15"/>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </StackLayout>
+
+</controls:CustomBottomSheet>

@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:CustomBottomSheet
+    x:Class="StudentUsos.Features.Grades.Views.GradeDetailsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:StudentUsos.Controls"
+    x:DataType="views:GradeDetailsViewModel"
+    HalfExpandedRatio="0.6"
+    xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
+    xmlns:views="using:StudentUsos.Features.Grades.Views"
+    xmlns:models="using:StudentUsos.Features.Grades.Models">
+
+    <StackLayout Margin="20,0">
+        <StackLayout Padding="20,0,20,0" HorizontalOptions="FillAndExpand">
+            <Grid ColumnDefinitions="*,30" RowDefinitions="auto, auto">
+                <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="FillAndExpand" Text="{Binding FinalGradeGroup.CourseName}" />
+                <Label Grid.Column="0" Grid.Row="1" Margin="0,0,0,1" FontSize="12" Text="{Binding FinalGradeGroup.FirstTermGrade.ClassType}" />
+                <Image Grid.Column="1" Grid.RowSpan="2" WidthRequest="20" Source="pencil_square128.png"
+                    Opacity="0"></Image>
+            </Grid>
+            <StackLayout Orientation="Horizontal" Margin="0,0,0,1">
+                <Label Text="ECTS " FontSize="12" TextColor="{StaticResource Gray300}"></Label>
+                <Label FontSize="12" Text="{Binding FinalGradeGroup.FirstTermGrade.EctsPoints}" TextColor="{StaticResource Gray300}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Spacing="5" Margin="0,0,0,0"
+                         IsVisible="{Binding FinalGradeGroup.FirstTermGrade.CountsIntoAverage, Converter={StaticResource StringToBoolConverter}}">
+                <Label Text="{x:Static strings:LocalizedStrings.GradesPage_CountIntoAverage}" FontSize="12" TextColor="{StaticResource Gray300}"/>
+                <Label Text="{x:Static strings:LocalizedStrings.Yes}" FontSize="12" TextColor="{StaticResource Gray300}"
+                       IsVisible="{Binding FinalGradeGroup.FirstTermGrade.CountsIntoAverage, Converter={StaticResource StringBoolToBoolConverter}}"/>
+                <Label Text="{x:Static strings:LocalizedStrings.No}" FontSize="12" TextColor="{StaticResource Gray300}"
+                       IsVisible="{Binding FinalGradeGroup.FirstTermGrade.CountsIntoAverage, Converter={StaticResource StringBoolToBoolNegatedConverter}}"/>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
+                <Label FontSize="12" Text="{x:Static strings:LocalizedStrings.GradesPage_FirstTerm}" />
+                <Frame Margin="3,3,5,3" Padding="6" BackgroundColor="{Binding FinalGradeGroup.FirstTermGrade.ValueSymbol, Converter={StaticResource GradeSymbolToColorConverter}}" 
+                       IsVisible="{Binding FinalGradeGroup.FirstTermGrade.ValueSymbol, Converter={StaticResource StringToBoolConverter}}">
+                    <Label FontSize="12" 
+                           Text="{Binding FinalGradeGroup.FirstTermGrade.ValueSymbol, Converter={StaticResource EmptyStringToStringConverter}, 
+                        ConverterParameter={x:Static strings:LocalizedStrings.LackOf}}" />
+                </Frame>
+                <Label FontSize="12" 
+                       Text="{Binding FinalGradeGroup.FirstTermGrade.ValueDescription, Converter={StaticResource EmptyStringToStringConverter}, 
+                    ConverterParameter={x:Static strings:LocalizedStrings.LackOf}}" 
+                       IsVisible="{Binding FinalGradeGroup.FirstTermGrade.IsModified, Converter={StaticResource NegateBoolConverter}}"/>
+            </StackLayout>
+            <StackLayout IsVisible="{Binding FinalGradeGroup.FirstTermGrade.IsSetAndNotModified}" Orientation="Horizontal" Spacing="3">
+                <Label FontSize="10" Text="{Binding FinalGradeGroup.FirstTermGrade.ModificationInfo}" TextColor="{StaticResource Gray300}" />
+            </StackLayout>
+            <StackLayout IsVisible="{Binding FinalGradeGroup.FirstTermGrade.Comment, Converter={StaticResource StringToBoolConverter}}" Orientation="Horizontal" Spacing="3">
+                <Label FontSize="10" Text="{x:Static strings:LocalizedStrings.Comment}" TextColor="{StaticResource Gray300}" />
+                <Label FontSize="10" Text="{Binding FinalGradeGroup.FirstTermGrade.Comment}" TextColor="{StaticResource Gray300}" />
+            </StackLayout>
+
+            <StackLayout Margin="0,3,0,0" Spacing="5" IsVisible="{Binding FinalGradeGroup.SecondTermGrade.IsSetOrModified}" Orientation="Horizontal">
+                <Label FontSize="12" Text="{x:Static strings:LocalizedStrings.GradesPage_SecondTerm}" />
+                <Frame Margin="3,3,5,3" Padding="6" BackgroundColor="{Binding FinalGradeGroup.SecondTermGrade.ValueSymbol, Converter={StaticResource GradeSymbolToColorConverter}}" 
+                       IsVisible="{Binding FinalGradeGroup.SecondTermGrade.ValueSymbol, Converter={StaticResource StringToBoolConverter}}">
+                    <Label FontSize="12" Text="{Binding FinalGradeGroup.SecondTermGrade.ValueSymbol, Converter={StaticResource EmptyStringToStringConverter}, ConverterParameter={x:Static strings:LocalizedStrings.LackOf}}" />
+                </Frame>
+                <Label FontSize="12" Text="{Binding FinalGradeGroup.SecondTermGrade.ValueDescription, Converter={StaticResource EmptyStringToStringConverter}, ConverterParameter={x:Static strings:LocalizedStrings.LackOf}}" 
+                       IsVisible="{Binding FinalGradeGroup.SecondTermGrade.IsModified, Converter={StaticResource NegateBoolConverter}}"/>
+            </StackLayout>
+
+            <StackLayout IsVisible="{Binding FinalGradeGroup.SecondTermGrade.IsSetAndNotModified}" Orientation="Horizontal" Spacing="3">
+                <Label FontSize="10" Text="{Binding FinalGradeGroup.SecondTermGrade.ModificationInfo}" TextColor="{StaticResource Gray300}" />
+            </StackLayout>
+            <StackLayout IsVisible="{Binding FinalGradeGroup.SecondTermGrade.Comment, Converter={StaticResource StringToBoolConverter}}" Orientation="Horizontal" Spacing="3">
+                <Label FontSize="10" Text="{x:Static strings:LocalizedStrings.Comment}" TextColor="{StaticResource Gray300}" />
+                <Label FontSize="10" Text="{Binding FinalGradeGroup.SecondTermGrade.Comment}" TextColor="{StaticResource Gray300}" />
+            </StackLayout>
+
+            <StackLayout Margin="0,20,0,0">
+
+                <StackLayout BindableLayout.ItemsSource="{Binding FinalGradeGroup.ChartEntries}" IsVisible="True" Orientation="Horizontal" Spacing="10">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="models:ChartData">
+                            <StackLayout HorizontalOptions="FillAndExpand">
+                                <Label FontSize="11" HorizontalTextAlignment="Center" Text="{Binding Value, StringFormat='{0}%', Mode=OneTime}" VerticalOptions="EndAndExpand" />
+                                <StackLayout Margin="0,3,0,3" BackgroundColor="{StaticResource Primary}" HeightRequest="{Binding ValueScaled, Mode=OneTime}" VerticalOptions="End" />
+                                <Label FontSize="11" HorizontalTextAlignment="Center" Text="{Binding Label, Mode=OneTime}" VerticalOptions="End" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+
+            </StackLayout>
+
+        </StackLayout>
+    </StackLayout>
+
+</controls:CustomBottomSheet>

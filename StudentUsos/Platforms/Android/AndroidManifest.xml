@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+	<!--android:allowBackup="false" because Preferences should be cleared after uninstalling the app
+	check https://learn.microsoft.com/en-us/dotnet/maui/platform-integration/storage/secure-storage?view=net-maui-8.0&tabs=android#enable-or-disable-backup-->
+	<application android:allowBackup="false" android:supportsRtl="true" android:icon="@mipmap/app_logo" android:label="Studencki USOS"></application>
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	<!--local notifications plugin persmissions-->
+	<uses-permission android:name="android.permission.WAKE_LOCK" />
+	<!--Required so that the plugin can reschedule notifications upon a reboot-->
+	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+	<uses-permission android:name="android.permission.VIBRATE" />
+	<!--<uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />-->
+	<uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+	<uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+</manifest>

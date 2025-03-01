@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="StudentUsos.Features.Dashboard.Views.DashboardPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:StudentUsos.Controls"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
+    xmlns:views="clr-namespace:StudentUsos.Features.Dashboard.Views"
+    x:Name="self"
+    BackgroundColor="{StaticResource BackgroundColor}"
+    x:DataType="views:DashboardViewModel">
+
+    <ContentPage.Resources>
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Layouts/ActivitiesDataTemplate.xaml"/>
+                <ResourceDictionary Source="../Layouts/CalendarDataTemplates.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+        <views:CalendarTemplateSelector x:Key="calendarTemplateSelector" GoogleCalendarTemplate="{StaticResource GoogleCalendarDataTemplate}" UsosapiTemplate="{StaticResource USOSAPIDataTemplate}" />
+
+        <Style x:Key="quickButtonsLabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0,3,0,0" />
+        </Style>
+
+    </ContentPage.Resources>
+
+    <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+        <Frame Margin="30, 0, 30, 0" Padding="0" 
+               AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional" AbsoluteLayout.LayoutBounds="0,0.99,1,50">
+            <controls:CustomTabBarXaml></controls:CustomTabBarXaml>
+        </Frame>
+
+        <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+            <ScrollView VerticalOptions="FillAndExpand">
+                <StackLayout VerticalOptions="FillAndExpand">
+
+                    <Grid Margin="30" ColumnDefinitions="*,auto" ColumnSpacing="20">
+                        <StackLayout toolkit:StateContainer.CurrentState="{Binding UserInfoStateKey}" Grid.Column="0">
+                            <toolkit:StateContainer.StateViews>
+
+                                <Label toolkit:StateView.StateKey="LoadingError" FontSize="35" Style="{StaticResource CenteredLabel}" Text="{x:Static strings:LocalizedStrings.Errors_LoadingError}" />
+                                <StackLayout toolkit:StateView.StateKey="Loading" />
+
+                                <Grid toolkit:StateView.StateKey="Loaded" HorizontalOptions="StartAndExpand"
+                                             ColumnDefinitions="auto,*" VerticalOptions="CenterAndExpand">
+                                    <Label Grid.Column="0" FontSize="30" Text="{x:Static strings:LocalizedStrings.Dashboard_Hello}" FontAttributes="Bold" VerticalOptions="StartAndExpand"/>
+                                    <Label Grid.Column="1" FontSize="30" Text="{Binding FirstName, StringFormat=', {0}!'}" FontAttributes="Bold" LineBreakMode="TailTruncation"/>
+                                </Grid>
+
+                            </toolkit:StateContainer.StateViews>
+                        </StackLayout>
+
+                        <StackLayout toolkit:StateContainer.CurrentState="{Binding StudentNumberStateKey}" Grid.Column="1">
+                            <toolkit:StateContainer.StateViews>
+
+                                <StackLayout toolkit:StateView.StateKey="LoadingError" />
+
+                                <Border toolkit:StateView.StateKey="Loading" Grid.Column="0" Style="{StaticResource BorderWithShadow}" Padding="12"
+                                        BackgroundColor="{StaticResource Primary}">
+                                    <StackLayout>
+                                        <Image HeightRequest="20" Opacity="0" Source="person_vcard.png" />
+                                        <Label Opacity="0" Style="{StaticResource quickButtonsLabelStyle}" Text="160000" />
+                                    </StackLayout>
+                                </Border>
+
+                                <Border toolkit:StateView.StateKey="Loaded" Grid.Column="0" Style="{StaticResource BorderWithShadow}" Padding="12"
+                                        BackgroundColor="{StaticResource Primary}">
+                                    <StackLayout>
+                                        <Image HeightRequest="20" Source="person_vcard.png" />
+                                        <Label Style="{StaticResource quickButtonsLabelStyle}" Text="{Binding IndexNumber}" />
+                                    </StackLayout>
+                                </Border>
+
+                            </toolkit:StateContainer.StateViews>
+                        </StackLayout>
+                    </Grid>
+
+
+                    <StackLayout toolkit:StateContainer.CurrentState="{Binding MainContentStateKey}" Spacing="10" VerticalOptions="FillAndExpand">
+                        <toolkit:StateContainer.StateViews>
+
+                            <StackLayout toolkit:StateView.StateKey="Loading" >
+
+                                <StackLayout Margin="30,20">
+                                    <Frame WidthRequest="200" HeightRequest="20"></Frame>
+                                    <StackLayout Margin="0,10,0,0">
+                                        <Frame HeightRequest="150"></Frame>
+                                    </StackLayout>
+                                </StackLayout>
+
+                                <StackLayout Margin="0,30" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="10">
+                                    <Frame>
+                                        <Label FontSize="20" Text="5.0" Opacity="0"/>
+                                    </Frame>
+                                    <StackLayout Spacing="5" VerticalOptions="CenterAndExpand">
+                                        <Border WidthRequest="150" HeightRequest="15"></Border>
+                                        <Border WidthRequest="150" HeightRequest="15"></Border>
+                                        <Border WidthRequest="150" HeightRequest="15"></Border>
+                                    </StackLayout>
+                                </StackLayout>
+
+                                <StackLayout Spacing="10" Margin="30,0">
+                                    <Frame WidthRequest="200" HeightRequest="20" Margin="0,10,0,0"></Frame>
+                                    <Frame HeightRequest="100"></Frame>
+                                    <Frame HeightRequest="100"></Frame>
+                                    <Frame HeightRequest="100"></Frame>
+                                    <Frame HeightRequest="100"></Frame>
+                                </StackLayout>
+
+                            </StackLayout>
+
+                            <StackLayout toolkit:StateView.StateKey="Loaded">
+                                <StackLayout toolkit:StateContainer.CurrentState="{Binding ActivitiesStateKey}">
+                                    <toolkit:StateContainer.StateViews>
+
+                                        <StackLayout toolkit:StateView.StateKey="Loading" />
+
+                                        <StackLayout Padding="20" toolkit:StateView.StateKey="LoadingError">
+                                            <Label Margin="0,0,0,5" FontSize="18" HorizontalTextAlignment="Center" Text="{Binding ActivitiesTitle}" FontAttributes="Bold"/>
+                                            <Label Style="{StaticResource CenteredLabel}" Text="{x:Static strings:LocalizedStrings.Errors_LoadingError}" />
+                                        </StackLayout>
+
+                                        <StackLayout Padding="20" toolkit:StateView.StateKey="ConnectionError">
+                                            <Label Margin="0,0,0,5" FontSize="18" HorizontalTextAlignment="Center" Text="{Binding ActivitiesTitle}" FontAttributes="Bold" />
+                                            <Label Style="{StaticResource CenteredLabel}" Text="{x:Static strings:LocalizedStrings.Errors_USOSAPIConnectionError}" />
+                                        </StackLayout>
+
+                                        <StackLayout Padding="20" toolkit:StateView.StateKey="Empty">
+                                            <Label Margin="0,0,0,10" FontSize="18" HorizontalTextAlignment="Center" Text="{Binding ActivitiesTitle}" FontAttributes="Bold"/>
+                                            <Label HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.DayOff}" />
+                                        </StackLayout>
+
+                                        <StackLayout Margin="0,20,0,10" toolkit:StateView.StateKey="Loaded">
+                                            <Label Margin="0,0,0,5" FontSize="18" HorizontalTextAlignment="Center" Text="{Binding ActivitiesTitle}" FontAttributes="Bold"/>
+                                            <StackLayout>
+                                                <CarouselView x:Name="carouselView" Margin="0,5,0,10" CurrentItem="{Binding CurrentItemInCarousel, Mode=TwoWay}"
+                                                              IndicatorView="activitiesIndicator" ItemsSource="{Binding Activities}" Loop="False" MinimumHeightRequest="20"
+                                                              ItemTemplate="{x:StaticResource activitiesDataTemplate}"/>
+                                                <IndicatorView x:Name="activitiesIndicator" Margin="0,2,0,0" />
+                                            </StackLayout>
+                                        </StackLayout>
+
+                                    </toolkit:StateContainer.StateViews>
+                                </StackLayout>
+
+                                <StackLayout toolkit:StateContainer.CurrentState="{Binding LatestFinalGradeStateKey}">
+                                    <toolkit:StateContainer.StateViews>
+
+                                        <StackLayout toolkit:StateView.StateKey="Loading" />
+
+                                        <StackLayout toolkit:StateView.StateKey="Empty" />
+
+                                        <StackLayout toolkit:StateView.StateKey="LoadingError" />
+
+                                        <Grid Margin="0,15" toolkit:StateView.StateKey="Loaded" HorizontalOptions="CenterAndExpand">
+                                            <StackLayout Margin="15" Orientation="Horizontal" Spacing="10">
+                                                <Border Padding="15" StrokeThickness="0" StrokeShape="RoundRectangle 15" VerticalOptions="Center"
+                                                    BackgroundColor="{Binding LatestFinalGrade.ValueSymbol, Converter={StaticResource GradeSymbolToColorConverter}}" >
+                                                    <Label FontSize="20" Text="{Binding LatestFinalGrade.ValueSymbol}" />
+                                                </Border>
+                                                <StackLayout VerticalOptions="CenterAndExpand">
+                                                    <Label FontSize="13" Text="{Binding LatestFinalGrade.CourseName}" />
+                                                    <Label Margin="0,0,0,3" FontSize="12" Text="{Binding LatestFinalGrade.ClassType}" />
+                                                    <StackLayout Orientation="Horizontal" Spacing="3">
+                                                        <Label FontSize="11" Text="{Binding LatestFinalGrade.DateModified}" TextColor="{StaticResource Gray300}" />
+                                                        <Label FontSize="11" Text="{Binding LatestFinalGrade.ModificationAuthorFirstName}" TextColor="{StaticResource Gray300}" />
+                                                        <Label FontSize="11" Text="{Binding LatestFinalGrade.ModificationAuthorLastName}" TextColor="{StaticResource Gray300}" />
+                                                    </StackLayout>
+                                                </StackLayout>
+                                            </StackLayout>
+                                            <Button BackgroundColor="Transparent"
+                                                    Command="{Binding OpenGradesPageCommand,Source={RelativeSource AncestorType={x:Type views:DashboardViewModel}}}"></Button>
+                                        </Grid>
+
+                                    </toolkit:StateContainer.StateViews>
+                                </StackLayout>
+
+                                <StackLayout Margin="30,10,30,70" toolkit:StateContainer.CurrentState="{Binding CalendarStateKey}">
+                                    <toolkit:StateContainer.StateViews>
+
+                                        <StackLayout toolkit:StateView.StateKey="Loading" />
+
+                                        <StackLayout Padding="20" toolkit:StateView.StateKey="LoadingError">
+                                            <Label Margin="0,0,0,10" FontSize="18" HorizontalTextAlignment="Center" FontAttributes="Bold"
+                                                   Text="{x:Static strings:LocalizedStrings.Dashboard_NextEvents}" />
+                                            <Label Style="{StaticResource CenteredLabel}" Text="{x:Static strings:LocalizedStrings.Errors_LoadingError}" />
+                                        </StackLayout>
+
+                                        <StackLayout Padding="20" toolkit:StateView.StateKey="ConnectionError">
+                                            <Label Margin="0,0,0,10" FontSize="18" HorizontalTextAlignment="Center" FontAttributes="Bold"
+                                                   Text="{x:Static strings:LocalizedStrings.Dashboard_NextEvents}" />
+                                            <Label Style="{StaticResource CenteredLabel}" Text="{x:Static strings:LocalizedStrings.Errors_USOSAPIConnectionError}" />
+                                        </StackLayout>
+
+                                        <StackLayout toolkit:StateView.StateKey="Loaded">
+                                            <Label Margin="0,0,0,10" FontSize="18" HorizontalTextAlignment="Center" FontAttributes="Bold"
+                                                   Text="{x:Static strings:LocalizedStrings.Dashboard_NextEvents}" />
+                                            <StackLayout BindableLayout.ItemTemplateSelector="{StaticResource calendarTemplateSelector}" BindableLayout.ItemsSource="{Binding CalendarEvents}">
+                                            </StackLayout>
+                                        </StackLayout>
+
+                                    </toolkit:StateContainer.StateViews>
+                                </StackLayout>
+                            </StackLayout>
+
+                        </toolkit:StateContainer.StateViews>
+
+                    </StackLayout>
+
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+
+    </AbsoluteLayout>
+
+</ContentPage>

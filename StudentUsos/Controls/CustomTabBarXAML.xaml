@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StudentUsos.Controls.CustomTabBarXaml"
+             BackgroundColor="{StaticResource Gray600}">
+
+    <ContentView.Resources>
+        <Style TargetType="Image">
+            <Setter Property="HeightRequest" Value="25"></Setter>
+        </Style>
+        <Style TargetType="Grid">
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="CornerRadius" Value="0"></Setter>
+            <Setter Property="BackgroundColor" Value="Transparent"></Setter>
+        </Style>
+    </ContentView.Resources>
+
+    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+        <Grid x:Name="mainPageTab">
+            <Image Source="tabbar_house.png"></Image>
+            <Button Clicked="GoToMainPageButton_OnClick"></Button>
+        </Grid>
+        <Grid x:Name="activitiesTab">
+            <Image Source="tabbar_timetable.png"></Image>
+            <Button Clicked="GoToActivitiesPageButton_OnClick"></Button>
+        </Grid>
+        <Grid x:Name="moreTab">
+            <Image Source="tabbar_grid.png"></Image>
+            <Button Clicked="GoToMorePageButton_OnClick"></Button>
+        </Grid>
+    </StackLayout>
+
+</ContentView>

@@ -1,0 +1,115 @@
+name: Run MAUI Tests on Android
+
+on:
+  workflow_dispatch: 
+  push:
+    branches:
+      - master
+      - main
+      - dev
+      
+  pull_request:
+    branches:
+      - master
+      - main
+      - dev
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore MAUI workload cache
+        id: cache-maui
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.nuget/packages
+            ~/.dotnet/sdk-manifests
+            ~/.dotnet/workload
+            ~/.dotnet/workload.json
+          key: maui-workload-${{ runner.os }}-${{ hashFiles('**/global.json') }}
+
+      - name: Install MAUI workload
+        if: steps.cache-maui.outputs.cache-hit != 'true'
+        run: dotnet workload install maui
+
+      - name: Add DevExpress NuGet Source
+        run: dotnet nuget add source "https://nuget.devexpress.com/${{ secrets.DEVEXPRESS_NUGET_KEY }}/api" --name DevExpress
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Create google-services.json
+        run: |
+          echo '${{ secrets.GOOGLE_SERVICES_JSON }}' > StudentUsos/Platforms/Android/Resources/google-services.json
+        shell: bash
+
+      - name: Build solution
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Cache Build Artifacts
+        uses: actions/cache@v3
+        with:
+          path: |
+            **/bin
+            **/obj
+          key: build-artifacts-${{ runner.os }}-${{ github.sha }}
+
+  unit-tests-shared:
+    needs: build
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Restore Build Artifacts
+        uses: actions/cache@v3
+        with:
+          path: |
+            **/bin
+            **/obj
+          key: build-artifacts-${{ runner.os }}-${{ github.sha }}
+
+      - name: Run Unit Tests
+        run: dotnet test --configuration Release --no-build --filter "Category=Unit_SharedBusinessLogic"
+
+  unit-tests-server-dependent:
+    needs: build
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Restore Build Artifacts
+        uses: actions/cache@v3
+        with:
+          path: |
+            **/bin
+            **/obj
+          key: build-artifacts-${{ runner.os }}-${{ github.sha }}
+
+      - name: Run Integration Tests
+        run: dotnet test --configuration Release --no-build --filter "Category=Unit_ServerDependent"
+
+  save-cache:
+    needs: [build, unit-tests-shared, unit-tests-server-dependent]
+    runs-on: windows-latest
+    if: always()
+    steps:
+      - name: Save MAUI workload cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.nuget/packages
+            ~/.dotnet/sdk-manifests
+            ~/.dotnet/workload
+            ~/.dotnet/workload.json
+          key: maui-workload-${{ runner.os }}-${{ hashFiles('**/global.json') }}

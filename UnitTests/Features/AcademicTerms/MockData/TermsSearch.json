@@ -1,0 +1,218 @@
+[
+  {
+    "id": "2023",
+    "name": {
+      "pl": "Rok akademicki 2023/2024",
+      "en": "Academic year 2023/2024"
+    },
+    "start_date": "2023-10-01",
+    "end_date": "2024-09-30",
+    "order_key": 310,
+    "finish_date": "2024-09-30",
+    "is_active": true
+  },
+  {
+    "id": "2023Z",
+    "name": {
+      "pl": "Semestr zimowy 2023/2024",
+      "en": "Winter semester 2023/2024"
+    },
+    "start_date": "2023-10-01",
+    "end_date": "2024-01-31",
+    "order_key": 320,
+    "finish_date": "2024-02-25",
+    "is_active": true
+  },
+  {
+    "id": "2023L",
+    "name": {
+      "pl": "Semestr letni 2023/2024",
+      "en": "Summer semester 2023/2024"
+    },
+    "start_date": "2024-02-26",
+    "end_date": "2024-06-16",
+    "order_key": 330,
+    "finish_date": "2024-09-30",
+    "is_active": true
+  },
+  {
+    "id": "2024",
+    "name": {
+      "pl": "Rok akademicki 2024/2025",
+      "en": "Academic year 2024/2025"
+    },
+    "start_date": "2024-10-01",
+    "end_date": "2025-09-30",
+    "order_key": 340,
+    "finish_date": "2025-09-30",
+    "is_active": true
+  },
+  {
+    "id": "2024Z",
+    "name": {
+      "pl": "Semestr zimowy 2024/2025",
+      "en": "Winter semester 2024/2025"
+    },
+    "start_date": "2024-10-01",
+    "end_date": "2025-01-31",
+    "order_key": 350,
+    "finish_date": "2025-02-28",
+    "is_active": true
+  },
+  {
+    "id": "2024L",
+    "name": {
+      "pl": "Semestr letni 2024/2025",
+      "en": "Summer semester 2024/2025"
+    },
+    "start_date": "2025-03-01",
+    "end_date": "2025-06-22",
+    "order_key": 360,
+    "finish_date": "2025-09-30",
+    "is_active": false
+  },
+  {
+    "id": "2025",
+    "name": {
+      "pl": "Rok akademicki 2025/2026",
+      "en": "Academic year 2025/2026"
+    },
+    "start_date": "2025-10-01",
+    "end_date": "2026-09-30",
+    "order_key": 370,
+    "finish_date": "2026-09-30",
+    "is_active": false
+  },
+  {
+    "id": "2025Z",
+    "name": {
+      "pl": "Semestr zimowy 2025/2026",
+      "en": "Winter semester 2025/2026"
+    },
+    "start_date": "2025-10-01",
+    "end_date": "2026-02-28",
+    "order_key": 380,
+    "finish_date": "2026-02-28",
+    "is_active": false
+  },
+  {
+    "id": "2025L",
+    "name": {
+      "pl": "Semestr letni 2025/2026",
+      "en": "Summer semester 2025/2026"
+    },
+    "start_date": "2026-03-01",
+    "end_date": "2026-09-30",
+    "order_key": 390,
+    "finish_date": "2026-09-30",
+    "is_active": false
+  },
+  {
+    "id": "2026",
+    "name": {
+      "pl": "Rok akademicki 2026/2027",
+      "en": "Academic year 2026/2027"
+    },
+    "start_date": "2026-10-01",
+    "end_date": "2027-09-30",
+    "order_key": 400,
+    "finish_date": "2027-09-30",
+    "is_active": false
+  },
+  {
+    "id": "2026Z",
+    "name": {
+      "pl": "Semestr zimowy 2026/2027",
+      "en": "Winter semester 2026/2027"
+    },
+    "start_date": "2026-10-01",
+    "end_date": "2027-02-28",
+    "order_key": 410,
+    "finish_date": "2027-02-28",
+    "is_active": false
+  },
+  {
+    "id": "2026L",
+    "name": {
+      "pl": "Semestr letni 2026/2027",
+      "en": "Summer semester 2026/2027"
+    },
+    "start_date": "2027-03-01",
+    "end_date": "2027-06-30",
+    "order_key": 420,
+    "finish_date": "2027-09-30",
+    "is_active": false
+  },
+  {
+    "id": "2027",
+    "name": {
+      "pl": "Rok akademicki 2027/2028",
+      "en": "Academic year 2027/2028"
+    },
+    "start_date": "2027-10-01",
+    "end_date": "2028-09-30",
+    "order_key": 430,
+    "finish_date": "2028-09-30",
+    "is_active": false
+  },
+  {
+    "id": "2027Z",
+    "name": {
+      "pl": "Semestr zimowy 2027/2028",
+      "en": "Winter semester 2027/2028"
+    },
+    "start_date": "2027-10-01",
+    "end_date": "2028-02-28",
+    "order_key": 440,
+    "finish_date": "2028-02-28",
+    "is_active": false
+  },
+  {
+    "id": "2027L",
+    "name": {
+      "pl": "Semestr letni 2027/2028",
+      "en": "Summer semester 2027/2028"
+    },
+    "start_date": "2028-03-01",
+    "end_date": "2028-09-30",
+    "order_key": 450,
+    "finish_date": "2028-09-30",
+    "is_active": false
+  },
+  {
+    "id": "2028",
+    "name": {
+      "pl": "Rok akademicki 2028/2029",
+      "en": "Academic year 2028/2029"
+    },
+    "start_date": "2028-10-01",
+    "end_date": "2029-09-30",
+    "order_key": 460,
+    "finish_date": "2029-09-30",
+    "is_active": false
+  },
+  {
+    "id": "2028Z",
+    "name": {
+      "pl": "Semestr zimowy 2028/2029",
+      "en": "Winter semester 2028/2029"
+    },
+    "start_date": "2028-10-01",
+    "end_date": "2029-02-28",
+    "order_key": 470,
+    "finish_date": "2029-02-28",
+    "is_active": false
+  },
+  {
+    "id": "2028L",
+    "name": {
+      "pl": "Semestr letni 2028/2029",
+      "en": "Summer semester 2028/2029"
+    },
+    "start_date": "2029-03-01",
+    "end_date": "2029-09-30",
+    "order_key": 480,
+    "finish_date": "2029-09-30",
+    "is_active": false
+  }
+]

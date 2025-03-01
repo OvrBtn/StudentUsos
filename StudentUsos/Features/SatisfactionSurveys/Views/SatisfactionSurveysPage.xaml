@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:CustomContentPageNotAnimated
+    x:Class="StudentUsos.Features.SatisfactionSurveys.Views.SatisfactionSurveysPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:StudentUsos.Controls"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
+    xmlns:views="using:StudentUsos.Features.SatisfactionSurveys.Views"
+    xmlns:models="using:StudentUsos.Features.SatisfactionSurveys.Models"
+    x:DataType="views:SatisfactionSurveysViewModel">
+
+    <StackLayout Margin="00,30,0,0" toolkit:StateContainer.CurrentState="{Binding MainStateKey}">
+        <toolkit:StateContainer.StateViews>
+
+            <Label toolkit:StateView.StateKey="LoadingError" Padding="20" Style="{StaticResource CenteredLabel}" Text="{x:Static strings:LocalizedStrings.Errors_LoadingError}" />
+            <Label toolkit:StateView.StateKey="ConnectionError" Padding="20" Style="{StaticResource CenteredLabel}" Text="{x:Static strings:LocalizedStrings.Errors_USOSAPIConnectionError}" />
+
+            <Label toolkit:StateView.StateKey="Empty" Padding="20" Style="{StaticResource CenteredLabel}" Text="{x:Static strings:LocalizedStrings.SatisfactionSurveysPage_Empty}" />
+
+            <ActivityIndicator toolkit:StateView.StateKey="Loading"></ActivityIndicator>
+
+            <StackLayout toolkit:StateView.StateKey="Loaded" VerticalOptions="FillAndExpand">
+
+                <Label Text="{x:Static strings:LocalizedStrings.SurveysPage_SurveysToFill}" HorizontalTextAlignment="Center" FontSize="18" Margin="0,0,0,10"></Label>
+                <CollectionView ItemsSource="{Binding Surveys}" VerticalOptions="FillAndExpand">
+                    <CollectionView.Footer>
+                        <StackLayout Margin="15"></StackLayout>
+                    </CollectionView.Footer>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:SatisfactionSurvey">
+                            <Frame Padding="0" Margin="30,5,30,5">
+                                <controls:CustomButton Command="{Binding ClickedCommand}">
+                                <StackLayout Padding="20" BackgroundColor="{StaticResource BackgroundColor2}">
+                                    <Label Text="{Binding Group.CourseName}"></Label>
+                                    <Label FontSize="12" Text="{Binding Group.ClassType}"></Label>
+                                    <StackLayout Orientation="Horizontal" CompressedLayout.IsHeadless="True" Margin="0,5,0,0">
+                                        <Label FontSize="12" LineHeight="0" Text="{Binding Lecturer.FullName}" TextColor="{StaticResource Gray300}" />
+                                    </StackLayout>
+                                </StackLayout>
+                            </controls:CustomButton>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+
+        </toolkit:StateContainer.StateViews>
+    </StackLayout>
+
+
+</controls:CustomContentPageNotAnimated>

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StudentUsos.Controls.FloatingButton"
+             xmlns:controls="clr-namespace:StudentUsos.Controls"
+             BackgroundColor="Transparent"
+             x:Name="this">
+    
+    <Grid RowDefinitions="auto,auto" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        <ContentView Grid.Row="0" x:Name="contentButtons" IsVisible="False" Content="{Binding ContentTemplate,Source={RelativeSource AncestorType={x:Type controls:FloatingButton}}}" />
+        <controls:CustomButton Grid.Row="1" CornerRadius="{Binding ButtonCornerRadius,Source={RelativeSource AncestorType={x:Type controls:FloatingButton}}}" OnClick="CustomButton_OnClick"
+                               HorizontalOptions="EndAndExpand">
+            <controls:CustomButton.Shadow>
+                <Shadow
+                    Brush="Black"
+                    Opacity="0.5"
+                    Offset="0,0"
+                    Radius="5"/>
+            </controls:CustomButton.Shadow>
+            <ContentView Content="{Binding ButtonTemplate,Source={RelativeSource AncestorType={x:Type controls:FloatingButton}}}"></ContentView>
+        </controls:CustomButton>
+    </Grid>
+
+</ContentView>

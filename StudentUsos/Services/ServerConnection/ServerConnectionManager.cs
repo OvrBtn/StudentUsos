@@ -1,0 +1,312 @@
+﻿using StudentUsos.Features.Authorization.Services;
+using System.Security.Cryptography;
+using System.Text;
+using System.Text.Json;
+
+namespace StudentUsos.Services.ServerConnection
+{
+    public class ServerConnectionManager : IServerConnectionManager
+    {
+        ILogger logger;
+        public ServerConnectionManager(ILogger logger)
+        {
+            this.logger = logger;
+        }
+
+        string apiVersion = "1";
+
+        const int HttpClientDefaultTimeoutSeconds = 10;
+        HttpClient httpClient = new() { Timeout = TimeSpan.FromSeconds(HttpClientDefaultTimeoutSeconds) };
+
+        const string QueryMethodKey = "querymethod";
+        const string QueryArgumentsKey = "queryarguments";
+        const string InternalAccessTokenKey = "internalaccesstoken";
+        const string UsosAccessTokenKey = "usosaccesstoken";
+        const string InternalAccessTokenSecretKey = "internalaccesstokensecret";
+        const string HashKey = "hash";
+        const string TimestampKey = "timestamp";
+        const string InstallationKey = "installation";
+        const string UsosConsumerKeyKey = "usosconsumerkey";
+        const string InternalConsumerKeyKey = "internalconsumerkey";
+        const string InternalConsumerKeySecretKey = "internalconsumerkeysecret";
+        const string VersionKey = "version";
+
+
+        public async Task<string?> SendRequestToUsosAsync(string methodName,
+            Dictionary<string, string> arguments,
+            Action<string>? onRequestFinished = null,
+            int timeout = HttpClientDefaultTimeoutSeconds)
+        {
+            try
+            {
+                Dictionary<string, string> payload = new();
+                Dictionary<string, string> headers = new();
+                payload.Add(QueryMethodKey, methodName);
+                payload.Add(QueryArgumentsKey, JsonSerializer.Serialize(arguments));
+                headers.Add(InternalAccessTokenKey, AuthorizationService.InternalAccessToken);
+                headers.Add(UsosAccessTokenKey, AuthorizationService.AccessToken);
+
+                Dictionary<string, string> dataToHash = new() { { InternalAccessTokenSecretKey, AuthorizationService.InternalAccessTokenSecret } };
+
+                var result = await SendGetRequestInternalAsync("usos/query", payload, headers, dataToHash, timeout);
+                if (result == null || result.IsSuccess == false)
+                {
+                    return null;
+                }
+                TryLogging(methodName, result.Response);
+                onRequestFinished?.Invoke(result.Response);
+                return result.Response;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public async Task<RequestResult?> SendGetRequestAsync(string endpoint,
+            Dictionary<string, string> requestPayload,
+            Dictionary<string, string>? additionalDataToHashButNotSend = null,
+            int timeout = HttpClientDefaultTimeoutSeconds)
+        {
+            try
+            {
+                return await SendGetRequestInternalAsync(endpoint, requestPayload, new(), additionalDataToHashButNotSend, timeout);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        async Task<RequestResult?> SendGetRequestInternalAsync(string endpoint,
+            Dictionary<string, string> requestPayload,
+            Dictionary<string, string> requestHeaders,
+            Dictionary<string, string>? additionalDataToHashButNotSend = null,
+            int timeout = HttpClientDefaultTimeoutSeconds)
+        {
+            try
+            {
+                string fullPath = Secrets.Default.ServerUrl + "api/v" + apiVersion + "/" + endpoint;
+
+                AddStaticPublicArguments(ref requestHeaders);
+                var dictionaryToHash = AddStaticSecretArguments(requestHeaders);
+                if (additionalDataToHashButNotSend != null) AddToDictionary(ref dictionaryToHash, additionalDataToHashButNotSend);
+                AddToDictionary(ref dictionaryToHash, requestPayload);
+
+                string hash = CreateHash(fullPath, dictionaryToHash);
+                requestHeaders.Add(HashKey, hash);
+
+                fullPath = fullPath + "?" + ParseDictionaryArgumentsToUrlFormat(requestPayload);
+
+                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, fullPath);
+                foreach (var item in requestHeaders)
+                {
+                    httpRequestMessage.Headers.Add(item.Key, item.Value);
+                }
+
+                var cancellationTokenSource = new CancellationTokenSource(TimeSpan.FromSeconds(timeout));
+                var response = await httpClient.SendAsync(httpRequestMessage, cancellationTokenSource.Token);
+                var result = await response.Content.ReadAsStringAsync();
+                return new(response.IsSuccessStatusCode, response, result);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public async Task<RequestResult?> SendAuthorizedGetRequestAsync(string endpoint,
+            Dictionary<string, string> requestPayload,
+            AuthorizationMode authorization,
+            int timeout = HttpClientDefaultTimeoutSeconds)
+        {
+            Dictionary<string, string> headers = new();
+            Dictionary<string, string> dataToHash = new();
+            if (authorization == AuthorizationMode.Full)
+            {
+                headers[InternalAccessTokenKey] = AuthorizationService.InternalAccessToken;
+                headers[UsosAccessTokenKey] = AuthorizationService.AccessToken;
+                dataToHash[InternalAccessTokenSecretKey] = AuthorizationService.InternalAccessTokenSecret;
+            }
+            return await SendGetRequestInternalAsync(endpoint, requestPayload, headers, dataToHash, timeout);
+        }
+
+        public async Task<RequestResult?> SendPostRequestAsync(string endpoint,
+            string postBody,
+            Dictionary<string, string> requestHeaders,
+            Dictionary<string, string>? additionalDataToHashButNotSend = null,
+            int timeout = HttpClientDefaultTimeoutSeconds)
+        {
+            try
+            {
+                string fullPath = Secrets.Default.ServerUrl + "api/v" + apiVersion + "/" + endpoint;
+
+                AddStaticPublicArguments(ref requestHeaders);
+                var dictionaryToHash = AddStaticSecretArguments(requestHeaders);
+                if (additionalDataToHashButNotSend != null) AddToDictionary(ref dictionaryToHash, additionalDataToHashButNotSend);
+
+                string hash = CreateHash(fullPath, dictionaryToHash, postBody);
+                requestHeaders.Add(HashKey, hash);
+
+                var cancellationTokenSource = new CancellationTokenSource(TimeSpan.FromSeconds(timeout));
+                using StringContent content = new(postBody, Encoding.UTF8, "application/json");
+
+                using var requestMessage = new HttpRequestMessage(HttpMethod.Post, fullPath)
+                {
+                    Content = content,
+                };
+                foreach (var item in requestHeaders)
+                {
+                    requestMessage.Headers.Add(item.Key, item.Value);
+                }
+
+                //var curl = ConvertToCurlForWindows(requestMessage);
+
+
+                using var response = await httpClient.SendAsync(requestMessage, cancellationTokenSource.Token);
+                var result = await response.Content.ReadAsStringAsync();
+
+                return new(response.IsSuccessStatusCode, response, result);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public async Task<RequestResult?> SendAuthorizedPostRequestAsync(string endpoint,
+            string postBody,
+            AuthorizationMode authorization,
+            int timeout = HttpClientDefaultTimeoutSeconds)
+        {
+            Dictionary<string, string> args = new();
+            Dictionary<string, string> argsSecret = new();
+            if (authorization == AuthorizationMode.Full)
+            {
+                args[InternalAccessTokenKey] = AuthorizationService.InternalAccessToken;
+                args[UsosAccessTokenKey] = AuthorizationService.AccessToken;
+                argsSecret[InternalAccessTokenSecretKey] = AuthorizationService.InternalAccessTokenSecret;
+            }
+            return await SendPostRequestAsync(endpoint, postBody, args, argsSecret, timeout);
+        }
+
+        public async Task<RequestResult?> SendAuthorizedPostRequestAsync(string endpoint,
+            Dictionary<string, string> requestPayload,
+            AuthorizationMode authorization,
+            int timeout = HttpClientDefaultTimeoutSeconds)
+        {
+            string serializedPostBody = JsonSerializer.Serialize(requestPayload, UtilitiesJsonContext.Default.DictionaryStringString);
+
+            Dictionary<string, string> args = new();
+            Dictionary<string, string> argsSecret = new();
+            if (authorization == AuthorizationMode.Full)
+            {
+                args[InternalAccessTokenKey] = AuthorizationService.InternalAccessToken;
+                args[UsosAccessTokenKey] = AuthorizationService.AccessToken;
+                argsSecret[InternalAccessTokenSecretKey] = AuthorizationService.InternalAccessTokenSecret;
+            }
+            return await SendPostRequestAsync(endpoint, serializedPostBody, args, argsSecret, timeout);
+        }
+
+        void AddToDictionary(ref Dictionary<string, string> target, Dictionary<string, string> source)
+        {
+            foreach (var item in source)
+            {
+                target[item.Key] = item.Value;
+            }
+        }
+
+        void AddStaticPublicArguments(ref Dictionary<string, string> args)
+        {
+            args.Add(TimestampKey, DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString());
+            args.Add(InstallationKey, AuthorizationService.Installation);
+            args.Add(UsosConsumerKeyKey, Secrets.Default.UsosConsumerKey);
+            args.Add(InternalConsumerKeyKey, Secrets.Default.InternalConsumerKey);
+            args.Add(VersionKey, apiVersion);
+        }
+
+        Dictionary<string, string> AddStaticSecretArguments(Dictionary<string, string> args)
+        {
+            Dictionary<string, string> result = new(args)
+            {
+                { InternalConsumerKeySecretKey, Secrets.Default.InternalConsumerKeySecret }
+            };
+            return result;
+        }
+
+        string ParseDictionaryArgumentsToUrlFormat(Dictionary<string, string> args)
+        {
+            StringBuilder result = new();
+            int counter = 0;
+            foreach (var item in args)
+            {
+                result.Append(item.Key);
+                result.Append("=");
+                result.Append(item.Value);
+                if (counter != args.Count - 1)
+                {
+                    result.Append("&");
+                }
+                counter++;
+            }
+            return result.ToString();
+        }
+
+        string CreateHash(string fullPath, Dictionary<string, string> arguments, string body = "")
+        {
+            var argumentsSorted = arguments.OrderBy(x => x.Key).ToDictionary();
+            string concateneted = fullPath;
+            foreach (var item in argumentsSorted)
+            {
+                if (item.Key.ToLower() == HashKey)
+                {
+                    continue;
+                }
+                concateneted += item.Value;
+            }
+            concateneted += body;
+            return HashValue(concateneted);
+        }
+
+        string HashValue(string value)
+        {
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                var bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(value));
+                var sBuilder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    sBuilder.Append(bytes[i].ToString("x2"));
+                }
+                return sBuilder.ToString();
+            }
+        }
+
+        void TryLogging(string methodName, string response)
+        {
+            bool canLog = methodName switch
+            {
+                _ when methodName.StartsWith("services/tt") => logger.IsModuleAllowed(LoggingPermission.Activities),
+                _ when methodName.StartsWith("services/calendar") => logger.IsModuleAllowed(LoggingPermission.Calendar),
+                _ when methodName.StartsWith("services/grades") => logger.IsModuleAllowed(LoggingPermission.FinalGrades),
+                _ when methodName.StartsWith("services/groups") => logger.IsModuleAllowed(LoggingPermission.Groups),
+                _ when methodName.StartsWith("services/payments") => logger.IsModuleAllowed(LoggingPermission.Payments),
+                _ when methodName.StartsWith("services/surveys") => logger.IsModuleAllowed(LoggingPermission.Surveys),
+                _ when methodName.StartsWith("services/users") => logger.IsModuleAllowed(LoggingPermission.User),
+                _ => true
+            };
+
+            if (canLog)
+            {
+                int maxLenghtForLogs = 10000;
+                string responseShorter = response.Substring(0, Math.Min(response.Length, maxLenghtForLogs));
+                logger.Log(LogLevel.Info, methodName + " => " + responseShorter);
+            }
+            else
+            {
+                logger.Log(LogLevel.Info, methodName);
+            }
+        }
+
+    }
+}

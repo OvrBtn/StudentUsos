@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:CustomContentPageNotAnimated
+    x:Class="StudentUsos.Features.Settings.Views.SettingsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:StudentUsos.Behaviours"
+    xmlns:controls="clr-namespace:StudentUsos.Controls"
+    xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
+    xmlns:views="using:StudentUsos.Features.Settings.Views"
+    x:DataType="views:SettingsViewModel">
+
+    <ScrollView>
+        <StackLayout Padding="30" Spacing="10">
+            <Border>
+                <StackLayout>
+                    <Label FontSize="16" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.SettingsPage_CalendarEvents}" />
+                    <Grid ColumnDefinitions="*, auto">
+                        <Label Grid.Column="0" Text="{x:Static strings:LocalizedStrings.Notifications}" />
+                        <Switch Grid.Column="1" x:Name="notificationsSwitch" IsToggled="{Binding AreNotificationsEnabled}" />
+                    </Grid>
+                    <Grid ColumnDefinitions="auto, auto, auto" ColumnSpacing="5" IsVisible="{Binding AreNotificationsEnabled}">
+                        <Label Grid.Column="0" Text="{x:Static strings:LocalizedStrings.Notify}" />
+                        <Entry Grid.Column="1" Keyboard="Numeric" MaxLength="2" Text="{Binding NotificationsDayPicked}" WidthRequest="25">
+                            <Entry.Behaviors>
+                                <behaviors:WholeNumberValidationBehavior />
+                            </Entry.Behaviors>
+                        </Entry>
+                        <Label Grid.Column="2" Text="{x:Static strings:LocalizedStrings.MorePage_DaysBefore}" />
+                    </Grid>
+                    <Grid ColumnDefinitions="auto, auto" ColumnSpacing="5" IsVisible="{Binding AreNotificationsEnabled}">
+                        <Label Grid.Column="0"  Text="{x:Static strings:LocalizedStrings.MorePage_NotifyAt}"></Label>
+                        <TimePicker Grid.Column="1" x:Name="timePicker" Format="HH:mm" Time="{Binding NotificationsTimePicked}" />
+                    </Grid>
+                </StackLayout>
+            </Border>
+
+            <Border >
+                <StackLayout Spacing="10">
+                    <Label FontSize="16" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.Language}" />
+                    <Button Text="{Binding CurrentLanguageName}" Background="{StaticResource Primary}" Command="{Binding LanguageButtonClickedCommand}"></Button>
+                </StackLayout>
+            </Border>
+
+            <Border>
+                <StackLayout Spacing="10">
+                    <Label FontSize="16" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.Account}" />
+                    <StackLayout Spacing="10">
+                        <Button Text="{x:Static strings:LocalizedStrings.MorePage_RevokeAccess}" 
+                            Clicked="RevokeAccessButton_Clicked" BackgroundColor="{StaticResource Primary}"/>
+                        <Button Text="{x:Static strings:LocalizedStrings.Logout}" Clicked="LogOutButton_Clicked_1" BackgroundColor="{StaticResource Primary}"/>
+                    </StackLayout>
+                </StackLayout>
+            </Border>
+
+            <Border>
+                <StackLayout Spacing="10">
+                    <Label FontSize="16" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.SettingsPage_TestingTabTitle}" />
+                    <StackLayout Spacing="10">
+                        <Button Text="{x:Static strings:LocalizedStrings.SettingsPage_Logs}" Clicked="OpenLogsButton_Clicked" BackgroundColor="{StaticResource Primary}"/>
+                        <Button Text="{x:Static strings:LocalizedStrings.SettingsPage_LogsAllowedModulesButton}" Clicked="OpenLogsInfoButton_Clicked" BackgroundColor="{StaticResource Primary}"/>
+                    </StackLayout>
+                </StackLayout>
+            </Border>
+
+            <Border >
+                <StackLayout Spacing="10">
+                    <Label FontSize="16" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.SettingsPage_AppInfo}" />
+                    <StackLayout Spacing="10">
+                        <Button Text="{x:Static strings:LocalizedStrings.SettingsPage_AppInfo}" Clicked="AppInfoButton_Clicked" BackgroundColor="{StaticResource Primary}"/>
+                    </StackLayout>
+                </StackLayout>
+            </Border>
+
+            <Label x:Name="versionLabel" FontSize="11" HorizontalTextAlignment="Center" Margin="0,15" TextColor="{StaticResource Gray300}" />
+
+        </StackLayout>
+    </ScrollView>
+
+</controls:CustomContentPageNotAnimated>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
+                    xmlns:models="clr-namespace:StudentUsos.Features.Dashboard.Models"
+                    xmlns:views="clr-namespace:StudentUsos.Features.Dashboard.Views">
+
+
+    <DataTemplate x:Key="USOSAPIDataTemplate" x:DataType="models:CalendarEvent">
+        <Border Margin="0,5" Padding="0" Style="{StaticResource BorderWithShadow}">
+            <Grid>
+                <StackLayout Padding="15" HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                    <StackLayout Margin="10" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                        <Label FontSize="13" HorizontalTextAlignment="Center" LineBreakMode="TailTruncation" LineHeight="0.8" MaxLines="2" Text="{Binding Title}" />
+                        <Label Margin="0,0,0,2" FontSize="10" HorizontalTextAlignment="Center" LineBreakMode="TailTruncation" Text="{Binding Type}" />
+                        <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal" Spacing="5">
+                            <Label FontSize="10" Text="{Binding FullDate}" TextColor="{StaticResource Gray300}" />
+                        </StackLayout>
+                        <Label Margin="0,3,0,0" FontSize="10" HorizontalTextAlignment="Center" IsVisible="{Binding IsDayOff}" Text="{x:Static strings:LocalizedStrings.DayOff}" />
+                    </StackLayout>
+                </StackLayout>
+                <Button BackgroundColor="Transparent"
+                     Command="{Binding OpenCalendarPageCommand,Source={RelativeSource AncestorType={x:Type views:DashboardViewModel}}}"/>
+            </Grid>
+        </Border>
+    </DataTemplate>
+
+    <DataTemplate x:Key="GoogleCalendarDataTemplate" x:DataType="models:CalendarEvent">
+        <Border Margin="0,5" Padding="0" Style="{StaticResource BorderWithShadow}">
+            <Grid>
+                <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal" Padding="15">
+                    <StackLayout Margin="10" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                        <Label FontSize="13" HorizontalTextAlignment="Center" LineBreakMode="TailTruncation" LineHeight="0.8" MaxLines="3" Text="{Binding Title}" />
+                        <Label Margin="0,0,0,2" FontSize="10" HorizontalTextAlignment="Center" IsVisible="{Binding Description, Converter={StaticResource StringToBoolConverter}}" 
+                        LineBreakMode="TailTruncation" MaxLines="3" Text="{Binding Description}" />
+                        <Label FontSize="10" HorizontalTextAlignment="Center" Text="{Binding FullDate}" TextColor="{StaticResource Gray300}" />
+                        <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
+                            <Label Margin="0,0,0,2" FontSize="10" Text="{Binding CalendarName}" TextColor="{StaticResource Gray400}" />
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+                <Button BackgroundColor="Transparent"
+                      Command="{Binding OpenCalendarPageCommand,Source={RelativeSource AncestorType={x:Type views:DashboardViewModel}}}"/>
+            </Grid>
+        </Border>
+
+    </DataTemplate>
+
+
+</ResourceDictionary>

@@ -1,0 +1,485 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AboutAppPage_AboutApp" xml:space="preserve">
+    <value>Studencki USOS is an unofficial application developed by a student at Poznań University of Technology majoring in Computer Science as part of the .NET Scientific Circle of Poznań University of Technology.</value>
+  </data>
+  <data name="AboutAppPage_Developer" xml:space="preserve">
+    <value>Person responsible for applications - Olivier Betman, Poznań University of Technology.</value>
+  </data>
+  <data name="AboutAppPage_DeveloperContact" xml:space="preserve">
+    <value>Contact for matters related to the application (questions, suggestions, errors, etc.):</value>
+  </data>
+  <data name="AboutAppPage_DeveloperTitle" xml:space="preserve">
+    <value>Developer</value>
+  </data>
+  <data name="AboutAppPage_PersonalData" xml:space="preserve">
+    <value>Personal data</value>
+  </data>
+  <data name="AboutAppPage_PersonalDataText1" xml:space="preserve">
+    <value>The application does not send data outside the user's device. The only form of data collection is logs, which are used for diagnostic purposes, but they are not automatically sent. Logs can only be sent by the user from the application settings (previous page).</value>
+  </data>
+  <data name="AboutAppPage_PersonalDataText2" xml:space="preserve">
+    <value>Logs are automatically deleted from the device after 2 days.</value>
+  </data>
+  <data name="Account" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="ActivitiesPage_DownloadActivities" xml:space="preserve">
+    <value>Download activities</value>
+  </data>
+  <data name="ActivitiesPage_Downloading" xml:space="preserve">
+    <value>Downloading</value>
+  </data>
+  <data name="ActivitiesPage_EvenWeek" xml:space="preserve">
+    <value>Even week</value>
+  </data>
+  <data name="ActivitiesPage_OddWeek" xml:space="preserve">
+    <value>Odd week</value>
+  </data>
+  <data name="ActivitiesPage_Room" xml:space="preserve">
+    <value>Room</value>
+  </data>
+  <data name="ActivitiesPage_Today" xml:space="preserve">
+    <value>Today</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="AppName" xml:space="preserve">
+    <value>Student USOS</value>
+  </data>
+  <data name="AppName_FirstPart" xml:space="preserve">
+    <value>Student</value>
+  </data>
+  <data name="AppName_SecondPart" xml:space="preserve">
+    <value>USOS</value>
+  </data>
+  <data name="Average" xml:space="preserve">
+    <value>Average</value>
+  </data>
+  <data name="Calendar" xml:space="preserve">
+    <value>Calendar</value>
+  </data>
+  <data name="CalendarEventType_Break" xml:space="preserve">
+    <value>break</value>
+  </data>
+  <data name="CalendarEventType_Dean" xml:space="preserve">
+    <value>dean's</value>
+  </data>
+  <data name="CalendarEventType_ExamSession" xml:space="preserve">
+    <value>exam session</value>
+  </data>
+  <data name="CalendarEventType_Holidays" xml:space="preserve">
+    <value>holiday</value>
+  </data>
+  <data name="CalendarEventType_PublicHolidays" xml:space="preserve">
+    <value>holiday</value>
+  </data>
+  <data name="CalendarEventType_Rector" xml:space="preserve">
+    <value>rector's</value>
+  </data>
+  <data name="CalendarPage_DaysOfWeekLabels" xml:space="preserve">
+    <value>M|T|W|T|F|S|S</value>
+    <comment>kontekst: pierwsze litery dni tygodni</comment>
+  </data>
+  <data name="CalendarPage_GoogleCalendar" xml:space="preserve">
+    <value>Google Calendar</value>
+  </data>
+  <data name="CalendarSettingsPage_AddedCalendars" xml:space="preserve">
+    <value>Added calendars</value>
+  </data>
+  <data name="CalendarSettingsPage_HelpDescription" xml:space="preserve">
+    <value>Some calendars allow you to export calendar in form of URL to iCalendar file (.ics). Using the button beside and the link you can connect e.g. Google Calendar to this app</value>
+  </data>
+  <data name="CalendarSettingsPage_HelpTItle" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="CalendarSettingsPage_NewCalendarDescription" xml:space="preserve">
+    <value>Insert URL to iCalendar file (.ics) of calendar which you want to import</value>
+  </data>
+  <data name="CalendarSettingsPage_NewCalendarTitle" xml:space="preserve">
+    <value>New calendar</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+  <data name="Dashboard_Hello" xml:space="preserve">
+    <value>Hi</value>
+  </data>
+  <data name="Dashboard_NextEvents" xml:space="preserve">
+    <value>Upcoming events</value>
+  </data>
+  <data name="DayOff" xml:space="preserve">
+    <value>Day off!</value>
+  </data>
+  <data name="Default" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="Errors_Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Errors_LoadingError" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Errors_USOSAPIConnectionError" xml:space="preserve">
+    <value>Connection to USOS API error</value>
+  </data>
+  <data name="FinalGrades" xml:space="preserve">
+    <value>Final grades</value>
+    <comment>kontekst: w sensie zaliczenie przedmiotu (ocena końcowa)</comment>
+  </data>
+  <data name="GradesPage_CountIntoAverage" xml:space="preserve">
+    <value>Counts into average</value>
+  </data>
+  <data name="GradesPage_EditGrades" xml:space="preserve">
+    <value>Edit grades</value>
+  </data>
+  <data name="GradesPage_Empty" xml:space="preserve">
+    <value>No final grades to show</value>
+  </data>
+  <data name="GradesPage_FirstTerm" xml:space="preserve">
+    <value>I term</value>
+  </data>
+  <data name="GradesPage_ScholarshipCalculator" xml:space="preserve">
+    <value>Scholarship calculator</value>
+  </data>
+  <data name="GradesPage_SecondTerm" xml:space="preserve">
+    <value>II term</value>
+  </data>
+  <data name="Group" xml:space="preserve">
+    <value>Group</value>
+  </data>
+  <data name="Groups" xml:space="preserve">
+    <value>Groups</value>
+  </data>
+  <data name="LackOf" xml:space="preserve">
+    <value>none</value>
+    <comment>kontekst: &lt;&lt;&lt;brak&gt;&gt;&gt; informacji do wyświetlenia</comment>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Later" xml:space="preserve">
+    <value>Later</value>
+  </data>
+  <data name="Lecturers" xml:space="preserve">
+    <value>Lecturers</value>
+  </data>
+  <data name="LoggingOut" xml:space="preserve">
+    <value>Logging out</value>
+  </data>
+  <data name="LoggingOut_Confirmation" xml:space="preserve">
+    <value>Are you sure you want to log out?</value>
+  </data>
+  <data name="LoggingPermissionDescription_Activities" xml:space="preserve">
+    <value>Activities</value>
+  </data>
+  <data name="LoggingPermissionDescription_Calendar" xml:space="preserve">
+    <value>Calendar</value>
+  </data>
+  <data name="LoggingPermissionDescription_FinalGrades" xml:space="preserve">
+    <value>Final grades</value>
+  </data>
+  <data name="LoggingPermissionDescription_Groups" xml:space="preserve">
+    <value>Groups</value>
+  </data>
+  <data name="LoggingPermissionDescription_Payments" xml:space="preserve">
+    <value>Payments</value>
+  </data>
+  <data name="LoggingPermissionDescription_Surveys" xml:space="preserve">
+    <value>Surveys</value>
+  </data>
+  <data name="LoggingPermissionDescription_User" xml:space="preserve">
+    <value>User (first name, last name, index numer)</value>
+  </data>
+  <data name="LoggingPermissionPopup_Title" xml:space="preserve">
+    <value>I allow collecting information from following modules for diagnostic purposes (logs)</value>
+  </data>
+  <data name="LoginPage_InputPIN" xml:space="preserve">
+    <value>Input PIN code:</value>
+  </data>
+  <data name="LoginPage_IssueWithLogin" xml:space="preserve">
+    <value>Issue with signing in?</value>
+  </data>
+  <data name="LoginPage_Login" xml:space="preserve">
+    <value>Log in</value>
+  </data>
+  <data name="LoginPage_LoginFailed" xml:space="preserve">
+    <value>Logging in failed</value>
+  </data>
+  <data name="LoginPage_LoginWithPIN" xml:space="preserve">
+    <value>Log in using PIN code</value>
+  </data>
+  <data name="Login_MissingScopes" xml:space="preserve">
+    <value>Missing permissions:</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Log out</value>
+  </data>
+  <data name="Modification" xml:space="preserve">
+    <value>Modification</value>
+  </data>
+  <data name="MorePage_AppName" xml:space="preserve">
+    <value>Student's USOS: Poznań University of Technology</value>
+  </data>
+  <data name="MorePage_DaysBefore" xml:space="preserve">
+    <value>days in advance</value>
+    <comment>kontekst: Powiadamiaj X &lt;&lt;&lt;dni wcześniej&gt;&gt;&gt; o godzinie 15:00</comment>
+  </data>
+  <data name="MorePage_NotifyAt" xml:space="preserve">
+    <value>at</value>
+    <comment>kontekst: Powiadamiaj X dni wcześniej &lt;&lt;&lt;o godzinie&gt;&gt;&gt; 15:00</comment>
+  </data>
+  <data name="MorePage_RevokeAccess" xml:space="preserve">
+    <value>Revoke access to USOS</value>
+  </data>
+  <data name="MultipleChoicePopup_Empty" xml:space="preserve">
+    <value>No options</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Notifications" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="Notify" xml:space="preserve">
+    <value>Notify</value>
+  </data>
+  <data name="Participants" xml:space="preserve">
+    <value>Participants</value>
+  </data>
+  <data name="Payments" xml:space="preserve">
+    <value>Payments</value>
+  </data>
+  <data name="PaymentsPage_AccountNumber" xml:space="preserve">
+    <value>Account number</value>
+  </data>
+  <data name="PaymentsPage_AccountNumberCopied" xml:space="preserve">
+    <value>Copied account number</value>
+  </data>
+  <data name="PaymentsPage_Amount" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="PaymentsPage_NoPayments" xml:space="preserve">
+    <value>No payments to display</value>
+  </data>
+  <data name="PaymentsPage_PaymentDeadline" xml:space="preserve">
+    <value>Deadline</value>
+  </data>
+  <data name="Permissions" xml:space="preserve">
+    <value>Permissions</value>
+  </data>
+  <data name="Permissions_MissingPermissionsDescription" xml:space="preserve">
+    <value>Missing permissions, some functions might not work. Log in again.</value>
+  </data>
+  <data name="PersonDetailsPage_EmailCopied" xml:space="preserve">
+    <value>Email copied</value>
+  </data>
+  <data name="PersonDetailsPage_PhoneNumberCopied" xml:space="preserve">
+    <value>Phone number copied</value>
+  </data>
+  <data name="Points" xml:space="preserve">
+    <value>Points</value>
+  </data>
+  <data name="PushNotifications_UsosNewGrade_DefaultTitleAndBody" xml:space="preserve">
+    <value>You have a new grade!</value>
+  </data>
+  <data name="PushNotifications_UsosNewGrade_InterpretedBodySeparator" xml:space="preserve">
+    <value>in</value>
+  </data>
+  <data name="PushNotifications_UsosNewGrade_InterpretedTitle" xml:space="preserve">
+    <value>New grade</value>
+  </data>
+  <data name="SatisfactionSurveysPage_Empty" xml:space="preserve">
+    <value>No surveys to fill</value>
+  </data>
+  <data name="Schedule" xml:space="preserve">
+    <value>Schedule</value>
+  </data>
+  <data name="Semesters" xml:space="preserve">
+    <value>Semesters</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="SessionInvalidMessage_Description" xml:space="preserve">
+    <value>You have been logged out by USOS. This usually happens when the application is deprived of permissions to your data by the user or the USOS password is changed. Sign in again to use the app.</value>
+  </data>
+  <data name="SessionInvalidMessage_Title" xml:space="preserve">
+    <value>The session has expired</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="SettingsPage_AppInfo" xml:space="preserve">
+    <value>Information about application</value>
+  </data>
+  <data name="SettingsPage_CalendarEvents" xml:space="preserve">
+    <value>Events from calendar</value>
+  </data>
+  <data name="SettingsPage_ChangingLanguageMessage" xml:space="preserve">
+    <value>Changes will be fully visible after restarting the app.</value>
+  </data>
+  <data name="SettingsPage_Logs" xml:space="preserve">
+    <value>Logs</value>
+  </data>
+  <data name="SettingsPage_LogsAllowedModulesButton" xml:space="preserve">
+    <value>Logged information</value>
+  </data>
+  <data name="SettingsPage_RevokeAccessDescription" xml:space="preserve">
+    <value>The application will still run on locally stored data, if you want to delete this data log out of the application.</value>
+  </data>
+  <data name="SettingsPage_RevokeAccessTitle" xml:space="preserve">
+    <value>Revoke access</value>
+  </data>
+  <data name="SettingsPage_TestingTabTitle" xml:space="preserve">
+    <value>Testing/diagnostic</value>
+  </data>
+  <data name="Surveys" xml:space="preserve">
+    <value>Surveys</value>
+  </data>
+  <data name="SurveysPage_SurveysToFill" xml:space="preserve">
+    <value>Surveys to fill</value>
+  </data>
+  <data name="TryAgain" xml:space="preserve">
+    <value>Try again</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="UniversityName" xml:space="preserve">
+    <value>Poznań University Of Technology</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+</root>

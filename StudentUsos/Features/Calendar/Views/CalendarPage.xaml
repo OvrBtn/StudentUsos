@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:CustomContentPageNotAnimated
+    x:Class="StudentUsos.Features.Calendar.Views.CalendarPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:StudentUsos.Controls"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:calendar="clr-namespace:CustomCalendar;assembly=ovrbtn.CustomCalendar.MAUI"
+    xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
+    xmlns:views="using:StudentUsos.Features.Calendar.Views"
+    xmlns:models="using:StudentUsos.Features.Calendar.Models"
+    x:DataType="views:CalendarViewModel">
+
+    <controls:CustomContentPageNotAnimated.Resources>
+        <Style x:Key="DayNameLabelStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource Gray300}" />
+            <Setter Property="LineBreakMode" Value="CharacterWrap" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="VerticalTextAlignment" Value="Center" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+        </Style>
+    </controls:CustomContentPageNotAnimated.Resources>
+
+    <StackLayout toolkit:StateContainer.CurrentState="{Binding MainStateKey}" Margin="20,20,20,0" CompressedLayout.IsHeadless="True">
+        <toolkit:StateContainer.StateViews>
+
+            <ActivityIndicator toolkit:StateView.StateKey="Loading"></ActivityIndicator>
+
+            <Label Text="{x:Static strings:LocalizedStrings.Errors_LoadingError}" toolkit:StateView.StateKey="LoadingError"></Label>
+
+            <StackLayout toolkit:StateView.StateKey="Loaded" VerticalOptions="FillAndExpand" CompressedLayout.IsHeadless="True">
+                <AbsoluteLayout Margin="0,0,10,10" CompressedLayout.IsHeadless="True" HeightRequest="50" HorizontalOptions="EndAndExpand" WidthRequest="50">
+                    <Image AbsoluteLayout.LayoutBounds="0.5,0.5,0.5,0.5" AbsoluteLayout.LayoutFlags="All" Source="gear.svg" ZIndex="11" />
+                    <Border Padding="0" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" BackgroundColor="{StaticResource BackgroundColor}" Stroke="Transparent" 
+                            StrokeShape="RoundRectangle 90,90,90,90" ZIndex="10">
+                        <Button Padding="0" BackgroundColor="#1A000000" Clicked="SettingsButton_Clicked" HeightRequest="50" WidthRequest="50" />
+                    </Border>
+                </AbsoluteLayout>
+
+                <Grid RowDefinitions="1.2*,*" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+
+                    <calendar:CustomCalendar 
+                        Grid.Row="0"
+                        VerticalOptions="FillAndExpand" 
+                        HorizontalOptions="FillAndExpand"
+                        Events="{Binding CustomObservableEvents}"
+                        DayBackgroundColor="{StaticResource BackgroundColor2}"
+                        DayClickedCommand="{Binding CustomCalendarClickedCommand}"
+                        MinimumDate="{Binding CustomCalendarMinDate}"
+                        MaximumDate="{Binding CustomCalendarMaxDate}"
+                        DayOfWeekLabels="{x:Static strings:LocalizedStrings.CalendarPage_DaysOfWeekLabels}">
+
+                    </calendar:CustomCalendar>
+
+                    <!--<CarouselView x:Name="carouselView" IsScrollAnimated="False" CompressedLayout.IsHeadless="True"
+                      ItemsSource="{Binding CalendarMonths}" Loop="False" VerticalOptions="FillAndExpand">
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate x:DataType="model:CalendarMonth">
+                            <StackLayout Margin="10,0,10,0" CompressedLayout.IsHeadless="True">
+                                <Label FontAttributes="Bold" HeightRequest="25" FontSize="17" HorizontalTextAlignment="Center" Text="{Binding CalendarTitle, Mode=OneTime}" />
+
+                                <Grid Margin="0,20,0,10" HeightRequest="20" ColumnDefinitions="*,*,*,*,*,*,*" HorizontalOptions="FillAndExpand" ColumnSpacing="5" CompressedLayout.IsHeadless="True">
+                                    <Label Grid.Column="0" Style="{StaticResource DayNameLabelStyle}" Text="P" />
+                                    <Label Grid.Column="1" Style="{StaticResource DayNameLabelStyle}" Text="W" />
+                                    <Label Grid.Column="2" Style="{StaticResource DayNameLabelStyle}" Text="Ś" />
+                                    <Label Grid.Column="3" Style="{StaticResource DayNameLabelStyle}" Text="C" />
+                                    <Label Grid.Column="4" Style="{StaticResource DayNameLabelStyle}" Text="P" />
+                                    <Label Grid.Column="5" Style="{StaticResource DayNameLabelStyle}" Text="S" />
+                                    <Label Grid.Column="6" Style="{StaticResource DayNameLabelStyle}" Text="N" />
+                                </Grid>
+
+                                <Grid BindableLayout.ItemsSource="{Binding Days, Mode=OneTime}" HorizontalOptions="FillAndExpand" 
+                              ColumnDefinitions="*,*,*,*,*,*,*" ColumnSpacing="5" RowDefinitions="*,*,*,*,*" CompressedLayout.IsHeadless="True"
+                              RowSpacing="5" VerticalOptions="FillAndExpand">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate x:DataType="model:CalendarDay">
+                                            <Frame Margin="0" Padding="0" BorderColor="{Binding BorderColor, Mode=OneWay}" 
+                                                   Background="{Binding BackgroundColor, Mode=OneWay}" CompressedLayout.IsHeadless="True" 
+                                            CornerRadius="15" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
+                                                   Grid.Row="{Binding Row, Mode=OneTime}" Grid.Column="{Binding Column, Mode=OneTime}">
+                                                <Frame.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding OnClick,Mode=OneTime}"></TapGestureRecognizer>
+                                                </Frame.GestureRecognizers>
+                                                <StackLayout CompressedLayout.IsHeadless="True" VerticalOptions="CenterAndExpand">
+                                                    <Label FontSize="10" HorizontalTextAlignment="Center" Text="{Binding DayString, Mode=OneTime}"
+                                                           VerticalTextAlignment="Center" />
+                                                    <StackLayout BindableLayout.ItemsSource="{Binding EventsIndicators, Mode=OneWay}" CompressedLayout.IsHeadless="True" 
+                                                             HorizontalOptions="CenterAndExpand" 
+                                                             IsVisible="{Binding EventsIndicators.Count, Converter={StaticResource CountToBoolConverter}, Mode=OneWay}" 
+                                                             Orientation="Horizontal" VerticalOptions="Center">
+                                                        <BindableLayout.ItemTemplate>
+                                                            <DataTemplate x:DataType="model:EventIndicator">
+                                                                <RoundRectangle Margin="0.5,0,0.5,0" WidthRequest="5" Fill="{Binding Color, Mode=OneWay}" CompressedLayout.IsHeadless="True"
+                                                                   HeightRequest="5" CornerRadius="90" HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand"/>
+                                                            </DataTemplate>
+                                                        </BindableLayout.ItemTemplate>
+                                                    </StackLayout>
+                                                </StackLayout>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </Grid>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>-->
+
+                    <StackLayout Grid.Row="1">
+
+                        <Label Margin="10" HorizontalOptions="CenterAndExpand" Text="{Binding TitleDate}" />
+                        <ScrollView VerticalOptions="FillAndExpand">
+                            <StackLayout VerticalOptions="FillAndExpand">
+
+                                <StackLayout BindableLayout.ItemsSource="{Binding EventsData}" VerticalOptions="Start">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate x:DataType="models:UsosCalendarEvent">
+                                            <StackLayout Margin="10,0,10,10">
+                                                <Frame Margin="0,0,0,3" Padding="0,0,0,0">
+                                                    <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                                                        <StackLayout BackgroundColor="{Binding BorderColor}" WidthRequest="5" />
+                                                        <StackLayout Margin="20,20,20,20" HorizontalOptions="FillAndExpand">
+                                                            <Label FontSize="14" LineHeight="0.8" Text="{Binding Name}" />
+                                                            <Label Margin="0,0,0,2" FontSize="11" Text="{Binding Type}" />
+                                                            <StackLayout Orientation="Horizontal" Spacing="5">
+                                                                <Label FontSize="11" Text="{Binding StartString}" TextColor="{StaticResource Gray300}" />
+                                                                <Label FontSize="11" Text="-" TextColor="{StaticResource Gray300}" />
+                                                                <Label FontSize="11" Text="{Binding EndString}" TextColor="{StaticResource Gray300}" />
+                                                            </StackLayout>
+                                                            <Label Margin="0,3,0,0" FontSize="11" IsVisible="{Binding IsDayOff}" Text="{x:Static strings:LocalizedStrings.DayOff}" />
+                                                        </StackLayout>
+                                                    </StackLayout>
+                                                </Frame>
+                                            </StackLayout>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </StackLayout>
+
+                                <StackLayout BindableLayout.ItemsSource="{Binding EventsDataGoogleCalendar}" VerticalOptions="Start">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate x:DataType="models:GoogleCalendarEvent">
+                                            <StackLayout Margin="10,0,10,10">
+                                                <Frame Margin="0,0,0,3" Padding="0,0,20,0">
+                                                    <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                                                        <StackLayout BackgroundColor="{Binding Calendar.Color}" WidthRequest="5" />
+                                                        <StackLayout Margin="20,20,0,20" HorizontalOptions="FillAndExpand">
+                                                            <Label FontSize="14" LineHeight="0.8" Text="{Binding Title}" />
+                                                            <Label Margin="0,0,0,2" FontSize="11" IsVisible="{Binding Description, Converter={StaticResource StringToBoolConverter}}" Text="{Binding Description}" />
+                                                            <StackLayout Orientation="Horizontal" Spacing="5">
+                                                                <Label FontSize="11" Text="{Binding StartBindable}" TextColor="{StaticResource Gray300}" />
+                                                                <Label FontSize="11" IsVisible="{Binding EndBindable, Converter={StaticResource StringToBoolConverter}}" Text="-" TextColor="{StaticResource Gray300}" />
+                                                                <Label FontSize="11" Text="{Binding EndBindable}" TextColor="{StaticResource Gray300}" />
+                                                            </StackLayout>
+                                                            <StackLayout Orientation="Horizontal" Spacing="5">
+                                                                <Label Margin="0,0,0,2" FontSize="11" Text="{x:Static strings:LocalizedStrings.Calendar}" TextColor="{StaticResource Gray400}" />
+                                                                <Label Margin="0,0,0,2" FontSize="11" Text="{Binding Calendar.Name}" TextColor="{StaticResource Gray400}" />
+                                                            </StackLayout>
+                                                        </StackLayout>
+                                                    </StackLayout>
+                                                </Frame>
+                                            </StackLayout>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </StackLayout>
+
+                            </StackLayout>
+                        </ScrollView>
+                    </StackLayout>
+
+                </Grid>
+
+            </StackLayout>
+
+        </toolkit:StateContainer.StateViews>
+    </StackLayout>
+
+</controls:CustomContentPageNotAnimated>

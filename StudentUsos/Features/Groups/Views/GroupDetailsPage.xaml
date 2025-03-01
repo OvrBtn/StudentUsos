@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:CustomBottomSheet
+    x:Class="StudentUsos.Features.Groups.Views.GroupDetailsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:StudentUsos.Controls"
+    xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
+    xmlns:views="using:StudentUsos.Features.Groups.Views"
+    xmlns:personModels="using:StudentUsos.Features.Person.Models"
+    x:DataType="views:GroupDetailsViewModel"
+    x:Name="self"
+    OnClose="{Binding OnClose, Mode=TwoWay}"
+    OnScrollViewCloseToEnd="{Binding GetMoreParticipants}">
+
+    <StackLayout Margin="40,0,40,0" CompressedLayout.IsHeadless="True" Spacing="0" VerticalOptions="FillAndExpand">
+        <Label FontAttributes="Bold" FontSize="18" Text="{Binding Group.CourseName}" />
+        <StackLayout Margin="10,5,0,5" CompressedLayout.IsHeadless="True" Orientation="Horizontal">
+            <Label FontSize="14" Text="{Binding Group.ClassType}" />
+            <Label FontSize="14" Text=", " />
+            <Label FontSize="14" Text="{x:Static strings:LocalizedStrings.Group}" TextTransform="Lowercase"/>
+            <Label FontSize="14" Text=": " />
+            <Label FontSize="14" Text="{Binding Group.GroupNumber}" />
+        </StackLayout>
+        <BoxView HeightRequest="0.5" Color="{StaticResource White}" />
+        <Label Margin="0,5,0,0" FontSize="14" Text="{x:Static strings:LocalizedStrings.Lecturers}" />
+        <StackLayout Margin="10,3,0,5" BindableLayout.ItemsSource="{Binding Group.Lecturers}" CompressedLayout.IsHeadless="True">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate x:DataType="personModels:Lecturer">
+                    <!--<Button Text="test" Command="{Binding LecturerClickedCommand}"></Button>-->
+                    <controls:CustomButton Grid.Column="0" HorizontalOptions="FillAndExpand" HeightRequest="50" Command="{Binding LecturerClickedCommand}">
+                        <Grid ColumnDefinitions="40, auto,*, auto, 30" Margin="10,0,0,0" ColumnSpacing="5">
+                            <Frame Grid.Column="0" Margin="0,4,0,4" Padding="5" BackgroundColor="{Binding InitialsBackgroundColor}" CornerRadius="90" HeightRequest="40" WidthRequest="40">
+                                <Label FontSize="12" HorizontalOptions="CenterAndExpand" Text="{Binding Initials}" VerticalOptions="CenterAndExpand" />
+                            </Frame>
+                            <Label Grid.Column="1" FontSize="14" LineHeight="0" Text="{Binding TitlesBefore}" VerticalOptions="CenterAndExpand" />
+                            <Label Grid.Column="2" FontSize="14" LineHeight="0" Text="{Binding FullName}" VerticalOptions="CenterAndExpand" LineBreakMode="TailTruncation" />
+                            <Label Grid.Column="3" FontSize="14" LineHeight="0" Text="{Binding TitlesAfter}" VerticalOptions="CenterAndExpand" />
+                            <StackLayout Grid.Column="4" >
+                                <Image Source="triangle.png" WidthRequest="10" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
+                            </StackLayout>
+                        </Grid>
+                    </controls:CustomButton>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </StackLayout>
+        <BoxView HeightRequest="0.5" Color="{StaticResource White}" />
+        <Label Margin="0,5,0,0" FontSize="14" Text="{x:Static strings:LocalizedStrings.Participants}" />
+        <StackLayout Margin="10,3,0,0" BindableLayout.ItemsSource="{Binding Participants}" VerticalOptions="FillAndExpand">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate x:DataType="personModels:Person">
+                    <Grid ColumnDefinitions="40,*" HeightRequest="50">
+                        <Frame Grid.Column="0" Margin="0,4,10,4" Padding="5" BackgroundColor="{Binding InitialsBackgroundColor}" CornerRadius="90" HeightRequest="40" WidthRequest="40">
+                            <Label FontSize="12" HorizontalOptions="CenterAndExpand" Text="{Binding Initials}" VerticalOptions="CenterAndExpand" />
+                        </Frame>
+                        <Label Grid.Column="1" FontSize="14" LineHeight="0" Text="{Binding FullName}" VerticalOptions="CenterAndExpand" />
+                    </Grid>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </StackLayout>
+    </StackLayout>
+
+</controls:CustomBottomSheet>

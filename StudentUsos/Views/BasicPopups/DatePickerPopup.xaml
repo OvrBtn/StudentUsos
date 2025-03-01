@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<local:PopupBase
+    x:Class="StudentUsos.DatePickerPopup"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:CustomCalendar="clr-namespace:CustomCalendar;assembly=ovrbtn.CustomCalendar.MAUI"
+    xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
+    xmlns:local="clr-namespace:StudentUsos.Views"
+    x:Name="self">
+
+    <AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" InputTransparent="True" CascadeInputTransparent="False">
+            <Border AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5,0.5,0.85,0.45" BackgroundColor="{StaticResource BackgroundColor}">
+                <CustomCalendar:CustomCalendar
+                    DayBackgroundColor="{StaticResource BackgroundColor2}"
+                    DrawSecondaryDays="False"
+                    TodayBackgroundColor="{StaticResource Gray950}"
+                    ClickedDayBackgroundColor="{StaticResource Primary}"
+                    DayOfWeekLabels="{x:Static strings:LocalizedStrings.CalendarPage_DaysOfWeekLabels}"
+                    x:Name="customCalendar"/>
+            </Border>
+        </AbsoluteLayout>
+
+</local:PopupBase>

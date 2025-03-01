@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:CustomContentPageNotAnimated
+    x:Class="StudentUsos.Features.Menu.MorePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:StudentUsos.Controls"
+    xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
+    xmlns:menu="using:StudentUsos.Features.Menu"
+    BackgroundColor="{StaticResource BackgroundColor}"
+    x:DataType="menu:MoreViewModel">
+
+    <controls:CustomContentPageNotAnimated.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Button">
+                <Setter Property="Margin" Value="0" />
+                <Setter Property="LineBreakMode" Value="WordWrap" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="Padding" Value="10" />
+                <Setter Property="CornerRadius" Value="20" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+            </Style>
+            <Style TargetType="Border" x:Key="ButtonBorderStyle">
+                <Setter Property="Margin" Value="0" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor2}"></Setter>
+                <Setter Property="StrokeThickness" Value="0"></Setter>
+                <Setter Property="HeightRequest" Value="180"></Setter>
+                <Setter Property="StrokeShape" Value="RoundRectangle 20"></Setter>
+                <Setter Property="CompressedLayout.IsHeadless" Value="True"></Setter>
+            </Style>
+            <Style TargetType="Image">
+                <Setter Property="HeightRequest" Value="50"></Setter>
+            </Style>
+        </ResourceDictionary>
+    </controls:CustomContentPageNotAnimated.Resources>
+
+    <ScrollView>
+
+        <Grid RowDefinitions="180,180,180" ColumnDefinitions="*, *" Margin="30"
+                  ColumnSpacing="10" RowSpacing="10" VerticalOptions="FillAndExpand">
+
+            <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource ButtonBorderStyle}">
+                <Grid VerticalOptions="FillAndExpand" CompressedLayout.IsHeadless="True">
+                    <StackLayout Padding="15,40" Spacing="10" VerticalOptions="CenterAndExpand" CompressedLayout.IsHeadless="True">
+                        <Image Source="calendar3_week2.png" ></Image>
+                        <Label FontSize="14" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.Calendar}" />
+                    </StackLayout>
+                    <Button Command="{Binding GoToCalendarPageCommand}" />
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource ButtonBorderStyle}">
+                <Grid VerticalOptions="FillAndExpand" CompressedLayout.IsHeadless="True">
+                    <StackLayout Padding="15,40" Spacing="10" VerticalOptions="CenterAndExpand" CompressedLayout.IsHeadless="True">
+                        <Image Source="grade256.png" ></Image>
+                        <Label FontSize="14" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.FinalGrades}" />
+                    </StackLayout>
+                    <Button Command="{Binding GoToGradesPageCommand}" />
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource ButtonBorderStyle}">
+                <Grid VerticalOptions="FillAndExpand" CompressedLayout.IsHeadless="True">
+                    <StackLayout Padding="15,40" Spacing="10" VerticalOptions="CenterAndExpand" CompressedLayout.IsHeadless="True">
+                        <Image Source="people_fill2.png" ></Image>
+                        <Label FontSize="14" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.Groups}" />
+                    </StackLayout>
+                    <Button Command="{Binding GoToGroupsPageCommand}" />
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource ButtonBorderStyle}">
+                <Grid VerticalOptions="FillAndExpand" CompressedLayout.IsHeadless="True">
+                    <StackLayout Padding="15,40" Spacing="10" VerticalOptions="CenterAndExpand" CompressedLayout.IsHeadless="True">
+                        <Image Source="star.png" ></Image>
+                        <Label FontSize="14" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.Surveys}" />
+                    </StackLayout>
+                    <Button Command="{Binding GoToSatisfactionSurveysPageCommand}" />
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="2" Grid.Column="0" Style="{StaticResource ButtonBorderStyle}">
+                <Grid VerticalOptions="FillAndExpand" CompressedLayout.IsHeadless="True">
+                    <StackLayout Padding="15,40" Spacing="10" VerticalOptions="CenterAndExpand" CompressedLayout.IsHeadless="True">
+                        <Image Source="credit_card.png" ></Image>
+                        <Label FontSize="14" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.Payments}" />
+                    </StackLayout>
+                    <Button Command="{Binding GoToPaymentsPageCommand}" />
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="2" Grid.Column="1" Style="{StaticResource ButtonBorderStyle}">
+                <Grid VerticalOptions="FillAndExpand" CompressedLayout.IsHeadless="True">
+                    <StackLayout Padding="15,40" Spacing="10" VerticalOptions="CenterAndExpand" CompressedLayout.IsHeadless="True">
+                        <Image Source="gear256.png" ></Image>
+                        <Label FontSize="14" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.Settings}" />
+                    </StackLayout>
+                    <Button Command="{Binding GoToSettingsPageCommand}" />
+                </Grid>
+            </Border>
+
+        </Grid>
+
+        <!--oryginally this page should be done using ColllectionView but it was done manually using grid to workaround performance issue-->
+
+        <!--<CollectionView toolkit:StateView.StateKey="Loaded" ItemsSource="{Binding Buttons}" Margin="30,0" CompressedLayout.IsHeadless="True">
+                <CollectionView.Header>
+                    <StackLayout Margin="15"></StackLayout>
+                </CollectionView.Header>
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="{OnIdiom Default=2, Tablet=3}" HorizontalItemSpacing="10" VerticalItemSpacing="10"></GridItemsLayout>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="vm:MorePageButton">
+                        <Border Padding="0" Margin="0" HeightRequest="180" StrokeShape="RoundRectangle 20" CompressedLayout.IsHeadless="True">
+                            <Grid VerticalOptions="FillAndExpand" CompressedLayout.IsHeadless="True">
+                                <StackLayout Padding="15,40" Spacing="10" VerticalOptions="CenterAndExpand" CompressedLayout.IsHeadless="True">
+                                    <Image Source="{Binding ImageName}" HeightRequest="50"></Image>
+                                    <Label FontSize="14" HorizontalTextAlignment="Center" Text="{Binding Text}" />
+                                </StackLayout>
+                                <Button Command="{Binding OnClickCommand}" BackgroundColor="Transparent" CornerRadius="20"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>-->
+
+
+    </ScrollView>
+
+</controls:CustomContentPageNotAnimated>

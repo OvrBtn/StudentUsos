@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <Color x:Key="Primary">#00A6E5</Color>
+    <Color x:Key="BackgroundColor">#1b1b1b</Color>
+    <Color x:Key="BackgroundColor2">#282828</Color>
+    <!--<Color x:Key="BackgroundColorShimmer">#2e2f36</Color>-->
+    <Color x:Key="BackgroundColorShimmer">#2e2f36</Color>
+    <!--<Color x:Key="BackgroundColor3">#212127</Color>-->
+    <!--<Color x:Key="BackgroundColor3">#34353d</Color>-->
+    <Color x:Key="BackgroundColor3">#2A2B31</Color>
+
+    <Color x:Key="LecturePrimaryColor">#577590</Color>
+    <Color x:Key="ClassesPrimaryColor">#77966D</Color>
+    <Color x:Key="LaboratoryPrimaryColor">#856088</Color>
+
+    <Color x:Key="TextColor">#ffffff</Color>
+
+    <Color x:Key="Random1">#2B59C3</Color>
+    <Color x:Key="Random2">#D36582</Color>
+    <Color x:Key="Random3">#5B8C5A</Color>
+    <Color x:Key="Random4">#ffbe0b</Color>
+    <Color x:Key="Random5">#8338ec</Color>
+    <Color x:Key="Random6">#E9724C</Color>
+    <Color x:Key="Random7">#4DCCBD</Color>
+    <Color x:Key="Random8">#1D7874</Color>
+    <Color x:Key="Random9">#C5283D</Color>
+    <Color x:Key="Random10">#FFC857</Color>
+    <Color x:Key="Random11">#3a86ff</Color>
+
+    <Color x:Key="PaymentPaid">#0A8754</Color>
+
+    <Color x:Key="FinalGrade1">#0A8754</Color>
+    <Color x:Key="FinalGrade2">#69A85C</Color>
+    <Color x:Key="FinalGrade3">#FE9920</Color>
+    <Color x:Key="FinalGrade4">#E3170A</Color>
+
+    <Color x:Key="White">White</Color>
+    <Color x:Key="Black">Black</Color>
+    <Color x:Key="Gray100">#E1E1E1</Color>
+    <Color x:Key="Gray200">#C8C8C8</Color>
+    <Color x:Key="Gray300">#ACACAC</Color>
+    <Color x:Key="Gray400">#919191</Color>
+    <Color x:Key="Gray500">#6E6E6E</Color>
+    <Color x:Key="Gray600">#404040</Color>
+    <Color x:Key="Gray900">#212121</Color>
+    <Color x:Key="Gray950">#141414</Color>
+
+</ResourceDictionary>

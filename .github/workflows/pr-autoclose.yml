@@ -1,0 +1,42 @@
+name: Auto Close PR if Not Code Owner
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+jobs:
+  check-code-owner:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Get CODEOWNERS
+        id: get_codeowners
+        run: |
+          CODEOWNERS_FILE=".github/CODEOWNERS"
+          if [ -f "$CODEOWNERS_FILE" ]; then
+            echo "Found CODEOWNERS file."
+            CODEOWNERS=$(grep -oP '(?<=@)[a-zA-Z0-9_-]+' "$CODEOWNERS_FILE" | sort -u)
+            echo "CODEOWNERS=$CODEOWNERS" >> $GITHUB_ENV
+          else
+            echo "CODEOWNERS file not found!"
+            exit 1
+          fi
+      
+      - name: Check PR Creator
+        id: check_creator
+        run: |
+          echo "PR created by: ${{ github.actor }}"
+          echo "Code owners: $CODEOWNERS"
+          
+          if echo "$CODEOWNERS" | grep -qw "${{ github.actor }}"; then
+            echo "User is a code owner. PR allowed."
+          else
+            echo "User is NOT a code owner. Closing PR..."
+            gh pr close ${{ github.event.pull_request.number }} --repo ${{ github.repository }} --comment "Closing PR because the author is not a code owner."
+            exit 1
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CODEOWNERS: ${{ env.CODEOWNERS }}

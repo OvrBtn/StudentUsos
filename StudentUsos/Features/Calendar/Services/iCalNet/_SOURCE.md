@@ -1,0 +1,1 @@
+Code in this folder is from https://github.com/der-daniel/ical.NET

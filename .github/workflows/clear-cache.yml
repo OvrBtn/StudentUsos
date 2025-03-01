@@ -1,0 +1,53 @@
+name: Delete Caches
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: delete-caches
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  delete-old-caches:
+    name: Delete unneeded caches
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - run: |
+          echo "All caches available:"
+          gh cache list --limit 500 --order asc --sort last_accessed_at
+          
+          gh cache list --limit 500 --order asc --sort last_accessed_at | grep -E '(build-artifacts|maui-workload)' > caches.txt || true
+          gh cache list --limit 1 --order desc --sort created_at | grep 'maui-workload' > latest_maui_workload.txt || true
+
+          echo "Found $(wc -l < caches.txt | xargs) cache entries for deletion"
+
+          echo "Filtered caches:"
+          grep -E 'build-artifacts|maui-workload' caches.txt || echo "No matching caches found"
+          
+          latest_maui_id=$(awk '{print $1}' latest_maui_workload.txt)
+
+          while IFS=$'\t' read -r id name size created_at last_accessed_at; do
+            accessedTimestamp=$(date -u -d "$last_accessed_at" +%s)
+            
+            # Skip latest maui-workload cache
+            if [[ "$name" == maui-workload* && "$id" == "$latest_maui_id" ]]; then
+              echo "Skipping latest maui-workload cache: $id $name ($last_accessed_at)"
+              continue
+            fi
+            
+            echo "Deleting $id $name ($last_accessed_at)"
+            gh cache delete $id
+              
+          done < caches.txt
+          
+          rm -rf caches.txt latest_maui_workload.txt
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

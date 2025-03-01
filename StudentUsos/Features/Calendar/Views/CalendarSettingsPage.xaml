@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:CustomContentPageNotAnimated
+    x:Class="StudentUsos.Features.Calendar.Views.CalendarSettingsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:StudentUsos.Controls"
+    xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
+    xmlns:views="using:StudentUsos.Features.Calendar.Views"
+    xmlns:models="using:StudentUsos.Features.Calendar.Models"
+    x:DataType="views:CalendarSettingsViewModel"
+    x:Name="self">
+
+    <controls:CustomContentPageNotAnimated.Resources>
+        <views:CalendarCountToBoolConverter x:Key="calendarCountToBoolConverter"></views:CalendarCountToBoolConverter>
+    </controls:CustomContentPageNotAnimated.Resources>
+
+
+    <StackLayout Margin="20,20,20,0">
+        <Label Margin="0,5,0,10" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.CalendarSettingsPage_AddedCalendars}" />
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="10">
+            <Border Padding="0" BackgroundColor="{StaticResource BackgroundColor2}" HorizontalOptions="FillAndExpand">
+                <Grid>
+                    <Image HeightRequest="20" Source="question_circle.png" />
+                    <Button Command="{Binding HelpCommand}" BackgroundColor="Transparent"></Button>
+                </Grid>
+            </Border>
+
+            <Border Padding="0" IsVisible="{Binding Calendars.Count, Converter={StaticResource calendarCountToBoolConverter}, ConverterParameter=5}"
+                        BackgroundColor="{StaticResource BackgroundColor2}" HorizontalOptions="FillAndExpand">
+                <Grid>
+                    <Image HeightRequest="20" Source="plus.svg" />
+                    <Button Command="{Binding CreateNewCommand}" Background="Transparent"></Button>
+                </Grid>
+            </Border>
+        </StackLayout>
+
+        <CollectionView Margin="0,15,0,0" ItemsSource="{Binding Calendars}" VerticalOptions="FillAndExpand">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:GoogleCalendar">
+                    <Border Margin="0,0,0,5" BackgroundColor="{StaticResource BackgroundColor3}">
+                        <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                            <Label HorizontalOptions="FillAndExpand" Text="{Binding Name}" />
+                            <StackLayout HorizontalOptions="End">
+                                <Border Padding="12">
+                                    <ImageButton Command="{Binding Source={x:Reference self}, Path=BindingContext.TrashOnClick}" CommandParameter="{Binding .}" 
+                                                                 HeightRequest="20" Source="trash3.svg" WidthRequest="20" />
+                                </Border>
+                            </StackLayout>
+                        </StackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </StackLayout>
+
+</controls:CustomContentPageNotAnimated>

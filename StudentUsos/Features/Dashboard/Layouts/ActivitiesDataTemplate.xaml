@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:activitiesModels="clr-namespace:StudentUsos.Features.Activities.Models"
+                    xmlns:controls="clr-namespace:StudentUsos.Controls"
+                    xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings">
+
+
+    <DataTemplate x:DataType="activitiesModels:Activity" x:Key="activitiesDataTemplate">
+        <Border Padding="0" Margin="30,2,30,2" Style="{StaticResource BorderWithShadow}">
+            <controls:CustomButton Command="{Binding ClickedCommand, Mode=OneTime}">
+                <StackLayout>
+                    <AbsoluteLayout HeightRequest="20" IsVisible="{Binding TimerValue, Converter={StaticResource StringToBoolConverter}}">
+                        <Rectangle AbsoluteLayout.LayoutFlags="SizeProportional" BackgroundColor="{StaticResource Primary}"
+                                AbsoluteLayout.LayoutBounds="{Binding TimerProgressRect}"/>
+                        <Label FontSize="11" Text="{Binding TimerValue,StringFormat='{0}'}" 
+                            TextColor="{StaticResource TextColor}" AbsoluteLayout.LayoutFlags="PositionProportional"
+                            AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1"/>
+                    </AbsoluteLayout>
+                    <StackLayout Margin="0,10,0,0" IsVisible="{Binding IsTimerVisible, Converter={StaticResource NegateBoolConverter}}"></StackLayout>
+                    <StackLayout Margin="20,10,20,20" HorizontalOptions="FillAndExpand">
+                        <Label FontSize="14" HorizontalTextAlignment="Center" LineBreakMode="TailTruncation" Text="{Binding Name}" />
+                        <Label FontSize="12" HorizontalTextAlignment="Center" Text="{Binding ClassTypeName}" />
+                        <StackLayout Margin="0,0,0,5" 
+                                      HorizontalOptions="Center" Orientation="Horizontal">
+                            <Label FontSize="11" HorizontalTextAlignment="Center" Text="{Binding StartTime}" VerticalOptions="Center" />
+                            <Label FontSize="11" Text=" - " TextColor="{StaticResource TextColor}" VerticalOptions="Center" />
+                            <Label FontSize="11" HorizontalTextAlignment="Center" Text="{Binding EndTime}" VerticalOptions="Center" />
+                        </StackLayout>
+                        <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal" Spacing="5">
+                            <Label FontSize="11" Text="{x:Static strings:LocalizedStrings.ActivitiesPage_Room}" TextColor="{StaticResource Gray300}" />
+                            <Label FontSize="11" Text="{Binding RoomNumber}" TextColor="{StaticResource Gray300}" />
+                        </StackLayout>
+                        <Label FontSize="11" HorizontalTextAlignment="Center" LineBreakMode="TailTruncation" Text="{Binding BuildingName}" 
+                            TextColor="{StaticResource Gray300}" />
+                    </StackLayout>
+                </StackLayout>
+            </controls:CustomButton>
+        </Border>
+    </DataTemplate>
+
+
+</ResourceDictionary>

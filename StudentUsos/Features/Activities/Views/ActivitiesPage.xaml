@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:CustomContentPageNotAnimated
+    x:Class="StudentUsos.Features.Activities.Views.ActivitiesPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:StudentUsos.Controls"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
+    xmlns:schedule="clr-namespace:CustomSchedule;assembly=ovrbtn.CustomSchedule.MAUI"
+    xmlns:views="clr-namespace:StudentUsos.Features.Activities.Views"
+    x:DataType="views:ActivitiesViewModel">
+
+    <StackLayout toolkit:StateContainer.CurrentState="{Binding MainStateKey}" VerticalOptions="FillAndExpand">
+        <toolkit:StateContainer.StateViews>
+
+            <ActivityIndicator toolkit:StateView.StateKey="Loading"></ActivityIndicator>
+
+            <AbsoluteLayout toolkit:StateView.StateKey="Loaded" VerticalOptions="FillAndExpand">
+
+                <controls:CustomButton x:Name="TodayButton" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="1,1,-1,-1" 
+                                       ZIndex="10" Margin="40,40"
+                               Command="{Binding TodayCommand}" BackgroundColor="{StaticResource Primary}" 
+                                       Shadow="{StaticResource defaultBlackShadow}"
+                               IsVisible="{Binding IsTodayButtonVisible}">
+                    <StackLayout Margin="20">
+                        <Label Text="{x:Static strings:LocalizedStrings.ActivitiesPage_Today}" Style="{StaticResource CenteredLabel}" FontSize="12"/>
+                    </StackLayout>
+                </controls:CustomButton>
+
+                <StackLayout Margin="30,20,30,0" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" ZIndex="5">
+
+                    <Label Text="{Binding Lecturer.FullName}" HorizontalOptions="CenterAndExpand" FontSize="20" Margin="0,0,0,10"
+               IsVisible="{Binding Lecturer, Converter={StaticResource IsNullNegatedConverter}}"/>
+
+                    <StackLayout Margin="0,0,0,10" IsVisible="{Binding Lecturer, Converter={StaticResource IsNullConverter}}"/>
+
+                    <StackLayout Margin="0,0,0,10">
+                        <controls:CustomButton Command="{Binding DatePickerClickedCommand}" BackgroundColor="{StaticResource BackgroundColor2}" 
+                                       Shadow="{StaticResource defaultBlackShadow}">
+                            <StackLayout Padding="15">
+                                <Label Text="{Binding DateOnlyPicked, Mode=TwoWay, StringFormat='{0:dd.MM.yyyy, dddd}'}" 
+                               HorizontalTextAlignment="Center" FontSize="20"/>
+                                <Label Text="{x:Static strings:LocalizedStrings.ActivitiesPage_EvenWeek}" IsVisible="{Binding IsWeekEven}" FontSize="10" 
+                               TextColor="{StaticResource Gray300}" HorizontalTextAlignment="Center"></Label>
+                                <Label Text="{x:Static strings:LocalizedStrings.ActivitiesPage_OddWeek}" 
+                                       IsVisible="{Binding IsWeekEven,Converter={StaticResource NegateBoolConverter}}" FontSize="10" 
+                               TextColor="{StaticResource Gray300}" HorizontalTextAlignment="Center"></Label>
+                            </StackLayout>
+                        </controls:CustomButton>
+                    </StackLayout>
+
+                    <schedule:Schedule x:Name="schedule" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" 
+                                       Days="{Binding ObservableDays}"
+                                       CurrentDateOnly="{Binding DateOnlyPicked, Mode=TwoWay}"
+                                       OnSwipedCommand="{Binding ScheduleSwipedCommand}">
+                        <schedule:Schedule.States>
+                            <schedule:States>
+                                <schedule:States.StateEmpty>
+                                    <!--<schedule:ImageElement ImageWidth="400" ImageHeight="400" ImageRelativePath="Embedded.rocket.png" IsImageVisible="True"/>-->
+                                    <schedule:TextElement  Text="{x:Static strings:LocalizedStrings.DayOff}" 
+                                     TextSize="40" TextTopMargin="0" TextAlign="Center"/>
+                                </schedule:States.StateEmpty>
+                                <schedule:States.StateLoadMore>
+                                    <schedule:ImageElement ImageHeight="400" ImageWidth="400" ImageRelativePath="Embedded.download.png" />
+                                    <schedule:ButtonElement x:Name="LoadMoreButtonElement"
+                                        ButtonText="{x:Static strings:LocalizedStrings.ActivitiesPage_DownloadActivities}" 
+                                        ButtonTopMargin="20" ButtonWidth="400" ButtonHeight="100"
+                                        ButtonBackgroundColor="{StaticResource Primary}" ButtonTextSize="30" ButtonCornerRadius="30"
+                                        Command="{Binding LoadMoreCommand}"/>
+                                </schedule:States.StateLoadMore>
+                            </schedule:States>
+                        </schedule:Schedule.States>
+                    </schedule:Schedule>
+
+                    <!--replaced with CustomSchedule (performance issues)-->
+                    <!--<StackLayout toolkit:StateContainer.CurrentState="{Binding ActivitiesStateKey}" VerticalOptions="FillAndExpand">
+            <toolkit:StateContainer.StateViews>
+
+                <StackLayout toolkit:StateView.StateKey="Empty" Margin="20">
+                    <Label HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.DayOff}" />
+                </StackLayout>
+
+                <StackLayout toolkit:StateView.StateKey="Loading" HeightRequest="200">
+                    <ActivityIndicator IsRunning="True" />
+                </StackLayout>
+
+                <StackLayout toolkit:StateView.StateKey="LoadingError">
+                    <Label Padding="20" Style="{StaticResource CenteredLabel}" Text="{x:Static strings:LocalizedStrings.Errors_LoadingError}" />
+                </StackLayout>
+
+                <StackLayout toolkit:StateView.StateKey="ConnectionError">
+                    <Label Padding="20" Style="{StaticResource CenteredLabel}" Text="{x:Static strings:LocalizedStrings.Errors_USOSAPIConnectionError}" />
+                </StackLayout>
+
+                <Border VerticalOptions="FillAndExpand" toolkit:StateView.StateKey="Loaded" BackgroundColor="Transparent" Padding="0" StrokeShape="RoundRectangle 20,20,0,0" Stroke="Transparent">
+                    <ScrollView x:Name="timetableScrollView" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand">
+                        <AbsoluteLayout HeightRequest="{Binding TimetableHeight}" VerticalOptions="FillAndExpand">
+
+                            <StackLayout BindableLayout.ItemsSource="{Binding BackgroundUnits}"
+                                AbsoluteLayout.LayoutFlags="SizeProportional" AbsoluteLayout.LayoutBounds="0,0,1,1" BackgroundColor="{StaticResource BackgroundColor}">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate x:DataType="local:TimetableBackgroundUnit">
+                                        <StackLayout VerticalOptions="StartAndExpand" Margin="0,0,0,0" Orientation="Horizontal" Spacing="10">
+                                            <Label Text="{Binding Time}" VerticalOptions="StartAndExpand" TranslationY="-10"></Label>
+                                            <BoxView HorizontalOptions="FillAndExpand" HeightRequest="2" BackgroundColor="{StaticResource Gray300}" VerticalOptions="StartAndExpand"></BoxView>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </StackLayout>
+
+                            <AbsoluteLayout BindableLayout.ItemsSource="{Binding ActivitiesObservable}" Margin="60,0,10,0" AbsoluteLayout.LayoutFlags="SizeProportional" AbsoluteLayout.LayoutBounds="0,0,1,1" Background="Transparent">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate x:DataType="model:Activity">
+                                        <Border Padding="0" Style="{StaticResource BorderWithShadow}" AbsoluteLayout.LayoutFlags="WidthProportional" 
+                                                AbsoluteLayout.LayoutBounds="{Binding LayoutBounds}">
+                                            <controls:CustomButton Command="{Binding OnClick}">
+                                                <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal" VerticalOptions="FillAndExpand">
+                                                    <StackLayout BackgroundColor="{Binding ClassTypeNameJSON, Converter={StaticResource classTypeToColorConverter}}" WidthRequest="7.5" />
+                                                    <StackLayout Margin="20,20,20,20" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                                                        <Label FontSize="14" Text="{Binding Name}" />
+                                                        <Label FontSize="12" Text="{Binding ClassTypeName}" />
+                                                        <StackLayout Margin="0,0,0,5" Orientation="Horizontal">
+                                                            <StackLayout Orientation="Horizontal">
+                                                                <Label FontSize="11" HorizontalTextAlignment="Center" Text="{Binding StartTime}" VerticalOptions="Center" />
+                                                                <Label FontSize="11" Text=" - " TextColor="{StaticResource TextColor}" VerticalOptions="Center" />
+                                                                <Label FontSize="11" HorizontalTextAlignment="Center" Text="{Binding EndTime}" VerticalOptions="Center" />
+                                                            </StackLayout>
+                                                            <StackLayout Margin="0,0,0,0" HorizontalOptions="EndAndExpand" Orientation="Horizontal">
+                                                                <Label FontSize="11" HorizontalTextAlignment="Center" Text="{Binding TimerValue}" TextColor="{StaticResource TextColor}" />
+                                                            </StackLayout>
+                                                        </StackLayout>
+                                                        <Label FontSize="11" HorizontalTextAlignment="Start" LineBreakMode="TailTruncation" Text="{Binding BuildingName}" TextColor="{StaticResource Gray300}" />
+                                                        <StackLayout Orientation="Horizontal" Spacing="5">
+                                                            <Label FontSize="11" Text="{x:Static strings:LocalizedStrings.ActivitiesPage_Room} " TextColor="{StaticResource Gray300}" />
+                                                            <Label FontSize="11" Text="{Binding RoomNumber}" TextColor="{StaticResource Gray300}" />
+                                                        </StackLayout>
+                                                    </StackLayout>
+                                                </StackLayout>
+                                            </controls:CustomButton>
+                                        </Border>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </AbsoluteLayout>
+
+                        </AbsoluteLayout>
+                    </ScrollView>
+                </Border>
+
+            </toolkit:StateContainer.StateViews>
+        </StackLayout>-->
+
+                </StackLayout>
+
+            </AbsoluteLayout>
+
+        </toolkit:StateContainer.StateViews>
+    </StackLayout>
+
+</controls:CustomContentPageNotAnimated>

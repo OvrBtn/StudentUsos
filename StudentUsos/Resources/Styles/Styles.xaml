@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+   
+
+    <Shadow x:Key="defaultBlackShadow" Brush="Black" Opacity="0.3" Radius="5" Offset="0,0"/>
+
+    <Style TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource White}" />
+        <Setter Property="LineBreakMode" Value="WordWrap" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="FontFamily" Value="OpenSansRegular" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="CenteredLabel">
+        <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+        <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+        <Setter Property="HorizontalTextAlignment" Value="Center"/>
+        <Setter Property="VerticalTextAlignment" Value="Center"/>
+    </Style>
+
+
+    <Style TargetType="Frame">
+        <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor2}" />
+        <Setter Property="BorderColor" Value="{StaticResource BackgroundColor2}" />
+        <Setter Property="CornerRadius" Value="20" />
+        <Setter Property="HasShadow" Value="True" />
+        <Setter Property="Padding" Value="20" />
+    </Style>
+
+    <Style TargetType="Border">
+        <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor2}" />
+        <Setter Property="Stroke" Value="{StaticResource BackgroundColor2}" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 20" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="Padding" Value="20" />
+    </Style>
+
+    <Style x:Key="BorderWithShadow" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor2}" />
+        <Setter Property="Shadow">
+            <Setter.Value>
+                <Shadow Brush="{StaticResource Black}"
+                        Opacity="0.45"
+                        Radius="3" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Stroke" Value="{StaticResource BackgroundColor2}" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 20,20,20,20" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="Stroke" Value="{StaticResource BackgroundColor2}" />
+        <Setter Property="Padding" Value="20" />
+    </Style>
+
+    <Style TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor2}" />
+        <Setter Property="TextColor" Value="{StaticResource TextColor}" />
+        <Setter Property="FontFamily" Value="OpenSansRegular" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="CornerRadius" Value="20" />
+        <Setter Property="Padding" Value="14,10" />
+        <Setter Property="LineBreakMode" Value="WordWrap"></Setter>
+    </Style>
+
+    <Style TargetType="Button" x:Key="ButtonWithShadow">
+        <Setter Property="Shadow">
+            <Setter.Value>
+                <Shadow Brush="Black" Radius="10" Opacity="0.5"></Shadow>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="ActivityIndicator">
+        <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Primary}}" />
+        <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+        <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+        <Setter Property="IsRunning" Value="True" />
+    </Style>
+
+    <Style TargetType="Entry">
+        <Setter Property="TextColor" Value="{StaticResource White}"></Setter>
+    </Style>
+
+    <Style TargetType="TimePicker">
+        <Setter Property="TextColor" Value="{StaticResource White}"></Setter>
+    </Style>
+
+    <Style TargetType="DatePicker">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource White}}" />
+        <Setter Property="FontFamily" Value="OpenSansRegular" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="MinimumHeightRequest" Value="44" />
+        <Setter Property="MinimumWidthRequest" Value="44" />
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <Style x:Key="BorderShadow" TargetType="Shadow">
+        <Setter Property="Radius" Value="20" />
+        <Setter Property="Opacity" Value="0.4" />
+        <Setter Property="Brush" Value="{StaticResource BackgroundColor}" />
+        <Setter Property="Offset" Value="0,0" />
+    </Style>
+
+    <Style TargetType="IndicatorView">
+        <Setter Property="IndicatorColor" Value="{StaticResource Gray300}" />
+        <Setter Property="SelectedIndicatorColor" Value="{StaticResource White}" />
+        <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+    </Style>
+
+    <Style TargetType="Editor">
+        <Setter Property="TextColor" Value="White"></Setter>
+    </Style>
+
+</ResourceDictionary>

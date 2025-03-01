@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<local:PopupBase
+    x:Class="StudentUsos.EntryPopup"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:StudentUsos.ViewModels"
+    x:DataType="vm:EntryPopupViewModel"
+    xmlns:local="clr-namespace:StudentUsos.Views">
+
+    <Frame Margin="20" Padding="10" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+        <StackLayout Margin="10">
+            <Label Text="{Binding Title}" FontAttributes="Bold" FontSize="20" HorizontalTextAlignment="Center" />
+            <Label Text="{Binding Description}" HorizontalTextAlignment="Center" />
+            <Entry Text="{Binding EntryText, Mode=TwoWay}" TextColor="{StaticResource TextColor}" Keyboard="{Binding Keyboard}"/>
+            <StackLayout Margin="0,5,0,0" HorizontalOptions="CenterAndExpand" Orientation="Horizontal" Spacing="5">
+                <Button Text="{Binding Cancel}" BackgroundColor="{StaticResource BackgroundColor}" Command="{Binding CancelClickedCommand}" FontSize="15" 
+                            TextColor="{StaticResource TextColor}" TextTransform="None" />
+                <Button Text="{Binding Confirm}" BackgroundColor="{StaticResource BackgroundColor}" Command="{Binding ConfirmClickedCommand}" FontSize="15" 
+                            TextColor="{StaticResource TextColor}" TextTransform="None" />
+            </StackLayout>
+        </StackLayout>
+    </Frame>
+    
+</local:PopupBase>

@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:CustomContentPageNotAnimated
+    x:Class="StudentUsos.Features.SatisfactionSurveys.Views.FillSatisfactionSurveyPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:StudentUsos.Controls"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:skiaextended="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
+    xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
+    x:DataType="views:FillSatisfactionSurveyViewModel"
+    x:Name="self"
+    xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
+    xmlns:views="using:StudentUsos.Features.SatisfactionSurveys.Views"
+    xmlns:models="using:StudentUsos.Features.SatisfactionSurveys.Models">
+
+    <controls:CustomContentPageNotAnimated.Resources>
+        <views:SkLottieImageSourceConverter x:Key="sKLottieImageSourceConverter"></views:SkLottieImageSourceConverter>
+    </controls:CustomContentPageNotAnimated.Resources>
+
+    <AbsoluteLayout>
+
+        <StackLayout IsVisible="{Binding IsSuccessLottieVisible}" AbsoluteLayout.LayoutFlags="All"
+                Margin="20" AbsoluteLayout.LayoutBounds="0,0,1,1">
+            <skiaextended:SKLottieView
+                            x:Name="successLottieAnimation"
+                            VerticalOptions="FillAndExpand"
+                            HorizontalOptions="FillAndExpand"
+                            RepeatCount="1"
+                            IsAnimationEnabled="true"
+                            Source="success_lottie_animation.json"/>
+        </StackLayout>
+
+        <StackLayout IsVisible="{Binding IsFailLottieVisible}" AbsoluteLayout.LayoutFlags="All"
+                Margin="20" AbsoluteLayout.LayoutBounds="0,0,1,1">
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding TryAgainCommand}"></TapGestureRecognizer>
+            </StackLayout.GestureRecognizers>
+            <skiaextended:SKLottieView
+                     x:Name="failLottieAnimation"
+                     RepeatCount="1"
+                     VerticalOptions="FillAndExpand"
+                     IsAnimationEnabled="true"
+                     Source="fail_lottie_animation.json"/>
+            <Button Text="{x:Static strings:LocalizedStrings.TryAgain}" Command="{Binding TryAgainCommand}" Margin="0,0,0,30"></Button>
+        </StackLayout>
+
+        <StackLayout Margin="0" toolkit:StateContainer.CurrentState="{Binding MainStateKey}" 
+                     IsVisible="{Binding IsAnyLottieVisible, Converter={StaticResource NegateBoolConverter}}"
+                     AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" VerticalOptions="FillAndExpand">
+
+            <toolkit:StateContainer.StateViews>
+
+                <ActivityIndicator toolkit:StateView.StateKey="Loading"></ActivityIndicator>
+
+                <Label toolkit:StateView.StateKey="Empty" Text="{x:Static strings:LocalizedStrings.SatisfactionSurveysPage_Empty}"></Label>
+
+                <Label toolkit:StateView.StateKey="ConnectionError" Text="{x:Static strings:LocalizedStrings.Errors_USOSAPIConnectionError}"></Label>
+
+                <AbsoluteLayout toolkit:StateView.StateKey="Loaded" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+
+                    <controls:CustomProgressBar x:Name="filledProgressBar" Progress="{Binding SatisfactionSurvey.FilledPercentage}"
+                                                AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" 
+                                                ProgressColor="{StaticResource Primary}"  Direction="BottomToTop"/>
+
+                    <Border AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" Padding="0" Margin="2.5" IsVisible="true"
+                        BackgroundColor="{StaticResource BackgroundColor}" StrokeThickness="0" StrokeShape="RoundRectangle 45,45,45,45" >
+                        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0,20,0,0">
+
+                            <StackLayout VerticalOptions="FillAndExpand">
+                                <Label Margin="0,10,0,5" FontAttributes="Bold" FontSize="18" Text="{Binding SatisfactionSurvey.Name}" HorizontalTextAlignment="Center"></Label>
+                                <Label Margin="0,0,0,5" FontSize="15" Text="{Binding SatisfactionSurvey.Group.CourseName}" HorizontalTextAlignment="Center"></Label>
+                                <Label Margin="0,0,0,5" FontSize="15" Text="{Binding SatisfactionSurvey.Group.ClassType}" HorizontalTextAlignment="Center"></Label>
+                                <Label Margin="0,0,0,0" FontSize="15" Text="{Binding SatisfactionSurvey.Lecturer.FullName}" HorizontalTextAlignment="Center"></Label>
+
+                                <StackLayout HeightRequest="1" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource Gray600}" Margin="30,20,30,20"/>
+
+                                <StackLayout Margin="30, 0, 30, 10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                    <Label Text="{Binding CurrentQuestion.DisplayText}" Margin="0,0,0,10"></Label>
+
+                                    <StackLayout BindableLayout.ItemsSource="{Binding CurrentQuestion.PossibleAnswers}">
+                                        <BindableLayout.ItemTemplate>
+                                            <DataTemplate x:DataType="models:SatisfactionSurveyAnswer">
+                                                <StackLayout Orientation="Horizontal">
+                                                    <RadioButton Content="{Binding DisplayText}" GroupName="{Binding QuestionId}" 
+                                                                 BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" TextColor="White"
+                                                                 IsChecked="{Binding IsChecked, Mode=TwoWay}" BorderColor="Pink"/>
+                                                </StackLayout>
+                                            </DataTemplate>
+                                        </BindableLayout.ItemTemplate>
+                                    </StackLayout>
+
+                                    <!--<Editor IsVisible="{Binding CurrentQuestion.AllowComment}" Text="{Binding CurrentQuestion.Comment, Mode=TwoWay}" HeightRequest="100" MaxLength="1000"></Editor>-->
+                                    
+                                    <dxe:MultilineEdit IsVisible="{Binding CurrentQuestion.AllowComment}" TextColor="White"
+                                                       BorderColor="{StaticResource Primary}" MaxLineCount="15" MinLineCount="5"
+                                                       CursorColor="{StaticResource Primary}" FocusedBorderColor="{StaticResource Primary}"
+                                                       MaxCharacterCount="{Binding CurrentQuestion.CommentMaxLength}"
+                                                       Text="{Binding CurrentQuestion.Comment, Mode=TwoWay}"/>
+
+                                </StackLayout>
+
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="20,20,20,30" Spacing="10">
+                                    <controls:CustomButton HorizontalOptions="FillAndExpand" Command="{Binding PreviousQuestionCommand}">
+                                        <Frame Padding="10">
+                                            <Image HeightRequest="30" Source="arrow_left.png"></Image>
+                                        </Frame>
+                                    </controls:CustomButton>
+                                    <controls:CustomButton HorizontalOptions="FillAndExpand" Command="{Binding NextQuestionCommand}" IsVisible="{Binding IsNextButtonVisible}">
+                                        <Frame Padding="10">
+                                            <Image HeightRequest="30" Source="arrow_right.png"></Image>
+                                        </Frame>
+                                    </controls:CustomButton>
+                                    <Button Text="{x:Static strings:LocalizedStrings.Send}" BackgroundColor="{StaticResource Primary}" Command="{Binding SendButtonClickedCommand}" VerticalOptions="FillAndExpand" 
+                                    HorizontalOptions="FillAndExpand" IsVisible="{Binding IsSendButtonVisible}"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                    </Border>
+                </AbsoluteLayout>
+
+            </toolkit:StateContainer.StateViews>
+
+        </StackLayout>
+
+    </AbsoluteLayout>
+
+</controls:CustomContentPageNotAnimated>

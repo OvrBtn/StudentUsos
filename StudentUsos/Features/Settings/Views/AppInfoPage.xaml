@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:CustomContentPageNotAnimated
+    x:Class="StudentUsos.Features.Settings.Views.AppInfoPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:StudentUsos.Controls"
+    xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings">
+
+    <ScrollView>
+        <StackLayout Margin="30" Spacing="20">
+
+            <StackLayout Spacing="10">
+                <Label Text="Studencki USOS" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="18"></Label>
+                <Label Text="{x:Static strings:LocalizedStrings.AboutAppPage_AboutApp}"/>
+            </StackLayout>
+
+            <StackLayout>
+                <Label Text="{x:Static strings:LocalizedStrings.AboutAppPage_DeveloperTitle}" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="18" Margin="0,0,0,10"></Label>
+                <Label Text="{x:Static strings:LocalizedStrings.AboutAppPage_Developer}"/>
+                <Label Text="{x:Static strings:LocalizedStrings.AboutAppPage_DeveloperContact}"/>
+                <controls:CustomButton Margin="10,10,10,5" OnClick="CopyEmailToClipboard">
+                    <Frame BackgroundColor="{StaticResource Primary}" Padding="0">
+                        <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="CenterAndExpand">
+                            <Label FontSize="12" Text="studenckiusosput@gmail.com"></Label>
+                            <Image Source="copy_to_clipboard.png" WidthRequest="15"></Image>
+                        </StackLayout>
+                    </Frame>
+                </controls:CustomButton>
+                <Button x:Name="button" FontSize="12" Text="Discord" Clicked="DiscordButton_Clicked" BackgroundColor="{StaticResource Primary}" Margin="10"></Button>
+            </StackLayout>
+
+            <StackLayout>
+                <Label Margin="0,0,0,10" Text="{x:Static strings:LocalizedStrings.AboutAppPage_PersonalData}" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="18"></Label>
+                <Label Text="{x:Static strings:LocalizedStrings.AboutAppPage_PersonalDataText1}"/>
+                <Label Text="{x:Static strings:LocalizedStrings.AboutAppPage_PersonalDataText2}"></Label>
+            </StackLayout>
+
+        </StackLayout>
+    </ScrollView>
+
+</controls:CustomContentPageNotAnimated>

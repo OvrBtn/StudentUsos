@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="StudentUsos.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:activities="using:StudentUsos.Features.Activities"
+    xmlns:menu="using:StudentUsos.Features.Menu"
+    xmlns:authorization="using:StudentUsos.Features.Authorization"
+    xmlns:views="clr-namespace:StudentUsos.Features.Dashboard.Views"
+    xmlns:views1="clr-namespace:StudentUsos.Features.Activities.Views"
+    Shell.NavBarIsVisible="False"
+    Shell.FlyoutBehavior="Disabled"
+    Shell.TabBarIsVisible="False">
+
+    <TabBar>
+        <ShellContent ContentTemplate="{DataTemplate views:DashboardPage}" Icon="house.svg" Route="DashboardPage" />
+        <ShellContent ContentTemplate="{DataTemplate views1:ActivitiesPage}" Icon="calendar2range.svg" Route="ActivitiesPage" />
+        <ShellContent ContentTemplate="{DataTemplate menu:MorePage}" Icon="grid.svg" Route="MorePage" />
+    </TabBar>
+
+    <ShellContent Title="Login" ContentTemplate="{DataTemplate authorization:LoginPage}" FlyoutItemIsVisible="False" Route="LoginPage" />
+
+</Shell>

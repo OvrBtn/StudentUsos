@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:CustomContentPageNotAnimated
+    x:Class="StudentUsos.Features.Grades.Views.ScholarshipCalculatorPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:StudentUsos.Controls"
+    xmlns:ex="clr-namespace:StudentUsos.Extensions"
+    x:DataType="views:ScholarshipCalculatorViewModel"
+    xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
+    xmlns:views="using:StudentUsos.Features.Grades.Views"
+    xmlns:models="using:StudentUsos.Features.Grades.Models">
+
+    <controls:CustomContentPageNotAnimated.Resources>
+        <views:MarginConverter x:Key="MarginConverter"></views:MarginConverter>
+    </controls:CustomContentPageNotAnimated.Resources>
+
+    <StackLayout Margin="0">
+        <Grid ColumnDefinitions="auto, auto" Margin="0,20,0,20" HorizontalOptions="Center" VerticalOptions="Center" ColumnSpacing="5">
+            <Label Grid.Column="0" Text="{x:Static strings:LocalizedStrings.Points}"></Label>
+            <Label Grid.Column="1" Text="{Binding PointsString}"></Label>
+        </Grid>
+
+        <ScrollView Orientation="Both" VerticalOptions="FillAndExpand">
+            <StackLayout BindableLayout.ItemsSource="{Binding ScholarshipCalculatorRecords}" Margin="20,0,20,0">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="models:ScholarshipCalculatorRecord">
+
+                        <controls:CustomButton VerticalOptions="Start" HorizontalOptions="Start"
+                                               Command="{Binding RecordOnClickCommand,Source={RelativeSource AncestorType={x:Type views:ScholarshipCalculatorViewModel}}}"
+                                               CommandParameter="{Binding .}">
+                            <controls:CustomButton.Margin>
+                                <MultiBinding Converter="{StaticResource MarginConverter}">
+                                    <!-- Left Margin -->
+                                    <Binding Path="Margin"/>
+                                    <!-- Top Margin -->
+                                    <Binding Mode="OneTime" Path="." Source="0" />
+                                    <!-- Right Margin -->
+                                    <Binding Mode="OneTime" Path="." Source="0" />
+                                    <!-- Bottom Margin (Binding) -->
+                                    <Binding Mode="OneTime" Path="." Source="10" />
+                                </MultiBinding>
+                            </controls:CustomButton.Margin>
+
+                            <Grid ColumnDefinitions="auto, auto, auto"
+                              IsVisible="True" Padding="10"
+                             ColumnSpacing="10">
+
+                                <Image Grid.Column="0" WidthRequest="10" Source="triangle.png" VerticalOptions="Center" IsVisible="{Binding IsSectionTitle}"></Image>
+                                <CheckBox  Grid.Column="0" IsChecked="{Binding IsCheckBoxChecked}" IsVisible="{Binding IsCheckBoxVisible}"></CheckBox>
+                                <Label Grid.Column="0" Text="{Binding Multiplier, StringFormat='{0}x'}" 
+                                       IsVisible="{Binding HasMultiplier}" TextColor="{StaticResource Primary}"/>
+
+                                <Label Grid.Column="1" FontSize="14" Text="{Binding Text}" LineBreakMode="CharacterWrap" HorizontalOptions="Start"
+                                   WidthRequest="{ex:ScreenSize Type=Width,Percentage=0.65}"></Label>
+                                <Label Grid.Column="2" FontSize="14" Text="{Binding PointsMinimumMaximum}" TextColor="{StaticResource Primary}"
+                                       IsVisible="{Binding IsSectionTitle, Converter={StaticResource NegateBoolConverter}}"></Label>
+                            </Grid>
+
+                        </controls:CustomButton>
+
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+        </ScrollView>
+
+    </StackLayout>
+
+</controls:CustomContentPageNotAnimated>

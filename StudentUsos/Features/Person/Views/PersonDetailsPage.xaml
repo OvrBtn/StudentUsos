@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:CustomContentPageNotAnimated
+    x:Class="StudentUsos.Features.Person.Views.PersonDetailsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:StudentUsos.Controls"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:DataType="views:PersonDetailsViewModel"
+    xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
+    xmlns:views="using:StudentUsos.Features.Person.Views"
+    xmlns:models="using:StudentUsos.Features.Person.Models">
+
+    <StackLayout toolkit:StateContainer.CurrentState="{Binding MainStateKey}">
+        <toolkit:StateContainer.StateViews>
+
+            <ActivityIndicator toolkit:StateView.StateKey="Loading"></ActivityIndicator>
+            
+            <ScrollView toolkit:StateView.StateKey="Loaded">
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="30">
+                    <Grid ColumnDefinitions="40, *" ColumnSpacing="10" HorizontalOptions="CenterAndExpand">
+                        <Frame Grid.Column="0" Margin="0,4,0,4" Padding="5" BackgroundColor="{Binding Person.InitialsBackgroundColor}" CornerRadius="90" HeightRequest="40" WidthRequest="40">
+                            <Label FontSize="12" HorizontalOptions="CenterAndExpand" Text="{Binding Person.Initials}" VerticalOptions="CenterAndExpand" />
+                        </Frame>
+                        <Label Grid.Column="1" LineBreakMode="WordWrap" Text="{Binding Lecturer.FullNameWithTitles}" FontSize="18" FontAttributes="Bold"></Label>
+                    </Grid>
+                    <Border Padding="0" Margin="10,10,10,10">
+                        <controls:CustomButton VerticalOptions="Start" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource Primary}"
+                                       Command="{Binding Lecturer.CopyEmailClickedCommand}">
+                            <Grid ColumnDefinitions="auto, 20" HorizontalOptions="CenterAndExpand" ColumnSpacing="10">
+                                <Label Text="{Binding Person.Email}" FontSize="11"></Label>
+                                <Image Grid.Column="1" Source="copy_to_clipboard.png" VerticalOptions="CenterAndExpand" WidthRequest="20" />
+                            </Grid>
+                        </controls:CustomButton>
+                    </Border>
+                    <Grid ColumnDefinitions="*,*" RowDefinitions="auto, auto" RowSpacing="10" ColumnSpacing="10" Margin="0,10,0,0">
+                        <Border Grid.Column="0" Grid.Row="0" Padding="0" Style="{StaticResource BorderWithShadow}">
+                            <controls:CustomButton Command="{Binding Lecturer.StaffTimetableClickedCommand}">
+                                <StackLayout Spacing="10" VerticalOptions="CenterAndExpand">
+                                    <Image Source="timetable.png" WidthRequest="50"></Image>
+                                    <Label Text="{x:Static strings:LocalizedStrings.Schedule}" FontSize="12" HorizontalOptions="CenterAndExpand"></Label>
+                                </StackLayout>
+                            </controls:CustomButton>
+                        </Border>
+                        <Border Grid.Column="1" Grid.Row="0" Style="{StaticResource BorderWithShadow}">
+                            <StackLayout Spacing="10">
+                                <Image Source="telephone.png" WidthRequest="50"></Image>
+                                <StackLayout BindableLayout.ItemsSource="{Binding Lecturer.PhoneNumbers}">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate x:DataType="models:PhoneNumber">
+                                            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="5">
+                                                <Label Text="{Binding Number}" FontSize="12"></Label>
+                                                <controls:CustomButton Command="{Binding CopyNumberCommand}" HorizontalOptions="Start"  WidthRequest="20" HeightRequest="20">
+                                                    <Image Source="copy_to_clipboard.png" VerticalOptions="CenterAndExpand" WidthRequest="15"/>
+                                                </controls:CustomButton>
+                                            </StackLayout>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </StackLayout>
+                            </StackLayout>
+                        </Border>
+                        <Border Grid.Column="0" Grid.Row="1" Style="{StaticResource BorderWithShadow}" Padding="0">
+                            <controls:CustomButton Command="{Binding Lecturer.HomePageUrlClickedCommand}">
+                                <StackLayout Spacing="10" Margin="20">
+                                    <Image Source="globe2.png" WidthRequest="50"></Image>
+                                    <Label Text="{Binding Lecturer.HomePageUrl}" HorizontalTextAlignment="Center" FontSize="10"
+                                   LineBreakMode="TailTruncation" MaxLines="2"/>
+                                </StackLayout>
+                            </controls:CustomButton>
+                        </Border>
+                        <Border Grid.Column="1" Grid.Row="1" Style="{StaticResource BorderWithShadow}" Padding="0">
+                            <controls:CustomButton Command="{Binding Lecturer.ProfileUrlClickedCommand}">
+                                <StackLayout Spacing="10" Margin="20">
+                                    <Image Source="globe2.png" WidthRequest="50"></Image>
+                                    <Label Text="{Binding Lecturer.ProfileUrl}" HorizontalTextAlignment="Center" FontSize="10"
+                                    LineBreakMode="TailTruncation" MaxLines="2"/>
+                                </StackLayout>
+                            </controls:CustomButton>
+                        </Border>
+                    </Grid>
+                    <Border Margin="0,10,0,0"  Style="{StaticResource BorderWithShadow}">
+                        <Label Text="{Binding Lecturer.OfficeHours}" FontSize="12"></Label>
+                    </Border>
+                    <Border Margin="0,10,0,0" Style="{StaticResource BorderWithShadow}">
+                        <StackLayout BindableLayout.ItemsSource="{Binding Lecturer.EmploymentPositions}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="models:EmploymentPosition">
+                                    <StackLayout>
+                                        <Label Text="{Binding FacultyName}" FontSize="12"></Label>
+                                        <Label Text="{Binding PositionName}" FontSize="12"></Label>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+                    </Border>
+                </StackLayout>
+            </ScrollView>
+
+        </toolkit:StateContainer.StateViews>
+    </StackLayout>
+
+</controls:CustomContentPageNotAnimated>

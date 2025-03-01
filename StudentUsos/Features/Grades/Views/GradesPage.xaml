@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:CustomContentPageNotAnimated
+    x:Class="StudentUsos.Features.Grades.Views.GradesPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:StudentUsos.Controls"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
+    xmlns:views="using:StudentUsos.Features.Grades.Views"
+    xmlns:models="using:StudentUsos.Features.Grades.Models"
+    x:Name="self"
+    x:DataType="views:GradesViewModel">
+
+    <AbsoluteLayout>
+
+        <controls:FloatingButton AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="1,1,-1,-1" ZIndex="10" Margin="40,40"
+                                 ButtonCornerRadius="1500" AnimationLength="160" AnimationSpacing="120" ButtonClicked="FloatingButton_ButtonClicked">
+            <controls:FloatingButton.ContentTemplate x:DataType="views:GradesPage">
+                <StackLayout Margin="0,0,0,10" Spacing="5">
+                    <controls:CustomButton BackgroundColor="#50000000" HorizontalOptions="End" CornerRadius="1000"
+                                           Command="{Binding SwitchEditingCommand}">
+                        <Grid ColumnDefinitions="auto, auto,auto" Margin="0" ColumnSpacing="5" HorizontalOptions="End">
+                            <CheckBox Grid.Column="0" IsChecked="{Binding IsEditingEnabled}" 
+                                      Margin="10,0,0,0" Color="White"></CheckBox>
+                            <Label Grid.Column="1" Text="{x:Static strings:LocalizedStrings.GradesPage_EditGrades}"></Label>
+                            <Border Grid.Column="2" BackgroundColor="{StaticResource Primary}" Padding="17" StrokeShape="RoundRectangle 1000">
+                                <Image WidthRequest="25" HeightRequest="25" Source="pencil_square128.png"></Image>
+                            </Border>
+                        </Grid>
+                    </controls:CustomButton>
+                    <controls:CustomButton BackgroundColor="#50000000" HorizontalOptions="End" CornerRadius="1000" OnClick="ScholarshipCalculatorButton_OnClick">
+                        <Grid ColumnDefinitions="auto, auto" Margin="5,0,0,0" ColumnSpacing="5" HorizontalOptions="End">
+                            <Label Grid.Column="0" Margin="10,0,0,0" Text="{x:Static strings:LocalizedStrings.GradesPage_ScholarshipCalculator}"></Label>
+                            <Border Grid.Column="1" BackgroundColor="{StaticResource Primary}" Padding="17" StrokeShape="RoundRectangle 1000">
+                                <Image WidthRequest="25" HeightRequest="25" Source="calculator.png"></Image>
+                            </Border>
+                        </Grid>
+                    </controls:CustomButton>
+                    <controls:CustomButton BackgroundColor="#50000000" HorizontalOptions="End" CornerRadius="1000" OnClick="GradesSummaryButton_OnClick">
+                        <Grid ColumnDefinitions="auto, auto" Margin="5,0,0,0" ColumnSpacing="5" HorizontalOptions="End">
+                            <Label Grid.Column="0" Margin="10,0,0,0" Text="ECTS"></Label>
+                            <Border Grid.Column="1" BackgroundColor="{StaticResource Primary}" Padding="17" StrokeShape="RoundRectangle 1000">
+                                <Image WidthRequest="25" HeightRequest="25" Source="wallet"></Image>
+                            </Border>
+                        </Grid>
+                    </controls:CustomButton>
+                </StackLayout>
+            </controls:FloatingButton.ContentTemplate>
+            <controls:FloatingButton.ButtonTemplate>
+                <StackLayout BackgroundColor="{StaticResource Primary}" Padding="17">
+                    <Image x:Name="floatingButtonImage" WidthRequest="20" Source="plus.png"></Image>
+                </StackLayout>
+            </controls:FloatingButton.ButtonTemplate>
+        </controls:FloatingButton>
+
+        <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" ZIndex="5">
+
+            <controls:CustomButton HeightRequest="50" Margin="30,0,30,0" HorizontalOptions="FillAndExpand" VerticalOptions="Start" Command="{Binding OpenTermsListCommand}" 
+                               IsVisible="{Binding CurrentlyDisplayedTerm.Name, Converter={StaticResource StringToBoolConverter}}">
+                <StackLayout Orientation="Horizontal" Spacing="15" HorizontalOptions="CenterAndExpand">
+                    <Label Text="{Binding CurrentlyDisplayedTerm.Name}" FontSize="16" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center"></Label>
+                    <Image Source="triangle.png" WidthRequest="12" Opacity="0.9"></Image>
+                </StackLayout>
+            </controls:CustomButton>
+
+            <StackLayout toolkit:StateContainer.CurrentState="{Binding GradesStateKey}" VerticalOptions="FillAndExpand">
+                <toolkit:StateContainer.StateViews>
+
+                    <Label toolkit:StateView.StateKey="LoadingError" Style="{StaticResource CenteredLabel}" Text="{x:Static strings:LocalizedStrings.Errors_LoadingError}" />
+
+                    <Label toolkit:StateView.StateKey="ConnectionError" Style="{StaticResource CenteredLabel}" Text="{x:Static strings:LocalizedStrings.Errors_USOSAPIConnectionError}" />
+
+                    <Label toolkit:StateView.StateKey="Empty" Style="{StaticResource CenteredLabel}" Text="{x:Static strings:LocalizedStrings.GradesPage_Empty}" />
+
+                    <ActivityIndicator toolkit:StateView.StateKey="Loading" />
+
+                    <StackLayout toolkit:StateView.StateKey="Loaded" VerticalOptions="FillAndExpand">
+                        <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal" Margin="0,0,0,10" Spacing="5">
+                            <Label Text="{x:Static strings:LocalizedStrings.Average}"></Label>
+                            <Label Text="{Binding GradeAverage}"></Label>
+                        </StackLayout>
+
+                        <CollectionView  HorizontalOptions="FillAndExpand" ItemsSource="{Binding GradesGroups}" VerticalOptions="FillAndExpand">
+                            <CollectionView.EmptyView>
+                                <Label Text="{x:Static strings:LocalizedStrings.GradesPage_Empty}" Style="{StaticResource CenteredLabel}"></Label>
+                            </CollectionView.EmptyView>
+                            <CollectionView.Footer>
+                                <StackLayout Margin="15" />
+                            </CollectionView.Footer>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="models:FinalGradeGroup">
+
+                                    <Border  Margin="30,5,30,5" ZIndex="10" Padding="0">
+                                        <Grid>
+
+                                            <StackLayout Margin="20" HorizontalOptions="Fill">
+
+                                                <!--Grade label and type-->
+                                                <Grid ColumnDefinitions="*,30" RowDefinitions="auto, auto">
+                                                    <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="FillAndExpand" Text="{Binding CourseName}" />
+                                                    <Label Grid.Column="0" Grid.Row="1" Margin="0,0,0,1" FontSize="12" Text="{Binding FirstTermGrade.ClassType}" />
+                                                    <Image Grid.Column="1" Grid.RowSpan="2" WidthRequest="20" Source="pencil_square128.png"
+                                                               IsVisible="{Binding IsEditingEnabled,Source={RelativeSource AncestorType={x:Type views:GradesViewModel}}}"></Image>
+                                                </Grid>
+
+                                                <!--First term grade value-->
+                                                <StackLayout Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
+                                                    <Label FontSize="12" Text="{x:Static strings:LocalizedStrings.GradesPage_FirstTerm}" />
+                                                    <Border Margin="3,3,5,3" Padding="6" BackgroundColor="{Binding FirstTermGrade.ValueSymbol, Converter={StaticResource GradeSymbolToColorConverter}}" 
+                                               IsVisible="{Binding FirstTermGrade.ValueSymbol, Converter={StaticResource StringToBoolConverter}}">
+                                                        <Label FontSize="12" Text="{Binding FirstTermGrade.ValueSymbol, Converter={StaticResource EmptyStringToStringConverter}, ConverterParameter={x:Static strings:LocalizedStrings.LackOf}}" />
+                                                    </Border>
+                                                    <Label FontSize="12" Text="{Binding FirstTermGrade.ValueDescription, Converter={StaticResource EmptyStringToStringConverter}, ConverterParameter={x:Static strings:LocalizedStrings.LackOf}}" 
+                                                       IsVisible="{Binding FirstTermGrade.IsModified, Converter={StaticResource NegateBoolConverter}}"/>
+                                                </StackLayout>
+
+                                                <!--First term grade modification info-->
+                                                <Label FontSize="10" Text="{Binding FirstTermGrade.ModificationInfo}" TextColor="{StaticResource Gray300}" 
+                                                        IsVisible="{Binding FirstTermGrade.IsSetAndNotModified}"/>
+
+                                                <!--Second term grade value-->
+                                                <StackLayout Margin="0,3,0,0" Spacing="5" HeightRequest="37" IsVisible="{Binding SecondTermGrade.IsSetOrModified}" Orientation="Horizontal">
+                                                    <Label FontSize="12" Text="{x:Static strings:LocalizedStrings.GradesPage_SecondTerm}" />
+                                                    <Border Margin="3,3,5,3" Padding="6" BackgroundColor="{Binding SecondTermGrade.ValueSymbol, Converter={StaticResource GradeSymbolToColorConverter}}" 
+                                               IsVisible="{Binding SecondTermGrade.ValueSymbol, Converter={StaticResource StringToBoolConverter}}">
+                                                        <Label FontSize="12" Text="{Binding SecondTermGrade.ValueSymbol, Converter={StaticResource EmptyStringToStringConverter}, ConverterParameter={x:Static strings:LocalizedStrings.LackOf}}" />
+                                                    </Border>
+                                                    <Label FontSize="12" Text="{Binding SecondTermGrade.ValueDescription, Converter={StaticResource EmptyStringToStringConverter}, ConverterParameter={x:Static strings:LocalizedStrings.LackOf}}" 
+                                                        IsVisible="{Binding SecondTermGrade.IsModified, Converter={StaticResource NegateBoolConverter}}"/>
+                                                </StackLayout>
+
+                                                <!--Second term grade modification info-->
+                                                <Label FontSize="10" Text="{Binding SecondTermGrade.ModificationInfo}" TextColor="{StaticResource Gray300}" 
+                                                       IsVisible="{Binding SecondTermGrade.IsSetAndNotModified}"/>
+
+                                            </StackLayout>
+
+                                            <Button Command="{Binding GradeClickedCommand, Source={RelativeSource AncestorType={x:Type views:GradesViewModel}}}" 
+                                                            CommandParameter="{Binding .}" BackgroundColor="Transparent"/>
+
+                                        </Grid>
+                                    </Border>
+
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+
+                </toolkit:StateContainer.StateViews>
+            </StackLayout>
+
+        </StackLayout>
+
+    </AbsoluteLayout>
+
+</controls:CustomContentPageNotAnimated>

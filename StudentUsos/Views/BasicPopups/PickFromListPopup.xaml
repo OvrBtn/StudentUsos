@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<local:PopupBase
+    x:Class="StudentUsos.PickFromListPopup"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
+    xmlns:local="clr-namespace:StudentUsos.Views"
+    x:Name="self">
+
+        <Border StrokeShape="RoundRectangle 20" Margin="30" Padding="30,30,30,0" VerticalOptions="CenterAndExpand" MaximumHeightRequest="500">
+            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                <Label x:Name="titleLabel" Text="{Binding PopupTitle,Source={x:Reference self}}" Margin="0,0,0,20" FontAttributes="Bold" FontSize="20" HorizontalTextAlignment="Center" />
+
+                <StackLayout toolkit:StateContainer.CurrentState="{Binding CollectionStateKey,Source={x:Reference self}}" VerticalOptions="FillAndExpand">
+                    <toolkit:StateContainer.StateViews>
+
+                        <Label toolkit:StateView.StateKey="Empty" Margin="0,0,0,30" Text="{x:Static strings:LocalizedStrings.MultipleChoicePopup_Empty}" Style="{StaticResource CenteredLabel}"></Label>
+
+                        <Label toolkit:StateView.StateKey="LoadingError" Margin="0,0,0,30" Text="{x:Static strings:LocalizedStrings.Errors_Error}" Style="{StaticResource CenteredLabel}"></Label>
+
+                        <Label toolkit:StateView.StateKey="ConnectionError" Margin="0,0,0,30" Text="{x:Static strings:LocalizedStrings.Errors_USOSAPIConnectionError}" Style="{StaticResource CenteredLabel}"></Label>
+
+                        <ActivityIndicator toolkit:StateView.StateKey="Loading" Margin="0,0,0,30"/>
+
+                        <CollectionView x:Name="optionsCollectionView" toolkit:StateView.StateKey="Loaded"
+                                        VerticalOptions="FillAndExpand" ItemsSource="{Binding Options,Source={x:Reference self}}">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout SnapPointsAlignment="Center" SnapPointsType="Mandatory" Orientation="Vertical"></LinearItemsLayout>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.Footer>
+                                <StackLayout Margin="15"></StackLayout>
+                            </CollectionView.Footer>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Text="{Binding .}" HeightRequest="100" FontSize="15" BackgroundColor="{StaticResource Primary}" Margin="10" Clicked="OptionsButton_Clicked"/>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                    </toolkit:StateContainer.StateViews>
+                </StackLayout>
+
+            </StackLayout>
+        </Border>
+
+</local:PopupBase>

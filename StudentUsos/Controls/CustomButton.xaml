@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StudentUsos.Controls.CustomButton"
+             xmlns:controls="clr-namespace:StudentUsos.Controls"
+             VerticalOptions="FillAndExpand"
+             HorizontalOptions="FillAndExpand"
+             x:Name="self">
+
+    <ContentView.ControlTemplate>
+        <ControlTemplate>
+            <Border Padding="0" Margin="0" StrokeThickness="0"
+                   BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type controls:CustomButton}}, Path=BackgroundColor}"
+                    Shadow="{Binding Source={RelativeSource AncestorType={x:Type controls:CustomButton}}, Path=Shadow}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="{Binding Source={RelativeSource AncestorType={x:Type controls:CustomButton}}, Path=CornerRadius}"></RoundRectangle>
+                </Border.StrokeShape>
+                <Grid>
+                    <ContentPresenter VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+                    <Button Clicked="Button_Clicked" CornerRadius="{Binding Source={RelativeSource AncestorType={x:Type controls:CustomButton}}, Path=CornerRadius}" BackgroundColor="Transparent"/>
+                </Grid>
+            </Border>
+        </ControlTemplate>
+    </ContentView.ControlTemplate>
+
+</ContentView>

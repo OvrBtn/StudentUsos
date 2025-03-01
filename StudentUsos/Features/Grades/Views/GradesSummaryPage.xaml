@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:CustomContentPageNotAnimated
+    x:Class="StudentUsos.Features.Grades.Views.GradesSummaryPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:StudentUsos.Controls"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:DataType="views:GradesSummaryViewModel"
+    xmlns:views="using:StudentUsos.Features.Grades.Views">
+
+    <StackLayout toolkit:StateContainer.CurrentState="{Binding MainStateKey}" VerticalOptions="Center">
+        <toolkit:StateContainer.StateViews>
+
+            <ActivityIndicator toolkit:StateView.StateKey="Loading"></ActivityIndicator>
+
+            <StackLayout toolkit:StateView.StateKey="Loaded" VerticalOptions="Center" HorizontalOptions="Center" Spacing="5">
+                <Label Text="ECTS" HorizontalTextAlignment="Center" FontSize="35"/>
+                <Label Text="{Binding EctsPointsSum}" HorizontalTextAlignment="Center" FontSize="35" FontAttributes="Bold"/>
+            </StackLayout>
+            
+        </toolkit:StateContainer.StateViews>
+    </StackLayout>
+
+</controls:CustomContentPageNotAnimated>

@@ -9,6 +9,16 @@ namespace UnitTests.TestMocks
             action?.Invoke();
         }
 
+        public void ShowErrorMessage(string title, string message)
+        {
+            throw new Exception($"{title} {message}");
+        }
+
+        public Task ShowSnackBarAsync(string text, string buttonText, Action? action = null)
+        {
+            return Task.CompletedTask;
+        }
+
         public void ShowToast(string message, IApplicationService.ToastDuration toastDuration = IApplicationService.ToastDuration.Short, double textSize = 14)
         {
 

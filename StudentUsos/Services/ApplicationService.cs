@@ -61,11 +61,9 @@ namespace StudentUsos.Services
             return Task.Run(action);
         }
 
-#nullable enable
         public Task WorkerThreadInvoke(Func<Task?> func)
         {
             return Task.Run(func);
         }
-#nullable disable
     }
 }

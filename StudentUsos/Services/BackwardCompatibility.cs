@@ -46,7 +46,10 @@ namespace StudentUsos.Services
 
                 _ = CheckIfUsosKeysAreStoredLocallyAsync();
             }
-            catch (Exception ex) { Utilities.ShowError(ex); }
+            catch (Exception ex)
+            {
+                Logger.Logger.Default?.LogCatchedException(ex);
+            }
         }
 
         static async Task CheckIfUsosKeysAreStoredLocallyAsync()
@@ -117,7 +120,7 @@ namespace StudentUsos.Services
                 if (internalAccessTokenSecret != emptyString) Preferences.Set(AuthorizationService.SecureStorageKeys.InternalAccessTokenSecret.ToString(), internalAccessTokenSecret);
                 if (googleCalendars != null && googleCalendars.Count > 0) LocalDatabaseManager.Default.InsertAll(googleCalendars);
             }
-            catch (Exception ex) { Utilities.ShowError(ex); }
+            catch (Exception ex) { Logger.Logger.Default?.LogCatchedException(ex); }
         }
     }
 }

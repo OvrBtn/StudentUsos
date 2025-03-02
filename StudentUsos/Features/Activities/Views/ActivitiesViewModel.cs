@@ -18,13 +18,16 @@ namespace StudentUsos.Features.Activities.Views
         IApplicationService applicationService;
         IActivitiesRepository activitiesRepository;
         IActivitiesService activitiesService;
+        ILogger? logger;
         public ActivitiesViewModel(IApplicationService applicationService,
             IActivitiesRepository activitiesRepository,
-            IActivitiesService activitiesService)
+            IActivitiesService activitiesService,
+            ILogger? logger = null)
         {
             this.applicationService = applicationService;
             this.activitiesRepository = activitiesRepository;
             this.activitiesService = activitiesService;
+            this.logger = logger;
 
             instance = this;
 
@@ -229,7 +232,7 @@ namespace StudentUsos.Features.Activities.Views
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                logger?.LogCatchedException(ex);
                 if (ActivitiesStateKey == StateKey.Loading) ActivitiesStateKey = StateKey.LoadingError;
             }
         }
@@ -288,7 +291,7 @@ namespace StudentUsos.Features.Activities.Views
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                logger?.LogCatchedException(ex);
                 ActivitiesStateKey = StateKey.LoadingError;
             }
         }

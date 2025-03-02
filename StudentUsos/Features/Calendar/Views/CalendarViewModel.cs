@@ -14,17 +14,20 @@ namespace StudentUsos.Features.Calendar.Views
         IGoogleCalendarService googleCalendarService;
         IGoogleCalendarRepository googleCalendarRepository;
         IApplicationService applicationService;
+        ILogger? logger;
         public CalendarViewModel(IUsosCalendarService usosCalendarService,
             IUsosCalendarRepository usosCalendarRepository,
             IGoogleCalendarService googleCalendarService,
             IGoogleCalendarRepository googleCalendarRepository,
-            IApplicationService applicationService)
+            IApplicationService applicationService,
+            ILogger? logger = null)
         {
             this.usosCalendarService = usosCalendarService;
             this.usosCalendarRepository = usosCalendarRepository;
             this.googleCalendarService = googleCalendarService;
             this.googleCalendarRepository = googleCalendarRepository;
             this.applicationService = applicationService;
+            this.logger = logger;
 
             CustomCalendarClickedCommand = new(CustomCalendarClicked);
 
@@ -200,7 +203,7 @@ namespace StudentUsos.Features.Calendar.Views
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                logger?.LogCatchedException(ex);
                 finished?.Invoke();
             }
         }
@@ -236,7 +239,7 @@ namespace StudentUsos.Features.Calendar.Views
                     }
                 }
             }
-            catch (Exception ex) { Utilities.ShowError(ex); }
+            catch (Exception ex) { logger?.LogCatchedException(ex); }
         }
 
         public void LoadUsosEventsLocal(ObservableCollection<CalendarMonth> calendarMonths)
@@ -249,7 +252,7 @@ namespace StudentUsos.Features.Calendar.Views
                     calendarMonths[i].SetEventsFromLocalDatabase(events);
                 }
             }
-            catch (Exception ex) { Utilities.ShowError(ex); }
+            catch (Exception ex) { logger?.LogCatchedException(ex); }
         }
 
         public async Task LocalUsosEventsServerAsync(ObservableCollection<CalendarMonth> calendarMonths, Action? finished = null)
@@ -272,7 +275,7 @@ namespace StudentUsos.Features.Calendar.Views
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                logger?.LogCatchedException(ex);
                 finished?.Invoke();
             }
         }

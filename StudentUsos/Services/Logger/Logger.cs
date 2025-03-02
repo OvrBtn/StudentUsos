@@ -67,13 +67,22 @@ namespace StudentUsos.Services.Logger
             {
                 GetAllowedModules();
             }
-            return allowedModules.Contains(permission.ToString());
+            return allowedModules!.Contains(permission.ToString());
         }
 
         public void SetAllowedModules(IEnumerable<string> newAllowedModules)
         {
             localStorageManager.Value.SetData(LocalStorageKeys.LoggingAllowedData, string.Join("|", newAllowedModules));
             allowedModules = new(newAllowedModules);
+        }
+
+        public void LogCatchedException(Exception ex,
+            [CallerMemberName] string callerName = "",
+            [CallerLineNumber] int callerLineNumber = 0)
+        {
+            LogInternal(LogLevel.Error, "Catched exception", ex, callerName, callerLineNumber);
+
+            applicationService.Value.ShowSnackBarAsync($"{callerName}: {callerLineNumber} - {ex.Message}", "ok");
         }
 
         public void Log(LogLevel logLevel,

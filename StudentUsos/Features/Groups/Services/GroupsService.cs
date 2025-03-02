@@ -13,15 +13,18 @@ namespace StudentUsos.Features.Groups.Services
         ILecturerService lecturerService;
         ILecturerRepository lecturerRepository;
         IServerConnectionManager serverConnectionManager;
+        ILogger? logger;
         public GroupsService(IGroupsRepository groupsRepository,
             ILecturerService lecturerService,
             ILecturerRepository lecturerRepository,
-            IServerConnectionManager serverConnectionManager)
+            IServerConnectionManager serverConnectionManager,
+            ILogger? logger = null)
         {
             this.groupsRepository = groupsRepository;
             this.lecturerService = lecturerService;
             this.lecturerRepository = lecturerRepository;
             this.serverConnectionManager = serverConnectionManager;
+            this.logger = logger;
         }
 
         public async Task<bool> SetEctsPointsIfNotSetAsync(IEnumerable<Group> groups)
@@ -56,7 +59,7 @@ namespace StudentUsos.Features.Groups.Services
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                logger?.LogCatchedException(ex);
             }
         }
 
@@ -114,7 +117,7 @@ namespace StudentUsos.Features.Groups.Services
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                logger?.LogCatchedException(ex);
                 return null;
             }
         }
@@ -172,7 +175,7 @@ namespace StudentUsos.Features.Groups.Services
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                logger?.LogCatchedException(ex);
                 return null;
             }
         }

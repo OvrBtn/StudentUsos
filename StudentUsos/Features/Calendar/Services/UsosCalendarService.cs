@@ -13,15 +13,18 @@ namespace StudentUsos.Features.Calendar.Services
         IServerConnectionManager serverConnectionManager;
         IStudentProgrammeService studentProgrammeService;
         ILocalStorageManager localStorageManager;
+        ILogger? logger;
         public UsosCalendarService(IUsosCalendarRepository usosCalendarRepository,
             IServerConnectionManager serverConnectionManager,
                 IStudentProgrammeService studentProgrammeService,
-                ILocalStorageManager localStorageManager)
+                ILocalStorageManager localStorageManager,
+                ILogger? logger = null)
         {
             this.usosCalendarRepository = usosCalendarRepository;
             this.serverConnectionManager = serverConnectionManager;
             this.studentProgrammeService = studentProgrammeService;
             this.localStorageManager = localStorageManager;
+            this.logger = logger;
         }
 
         bool isInitialized;
@@ -133,7 +136,7 @@ namespace StudentUsos.Features.Calendar.Services
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                logger?.LogCatchedException(ex);
                 return null;
             }
         }

@@ -7,10 +7,14 @@ namespace StudentUsos.Features.Grades.Views
     {
         IServerConnectionManager serverConnectionManager;
         ILocalStorageManager localStorageManager;
-        public GradesSummaryViewModel(IServerConnectionManager serverConnectionManager, ILocalStorageManager localStorageManager)
+        ILogger? logger;
+        public GradesSummaryViewModel(IServerConnectionManager serverConnectionManager,
+            ILocalStorageManager localStorageManager,
+            ILogger? logger = null)
         {
             this.serverConnectionManager = serverConnectionManager;
             this.localStorageManager = localStorageManager;
+            this.logger = logger;
 
             SetEctsPointsSumAsync();
         }
@@ -48,7 +52,7 @@ namespace StudentUsos.Features.Grades.Views
 
                 return sum;
             }
-            catch (Exception ex) { Utilities.ShowError(ex); return null; }
+            catch (Exception ex) { logger?.LogCatchedException(ex); return null; }
         }
     }
 }

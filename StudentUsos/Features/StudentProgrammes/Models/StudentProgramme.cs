@@ -37,7 +37,7 @@ namespace StudentUsos.Features.StudentProgrammes.Models
                 FacultyNameJson = programme.Faculty.NameJson;
                 CreationDate = DateTimeOffset.Now.DateTime.ToString();
             }
-            catch (Exception ex) { Utilities.ShowError(ex); }
+            catch (Exception ex) { Logger.Default?.LogCatchedException(ex); }
         }
     }
 }

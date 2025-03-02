@@ -7,10 +7,14 @@ namespace StudentUsos.Features.Calendar.Repositories
     {
         ILocalNotificationsService localNotificationsService;
         ILocalDatabaseManager localDatabaseManager;
-        public UsosCalendarRepository(ILocalNotificationsService localNotificationsService, ILocalDatabaseManager localDatabaseManager)
+        ILogger? logger;
+        public UsosCalendarRepository(ILocalNotificationsService localNotificationsService,
+            ILocalDatabaseManager localDatabaseManager,
+            ILogger? logger = null)
         {
             this.localNotificationsService = localNotificationsService;
             this.localDatabaseManager = localDatabaseManager;
+            this.logger = logger;
         }
 
         public List<UsosCalendarEvent> GetAllEvents()
@@ -128,7 +132,7 @@ namespace StudentUsos.Features.Calendar.Repositories
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                logger?.LogCatchedException(ex);
                 return new(new(), new());
             }
         }

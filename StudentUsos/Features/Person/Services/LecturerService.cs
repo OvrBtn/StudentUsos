@@ -7,9 +7,11 @@ namespace StudentUsos.Features.Person.Services
     public class LecturerService : ILecturerService
     {
         IServerConnectionManager serverConnectionManager;
-        public LecturerService(IServerConnectionManager serverConnectionManager)
+        ILogger? logger;
+        public LecturerService(IServerConnectionManager serverConnectionManager, ILogger? logger = null)
         {
             this.serverConnectionManager = serverConnectionManager;
+            this.logger = logger;
         }
 
         public async Task<List<Lecturer>?> GetDetailedLecturersAsync(List<string> lecturerIds)
@@ -38,7 +40,7 @@ namespace StudentUsos.Features.Person.Services
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                logger?.LogCatchedException(ex);
                 return null;
             }
         }

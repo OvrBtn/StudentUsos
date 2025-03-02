@@ -65,7 +65,7 @@ namespace StudentUsos.Features.Grades.Models
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                Logger.Default?.LogCatchedException(ex);
             }
         }
 

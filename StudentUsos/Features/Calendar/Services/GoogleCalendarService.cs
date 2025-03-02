@@ -9,9 +9,11 @@ namespace StudentUsos.Features.Calendar.Services
     public class GoogleCalendarService : IGoogleCalendarService
     {
         IGoogleCalendarRepository googleCalendarRepository;
-        public GoogleCalendarService(IGoogleCalendarRepository googleCalendarRepository)
+        ILogger? logger;
+        public GoogleCalendarService(IGoogleCalendarRepository googleCalendarRepository, ILogger? logger = null)
         {
             this.googleCalendarRepository = googleCalendarRepository;
+            this.logger = logger;
         }
 
         HttpClient httpClient = new();
@@ -76,7 +78,7 @@ namespace StudentUsos.Features.Calendar.Services
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                logger?.LogCatchedException(ex);
                 return new();
             }
         }
@@ -116,7 +118,7 @@ namespace StudentUsos.Features.Calendar.Services
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                logger?.LogCatchedException(ex);
                 return null;
             }
         }

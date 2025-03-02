@@ -28,7 +28,7 @@ namespace StudentUsos
             {
                 base.OnCreate(savedInstanceState);
             }
-            catch (Exception ex) { Utilities.ShowError(ex); }
+            catch (Exception ex) { Logger.Default?.LogCatchedException(ex); }
 
             RequestedOrientation = ScreenOrientation.Portrait;
 
@@ -62,7 +62,7 @@ namespace StudentUsos
                     }
                 }
             }
-            catch (Exception ex) { Utilities.ShowError(ex); }
+            catch (Exception ex) { Logger.Default?.LogCatchedException(ex); }
         }
 
         void SetStatusBarHeight()
@@ -79,7 +79,7 @@ namespace StudentUsos
                     App.StatusBarHeight = (int)(Resources.GetDimensionPixelSize(resourceId) / Resources.DisplayMetrics.Density);
                 }
             }
-            catch (Exception ex) { Utilities.ShowError(ex); }
+            catch (Exception ex) { Logger.Default?.LogCatchedException(ex); }
         }
 
         void SetNavigationBar()
@@ -90,7 +90,7 @@ namespace StudentUsos
 
                 App.SetNavigationBarColor = new((color) => { Window?.SetNavigationBarColor(color.ToAndroid()); });
             }
-            catch (Exception ex) { Utilities.ShowError(ex); }
+            catch (Exception ex) { Logger.Default?.LogCatchedException(ex); }
 
         }
     }

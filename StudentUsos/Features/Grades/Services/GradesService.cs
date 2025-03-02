@@ -19,12 +19,14 @@ namespace StudentUsos.Features.Grades.Services
         IGroupsService groupsService;
         ITermsRepository termsRepository;
         ITermsService termsService;
+        ILogger? logger;
         public GradesService(IServerConnectionManager serverConnectionManager,
             IGradesRepository gradesRepository,
             IGroupsRepository groupsRepository,
             IGroupsService groupsService,
             ITermsRepository termsRepository,
-            ITermsService termsService)
+            ITermsService termsService,
+            ILogger? logger = null)
         {
             this.serverConnectionManager = serverConnectionManager;
             this.gradesRepository = gradesRepository;
@@ -32,6 +34,7 @@ namespace StudentUsos.Features.Grades.Services
             this.groupsService = groupsService;
             this.termsRepository = termsRepository;
             this.termsService = termsService;
+            this.logger = logger;
         }
 
         //in seconds
@@ -103,7 +106,7 @@ namespace StudentUsos.Features.Grades.Services
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                logger?.LogCatchedException(ex);
             }
         }
 
@@ -140,7 +143,7 @@ namespace StudentUsos.Features.Grades.Services
 
                 return latest;
             }
-            catch (Exception ex) { Utilities.ShowError(ex); return null; }
+            catch (Exception ex) { logger?.LogCatchedException(ex); return null; }
         }
 
         public async Task<List<FinalGrade>?> GetGradesServerAsync(List<Group> groups, string academicTermId)
@@ -206,7 +209,7 @@ namespace StudentUsos.Features.Grades.Services
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                logger?.LogCatchedException(ex);
                 return null;
             }
         }
@@ -240,7 +243,7 @@ namespace StudentUsos.Features.Grades.Services
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                logger?.LogCatchedException(ex);
             }
         }
     }

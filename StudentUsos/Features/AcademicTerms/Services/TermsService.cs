@@ -8,13 +8,16 @@ namespace StudentUsos.Features.AcademicTerms.Services
 {
     public class TermsService : ITermsService
     {
+        ILogger? logger;
         IServerConnectionManager serverConnectionManager;
         ITermsRepository termsRepository;
         public TermsService(IServerConnectionManager serverConnectionManager,
-            ITermsRepository termsRepository)
+            ITermsRepository termsRepository,
+            ILogger? logger = null)
         {
             this.serverConnectionManager = serverConnectionManager;
             this.termsRepository = termsRepository;
+            this.logger = logger;
         }
 
         public async Task<List<Term>?> GetTermsAsync(DateTime minDate, DateTime maxDate)
@@ -78,7 +81,7 @@ namespace StudentUsos.Features.AcademicTerms.Services
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                logger?.LogCatchedException(ex);
                 return null;
             }
         }

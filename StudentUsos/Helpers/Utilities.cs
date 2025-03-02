@@ -1,9 +1,5 @@
-﻿using CommunityToolkit.Maui.Alerts;
-using CommunityToolkit.Maui.Core;
-using StudentUsos.Resources.LocalizedStrings;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Globalization;
-using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -33,75 +29,6 @@ namespace StudentUsos.Helpers
         public static float Lerp(float value, float min, float max)
         {
             return value * (max - min) + min;
-        }
-
-        public static void ShowError(string message)
-        {
-            ApplicationService.Default.MainThreadInvoke(() =>
-            {
-                MessagePopupPage.CreateAndShow(LocalizedStrings.Errors_Error, message, "ok", () => { });
-            });
-        }
-
-        /// <summary>
-        /// Show simple popup about exception
-        /// Debug mode only: with exact line of code where the error occured
-        /// </summary>
-        /// <param name="ex"></param>
-        public static void ShowError(Exception ex, [CallerMemberName] string callerName = "",
-            [CallerLineNumber] int callerLineNumber = 0, [CallerFilePath] string callerFilePath = "")
-        {
-            ApplicationService.Default?.MainThreadInvoke(() =>
-            {
-                var st = new StackTrace(ex, true);
-                var frame = st.GetFrame(st.FrameCount - 1);
-                var line = frame?.GetFileLineNumber() ?? -1;
-                //Logger.Log(Logger.LogLevel.Error, "Catched error (StackTrace line = " + line + ")", ex, callerName, callerLineNumber, callerFilePath);
-#if RELEASE
-                //MessagePopupPage.CreateAndShow("Błąd", "CN: " + callerName + "\n M: " + ex.Message + "\n LN: " + callerLineNumber, "ok", () => { });
-                //messagePopup.ShowPopup();
-#endif
-#if DEBUG
-                //MessagePopupPage.CreateAndShow(LocalizedStrings.Errors_Error, "CN: " + callerName + "\n M: " + ex.Message + "\n FN: " + frame?.GetFileName() + "\n L: " + line, "ok", () => { });
-                //messagePopup.ShowPopup();
-#endif
-                _ = ShowSnackBarAsync("Error " + "CN: " + callerName + "\n M: " + ex.Message + "\n LN: " + callerLineNumber, "ok");
-            });
-        }
-
-        public static void ShowError(string title, string message)
-        {
-            MessagePopupPage.CreateAndShow(title, message, "ok", () => { });
-        }
-
-        static Color? Gray600 { get; set; }
-        static Color? Primary { get; set; }
-        public static async Task ShowSnackBarAsync(string text, string buttonText, Action? action = null)
-        {
-            if (Gray600 == null)
-            {
-                Gray600 = GetColorFromResources("Gray600");
-            }
-            if (Primary == null)
-            {
-                Primary = GetColorFromResources("Primary");
-            }
-
-            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-
-            var snackbarOptions = new SnackbarOptions
-            {
-                BackgroundColor = Gray600,
-                TextColor = Colors.White,
-                ActionButtonTextColor = Colors.White,
-                CornerRadius = new CornerRadius(20),
-            };
-
-            TimeSpan duration = TimeSpan.FromSeconds(3);
-
-            var snackbar = Snackbar.Make(text, action, buttonText, duration, snackbarOptions);
-
-            await snackbar.Show(cancellationTokenSource.Token);
         }
 
         /// <summary>

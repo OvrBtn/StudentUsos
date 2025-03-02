@@ -8,6 +8,10 @@ namespace StudentUsos.Services.Logger
         public bool IsModuleAllowed(LoggingPermission permission);
         public void SetAllowedModules(IEnumerable<string> newAllowedModules);
 
+        public void LogCatchedException(Exception ex,
+            [CallerMemberName] string callerName = "",
+            [CallerLineNumber] int callerLineNumber = 0);
+
         public void Log(LogLevel logLevel,
             string message = "",
             [CallerMemberName] string callerName = "",

@@ -15,11 +15,14 @@ namespace StudentUsos.Features.StudentProgrammes.Services
     {
         IServerConnectionManager serverConnectionManager;
         IStudentProgrammeRepository studentProgrammeRepository;
+        ILogger? logger;
         public StudentProgrammeService(IServerConnectionManager serverConnectionManager,
-            IStudentProgrammeRepository studentProgrammeRepository)
+            IStudentProgrammeRepository studentProgrammeRepository,
+            ILogger? logger = null)
         {
             this.serverConnectionManager = serverConnectionManager;
             this.studentProgrammeRepository = studentProgrammeRepository;
+            this.logger = logger;
         }
 
         public async Task<List<StudentProgramme>> GetStudentProgrammesAsync()
@@ -53,7 +56,7 @@ namespace StudentUsos.Features.StudentProgrammes.Services
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                logger?.LogCatchedException(ex);
                 return studentProgrammeRepository.GetAll();
             }
         }

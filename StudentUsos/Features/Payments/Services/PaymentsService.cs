@@ -7,9 +7,11 @@ namespace StudentUsos.Features.Payments.Services
     public class PaymentsService : IPaymentsService
     {
         IServerConnectionManager serverConnectionManager;
-        public PaymentsService(IServerConnectionManager serverConnectionManager)
+        ILogger? logger;
+        public PaymentsService(IServerConnectionManager serverConnectionManager, ILogger? logger = null)
         {
             this.serverConnectionManager = serverConnectionManager;
+            this.logger = logger;
         }
 
         public async Task<List<Payment>?> GetPaymentsApiAsync()
@@ -38,7 +40,7 @@ namespace StudentUsos.Features.Payments.Services
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                logger?.LogCatchedException(ex);
                 return null;
             }
         }

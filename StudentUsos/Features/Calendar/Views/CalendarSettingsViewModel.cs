@@ -12,10 +12,14 @@ namespace StudentUsos.Features.Calendar.Views
         CalendarViewModel calendarViewModel;
         IGoogleCalendarService googleCalendarService;
         IGoogleCalendarRepository googleCalendarRepository;
-        public CalendarSettingsViewModel(IGoogleCalendarService googleCalendarService, IGoogleCalendarRepository googleCalendarRepository)
+        ILogger? logger;
+        public CalendarSettingsViewModel(IGoogleCalendarService googleCalendarService,
+            IGoogleCalendarRepository googleCalendarRepository,
+            ILogger? logger = null)
         {
             this.googleCalendarService = googleCalendarService;
             this.googleCalendarRepository = googleCalendarRepository;
+            this.logger = logger;
         }
 
         public void Init(CalendarViewModel calendarViewModel)
@@ -101,7 +105,7 @@ namespace StudentUsos.Features.Calendar.Views
                     calendarViewModel.SetGoogleEventsServer(events, calendarViewModel.CalendarMonths);
                 }
             }
-            catch (Exception ex) { Utilities.ShowError(ex); }
+            catch (Exception ex) { logger?.LogCatchedException(ex); }
         }
     }
 }

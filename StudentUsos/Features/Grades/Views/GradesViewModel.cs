@@ -224,7 +224,6 @@ namespace StudentUsos.Features.Grades.Views
                 {
                     try
                     {
-                        popup.Close();
                         GradesStateKey = StateKey.Loading;
                         var pickedTerm = terms[pickedItem.Index];
 

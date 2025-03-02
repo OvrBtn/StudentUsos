@@ -16,11 +16,8 @@ namespace StudentUsos.Features.Activities.Repositories
         {
             try
             {
+                var all = localDatabaseManager.GetAll<Activity>();
                 var activities = localDatabaseManager.GetAll<Activity>(x => x.StartDateTime.Date == date.Date);
-                if (activities.Count == 0)
-                {
-                    return null;
-                }
 
                 var timetableDays = localDatabaseManager.GetAll<TimetableDay>(x => x.Date.Date == date.Date);
                 if (timetableDays.Count == 0)
@@ -42,10 +39,6 @@ namespace StudentUsos.Features.Activities.Repositories
             try
             {
                 var activities = localDatabaseManager.GetAll<Activity>();
-                if (activities.Count == 0)
-                {
-                    return null;
-                }
 
                 var timetableDays = localDatabaseManager.GetAll<TimetableDay>();
                 if (timetableDays.Count == 0)

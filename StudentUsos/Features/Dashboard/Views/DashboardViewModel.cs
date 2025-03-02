@@ -23,6 +23,8 @@ using System.Collections.ObjectModel;
 
 namespace StudentUsos.Features.Dashboard.Views
 {
+    //TODO: split into separate viewmodels to minimize amount of dependencies and allow testing
+
     public partial class DashboardViewModel : BaseViewModel
     {
         public DashboardPage DashboardPage;
@@ -414,9 +416,6 @@ namespace StudentUsos.Features.Dashboard.Views
 
         [ObservableProperty] Activity currentItemInCarousel;
 
-        /// <summary>
-        /// Load today's activities
-        /// </summary>
         async void LoadActivitiesAsync()
         {
             try
@@ -426,7 +425,7 @@ namespace StudentUsos.Features.Dashboard.Views
 
                 var activitiesFromLocalDb = LoadActivitiesLocalDb();
                 SynchronousOperationFinished();
-                //to limit making http request for activities every time app is open
+                //to limit making requests for activities every time app is open
                 if (activitiesFromLocalDb != null && activitiesFromLocalDb.FirstOrDefault(new TimetableDay()).CreationDate.Date == DateTimeOffset.Now.DateTime.Date) return;
 
                 await Task.Delay(webrequestDelay);

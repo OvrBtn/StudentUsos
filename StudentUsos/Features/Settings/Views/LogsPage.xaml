@@ -12,7 +12,7 @@
     <StackLayout>
         <Button Text="{x:Static string:LocalizedStrings.LogsPage_RemoveAll}" Command="{Binding RemoveAllLogsCommand}"
                 Margin="10"/>
-        <CollectionView Margin="0" ItemsSource="{Binding Logs}">
+        <CollectionView Margin="0" ItemsSource="{Binding Logs}" VerticalOptions="FillAndExpand">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="logger:LogRecord">
                     <Label Text="{Binding LogRecordString}" Margin="30,10"></Label>

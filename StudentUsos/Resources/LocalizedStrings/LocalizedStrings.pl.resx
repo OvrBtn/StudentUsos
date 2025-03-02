@@ -344,6 +344,9 @@
   <data name="Logout" xml:space="preserve">
     <value>Wyloguj</value>
   </data>
+  <data name="LogsPage_RemoveAll" xml:space="preserve">
+    <value>Usuń wszystkie</value>
+  </data>
   <data name="Modification" xml:space="preserve">
     <value>Modyfikacja</value>
   </data>

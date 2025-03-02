@@ -43,7 +43,7 @@ namespace StudentUsos.Features.Settings.Views
 
         private void OpenLogsButton_Clicked(object sender, EventArgs e)
         {
-
+            navigationService.PushAsync<LogsPage>();
         }
 
         private void OpenLogsInfoButton_Clicked(object sender, EventArgs e)

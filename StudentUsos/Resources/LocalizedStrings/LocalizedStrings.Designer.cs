@@ -727,6 +727,15 @@ namespace StudentUsos.Resources.LocalizedStrings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remove all.
+        /// </summary>
+        internal static string LogsPage_RemoveAll {
+            get {
+                return ResourceManager.GetString("LogsPage_RemoveAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Modification.
         /// </summary>
         internal static string Modification {

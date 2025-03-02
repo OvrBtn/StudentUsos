@@ -119,6 +119,8 @@ namespace StudentUsos
             builder.Services.AddTransient<FillSatisfactionSurveyPage>();
             builder.Services.AddTransient<SatisfactionSurveysPage>();
 
+            builder.Services.AddTransient<LogsPage>();
+
             return builder;
         }
 
@@ -151,6 +153,8 @@ namespace StudentUsos
             builder.Services.AddTransient<SatisfactionSurveysViewModel>();
 
             builder.Services.AddTransient<PersonDetailsViewModel>();
+
+            builder.Services.AddTransient<LogsViewModel>();
 
             return builder;
         }

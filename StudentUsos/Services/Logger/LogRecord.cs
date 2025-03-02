@@ -19,6 +19,9 @@ namespace StudentUsos.Services.Logger
         public string CreationDate { get; set; } = DateTimeOffset.UtcNow.DateTime.ToString(CultureInfo.InvariantCulture);
         public long CreationDateUnix { get; set; } = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
 
+        [JsonIgnore]
+        public bool IsSynchronizedWithServer { get; set; }
+
         [JsonIgnore, Ignore]
         public string LogRecordString
         {

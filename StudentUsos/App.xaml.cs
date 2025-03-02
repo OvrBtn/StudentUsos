@@ -24,6 +24,16 @@ namespace StudentUsos
             SetLanguageFromLocalStorage();
 
             CalendarSettings.LoadNotificationSettingsAndInitializePreferences();
+
+            try
+            {
+                int a = 5, b = 0;
+                int c = a / b;
+            }
+            catch (Exception e)
+            {
+                Logger.Default!.LogCatchedException(e);
+            }
         }
 
         //Called after Android MainActivity ctor

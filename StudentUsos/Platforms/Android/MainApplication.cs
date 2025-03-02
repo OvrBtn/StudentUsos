@@ -20,6 +20,17 @@ namespace StudentUsos
         {
         }
 
+        public override void OnCreate()
+        {
+            base.OnCreate();
+
+            AndroidEnvironment.UnhandledExceptionRaiser += (sender, e) =>
+            {
+                Logger.Default?.Log(LogLevel.Fatal, e.Exception.ToString());
+                e.Handled = true;
+            };
+        }
+
         protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
     }
 }

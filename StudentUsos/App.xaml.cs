@@ -11,11 +11,14 @@ namespace StudentUsos
 
         public static IServiceProvider ServiceProvider { get; private set; }
         FirebasePushNotificationsService firebasePushNotificationsService;
+        ILogger logger;
         public App(IServiceProvider serviceProvider,
-            FirebasePushNotificationsService firebasePushNotificationsService)
+            FirebasePushNotificationsService firebasePushNotificationsService,
+            ILogger logger = null)
         {
             ServiceProvider = serviceProvider;
             this.firebasePushNotificationsService = firebasePushNotificationsService;
+            this.logger = logger;
 
             InitializeComponent();
 
@@ -24,6 +27,17 @@ namespace StudentUsos
             SetLanguageFromLocalStorage();
 
             CalendarSettings.LoadNotificationSettingsAndInitializePreferences();
+
+            AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
+            {
+                logger.Log(LogLevel.Fatal, e.ExceptionObject.ToString()!);
+            };
+
+            TaskScheduler.UnobservedTaskException += (sender, e) =>
+            {
+                logger.Log(LogLevel.Fatal, e.Exception.ToString());
+                e.SetObserved();
+            };
         }
 
         //Called after Android MainActivity ctor

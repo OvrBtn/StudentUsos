@@ -41,6 +41,12 @@ namespace StudentUsos.Services.Logger
             const int deleteLogsAfterDays = 1;
             var deleteThresholdUnixtime = DateTimeOffset.UtcNow.AddDays(deleteLogsAfterDays * -1).ToUnixTimeSeconds();
             localDatabaseManager.Value.Remove<LogRecord>($"CreationDateUnix < {deleteThresholdUnixtime} AND IsSynchronizedWithServer = 1");
+
+            //if unhandled exception happens it might not get sent to server, this makes sure it does
+            if (localDatabaseManager.Value.Get<LogRecord>(x => x.LogLevel == LogLevel.Fatal.ToString()) is not null)
+            {
+                await TrySendingLogsToServerAsync();
+            }
         }
 
         List<string>? allowedModules = null;
@@ -173,7 +179,7 @@ namespace StudentUsos.Services.Logger
             var result = await serverConnectionManager.Value.SendAuthorizedPostRequestAsync("logs/log", serialized, AuthorizationMode.Full);
             if (result is not null && result.IsSuccess)
             {
-                localDatabaseManager.Value.ExecuteQuery($"UPDATE {nameof(LogRecord)} SET {nameof(LogRecord.IsSynchronizedWithServer)} = 1 WHERE CreationDateUnix <= {unixTime};");
+                localDatabaseManager.Value.ExecuteQuery($"UPDATE {nameof(LogRecord)} SET {nameof(LogRecord.IsSynchronizedWithServer)} = 1 WHERE {nameof(LogRecord.CreationDateUnix)} <= {unixTime};");
             }
         }
     }

@@ -51,6 +51,7 @@ namespace StudentUsos.Features.Settings.Views
             List<MultipleChoicePopup.Item> options = new()
             {
                 new(LoggingPermission.User, LocalizedStrings.LoggingPermissionDescription_User, logger.IsModuleAllowed(LoggingPermission.User)),
+                new(LoggingPermission.Progs, LocalizedStrings.LoggingPermissionDescription_Progs, logger.IsModuleAllowed(LoggingPermission.Progs)),
                 new(LoggingPermission.Activities, LocalizedStrings.LoggingPermissionDescription_Activities, logger.IsModuleAllowed(LoggingPermission.Activities)),
                 new(LoggingPermission.Calendar, LocalizedStrings.LoggingPermissionDescription_Calendar, logger.IsModuleAllowed(LoggingPermission.Calendar)),
                 new(LoggingPermission.FinalGrades, LocalizedStrings.LoggingPermissionDescription_FinalGrades, logger.IsModuleAllowed(LoggingPermission.FinalGrades)),

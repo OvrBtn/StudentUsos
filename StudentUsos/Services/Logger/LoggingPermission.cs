@@ -8,6 +8,7 @@
         FinalGrades,
         Groups,
         Surveys,
-        Payments
+        Payments,
+        Progs
     }
 }

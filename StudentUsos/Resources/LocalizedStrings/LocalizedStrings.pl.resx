@@ -314,6 +314,9 @@
   <data name="LoggingPermissionDescription_Payments" xml:space="preserve">
     <value>Płatności</value>
   </data>
+  <data name="LoggingPermissionDescription_Progs" xml:space="preserve">
+    <value>Kierunek studiów</value>
+  </data>
   <data name="LoggingPermissionDescription_Surveys" xml:space="preserve">
     <value>Ankiety</value>
   </data>

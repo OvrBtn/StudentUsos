@@ -637,6 +637,15 @@ namespace StudentUsos.Resources.LocalizedStrings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Major.
+        /// </summary>
+        internal static string LoggingPermissionDescription_Progs {
+            get {
+                return ResourceManager.GetString("LoggingPermissionDescription_Progs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Surveys.
         /// </summary>
         internal static string LoggingPermissionDescription_Surveys {

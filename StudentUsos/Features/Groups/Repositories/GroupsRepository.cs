@@ -6,9 +6,11 @@ namespace StudentUsos.Features.Groups.Repositories
     public class GroupsRepository : IGroupsRepository
     {
         ILocalDatabaseManager localDatabaseManager;
-        public GroupsRepository(ILocalDatabaseManager localDatabaseManager)
+        ILogger? logger;
+        public GroupsRepository(ILocalDatabaseManager localDatabaseManager, ILogger? logger = null)
         {
             this.localDatabaseManager = localDatabaseManager;
+            this.logger = logger;
         }
 
         public List<Group> GetGroups(Term term)
@@ -58,7 +60,7 @@ namespace StudentUsos.Features.Groups.Repositories
                 }
                 return groupsGrouped;
             }
-            catch (Exception ex) { Utilities.ShowError(ex); return new List<GroupsGrouped>(); }
+            catch (Exception ex) { logger?.LogCatchedException(ex); return new List<GroupsGrouped>(); }
         }
 
         public void InsertOrReplace(IEnumerable<Term> terms)

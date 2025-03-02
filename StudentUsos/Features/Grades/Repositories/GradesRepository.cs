@@ -6,9 +6,11 @@ namespace StudentUsos.Features.Grades.Repositories
     public class GradesRepository : IGradesRepository
     {
         ILocalDatabaseManager localDatabaseManager;
-        public GradesRepository(ILocalDatabaseManager localDatabaseManager)
+        ILogger? logger;
+        public GradesRepository(ILocalDatabaseManager localDatabaseManager, ILogger? logger = null)
         {
             this.localDatabaseManager = localDatabaseManager;
+            this.logger = logger;
         }
 
         public FinalGrade? GetLatestGrade()
@@ -26,7 +28,7 @@ namespace StudentUsos.Features.Grades.Repositories
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                logger?.LogCatchedException(ex);
                 return new FinalGrade();
             }
         }

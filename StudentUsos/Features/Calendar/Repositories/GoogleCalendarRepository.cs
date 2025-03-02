@@ -8,10 +8,14 @@ namespace StudentUsos.Features.Calendar.Repositories
     {
         ILocalNotificationsService localNotificationsService;
         ILocalDatabaseManager localDatabaseManager;
-        public GoogleCalendarRepository(ILocalNotificationsService localNotificationsService, ILocalDatabaseManager localDatabaseManager)
+        ILogger? logger;
+        public GoogleCalendarRepository(ILocalNotificationsService localNotificationsService,
+            ILocalDatabaseManager localDatabaseManager,
+            ILogger? logger = null)
         {
             this.localNotificationsService = localNotificationsService;
             this.localDatabaseManager = localDatabaseManager;
+            this.logger = logger;
         }
 
         public List<GoogleCalendar> GetAllCalendars()
@@ -155,7 +159,7 @@ namespace StudentUsos.Features.Calendar.Repositories
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                logger?.LogCatchedException(ex);
                 return (new(), new());
             }
         }

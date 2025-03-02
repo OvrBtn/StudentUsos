@@ -314,6 +314,9 @@
   <data name="LoggingPermissionDescription_Payments" xml:space="preserve">
     <value>Płatności</value>
   </data>
+  <data name="LoggingPermissionDescription_Progs" xml:space="preserve">
+    <value>Kierunek studiów</value>
+  </data>
   <data name="LoggingPermissionDescription_Surveys" xml:space="preserve">
     <value>Ankiety</value>
   </data>
@@ -343,6 +346,9 @@
   </data>
   <data name="Logout" xml:space="preserve">
     <value>Wyloguj</value>
+  </data>
+  <data name="LogsPage_RemoveAll" xml:space="preserve">
+    <value>Usuń wszystkie</value>
   </data>
   <data name="Modification" xml:space="preserve">
     <value>Modyfikacja</value>

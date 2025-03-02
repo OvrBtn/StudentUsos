@@ -141,7 +141,7 @@ namespace StudentUsos.Features.Person.Models
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                Logger.Default?.LogCatchedException(ex);
                 return new();
             }
         }
@@ -164,7 +164,7 @@ namespace StudentUsos.Features.Person.Models
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                Logger.Default?.LogCatchedException(ex);
                 return new();
             }
         }

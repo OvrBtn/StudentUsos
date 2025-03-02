@@ -6,6 +6,7 @@
         public void GenerateTables();
         public void DeleteTables();
         public int ClearTable<T>();
+        public int ExecuteQuery(string query);
         public T? Get<T>(Func<T, bool> predicate) where T : new();
         public List<T> GetAll<T>(Func<T, bool> predicate) where T : new();
         public List<T> GetAll<T>() where T : new();

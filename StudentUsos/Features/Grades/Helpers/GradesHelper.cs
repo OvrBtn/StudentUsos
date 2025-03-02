@@ -18,7 +18,7 @@ namespace StudentUsos.Features.Grades.Helpers
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                Logger.Default?.LogCatchedException(ex);
                 return null;
             }
         }
@@ -52,7 +52,11 @@ namespace StudentUsos.Features.Grades.Helpers
                 }
                 return groups;
             }
-            catch (Exception ex) { Utilities.ShowError(ex); return new List<FinalGradeGroup>(); }
+            catch (Exception ex)
+            {
+                Logger.Default?.LogCatchedException(ex);
+                return new List<FinalGradeGroup>();
+            }
         }
 
         public static List<FinalGrade> UngroupGrades(IEnumerable<FinalGradeGroup> finalGradeGroups)
@@ -127,7 +131,7 @@ namespace StudentUsos.Features.Grades.Helpers
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                Logger.Default?.LogCatchedException(ex);
                 return 0f;
             }
         }

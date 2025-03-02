@@ -14,11 +14,13 @@
         }
         public void ShowToast(string message, ToastDuration toastDuration = ToastDuration.Short, double textSize = 14);
 
-#nullable enable
+        public Task ShowSnackBarAsync(string text, string buttonText, Action? action = null);
+
+        public void ShowErrorMessage(string title, string message);
+
         //mocked to avoid having to use Task.Delay in tests
         public Task WorkerThreadInvoke(Action action);
         public Task WorkerThreadInvoke(Func<Task?> func);
-#nullable disable
 
     }
 }

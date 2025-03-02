@@ -7,9 +7,11 @@ namespace StudentUsos.Features.Activities.Services
     public class ActivitiesService : IActivitiesService
     {
         IServerConnectionManager serverConnectionManager;
-        public ActivitiesService(IServerConnectionManager serverConnectionManager)
+        ILogger? logger;
+        public ActivitiesService(IServerConnectionManager serverConnectionManager, ILogger? logger)
         {
             this.serverConnectionManager = serverConnectionManager;
+            this.logger = logger;
         }
 
         public Task<GetActivitiesResult?> GetActivitiesOfCurrentUserApiAsync(DateTime date, int numberOfDays = 1)
@@ -61,7 +63,7 @@ namespace StudentUsos.Features.Activities.Services
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                logger?.LogCatchedException(ex);
                 return null;
             }
         }

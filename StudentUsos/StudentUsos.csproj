@@ -223,6 +223,9 @@
 		<Compile Update="Controls\CustomContentPageNotAnimated.xaml.cs">
 		  <DependentUpon>CustomContentPageNotAnimated.xaml</DependentUpon>
 		</Compile>
+		<Compile Update="Features\Settings\Views\LogsPage.xaml.cs">
+		  <DependentUpon>LogsPage.xaml</DependentUpon>
+		</Compile>
 		<Compile Update="Resources\LocalizedStrings\LocalizedStrings.Designer.cs">
 		  <DesignTime>True</DesignTime>
 		  <AutoGen>True</AutoGen>
@@ -353,6 +356,9 @@
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Features\Grades\Views\ModifyGradePage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Features\Settings\Views\LogsPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\TestPage.xaml">

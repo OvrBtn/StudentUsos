@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:CustomContentPageNotAnimated
+    x:Class="StudentUsos.Features.Settings.Views.LogsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:StudentUsos.Controls"
+    xmlns:views="clr-namespace:StudentUsos.Features.Settings.Views"
+    xmlns:logger="clr-namespace:StudentUsos.Services.Logger"
+    xmlns:string="clr-namespace:StudentUsos.Resources.LocalizedStrings"
+    x:DataType="views:LogsViewModel">
+
+    <StackLayout>
+        <Button Text="{x:Static string:LocalizedStrings.LogsPage_RemoveAll}" Command="{Binding RemoveAllLogsCommand}"
+                Margin="10"/>
+        <CollectionView Margin="0" ItemsSource="{Binding Logs}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="logger:LogRecord">
+                    <Label Text="{Binding LogRecordString}" Margin="30,10"></Label>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+
+</controls:CustomContentPageNotAnimated>

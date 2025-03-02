@@ -1,7 +1,7 @@
-﻿using System.Collections.ObjectModel;
-using System.Globalization;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CustomCalendar;
+using System.Collections.ObjectModel;
+using System.Globalization;
 
 namespace StudentUsos.Features.Calendar.Models
 {
@@ -63,7 +63,7 @@ namespace StudentUsos.Features.Calendar.Models
                     }
                 }
             }
-            catch (Exception ex) { Utilities.ShowError(ex); }
+            catch (Exception ex) { Logger.Default?.LogCatchedException(ex); }
         }
 
         public void SetEventsFromLocalDatabase(List<UsosCalendarEvent> data)
@@ -87,7 +87,7 @@ namespace StudentUsos.Features.Calendar.Models
                     }
                 }
             }
-            catch (Exception ex) { Utilities.ShowError(ex); }
+            catch (Exception ex) { Logger.Default?.LogCatchedException(ex); }
         }
 
         DateTime FirstDayOfMonthToFullDate(int day)

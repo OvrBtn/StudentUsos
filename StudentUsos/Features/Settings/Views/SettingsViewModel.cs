@@ -22,9 +22,11 @@ namespace StudentUsos.Features.Settings.Views
         IUsosCalendarRepository usosCalendarRepository;
         IGoogleCalendarRepository googleCalendarRepository;
         ILocalStorageManager localStorageManager;
+        ILogger? logger;
         public SettingsViewModel(IUsosCalendarRepository usosCalendarRepository,
             IGoogleCalendarRepository googleCalendarRepository,
-            ILocalStorageManager localStorageManager)
+            ILocalStorageManager localStorageManager,
+            ILogger? logger = null)
         {
             this.usosCalendarRepository = usosCalendarRepository;
             this.googleCalendarRepository = googleCalendarRepository;
@@ -36,6 +38,7 @@ namespace StudentUsos.Features.Settings.Views
             notificationsTimePickedPreviousValue = NotificationsTimePicked = CalendarSettings.TimeOfDayOfCalendarEventNotification;
 
             _ = LoadLanguagesAsync();
+            this.logger = logger;
         }
 
         public async void SettingsPage_Disappearing(object? sender, EventArgs e)
@@ -60,7 +63,7 @@ namespace StudentUsos.Features.Settings.Views
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                logger?.LogCatchedException(ex);
             }
         }
 

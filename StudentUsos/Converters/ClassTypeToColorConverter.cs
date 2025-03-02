@@ -34,7 +34,7 @@ namespace StudentUsos.Converters
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                Logger.Default?.LogCatchedException(ex);
                 return defaultColor;
             }
         }

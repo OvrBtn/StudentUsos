@@ -88,6 +88,11 @@ namespace StudentUsos.Services.LocalDatabase
             return dbConnection.Execute("DELETE FROM " + typeof(T).Name);
         }
 
+        public int ExecuteQuery(string query)
+        {
+            return dbConnection.Execute(query);
+        }
+
         public T? Get<T>(Func<T, bool> predicate) where T : new()
         {
             var result = dbConnection.Table<T>().FirstOrDefault(predicate);

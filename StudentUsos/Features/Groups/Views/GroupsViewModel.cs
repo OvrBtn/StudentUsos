@@ -10,13 +10,16 @@ namespace StudentUsos.Features.Groups.Views
         IGroupsService groupsService;
         IGroupsRepository groupsRepository;
         IApplicationService applicationService;
+        ILogger? logger;
         public GroupsViewModel(IGroupsService groupsService,
             IGroupsRepository groupsRepository,
-            IApplicationService applicationService)
+            IApplicationService applicationService,
+            ILogger? logger = null)
         {
             this.groupsService = groupsService;
             this.groupsRepository = groupsRepository;
             this.applicationService = applicationService;
+            this.logger = logger;
         }
 
         public void Init()
@@ -56,7 +59,7 @@ namespace StudentUsos.Features.Groups.Views
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                logger?.LogCatchedException(ex);
                 GroupsListStateKey = StateKey.LoadingError;
             }
         }
@@ -87,7 +90,7 @@ namespace StudentUsos.Features.Groups.Views
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                logger?.LogCatchedException(ex);
                 if (GroupsGroupedObservable.Count == 0) GroupsListStateKey = StateKey.LoadingError;
             }
         }

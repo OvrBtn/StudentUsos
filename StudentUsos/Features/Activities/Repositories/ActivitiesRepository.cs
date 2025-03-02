@@ -5,9 +5,11 @@ namespace StudentUsos.Features.Activities.Repositories
     public class ActivitiesRepository : IActivitiesRepository
     {
         ILocalDatabaseManager localDatabaseManager;
-        public ActivitiesRepository(ILocalDatabaseManager localDatabaseManager)
+        ILogger? logger;
+        public ActivitiesRepository(ILocalDatabaseManager localDatabaseManager, ILogger? logger = null)
         {
             this.localDatabaseManager = localDatabaseManager;
+            this.logger = logger;
         }
 
         public GetActivitiesResult? GetActivities(DateTime date)
@@ -30,7 +32,7 @@ namespace StudentUsos.Features.Activities.Repositories
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                logger?.LogCatchedException(ex);
                 return null;
             }
         }
@@ -55,7 +57,7 @@ namespace StudentUsos.Features.Activities.Repositories
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                logger?.LogCatchedException(ex);
                 return null;
             }
         }

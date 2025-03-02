@@ -1,5 +1,4 @@
 ﻿using StudentUsos.Controls;
-using StudentUsos.Features.Activities;
 using StudentUsos.Features.Dashboard.Views;
 using StudentUsos.Resources.LocalizedStrings;
 using StudentUsos.Services.LocalNotifications;
@@ -153,7 +152,7 @@ namespace StudentUsos.Features.Authorization.Services
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                Logger.Default?.LogCatchedException(ex);
                 OnCatch(OnLoginFailed);
             }
 
@@ -162,7 +161,7 @@ namespace StudentUsos.Features.Authorization.Services
         static void OnCatch(Action onLoginFailed)
         {
             onLoginFailed?.Invoke();
-            Utilities.ShowError(LocalizedStrings.Errors_LoadingError, LocalizedStrings.LoginPage_LoginFailed);
+            ApplicationService.Default.ShowErrorMessage(LocalizedStrings.Errors_LoadingError, LocalizedStrings.LoginPage_LoginFailed);
         }
 
         public static event Action OnContinueLogging;
@@ -214,7 +213,7 @@ namespace StudentUsos.Features.Authorization.Services
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                Logger.Default?.LogCatchedException(ex);
                 OnCatch(OnLoginFailed);
             }
             finally

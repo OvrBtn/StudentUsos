@@ -40,7 +40,7 @@ namespace StudentUsos.Services.Logger
 
             const int deleteLogsAfterDays = 1;
             var deleteThresholdUnixtime = DateTimeOffset.UtcNow.AddDays(deleteLogsAfterDays * -1).ToUnixTimeSeconds();
-            localDatabaseManager.Value.Remove($"CreationDateUnix < {deleteThresholdUnixtime}");
+            localDatabaseManager.Value.Remove<LogRecord>($"CreationDateUnix < {deleteThresholdUnixtime} AND IsSynchronizedWithServer = 1");
         }
 
         List<string>? allowedModules = null;
@@ -67,13 +67,22 @@ namespace StudentUsos.Services.Logger
             {
                 GetAllowedModules();
             }
-            return allowedModules.Contains(permission.ToString());
+            return allowedModules!.Contains(permission.ToString());
         }
 
         public void SetAllowedModules(IEnumerable<string> newAllowedModules)
         {
             localStorageManager.Value.SetData(LocalStorageKeys.LoggingAllowedData, string.Join("|", newAllowedModules));
             allowedModules = new(newAllowedModules);
+        }
+
+        public void LogCatchedException(Exception ex,
+            [CallerMemberName] string callerName = "",
+            [CallerLineNumber] int callerLineNumber = 0)
+        {
+            LogInternal(LogLevel.Error, "Catched exception", ex, callerName, callerLineNumber);
+
+            applicationService.Value.ShowSnackBarAsync($"{callerName}: {callerLineNumber} - {ex.Message}", "ok");
         }
 
         public void Log(LogLevel logLevel,
@@ -128,7 +137,6 @@ namespace StudentUsos.Services.Logger
         }
 
 
-
         async Task TrySendingLogsToServerAsync()
         {
             var userInfo = userInfoRepository.Value.GetUserInfo();
@@ -138,8 +146,21 @@ namespace StudentUsos.Services.Logger
             }
 
             var allLogs = localDatabaseManager.Value.GetAll<LogRecord>();
-            //add milliseconds to make sure that exception which triggered this operation also gets removed
-            long unixTime = DateTimeOffset.UtcNow.AddMilliseconds(10).ToUnixTimeSeconds();
+            if (allLogs.Count == 0)
+            {
+                return;
+            }
+
+            long unixTime;
+            if (DateTime.TryParse(allLogs.Last().CreationDate, out var parsed))
+            {
+                unixTime = new DateTimeOffset(parsed).ToUnixTimeSeconds();
+            }
+            else
+            {
+                //add milliseconds to make sure that exception which triggered this operation also gets removed
+                unixTime = DateTimeOffset.Now.AddMilliseconds(20).ToUnixTimeSeconds();
+            }
 
             var args = new LogRequestPayload()
             {
@@ -152,7 +173,7 @@ namespace StudentUsos.Services.Logger
             var result = await serverConnectionManager.Value.SendAuthorizedPostRequestAsync("logs/log", serialized, AuthorizationMode.Full);
             if (result is not null && result.IsSuccess)
             {
-                localDatabaseManager.Value.Remove<LogRecord>($"CreationDateUnix < {unixTime}");
+                localDatabaseManager.Value.ExecuteQuery($"UPDATE {nameof(LogRecord)} SET {nameof(LogRecord.IsSynchronizedWithServer)} = 1 WHERE CreationDateUnix <= {unixTime};");
             }
         }
     }

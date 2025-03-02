@@ -293,6 +293,7 @@ namespace StudentUsos.Services.ServerConnection
                 _ when methodName.StartsWith("services/payments") => logger.IsModuleAllowed(LoggingPermission.Payments),
                 _ when methodName.StartsWith("services/surveys") => logger.IsModuleAllowed(LoggingPermission.Surveys),
                 _ when methodName.StartsWith("services/users") => logger.IsModuleAllowed(LoggingPermission.User),
+                _ when methodName.StartsWith("services/progs/student") => logger.IsModuleAllowed(LoggingPermission.Progs),
                 _ => true
             };
 

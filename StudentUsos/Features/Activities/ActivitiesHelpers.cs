@@ -22,7 +22,7 @@ namespace StudentUsos.Features.Activities
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                Logger.Default?.LogCatchedException(ex);
             }
         }
 

@@ -41,6 +41,7 @@ namespace StudentUsos.Features.Dashboard.Views
         IGoogleCalendarRepository googleCalendarRepository;
         ILocalStorageManager localStorageManager;
         IApplicationService applicationService;
+        ILogger? logger;
         public DashboardViewModel(
             INavigationService navigationService,
             IActivitiesRepository activitiesRepository,
@@ -56,7 +57,8 @@ namespace StudentUsos.Features.Dashboard.Views
             IGoogleCalendarService googleCalendarService,
             IGoogleCalendarRepository googleCalendarRepository,
             ILocalStorageManager localStorageManager,
-            IApplicationService applicationService)
+            IApplicationService applicationService,
+            ILogger? logger = null)
         {
             this.navigationService = navigationService;
             this.activitiesRepository = activitiesRepository;
@@ -73,6 +75,7 @@ namespace StudentUsos.Features.Dashboard.Views
             this.googleCalendarRepository = googleCalendarRepository;
             this.localStorageManager = localStorageManager;
             this.applicationService = applicationService;
+            this.logger = logger;
 
             instance = this;
 
@@ -306,7 +309,7 @@ namespace StudentUsos.Features.Dashboard.Views
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                logger?.LogCatchedException(ex);
             }
         }
 
@@ -324,7 +327,7 @@ namespace StudentUsos.Features.Dashboard.Views
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                logger?.LogCatchedException(ex);
                 if (string.IsNullOrEmpty(FirstName)) UserInfoStateKey = StudentNumberStateKey = StateKey.LoadingError;
             }
         }
@@ -341,7 +344,7 @@ namespace StudentUsos.Features.Dashboard.Views
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                logger?.LogCatchedException(ex);
                 UserInfoStateKey = StudentNumberStateKey = StateKey.LoadingError;
             }
         }
@@ -434,7 +437,7 @@ namespace StudentUsos.Features.Dashboard.Views
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                logger?.LogCatchedException(ex);
             }
         }
 
@@ -483,7 +486,7 @@ namespace StudentUsos.Features.Dashboard.Views
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                logger?.LogCatchedException(ex);
                 return null;
             }
         }
@@ -517,7 +520,7 @@ namespace StudentUsos.Features.Dashboard.Views
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                logger?.LogCatchedException(ex);
             }
         }
 
@@ -675,7 +678,7 @@ namespace StudentUsos.Features.Dashboard.Views
                 {
                     applicationService.MainThreadInvoke(() =>
                     {
-                        Utilities.ShowError(ex);
+                        logger?.LogCatchedException(ex);
                         AsynchronousOperationFinished();
                         SynchronousOperationFinished();
                     });

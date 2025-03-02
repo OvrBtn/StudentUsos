@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using SQLite;
+using System.Globalization;
 using System.Text.Json.Serialization;
 
 namespace StudentUsos.Services.Logger
@@ -17,5 +18,14 @@ namespace StudentUsos.Services.Logger
         public string CallerLineNumber { get; set; }
         public string CreationDate { get; set; } = DateTimeOffset.UtcNow.DateTime.ToString(CultureInfo.InvariantCulture);
         public long CreationDateUnix { get; set; } = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+
+        [JsonIgnore]
+        public bool IsSynchronizedWithServer { get; set; }
+
+        [JsonIgnore, Ignore]
+        public string LogRecordString
+        {
+            get => $"{LogLevel}|{CreationDate}|{CallerName}|{CallerLineNumber}|{Message}|{ExceptionMessage}";
+        }
     }
 }

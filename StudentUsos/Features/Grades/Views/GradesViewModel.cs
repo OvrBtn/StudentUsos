@@ -29,6 +29,7 @@ namespace StudentUsos.Features.Grades.Views
         ITermsService termsService;
         ITermsRepository termsRepository;
         IApplicationService applicationService;
+        ILogger? logger;
         public GradesViewModel(IServiceProvider serviceProvider,
             IGroupsService groupsService,
             IGroupsRepository groupsRepository,
@@ -37,7 +38,8 @@ namespace StudentUsos.Features.Grades.Views
             IStudentProgrammeService studentProgrammeService,
             ITermsService termsService,
             ITermsRepository termsRepository,
-            IApplicationService applicationService)
+            IApplicationService applicationService,
+            ILogger? logger = null)
         {
             this.serviceProvider = serviceProvider;
             this.groupsService = groupsService;
@@ -48,6 +50,7 @@ namespace StudentUsos.Features.Grades.Views
             this.termsService = termsService;
             this.termsRepository = termsRepository;
             this.applicationService = applicationService;
+            this.logger = logger;
 
             GradesStateKey = StateKey.Loading;
             OpenTermsListCommand = new Command(() => applicationService.WorkerThreadInvoke(MoreTermsButtonClickedAsync));
@@ -153,7 +156,7 @@ namespace StudentUsos.Features.Grades.Views
                 gradesRepository.DeleteAll();
                 gradesRepository.InsertAll(GradesHelper.UngroupGrades(groupedGradesServer));
             }
-            catch (Exception ex) { Utilities.ShowError(ex); }
+            catch (Exception ex) { logger?.LogCatchedException(ex); }
         }
 
         [RelayCommand]
@@ -269,10 +272,10 @@ namespace StudentUsos.Features.Grades.Views
                             GradesStateKey = StateKey.Loaded;
                         });
                     }
-                    catch (Exception ex) { Utilities.ShowError(ex); GradesStateKey = StateKey.LoadingError; }
+                    catch (Exception ex) { logger?.LogCatchedException(ex); GradesStateKey = StateKey.LoadingError; }
                 }
             }
-            catch (Exception ex) { Utilities.ShowError(ex); GradesStateKey = StateKey.LoadingError; }
+            catch (Exception ex) { logger?.LogCatchedException(ex); GradesStateKey = StateKey.LoadingError; }
         }
     }
 }

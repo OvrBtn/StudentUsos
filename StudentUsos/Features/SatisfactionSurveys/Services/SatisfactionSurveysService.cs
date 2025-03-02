@@ -69,7 +69,7 @@ namespace StudentUsos.Features.SatisfactionSurveys.Services
             }
             catch (Exception ex)
             {
-                Utilities.ShowError(ex);
+                logger?.LogCatchedException(ex);
                 return SendResult.RuntimeError;
             }
         }

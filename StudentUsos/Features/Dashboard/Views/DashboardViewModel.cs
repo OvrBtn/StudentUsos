@@ -31,8 +31,8 @@ namespace StudentUsos.Features.Dashboard.Views
         INavigationService navigationService;
         IActivitiesRepository activitiesRepository;
         IActivitiesService activitiesService;
-        UserInfoRepository userInfoRepository;
-        UserInfoService userinfoService;
+        IUserInfoRepository userInfoRepository;
+        IUserInfoService userinfoService;
         IGroupsService groupsService;
         IGroupsRepository groupsRepository;
         IGradesService gradesService;
@@ -48,8 +48,8 @@ namespace StudentUsos.Features.Dashboard.Views
             INavigationService navigationService,
             IActivitiesRepository activitiesRepository,
             IActivitiesService activitiesService,
-            UserInfoRepository userInfoRepository,
-            UserInfoService userinfoService,
+            IUserInfoRepository userInfoRepository,
+            IUserInfoService userinfoService,
             IGroupsService groupsService,
             IGroupsRepository groupsRepository,
             IGradesService gradesService,

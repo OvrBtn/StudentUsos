@@ -1,16 +1,15 @@
-﻿namespace StudentUsos.Features.Activities.Models
+﻿namespace StudentUsos.Features.Activities.Models;
+
+public class GetActivitiesResult
 {
-    public class GetActivitiesResult
+    /// <summary>
+    /// Activities grouped by days
+    /// </summary>
+    public List<TimetableDay> Result { get; private set; } = new();
+    public List<Activity> AllActivities { get; private set; } = new();
+    public GetActivitiesResult(List<TimetableDay> result, List<Activity> allActivities)
     {
-        /// <summary>
-        /// Activities grouped by days
-        /// </summary>
-        public List<TimetableDay> Result { get; private set; } = new();
-        public List<Activity> AllActivities { get; private set; } = new();
-        public GetActivitiesResult(List<TimetableDay> result, List<Activity> allActivities)
-        {
-            Result = result;
-            AllActivities = allActivities;
-        }
+        Result = result;
+        AllActivities = allActivities;
     }
 }

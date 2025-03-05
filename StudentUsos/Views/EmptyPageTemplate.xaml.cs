@@ -1,12 +1,11 @@
 ﻿using StudentUsos.Controls;
 
-namespace StudentUsos
+namespace StudentUsos;
+
+public partial class EmptyPageTemplate : CustomContentPageNotAnimated
 {
-    public partial class EmptyPageTemplate : CustomContentPageNotAnimated
+    public EmptyPageTemplate()
     {
-        public EmptyPageTemplate()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

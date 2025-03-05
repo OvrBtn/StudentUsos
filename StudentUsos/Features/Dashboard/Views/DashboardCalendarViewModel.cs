@@ -7,175 +7,174 @@ using StudentUsos.Features.Calendar.Services;
 using StudentUsos.Features.Dashboard.Models;
 using System.Collections.ObjectModel;
 
-namespace StudentUsos.Features.Dashboard.Views
+namespace StudentUsos.Features.Dashboard.Views;
+
+public partial class DashboardCalendarViewModel : BaseViewModel
 {
-    public partial class DashboardCalendarViewModel : BaseViewModel
+    IUsosCalendarService usosCalendarService;
+    IUsosCalendarRepository usosCalendarRepository;
+    IGoogleCalendarService googleCalendarService;
+    IGoogleCalendarRepository googleCalendarRepository;
+    IApplicationService applicationService;
+    ILogger logger;
+    public DashboardCalendarViewModel(IUsosCalendarService usosCalendarService,
+        IUsosCalendarRepository usosCalendarRepository,
+        IGoogleCalendarService googleCalendarService,
+        IGoogleCalendarRepository googleCalendarRepository,
+        IApplicationService applicationService,
+        ILogger? logger = null)
     {
-        IUsosCalendarService usosCalendarService;
-        IUsosCalendarRepository usosCalendarRepository;
-        IGoogleCalendarService googleCalendarService;
-        IGoogleCalendarRepository googleCalendarRepository;
-        IApplicationService applicationService;
-        ILogger logger;
-        public DashboardCalendarViewModel(IUsosCalendarService usosCalendarService,
-            IUsosCalendarRepository usosCalendarRepository,
-            IGoogleCalendarService googleCalendarService,
-            IGoogleCalendarRepository googleCalendarRepository,
-            IApplicationService applicationService,
-            ILogger? logger = null)
+        this.usosCalendarService = usosCalendarService;
+        this.usosCalendarRepository = usosCalendarRepository;
+        this.googleCalendarService = googleCalendarService;
+        this.googleCalendarRepository = googleCalendarRepository;
+        this.applicationService = applicationService;
+        this.logger = logger;
+    }
+
+
+    public async Task InitAsync()
+    {
+        CalendarStateKey = StateKey.Loading;
+        await LoadCalendarEvents();
+    }
+
+    public event Action OnSynchronousLoadingFinished;
+    public event Action OnAsynchronousLoadingFinished;
+
+    [ObservableProperty] string calendarStateKey = StateKey.Loading;
+
+    [ObservableProperty] ObservableCollection<UsosCalendarEvent> events = new();
+    [ObservableProperty] ObservableCollection<GoogleCalendarEvent> eventsGoogle = new();
+
+    [ObservableProperty] ObservableCollection<CalendarEvent> calendarEvents = new();
+
+    const int WebrequestDelay = 1000;
+    const int MaxCalendarEvents = 5;
+    async Task LoadCalendarEvents()
+    {
+        try
         {
-            this.usosCalendarService = usosCalendarService;
-            this.usosCalendarRepository = usosCalendarRepository;
-            this.googleCalendarService = googleCalendarService;
-            this.googleCalendarRepository = googleCalendarRepository;
-            this.applicationService = applicationService;
-            this.logger = logger;
-        }
+            CalendarEvents.Clear();
 
+            LoadCalendarEventsLocal();
+            OnSynchronousLoadingFinished?.Invoke();
 
-        public async Task InitAsync()
-        {
-            CalendarStateKey = StateKey.Loading;
-            await LoadCalendarEvents();
-        }
-
-        public event Action OnSynchronousLoadingFinished;
-        public event Action OnAsynchronousLoadingFinished;
-
-        [ObservableProperty] string calendarStateKey = StateKey.Loading;
-
-        [ObservableProperty] ObservableCollection<UsosCalendarEvent> events = new();
-        [ObservableProperty] ObservableCollection<GoogleCalendarEvent> eventsGoogle = new();
-
-        [ObservableProperty] ObservableCollection<CalendarEvent> calendarEvents = new();
-
-        const int WebrequestDelay = 1000;
-        const int MaxCalendarEvents = 5;
-        async Task LoadCalendarEvents()
-        {
-            try
+            if (CalendarEvents.Count != 0)
             {
-                CalendarEvents.Clear();
+                await Task.Delay(WebrequestDelay);
+            }
 
-                LoadCalendarEventsLocal();
-                OnSynchronousLoadingFinished?.Invoke();
+            await LoadCalendarEventsServerAsync();
+            OnAsynchronousLoadingFinished?.Invoke();
+        }
+        catch (Exception ex)
+        {
+            logger?.LogCatchedException(ex);
+        }
+    }
 
-                if (CalendarEvents.Count != 0)
+    async Task LoadCalendarEventsServerAsync()
+    {
+        var usosEvents = await usosCalendarService.TryFetchingAvailableEventsAsync();
+        List<UsosCalendarEvent> usosEventsLinearized;
+        if (usosEvents == null)
+        {
+            usosEventsLinearized = usosCalendarRepository.GetAllEvents();
+        }
+        else
+        {
+            usosEventsLinearized = usosEvents.SelectMany(x => x.events).ToList();
+            foreach (var item in usosEvents)
+            {
+                await usosCalendarRepository.SaveEventsFromServerAndHandleLocalNotificationsAsync(item.date.Year, item.date.Month, item.events, item.isPrimaryUpdate);
+            }
+
+            if (usosEvents.Count != CalendarSettings.MonthsToGetInTotal)
+            {
+                var date = DateTimeOffset.Now.DateTime;
+                for (int i = 0; i < CalendarSettings.MonthsToGetInTotal; i++)
                 {
-                    await Task.Delay(WebrequestDelay);
+                    if (usosEvents.Any(x => x.date.Year == date.Year && x.date.Month == date.Month) == false)
+                    {
+                        usosEventsLinearized.AddRange(usosCalendarRepository.GetEvents(date.Year, date.Month));
+                    }
+                    date = date.AddMonths(1);
                 }
-
-                await LoadCalendarEventsServerAsync();
-                OnAsynchronousLoadingFinished?.Invoke();
-            }
-            catch (Exception ex)
-            {
-                logger?.LogCatchedException(ex);
+                Utilities.RemoveDuplicates(usosEventsLinearized, UsosCalendarEvent.AreEqual);
             }
         }
 
-        async Task LoadCalendarEventsServerAsync()
+        List<GoogleCalendarEvent> googleCalendarEventsLinearized = new();
+        var googleCalendars = googleCalendarRepository.GetAllCalendars();
+        foreach (var calendar in googleCalendars)
         {
-            var usosEvents = await usosCalendarService.TryFetchingAvailableEventsAsync();
-            List<UsosCalendarEvent> usosEventsLinearized;
-            if (usosEvents == null)
+            var googleEvents = await googleCalendarService.GetGoogleCalendarEventsAsync(calendar);
+            if (googleEvents == null)
             {
-                usosEventsLinearized = usosCalendarRepository.GetAllEvents();
+                googleCalendarEventsLinearized = googleCalendarRepository.GetAllEvents().Where(x => x.CalendarName == calendar.Name).ToList();
             }
             else
             {
-                usosEventsLinearized = usosEvents.SelectMany(x => x.events).ToList();
-                foreach (var item in usosEvents)
-                {
-                    await usosCalendarRepository.SaveEventsFromServerAndHandleLocalNotificationsAsync(item.date.Year, item.date.Month, item.events, item.isPrimaryUpdate);
-                }
-
-                if (usosEvents.Count != CalendarSettings.MonthsToGetInTotal)
-                {
-                    var date = DateTimeOffset.Now.DateTime;
-                    for (int i = 0; i < CalendarSettings.MonthsToGetInTotal; i++)
-                    {
-                        if (usosEvents.Any(x => x.date.Year == date.Year && x.date.Month == date.Month) == false)
-                        {
-                            usosEventsLinearized.AddRange(usosCalendarRepository.GetEvents(date.Year, date.Month));
-                        }
-                        date = date.AddMonths(1);
-                    }
-                    Utilities.RemoveDuplicates(usosEventsLinearized, UsosCalendarEvent.AreEqual);
-                }
+                await googleCalendarRepository.SaveEventsFromServerAndHandleLocalNotificationsAsync(googleEvents);
+                googleCalendarEventsLinearized.AddRange(googleEvents);
             }
-
-            List<GoogleCalendarEvent> googleCalendarEventsLinearized = new();
-            var googleCalendars = googleCalendarRepository.GetAllCalendars();
-            foreach (var calendar in googleCalendars)
-            {
-                var googleEvents = await googleCalendarService.GetGoogleCalendarEventsAsync(calendar);
-                if (googleEvents == null)
-                {
-                    googleCalendarEventsLinearized = googleCalendarRepository.GetAllEvents().Where(x => x.CalendarName == calendar.Name).ToList();
-                }
-                else
-                {
-                    await googleCalendarRepository.SaveEventsFromServerAndHandleLocalNotificationsAsync(googleEvents);
-                    googleCalendarEventsLinearized.AddRange(googleEvents);
-                }
-            }
-
-            var grouped = GroupCalendarEvents(usosEventsLinearized, googleCalendarEventsLinearized);
-            SetCalendarEvents(grouped);
         }
 
-        void LoadCalendarEventsLocal()
+        var grouped = GroupCalendarEvents(usosEventsLinearized, googleCalendarEventsLinearized);
+        SetCalendarEvents(grouped);
+    }
+
+    void LoadCalendarEventsLocal()
+    {
+        var usosEventsLocal = usosCalendarRepository.GetAllEvents();
+        var googleCalendarEventsLocal = googleCalendarRepository.GetAllEvents();
+
+        var events = GroupCalendarEvents(usosEventsLocal, googleCalendarEventsLocal);
+        SetCalendarEvents(events);
+    }
+
+    List<CalendarEvent> GroupCalendarEvents(List<UsosCalendarEvent> usosEvents, List<GoogleCalendarEvent> googleEvents)
+    {
+        var now = DateTimeOffset.Now.DateTime;
+        List<CalendarEvent> calendarEvents = new();
+
+        var usosEventsSorted = usosEvents.Where(x => x.End >= now)
+            .OrderBy(x => x.Start)
+            .Take(MaxCalendarEvents);
+        foreach (var item in usosEventsSorted)
         {
-            var usosEventsLocal = usosCalendarRepository.GetAllEvents();
-            var googleCalendarEventsLocal = googleCalendarRepository.GetAllEvents();
-
-            var events = GroupCalendarEvents(usosEventsLocal, googleCalendarEventsLocal);
-            SetCalendarEvents(events);
+            calendarEvents.Add(new(item));
         }
 
-        List<CalendarEvent> GroupCalendarEvents(List<UsosCalendarEvent> usosEvents, List<GoogleCalendarEvent> googleEvents)
+        for (int i = 0; i < googleEvents.Count; i++)
         {
-            var now = DateTimeOffset.Now.DateTime;
-            List<CalendarEvent> calendarEvents = new();
-
-            var usosEventsSorted = usosEvents.Where(x => x.End >= now)
-                .OrderBy(x => x.Start)
-                .Take(MaxCalendarEvents);
-            foreach (var item in usosEventsSorted)
+            if (googleEvents[i].Start < now && googleEvents[i].End < now)
             {
-                calendarEvents.Add(new(item));
+                continue;
             }
-
-            for (int i = 0; i < googleEvents.Count; i++)
+            calendarEvents.Add(new(googleEvents[i]));
+            if (calendarEvents.Count > MaxCalendarEvents)
             {
-                if (googleEvents[i].Start < now && googleEvents[i].End < now)
-                {
-                    continue;
-                }
-                calendarEvents.Add(new(googleEvents[i]));
-                if (calendarEvents.Count > MaxCalendarEvents)
-                {
-                    break;
-                }
+                break;
             }
-
-            calendarEvents = calendarEvents.Where(x => now <= x.EndDateTime)
-                .OrderBy(x => x.StartDateTime)
-                .Take(MaxCalendarEvents).ToList();
-            return calendarEvents;
         }
 
-        void SetCalendarEvents(List<CalendarEvent> calendarEvents)
+        calendarEvents = calendarEvents.Where(x => now <= x.EndDateTime)
+            .OrderBy(x => x.StartDateTime)
+            .Take(MaxCalendarEvents).ToList();
+        return calendarEvents;
+    }
+
+    void SetCalendarEvents(List<CalendarEvent> calendarEvents)
+    {
+        if (Utilities.CompareCollections(CalendarEvents, calendarEvents, CalendarEvent.AreEqual) == false)
         {
-            if (Utilities.CompareCollections(CalendarEvents, calendarEvents, CalendarEvent.AreEqual) == false)
+            applicationService.MainThreadInvoke(() =>
             {
-                applicationService.MainThreadInvoke(() =>
-                {
-                    CalendarEvents = calendarEvents.ToObservableCollection();
-                });
-            }
-            if (CalendarEvents.Count > 0) CalendarStateKey = StateKey.Loaded;
+                CalendarEvents = calendarEvents.ToObservableCollection();
+            });
         }
+        if (CalendarEvents.Count > 0) CalendarStateKey = StateKey.Loaded;
     }
 }

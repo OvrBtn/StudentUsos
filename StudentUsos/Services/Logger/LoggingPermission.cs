@@ -1,14 +1,13 @@
-﻿namespace StudentUsos.Services.Logger
+﻿namespace StudentUsos.Services.Logger;
+
+public enum LoggingPermission
 {
-    public enum LoggingPermission
-    {
-        User,
-        Activities,
-        Calendar,
-        FinalGrades,
-        Groups,
-        Surveys,
-        Payments,
-        Progs
-    }
+    User,
+    Activities,
+    Calendar,
+    FinalGrades,
+    Groups,
+    Surveys,
+    Payments,
+    Progs
 }

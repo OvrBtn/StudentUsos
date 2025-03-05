@@ -1,81 +1,80 @@
 ﻿using StudentUsos.Features.AcademicTerms.Models;
 using StudentUsos.Features.Groups.Models;
 
-namespace StudentUsos.Features.Groups.Repositories
+namespace StudentUsos.Features.Groups.Repositories;
+
+public class GroupsRepository : IGroupsRepository
 {
-    public class GroupsRepository : IGroupsRepository
+    ILocalDatabaseManager localDatabaseManager;
+    ILogger? logger;
+    public GroupsRepository(ILocalDatabaseManager localDatabaseManager, ILogger? logger = null)
     {
-        ILocalDatabaseManager localDatabaseManager;
-        ILogger? logger;
-        public GroupsRepository(ILocalDatabaseManager localDatabaseManager, ILogger? logger = null)
-        {
-            this.localDatabaseManager = localDatabaseManager;
-            this.logger = logger;
-        }
+        this.localDatabaseManager = localDatabaseManager;
+        this.logger = logger;
+    }
 
-        public List<Group> GetGroups(Term term)
-        {
-            return localDatabaseManager.GetAll<Group>(x => x.CourseIsCurrentlyConducted == "1" && x.TermId == term.Id);
-        }
+    public List<Group> GetGroups(Term term)
+    {
+        return localDatabaseManager.GetAll<Group>(x => x.CourseIsCurrentlyConducted == "1" && x.TermId == term.Id);
+    }
 
-        public Group? GetGroup(string courseId, string classTypeName)
-        {
-            return localDatabaseManager.Get<Group>(x => x.CourseId == courseId && x.ClassType == classTypeName); ;
-        }
+    public Group? GetGroup(string courseId, string classTypeName)
+    {
+        return localDatabaseManager.Get<Group>(x => x.CourseId == courseId && x.ClassType == classTypeName); ;
+    }
 
-        public List<Group> GetAll()
-        {
-            return localDatabaseManager.GetAll<Group>();
-        }
+    public List<Group> GetAll()
+    {
+        return localDatabaseManager.GetAll<Group>();
+    }
 
-        public List<GroupsGrouped> GetActiveTermsGroupsGrouped()
-        {
-            var groups = localDatabaseManager.GetAll<Group>(x => x.CourseIsCurrentlyConducted == "1");
-            return GroupGroups(groups);
-        }
+    public List<GroupsGrouped> GetActiveTermsGroupsGrouped()
+    {
+        var groups = localDatabaseManager.GetAll<Group>(x => x.CourseIsCurrentlyConducted == "1");
+        return GroupGroups(groups);
+    }
 
-        /// <summary>
-        /// Group groups with the same term id
-        /// </summary>
-        /// <param name="groups"></param>
-        /// <returns>Grouped groups or empty list if failed</returns>
-        List<GroupsGrouped> GroupGroups(List<Group> groups)
+    /// <summary>
+    /// Group groups with the same term id
+    /// </summary>
+    /// <param name="groups"></param>
+    /// <returns>Grouped groups or empty list if failed</returns>
+    List<GroupsGrouped> GroupGroups(List<Group> groups)
+    {
+        try
         {
-            try
+            List<GroupsGrouped> groupsGrouped = new();
+            List<string> idsOfAddedTerms = new();
+            List<Term> terms = localDatabaseManager.GetAll<Term>();
+            for (int i = 0; i < groups.Count; i++)
             {
-                List<GroupsGrouped> groupsGrouped = new();
-                List<string> idsOfAddedTerms = new();
-                List<Term> terms = localDatabaseManager.GetAll<Term>();
-                for (int i = 0; i < groups.Count; i++)
+                string currentTermId = groups[i].TermId;
+                if (idsOfAddedTerms.Contains(currentTermId) == false)
                 {
-                    string currentTermId = groups[i].TermId;
-                    if (idsOfAddedTerms.Contains(currentTermId) == false)
-                    {
-                        var found = terms.Where(x => x.Id == currentTermId).First();
-                        string currentTermName = found.Name;
-                        GroupsGrouped groupsGroupedObject = new(currentTermId, currentTermName, groups.Where(x => x.TermId == currentTermId).ToList());
-                        groupsGrouped.Add(groupsGroupedObject);
-                        idsOfAddedTerms.Add(currentTermId);
-                    }
+                    var found = terms.Where(x => x.Id == currentTermId).First();
+                    string currentTermName = found.Name;
+                    GroupsGrouped groupsGroupedObject = new(currentTermId, currentTermName, groups.Where(x => x.TermId == currentTermId).ToList());
+                    groupsGrouped.Add(groupsGroupedObject);
+                    idsOfAddedTerms.Add(currentTermId);
                 }
-                return groupsGrouped;
             }
-            catch (Exception ex) { logger?.LogCatchedException(ex); return new List<GroupsGrouped>(); }
+            return groupsGrouped;
         }
+        catch (Exception ex) { logger?.LogCatchedException(ex); return new List<GroupsGrouped>(); }
+    }
 
-        public void InsertOrReplace(IEnumerable<Term> terms)
-        {
-            localDatabaseManager.InsertOrReplaceAll(terms);
-        }
+    public void InsertOrReplace(IEnumerable<Term> terms)
+    {
+        localDatabaseManager.InsertOrReplaceAll(terms);
+    }
 
-        public void InsertOrReplace(IEnumerable<Group> groups)
-        {
-            localDatabaseManager.InsertOrReplaceAll(groups);
-        }
+    public void InsertOrReplace(IEnumerable<Group> groups)
+    {
+        localDatabaseManager.InsertOrReplaceAll(groups);
+    }
 
-        public void InsertOrReplace(Group group)
-        {
-            localDatabaseManager.InsertOrReplace(group);
-        }
+    public void InsertOrReplace(Group group)
+    {
+        localDatabaseManager.InsertOrReplace(group);
     }
 }

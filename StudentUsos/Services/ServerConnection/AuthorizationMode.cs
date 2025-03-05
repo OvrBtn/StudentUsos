@@ -1,8 +1,7 @@
-﻿namespace StudentUsos.Services.ServerConnection
+﻿namespace StudentUsos.Services.ServerConnection;
+
+public enum AuthorizationMode
 {
-    public enum AuthorizationMode
-    {
-        Full,
-        StaticInternalsOnly
-    }
+    Full,
+    StaticInternalsOnly
 }

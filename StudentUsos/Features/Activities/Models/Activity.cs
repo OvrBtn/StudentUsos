@@ -6,200 +6,197 @@ using StudentUsos.Features.Groups.Views;
 using System.Globalization;
 using System.Text.Json.Serialization;
 
-namespace StudentUsos.Features.Activities.Models
+namespace StudentUsos.Features.Activities.Models;
+
+[JsonSerializable(typeof(List<Activity>))]
+internal partial class ActivityJsonContext : JsonSerializerContext
+{ }
+
+public partial class Activity : ObservableObject
 {
-    [JsonSerializable(typeof(List<Activity>))]
-    internal partial class ActivityJsonContext : JsonSerializerContext
-    { }
-
-    public partial class Activity : ObservableObject
+    //data saved to local database
+    [JsonPropertyName("unit_id"), JsonConverter(typeof(JsonObjectToStringConverter))]
+    public string UnitId { get; set; }
+    [JsonPropertyName("start_time")]
+    public string StartDateTimeString
     {
-        //data saved to local database
-        [JsonPropertyName("unit_id"), JsonConverter(typeof(JsonObjectToStringConverter))]
-        public string UnitId { get; set; }
-        [JsonPropertyName("start_time")]
-        public string StartDateTimeString
+        get => startDateTimeString;
+        set
         {
-            get => startDateTimeString;
-            set
+            startDateTimeString = value;
+            if (DateTime.TryParse(startDateTimeString, out var parsed))
             {
-                startDateTimeString = value;
-                if (DateTime.TryParse(startDateTimeString, out var parsed))
-                {
-                    StartTime = parsed.ToString("HH:mm");
-                }
+                StartTime = parsed.ToString("HH:mm");
+            }
 
+        }
+    }
+    string startDateTimeString;
+    public string StartTime { get; set; }
+    [JsonPropertyName("end_time")]
+    public string EndDateTimeString
+    {
+        get => endDateTimeString;
+        set
+        {
+            endDateTimeString = value;
+            if (DateTime.TryParse(endDateTimeString, out var parsed))
+            {
+                EndTime = parsed.ToString("HH:mm");
             }
         }
-        string startDateTimeString;
-        public string StartTime { get; set; }
-        [JsonPropertyName("end_time")]
-        public string EndDateTimeString
+    }
+    string endDateTimeString;
+    public string EndTime { get; set; }
+    public string Name
+    {
+        get
         {
-            get => endDateTimeString;
-            set
-            {
-                endDateTimeString = value;
-                if (DateTime.TryParse(endDateTimeString, out var parsed))
-                {
-                    EndTime = parsed.ToString("HH:mm");
-                }
-            }
+            string name = Utilities.GetLocalizedStringFromJson(NameJson);
+            if (name.Contains(ClassTypeName)) name = name.Remove(name.LastIndexOf(ClassTypeName));
+            if (name.Contains(" - ")) name = name.Remove(name.LastIndexOf(" - "));
+            return name;
         }
-        string endDateTimeString;
-        public string EndTime { get; set; }
-        public string Name
+    }
+    [JsonPropertyName("name"), JsonConverter(typeof(JsonObjectToStringConverter))]
+    public string NameJson { get; set; }
+    public string BuildingName { get => Utilities.GetLocalizedStringFromJson(BuildingNameJson); }
+    [JsonPropertyName("building_name"), JsonConverter(typeof(JsonObjectToStringConverter))]
+    public string BuildingNameJson { get; set; }
+    [JsonPropertyName("room_number")]
+    public string RoomNumber { get; set; }
+    [JsonPropertyName("group_number"), JsonConverter(typeof(JsonObjectToStringConverter))]
+    public string GroupNumber { get; set; }
+    [JsonPropertyName("course_id")]
+    public string CourseId { get; set; }
+    public string ClassTypeName { get => Utilities.GetLocalizedStringFromJson(ClassTypeNameJson); }
+    [JsonPropertyName("classtype_name"), JsonConverter(typeof(JsonObjectToStringConverter))]
+    public string ClassTypeNameJson { get; set; }
+    [JsonPropertyName("lecturer_ids"), JsonConverter(typeof(JsonObjectToStringConverter))]
+    public string LecturerIds { get; set; }
+
+    //SQLite doesn't support DateTime
+    [Ignore]
+    public DateTime StartDateTime
+    {
+        get
         {
-            get
-            {
-                string name = Utilities.GetLocalizedStringFromJson(NameJson);
-                if (name.Contains(ClassTypeName)) name = name.Remove(name.LastIndexOf(ClassTypeName));
-                if (name.Contains(" - ")) name = name.Remove(name.LastIndexOf(" - "));
-                return name;
-            }
+            if (startDateTime != DateTime.MinValue) return startDateTime;
+            if (DateTime.TryParse(StartDateTimeString, out DateTime result)) return result;
+            return DateTime.MinValue;
         }
-        [JsonPropertyName("name"), JsonConverter(typeof(JsonObjectToStringConverter))]
-        public string NameJson { get; set; }
-        public string BuildingName { get => Utilities.GetLocalizedStringFromJson(BuildingNameJson); }
-        [JsonPropertyName("building_name"), JsonConverter(typeof(JsonObjectToStringConverter))]
-        public string BuildingNameJson { get; set; }
-        [JsonPropertyName("room_number")]
-        public string RoomNumber { get; set; }
-        [JsonPropertyName("group_number"), JsonConverter(typeof(JsonObjectToStringConverter))]
-        public string GroupNumber { get; set; }
-        [JsonPropertyName("course_id")]
-        public string CourseId { get; set; }
-        public string ClassTypeName { get => Utilities.GetLocalizedStringFromJson(ClassTypeNameJson); }
-        [JsonPropertyName("classtype_name"), JsonConverter(typeof(JsonObjectToStringConverter))]
-        public string ClassTypeNameJson { get; set; }
-        [JsonPropertyName("lecturer_ids"), JsonConverter(typeof(JsonObjectToStringConverter))]
-        public string LecturerIds { get; set; }
-
-        //SQLite doesn't support DateTime
-        [Ignore]
-        public DateTime StartDateTime
+        set
         {
-            get
-            {
-                if (startDateTime != DateTime.MinValue) return startDateTime;
-                if (DateTime.TryParse(StartDateTimeString, out DateTime result)) return result;
-                return DateTime.MinValue;
-            }
-            set
-            {
-                startDateTime = value;
-                StartDateTimeString = startDateTime.ToString();
-            }
+            startDateTime = value;
+            StartDateTimeString = startDateTime.ToString();
         }
-        DateTime startDateTime;
-        [Ignore]
-        public DateTime EndDateTime
+    }
+    DateTime startDateTime;
+    [Ignore]
+    public DateTime EndDateTime
+    {
+        get
         {
-            get
-            {
-                if (endDateTime != DateTime.MinValue) return endDateTime;
-                if (DateTime.TryParse(EndDateTimeString, out DateTime result)) return result;
-                return DateTime.MinValue;
-            }
-            set
-            {
-                endDateTime = value;
-                EndDateTimeString = endDateTime.ToString();
-            }
+            if (endDateTime != DateTime.MinValue) return endDateTime;
+            if (DateTime.TryParse(EndDateTimeString, out DateTime result)) return result;
+            return DateTime.MinValue;
         }
-        DateTime endDateTime;
-
-        [ObservableProperty, NotifyPropertyChangedFor(nameof(IsTimerVisibleNegation))]
-        bool isTimerVisible = false;
-        [Ignore]
-        public bool IsTimerVisibleNegation
+        set
         {
-            get => !IsTimerVisible;
+            endDateTime = value;
+            EndDateTimeString = endDateTime.ToString();
         }
+    }
+    DateTime endDateTime;
 
-        [ObservableProperty]
-        string timerValue = "";
+    [ObservableProperty, NotifyPropertyChangedFor(nameof(IsTimerVisibleNegation))]
+    bool isTimerVisible = false;
+    [Ignore]
+    public bool IsTimerVisibleNegation
+    {
+        get => !IsTimerVisible;
+    }
 
-        /// <summary>
-        /// Value from 0 to 1
-        /// </summary>
-        [ObservableProperty, NotifyPropertyChangedFor(nameof(TimerProgressRect))]
-        float timerProgress = 0;
+    [ObservableProperty]
+    string timerValue = "";
 
-        [Ignore]
-        public Rect TimerProgressRect
-        {
-            get => new(0, 0, TimerProgress, 1);
-        }
+    /// <summary>
+    /// Value from 0 to 1
+    /// </summary>
+    [ObservableProperty, NotifyPropertyChangedFor(nameof(TimerProgressRect))]
+    float timerProgress = 0;
 
-
-        static ClassTypeToColorConverter classTypeToColorConverter = new();
-        public Color GetRibbonColor()
-        {
-            return (Color)classTypeToColorConverter.Convert(ClassTypeNameJson, typeof(Activity), null, CultureInfo.InvariantCulture);
-        }
-
-        public enum ActivityType
-        {
-            Student,
-            Staff
-        }
-
-        public ActivityType Type { get; set; } = ActivityType.Student;
-
-
-        bool isBusy = false;
-        [RelayCommand]
-        async Task OnClicked()
-        {
-            if (isBusy) return;
-            isBusy = true;
-            await Task.Delay(200);
-            if (Type == ActivityType.Staff)
-            {
-                var page = App.ServiceProvider.GetService<StaffGroupDetailsPage>()!;
-                page.Init(this, () => isBusy = false);
-                page.ShowPopup();
-            }
-            else
-            {
-                var groupsRepository = App.ServiceProvider.GetService<IGroupsRepository>()!;
-                var group = groupsRepository.GetGroup(CourseId, ClassTypeName) ?? new();
-                var page = App.ServiceProvider.GetService<GroupDetailsPage>()!;
-                page.Init(group, () => isBusy = false);
-                page.ShowPopup();
-            }
-        }
-
-        /// <summary>
-        /// Compare actities using relevant properties
-        /// </summary>
-        /// <param name="a1"></param>
-        /// <param name="a2"></param>
-        /// <returns></returns>
-        public static bool Comparer(Activity a1, Activity a2)
-        {
-            return a1.Name == a2.Name && a1.StartDateTime == a2.StartDateTime && a1.EndDateTime == a2.EndDateTime && a1.CourseId == a2.CourseId;
-        }
-
-        [ObservableProperty]
-        [property: Ignore]
-        Rect layoutBounds;
-
-        public Rect CalculateLayoutBounds()
-        {
-            float oneHourSpace = Views.ActivitiesViewModel.TimetableHourHeight;
-            var rect = new Rect();
-            rect.X = 0;
-            rect.Width = 1;
-            var timeDifference = EndDateTime - StartDateTime;
-            double height = oneHourSpace * timeDifference.TotalHours;
-            rect.Height = height;
-            float startHour = StartDateTime.Hour + StartDateTime.Minute / 60f;
-            rect.Y = startHour * oneHourSpace;
-            return rect;
-        }
+    [Ignore]
+    public Rect TimerProgressRect
+    {
+        get => new(0, 0, TimerProgress, 1);
     }
 
 
+    static ClassTypeToColorConverter classTypeToColorConverter = new();
+    public Color GetRibbonColor()
+    {
+        return (Color)classTypeToColorConverter.Convert(ClassTypeNameJson, typeof(Activity), null, CultureInfo.InvariantCulture);
+    }
+
+    public enum ActivityType
+    {
+        Student,
+        Staff
+    }
+
+    public ActivityType Type { get; set; } = ActivityType.Student;
+
+
+    bool isBusy = false;
+    [RelayCommand]
+    async Task OnClicked()
+    {
+        if (isBusy) return;
+        isBusy = true;
+        await Task.Delay(200);
+        if (Type == ActivityType.Staff)
+        {
+            var page = App.ServiceProvider.GetService<StaffGroupDetailsPage>()!;
+            page.Init(this, () => isBusy = false);
+            page.ShowPopup();
+        }
+        else
+        {
+            var groupsRepository = App.ServiceProvider.GetService<IGroupsRepository>()!;
+            var group = groupsRepository.GetGroup(CourseId, ClassTypeName) ?? new();
+            var page = App.ServiceProvider.GetService<GroupDetailsPage>()!;
+            page.Init(group, () => isBusy = false);
+            page.ShowPopup();
+        }
+    }
+
+    /// <summary>
+    /// Compare actities using relevant properties
+    /// </summary>
+    /// <param name="a1"></param>
+    /// <param name="a2"></param>
+    /// <returns></returns>
+    public static bool Comparer(Activity a1, Activity a2)
+    {
+        return a1.Name == a2.Name && a1.StartDateTime == a2.StartDateTime && a1.EndDateTime == a2.EndDateTime && a1.CourseId == a2.CourseId;
+    }
+
+    [ObservableProperty]
+    [property: Ignore]
+    Rect layoutBounds;
+
+    public Rect CalculateLayoutBounds()
+    {
+        float oneHourSpace = Views.ActivitiesViewModel.TimetableHourHeight;
+        var rect = new Rect();
+        rect.X = 0;
+        rect.Width = 1;
+        var timeDifference = EndDateTime - StartDateTime;
+        double height = oneHourSpace * timeDifference.TotalHours;
+        rect.Height = height;
+        float startHour = StartDateTime.Hour + StartDateTime.Minute / 60f;
+        rect.Y = startHour * oneHourSpace;
+        return rect;
+    }
 }

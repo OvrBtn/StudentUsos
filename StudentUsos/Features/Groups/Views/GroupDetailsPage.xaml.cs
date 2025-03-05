@@ -1,21 +1,20 @@
 ﻿using StudentUsos.Controls;
 using StudentUsos.Features.Groups.Models;
 
-namespace StudentUsos.Features.Groups.Views
+namespace StudentUsos.Features.Groups.Views;
+
+public partial class GroupDetailsPage : CustomBottomSheet
 {
-    public partial class GroupDetailsPage : CustomBottomSheet
+    GroupDetailsViewModel groupDetailsViewModel;
+    public GroupDetailsPage(GroupDetailsViewModel groupDetailsViewModel)
     {
-        GroupDetailsViewModel groupDetailsViewModel;
-        public GroupDetailsPage(GroupDetailsViewModel groupDetailsViewModel)
-        {
-            InitializeComponent();
+        InitializeComponent();
 
-            BindingContext = this.groupDetailsViewModel = groupDetailsViewModel;
-        }
+        BindingContext = this.groupDetailsViewModel = groupDetailsViewModel;
+    }
 
-        public void Init(Group group, Action? onClose = null)
-        {
-            groupDetailsViewModel.Init(group, onClose);
-        }
+    public void Init(Group group, Action? onClose = null)
+    {
+        groupDetailsViewModel.Init(group, onClose);
     }
 }

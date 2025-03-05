@@ -2,172 +2,171 @@
 using StudentUsos.Features.Groups.Models;
 using System.Globalization;
 
-namespace StudentUsos.Features.Grades.Helpers
+namespace StudentUsos.Features.Grades.Helpers;
+
+public static class GradesHelper
 {
-    public static class GradesHelper
+    public static FinalGrade? FindLatest(List<FinalGrade> grades)
     {
-        public static FinalGrade? FindLatest(List<FinalGrade> grades)
+        try
         {
-            try
-            {
-                if (grades.Count == 0) return null;
-                var gradesToSort = new List<FinalGrade>(grades);
-                gradesToSort = gradesToSort.OrderBy(x => x.DateModifiedDateTime).ToList();
-                if (string.IsNullOrEmpty(gradesToSort[gradesToSort.Count - 1].CourseName)) return null;
-                return gradesToSort[gradesToSort.Count - 1];
-            }
-            catch (Exception ex)
-            {
-                Logger.Default?.LogCatchedException(ex);
-                return null;
-            }
+            if (grades.Count == 0) return null;
+            var gradesToSort = new List<FinalGrade>(grades);
+            gradesToSort = gradesToSort.OrderBy(x => x.DateModifiedDateTime).ToList();
+            if (string.IsNullOrEmpty(gradesToSort[gradesToSort.Count - 1].CourseName)) return null;
+            return gradesToSort[gradesToSort.Count - 1];
         }
-
-        /// <summary>
-        /// Group grades by their course_unit_id
-        /// </summary>
-        /// <param name="listOfGrades"></param>
-        /// <returns>Groups of grades from first and second term for every subject</returns>
-        public static List<FinalGradeGroup> GroupGrades(List<FinalGrade> listOfGrades)
+        catch (Exception ex)
         {
-            try
+            Logger.Default?.LogCatchedException(ex);
+            return null;
+        }
+    }
+
+    /// <summary>
+    /// Group grades by their course_unit_id
+    /// </summary>
+    /// <param name="listOfGrades"></param>
+    /// <returns>Groups of grades from first and second term for every subject</returns>
+    public static List<FinalGradeGroup> GroupGrades(List<FinalGrade> listOfGrades)
+    {
+        try
+        {
+            if (listOfGrades == null)
             {
-                if (listOfGrades == null)
+                return new();
+            }
+            List<FinalGrade> list = new List<FinalGrade>(listOfGrades);
+            List<FinalGradeGroup> groups = new();
+            while (list.Count > 0)
+            {
+                var res = list.Where(x => x.CourseUnitId == list[0].CourseUnitId).ToList();
+                groups.Add(new FinalGradeGroup()
                 {
-                    return new();
-                }
-                List<FinalGrade> list = new List<FinalGrade>(listOfGrades);
-                List<FinalGradeGroup> groups = new();
-                while (list.Count > 0)
+                    CourseId = res[0].CourseId,
+                    CourseName = res[0].CourseName,
+                    FirstTermGrade = res.Where(x => x.ExamSessionNumber == "1").FirstOrDefault(res[0]),
+                    SecondTermGrade = res.Where(x => x.ExamSessionNumber == "2").FirstOrDefault(res[1])
+                });
+                list.RemoveAll(x => x.CourseUnitId == res[0].CourseUnitId);
+            }
+            return groups;
+        }
+        catch (Exception ex)
+        {
+            Logger.Default?.LogCatchedException(ex);
+            return new List<FinalGradeGroup>();
+        }
+    }
+
+    public static List<FinalGrade> UngroupGrades(IEnumerable<FinalGradeGroup> finalGradeGroups)
+    {
+        try
+        {
+            List<FinalGrade> finalGrades = new();
+            foreach (var item in finalGradeGroups)
+            {
+                finalGrades.Add(item.FirstTermGrade);
+                finalGrades.Add(item.SecondTermGrade);
+            }
+            return finalGrades;
+        }
+        catch
+        {
+            return new List<FinalGrade>();
+        }
+    }
+
+    public static float CalculateGradeAverage(IEnumerable<FinalGradeGroup> gradesGroups)
+    {
+        try
+        {
+            float top = 0, bottom = 0;
+            var gradesGroupsList = new List<FinalGradeGroup>(gradesGroups);
+            while (gradesGroupsList.Count > 0)
+            {
+                var allGradesGroupsForCourse = gradesGroupsList.Where(x => x.CourseId == gradesGroupsList[0].CourseId).ToList();
+                List<float> gradesFromAllClassesTypes = new();
+                float ectsPoints = 0;
+                foreach (var gradesGroup in allGradesGroupsForCourse)
                 {
-                    var res = list.Where(x => x.CourseUnitId == list[0].CourseUnitId).ToList();
-                    groups.Add(new FinalGradeGroup()
+                    if (gradesGroup.FirstTermGrade.CountsIntoAverage == "N") continue;
+                    float gradesFromTermsSum = 0;
+                    int gradesFromTermsCount = 0;
+                    FinalGrade? grade = null;
+                    if (gradesGroup.SecondTermGrade.IsEmpty == false || gradesGroup.SecondTermGrade.IsModified)
                     {
-                        CourseId = res[0].CourseId,
-                        CourseName = res[0].CourseName,
-                        FirstTermGrade = res.Where(x => x.ExamSessionNumber == "1").FirstOrDefault(res[0]),
-                        SecondTermGrade = res.Where(x => x.ExamSessionNumber == "2").FirstOrDefault(res[1])
-                    });
-                    list.RemoveAll(x => x.CourseUnitId == res[0].CourseUnitId);
-                }
-                return groups;
-            }
-            catch (Exception ex)
-            {
-                Logger.Default?.LogCatchedException(ex);
-                return new List<FinalGradeGroup>();
-            }
-        }
-
-        public static List<FinalGrade> UngroupGrades(IEnumerable<FinalGradeGroup> finalGradeGroups)
-        {
-            try
-            {
-                List<FinalGrade> finalGrades = new();
-                foreach (var item in finalGradeGroups)
-                {
-                    finalGrades.Add(item.FirstTermGrade);
-                    finalGrades.Add(item.SecondTermGrade);
-                }
-                return finalGrades;
-            }
-            catch
-            {
-                return new List<FinalGrade>();
-            }
-        }
-
-        public static float CalculateGradeAverage(IEnumerable<FinalGradeGroup> gradesGroups)
-        {
-            try
-            {
-                float top = 0, bottom = 0;
-                var gradesGroupsList = new List<FinalGradeGroup>(gradesGroups);
-                while (gradesGroupsList.Count > 0)
-                {
-                    var allGradesGroupsForCourse = gradesGroupsList.Where(x => x.CourseId == gradesGroupsList[0].CourseId).ToList();
-                    List<float> gradesFromAllClassesTypes = new();
-                    float ectsPoints = 0;
-                    foreach (var gradesGroup in allGradesGroupsForCourse)
-                    {
-                        if (gradesGroup.FirstTermGrade.CountsIntoAverage == "N") continue;
-                        float gradesFromTermsSum = 0;
-                        int gradesFromTermsCount = 0;
-                        FinalGrade? grade = null;
-                        if (gradesGroup.SecondTermGrade.IsEmpty == false || gradesGroup.SecondTermGrade.IsModified)
+                        grade = gradesGroup.SecondTermGrade;
+                        if (float.TryParse(grade.ValueSymbol.Replace('.', ','), NumberStyles.Float, new CultureInfo("pl"), out float parsed))
                         {
-                            grade = gradesGroup.SecondTermGrade;
-                            if (float.TryParse(grade.ValueSymbol.Replace('.', ','), NumberStyles.Float, new CultureInfo("pl"), out float parsed))
-                            {
-                                gradesFromTermsSum += parsed;
-                                gradesFromTermsCount++;
-                            }
+                            gradesFromTermsSum += parsed;
+                            gradesFromTermsCount++;
                         }
-                        if (gradesGroup.FirstTermGrade.IsEmpty == false || gradesGroup.FirstTermGrade.IsModified)
-                        {
-                            grade = gradesGroup.FirstTermGrade;
-                            if (float.TryParse(grade.ValueSymbol.Replace('.', ','), NumberStyles.Float, new CultureInfo("pl"), out float parsed))
-                            {
-                                gradesFromTermsSum += parsed;
-                                gradesFromTermsCount++;
-                            }
-                        }
-                        if (gradesFromTermsCount != 0 && grade != null)
-                        {
-                            gradesFromAllClassesTypes.Add(gradesFromTermsSum / gradesFromTermsCount);
-                            ectsPoints = grade.EctsPointsFloat;
-                        }
-
                     }
-                    if (gradesFromAllClassesTypes.Count > 0)
+                    if (gradesGroup.FirstTermGrade.IsEmpty == false || gradesGroup.FirstTermGrade.IsModified)
                     {
-                        top += ectsPoints * gradesFromAllClassesTypes.Sum() / gradesFromAllClassesTypes.Count;
-                        bottom += ectsPoints;
+                        grade = gradesGroup.FirstTermGrade;
+                        if (float.TryParse(grade.ValueSymbol.Replace('.', ','), NumberStyles.Float, new CultureInfo("pl"), out float parsed))
+                        {
+                            gradesFromTermsSum += parsed;
+                            gradesFromTermsCount++;
+                        }
                     }
-                    gradesGroupsList.RemoveAll(x => allGradesGroupsForCourse.Contains(x));
+                    if (gradesFromTermsCount != 0 && grade != null)
+                    {
+                        gradesFromAllClassesTypes.Add(gradesFromTermsSum / gradesFromTermsCount);
+                        ectsPoints = grade.EctsPointsFloat;
+                    }
+
                 }
-                if (bottom == 0) return 0f;
-                return (float)Math.Round((double)top / bottom, 2);
-            }
-            catch (Exception ex)
-            {
-                Logger.Default?.LogCatchedException(ex);
-                return 0f;
-            }
-        }
-
-        public static void AssignAcademicGroupsToGrades(IEnumerable<Group> groups, IEnumerable<FinalGrade> grades)
-        {
-            foreach (var item in grades)
-            {
-                var foundGroup = groups.FirstOrDefault(x => x.CourseId == item.CourseId);
-                if (foundGroup == null) continue;
-                item.Group = foundGroup;
-            }
-        }
-
-        public static void CopyGradeDistributionsIfNotSet(IEnumerable<FinalGradeGroup> copyFrom, IEnumerable<FinalGradeGroup> copyTo)
-        {
-            foreach (var item in copyTo)
-            {
-                if (string.IsNullOrEmpty(item.FirstTermGrade.GradeDistribution) == false)
+                if (gradesFromAllClassesTypes.Count > 0)
                 {
-                    continue;
+                    top += ectsPoints * gradesFromAllClassesTypes.Sum() / gradesFromAllClassesTypes.Count;
+                    bottom += ectsPoints;
                 }
-                var found = copyFrom.FirstOrDefault(x => x?.FirstTermGrade?.CourseUnitId == item?.FirstTermGrade?.CourseUnitId);
-                if (found == null) continue;
-                item.FirstTermGrade.GradeDistribution = found.FirstTermGrade.GradeDistribution;
+                gradesGroupsList.RemoveAll(x => allGradesGroupsForCourse.Contains(x));
             }
+            if (bottom == 0) return 0f;
+            return (float)Math.Round((double)top / bottom, 2);
         }
-
-        public static void CopyGradeDistributions(IEnumerable<FinalGradeGroup> copyFrom, IEnumerable<FinalGradeGroup> copyTo)
+        catch (Exception ex)
         {
-            foreach (var item in copyTo)
+            Logger.Default?.LogCatchedException(ex);
+            return 0f;
+        }
+    }
+
+    public static void AssignAcademicGroupsToGrades(IEnumerable<Group> groups, IEnumerable<FinalGrade> grades)
+    {
+        foreach (var item in grades)
+        {
+            var foundGroup = groups.FirstOrDefault(x => x.CourseId == item.CourseId);
+            if (foundGroup == null) continue;
+            item.Group = foundGroup;
+        }
+    }
+
+    public static void CopyGradeDistributionsIfNotSet(IEnumerable<FinalGradeGroup> copyFrom, IEnumerable<FinalGradeGroup> copyTo)
+    {
+        foreach (var item in copyTo)
+        {
+            if (string.IsNullOrEmpty(item.FirstTermGrade.GradeDistribution) == false)
             {
-                var found = copyFrom.FirstOrDefault(x => x?.FirstTermGrade?.CourseUnitId == item?.FirstTermGrade?.CourseUnitId);
-                if (found == null) continue;
-                item.FirstTermGrade.GradeDistribution = found.FirstTermGrade.GradeDistribution;
+                continue;
             }
+            var found = copyFrom.FirstOrDefault(x => x?.FirstTermGrade?.CourseUnitId == item?.FirstTermGrade?.CourseUnitId);
+            if (found == null) continue;
+            item.FirstTermGrade.GradeDistribution = found.FirstTermGrade.GradeDistribution;
+        }
+    }
+
+    public static void CopyGradeDistributions(IEnumerable<FinalGradeGroup> copyFrom, IEnumerable<FinalGradeGroup> copyTo)
+    {
+        foreach (var item in copyTo)
+        {
+            var found = copyFrom.FirstOrDefault(x => x?.FirstTermGrade?.CourseUnitId == item?.FirstTermGrade?.CourseUnitId);
+            if (found == null) continue;
+            item.FirstTermGrade.GradeDistribution = found.FirstTermGrade.GradeDistribution;
         }
     }
 }

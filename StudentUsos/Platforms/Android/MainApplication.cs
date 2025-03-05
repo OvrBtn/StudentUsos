@@ -10,27 +10,26 @@ using Android.Runtime;
 //[assembly: UsesPermission("android.permission.SCHEDULE_EXACT_ALARM")]
 [assembly: UsesPermission("android.permission.POST_NOTIFICATIONS")]
 
-namespace StudentUsos
+namespace StudentUsos;
+
+[Application]
+public class MainApplication : MauiApplication
 {
-    [Application]
-    public class MainApplication : MauiApplication
+    public MainApplication(IntPtr handle, JniHandleOwnership ownership)
+        : base(handle, ownership)
     {
-        public MainApplication(IntPtr handle, JniHandleOwnership ownership)
-            : base(handle, ownership)
-        {
-        }
-
-        public override void OnCreate()
-        {
-            base.OnCreate();
-
-            AndroidEnvironment.UnhandledExceptionRaiser += (sender, e) =>
-            {
-                Logger.Default?.Log(LogLevel.Fatal, e.Exception.ToString());
-                e.Handled = true;
-            };
-        }
-
-        protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
     }
+
+    public override void OnCreate()
+    {
+        base.OnCreate();
+
+        AndroidEnvironment.UnhandledExceptionRaiser += (sender, e) =>
+        {
+            Logger.Default?.Log(LogLevel.Fatal, e.Exception.ToString());
+            e.Handled = true;
+        };
+    }
+
+    protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
 }

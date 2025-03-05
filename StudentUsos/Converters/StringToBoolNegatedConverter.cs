@@ -1,26 +1,24 @@
 ﻿using System.Globalization;
 
-namespace StudentUsos.Converters
+namespace StudentUsos.Converters;
+
+public class StringToBoolNegatedConverter : IValueConverter
 {
-
-    public class StringToBoolNegatedConverter : IValueConverter
+    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+        try
         {
-            try
-            {
-                if (value == null || (string)(value) == "") return true;
-                return false;
-            }
-            catch
-            {
-                return true;
-            }
+            if (value == null || (string)(value) == "") return true;
+            return false;
         }
+        catch
+        {
+            return true;
+        }
+    }
 
-        public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
+    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
     }
 }

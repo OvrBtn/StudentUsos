@@ -2,25 +2,24 @@
 using StudentUsos.Controls;
 using StudentUsos.Features.SatisfactionSurveys.Models;
 
-namespace StudentUsos.Features.SatisfactionSurveys.Views
+namespace StudentUsos.Features.SatisfactionSurveys.Views;
+
+public partial class FillSatisfactionSurveyPage : CustomContentPageNotAnimated
 {
-    public partial class FillSatisfactionSurveyPage : CustomContentPageNotAnimated
+    public SKLottieView SkSuccessLottieView { get; init; }
+    public SKLottieView SkFailLottieView { get; init; }
+    FillSatisfactionSurveyViewModel fillSatisfactionSurveyViewModel;
+    public FillSatisfactionSurveyPage(FillSatisfactionSurveyViewModel fillSatisfactionSurveyViewModel)
     {
-        public SKLottieView SkSuccessLottieView { get; init; }
-        public SKLottieView SkFailLottieView { get; init; }
-        FillSatisfactionSurveyViewModel fillSatisfactionSurveyViewModel;
-        public FillSatisfactionSurveyPage(FillSatisfactionSurveyViewModel fillSatisfactionSurveyViewModel)
-        {
-            InitializeComponent();
-            SkSuccessLottieView = successLottieAnimation;
-            SkFailLottieView = failLottieAnimation;
-            BindingContext = this.fillSatisfactionSurveyViewModel = fillSatisfactionSurveyViewModel;
+        InitializeComponent();
+        SkSuccessLottieView = successLottieAnimation;
+        SkFailLottieView = failLottieAnimation;
+        BindingContext = this.fillSatisfactionSurveyViewModel = fillSatisfactionSurveyViewModel;
 
-        }
+    }
 
-        public async Task InitAsync(SatisfactionSurvey satisfactionSurvey, Action onSuccess)
-        {
-            await fillSatisfactionSurveyViewModel.InitAsync(satisfactionSurvey, this, filledProgressBar, onSuccess);
-        }
+    public async Task InitAsync(SatisfactionSurvey satisfactionSurvey, Action onSuccess)
+    {
+        await fillSatisfactionSurveyViewModel.InitAsync(satisfactionSurvey, this, filledProgressBar, onSuccess);
     }
 }

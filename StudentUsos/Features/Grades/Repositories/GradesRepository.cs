@@ -1,61 +1,60 @@
 ﻿using StudentUsos.Features.Grades.Helpers;
 using StudentUsos.Features.Grades.Models;
 
-namespace StudentUsos.Features.Grades.Repositories
+namespace StudentUsos.Features.Grades.Repositories;
+
+public class GradesRepository : IGradesRepository
 {
-    public class GradesRepository : IGradesRepository
+    ILocalDatabaseManager localDatabaseManager;
+    ILogger? logger;
+    public GradesRepository(ILocalDatabaseManager localDatabaseManager, ILogger? logger = null)
     {
-        ILocalDatabaseManager localDatabaseManager;
-        ILogger? logger;
-        public GradesRepository(ILocalDatabaseManager localDatabaseManager, ILogger? logger = null)
-        {
-            this.localDatabaseManager = localDatabaseManager;
-            this.logger = logger;
-        }
+        this.localDatabaseManager = localDatabaseManager;
+        this.logger = logger;
+    }
 
-        public FinalGrade? GetLatestGrade()
+    public FinalGrade? GetLatestGrade()
+    {
+        try
         {
-            try
+            var res = localDatabaseManager.Get<FinalGrade>(x => x.IsLatest);
+            if (res == null || res.IsEmpty)
             {
-                var res = localDatabaseManager.Get<FinalGrade>(x => x.IsLatest);
-                if (res == null || res.IsEmpty)
-                {
-                    var allGrades = localDatabaseManager.GetAll<FinalGrade>();
-                    res = GradesHelper.FindLatest(allGrades);
-                }
-                if (res == null || res.IsEmpty) return null;
-                return res;
+                var allGrades = localDatabaseManager.GetAll<FinalGrade>();
+                res = GradesHelper.FindLatest(allGrades);
             }
-            catch (Exception ex)
-            {
-                logger?.LogCatchedException(ex);
-                return new FinalGrade();
-            }
+            if (res == null || res.IsEmpty) return null;
+            return res;
         }
-
-        public List<FinalGrade> GetAll()
+        catch (Exception ex)
         {
-            return localDatabaseManager.GetAll<FinalGrade>();
+            logger?.LogCatchedException(ex);
+            return new FinalGrade();
         }
+    }
 
-        public FinalGrade? Get(string courseUnitId)
-        {
-            return localDatabaseManager.Get<FinalGrade>(x => x.CourseUnitId == courseUnitId);
-        }
+    public List<FinalGrade> GetAll()
+    {
+        return localDatabaseManager.GetAll<FinalGrade>();
+    }
 
-        public void InsertOrReplace(FinalGrade finalGrade)
-        {
-            localDatabaseManager.InsertOrReplace(finalGrade);
-        }
+    public FinalGrade? Get(string courseUnitId)
+    {
+        return localDatabaseManager.Get<FinalGrade>(x => x.CourseUnitId == courseUnitId);
+    }
 
-        public void DeleteAll()
-        {
-            localDatabaseManager.ClearTable<FinalGrade>();
-        }
+    public void InsertOrReplace(FinalGrade finalGrade)
+    {
+        localDatabaseManager.InsertOrReplace(finalGrade);
+    }
 
-        public void InsertAll(IEnumerable<FinalGrade> finalGrades)
-        {
-            localDatabaseManager.InsertAll(finalGrades);
-        }
+    public void DeleteAll()
+    {
+        localDatabaseManager.ClearTable<FinalGrade>();
+    }
+
+    public void InsertAll(IEnumerable<FinalGrade> finalGrades)
+    {
+        localDatabaseManager.InsertAll(finalGrades);
     }
 }

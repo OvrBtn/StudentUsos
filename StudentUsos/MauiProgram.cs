@@ -19,77 +19,77 @@ using Android.Text;
 using StudentUsos.Platforms.Android;
 #endif
 
-namespace StudentUsos
+namespace StudentUsos;
+
+public static class MauiProgram
 {
-    public static class MauiProgram
+    public static MauiApp CreateMauiApp()
     {
-        public static MauiApp CreateMauiApp()
-        {
-            Secrets.Initialize();
+        Secrets.Initialize();
 
-            AllowMultiLineTruncation();
+        AllowMultiLineTruncation();
 
-            var builder = MauiApp.CreateBuilder();
+        var builder = MauiApp.CreateBuilder();
 
 #if ANDROID
-            builder.Services.AddSingleton<INotificationBuilder, CustomNotificationBuilder>();
+        builder.Services.AddSingleton<INotificationBuilder, CustomNotificationBuilder>();
 #endif
 
-            builder
-                .UseMauiApp<App>()
-                .UseMauiCommunityToolkit()
-                .UseSkiaSharp()
-                .UseCustomCalendar()
-                .UseCustomSchedule()
-                .UseLocalNotification()
-                .UseDevExpress()
-                .UseFirebasePushNotifications()
-                .RegisterViews()
-                .RegisterViewModels()
-                .RegisterServices()
-                .ConfigureFonts(fonts =>
-                {
-                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                });
+        builder
+            .UseMauiApp<App>()
+            .UseMauiCommunityToolkit()
+            .UseSkiaSharp()
+            .UseCustomCalendar()
+            .UseCustomSchedule()
+            .UseLocalNotification()
+            .UseDevExpress()
+            .UseFirebasePushNotifications()
+            .RegisterViews()
+            .RegisterViewModels()
+            .RegisterServices()
+            .ConfigureFonts(fonts =>
+            {
+                fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+            });
 
 
 #if DEBUG
-            builder.Logging.AddDebug();
+        builder.Logging.AddDebug();
 #endif
 
-            //first use of SkiaSharp is taking significant amount of time of main thread, forcing first execution on another thread seems to make it better
-            DashboardViewModel.FinishedSynchronousLoading += InitializeSkiaSharp;
+        //first use of SkiaSharp is taking significant amount of time of main thread, forcing first execution on another thread seems to make it better
+        DashboardViewModel.FinishedSynchronousLoading += InitializeSkiaSharp;
 
 #if ANDROID
-            builder.Services.AddSingleton<INotificationBuilder, CustomNotificationBuilder>();
+        builder.Services.AddSingleton<INotificationBuilder, CustomNotificationBuilder>();
 #endif
 
-            builder.Services.AddSingleton<FirebasePushNotificationsService>();
+        builder.Services.AddSingleton<FirebasePushNotificationsService>();
 
-            return builder.Build();
-        }
+        return builder.Build();
+    }
 
-        static void InitializeSkiaSharp()
+    static void InitializeSkiaSharp()
+    {
+        Task.Run(() =>
         {
-            Task.Run(() =>
-            {
-                SKCanvas skCanvas = new(new SKBitmap());
-                skCanvas.Dispose();
-            });
-        }
+            SKCanvas skCanvas = new(new SKBitmap());
+            skCanvas.Dispose();
+        });
+    }
 
-        //workaround for Label's properties MaxLines and LineBreakMode not working together, from https://github.com/dotnet/maui/discussions/5492
-        static void AllowMultiLineTruncation()
+    //workaround for Label's properties MaxLines and LineBreakMode not working together, from https://github.com/dotnet/maui/discussions/5492
+    static void AllowMultiLineTruncation()
+    {
+        static void UpdateMaxLines(ILabelHandler handler, ILabel label)
         {
-            static void UpdateMaxLines(ILabelHandler handler, ILabel label)
-            {
 #if ANDROID
-                var textView = handler.PlatformView;
-                if (label is Label controlsLabel && textView.Ellipsize == TextUtils.TruncateAt.End && controlsLabel.MaxLines != -1)
-                {
-                    textView.SetMaxLines(controlsLabel.MaxLines);
-                }
+            var textView = handler.PlatformView;
+            if (label is Label controlsLabel && textView.Ellipsize == TextUtils.TruncateAt.End && controlsLabel.MaxLines != -1)
+            {
+                textView.SetMaxLines(controlsLabel.MaxLines);
+            }
 #elif IOS
                 var textView = handler.PlatformView;
                 if (label is Label controlsLabel && textView.LineBreakMode == UILineBreakMode.TailTruncation && controlsLabel.MaxLines != -1)
@@ -97,14 +97,13 @@ namespace StudentUsos
                     textView.Lines = controlsLabel.MaxLines;
                 }
 #endif
-            }
-            ;
-
-            LabelHandler.Mapper.AppendToMapping(
-               nameof(Label.LineBreakMode), UpdateMaxLines);
-
-            LabelHandler.Mapper.AppendToMapping(
-              nameof(Label.MaxLines), UpdateMaxLines);
         }
+        ;
+
+        LabelHandler.Mapper.AppendToMapping(
+            nameof(Label.LineBreakMode), UpdateMaxLines);
+
+        LabelHandler.Mapper.AppendToMapping(
+            nameof(Label.MaxLines), UpdateMaxLines);
     }
 }

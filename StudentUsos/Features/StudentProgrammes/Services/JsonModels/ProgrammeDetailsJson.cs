@@ -1,12 +1,11 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace StudentUsos.Features.StudentProgrammes.Services.JsonModels
+namespace StudentUsos.Features.StudentProgrammes.Services.JsonModels;
+
+public class ProgrammeDetailsJson
 {
-    public class ProgrammeDetailsJson
-    {
-        [JsonPropertyName("name"), JsonConverter(typeof(JsonObjectToStringConverter))]
-        public string NameJson { get; set; }
-        [JsonPropertyName("faculty")]
-        public Faculty Faculty { get; set; }
-    }
+    [JsonPropertyName("name"), JsonConverter(typeof(JsonObjectToStringConverter))]
+    public string NameJson { get; set; }
+    [JsonPropertyName("faculty")]
+    public Faculty Faculty { get; set; }
 }

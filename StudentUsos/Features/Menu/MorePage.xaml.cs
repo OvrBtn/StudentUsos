@@ -1,13 +1,12 @@
 ﻿using StudentUsos.Controls;
 
-namespace StudentUsos.Features.Menu
+namespace StudentUsos.Features.Menu;
+
+public partial class MorePage : CustomContentPageNotAnimated
 {
-    public partial class MorePage : CustomContentPageNotAnimated
+    public MorePage(MoreViewModel moreViewModel)
     {
-        public MorePage(MoreViewModel moreViewModel)
-        {
-            BindingContext = moreViewModel;
-            InitializeComponent();
-        }
+        BindingContext = moreViewModel;
+        InitializeComponent();
     }
 }

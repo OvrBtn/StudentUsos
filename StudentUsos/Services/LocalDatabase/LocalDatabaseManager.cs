@@ -9,152 +9,151 @@ using StudentUsos.Features.Person.Models;
 using StudentUsos.Features.StudentProgrammes.Models;
 using StudentUsos.Features.UserInfo;
 
-namespace StudentUsos.Services.LocalDatabase
+namespace StudentUsos.Services.LocalDatabase;
+
+public class LocalDatabaseManager : ILocalDatabaseManager
 {
-    public class LocalDatabaseManager : ILocalDatabaseManager
+    public static ILocalDatabaseManager Default { get; private set; }
+    SQLiteConnection dbConnection;
+
+    public LocalDatabaseManager(LocalDatabaseOptions option = LocalDatabaseOptions.DefaultLocalFile)
     {
-        public static ILocalDatabaseManager Default { get; private set; }
-        SQLiteConnection dbConnection;
+        Default = this;
 
-        public LocalDatabaseManager(LocalDatabaseOptions option = LocalDatabaseOptions.DefaultLocalFile)
+        if (option == LocalDatabaseOptions.InMemory)
         {
-            Default = this;
-
-            if (option == LocalDatabaseOptions.InMemory)
-            {
-                dbConnection = new(":memory:");
-            }
-            else
-            {
-                dbConnection = new(Path.Combine(FileSystem.AppDataDirectory, "MainDB.db3"),
-                    SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.FullMutex);
-                dbConnection.EnableWriteAheadLogging();
-            }
-
-            try
-            {
-                GenerateTables();
-            }
-            catch
-            {
-                BackwardCompatibility.ResetLocalData();
-                LocalStorageManager.Default.SetData(LocalStorageKeys.IsAppRunningForTheFirstTime, true.ToString());
-            }
+            dbConnection = new(":memory:");
+        }
+        else
+        {
+            dbConnection = new(Path.Combine(FileSystem.AppDataDirectory, "MainDB.db3"),
+                SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.FullMutex);
+            dbConnection.EnableWriteAheadLogging();
         }
 
-        public void ResetTables()
+        try
         {
-            DeleteTables();
             GenerateTables();
         }
-
-        public void GenerateTables()
+        catch
         {
-            dbConnection.CreateTable<Lecturer>();
-            dbConnection.CreateTable<Activity>();
-            dbConnection.CreateTable<Term>();
-            dbConnection.CreateTable<Group>();
-            dbConnection.CreateTable<GoogleCalendarEvent>();
-            dbConnection.CreateTable<UsosCalendarEvent>();
-            dbConnection.CreateTable<GoogleCalendar>();
-            dbConnection.CreateTable<FinalGrade>();
-            dbConnection.CreateTable<StudentProgramme>();
-            dbConnection.CreateTable<TimetableDay>();
-            dbConnection.CreateTable<Payment>();
-            dbConnection.CreateTable<UserInfo>();
-            dbConnection.CreateTable<LogRecord>();
-        }
-
-        public void DeleteTables()
-        {
+            BackwardCompatibility.ResetLocalData();
             LocalStorageManager.Default.SetData(LocalStorageKeys.IsAppRunningForTheFirstTime, true.ToString());
-            dbConnection.DropTable<Lecturer>();
-            dbConnection.DropTable<Activity>();
-            dbConnection.DropTable<Term>();
-            dbConnection.DropTable<Group>();
-            dbConnection.DropTable<GoogleCalendarEvent>();
-            dbConnection.DropTable<UsosCalendarEvent>();
-            dbConnection.DropTable<GoogleCalendar>();
-            dbConnection.DropTable<FinalGrade>();
-            dbConnection.DropTable<StudentProgramme>();
-            dbConnection.DropTable<TimetableDay>();
-            dbConnection.DropTable<Payment>();
-            dbConnection.DropTable<UserInfo>();
-            dbConnection.DropTable<LogRecord>();
         }
+    }
 
-        public int ClearTable<T>()
-        {
-            return dbConnection.Execute("DELETE FROM " + typeof(T).Name);
-        }
+    public void ResetTables()
+    {
+        DeleteTables();
+        GenerateTables();
+    }
 
-        public int ExecuteQuery(string query)
-        {
-            return dbConnection.Execute(query);
-        }
+    public void GenerateTables()
+    {
+        dbConnection.CreateTable<Lecturer>();
+        dbConnection.CreateTable<Activity>();
+        dbConnection.CreateTable<Term>();
+        dbConnection.CreateTable<Group>();
+        dbConnection.CreateTable<GoogleCalendarEvent>();
+        dbConnection.CreateTable<UsosCalendarEvent>();
+        dbConnection.CreateTable<GoogleCalendar>();
+        dbConnection.CreateTable<FinalGrade>();
+        dbConnection.CreateTable<StudentProgramme>();
+        dbConnection.CreateTable<TimetableDay>();
+        dbConnection.CreateTable<Payment>();
+        dbConnection.CreateTable<UserInfo>();
+        dbConnection.CreateTable<LogRecord>();
+    }
 
-        public T? Get<T>(Func<T, bool> predicate) where T : new()
-        {
-            var result = dbConnection.Table<T>().FirstOrDefault(predicate);
-            return result;
-        }
+    public void DeleteTables()
+    {
+        LocalStorageManager.Default.SetData(LocalStorageKeys.IsAppRunningForTheFirstTime, true.ToString());
+        dbConnection.DropTable<Lecturer>();
+        dbConnection.DropTable<Activity>();
+        dbConnection.DropTable<Term>();
+        dbConnection.DropTable<Group>();
+        dbConnection.DropTable<GoogleCalendarEvent>();
+        dbConnection.DropTable<UsosCalendarEvent>();
+        dbConnection.DropTable<GoogleCalendar>();
+        dbConnection.DropTable<FinalGrade>();
+        dbConnection.DropTable<StudentProgramme>();
+        dbConnection.DropTable<TimetableDay>();
+        dbConnection.DropTable<Payment>();
+        dbConnection.DropTable<UserInfo>();
+        dbConnection.DropTable<LogRecord>();
+    }
 
-        public List<T> GetAll<T>(Func<T, bool> predicate) where T : new()
-        {
-            var result = dbConnection.Table<T>().Where(predicate).ToList();
-            return result;
-        }
+    public int ClearTable<T>()
+    {
+        return dbConnection.Execute("DELETE FROM " + typeof(T).Name);
+    }
 
-        public List<T> GetAll<T>() where T : new()
-        {
-            var result = dbConnection.Table<T>().ToList();
-            if (result == null) return new List<T>();
-            return result;
-        }
+    public int ExecuteQuery(string query)
+    {
+        return dbConnection.Execute(query);
+    }
 
-        public void InsertOrReplace<T>(T obj)
-        {
-            dbConnection.InsertOrReplace(obj);
-        }
+    public T? Get<T>(Func<T, bool> predicate) where T : new()
+    {
+        var result = dbConnection.Table<T>().FirstOrDefault(predicate);
+        return result;
+    }
 
-        public void InsertOrReplaceAll<T>(IEnumerable<T> list) where T : new()
-        {
-            foreach (var item in list)
-            {
-                dbConnection.InsertOrReplace(item);
-            }
-        }
+    public List<T> GetAll<T>(Func<T, bool> predicate) where T : new()
+    {
+        var result = dbConnection.Table<T>().Where(predicate).ToList();
+        return result;
+    }
 
-        public void Insert<T>(T obj) where T : new()
-        {
-            dbConnection.Insert(obj);
-        }
+    public List<T> GetAll<T>() where T : new()
+    {
+        var result = dbConnection.Table<T>().ToList();
+        if (result == null) return new List<T>();
+        return result;
+    }
 
-        public void InsertAll<T>(IEnumerable<T> list) where T : new()
-        {
-            dbConnection.InsertAll(list);
-        }
+    public void InsertOrReplace<T>(T obj)
+    {
+        dbConnection.InsertOrReplace(obj);
+    }
 
-        public int Remove<T>(string whereBody)
+    public void InsertOrReplaceAll<T>(IEnumerable<T> list) where T : new()
+    {
+        foreach (var item in list)
         {
-            string query = "DELETE FROM " + typeof(T).Name + " WHERE " + whereBody;
-            return dbConnection.Execute(query);
+            dbConnection.InsertOrReplace(item);
         }
+    }
 
-        public int Remove<T>(T obj) where T : class
-        {
-            if (obj is string)
-            {
-                throw new ArgumentException("Object to delete can't be a string");
-            }
-            return dbConnection.Delete(obj);
-        }
+    public void Insert<T>(T obj) where T : new()
+    {
+        dbConnection.Insert(obj);
+    }
 
-        public bool IsTableEmpty<T>() where T : new()
+    public void InsertAll<T>(IEnumerable<T> list) where T : new()
+    {
+        dbConnection.InsertAll(list);
+    }
+
+    public int Remove<T>(string whereBody)
+    {
+        string query = "DELETE FROM " + typeof(T).Name + " WHERE " + whereBody;
+        return dbConnection.Execute(query);
+    }
+
+    public int Remove<T>(T obj) where T : class
+    {
+        if (obj is string)
         {
-            var result = dbConnection.Query<T>("SELECT * FROM " + typeof(T).Name + " LIMIT 1");
-            if (result == null || result.Count == 0) return true;
-            return false;
+            throw new ArgumentException("Object to delete can't be a string");
         }
+        return dbConnection.Delete(obj);
+    }
+
+    public bool IsTableEmpty<T>() where T : new()
+    {
+        var result = dbConnection.Query<T>("SELECT * FROM " + typeof(T).Name + " LIMIT 1");
+        if (result == null || result.Count == 0) return true;
+        return false;
     }
 }

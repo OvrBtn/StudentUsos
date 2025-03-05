@@ -1,8 +1,7 @@
-﻿namespace StudentUsos.Services.LocalDatabase
+﻿namespace StudentUsos.Services.LocalDatabase;
+
+public enum LocalDatabaseOptions
 {
-    public enum LocalDatabaseOptions
-    {
-        DefaultLocalFile,
-        InMemory
-    }
+    DefaultLocalFile,
+    InMemory
 }

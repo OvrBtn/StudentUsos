@@ -44,6 +44,16 @@ internal static class AuthorizationService
 #endif
 
         serverConnectionManager = App.ServiceProvider?.GetService<IServerConnectionManager>()!;
+
+        var firebasePushNotificationsService = App.ServiceProvider?.GetService<FirebasePushNotificationsService>();
+        if (firebasePushNotificationsService is not null)
+        {
+            OnLoginSucceeded += async () =>
+            {
+                string token = await firebasePushNotificationsService.GetFcmTokenAsync();
+                _ = firebasePushNotificationsService.SendFcmTokenToServerAsync(token);
+            };
+        }
     }
 
     public static event Action OnLoginSucceeded;

@@ -1,13 +1,12 @@
 ﻿using StudentUsos.Controls;
 
-namespace StudentUsos.Features.Authorization
+namespace StudentUsos.Features.Authorization;
+
+public partial class LoginPage : CustomContentPageNotAnimated
 {
-    public partial class LoginPage : CustomContentPageNotAnimated
+    public LoginPage()
     {
-        public LoginPage()
-        {
-            BindingContext = new LoginViewModel();
-            InitializeComponent();
-        }
+        BindingContext = new LoginViewModel();
+        InitializeComponent();
     }
 }

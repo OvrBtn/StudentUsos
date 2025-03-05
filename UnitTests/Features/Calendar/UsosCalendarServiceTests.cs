@@ -5,146 +5,145 @@ using StudentUsos.Features.Calendar.Services;
 using StudentUsos.Features.StudentProgrammes.Services;
 using StudentUsos.Services.ServerConnection;
 
-namespace UnitTests.Features.Calendar
+namespace UnitTests.Features.Calendar;
+
+[Category(Categories.Unit_SharedBusinessLogic)]
+public class UsosCalendarServiceTests
 {
-    [Category(Categories.Unit_SharedBusinessLogic)]
-    public class UsosCalendarServiceTests
+    Mock<IServerConnectionManager> serverConnectionMock;
+    Mock<IStudentProgrammeService> studentProgrammeServiceMock;
+    LocalStorageManagerMock localStorageManagerMock = new();
+    public UsosCalendarServiceTests()
     {
-        Mock<IServerConnectionManager> serverConnectionMock;
-        Mock<IStudentProgrammeService> studentProgrammeServiceMock;
-        LocalStorageManagerMock localStorageManagerMock = new();
-        public UsosCalendarServiceTests()
+        serverConnectionMock = CalendarTestHelper.GetServerConnectionManagetMockForFetchingUsosCalendarEvents();
+        studentProgrammeServiceMock = CalendarTestHelper.GetStudentProgrammeServiceMock();
+    }
+
+    [Fact]
+    public async Task TryFetchingAvailableEventsAsync_EmptyLocalDatabase_ReturnsEvents()
+    {
+        //Arrange
+        var usosCalendarRepoMock = new Mock<IUsosCalendarRepository>();
+
+        var usosCalendarService = new UsosCalendarService(usosCalendarRepoMock.Object,
+            serverConnectionMock.Object,
+            studentProgrammeServiceMock.Object,
+            localStorageManagerMock);
+
+        //Act
+        var result = await usosCalendarService.TryFetchingAvailableEventsAsync();
+
+        //Assert
+        Assert.Equal(CalendarSettings.MonthsToGetInTotal, result.Count);
+
+        int primaryUpdateCount = 0, secondaryUpdateCount = 0;
+        foreach (var item in result)
         {
-            serverConnectionMock = CalendarTestHelper.GetServerConnectionManagetMockForFetchingUsosCalendarEvents();
-            studentProgrammeServiceMock = CalendarTestHelper.GetStudentProgrammeServiceMock();
-        }
-
-        [Fact]
-        public async Task TryFetchingAvailableEventsAsync_EmptyLocalDatabase_ReturnsEvents()
-        {
-            //Arrange
-            var usosCalendarRepoMock = new Mock<IUsosCalendarRepository>();
-
-            var usosCalendarService = new UsosCalendarService(usosCalendarRepoMock.Object,
-                serverConnectionMock.Object,
-                studentProgrammeServiceMock.Object,
-                localStorageManagerMock);
-
-            //Act
-            var result = await usosCalendarService.TryFetchingAvailableEventsAsync();
-
-            //Assert
-            Assert.Equal(CalendarSettings.MonthsToGetInTotal, result.Count);
-
-            int primaryUpdateCount = 0, secondaryUpdateCount = 0;
-            foreach (var item in result)
+            if (item.isPrimaryUpdate)
             {
-                if (item.isPrimaryUpdate)
-                {
-                    primaryUpdateCount++;
-                }
-                else
-                {
-                    secondaryUpdateCount++;
-                }
+                primaryUpdateCount++;
             }
-            Assert.Equal(CalendarSettings.PrimaryUpdateMonths, primaryUpdateCount);
-            Assert.Equal(CalendarSettings.SecondaryUpdateMonths, secondaryUpdateCount);
-
-            DateTime date = new(DateTime.Now.Year, DateTime.Now.Month, 1);
-            Assert.All(result, x =>
+            else
             {
-                Assert.Equal(date, x.date);
-                Assert.Equal(date, x.events[0].Start);
-                date = date.AddMonths(1);
-            });
-        }
-
-        [Fact]
-        public async Task TryFetchingAvailableEventsAsync_WhenCanOnlyGetPrimaryEvents_ReturnsOnlyPrimaryEvents()
-        {
-            //Arrange
-            var usosCalendarRepoMock = new Mock<IUsosCalendarRepository>();
-
-            localStorageManagerMock.SetData(StudentUsos.Services.LocalStorage.LocalStorageKeys.LastSecondaryCalendarUpdate, DateTime.Now.ToString());
-
-            var usosCalendarService = new UsosCalendarService(usosCalendarRepoMock.Object,
-                serverConnectionMock.Object,
-                studentProgrammeServiceMock.Object,
-                localStorageManagerMock);
-
-            //Act
-            var result = await usosCalendarService.TryFetchingAvailableEventsAsync();
-
-            //Assert
-            Assert.Equal(CalendarSettings.PrimaryUpdateMonths, result.Count);
-
-            int primaryUpdatesCount = 0, secondaryCount = 0;
-            foreach (var item in result)
-            {
-                if (item.isPrimaryUpdate)
-                {
-                    primaryUpdatesCount++;
-                }
-                else
-                {
-                    secondaryCount++;
-                }
+                secondaryUpdateCount++;
             }
-            Assert.Equal(CalendarSettings.PrimaryUpdateMonths, primaryUpdatesCount);
-            Assert.Equal(0, secondaryCount);
-
-            DateTime date = new(DateTime.Now.Year, DateTime.Now.Month, 1);
-            Assert.All(result, x =>
-            {
-                Assert.Equal(date, x.date);
-                Assert.Equal(date, x.events[0].Start);
-                date = date.AddMonths(1);
-            });
         }
+        Assert.Equal(CalendarSettings.PrimaryUpdateMonths, primaryUpdateCount);
+        Assert.Equal(CalendarSettings.SecondaryUpdateMonths, secondaryUpdateCount);
 
-        [Fact]
-        public async Task TryFetchingAvailableEventsAsync_WhenCanOnlyGetSecondaryEvents_ReturnsOnlySecondary()
+        DateTime date = new(DateTime.Now.Year, DateTime.Now.Month, 1);
+        Assert.All(result, x =>
         {
-            //Arrange
-            var usosCalendarRepoMock = new Mock<IUsosCalendarRepository>();
+            Assert.Equal(date, x.date);
+            Assert.Equal(date, x.events[0].Start);
+            date = date.AddMonths(1);
+        });
+    }
 
-            localStorageManagerMock.SetData(StudentUsos.Services.LocalStorage.LocalStorageKeys.LastPrimaryCalendarUpdate, DateTime.Now.ToString());
+    [Fact]
+    public async Task TryFetchingAvailableEventsAsync_WhenCanOnlyGetPrimaryEvents_ReturnsOnlyPrimaryEvents()
+    {
+        //Arrange
+        var usosCalendarRepoMock = new Mock<IUsosCalendarRepository>();
 
-            var usosCalendarService = new UsosCalendarService(usosCalendarRepoMock.Object,
-                serverConnectionMock.Object,
-                studentProgrammeServiceMock.Object,
-                localStorageManagerMock);
+        localStorageManagerMock.SetData(StudentUsos.Services.LocalStorage.LocalStorageKeys.LastSecondaryCalendarUpdate, DateTime.Now.ToString());
 
-            //Act
-            var result = await usosCalendarService.TryFetchingAvailableEventsAsync();
+        var usosCalendarService = new UsosCalendarService(usosCalendarRepoMock.Object,
+            serverConnectionMock.Object,
+            studentProgrammeServiceMock.Object,
+            localStorageManagerMock);
 
-            //Assert
-            Assert.Equal(CalendarSettings.SecondaryUpdateMonths, result.Count);
+        //Act
+        var result = await usosCalendarService.TryFetchingAvailableEventsAsync();
 
-            int primaryUpdatesCount = 0, secondaryCount = 0;
-            foreach (var item in result)
+        //Assert
+        Assert.Equal(CalendarSettings.PrimaryUpdateMonths, result.Count);
+
+        int primaryUpdatesCount = 0, secondaryCount = 0;
+        foreach (var item in result)
+        {
+            if (item.isPrimaryUpdate)
             {
-                if (item.isPrimaryUpdate)
-                {
-                    primaryUpdatesCount++;
-                }
-                else
-                {
-                    secondaryCount++;
-                }
+                primaryUpdatesCount++;
             }
-            Assert.Equal(0, primaryUpdatesCount);
-            Assert.Equal(CalendarSettings.SecondaryUpdateMonths, secondaryCount);
-
-            DateTime date = new(DateTime.Now.Year, DateTime.Now.Month, 1);
-            date = date.AddMonths(CalendarSettings.PrimaryUpdateMonths);
-            Assert.All(result, x =>
+            else
             {
-                Assert.Equal(date, x.date);
-                Assert.Equal(date, x.events[0].Start);
-                date = date.AddMonths(1);
-            });
+                secondaryCount++;
+            }
         }
+        Assert.Equal(CalendarSettings.PrimaryUpdateMonths, primaryUpdatesCount);
+        Assert.Equal(0, secondaryCount);
+
+        DateTime date = new(DateTime.Now.Year, DateTime.Now.Month, 1);
+        Assert.All(result, x =>
+        {
+            Assert.Equal(date, x.date);
+            Assert.Equal(date, x.events[0].Start);
+            date = date.AddMonths(1);
+        });
+    }
+
+    [Fact]
+    public async Task TryFetchingAvailableEventsAsync_WhenCanOnlyGetSecondaryEvents_ReturnsOnlySecondary()
+    {
+        //Arrange
+        var usosCalendarRepoMock = new Mock<IUsosCalendarRepository>();
+
+        localStorageManagerMock.SetData(StudentUsos.Services.LocalStorage.LocalStorageKeys.LastPrimaryCalendarUpdate, DateTime.Now.ToString());
+
+        var usosCalendarService = new UsosCalendarService(usosCalendarRepoMock.Object,
+            serverConnectionMock.Object,
+            studentProgrammeServiceMock.Object,
+            localStorageManagerMock);
+
+        //Act
+        var result = await usosCalendarService.TryFetchingAvailableEventsAsync();
+
+        //Assert
+        Assert.Equal(CalendarSettings.SecondaryUpdateMonths, result.Count);
+
+        int primaryUpdatesCount = 0, secondaryCount = 0;
+        foreach (var item in result)
+        {
+            if (item.isPrimaryUpdate)
+            {
+                primaryUpdatesCount++;
+            }
+            else
+            {
+                secondaryCount++;
+            }
+        }
+        Assert.Equal(0, primaryUpdatesCount);
+        Assert.Equal(CalendarSettings.SecondaryUpdateMonths, secondaryCount);
+
+        DateTime date = new(DateTime.Now.Year, DateTime.Now.Month, 1);
+        date = date.AddMonths(CalendarSettings.PrimaryUpdateMonths);
+        Assert.All(result, x =>
+        {
+            Assert.Equal(date, x.date);
+            Assert.Equal(date, x.events[0].Start);
+            date = date.AddMonths(1);
+        });
     }
 }

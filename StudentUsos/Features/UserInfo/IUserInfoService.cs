@@ -1,7 +1,6 @@
-﻿namespace StudentUsos.Features.UserInfo
+﻿namespace StudentUsos.Features.UserInfo;
+
+public interface IUserInfoService
 {
-    public interface IUserInfoService
-    {
-        public Task<UserInfo?> GetUserInfoAsync();
-    }
+    public Task<UserInfo?> GetUserInfoAsync();
 }

@@ -6,125 +6,124 @@ using StudentUsos.Features.AcademicTerms.Services;
 using StudentUsos.Services.ServerConnection;
 using System.Text.Json;
 
-namespace UnitTests.Features.AcademicTerms
+namespace UnitTests.Features.AcademicTerms;
+
+[Category(Categories.Unit_SharedBusinessLogic)]
+public class TermsServiceTests
 {
-    [Category(Categories.Unit_SharedBusinessLogic)]
-    public class TermsServiceTests
+    [Fact]
+    public async Task GetTermsAsync_WhenValidResponse_ReturnsTerms()
     {
-        [Fact]
-        public async Task GetTermsAsync_WhenValidResponse_ReturnsTerms()
+        //Arrange
+        var json = MockDataHelper.LoadFile("TermsSearch.json", "AcademicTerms");
+        var jsonDeserialized = JsonSerializer.Deserialize<List<Term>>(json);
+        var jsonDeserializedFiltered = jsonDeserialized!.Where(x => x.Id.ToLower().Contains("l") || x.Id.ToLower().Contains("z"));
+
+        var serverConnectionMock = new Mock<IServerConnectionManager>();
+        ServerConnectionManagerTestHelper.SetupGenericSendRequestToUsos(serverConnectionMock, json);
+
+        var termsService = new TermsService(serverConnectionMock.Object, null);
+
+        //Act
+
+        //filtering terms based on start and end date happens on usos api side
+        var terms = await termsService.GetTermsAsync(DateTime.MinValue, DateTime.MaxValue);
+
+        //Assert
+        Assert.NotNull(terms);
+        Assert.All(terms, term =>
         {
-            //Arrange
-            var json = MockDataHelper.LoadFile("TermsSearch.json", "AcademicTerms");
-            var jsonDeserialized = JsonSerializer.Deserialize<List<Term>>(json);
-            var jsonDeserializedFiltered = jsonDeserialized!.Where(x => x.Id.ToLower().Contains("l") || x.Id.ToLower().Contains("z"));
+            Assert.True(term.Id.ToLower().Contains("l") || term.Id.ToLower().Contains("z"));
+        });
+        Assert.Equal(jsonDeserializedFiltered.Count(), terms.Count);
 
-            var serverConnectionMock = new Mock<IServerConnectionManager>();
-            ServerConnectionManagerTestHelper.SetupGenericSendRequestToUsos(serverConnectionMock, json);
+    }
 
-            var termsService = new TermsService(serverConnectionMock.Object, null);
+    [Fact]
+    public async Task GetTermsAsync_WhenInvalidResponse_ReturnsNull()
+    {
+        //Arrange
+        var serverConnectionMock = new Mock<IServerConnectionManager>();
+        ServerConnectionManagerTestHelper.SetupGenericSendRequestToUsos(serverConnectionMock, null);
 
-            //Act
+        var termsService = new TermsService(serverConnectionMock.Object, null);
 
-            //filtering terms based on start and end date happens on usos api side
-            var terms = await termsService.GetTermsAsync(DateTime.MinValue, DateTime.MaxValue);
+        //Act
+        var terms = await termsService.GetTermsAsync(DateTime.MinValue, DateTime.MaxValue);
 
-            //Assert
-            Assert.NotNull(terms);
-            Assert.All(terms, term =>
-            {
-                Assert.True(term.Id.ToLower().Contains("l") || term.Id.ToLower().Contains("z"));
-            });
-            Assert.Equal(jsonDeserializedFiltered.Count(), terms.Count);
+        //Assert
+        Assert.Null(terms);
+    }
 
-        }
-
-        [Fact]
-        public async Task GetTermsAsync_WhenInvalidResponse_ReturnsNull()
+    [Fact]
+    public async Task GetCurrentTermAsync_WhenValidResponse_ReturnsTerm()
+    {
+        //Arrange
+        var currentTerm = new Term
         {
-            //Arrange
-            var serverConnectionMock = new Mock<IServerConnectionManager>();
-            ServerConnectionManagerTestHelper.SetupGenericSendRequestToUsos(serverConnectionMock, null);
-
-            var termsService = new TermsService(serverConnectionMock.Object, null);
-
-            //Act
-            var terms = await termsService.GetTermsAsync(DateTime.MinValue, DateTime.MaxValue);
-
-            //Assert
-            Assert.Null(terms);
-        }
-
-        [Fact]
-        public async Task GetCurrentTermAsync_WhenValidResponse_ReturnsTerm()
+            Id = "2023Z",
+            StartDate = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd"),
+            FinishDate = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd"),
+        };
+        List<Term> terms = new()
         {
-            //Arrange
-            var currentTerm = new Term
+            currentTerm,
+            new Term
             {
-                Id = "2023Z",
-                StartDate = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd"),
-                FinishDate = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd"),
-            };
-            List<Term> terms = new()
+                Id = "2023L",
+                StartDate = DateTime.Now.AddMonths(-12).ToString("yyyy-MM-dd"),
+                FinishDate = DateTime.Now.AddMonths(-6).ToString("yyyy-MM-dd"),
+            },
+            new Term
             {
-                currentTerm,
-                new Term
-                {
-                    Id = "2023L",
-                    StartDate = DateTime.Now.AddMonths(-12).ToString("yyyy-MM-dd"),
-                    FinishDate = DateTime.Now.AddMonths(-6).ToString("yyyy-MM-dd"),
-                },
-                new Term
-                {
-                    Id = "2024Z",
-                    StartDate = DateTime.Now.AddMonths(6).ToString("yyyy-MM-dd"),
-                    FinishDate = DateTime.Now.AddMonths(12).ToString("yyyy-MM-dd"),
-                }
-            };
-            var serverConnectionMock = new Mock<IServerConnectionManager>();
-            ServerConnectionManagerTestHelper.SetupGenericSendRequestToUsos(serverConnectionMock, JsonSerializer.Serialize(terms));
-            var termsRepositoryMock = new Mock<ITermsRepository>();
+                Id = "2024Z",
+                StartDate = DateTime.Now.AddMonths(6).ToString("yyyy-MM-dd"),
+                FinishDate = DateTime.Now.AddMonths(12).ToString("yyyy-MM-dd"),
+            }
+        };
+        var serverConnectionMock = new Mock<IServerConnectionManager>();
+        ServerConnectionManagerTestHelper.SetupGenericSendRequestToUsos(serverConnectionMock, JsonSerializer.Serialize(terms));
+        var termsRepositoryMock = new Mock<ITermsRepository>();
 
-            var termsService = new TermsService(serverConnectionMock.Object, termsRepositoryMock.Object);
+        var termsService = new TermsService(serverConnectionMock.Object, termsRepositoryMock.Object);
 
-            //Act
-            var term = await termsService.GetCurrentTermAsync();
+        //Act
+        var term = await termsService.GetCurrentTermAsync();
 
-            //Assert
-            Assert.NotNull(term);
-            Assert.Equal(JsonSerializer.Serialize(currentTerm), JsonSerializer.Serialize(term));
-        }
+        //Assert
+        Assert.NotNull(term);
+        Assert.Equal(JsonSerializer.Serialize(currentTerm), JsonSerializer.Serialize(term));
+    }
 
-        [Fact]
-        public async Task GetCurrentTermAsync_WhenInvalidResponse_ReturnsNull()
+    [Fact]
+    public async Task GetCurrentTermAsync_WhenInvalidResponse_ReturnsNull()
+    {
+        //Arrange
+        List<Term> terms = new()
         {
-            //Arrange
-            List<Term> terms = new()
+            new Term
             {
-                new Term
-                {
-                    Id = "2023L",
-                    StartDate = DateTime.Now.AddMonths(-12).ToString("yyyy-MM-dd"),
-                    FinishDate = DateTime.Now.AddMonths(-6).ToString("yyyy-MM-dd"),
-                },
-                new Term
-                {
-                    Id = "2024Z",
-                    StartDate = DateTime.Now.AddMonths(6).ToString("yyyy-MM-dd"),
-                    FinishDate = DateTime.Now.AddMonths(12).ToString("yyyy-MM-dd"),
-                }
-            };
-            var serverConnectionMock = new Mock<IServerConnectionManager>();
-            ServerConnectionManagerTestHelper.SetupGenericSendRequestToUsos(serverConnectionMock, JsonSerializer.Serialize(terms));
-            var termsRepositoryMock = new Mock<ITermsRepository>();
+                Id = "2023L",
+                StartDate = DateTime.Now.AddMonths(-12).ToString("yyyy-MM-dd"),
+                FinishDate = DateTime.Now.AddMonths(-6).ToString("yyyy-MM-dd"),
+            },
+            new Term
+            {
+                Id = "2024Z",
+                StartDate = DateTime.Now.AddMonths(6).ToString("yyyy-MM-dd"),
+                FinishDate = DateTime.Now.AddMonths(12).ToString("yyyy-MM-dd"),
+            }
+        };
+        var serverConnectionMock = new Mock<IServerConnectionManager>();
+        ServerConnectionManagerTestHelper.SetupGenericSendRequestToUsos(serverConnectionMock, JsonSerializer.Serialize(terms));
+        var termsRepositoryMock = new Mock<ITermsRepository>();
 
-            var termsService = new TermsService(serverConnectionMock.Object, termsRepositoryMock.Object);
+        var termsService = new TermsService(serverConnectionMock.Object, termsRepositoryMock.Object);
 
-            //Act
-            var term = await termsService.GetCurrentTermAsync();
+        //Act
+        var term = await termsService.GetCurrentTermAsync();
 
-            //Assert
-            Assert.Null(term);
-        }
+        //Assert
+        Assert.Null(term);
     }
 }

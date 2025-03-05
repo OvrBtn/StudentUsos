@@ -1,28 +1,27 @@
 ﻿using StudentUsos.Features.StudentProgrammes.Models;
 
-namespace StudentUsos.Features.StudentProgrammes.Repositories
+namespace StudentUsos.Features.StudentProgrammes.Repositories;
+
+public class StudentProgrammeRepository : IStudentProgrammeRepository
 {
-    public class StudentProgrammeRepository : IStudentProgrammeRepository
+    ILocalDatabaseManager localDatabaseManager;
+    public StudentProgrammeRepository(ILocalDatabaseManager localDatabaseManager)
     {
-        ILocalDatabaseManager localDatabaseManager;
-        public StudentProgrammeRepository(ILocalDatabaseManager localDatabaseManager)
-        {
-            this.localDatabaseManager = localDatabaseManager;
-        }
+        this.localDatabaseManager = localDatabaseManager;
+    }
 
-        public List<StudentProgramme> GetAll()
-        {
-            return localDatabaseManager.GetAll<StudentProgramme>();
-        }
+    public List<StudentProgramme> GetAll()
+    {
+        return localDatabaseManager.GetAll<StudentProgramme>();
+    }
 
-        public void ClearAll()
-        {
-            localDatabaseManager.ClearTable<StudentProgramme>();
-        }
+    public void ClearAll()
+    {
+        localDatabaseManager.ClearTable<StudentProgramme>();
+    }
 
-        public void SaveAll(List<StudentProgramme> programmes)
-        {
-            localDatabaseManager.InsertAll(programmes);
-        }
+    public void SaveAll(List<StudentProgramme> programmes)
+    {
+        localDatabaseManager.InsertAll(programmes);
     }
 }

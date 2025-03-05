@@ -1,9 +1,8 @@
 ﻿using StudentUsos.Features.Payments.Models;
 
-namespace StudentUsos.Features.Payments.Services
+namespace StudentUsos.Features.Payments.Services;
+
+public interface IPaymentsService
 {
-    public interface IPaymentsService
-    {
-        public Task<List<Payment>?> GetPaymentsApiAsync();
-    }
+    public Task<List<Payment>?> GetPaymentsApiAsync();
 }

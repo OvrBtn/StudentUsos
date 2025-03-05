@@ -1,29 +1,27 @@
 ﻿using System.Globalization;
 
-namespace StudentUsos.Converters
-{
+namespace StudentUsos.Converters;
 
-    public class NegateBoolConverter : IValueConverter
+public class NegateBoolConverter : IValueConverter
+{
+    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+        try
         {
-            try
-            {
-                if (value is null)
-                {
-                    return false;
-                }
-                return !(bool)value;
-            }
-            catch
+            if (value is null)
             {
                 return false;
             }
+            return !(bool)value;
         }
-
-        public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+        catch
         {
-            throw new NotImplementedException();
+            return false;
         }
+    }
+
+    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
     }
 }

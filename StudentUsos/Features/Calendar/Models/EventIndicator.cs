@@ -1,8 +1,7 @@
-﻿namespace StudentUsos.Features.Calendar.Models
+﻿namespace StudentUsos.Features.Calendar.Models;
+
+public class EventIndicator
 {
-    public class EventIndicator
-    {
-        public string CalendarName { get; set; }
-        public Color Color { get; set; }
-    }
+    public string CalendarName { get; set; }
+    public Color Color { get; set; }
 }

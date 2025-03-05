@@ -2,30 +2,29 @@
 using System.Globalization;
 using System.Text.Json.Serialization;
 
-namespace StudentUsos.Services.Logger
+namespace StudentUsos.Services.Logger;
+
+[JsonSerializable(typeof(List<LogRecord>))]
+public partial class LogRecordJsonContext : JsonSerializerContext
+{ }
+
+public class LogRecord
 {
-    [JsonSerializable(typeof(List<LogRecord>))]
-    public partial class LogRecordJsonContext : JsonSerializerContext
-    { }
+    public string LogLevel { get; set; }
+    public string Message { get; set; }
+    public string ExceptionMessage { get; set; }
+    public string ExceptionSerialized { get; set; }
+    public string CallerName { get; set; }
+    public string CallerLineNumber { get; set; }
+    public string CreationDate { get; set; } = DateTimeOffset.UtcNow.DateTime.ToString(CultureInfo.InvariantCulture);
+    public long CreationDateUnix { get; set; } = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
 
-    public class LogRecord
+    [JsonIgnore]
+    public bool IsSynchronizedWithServer { get; set; }
+
+    [JsonIgnore, Ignore]
+    public string LogRecordString
     {
-        public string LogLevel { get; set; }
-        public string Message { get; set; }
-        public string ExceptionMessage { get; set; }
-        public string ExceptionSerialized { get; set; }
-        public string CallerName { get; set; }
-        public string CallerLineNumber { get; set; }
-        public string CreationDate { get; set; } = DateTimeOffset.UtcNow.DateTime.ToString(CultureInfo.InvariantCulture);
-        public long CreationDateUnix { get; set; } = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-
-        [JsonIgnore]
-        public bool IsSynchronizedWithServer { get; set; }
-
-        [JsonIgnore, Ignore]
-        public string LogRecordString
-        {
-            get => $"{LogLevel}|{CreationDate}|{CallerName}|{CallerLineNumber}|{Message}|{ExceptionMessage}";
-        }
+        get => $"{LogLevel}|{CreationDate}|{CallerName}|{CallerLineNumber}|{Message}|{ExceptionMessage}";
     }
 }

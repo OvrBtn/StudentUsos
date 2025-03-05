@@ -1,9 +1,8 @@
-﻿namespace StudentUsos.Features.SatisfactionSurveys.Services
+﻿namespace StudentUsos.Features.SatisfactionSurveys.Services;
+
+public enum SendResult
 {
-    public enum SendResult
-    {
-        Success,
-        RuntimeError,
-        ApiConnectionError
-    }
+    Success,
+    RuntimeError,
+    ApiConnectionError
 }

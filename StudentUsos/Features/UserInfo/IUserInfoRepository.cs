@@ -1,8 +1,7 @@
-﻿namespace StudentUsos.Features.UserInfo
+﻿namespace StudentUsos.Features.UserInfo;
+
+public interface IUserInfoRepository
 {
-    public interface IUserInfoRepository
-    {
-        public UserInfo? GetUserInfo();
-        public void SaveUserInfo(UserInfo userInfo);
-    }
+    public UserInfo? GetUserInfo();
+    public void SaveUserInfo(UserInfo userInfo);
 }

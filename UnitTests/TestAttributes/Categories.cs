@@ -1,8 +1,7 @@
-﻿namespace UnitTests.TestAttributes
+﻿namespace UnitTests.TestAttributes;
+
+public enum Categories
 {
-    public enum Categories
-    {
-        Unit_SharedBusinessLogic,
-        Unit_ServerDependent
-    }
+    Unit_SharedBusinessLogic,
+    Unit_ServerDependent
 }

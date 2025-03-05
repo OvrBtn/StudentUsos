@@ -7,12 +7,26 @@ namespace StudentUsos.Features.Dashboard.Views
         DashboardViewModel viewModel;
         public DashboardPage(DashboardViewModel dashboardViewModel)
         {
-            dashboardViewModel.PassPage(this);
             BindingContext = viewModel = dashboardViewModel;
             InitializeComponent();
 
             //Since user's name is just 1 label it should be fine to load it immediately
             viewModel.LoadUserName();
+
+            viewModel.DashboardActivitiesViewModel.OnCurrentActivityChanged += DashboardActivitiesViewModel_OnCurrentActivityChanged;
+        }
+
+        bool scrolled = false;
+        private void DashboardActivitiesViewModel_OnCurrentActivityChanged(Activity obj)
+        {
+            if (scrolled)
+            {
+                return;
+            }
+            if (TryScrollingToItem(obj))
+            {
+                scrolled = true;
+            }
         }
 
         bool isViewModelInitialized = false;

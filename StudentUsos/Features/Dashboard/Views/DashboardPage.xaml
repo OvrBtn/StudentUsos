@@ -117,31 +117,37 @@
                             </StackLayout>
 
                             <StackLayout toolkit:StateView.StateKey="Loaded">
-                                <StackLayout toolkit:StateContainer.CurrentState="{Binding ActivitiesStateKey}">
+                                <StackLayout toolkit:StateContainer.CurrentState="{Binding  DashboardActivitiesViewModel.ActivitiesStateKey}">
                                     <toolkit:StateContainer.StateViews>
 
                                         <StackLayout toolkit:StateView.StateKey="Loading" />
 
                                         <StackLayout Padding="20" toolkit:StateView.StateKey="LoadingError">
-                                            <Label Margin="0,0,0,5" FontSize="18" HorizontalTextAlignment="Center" Text="{Binding ActivitiesTitle}" FontAttributes="Bold"/>
+                                            <Label Margin="0,0,0,5" FontSize="18" HorizontalTextAlignment="Center" 
+                                                   Text="{Binding DashboardActivitiesViewModel.ActivitiesTitle}" FontAttributes="Bold"/>
                                             <Label Style="{StaticResource CenteredLabel}" Text="{x:Static strings:LocalizedStrings.Errors_LoadingError}" />
                                         </StackLayout>
 
                                         <StackLayout Padding="20" toolkit:StateView.StateKey="ConnectionError">
-                                            <Label Margin="0,0,0,5" FontSize="18" HorizontalTextAlignment="Center" Text="{Binding ActivitiesTitle}" FontAttributes="Bold" />
+                                            <Label Margin="0,0,0,5" FontSize="18" HorizontalTextAlignment="Center" 
+                                                   Text="{Binding DashboardActivitiesViewModel.ActivitiesTitle}" FontAttributes="Bold" />
                                             <Label Style="{StaticResource CenteredLabel}" Text="{x:Static strings:LocalizedStrings.Errors_USOSAPIConnectionError}" />
                                         </StackLayout>
 
                                         <StackLayout Padding="20" toolkit:StateView.StateKey="Empty">
-                                            <Label Margin="0,0,0,10" FontSize="18" HorizontalTextAlignment="Center" Text="{Binding ActivitiesTitle}" FontAttributes="Bold"/>
+                                            <Label Margin="0,0,0,10" FontSize="18" HorizontalTextAlignment="Center" 
+                                                   Text="{Binding DashboardActivitiesViewModel.ActivitiesTitle}" FontAttributes="Bold"/>
                                             <Label HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.DayOff}" />
                                         </StackLayout>
 
                                         <StackLayout Margin="0,20,0,10" toolkit:StateView.StateKey="Loaded">
-                                            <Label Margin="0,0,0,5" FontSize="18" HorizontalTextAlignment="Center" Text="{Binding ActivitiesTitle}" FontAttributes="Bold"/>
+                                            <Label Margin="0,0,0,5" FontSize="18" HorizontalTextAlignment="Center"
+                                                   Text="{Binding DashboardActivitiesViewModel.ActivitiesTitle}" FontAttributes="Bold"/>
                                             <StackLayout>
-                                                <CarouselView x:Name="carouselView" Margin="0,5,0,10" CurrentItem="{Binding CurrentItemInCarousel, Mode=TwoWay}"
-                                                              IndicatorView="activitiesIndicator" ItemsSource="{Binding Activities}" Loop="False" MinimumHeightRequest="20"
+                                                <CarouselView x:Name="carouselView" Margin="0,5,0,10" 
+                                                              CurrentItem="{Binding DashboardActivitiesViewModel.CurrentItemInCarousel, Mode=TwoWay}"
+                                                              IndicatorView="activitiesIndicator" ItemsSource="{Binding DashboardActivitiesViewModel.Activities}" 
+                                                              Loop="False" MinimumHeightRequest="20"
                                                               ItemTemplate="{x:StaticResource activitiesDataTemplate}"/>
                                                 <IndicatorView x:Name="activitiesIndicator" Margin="0,2,0,0" />
                                             </StackLayout>
@@ -150,7 +156,7 @@
                                     </toolkit:StateContainer.StateViews>
                                 </StackLayout>
 
-                                <StackLayout toolkit:StateContainer.CurrentState="{Binding LatestFinalGradeStateKey}">
+                                <StackLayout toolkit:StateContainer.CurrentState="{Binding DashboardGradeViewModel.LatestFinalGradeStateKey}">
                                     <toolkit:StateContainer.StateViews>
 
                                         <StackLayout toolkit:StateView.StateKey="Loading" />
@@ -162,16 +168,19 @@
                                         <Grid Margin="0,15" toolkit:StateView.StateKey="Loaded" HorizontalOptions="CenterAndExpand">
                                             <StackLayout Margin="15" Orientation="Horizontal" Spacing="10">
                                                 <Border Padding="15" StrokeThickness="0" StrokeShape="RoundRectangle 15" VerticalOptions="Center"
-                                                    BackgroundColor="{Binding LatestFinalGrade.ValueSymbol, Converter={StaticResource GradeSymbolToColorConverter}}" >
-                                                    <Label FontSize="20" Text="{Binding LatestFinalGrade.ValueSymbol}" />
+                                                    BackgroundColor="{Binding DashboardGradeViewModel.LatestFinalGrade.ValueSymbol, Converter={StaticResource GradeSymbolToColorConverter}}" >
+                                                    <Label FontSize="20" Text="{Binding DashboardGradeViewModel.LatestFinalGrade.ValueSymbol}" />
                                                 </Border>
                                                 <StackLayout VerticalOptions="CenterAndExpand">
-                                                    <Label FontSize="13" Text="{Binding LatestFinalGrade.CourseName}" />
-                                                    <Label Margin="0,0,0,3" FontSize="12" Text="{Binding LatestFinalGrade.ClassType}" />
+                                                    <Label FontSize="13" Text="{Binding DashboardGradeViewModel.LatestFinalGrade.CourseName}" />
+                                                    <Label Margin="0,0,0,3" FontSize="12" Text="{Binding DashboardGradeViewModel.LatestFinalGrade.ClassType}" />
                                                     <StackLayout Orientation="Horizontal" Spacing="3">
-                                                        <Label FontSize="11" Text="{Binding LatestFinalGrade.DateModified}" TextColor="{StaticResource Gray300}" />
-                                                        <Label FontSize="11" Text="{Binding LatestFinalGrade.ModificationAuthorFirstName}" TextColor="{StaticResource Gray300}" />
-                                                        <Label FontSize="11" Text="{Binding LatestFinalGrade.ModificationAuthorLastName}" TextColor="{StaticResource Gray300}" />
+                                                        <Label FontSize="11" Text="{Binding DashboardGradeViewModel.LatestFinalGrade.DateModified}" 
+                                                               TextColor="{StaticResource Gray300}" />
+                                                        <Label FontSize="11" Text="{Binding DashboardGradeViewModel.LatestFinalGrade.ModificationAuthorFirstName}" 
+                                                               TextColor="{StaticResource Gray300}" />
+                                                        <Label FontSize="11" Text="{Binding DashboardGradeViewModel.LatestFinalGrade.ModificationAuthorLastName}" 
+                                                               TextColor="{StaticResource Gray300}" />
                                                     </StackLayout>
                                                 </StackLayout>
                                             </StackLayout>
@@ -182,7 +191,7 @@
                                     </toolkit:StateContainer.StateViews>
                                 </StackLayout>
 
-                                <StackLayout Margin="30,10,30,70" toolkit:StateContainer.CurrentState="{Binding CalendarStateKey}">
+                                <StackLayout Margin="30,10,30,70" toolkit:StateContainer.CurrentState="{Binding  DashboardCalendarViewModel.CalendarStateKey}">
                                     <toolkit:StateContainer.StateViews>
 
                                         <StackLayout toolkit:StateView.StateKey="Loading" />
@@ -202,7 +211,8 @@
                                         <StackLayout toolkit:StateView.StateKey="Loaded">
                                             <Label Margin="0,0,0,10" FontSize="18" HorizontalTextAlignment="Center" FontAttributes="Bold"
                                                    Text="{x:Static strings:LocalizedStrings.Dashboard_NextEvents}" />
-                                            <StackLayout BindableLayout.ItemTemplateSelector="{StaticResource calendarTemplateSelector}" BindableLayout.ItemsSource="{Binding CalendarEvents}">
+                                            <StackLayout BindableLayout.ItemTemplateSelector="{StaticResource calendarTemplateSelector}" 
+                                                         BindableLayout.ItemsSource="{Binding DashboardCalendarViewModel.CalendarEvents}">
                                             </StackLayout>
                                         </StackLayout>
 

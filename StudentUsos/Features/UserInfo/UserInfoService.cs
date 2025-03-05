@@ -3,7 +3,7 @@ using System.Text.Json;
 
 namespace StudentUsos.Features.UserInfo
 {
-    public class UserInfoService
+    public class UserInfoService : IUserInfoService
     {
         IServerConnectionManager serverConnectionManager;
         public UserInfoService(IServerConnectionManager serverConnectionManager)

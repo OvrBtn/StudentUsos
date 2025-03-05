@@ -1,5 +1,8 @@
-﻿using StudentUsos.Features.Authorization.Services;
+﻿using Plugin.LocalNotification;
+using StudentUsos.Features.Authorization.Services;
 using StudentUsos.Features.Calendar;
+using StudentUsos.Features.Groups.Repositories;
+using StudentUsos.Features.Groups.Services;
 using StudentUsos.Resources.LocalizedStrings;
 using System.Globalization;
 
@@ -38,6 +41,7 @@ namespace StudentUsos
                 logger.Log(LogLevel.Fatal, e.Exception.ToString());
                 e.SetObserved();
             };
+
         }
 
         //Called after Android MainActivity ctor
@@ -48,6 +52,64 @@ namespace StudentUsos
             BackwardCompatibility.Check();
 
             _ = firebasePushNotificationsService.InitNotificationsAsync();
+
+            _ = CheckPermissionsAsync();
+
+            _ = DelayedInitializationAsync();
+        }
+
+        async Task DelayedInitializationAsync()
+        {
+            await Task.Delay(2500);
+
+            if (CheckIfAppRunningForTheFirstTime())
+            {
+                _ = HandleEmptyLocalDatabaseAsync().ConfigureAwait(false);
+            }
+
+            AuthorizationService.CheckForMissingScopes();
+        }
+
+        async Task HandleEmptyLocalDatabaseAsync()
+        {
+            var localStorageManager = ServiceProvider.GetService<ILocalStorageManager>()!;
+            var groupsService = ServiceProvider.GetService<IGroupsService>()!;
+            var groupsRepository = ServiceProvider.GetService<IGroupsRepository>()!;
+
+            localStorageManager.SetData(LocalStorageKeys.IsAppRunningForTheFirstTime, false.ToString());
+
+            var groupsServer = await groupsService.GetGroupedGroupsServerAsync(false, true);
+            if (groupsServer == null)
+            {
+                return;
+            }
+            groupsServer.GroupsGrouped.Reverse();
+            await groupsService.SetEctsPointsAsync(groupsServer.Groups);
+            groupsRepository.InsertOrReplace(groupsServer.Terms);
+            groupsRepository.InsertOrReplace(groupsServer.Groups);
+        }
+
+        static bool CheckIfAppRunningForTheFirstTime()
+        {
+            if (LocalStorageManager.Default.TryGettingData(LocalStorageKeys.IsAppRunningForTheFirstTime, out string result))
+            {
+                return bool.Parse(result);
+            }
+            else
+            {
+                LocalStorageManager.Default.SetData(LocalStorageKeys.IsAppRunningForTheFirstTime, bool.TrueString);
+                return true;
+            }
+        }
+
+        async Task CheckPermissionsAsync()
+        {
+            await Task.Delay(4000);
+            if (await LocalNotificationCenter.Current.AreNotificationsEnabled() == false)
+            {
+                await LocalNotificationCenter.Current.RequestNotificationPermission();
+            }
+            return;
         }
 
         async Task SetMainPageAsync()

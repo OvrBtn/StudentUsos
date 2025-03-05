@@ -57,9 +57,9 @@ namespace StudentUsos
             builder.Services.AddSingleton<IActivitiesRepository, ActivitiesRepository>();
             builder.Services.AddSingleton<IActivitiesService, ActivitiesService>();
 
-            builder.Services.AddSingleton<UserInfoRepository>();
-            builder.Services.AddSingleton(new Lazy<UserInfoRepository>(() => App.ServiceProvider.GetService<UserInfoRepository>()!));
-            builder.Services.AddSingleton<UserInfoService>();
+            builder.Services.AddSingleton<IUserInfoRepository, UserInfoRepository>();
+            builder.Services.AddSingleton(new Lazy<IUserInfoRepository>(() => App.ServiceProvider.GetService<IUserInfoRepository>()!));
+            builder.Services.AddSingleton<IUserInfoService, UserInfoService>();
 
             builder.Services.AddSingleton<IGroupsService, GroupsService>();
             builder.Services.AddSingleton<IGroupsRepository, GroupsRepository>();
@@ -127,6 +127,10 @@ namespace StudentUsos
         public static MauiAppBuilder RegisterViewModels(this MauiAppBuilder builder)
         {
             builder.Services.AddSingleton<DashboardViewModel>();
+            builder.Services.AddSingleton<DashboardActivitiesViewModel>();
+            builder.Services.AddSingleton<DashboardCalendarViewModel>();
+            builder.Services.AddSingleton<DashboardGradeViewModel>();
+
             builder.Services.AddTransient<ActivitiesViewModel>();
             builder.Services.AddSingleton<MoreViewModel>();
 

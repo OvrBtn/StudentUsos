@@ -1,6 +1,6 @@
 ﻿namespace StudentUsos.Features.UserInfo
 {
-    public class UserInfoRepository
+    public class UserInfoRepository : IUserInfoRepository
     {
         ILocalDatabaseManager localDatabaseManager;
         public UserInfoRepository(ILocalDatabaseManager localDatabaseManager)

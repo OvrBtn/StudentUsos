@@ -11,21 +11,6 @@ namespace StudentUsos.Helpers
 
     public static class Utilities
     {
-        public static bool IsAppRunningForTheFirstTime { get => CheckIfAppRunningForTheFirstTime(); }
-
-        static bool CheckIfAppRunningForTheFirstTime()
-        {
-            if (LocalStorageManager.Default.TryGettingData(LocalStorageKeys.IsAppRunningForTheFirstTime, out string result))
-            {
-                return bool.Parse(result);
-            }
-            else
-            {
-                LocalStorageManager.Default.SetData(LocalStorageKeys.IsAppRunningForTheFirstTime, bool.TrueString);
-                return true;
-            }
-        }
-
         public static float Lerp(float value, float min, float max)
         {
             return value * (max - min) + min;
@@ -298,20 +283,5 @@ namespace StudentUsos.Helpers
                 return "localized string error";
             }
         }
-
-        /// <summary>
-        /// Use this when getting DateTimeOffset.Now.DateTime on app startup to make sure that 
-        /// the first initialization of DateTimeOffset.Now.DateTime happens on worker thread (first usage of DateTimeOffset.Now.DateTime is expensive)
-        /// </summary>
-        /// <param name="result"></param>
-        public static void DateTimeNowWorkerThread(Action<string> result, string toStringFormat)
-        {
-            ApplicationService.Default.WorkerThreadInvoke(() =>
-            {
-                string date = DateTimeOffset.Now.DateTime.ToString(toStringFormat);
-                result?.Invoke(date);
-            });
-        }
-
     }
 }

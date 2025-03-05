@@ -15,13 +15,13 @@ namespace StudentUsos.Services.Logger
         Lazy<ILocalDatabaseManager> localDatabaseManager;
         Lazy<IServerConnectionManager> serverConnectionManager;
         Lazy<IApplicationService> applicationService;
-        Lazy<UserInfoRepository> userInfoRepository;
+        Lazy<IUserInfoRepository> userInfoRepository;
         public Logger(
             Lazy<ILocalStorageManager> localStorageManager,
             Lazy<ILocalDatabaseManager> localDatabaseManager,
             Lazy<IServerConnectionManager> serverConnectionManager,
             Lazy<IApplicationService> applicationService,
-            Lazy<UserInfoRepository> userInfoRepository)
+            Lazy<IUserInfoRepository> userInfoRepository)
         {
             Default = this;
 

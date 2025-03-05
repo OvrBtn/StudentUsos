@@ -1,9 +1,12 @@
-﻿using StudentUsos.Services;
+﻿using Moq;
+using StudentUsos.Services;
 
 namespace UnitTests.TestMocks;
 
 public class ApplicationServiceMock : IApplicationService
 {
+    public IAppInfo ApplicationInfo => new Mock<IAppInfo>().Object;
+
     public void MainThreadInvoke(Action action)
     {
         action?.Invoke();

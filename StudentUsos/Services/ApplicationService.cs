@@ -8,6 +8,8 @@ namespace StudentUsos.Services;
 /// </summary>
 public class ApplicationService : IApplicationService
 {
+    public IAppInfo ApplicationInfo => AppInfo.Current;
+
     public static IApplicationService Default { get; private set; }
 
     public ApplicationService()
@@ -27,6 +29,8 @@ public class ApplicationService : IApplicationService
     }
 
     static Color? Gray600 { get; set; }
+
+
     public async Task ShowSnackBarAsync(string text, string buttonText, Action? action = null)
     {
         if (Gray600 == null)

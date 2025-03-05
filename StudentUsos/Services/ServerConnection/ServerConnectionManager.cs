@@ -8,9 +8,11 @@ namespace StudentUsos.Services.ServerConnection;
 public class ServerConnectionManager : IServerConnectionManager
 {
     ILogger logger;
-    public ServerConnectionManager(ILogger logger)
+    IApplicationService applicationService;
+    public ServerConnectionManager(ILogger logger, IApplicationService applicationService)
     {
         this.logger = logger;
+        this.applicationService = applicationService;
     }
 
     string apiVersion = "1";
@@ -29,7 +31,8 @@ public class ServerConnectionManager : IServerConnectionManager
     const string UsosConsumerKeyKey = "UsosconsumerKey";
     const string InternalConsumerKeyKey = "InternalConsumerKey";
     const string InternalConsumerKeySecretKey = "InternalConsumerKeyCecret";
-    const string VersionKey = "Version";
+    const string ApiVersionKey = "ApiVersion";
+    const string ApplicationVersionKey = "ApplicationVersion";
 
 
     public async Task<string?> SendRequestToUsosAsync(string methodName,
@@ -222,7 +225,8 @@ public class ServerConnectionManager : IServerConnectionManager
         args.Add(InstallationKey, AuthorizationService.Installation);
         args.Add(UsosConsumerKeyKey, Secrets.Default.UsosConsumerKey);
         args.Add(InternalConsumerKeyKey, Secrets.Default.InternalConsumerKey);
-        args.Add(VersionKey, apiVersion);
+        args.Add(ApiVersionKey, apiVersion);
+        args.Add(ApplicationVersionKey, applicationService.ApplicationInfo.VersionString);
     }
 
     Dictionary<string, string> AddStaticSecretArguments(Dictionary<string, string> args)

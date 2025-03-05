@@ -188,7 +188,7 @@
                                     </toolkit:StateContainer.StateViews>
                                 </StackLayout>
 
-                                <StackLayout Margin="30,10,30,70" toolkit:StateContainer.CurrentState="{Binding CalendarStateKey}">
+                                <StackLayout Margin="30,10,30,70" toolkit:StateContainer.CurrentState="{Binding  DashboardCalendarViewModel.CalendarStateKey}">
                                     <toolkit:StateContainer.StateViews>
 
                                         <StackLayout toolkit:StateView.StateKey="Loading" />
@@ -208,7 +208,8 @@
                                         <StackLayout toolkit:StateView.StateKey="Loaded">
                                             <Label Margin="0,0,0,10" FontSize="18" HorizontalTextAlignment="Center" FontAttributes="Bold"
                                                    Text="{x:Static strings:LocalizedStrings.Dashboard_NextEvents}" />
-                                            <StackLayout BindableLayout.ItemTemplateSelector="{StaticResource calendarTemplateSelector}" BindableLayout.ItemsSource="{Binding CalendarEvents}">
+                                            <StackLayout BindableLayout.ItemTemplateSelector="{StaticResource calendarTemplateSelector}" 
+                                                         BindableLayout.ItemsSource="{Binding DashboardCalendarViewModel.CalendarEvents}">
                                             </StackLayout>
                                         </StackLayout>
 

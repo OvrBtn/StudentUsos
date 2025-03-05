@@ -1,14 +1,8 @@
-﻿using CommunityToolkit.Maui.Core.Extensions;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using StudentUsos.Features.Authorization;
 using StudentUsos.Features.Authorization.Services;
-using StudentUsos.Features.Calendar;
-using StudentUsos.Features.Calendar.Models;
-using StudentUsos.Features.Calendar.Repositories;
-using StudentUsos.Features.Calendar.Services;
 using StudentUsos.Features.Calendar.Views;
-using StudentUsos.Features.Dashboard.Models;
 using StudentUsos.Features.Grades.Models;
 using StudentUsos.Features.Grades.Repositories;
 using StudentUsos.Features.Grades.Services;
@@ -16,7 +10,6 @@ using StudentUsos.Features.Grades.Views;
 using StudentUsos.Features.Groups.Repositories;
 using StudentUsos.Features.Groups.Services;
 using StudentUsos.Features.UserInfo;
-using System.Collections.ObjectModel;
 
 namespace StudentUsos.Features.Dashboard.Views
 {
@@ -27,6 +20,7 @@ namespace StudentUsos.Features.Dashboard.Views
         public DashboardPage DashboardPage;
 
         public DashboardActivitiesViewModel DashboardActivitiesViewModel { get; init; }
+        public DashboardCalendarViewModel DashboardCalendarViewModel { get; init; }
 
         INavigationService navigationService;
         IUserInfoRepository userInfoRepository;
@@ -35,15 +29,12 @@ namespace StudentUsos.Features.Dashboard.Views
         IGroupsRepository groupsRepository;
         IGradesService gradesService;
         IGradesRepository gradesRepository;
-        IUsosCalendarService usosCalendarService;
-        IUsosCalendarRepository usosCalendarRepository;
-        IGoogleCalendarService googleCalendarService;
-        IGoogleCalendarRepository googleCalendarRepository;
         ILocalStorageManager localStorageManager;
         IApplicationService applicationService;
         ILogger? logger;
         public DashboardViewModel(
             DashboardActivitiesViewModel dashboardActivitiesViewModel,
+            DashboardCalendarViewModel dashboardCalendarViewModel,
             INavigationService navigationService,
             IUserInfoRepository userInfoRepository,
             IUserInfoService userinfoService,
@@ -51,15 +42,13 @@ namespace StudentUsos.Features.Dashboard.Views
             IGroupsRepository groupsRepository,
             IGradesService gradesService,
             IGradesRepository gradesRepository,
-            IUsosCalendarService usosCalendarService,
-            IUsosCalendarRepository usosCalendarRepository,
-            IGoogleCalendarService googleCalendarService,
-            IGoogleCalendarRepository googleCalendarRepository,
+
             ILocalStorageManager localStorageManager,
             IApplicationService applicationService,
             ILogger? logger = null)
         {
             this.DashboardActivitiesViewModel = dashboardActivitiesViewModel;
+            this.DashboardCalendarViewModel = dashboardCalendarViewModel;
 
             this.navigationService = navigationService;
             this.userInfoRepository = userInfoRepository;
@@ -68,45 +57,30 @@ namespace StudentUsos.Features.Dashboard.Views
             this.groupsService = groupsService;
             this.gradesService = gradesService;
             this.gradesRepository = gradesRepository;
-            this.usosCalendarService = usosCalendarService;
-            this.usosCalendarRepository = usosCalendarRepository;
-            this.googleCalendarService = googleCalendarService;
-            this.googleCalendarRepository = googleCalendarRepository;
+
             this.localStorageManager = localStorageManager;
             this.applicationService = applicationService;
             this.logger = logger;
 
-            instance = this;
-
-            CalendarStateKey = GoogleCalendarStateKey = StudentNumberStateKey = UserInfoStateKey = LatestFinalGradeStateKey = StateKey.Loading;
+            StudentNumberStateKey = UserInfoStateKey = LatestFinalGradeStateKey = StateKey.Loading;
 
             Shell.Current.Navigated += (sender, e) =>
             {
                 if (e.Previous != null && e.Previous.Location.OriginalString == "//" + nameof(LoginPage)) webrequestDelay = 0;
             };
 
-            AuthorizationService.OnLogout += AuthorizationService_OnLogout;
             AuthorizationService.OnLoginSucceeded += AuthorizationService_OnLoginSucceeded;
 
             DashboardActivitiesViewModel.OnSynchronousLoadingFinished += SynchronousOperationFinished;
             DashboardActivitiesViewModel.OnAsynchronousLoadingFinished += AsynchronousOperationFinished;
+
+            DashboardCalendarViewModel.OnSynchronousLoadingFinished += SynchronousOperationFinished;
+            DashboardCalendarViewModel.OnAsynchronousLoadingFinished += AsynchronousOperationFinished;
         }
 
-        static DashboardViewModel? instance;
         private void AuthorizationService_OnLoginSucceeded()
         {
-            if (instance != null)
-            {
-                _ = instance.InitAsync();
-            }
-        }
-
-        private void AuthorizationService_OnLogout()
-        {
-            if (instance != null)
-            {
-                instance.CalendarStateKey = instance.GoogleCalendarStateKey = instance.StudentNumberStateKey = instance.UserInfoStateKey = instance.LatestFinalGradeStateKey = StateKey.Loading;
-            }
+            _ = InitAsync();
         }
 
         public void PassPage(DashboardPage dashboardPage)
@@ -117,8 +91,6 @@ namespace StudentUsos.Features.Dashboard.Views
         [ObservableProperty] string mainContentStateKey = StateKey.Loading;
         [ObservableProperty] string userInfoStateKey = StateKey.Loading;
         [ObservableProperty] string studentNumberStateKey = StateKey.Loading;
-        [ObservableProperty] string calendarStateKey = StateKey.Loading;
-        [ObservableProperty] string googleCalendarStateKey = StateKey.Loading;
 
         object syncLoadingLock = new();
         /// <summary>
@@ -145,6 +117,7 @@ namespace StudentUsos.Features.Dashboard.Views
                     {
                         FinishedSynchronousLoading?.Invoke();
                         MainContentStateKey = StateKey.Loaded;
+                        syncLoadingFinishedCounter = 0;
                     });
                 }
             }
@@ -199,7 +172,7 @@ namespace StudentUsos.Features.Dashboard.Views
 
         public async Task InitAsync()
         {
-
+            StudentNumberStateKey = UserInfoStateKey = StateKey.Loading;
 
             if (Utilities.IsAppRunningForTheFirstTime)
             {
@@ -247,7 +220,7 @@ namespace StudentUsos.Features.Dashboard.Views
         {
             LoadUserInfo();
             applicationService.WorkerThreadInvoke(DashboardActivitiesViewModel.Init);
-            _ = LoadCalendarEvents();
+            _ = DashboardCalendarViewModel.InitAsync();
             LoadLatestFinalGrade();
         }
 
@@ -329,150 +302,6 @@ namespace StudentUsos.Features.Dashboard.Views
                 UserInfoStateKey = StudentNumberStateKey = StateKey.LoadingError;
             }
         }
-
-        #region Activities
-
-
-
-        #endregion
-
-        #region Calendar
-
-        [ObservableProperty] ObservableCollection<UsosCalendarEvent> events = new();
-        [ObservableProperty] ObservableCollection<GoogleCalendarEvent> eventsGoogle = new();
-
-        [ObservableProperty] ObservableCollection<CalendarEvent> calendarEvents = new();
-
-        const int MaxCalendarEvents = 5;
-        async Task LoadCalendarEvents()
-        {
-            try
-            {
-                RegisterSynchronousOperation();
-                RegisterAsynchronousOperation();
-
-                CalendarEvents.Clear();
-
-                LoadCalendarEventsLocal();
-                SynchronousOperationFinished();
-
-                await Task.Delay(webrequestDelay);
-
-                await LoadCalendarEventsServerAsync();
-                AsynchronousOperationFinished();
-            }
-            catch (Exception ex)
-            {
-                logger?.LogCatchedException(ex);
-            }
-        }
-
-        async Task LoadCalendarEventsServerAsync()
-        {
-            var usosEvents = await usosCalendarService.TryFetchingAvailableEventsAsync();
-            List<UsosCalendarEvent> usosEventsLinearized;
-            if (usosEvents == null)
-            {
-                usosEventsLinearized = usosCalendarRepository.GetAllEvents();
-            }
-            else
-            {
-                usosEventsLinearized = usosEvents.SelectMany(x => x.events).ToList();
-                foreach (var item in usosEvents)
-                {
-                    await usosCalendarRepository.SaveEventsFromServerAndHandleLocalNotificationsAsync(item.date.Year, item.date.Month, item.events, item.isPrimaryUpdate);
-                }
-
-                if (usosEvents.Count != CalendarSettings.MonthsToGetInTotal)
-                {
-                    var date = DateTimeOffset.Now.DateTime;
-                    for (int i = 0; i < CalendarSettings.MonthsToGetInTotal; i++)
-                    {
-                        if (usosEvents.Any(x => x.date.Year == date.Year && x.date.Month == date.Month) == false)
-                        {
-                            usosEventsLinearized.AddRange(usosCalendarRepository.GetEvents(date.Year, date.Month));
-                        }
-                        date = date.AddMonths(1);
-                    }
-                    Utilities.RemoveDuplicates(usosEventsLinearized, UsosCalendarEvent.AreEqual);
-                }
-            }
-
-            List<GoogleCalendarEvent> googleCalendarEventsLinearized = new();
-            var googleCalendars = googleCalendarRepository.GetAllCalendars();
-            foreach (var calendar in googleCalendars)
-            {
-                var googleEvents = await googleCalendarService.GetGoogleCalendarEventsAsync(calendar);
-                if (googleEvents == null)
-                {
-                    googleCalendarEventsLinearized = googleCalendarRepository.GetAllEvents().Where(x => x.CalendarName == calendar.Name).ToList();
-                }
-                else
-                {
-                    await googleCalendarRepository.SaveEventsFromServerAndHandleLocalNotificationsAsync(googleEvents);
-                    googleCalendarEventsLinearized.AddRange(googleEvents);
-                }
-            }
-
-            var grouped = GroupCalendarEvents(usosEventsLinearized, googleCalendarEventsLinearized);
-            SetCalendarEvents(grouped);
-        }
-
-        void LoadCalendarEventsLocal()
-        {
-            var usosEventsLocal = usosCalendarRepository.GetAllEvents();
-            var googleCalendarEventsLocal = googleCalendarRepository.GetAllEvents();
-
-            var events = GroupCalendarEvents(usosEventsLocal, googleCalendarEventsLocal);
-            ExecuteOnceWhenSynchronousLoadingFinished(() => SetCalendarEvents(events));
-        }
-
-        List<CalendarEvent> GroupCalendarEvents(List<UsosCalendarEvent> usosEvents, List<GoogleCalendarEvent> googleEvents)
-        {
-            List<CalendarEvent> calendarEvents = new();
-
-            for (int i = 0; i < usosEvents.Count; i++)
-            {
-                calendarEvents.Add(new(usosEvents[i]));
-                if (i > MaxCalendarEvents * 2)
-                {
-                    break;
-                }
-            }
-
-            var now = DateTimeOffset.Now.DateTime;
-            for (int i = 0; i < googleEvents.Count; i++)
-            {
-                if (googleEvents[i].Start < now && googleEvents[i].End < now)
-                {
-                    continue;
-                }
-                calendarEvents.Add(new(googleEvents[i]));
-                if (calendarEvents.Count > MaxCalendarEvents * 4)
-                {
-                    break;
-                }
-            }
-
-            calendarEvents = calendarEvents.Where(x => x.StartDateTime >= now || now <= x.EndDateTime)
-                .OrderBy(x => x.StartDateTime)
-                .Take(MaxCalendarEvents).ToList();
-            return calendarEvents;
-        }
-
-        void SetCalendarEvents(List<CalendarEvent> calendarEvents)
-        {
-            if (Utilities.CompareCollections(CalendarEvents, calendarEvents, CalendarEvent.AreEqual) == false)
-            {
-                applicationService.MainThreadInvoke(() =>
-                {
-                    CalendarEvents = calendarEvents.ToObservableCollection();
-                });
-            }
-            if (CalendarEvents.Count > 0) CalendarStateKey = StateKey.Loaded;
-        }
-
-        #endregion
 
         #region LatestFinalGrade
 

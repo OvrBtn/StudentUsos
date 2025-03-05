@@ -24,8 +24,10 @@ namespace StudentUsos.Features.Dashboard.Views
             {
                 return;
             }
-            TryScrollingToItem(obj);
-            scrolled = true;
+            if (TryScrollingToItem(obj))
+            {
+                scrolled = true;
+            }
         }
 
         bool isViewModelInitialized = false;

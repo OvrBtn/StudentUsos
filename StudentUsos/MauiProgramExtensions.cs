@@ -128,6 +128,7 @@ namespace StudentUsos
         {
             builder.Services.AddSingleton<DashboardViewModel>();
             builder.Services.AddSingleton<DashboardActivitiesViewModel>();
+            builder.Services.AddSingleton<DashboardCalendarViewModel>();
 
             builder.Services.AddTransient<ActivitiesViewModel>();
             builder.Services.AddSingleton<MoreViewModel>();

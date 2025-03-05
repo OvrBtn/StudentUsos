@@ -274,16 +274,9 @@ public class ServerConnectionManager : IServerConnectionManager
 
     string HashValue(string value)
     {
-        using (SHA256 sha256 = SHA256.Create())
-        {
-            var bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(value));
-            var sBuilder = new StringBuilder();
-            for (int i = 0; i < bytes.Length; i++)
-            {
-                sBuilder.Append(bytes[i].ToString("x2"));
-            }
-            return sBuilder.ToString();
-        }
+        using HMACSHA256 sha256 = new(Encoding.UTF8.GetBytes(Secrets.Default.InternalConsumerKeySecret));
+        var bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(value));
+        return BitConverter.ToString(bytes).Replace("-", "").ToLower(System.Globalization.CultureInfo.CurrentCulture);
     }
 
     void TryLogging(string methodName, string response)

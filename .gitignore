@@ -367,3 +367,4 @@ FodyWeavers.xsd
 secrets.json
 google-services.json
 secrets.json
+CurlHelper.cs

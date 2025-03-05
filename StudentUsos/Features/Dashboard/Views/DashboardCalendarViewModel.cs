@@ -136,18 +136,17 @@ namespace StudentUsos.Features.Dashboard.Views
 
         List<CalendarEvent> GroupCalendarEvents(List<UsosCalendarEvent> usosEvents, List<GoogleCalendarEvent> googleEvents)
         {
+            var now = DateTimeOffset.Now.DateTime;
             List<CalendarEvent> calendarEvents = new();
 
-            for (int i = 0; i < usosEvents.Count; i++)
+            var usosEventsSorted = usosEvents.Where(x => x.End >= now)
+                .OrderBy(x => x.Start)
+                .Take(MaxCalendarEvents);
+            foreach (var item in usosEventsSorted)
             {
-                calendarEvents.Add(new(usosEvents[i]));
-                if (i > MaxCalendarEvents * 2)
-                {
-                    break;
-                }
+                calendarEvents.Add(new(item));
             }
 
-            var now = DateTimeOffset.Now.DateTime;
             for (int i = 0; i < googleEvents.Count; i++)
             {
                 if (googleEvents[i].Start < now && googleEvents[i].End < now)
@@ -155,13 +154,13 @@ namespace StudentUsos.Features.Dashboard.Views
                     continue;
                 }
                 calendarEvents.Add(new(googleEvents[i]));
-                if (calendarEvents.Count > MaxCalendarEvents * 4)
+                if (calendarEvents.Count > MaxCalendarEvents)
                 {
                     break;
                 }
             }
 
-            calendarEvents = calendarEvents.Where(x => x.StartDateTime >= now || now <= x.EndDateTime)
+            calendarEvents = calendarEvents.Where(x => now <= x.EndDateTime)
                 .OrderBy(x => x.StartDateTime)
                 .Take(MaxCalendarEvents).ToList();
             return calendarEvents;

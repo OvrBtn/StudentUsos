@@ -43,15 +43,13 @@ namespace StudentUsos.Features.Authorization.Services
             MainActivity.OnLogInCallback += (v) => _ = ContinueAuthenticationAsync(v);
 #endif
 
-            serverConnectionManager = App.ServiceProvider.GetService<IServerConnectionManager>()!;
-
-            CheckForMissingScopes();
+            serverConnectionManager = App.ServiceProvider?.GetService<IServerConnectionManager>()!;
         }
 
         public static event Action OnLoginSucceeded;
         public static event Action OnLoginFailed;
 
-        static void CheckForMissingScopes()
+        public static void CheckForMissingScopes()
         {
             var scopesFromPreferences = Preferences.Get(PreferencesKeys.Scopes.ToString(), "");
             if (scopesFromPreferences == "") Preferences.Set(PreferencesKeys.Scopes.ToString(), string.Join('|', scopes));

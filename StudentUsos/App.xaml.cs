@@ -66,6 +66,8 @@ namespace StudentUsos
             {
                 _ = HandleEmptyLocalDatabaseAsync().ConfigureAwait(false);
             }
+
+            AuthorizationService.CheckForMissingScopes();
         }
 
         async Task HandleEmptyLocalDatabaseAsync()

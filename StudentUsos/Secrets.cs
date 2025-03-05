@@ -36,6 +36,5 @@ public class Secrets
     public string InternalConsumerKey { get; init; }
     public string InternalConsumerKeySecret { get; init; }
     public string ServerUrl { get; init; }
-    public string UsosConsumerKey { get; init; }
 
 }

@@ -28,7 +28,6 @@ public class ServerConnectionManager : IServerConnectionManager
     const string HashKey = "Hash";
     const string TimestampKey = "Timestamp";
     const string InstallationKey = "Installation";
-    const string UsosConsumerKeyKey = "UsosconsumerKey";
     const string InternalConsumerKeyKey = "InternalConsumerKey";
     const string InternalConsumerKeySecretKey = "InternalConsumerKeyCecret";
     const string ApiVersionKey = "ApiVersion";
@@ -223,7 +222,6 @@ public class ServerConnectionManager : IServerConnectionManager
     {
         args.Add(TimestampKey, DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString());
         args.Add(InstallationKey, AuthorizationService.Installation);
-        args.Add(UsosConsumerKeyKey, Secrets.Default.UsosConsumerKey);
         args.Add(InternalConsumerKeyKey, Secrets.Default.InternalConsumerKey);
         args.Add(ApiVersionKey, apiVersion);
         args.Add(ApplicationVersionKey, applicationService.ApplicationInfo.VersionString);

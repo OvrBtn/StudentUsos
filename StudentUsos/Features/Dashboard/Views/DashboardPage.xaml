@@ -156,7 +156,7 @@
                                     </toolkit:StateContainer.StateViews>
                                 </StackLayout>
 
-                                <StackLayout toolkit:StateContainer.CurrentState="{Binding LatestFinalGradeStateKey}">
+                                <StackLayout toolkit:StateContainer.CurrentState="{Binding DashboardGradeViewModel.LatestFinalGradeStateKey}">
                                     <toolkit:StateContainer.StateViews>
 
                                         <StackLayout toolkit:StateView.StateKey="Loading" />
@@ -168,16 +168,19 @@
                                         <Grid Margin="0,15" toolkit:StateView.StateKey="Loaded" HorizontalOptions="CenterAndExpand">
                                             <StackLayout Margin="15" Orientation="Horizontal" Spacing="10">
                                                 <Border Padding="15" StrokeThickness="0" StrokeShape="RoundRectangle 15" VerticalOptions="Center"
-                                                    BackgroundColor="{Binding LatestFinalGrade.ValueSymbol, Converter={StaticResource GradeSymbolToColorConverter}}" >
-                                                    <Label FontSize="20" Text="{Binding LatestFinalGrade.ValueSymbol}" />
+                                                    BackgroundColor="{Binding DashboardGradeViewModel.LatestFinalGrade.ValueSymbol, Converter={StaticResource GradeSymbolToColorConverter}}" >
+                                                    <Label FontSize="20" Text="{Binding DashboardGradeViewModel.LatestFinalGrade.ValueSymbol}" />
                                                 </Border>
                                                 <StackLayout VerticalOptions="CenterAndExpand">
-                                                    <Label FontSize="13" Text="{Binding LatestFinalGrade.CourseName}" />
-                                                    <Label Margin="0,0,0,3" FontSize="12" Text="{Binding LatestFinalGrade.ClassType}" />
+                                                    <Label FontSize="13" Text="{Binding DashboardGradeViewModel.LatestFinalGrade.CourseName}" />
+                                                    <Label Margin="0,0,0,3" FontSize="12" Text="{Binding DashboardGradeViewModel.LatestFinalGrade.ClassType}" />
                                                     <StackLayout Orientation="Horizontal" Spacing="3">
-                                                        <Label FontSize="11" Text="{Binding LatestFinalGrade.DateModified}" TextColor="{StaticResource Gray300}" />
-                                                        <Label FontSize="11" Text="{Binding LatestFinalGrade.ModificationAuthorFirstName}" TextColor="{StaticResource Gray300}" />
-                                                        <Label FontSize="11" Text="{Binding LatestFinalGrade.ModificationAuthorLastName}" TextColor="{StaticResource Gray300}" />
+                                                        <Label FontSize="11" Text="{Binding DashboardGradeViewModel.LatestFinalGrade.DateModified}" 
+                                                               TextColor="{StaticResource Gray300}" />
+                                                        <Label FontSize="11" Text="{Binding DashboardGradeViewModel.LatestFinalGrade.ModificationAuthorFirstName}" 
+                                                               TextColor="{StaticResource Gray300}" />
+                                                        <Label FontSize="11" Text="{Binding DashboardGradeViewModel.LatestFinalGrade.ModificationAuthorLastName}" 
+                                                               TextColor="{StaticResource Gray300}" />
                                                     </StackLayout>
                                                 </StackLayout>
                                             </StackLayout>

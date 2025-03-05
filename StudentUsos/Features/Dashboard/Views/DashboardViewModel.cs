@@ -3,9 +3,6 @@ using CommunityToolkit.Mvvm.Input;
 using StudentUsos.Features.Authorization;
 using StudentUsos.Features.Authorization.Services;
 using StudentUsos.Features.Calendar.Views;
-using StudentUsos.Features.Grades.Models;
-using StudentUsos.Features.Grades.Repositories;
-using StudentUsos.Features.Grades.Services;
 using StudentUsos.Features.Grades.Views;
 using StudentUsos.Features.Groups.Repositories;
 using StudentUsos.Features.Groups.Services;
@@ -13,56 +10,49 @@ using StudentUsos.Features.UserInfo;
 
 namespace StudentUsos.Features.Dashboard.Views
 {
-    //TODO: split into separate viewmodels to minimize amount of dependencies and allow testing
-
     public partial class DashboardViewModel : BaseViewModel
     {
         public DashboardPage DashboardPage;
 
         public DashboardActivitiesViewModel DashboardActivitiesViewModel { get; init; }
         public DashboardCalendarViewModel DashboardCalendarViewModel { get; init; }
+        public DashboardGradeViewModel DashboardGradeViewModel { get; init; }
 
         INavigationService navigationService;
         IUserInfoRepository userInfoRepository;
         IUserInfoService userinfoService;
         IGroupsService groupsService;
         IGroupsRepository groupsRepository;
-        IGradesService gradesService;
-        IGradesRepository gradesRepository;
         ILocalStorageManager localStorageManager;
         IApplicationService applicationService;
         ILogger? logger;
         public DashboardViewModel(
             DashboardActivitiesViewModel dashboardActivitiesViewModel,
             DashboardCalendarViewModel dashboardCalendarViewModel,
+            DashboardGradeViewModel dashboardGradeViewModel,
             INavigationService navigationService,
             IUserInfoRepository userInfoRepository,
             IUserInfoService userinfoService,
             IGroupsService groupsService,
             IGroupsRepository groupsRepository,
-            IGradesService gradesService,
-            IGradesRepository gradesRepository,
-
             ILocalStorageManager localStorageManager,
             IApplicationService applicationService,
             ILogger? logger = null)
         {
             this.DashboardActivitiesViewModel = dashboardActivitiesViewModel;
             this.DashboardCalendarViewModel = dashboardCalendarViewModel;
+            this.DashboardGradeViewModel = dashboardGradeViewModel;
 
             this.navigationService = navigationService;
             this.userInfoRepository = userInfoRepository;
             this.userinfoService = userinfoService;
             this.groupsRepository = groupsRepository;
             this.groupsService = groupsService;
-            this.gradesService = gradesService;
-            this.gradesRepository = gradesRepository;
-
             this.localStorageManager = localStorageManager;
             this.applicationService = applicationService;
             this.logger = logger;
 
-            StudentNumberStateKey = UserInfoStateKey = LatestFinalGradeStateKey = StateKey.Loading;
+            StudentNumberStateKey = UserInfoStateKey = StateKey.Loading;
 
             Shell.Current.Navigated += (sender, e) =>
             {
@@ -76,6 +66,9 @@ namespace StudentUsos.Features.Dashboard.Views
 
             DashboardCalendarViewModel.OnSynchronousLoadingFinished += SynchronousOperationFinished;
             DashboardCalendarViewModel.OnAsynchronousLoadingFinished += AsynchronousOperationFinished;
+
+            DashboardGradeViewModel.OnSynchronousLoadingFinished += SynchronousOperationFinished;
+            DashboardGradeViewModel.OnAsynchronousLoadingFinished += AsynchronousOperationFinished;
         }
 
         private void AuthorizationService_OnLoginSucceeded()
@@ -99,13 +92,6 @@ namespace StudentUsos.Features.Dashboard.Views
         /// </summary>
         int syncLoadingTotal = 4;
         int syncLoadingFinishedCounter = 0;
-        void RegisterSynchronousOperation()
-        {
-            //lock (syncLoadingTotalLock)
-            //{
-            //    syncLoadingTotal++;
-            //}
-        }
         void SynchronousOperationFinished()
         {
             lock (syncLoadingLock)
@@ -127,32 +113,8 @@ namespace StudentUsos.Features.Dashboard.Views
         /// </summary>
         public static event Action FinishedSynchronousLoading;
 
-        /// <summary>
-        /// Used to update all UI elements at the same time when they are all loaded from local database
-        /// </summary>
-        /// <param name="action"></param>
-        void ExecuteOnceWhenSynchronousLoadingFinished(Action action)
-        {
-            if (action == null) return;
-            Action handler = null;
-            handler = () =>
-            {
-                FinishedSynchronousLoading -= handler;
-                applicationService.MainThreadInvoke(() =>
-                {
-                    action.Invoke();
-                });
-
-            };
-            FinishedSynchronousLoading += handler;
-        }
-
         int asyncLoadingTotal = 3;
         int asyncLoadingFinishedCounter = 0;
-        void RegisterAsynchronousOperation()
-        {
-            //applicationService.MainThreadInvoke(() => asyncLoadingTotal++);
-        }
         void AsynchronousOperationFinished()
         {
             applicationService.MainThreadInvoke(() =>
@@ -176,15 +138,14 @@ namespace StudentUsos.Features.Dashboard.Views
 
             if (Utilities.IsAppRunningForTheFirstTime)
             {
-                _ = HandleEmptyLocalDatabase();
+                _ = HandleEmptyLocalDatabaseAsync();
             }
-
 
             LoadDashboard();
         }
 
 
-        async Task HandleEmptyLocalDatabase()
+        async Task HandleEmptyLocalDatabaseAsync()
         {
             localStorageManager.SetData(LocalStorageKeys.IsAppRunningForTheFirstTime, false.ToString());
 
@@ -221,7 +182,7 @@ namespace StudentUsos.Features.Dashboard.Views
             LoadUserInfo();
             applicationService.WorkerThreadInvoke(DashboardActivitiesViewModel.Init);
             _ = DashboardCalendarViewModel.InitAsync();
-            LoadLatestFinalGrade();
+            DashboardGradeViewModel.Init();
         }
 
         [ObservableProperty] string firstName;
@@ -252,7 +213,6 @@ namespace StudentUsos.Features.Dashboard.Views
         {
             try
             {
-                RegisterSynchronousOperation();
                 var userInfo = userInfoRepository.GetUserInfo();
                 if (userInfo != null)
                 {
@@ -271,12 +231,10 @@ namespace StudentUsos.Features.Dashboard.Views
         {
             try
             {
-                //RegisterAsynchronousOperation();
                 await Task.Delay(webrequestDelay);
                 var userInfo = await userinfoService.GetUserInfoAsync();
                 if (userInfo == null) return;
                 HandleUserInfo(userInfo);
-                //AsynchronousOperationFinished();
                 userInfoRepository.SaveUserInfo(userInfo);
             }
             catch (Exception ex)
@@ -302,64 +260,6 @@ namespace StudentUsos.Features.Dashboard.Views
                 UserInfoStateKey = StudentNumberStateKey = StateKey.LoadingError;
             }
         }
-
-        #region LatestFinalGrade
-
-        [ObservableProperty] FinalGrade latestFinalGrade;
-        [ObservableProperty] string latestFinalGradeStateKey = StateKey.Loading;
-
-        void LoadLatestFinalGrade()
-        {
-            RegisterSynchronousOperation();
-            LatestFinalGradeStateKey = StateKey.Loading;
-            Task task = applicationService.WorkerThreadInvoke(async () =>
-            {
-                try
-                {
-                    RegisterAsynchronousOperation();
-
-                    FinalGrade local = gradesRepository.GetLatestGrade();
-                    if (local != null)
-                    {
-                        ExecuteOnceWhenSynchronousLoadingFinished(() =>
-                        {
-                            LatestFinalGrade = local;
-                            LatestFinalGradeStateKey = StateKey.Loaded;
-                        });
-                    }
-                    SynchronousOperationFinished();
-
-                    await Task.Delay(webrequestDelay);
-                    var server = await gradesService.GetLatestGradeServerAsync();
-                    applicationService.MainThreadInvoke(() =>
-                    {
-                        if (server != null && server.IsEmpty)
-                        {
-                            LatestFinalGradeStateKey = StateKey.Empty;
-                        }
-                        else if (server != null && server.IsCourseExamAndGradeEqual(local) == false)
-                        {
-                            LatestFinalGrade = server;
-                            LatestFinalGradeStateKey = StateKey.Loaded;
-                        }
-                        else if (LatestFinalGrade == null) LatestFinalGradeStateKey = StateKey.LoadingError;
-                        AsynchronousOperationFinished();
-                    });
-                }
-                catch (Exception ex)
-                {
-                    applicationService.MainThreadInvoke(() =>
-                    {
-                        logger?.LogCatchedException(ex);
-                        AsynchronousOperationFinished();
-                        SynchronousOperationFinished();
-                    });
-                }
-            });
-
-        }
-
-        #endregion
 
     }
 }

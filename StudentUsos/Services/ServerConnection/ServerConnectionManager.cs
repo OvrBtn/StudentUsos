@@ -18,18 +18,18 @@ public class ServerConnectionManager : IServerConnectionManager
     const int HttpClientDefaultTimeoutSeconds = 10;
     HttpClient httpClient = new() { Timeout = TimeSpan.FromSeconds(HttpClientDefaultTimeoutSeconds) };
 
-    const string QueryMethodKey = "querymethod";
-    const string QueryArgumentsKey = "queryarguments";
-    const string InternalAccessTokenKey = "internalaccesstoken";
-    const string UsosAccessTokenKey = "usosaccesstoken";
-    const string InternalAccessTokenSecretKey = "internalaccesstokensecret";
-    const string HashKey = "hash";
-    const string TimestampKey = "timestamp";
-    const string InstallationKey = "installation";
-    const string UsosConsumerKeyKey = "usosconsumerkey";
-    const string InternalConsumerKeyKey = "internalconsumerkey";
-    const string InternalConsumerKeySecretKey = "internalconsumerkeysecret";
-    const string VersionKey = "version";
+    const string QueryMethodKey = "QueryMethod";
+    const string QueryArgumentsKey = "QueryArguments";
+    const string InternalAccessTokenKey = "InternalAccessToken";
+    const string UsosAccessTokenKey = "UsosAccessToken";
+    const string InternalAccessTokenSecretKey = "InternalAccessTokenSecret";
+    const string HashKey = "Hash";
+    const string TimestampKey = "Timestamp";
+    const string InstallationKey = "Installation";
+    const string UsosConsumerKeyKey = "UsosconsumerKey";
+    const string InternalConsumerKeyKey = "InternalConsumerKey";
+    const string InternalConsumerKeySecretKey = "InternalConsumerKeyCecret";
+    const string VersionKey = "Version";
 
 
     public async Task<string?> SendRequestToUsosAsync(string methodName,

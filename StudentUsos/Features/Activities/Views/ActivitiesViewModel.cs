@@ -5,6 +5,7 @@ using CustomSchedule;
 using StudentUsos.Features.Activities.Models;
 using StudentUsos.Features.Activities.Repositories;
 using StudentUsos.Features.Activities.Services;
+using StudentUsos.Features.Authorization.Services;
 using StudentUsos.Features.Person.Models;
 using StudentUsos.Resources.LocalizedStrings;
 using System.Collections.ObjectModel;
@@ -41,9 +42,22 @@ namespace StudentUsos.Features.Activities.Views
                 applicationService.ShowToast(LocalizedStrings.ActivitiesPage_Downloading);
                 applicationService.WorkerThreadInvoke(() => RefreshActivitiesAsync(DateOnlyPicked.ToDateTime(TimeOnly.MinValue)));
             });
+
+            AuthorizationService.OnLogout += AuthorizationService_OnLogout;
+            AuthorizationService.OnLoginSucceeded += AuthorizationService_OnAuthorizationFinished;
         }
 
-        static ActivitiesViewModel instance;
+        private void AuthorizationService_OnAuthorizationFinished()
+        {
+            if (instance != null) instance.DatePicked = DateTimeOffset.Now.DateTime;
+        }
+
+        private void AuthorizationService_OnLogout()
+        {
+            if (instance is not null) instance.ActivitiesStateKey = StateKey.Loading;
+        }
+
+        static ActivitiesViewModel? instance;
         public Lecturer? Lecturer { get; private set; }
         [ObservableProperty] string mainStateKey = StateKey.Loading;
 
@@ -176,16 +190,6 @@ namespace StudentUsos.Features.Activities.Views
                 time = time.AddDays(3);
             }
             return CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(time, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
-        }
-
-        public static void OnLogout()
-        {
-            if (instance != null) instance.ActivitiesStateKey = StateKey.Loading;
-        }
-
-        public static void OnLogin()
-        {
-            if (instance != null) instance.DatePicked = DateTimeOffset.Now.DateTime;
         }
 
         [RelayCommand]

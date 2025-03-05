@@ -13,6 +13,19 @@ namespace StudentUsos.Features.Dashboard.Views
 
             //Since user's name is just 1 label it should be fine to load it immediately
             viewModel.LoadUserName();
+
+            viewModel.DashboardActivitiesViewModel.OnCurrentActivityChanged += DashboardActivitiesViewModel_OnCurrentActivityChanged;
+        }
+
+        bool scrolled = false;
+        private void DashboardActivitiesViewModel_OnCurrentActivityChanged(Activity obj)
+        {
+            if (scrolled)
+            {
+                return;
+            }
+            TryScrollingToItem(obj);
+            scrolled = true;
         }
 
         bool isViewModelInitialized = false;

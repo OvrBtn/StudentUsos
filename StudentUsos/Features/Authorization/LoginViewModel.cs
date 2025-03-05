@@ -1,7 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using StudentUsos.Features.Activities;
 using StudentUsos.Features.Authorization.Services;
-using StudentUsos.Features.Dashboard.Views;
 
 namespace StudentUsos.Features.Authorization
 {
@@ -35,7 +33,7 @@ namespace StudentUsos.Features.Authorization
                 AuthorizationService.OnLoginSucceeded += LoginSuccessAsync;
                 AuthorizationService.OnLoginFailed += LoginFail;
                 AuthorizationService.OnContinueLogging += () => { MainStateKey = StateKey.Loading; };
-                AuthorizationService.OnLoggingFinished += () => { MainStateKey = StateKey.Loaded; };
+                AuthorizationService.OnAuthorizationFinished += () => { MainStateKey = StateKey.Loaded; };
                 areEventsSet = true;
             }
 
@@ -74,8 +72,6 @@ namespace StudentUsos.Features.Authorization
             IsActivityIndicatorRunning = false;
             LocalDatabaseManager.Default.GenerateTables();
             await Shell.Current.GoToAsync("//DashboardPage");
-            DashboardViewModel.OnLogin();
-            Activities.Views.ActivitiesViewModel.OnLogin();
         }
 
         private void LoginFail()

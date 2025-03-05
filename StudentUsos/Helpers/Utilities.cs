@@ -298,20 +298,5 @@ namespace StudentUsos.Helpers
                 return "localized string error";
             }
         }
-
-        /// <summary>
-        /// Use this when getting DateTimeOffset.Now.DateTime on app startup to make sure that 
-        /// the first initialization of DateTimeOffset.Now.DateTime happens on worker thread (first usage of DateTimeOffset.Now.DateTime is expensive)
-        /// </summary>
-        /// <param name="result"></param>
-        public static void DateTimeNowWorkerThread(Action<string> result, string toStringFormat)
-        {
-            ApplicationService.Default.WorkerThreadInvoke(() =>
-            {
-                string date = DateTimeOffset.Now.DateTime.ToString(toStringFormat);
-                result?.Invoke(date);
-            });
-        }
-
     }
 }

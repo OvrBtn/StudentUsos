@@ -1,5 +1,4 @@
 ﻿using StudentUsos.Controls;
-using StudentUsos.Features.Dashboard.Views;
 using StudentUsos.Resources.LocalizedStrings;
 using StudentUsos.Services.LocalNotifications;
 using StudentUsos.Services.ServerConnection;
@@ -165,7 +164,7 @@ namespace StudentUsos.Features.Authorization.Services
         }
 
         public static event Action OnContinueLogging;
-        public static event Action OnLoggingFinished;
+        public static event Action OnAuthorizationFinished;
 
         static async Task ContinueAuthenticationAsync(string returned)
         {
@@ -209,7 +208,7 @@ namespace StudentUsos.Features.Authorization.Services
                 Preferences.Set(SecureStorageKeys.InternalAccessTokenSecret.ToString(), InternalAccessTokenSecret);
 
                 OnLoginSucceeded?.Invoke();
-                OnLoggingFinished?.Invoke();
+                OnAuthorizationFinished?.Invoke();
             }
             catch (Exception ex)
             {
@@ -218,9 +217,11 @@ namespace StudentUsos.Features.Authorization.Services
             }
             finally
             {
-                OnLoggingFinished?.Invoke();
+                OnAuthorizationFinished?.Invoke();
             }
         }
+
+        public static event Action OnLogout;
 
         public static async void LogoutAsync()
         {
@@ -234,8 +235,6 @@ namespace StudentUsos.Features.Authorization.Services
             LocalStorageManager.Default.DeleteEverything();
             App.ServiceProvider.GetService<ILocalNotificationsService>()?.RemoveAll();
             await Shell.Current.GoToAsync("//LoginPage");
-            DashboardViewModel.OnLogout();
-            Activities.Views.ActivitiesViewModel.OnLogout();
             CustomTabBar.ActiveTabIndex = 0;
             _ = serverConnectionManager.SendAuthorizedGetRequestAsync("authorization/logout", new(), AuthorizationMode.Full).ConfigureAwait(false);
         }

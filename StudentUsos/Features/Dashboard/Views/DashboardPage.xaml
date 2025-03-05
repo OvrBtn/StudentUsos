@@ -117,31 +117,37 @@
                             </StackLayout>
 
                             <StackLayout toolkit:StateView.StateKey="Loaded">
-                                <StackLayout toolkit:StateContainer.CurrentState="{Binding ActivitiesStateKey}">
+                                <StackLayout toolkit:StateContainer.CurrentState="{Binding  DashboardActivitiesViewModel.ActivitiesStateKey}">
                                     <toolkit:StateContainer.StateViews>
 
                                         <StackLayout toolkit:StateView.StateKey="Loading" />
 
                                         <StackLayout Padding="20" toolkit:StateView.StateKey="LoadingError">
-                                            <Label Margin="0,0,0,5" FontSize="18" HorizontalTextAlignment="Center" Text="{Binding ActivitiesTitle}" FontAttributes="Bold"/>
+                                            <Label Margin="0,0,0,5" FontSize="18" HorizontalTextAlignment="Center" 
+                                                   Text="{Binding DashboardActivitiesViewModel.ActivitiesTitle}" FontAttributes="Bold"/>
                                             <Label Style="{StaticResource CenteredLabel}" Text="{x:Static strings:LocalizedStrings.Errors_LoadingError}" />
                                         </StackLayout>
 
                                         <StackLayout Padding="20" toolkit:StateView.StateKey="ConnectionError">
-                                            <Label Margin="0,0,0,5" FontSize="18" HorizontalTextAlignment="Center" Text="{Binding ActivitiesTitle}" FontAttributes="Bold" />
+                                            <Label Margin="0,0,0,5" FontSize="18" HorizontalTextAlignment="Center" 
+                                                   Text="{Binding DashboardActivitiesViewModel.ActivitiesTitle}" FontAttributes="Bold" />
                                             <Label Style="{StaticResource CenteredLabel}" Text="{x:Static strings:LocalizedStrings.Errors_USOSAPIConnectionError}" />
                                         </StackLayout>
 
                                         <StackLayout Padding="20" toolkit:StateView.StateKey="Empty">
-                                            <Label Margin="0,0,0,10" FontSize="18" HorizontalTextAlignment="Center" Text="{Binding ActivitiesTitle}" FontAttributes="Bold"/>
+                                            <Label Margin="0,0,0,10" FontSize="18" HorizontalTextAlignment="Center" 
+                                                   Text="{Binding DashboardActivitiesViewModel.ActivitiesTitle}" FontAttributes="Bold"/>
                                             <Label HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.DayOff}" />
                                         </StackLayout>
 
                                         <StackLayout Margin="0,20,0,10" toolkit:StateView.StateKey="Loaded">
-                                            <Label Margin="0,0,0,5" FontSize="18" HorizontalTextAlignment="Center" Text="{Binding ActivitiesTitle}" FontAttributes="Bold"/>
+                                            <Label Margin="0,0,0,5" FontSize="18" HorizontalTextAlignment="Center"
+                                                   Text="{Binding DashboardActivitiesViewModel.ActivitiesTitle}" FontAttributes="Bold"/>
                                             <StackLayout>
-                                                <CarouselView x:Name="carouselView" Margin="0,5,0,10" CurrentItem="{Binding CurrentItemInCarousel, Mode=TwoWay}"
-                                                              IndicatorView="activitiesIndicator" ItemsSource="{Binding Activities}" Loop="False" MinimumHeightRequest="20"
+                                                <CarouselView x:Name="carouselView" Margin="0,5,0,10" 
+                                                              CurrentItem="{Binding DashboardActivitiesViewModel.CurrentItemInCarousel, Mode=TwoWay}"
+                                                              IndicatorView="activitiesIndicator" ItemsSource="{Binding DashboardActivitiesViewModel.Activities}" 
+                                                              Loop="False" MinimumHeightRequest="20"
                                                               ItemTemplate="{x:StaticResource activitiesDataTemplate}"/>
                                                 <IndicatorView x:Name="activitiesIndicator" Margin="0,2,0,0" />
                                             </StackLayout>

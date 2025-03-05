@@ -1,4 +1,5 @@
-﻿using StudentUsos.Features.Authorization.Services;
+﻿using Plugin.LocalNotification;
+using StudentUsos.Features.Authorization.Services;
 using StudentUsos.Features.Calendar;
 using StudentUsos.Resources.LocalizedStrings;
 using System.Globalization;
@@ -38,6 +39,7 @@ namespace StudentUsos
                 logger.Log(LogLevel.Fatal, e.Exception.ToString());
                 e.SetObserved();
             };
+
         }
 
         //Called after Android MainActivity ctor
@@ -48,6 +50,18 @@ namespace StudentUsos
             BackwardCompatibility.Check();
 
             _ = firebasePushNotificationsService.InitNotificationsAsync();
+
+            _ = CheckPermissionsAsync();
+        }
+
+        async Task CheckPermissionsAsync()
+        {
+            await Task.Delay(4000);
+            if (await LocalNotificationCenter.Current.AreNotificationsEnabled() == false)
+            {
+                await LocalNotificationCenter.Current.RequestNotificationPermission();
+            }
+            return;
         }
 
         async Task SetMainPageAsync()

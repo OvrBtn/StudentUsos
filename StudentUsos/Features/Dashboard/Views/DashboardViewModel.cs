@@ -4,16 +4,12 @@ using StudentUsos.Features.Authorization;
 using StudentUsos.Features.Authorization.Services;
 using StudentUsos.Features.Calendar.Views;
 using StudentUsos.Features.Grades.Views;
-using StudentUsos.Features.Groups.Repositories;
-using StudentUsos.Features.Groups.Services;
 using StudentUsos.Features.UserInfo;
 
 namespace StudentUsos.Features.Dashboard.Views
 {
     public partial class DashboardViewModel : BaseViewModel
     {
-        public DashboardPage DashboardPage;
-
         public DashboardActivitiesViewModel DashboardActivitiesViewModel { get; init; }
         public DashboardCalendarViewModel DashboardCalendarViewModel { get; init; }
         public DashboardGradeViewModel DashboardGradeViewModel { get; init; }
@@ -21,8 +17,6 @@ namespace StudentUsos.Features.Dashboard.Views
         INavigationService navigationService;
         IUserInfoRepository userInfoRepository;
         IUserInfoService userinfoService;
-        IGroupsService groupsService;
-        IGroupsRepository groupsRepository;
         ILocalStorageManager localStorageManager;
         IApplicationService applicationService;
         ILogger? logger;
@@ -33,8 +27,6 @@ namespace StudentUsos.Features.Dashboard.Views
             INavigationService navigationService,
             IUserInfoRepository userInfoRepository,
             IUserInfoService userinfoService,
-            IGroupsService groupsService,
-            IGroupsRepository groupsRepository,
             ILocalStorageManager localStorageManager,
             IApplicationService applicationService,
             ILogger? logger = null)
@@ -46,8 +38,6 @@ namespace StudentUsos.Features.Dashboard.Views
             this.navigationService = navigationService;
             this.userInfoRepository = userInfoRepository;
             this.userinfoService = userinfoService;
-            this.groupsRepository = groupsRepository;
-            this.groupsService = groupsService;
             this.localStorageManager = localStorageManager;
             this.applicationService = applicationService;
             this.logger = logger;
@@ -74,11 +64,6 @@ namespace StudentUsos.Features.Dashboard.Views
         private void AuthorizationService_OnLoginSucceeded()
         {
             _ = InitAsync();
-        }
-
-        public void PassPage(DashboardPage dashboardPage)
-        {
-            this.DashboardPage = dashboardPage;
         }
 
         [ObservableProperty] string mainContentStateKey = StateKey.Loading;
@@ -108,6 +93,7 @@ namespace StudentUsos.Features.Dashboard.Views
                 }
             }
         }
+
         /// <summary>
         /// Invoked when all methods loading data from local databased finished executing
         /// </summary>
@@ -123,9 +109,11 @@ namespace StudentUsos.Features.Dashboard.Views
                 if (asyncLoadingFinishedCounter == asyncLoadingTotal)
                 {
                     FinishedAsynchronousLoading?.Invoke();
+                    asyncLoadingFinishedCounter = 0;
                 }
             });
         }
+
         /// <summary>
         /// Invoked when all methods loading data from USOS API finished executing
         /// </summary>
@@ -136,29 +124,9 @@ namespace StudentUsos.Features.Dashboard.Views
         {
             StudentNumberStateKey = UserInfoStateKey = StateKey.Loading;
 
-            if (Utilities.IsAppRunningForTheFirstTime)
-            {
-                _ = HandleEmptyLocalDatabaseAsync();
-            }
-
             LoadDashboard();
         }
 
-
-        async Task HandleEmptyLocalDatabaseAsync()
-        {
-            localStorageManager.SetData(LocalStorageKeys.IsAppRunningForTheFirstTime, false.ToString());
-
-            var groupsServer = await groupsService.GetGroupedGroupsServerAsync(false, true);
-            if (groupsServer == null)
-            {
-                return;
-            }
-            groupsServer.GroupsGrouped.Reverse();
-            await groupsService.SetEctsPointsAsync(groupsServer.Groups);
-            groupsRepository.InsertOrReplace(groupsServer.Terms);
-            groupsRepository.InsertOrReplace(groupsServer.Groups);
-        }
 
         [RelayCommand]
         void OpenGradesPage()

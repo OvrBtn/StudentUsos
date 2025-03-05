@@ -7,7 +7,6 @@ namespace StudentUsos.Features.Dashboard.Views
         DashboardViewModel viewModel;
         public DashboardPage(DashboardViewModel dashboardViewModel)
         {
-            dashboardViewModel.PassPage(this);
             BindingContext = viewModel = dashboardViewModel;
             InitializeComponent();
 

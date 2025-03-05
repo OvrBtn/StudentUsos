@@ -11,21 +11,6 @@ namespace StudentUsos.Helpers
 
     public static class Utilities
     {
-        public static bool IsAppRunningForTheFirstTime { get => CheckIfAppRunningForTheFirstTime(); }
-
-        static bool CheckIfAppRunningForTheFirstTime()
-        {
-            if (LocalStorageManager.Default.TryGettingData(LocalStorageKeys.IsAppRunningForTheFirstTime, out string result))
-            {
-                return bool.Parse(result);
-            }
-            else
-            {
-                LocalStorageManager.Default.SetData(LocalStorageKeys.IsAppRunningForTheFirstTime, bool.TrueString);
-                return true;
-            }
-        }
-
         public static float Lerp(float value, float min, float max)
         {
             return value * (max - min) + min;

@@ -8,9 +8,11 @@ namespace StudentUsos.Services.ServerConnection;
 public class ServerConnectionManager : IServerConnectionManager
 {
     ILogger logger;
-    public ServerConnectionManager(ILogger logger)
+    IApplicationService applicationService;
+    public ServerConnectionManager(ILogger logger, IApplicationService applicationService)
     {
         this.logger = logger;
+        this.applicationService = applicationService;
     }
 
     string apiVersion = "1";
@@ -18,18 +20,18 @@ public class ServerConnectionManager : IServerConnectionManager
     const int HttpClientDefaultTimeoutSeconds = 10;
     HttpClient httpClient = new() { Timeout = TimeSpan.FromSeconds(HttpClientDefaultTimeoutSeconds) };
 
-    const string QueryMethodKey = "querymethod";
-    const string QueryArgumentsKey = "queryarguments";
-    const string InternalAccessTokenKey = "internalaccesstoken";
-    const string UsosAccessTokenKey = "usosaccesstoken";
-    const string InternalAccessTokenSecretKey = "internalaccesstokensecret";
-    const string HashKey = "hash";
-    const string TimestampKey = "timestamp";
-    const string InstallationKey = "installation";
-    const string UsosConsumerKeyKey = "usosconsumerkey";
-    const string InternalConsumerKeyKey = "internalconsumerkey";
-    const string InternalConsumerKeySecretKey = "internalconsumerkeysecret";
-    const string VersionKey = "version";
+    const string QueryMethodKey = "QueryMethod";
+    const string QueryArgumentsKey = "QueryArguments";
+    const string InternalAccessTokenKey = "InternalAccessToken";
+    const string UsosAccessTokenKey = "UsosAccessToken";
+    const string InternalAccessTokenSecretKey = "InternalAccessTokenSecret";
+    const string HashKey = "Hash";
+    const string TimestampKey = "Timestamp";
+    const string InstallationKey = "Installation";
+    const string InternalConsumerKeyKey = "InternalConsumerKey";
+    const string InternalConsumerKeySecretKey = "InternalConsumerKeyCecret";
+    const string ApiVersionKey = "ApiVersion";
+    const string ApplicationVersionKey = "ApplicationVersion";
 
 
     public async Task<string?> SendRequestToUsosAsync(string methodName,
@@ -220,9 +222,9 @@ public class ServerConnectionManager : IServerConnectionManager
     {
         args.Add(TimestampKey, DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString());
         args.Add(InstallationKey, AuthorizationService.Installation);
-        args.Add(UsosConsumerKeyKey, Secrets.Default.UsosConsumerKey);
         args.Add(InternalConsumerKeyKey, Secrets.Default.InternalConsumerKey);
-        args.Add(VersionKey, apiVersion);
+        args.Add(ApiVersionKey, apiVersion);
+        args.Add(ApplicationVersionKey, applicationService.ApplicationInfo.VersionString);
     }
 
     Dictionary<string, string> AddStaticSecretArguments(Dictionary<string, string> args)
@@ -270,16 +272,9 @@ public class ServerConnectionManager : IServerConnectionManager
 
     string HashValue(string value)
     {
-        using (SHA256 sha256 = SHA256.Create())
-        {
-            var bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(value));
-            var sBuilder = new StringBuilder();
-            for (int i = 0; i < bytes.Length; i++)
-            {
-                sBuilder.Append(bytes[i].ToString("x2"));
-            }
-            return sBuilder.ToString();
-        }
+        using HMACSHA256 sha256 = new(Encoding.UTF8.GetBytes(Secrets.Default.InternalConsumerKeySecret));
+        var bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(value));
+        return BitConverter.ToString(bytes).Replace("-", "").ToLower(System.Globalization.CultureInfo.CurrentCulture);
     }
 
     void TryLogging(string methodName, string response)

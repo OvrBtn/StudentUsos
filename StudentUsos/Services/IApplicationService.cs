@@ -5,6 +5,8 @@
 /// </summary>
 public interface IApplicationService
 {
+    public IAppInfo ApplicationInfo { get; }
+
     public void MainThreadInvoke(Action action);
 
     public enum ToastDuration

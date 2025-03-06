@@ -54,6 +54,12 @@ public static class BackwardCompatibility
 
     static async Task CheckIfUsosKeysAreStoredLocallyAsync()
     {
+        //see comments below for a explanation
+        if (Preferences.ContainsKey("TempCompatibilityFlag"))
+        {
+            return;
+        }
+
         var serverConnectionManager = App.ServiceProvider.GetService<IServerConnectionManager>()!;
 
         string emptyString = "empty";
@@ -73,8 +79,13 @@ public static class BackwardCompatibility
             }
             if (result.IsSuccess)
             {
-                Preferences.Remove(AuthorizationService.PreferencesKeys.AccessToken.ToString());
-                Preferences.Remove(AuthorizationService.PreferencesKeys.AccessTokenSecret.ToString());
+                //for now don't remove them so in case I need to revert update users won't have to sign in again
+                //Preferences.Remove(AuthorizationService.PreferencesKeys.AccessToken.ToString());
+                //Preferences.Remove(AuthorizationService.PreferencesKeys.AccessTokenSecret.ToString());
+
+                //instead set a temp flag to avoid spamming the server
+                Preferences.Set("TempCompatibilityFlag", true.ToString());
+
                 Preferences.Set(AuthorizationService.SecureStorageKeys.AccessToken.ToString(), accessToken);
                 var deserialized = JsonSerializer.Deserialize(result.Response, UtilitiesJsonContext.Default.DictionaryStringString);
                 if (deserialized is null)

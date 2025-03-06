@@ -27,15 +27,8 @@ public class UsosCalendarService : IUsosCalendarService
         this.logger = logger;
     }
 
-    bool isInitialized;
     void EnsureInitialized()
     {
-        if (isInitialized)
-        {
-            return;
-        }
-        isInitialized = true;
-
         bool isTableEmpty = usosCalendarRepository.IsEmpty();
         //if dates of last updates with USOS API is not set or if there are no record in API's events table in local database set last update dates to force making webrequests
         if (localStorageManager.TryGettingData(LocalStorageKeys.LastPrimaryCalendarUpdate, out var lastPrimaryEventsUpdate) == false || isTableEmpty)

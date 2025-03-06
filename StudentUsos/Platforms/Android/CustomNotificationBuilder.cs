@@ -1,10 +1,10 @@
-﻿using System.Globalization;
-using System.Text.Json;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Plugin.FirebasePushNotifications;
 using Plugin.FirebasePushNotifications.Platforms;
 using StudentUsos.Resources.LocalizedStrings;
 using StudentUsos.Services.ServerConnection;
+using System.Globalization;
+using System.Text.Json;
 
 namespace StudentUsos.Platforms.Android;
 
@@ -17,8 +17,11 @@ public class CustomNotificationBuilder : NotificationBuilder
 
     public override bool ShouldHandleNotificationReceived(IDictionary<string, object> data)
     {
-        return true;
-        //return base.ShouldHandleNotificationReceived(data);
+        if (data.ContainsKey("type"))
+        {
+            return true;
+        }
+        return base.ShouldHandleNotificationReceived(data);
     }
 
     public override async void OnNotificationReceived(IDictionary<string, object> data)
@@ -46,13 +49,13 @@ public class CustomNotificationBuilder : NotificationBuilder
 
     async Task HandleNewGradeNotificationAsync(IDictionary<string, object> data)
     {
-        string examId = data["examId"].ToString();
-        string examSessionNumber = data["examSessionNumber"].ToString();
-
         data["title"] = data["body"] = LocalizedStrings.PushNotifications_UsosNewGrade_DefaultTitleAndBody;
 
         try
         {
+            var examId = data["examId"].ToString();
+            var examSessionNumber = data["examSessionNumber"].ToString();
+
             var serverConnectionManager = App.ServiceProvider.GetService<IServerConnectionManager>();
 
             Dictionary<string, string> args = new()

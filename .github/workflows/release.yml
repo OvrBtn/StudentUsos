@@ -1,0 +1,75 @@
+name: Build & Release MAUI Android App
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build-android:
+    name: Build & Sign Android APK
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restore MAUI workload cache
+        id: cache-maui
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.nuget/packages
+            ~/.dotnet/sdk-manifests
+            ~/.dotnet/workload
+            ~/.dotnet/workload.json
+          key: maui-workload-${{ runner.os }}-${{ hashFiles('**/global.json') }}
+
+      - name: Install MAUI workload
+        if: steps.cache-maui.outputs.cache-hit != 'true'
+        run: dotnet workload install maui
+
+      - name: Add DevExpress NuGet Source
+        run: dotnet nuget add source "https://nuget.devexpress.com/${{ secrets.DEVEXPRESS_NUGET_KEY }}/api" --name DevExpress
+
+      - name: Restore Dependencies
+        run: dotnet restore
+
+      - name: Create google-services.json
+        run: |
+          echo '${{ secrets.GOOGLE_SERVICES_JSON }}' > StudentUsos/Platforms/Android/Resources/google-services.json
+        shell: bash
+
+      - name: Create secrets.json
+        run: |
+          echo '${{ secrets.STUDENT_USOS_SECRETS }}' > StudentUsos/Resources/Raw/secrets.json
+        shell: bash
+        
+      - name: Decode Keystore from Secret
+        run: |
+          $base64 = "${{ secrets.ANDROID_KEYSTORE_BASE64 }}"
+          [IO.File]::WriteAllBytes("StudentUsos/release-key.keystore", [Convert]::FromBase64String($base64))
+        shell: pwsh
+
+      - name: Build APK (Unsigned)
+        run: dotnet publish ./StudentUsos/StudentUsos.csproj -c Release -f net8.0-android --no-restore `
+          -p:AndroidPackageFormat=apk `
+          -p:AndroidKeyStore=true `
+          -p:AndroidSigningKeyStore=release-key.keystore `
+          -p:AndroidSigningKeyAlias="${{ secrets.ANDROID_KEY_ALIAS }}" `
+          -p:AndroidSigningKeyPass="${{ secrets.ANDROID_KEY_PASSWORD }}" `
+          -p:AndroidSigningStorePass="${{ secrets.ANDROID_KEYSTORE_PASSWORD }}"
+        shell: pwsh
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            ./StudentUsos/bin/Release/**/publish/*-Signed.apk
+          token: ${{ secrets.GITHUB_TOKEN }}

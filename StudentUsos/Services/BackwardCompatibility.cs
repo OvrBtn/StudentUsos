@@ -14,7 +14,7 @@ public static class BackwardCompatibility
     /// <summary>
     /// When changes in code are made that might not correlate with previous version (e.g. local databse structure has changed and exceptions might occur) add number of new version here so local data will be deleted
     /// </summary>
-    static readonly string[] AppVersionsToReset = { "3.7.0", "3.7.2", "3.7.3", "4.0.0" };
+    static readonly string[] AppVersionsToReset = { "3.7.0", "3.7.2", "3.7.3", "4.0.3" };
 
     public enum PrefencesEnum
     {

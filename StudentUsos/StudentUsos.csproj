@@ -20,9 +20,9 @@
 		<ApplicationIdGuid>7cb62b6f-99f2-411b-91cf-58c93185c07c</ApplicationIdGuid>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>4.0.0</ApplicationDisplayVersion>
-		<Version>4.0.0</Version>
-		<ApplicationVersion>37</ApplicationVersion>
+		<ApplicationDisplayVersion>4.0.3</ApplicationDisplayVersion>
+		<Version>4.0.3</Version>
+		<ApplicationVersion>41</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">13.1</SupportedOSPlatformVersion>
@@ -45,21 +45,14 @@
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
 
-		<!--for .apk build-->
 		<AndroidPackageFormat>apk</AndroidPackageFormat>
 		
-		<!--for .aab (Google Play Store bundle) build-->
 		<!--<AndroidPackageFormat>aab</AndroidPackageFormat>
 		<AndroidUseAapt2>True</AndroidUseAapt2>
 		<AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>-->
 		
 		<ApplicationTitle>Studencki USOS</ApplicationTitle>
-		<!--<AotAssemblies>true</AotAssemblies>
-		<RunAOTCompilation>True</RunAOTCompilation>
-		<AndroidEnableProfiledAot>True</AndroidEnableProfiledAot>-->
-		<!--when enabled startup time is 2 seconds longer and the runtime performance is the same-->
-		<!--<EnableLLVM>false</EnableLLVM>-->
-		<!--<AndroidLinkTool>r8</AndroidLinkTool>-->
+	
 		<PublishTrimmed>True</PublishTrimmed>
 	</PropertyGroup>
 

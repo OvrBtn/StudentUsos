@@ -118,22 +118,24 @@ public static class BackwardCompatibility
             var localStorageManager = App.ServiceProvider.GetService<ILocalStorageManager>()!;
             var localNotificationsService = App.ServiceProvider.GetService<ILocalNotificationsService>()!;
 
-            string emptyString = "<EMPTY>";
-            string scopes = Preferences.Get(AuthorizationService.PreferencesKeys.Scopes.ToString(), emptyString);
-            string accessToken = Preferences.Get(AuthorizationService.SecureStorageKeys.AccessToken.ToString(), emptyString);
-            string internalAccessToken = Preferences.Get(AuthorizationService.SecureStorageKeys.InternalAccessToken.ToString(), emptyString);
-            string internalAccessTokenSecret = Preferences.Get(AuthorizationService.SecureStorageKeys.InternalAccessTokenSecret.ToString(), emptyString);
+            var scopes = Preferences.Get(AuthorizationService.PreferencesKeys.Scopes.ToString(), null);
+            var accessToken = Preferences.Get(AuthorizationService.SecureStorageKeys.AccessToken.ToString(), null);
+            //needed only for compatibility with versions <= 3.x.x
+            var accessTokenSecret = Preferences.Get("AccessTokenSecret", null);
+            var internalAccessToken = Preferences.Get(AuthorizationService.SecureStorageKeys.InternalAccessToken.ToString(), null);
+            var internalAccessTokenSecret = Preferences.Get(AuthorizationService.SecureStorageKeys.InternalAccessTokenSecret.ToString(), null);
             var googleCalendars = localDatabaseManager.GetAll<GoogleCalendar>();
 
             localDatabaseManager.ResetTables();
             localStorageManager.DeleteEverything();
             localNotificationsService.RemoveAll();
 
-            if (scopes != emptyString) Preferences.Set(AuthorizationService.PreferencesKeys.Scopes.ToString(), scopes);
-            if (accessToken != emptyString) Preferences.Set(AuthorizationService.SecureStorageKeys.AccessToken.ToString(), accessToken);
-            if (internalAccessToken != emptyString) Preferences.Set(AuthorizationService.SecureStorageKeys.InternalAccessToken.ToString(), internalAccessToken);
-            if (internalAccessTokenSecret != emptyString) Preferences.Set(AuthorizationService.SecureStorageKeys.InternalAccessTokenSecret.ToString(), internalAccessTokenSecret);
-            if (googleCalendars != null && googleCalendars.Count > 0) localDatabaseManager.InsertAll(googleCalendars);
+            if (scopes is not null) Preferences.Set(AuthorizationService.PreferencesKeys.Scopes.ToString(), scopes);
+            if (accessToken is not null) Preferences.Set(AuthorizationService.SecureStorageKeys.AccessToken.ToString(), accessToken);
+            if (accessTokenSecret is not null) Preferences.Set("AccessTokenSecret", accessTokenSecret);
+            if (internalAccessToken is not null) Preferences.Set(AuthorizationService.SecureStorageKeys.InternalAccessToken.ToString(), internalAccessToken);
+            if (internalAccessTokenSecret is not null) Preferences.Set(AuthorizationService.SecureStorageKeys.InternalAccessTokenSecret.ToString(), internalAccessTokenSecret);
+            if (googleCalendars is not null && googleCalendars.Count > 0) localDatabaseManager.InsertAll(googleCalendars);
         }
         catch (Exception ex) { Logger.Logger.Default?.LogCatchedException(ex); }
     }

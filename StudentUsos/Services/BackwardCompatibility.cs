@@ -52,6 +52,8 @@ public static class BackwardCompatibility
         }
     }
 
+    public static event Action OnCompatibilityRegisterSucceeded;
+
     static async Task CheckIfUsosKeysAreStoredLocallyAsync()
     {
         //see comments below for a explanation
@@ -77,36 +79,39 @@ public static class BackwardCompatibility
             {
                 return;
             }
-            if (result.IsSuccess)
+            if (result.IsSuccess == false)
             {
-                //for now don't remove them so in case I need to revert update users won't have to sign in again
-                //Preferences.Remove(AuthorizationService.PreferencesKeys.AccessToken.ToString());
-                //Preferences.Remove(AuthorizationService.PreferencesKeys.AccessTokenSecret.ToString());
-
-                //instead set a temp flag to avoid spamming the server
-                Preferences.Set("TempCompatibilityFlag", true.ToString());
-
-                Preferences.Set(AuthorizationService.SecureStorageKeys.AccessToken.ToString(), accessToken);
-                var deserialized = JsonSerializer.Deserialize(result.Response, UtilitiesJsonContext.Default.DictionaryStringString);
-                if (deserialized is null)
-                {
-                    return;
-                }
-                if (deserialized.TryGetValue("internalAccessToken", out var internalAccessToken) &&
-                    deserialized.TryGetValue("internalAccessTokenSecret", out var internalAccessTokenSecret))
-                {
-                    Preferences.Set(AuthorizationService.SecureStorageKeys.InternalAccessToken.ToString(), internalAccessToken);
-                    Preferences.Set(AuthorizationService.SecureStorageKeys.InternalAccessTokenSecret.ToString(), internalAccessTokenSecret);
-                    AuthorizationService.InternalAccessToken = internalAccessToken;
-                    AuthorizationService.InternalAccessTokenSecret = internalAccessTokenSecret;
-                }
-
-                var firebasePushNotificationsService = App.ServiceProvider.GetService<FirebasePushNotificationsService>()!;
-                string token = await firebasePushNotificationsService.GetFcmTokenAsync();
-                firebasePushNotificationsService.CacheFcmToken(token);
-                await firebasePushNotificationsService.SendFcmTokenToServerAsync(token);
-
+                return;
             }
+
+            //for now don't remove them so in case I need to revert update users won't have to sign in again
+            //Preferences.Remove(AuthorizationService.PreferencesKeys.AccessToken.ToString());
+            //Preferences.Remove(AuthorizationService.PreferencesKeys.AccessTokenSecret.ToString());
+
+            //instead set a temp flag to avoid spamming the server
+            Preferences.Set("TempCompatibilityFlag", true.ToString());
+
+            Preferences.Set(AuthorizationService.SecureStorageKeys.AccessToken.ToString(), accessToken);
+            var deserialized = JsonSerializer.Deserialize(result.Response, UtilitiesJsonContext.Default.DictionaryStringString);
+            if (deserialized is null)
+            {
+                return;
+            }
+            if (deserialized.TryGetValue("internalAccessToken", out var internalAccessToken) &&
+                deserialized.TryGetValue("internalAccessTokenSecret", out var internalAccessTokenSecret))
+            {
+                Preferences.Set(AuthorizationService.SecureStorageKeys.InternalAccessToken.ToString(), internalAccessToken);
+                Preferences.Set(AuthorizationService.SecureStorageKeys.InternalAccessTokenSecret.ToString(), internalAccessTokenSecret);
+                AuthorizationService.InternalAccessToken = internalAccessToken;
+                AuthorizationService.InternalAccessTokenSecret = internalAccessTokenSecret;
+            }
+
+            var firebasePushNotificationsService = App.ServiceProvider.GetService<FirebasePushNotificationsService>()!;
+            string token = await firebasePushNotificationsService.GetFcmTokenAsync();
+            firebasePushNotificationsService.CacheFcmToken(token);
+            await firebasePushNotificationsService.SendFcmTokenToServerAsync(token);
+
+            OnCompatibilityRegisterSucceeded?.Invoke();
         }
     }
 
@@ -118,22 +123,24 @@ public static class BackwardCompatibility
             var localStorageManager = App.ServiceProvider.GetService<ILocalStorageManager>()!;
             var localNotificationsService = App.ServiceProvider.GetService<ILocalNotificationsService>()!;
 
-            string emptyString = "<EMPTY>";
-            string scopes = Preferences.Get(AuthorizationService.PreferencesKeys.Scopes.ToString(), emptyString);
-            string accessToken = Preferences.Get(AuthorizationService.SecureStorageKeys.AccessToken.ToString(), emptyString);
-            string internalAccessToken = Preferences.Get(AuthorizationService.SecureStorageKeys.InternalAccessToken.ToString(), emptyString);
-            string internalAccessTokenSecret = Preferences.Get(AuthorizationService.SecureStorageKeys.InternalAccessTokenSecret.ToString(), emptyString);
+            var scopes = Preferences.Get(AuthorizationService.PreferencesKeys.Scopes.ToString(), null);
+            var accessToken = Preferences.Get(AuthorizationService.SecureStorageKeys.AccessToken.ToString(), null);
+            //needed only for compatibility with versions <= 3.x.x
+            var accessTokenSecret = Preferences.Get("AccessTokenSecret", null);
+            var internalAccessToken = Preferences.Get(AuthorizationService.SecureStorageKeys.InternalAccessToken.ToString(), null);
+            var internalAccessTokenSecret = Preferences.Get(AuthorizationService.SecureStorageKeys.InternalAccessTokenSecret.ToString(), null);
             var googleCalendars = localDatabaseManager.GetAll<GoogleCalendar>();
 
             localDatabaseManager.ResetTables();
             localStorageManager.DeleteEverything();
             localNotificationsService.RemoveAll();
 
-            if (scopes != emptyString) Preferences.Set(AuthorizationService.PreferencesKeys.Scopes.ToString(), scopes);
-            if (accessToken != emptyString) Preferences.Set(AuthorizationService.SecureStorageKeys.AccessToken.ToString(), accessToken);
-            if (internalAccessToken != emptyString) Preferences.Set(AuthorizationService.SecureStorageKeys.InternalAccessToken.ToString(), internalAccessToken);
-            if (internalAccessTokenSecret != emptyString) Preferences.Set(AuthorizationService.SecureStorageKeys.InternalAccessTokenSecret.ToString(), internalAccessTokenSecret);
-            if (googleCalendars != null && googleCalendars.Count > 0) localDatabaseManager.InsertAll(googleCalendars);
+            if (scopes is not null) Preferences.Set(AuthorizationService.PreferencesKeys.Scopes.ToString(), scopes);
+            if (accessToken is not null) Preferences.Set(AuthorizationService.SecureStorageKeys.AccessToken.ToString(), accessToken);
+            if (accessTokenSecret is not null) Preferences.Set("AccessTokenSecret", accessTokenSecret);
+            if (internalAccessToken is not null) Preferences.Set(AuthorizationService.SecureStorageKeys.InternalAccessToken.ToString(), internalAccessToken);
+            if (internalAccessTokenSecret is not null) Preferences.Set(AuthorizationService.SecureStorageKeys.InternalAccessTokenSecret.ToString(), internalAccessTokenSecret);
+            if (googleCalendars is not null && googleCalendars.Count > 0) localDatabaseManager.InsertAll(googleCalendars);
         }
         catch (Exception ex) { Logger.Logger.Default?.LogCatchedException(ex); }
     }

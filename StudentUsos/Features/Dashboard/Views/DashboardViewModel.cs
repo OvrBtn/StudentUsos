@@ -59,6 +59,13 @@ public partial class DashboardViewModel : BaseViewModel
 
         DashboardGradeViewModel.OnSynchronousLoadingFinished += SynchronousOperationFinished;
         DashboardGradeViewModel.OnAsynchronousLoadingFinished += AsynchronousOperationFinished;
+
+        BackwardCompatibility.OnCompatibilityRegisterSucceeded += BackwardCompatibility_OnCompatibilityRegisterSucceeded;
+    }
+
+    private void BackwardCompatibility_OnCompatibilityRegisterSucceeded()
+    {
+        _ = InitAsync();
     }
 
     private void AuthorizationService_OnLoginSucceeded()
@@ -199,7 +206,10 @@ public partial class DashboardViewModel : BaseViewModel
     {
         try
         {
-            await Task.Delay(webrequestDelay);
+            if (string.IsNullOrEmpty(IndexNumber) == false)
+            {
+                await Task.Delay(webrequestDelay);
+            }
             var userInfo = await userinfoService.GetUserInfoAsync();
             if (userInfo == null) return;
             HandleUserInfo(userInfo);

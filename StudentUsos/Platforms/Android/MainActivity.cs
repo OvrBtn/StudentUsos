@@ -7,8 +7,16 @@ using StudentUsos.Platforms.Android;
 
 namespace StudentUsos;
 
-[Activity(Theme = "@style/Maui.SplashTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode |
-                                                                                         ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize | ConfigChanges.Density)]
+[Activity(Theme = "@style/Maui.SplashTheme",
+    MainLauncher = true,
+    LaunchMode = LaunchMode.SingleTask,
+    Exported = true,
+    ConfigurationChanges = ConfigChanges.ScreenSize
+        | ConfigChanges.Orientation
+        | ConfigChanges.UiMode
+        | ConfigChanges.ScreenLayout
+        | ConfigChanges.SmallestScreenSize
+        | ConfigChanges.Density)]
 [IntentFilter(new[] { Intent.ActionView },
     Categories = new[]
     {
@@ -16,7 +24,9 @@ namespace StudentUsos;
         Intent.CategoryDefault,
         Intent.CategoryBrowsable,
     },
-    DataScheme = "studenckiusosput", DataHost = "", DataPathPrefix = "/studenckiusosput")]
+    DataScheme = "studenckiusosput",
+    DataHost = "",
+    DataPathPrefix = "/studenckiusosput")]
 public class MainActivity : MauiAppCompatActivity
 {
     public static event Action<string> OnLogInCallback;
@@ -36,7 +46,7 @@ public class MainActivity : MauiAppCompatActivity
 
         SetStatusBarHeight();
 
-        CheckUri();
+        CheckUri(this.Intent);
 
         App.SetStatusBarColor = new((color) => { Window?.SetStatusBarColor(color.ToAndroid()); });
 
@@ -47,11 +57,22 @@ public class MainActivity : MauiAppCompatActivity
         });
     }
 
-    void CheckUri()
+    protected override void OnNewIntent(Intent? intent)
+    {
+        base.OnNewIntent(intent);
+
+        CheckUri(intent);
+    }
+
+    void CheckUri(Intent? intent)
     {
         try
         {
-            var uri = Intent?.Data;
+            if (intent is null)
+            {
+                return;
+            }
+            var uri = intent?.Data;
             if (uri != null)
             {
                 var parameters = uri?.GetQueryParameters("oauth_verifier")?.ToList();

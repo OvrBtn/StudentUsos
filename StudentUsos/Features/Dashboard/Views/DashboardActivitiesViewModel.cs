@@ -129,12 +129,20 @@ public partial class DashboardActivitiesViewModel : BaseViewModel
             var activitiesFromLocalDb = LoadActivitiesLocalDb();
             OnSynchronousLoadingFinished?.Invoke();
 
-            //to limit making requests for activities every time app is open
-            if (activitiesFromLocalDb != null && activitiesFromLocalDb.FirstOrDefault(new TimetableDay()).CreationDate.Date == DateTimeOffset.Now.DateTime.Date) return;
+            var firstAcitivity = activitiesFromLocalDb?.FirstOrDefault();
+            if (activitiesFromLocalDb is not null && firstAcitivity is not null)
+            {
+                TimeSpan refreshActivitiesThreshold = new(0, 30, 0);
+                //to limit making requests for activities every time app is open
+                if (DateTimeOffset.Now.DateTime - firstAcitivity.CreationDate < refreshActivitiesThreshold)
+                {
+                    return;
+                }
+            }
 
             var activitiesFromApi = await LoadActivitiesApiAsync();
             OnAsynchronousLoadingFinished?.Invoke();
-            if (activitiesFromApi != null) activitiesRepository.Replace(activitiesFromApi);
+            if (activitiesFromApi is not null) activitiesRepository.Replace(activitiesFromApi);
         }
         catch (Exception ex)
         {

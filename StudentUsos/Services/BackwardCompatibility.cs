@@ -12,7 +12,8 @@ namespace StudentUsos.Services;
 public static class BackwardCompatibility
 {
     /// <summary>
-    /// When changes in code are made that might not correlate with previous version (e.g. local databse structure has changed and exceptions might occur) add number of new version here so local data will be deleted
+    /// When changes in code are made that might not correlate with previous version (e.g. local databse structure has changed and exceptions might occur) 
+    /// add number of new version here so local data will be deleted
     /// </summary>
     static readonly string[] AppVersionsToReset = { "3.7.0", "3.7.2", "3.7.3", "4.0.3" };
 
@@ -56,63 +57,60 @@ public static class BackwardCompatibility
 
     static async Task CheckIfUsosKeysAreStoredLocallyAsync()
     {
-        //see comments below for a explanation
+
+        //compatibility flag from previous iterations
         if (Preferences.ContainsKey("TempCompatibilityFlag"))
+        {
+            Preferences.Remove(AuthorizationService.PreferencesKeys.AccessTokenSecret.ToString());
+            return;
+        }
+
+        var accessToken = Preferences.Get(AuthorizationService.PreferencesKeys.AccessToken.ToString(), null);
+        var accessTokenSecret = Preferences.Get(AuthorizationService.PreferencesKeys.AccessTokenSecret.ToString(), null);
+        if (accessToken is null || accessTokenSecret is null)
         {
             return;
         }
 
         var serverConnectionManager = App.ServiceProvider.GetService<IServerConnectionManager>()!;
 
-        string emptyString = "empty";
-        var accessToken = Preferences.Get(AuthorizationService.PreferencesKeys.AccessToken.ToString(), emptyString);
-        var accessTokenSecret = Preferences.Get(AuthorizationService.PreferencesKeys.AccessTokenSecret.ToString(), emptyString);
-        if (accessToken != emptyString && accessTokenSecret != emptyString)
+        Dictionary<string, string> args = new()
         {
-            Dictionary<string, string> args = new()
-            {
-                { "usosAccessToken", accessToken },
-                { "usosAccessTokenSecret", accessTokenSecret }
-            };
-            var result = await serverConnectionManager.SendAuthorizedPostRequestAsync("authorization/compatibilityRegister", args, AuthorizationMode.StaticInternalsOnly);
-            if (result is null)
-            {
-                return;
-            }
-            if (result.IsSuccess == false)
-            {
-                return;
-            }
-
-            //for now don't remove them so in case I need to revert update users won't have to sign in again
-            //Preferences.Remove(AuthorizationService.PreferencesKeys.AccessToken.ToString());
-            //Preferences.Remove(AuthorizationService.PreferencesKeys.AccessTokenSecret.ToString());
-
-            //instead set a temp flag to avoid spamming the server
-            Preferences.Set("TempCompatibilityFlag", true.ToString());
-
-            Preferences.Set(AuthorizationService.SecureStorageKeys.AccessToken.ToString(), accessToken);
-            var deserialized = JsonSerializer.Deserialize(result.Response, UtilitiesJsonContext.Default.DictionaryStringString);
-            if (deserialized is null)
-            {
-                return;
-            }
-            if (deserialized.TryGetValue("internalAccessToken", out var internalAccessToken) &&
-                deserialized.TryGetValue("internalAccessTokenSecret", out var internalAccessTokenSecret))
-            {
-                Preferences.Set(AuthorizationService.SecureStorageKeys.InternalAccessToken.ToString(), internalAccessToken);
-                Preferences.Set(AuthorizationService.SecureStorageKeys.InternalAccessTokenSecret.ToString(), internalAccessTokenSecret);
-                AuthorizationService.InternalAccessToken = internalAccessToken;
-                AuthorizationService.InternalAccessTokenSecret = internalAccessTokenSecret;
-            }
-
-            var firebasePushNotificationsService = App.ServiceProvider.GetService<FirebasePushNotificationsService>()!;
-            string token = await firebasePushNotificationsService.GetFcmTokenAsync();
-            firebasePushNotificationsService.CacheFcmToken(token);
-            await firebasePushNotificationsService.SendFcmTokenToServerAsync(token);
-
-            OnCompatibilityRegisterSucceeded?.Invoke();
+            { "usosAccessToken", accessToken },
+            { "usosAccessTokenSecret", accessTokenSecret }
+        };
+        var result = await serverConnectionManager.SendAuthorizedPostRequestAsync("authorization/compatibilityRegister", args, AuthorizationMode.StaticInternalsOnly);
+        if (result is null)
+        {
+            return;
         }
+        if (result.IsSuccess == false)
+        {
+            return;
+        }
+
+        Preferences.Set(AuthorizationService.SecureStorageKeys.AccessToken.ToString(), accessToken);
+        var deserialized = JsonSerializer.Deserialize(result.Response, UtilitiesJsonContext.Default.DictionaryStringString);
+        if (deserialized is null)
+        {
+            return;
+        }
+        if (deserialized.TryGetValue("internalAccessToken", out var internalAccessToken) &&
+            deserialized.TryGetValue("internalAccessTokenSecret", out var internalAccessTokenSecret))
+        {
+            Preferences.Set(AuthorizationService.SecureStorageKeys.InternalAccessToken.ToString(), internalAccessToken);
+            Preferences.Set(AuthorizationService.SecureStorageKeys.InternalAccessTokenSecret.ToString(), internalAccessTokenSecret);
+            AuthorizationService.InternalAccessToken = internalAccessToken;
+            AuthorizationService.InternalAccessTokenSecret = internalAccessTokenSecret;
+            Preferences.Remove(AuthorizationService.PreferencesKeys.AccessTokenSecret.ToString());
+        }
+
+        var firebasePushNotificationsService = App.ServiceProvider.GetService<FirebasePushNotificationsService>()!;
+        string token = await firebasePushNotificationsService.GetFcmTokenAsync();
+        firebasePushNotificationsService.CacheFcmToken(token);
+        await firebasePushNotificationsService.SendFcmTokenToServerAsync(token);
+
+        OnCompatibilityRegisterSucceeded?.Invoke();
     }
 
     public static void ResetLocalData()

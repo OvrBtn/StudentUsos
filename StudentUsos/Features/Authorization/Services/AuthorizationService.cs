@@ -27,7 +27,7 @@ internal static class AuthorizationService
     }
 
     /// <summary>
-    /// These keys should be used with <see cref="SecureStorage"/> but there are bugs making it unuseable to <see cref="Preferences"/> are used instead
+    /// These keys should be used with <see cref="SecureStorage"/> but there are bugs making it unusable so <see cref="Preferences"/> are used instead
     /// </summary>
     public enum SecureStorageKeys
     {

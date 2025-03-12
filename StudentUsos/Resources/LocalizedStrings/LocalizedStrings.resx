@@ -162,6 +162,9 @@
   <data name="Add" xml:space="preserve">
     <value>Add</value>
   </data>
+  <data name="Analyse" xml:space="preserve">
+    <value>Analyse</value>
+  </data>
   <data name="AppName" xml:space="preserve">
     <value>Student USOS</value>
   </data>
@@ -374,6 +377,39 @@
   <data name="Notifications" xml:space="preserve">
     <value>Notifications</value>
   </data>
+  <data name="NotificationsDiagnosis_GoToSettings" xml:space="preserve">
+    <value>Go to settings</value>
+  </data>
+  <data name="NotificationsDiagnosis_AutoStartTitle" xml:space="preserve">
+    <value>Checking if device manufacturer defined additional permission which might block this application from receiving notifications after device reboot</value>
+  </data>
+  <data name="NotificationsDiagnosis_AutoStartWarningMessage" xml:space="preserve">
+    <value>Manufacturer of your device might have defined a permission which could block this application from starting after rebooting the device. By clicking button below the app will try to forward you to the right settings page.</value>
+  </data>
+  <data name="NotificationsDiagnosis_BackgroundRestrictedButton" xml:space="preserve">
+    <value>Allow running in background</value>
+  </data>
+  <data name="NotificationsDiagnosis_BackgroundRestrictedErrorDescription" xml:space="preserve">
+    <value>This application is not allowed to run in background, this could potentially block some notifications.</value>
+  </data>
+  <data name="NotificationsDiagnosis_BackgroundRestrictedTitle" xml:space="preserve">
+    <value>Checking if application is restricted from running in the background</value>
+  </data>
+  <data name="NotificationsDiagnosis_BatteryOptimizationErrorDescription" xml:space="preserve">
+    <value>Your device has battery optimization enabled for this app, this might break notifications</value>
+  </data>
+  <data name="NotificationsDiagnosis_BatteryOptimizationTitle" xml:space="preserve">
+    <value>Checking if battery optimization is enabled for this application</value>
+  </data>
+  <data name="NotificationsDiagnosis_FcmTokenErrorMessage" xml:space="preserve">
+    <value>Synchronizing has failed. Next steps:
+1. Server could be down - try again later.
+2. Something might be wrong on the server - try signing out and signing in again.
+3. If issue persists try contacting support (ways of contact can be found in Settings -&gt; App information).</value>
+  </data>
+  <data name="NotificationsDiagnosis_FcmTokenTitle" xml:space="preserve">
+    <value>Updating device information on the server</value>
+  </data>
   <data name="Notify" xml:space="preserve">
     <value>Notify</value>
   </data>
@@ -473,6 +509,9 @@
   <data name="SurveysPage_SurveysToFill" xml:space="preserve">
     <value>Surveys to fill</value>
   </data>
+  <data name="Troubleshooting" xml:space="preserve">
+    <value>Troubleshooting</value>
+  </data>
   <data name="TryAgain" xml:space="preserve">
     <value>Try again</value>
   </data>
@@ -487,5 +526,8 @@
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>
+  </data>
+  <data name="NotificationsDiagnosis_AutoStartCouldNotOpenSettings" xml:space="preserve">
+    <value>Didn't find the appropriate settings page</value>
   </data>
 </root>

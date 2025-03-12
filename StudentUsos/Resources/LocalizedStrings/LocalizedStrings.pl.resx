@@ -162,6 +162,9 @@
   <data name="Add" xml:space="preserve">
     <value>Dodaj</value>
   </data>
+  <data name="Analyse" xml:space="preserve">
+    <value>Analizuj</value>
+  </data>
   <data name="AppName" xml:space="preserve">
     <value>Studencki USOS</value>
   </data>
@@ -376,6 +379,39 @@
   <data name="Notifications" xml:space="preserve">
     <value>Powiadomienia</value>
   </data>
+  <data name="NotificationsDiagnosis_GoToSettings" xml:space="preserve">
+    <value>Przejdź do ustawień</value>
+  </data>
+  <data name="NotificationsDiagnosis_AutoStartTitle" xml:space="preserve">
+    <value>Sprawdzanie, czy producent urządzenia zdefiniował dodatkowe uprawnienie, które może blokować tę aplikację przed otrzymywaniem powiadomień po ponownym uruchomieniu urządzenia</value>
+  </data>
+  <data name="NotificationsDiagnosis_AutoStartWarningMessage" xml:space="preserve">
+    <value>Producent Twojego urządzenia mógł zdefiniować uprawnienie, które może blokować uruchamianie tej aplikacji po ponownym uruchomieniu urządzenia. Klikając przycisk poniżej, aplikacja spróbuje przekierować Cię do odpowiedniej strony ustawień</value>
+  </data>
+  <data name="NotificationsDiagnosis_BackgroundRestrictedButton" xml:space="preserve">
+    <value>Zezwól na działanie w tle</value>
+  </data>
+  <data name="NotificationsDiagnosis_BackgroundRestrictedErrorDescription" xml:space="preserve">
+    <value>Działanie aplikacji w tle jest zablokowane, co może potencjalnie prowadzić do nie otrzymywania niektórych powiadomień.</value>
+  </data>
+  <data name="NotificationsDiagnosis_BackgroundRestrictedTitle" xml:space="preserve">
+    <value>Sprawdzanie czy działanie aplikacji w tle jest ograniczone</value>
+  </data>
+  <data name="NotificationsDiagnosis_BatteryOptimizationErrorDescription" xml:space="preserve">
+    <value>Na Twoim urządzeniu włączona jest optymalizacja baterii dla tej aplikacji, co może powodować problemy z powiadomieniami</value>
+  </data>
+  <data name="NotificationsDiagnosis_BatteryOptimizationTitle" xml:space="preserve">
+    <value>Sprawdzanie czy optymalizacja baterii jest włączona dla tej aplikacji</value>
+  </data>
+  <data name="NotificationsDiagnosis_FcmTokenErrorMessage" xml:space="preserve">
+    <value>Synchronizacja nie powiodła się. Kolejne kroki:
+1. Serwer może być niedostępny – spróbuj ponownie później.
+2. Może występować problem po stronie serwera – spróbuj się wylogować i zalogować ponownie.
+3. Jeśli problem nadal występuje, skontaktuj się z pomocą techniczną (sposoby kontaktu znajdziesz w Ustawieniach → Informacje o aplikacji).</value>
+  </data>
+  <data name="NotificationsDiagnosis_FcmTokenTitle" xml:space="preserve">
+    <value>Synchronizowanie informacji o urządzeniu z serwerem</value>
+  </data>
   <data name="Notify" xml:space="preserve">
     <value>Powiadamiaj</value>
   </data>
@@ -475,6 +511,9 @@
   <data name="SurveysPage_SurveysToFill" xml:space="preserve">
     <value>Ankiety do wypełnienia</value>
   </data>
+  <data name="Troubleshooting" xml:space="preserve">
+    <value>Rozwiązywanie problemów</value>
+  </data>
   <data name="TryAgain" xml:space="preserve">
     <value>Spróbuj ponownie</value>
   </data>
@@ -489,5 +528,8 @@
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Tak</value>
+  </data>
+  <data name="NotificationsDiagnosis_AutoStartCouldNotOpenSettings" xml:space="preserve">
+    <value>Nie znaleziono odpowiedniej strony z ustawieniami</value>
   </data>
 </root>

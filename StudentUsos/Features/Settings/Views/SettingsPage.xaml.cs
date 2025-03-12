@@ -1,5 +1,6 @@
 ﻿using StudentUsos.Controls;
 using StudentUsos.Features.Authorization.Services;
+using StudentUsos.Features.Settings.Views.NotificationsDiagnosis;
 using StudentUsos.Resources.LocalizedStrings;
 
 namespace StudentUsos.Features.Settings.Views;
@@ -76,5 +77,10 @@ public partial class SettingsPage : CustomContentPageNotAnimated
     private async void AppInfoButton_Clicked(object sender, EventArgs e)
     {
         await navigationService.PushAsync<AppInfoPage>();
+    }
+
+    private void TroubleshootingButton_Clicked(object sender, EventArgs e)
+    {
+        navigationService.PushAsync<NotificationsDiagnosisPage>();
     }
 }

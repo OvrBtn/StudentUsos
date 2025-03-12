@@ -136,7 +136,6 @@
 		<None Remove="Resources\Images\calendar3_week2.png" />
 		<None Remove="Resources\Images\copy_to_clipboard.png" />
 		<None Remove="Resources\Images\credit_card.png" />
-		<None Remove="Resources\Images\Embedded\beer.png" />
 		<None Remove="Resources\Images\Embedded\download.png" />
 		<None Remove="Resources\Images\Embedded\rocket.png" />
 		<None Remove="Resources\Images\gear.svg" BaseSize="64,64" />
@@ -172,7 +171,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Include="Resources\Images\Embedded\beer.png" />
 	  <EmbeddedResource Include="Resources\Images\Embedded\download.png" />
 	  <EmbeddedResource Include="Resources\Images\Embedded\rocket.png" />
 	</ItemGroup>
@@ -215,6 +213,9 @@
 		</Compile>
 		<Compile Update="Controls\CustomContentPageNotAnimated.xaml.cs">
 		  <DependentUpon>CustomContentPageNotAnimated.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Features\Settings\Views\NotificationsDiagnosis\NotificationsDiagnosisPage.xaml.cs">
+		  <DependentUpon>NotificationsDiagnosisPage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Features\Settings\Views\LogsPage.xaml.cs">
 		  <DependentUpon>LogsPage.xaml</DependentUpon>
@@ -325,6 +326,12 @@
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Features\Dashboard\Layouts\CalendarDataTemplates.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Features\Settings\Views\NotificationsDiagnosis\NotificationsDiagnosisPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Features\Settings\Views\NotificationsDiagnosis\StateContentView.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Resources\ResourceDictionaries\Converters.xaml">

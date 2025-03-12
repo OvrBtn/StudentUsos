@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:notificationsDiagnosis="clr-namespace:StudentUsos.Features.Settings.Views.NotificationsDiagnosis"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="StudentUsos.Features.Settings.Views.NotificationsDiagnosis.StateContentView"
+             x:DataType="notificationsDiagnosis:StateContentView">
+
+    <StackLayout toolkit:StateContainer.CurrentState="{Binding CurrentStateString, 
+        Source={RelativeSource AncestorType={x:Type notificationsDiagnosis:StateContentView}}}" 
+                 VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        <toolkit:StateContainer.StateViews>
+            
+            <ActivityIndicator toolkit:StateView.StateKey="Loading"/>
+
+            <Image toolkit:StateView.StateKey="Success" Source="symbol_success.png"></Image>
+
+            <Image toolkit:StateView.StateKey="Warning" Source="symbol_warning.png"></Image>
+            
+            <Image toolkit:StateView.StateKey="Error" Source="symbol_fail.png"></Image>
+            
+        </toolkit:StateContainer.StateViews>
+    </StackLayout>
+    
+</ContentView>

@@ -94,7 +94,10 @@ public partial class CustomBottomSheet : ContentPage
         CurrentInstance = null;
         devExpressBottomSheet?.Close();
         OnClose?.Invoke();
-        App.Current?.MainPage?.Navigation.PopModalAsync();
+        if (App.Current?.MainPage?.Navigation.ModalStack.Count > 0)
+        {
+            App.Current?.MainPage?.Navigation.PopModalAsync();
+        }
     }
 
     protected override void OnDisappearing()

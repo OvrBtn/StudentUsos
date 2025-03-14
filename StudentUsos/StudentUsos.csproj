@@ -221,6 +221,9 @@
 		<Compile Update="Features\Settings\Views\LogsPage.xaml.cs">
 		  <DependentUpon>LogsPage.xaml</DependentUpon>
 		</Compile>
+		<Compile Update="Features\Settings\Views\Subpages\AccountSubpage.xaml.cs">
+		  <DependentUpon>AccountSubpage.xaml</DependentUpon>
+		</Compile>
 		<Compile Update="Features\Settings\Views\Subpages\NotificationsSubpage.xaml.cs">
 		  <DependentUpon>NotificationsSubpage.xaml</DependentUpon>
 		</Compile>
@@ -336,6 +339,9 @@
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Features\Settings\Views\NotificationsDiagnosis\StateContentView.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Features\Settings\Views\Subpages\AccountSubpage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Features\Settings\Views\Subpages\EmptyPageTemplate - Copy.xaml">

@@ -26,6 +26,12 @@ public partial class SettingsViewModel : BaseViewModel
         await navigationService.PushAsync<NotificationsSubpage>();
     }
 
+    [RelayCommand]
+    async Task GoToAccountSubpageAsync()
+    {
+        await navigationService.PushAsync<AccountSubpage>();
+    }
+
 
     [ObservableProperty] string currentLanguageName = CultureInfo.CurrentCulture.NativeName;
     [ObservableProperty] List<Language> languages;

@@ -122,6 +122,7 @@ internal static class MauiProgramExtensions
 
         builder.Services.AddTransient<SettingsPage>();
         builder.Services.AddTransient<NotificationsSubpage>();
+        builder.Services.AddTransient<AccountSubpage>();
         builder.Services.AddTransient<AppInfoPage>();
         builder.Services.AddTransient<NotificationsDiagnosisPage>();
 

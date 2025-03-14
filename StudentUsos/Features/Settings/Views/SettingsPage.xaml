@@ -22,6 +22,16 @@
                 </Grid>
             </Border>
 
+            <Border Padding="0">
+                <Grid>
+                    <Grid Margin="20" ColumnDefinitions="auto, *" ColumnSpacing="10">
+                        <Image Grid.Column="0" Source="person" WidthRequest="25"></Image>
+                        <Label Grid.Column="1" Text="{x:Static strings:LocalizedStrings.Account}"/>
+                    </Grid>
+                    <Button BackgroundColor="Transparent" Command="{Binding GoToAccountSubpageCommand}"/>
+                </Grid>
+            </Border>
+
             <Border >
                 <StackLayout Spacing="10">
                     <Label FontSize="16" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.Language}" />
@@ -29,16 +39,7 @@
                 </StackLayout>
             </Border>
 
-            <Border>
-                <StackLayout Spacing="10">
-                    <Label FontSize="16" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.Account}" />
-                    <StackLayout Spacing="10">
-                        <Button Text="{x:Static strings:LocalizedStrings.MorePage_RevokeAccess}" 
-                            Clicked="RevokeAccessButton_Clicked" BackgroundColor="{StaticResource Primary}"/>
-                        <Button Text="{x:Static strings:LocalizedStrings.Logout}" Clicked="LogOutButton_Clicked_1" BackgroundColor="{StaticResource Primary}"/>
-                    </StackLayout>
-                </StackLayout>
-            </Border>
+           
 
             <Border>
                 <StackLayout Spacing="10">

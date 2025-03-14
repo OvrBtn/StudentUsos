@@ -1,6 +1,6 @@
 ﻿using StudentUsos.Controls;
 
-namespace StudentUsos;
+namespace StudentUsos.Features.Settings.Views.Subpages;
 
 public partial class EmptyPageTemplate : CustomContentPageNotAnimated
 {

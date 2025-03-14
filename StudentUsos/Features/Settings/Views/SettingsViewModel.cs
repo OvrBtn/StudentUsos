@@ -1,8 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using StudentUsos.Features.Calendar;
-using StudentUsos.Features.Calendar.Repositories;
 using StudentUsos.Features.Settings.Models;
+using StudentUsos.Features.Settings.Views.Subpages;
 using StudentUsos.Resources.LocalizedStrings;
 using System.Globalization;
 using System.Text.Json;
@@ -11,61 +10,22 @@ namespace StudentUsos.Features.Settings.Views;
 
 public partial class SettingsViewModel : BaseViewModel
 {
-    [ObservableProperty] bool areNotificationsEnabled = true;
-    [ObservableProperty] string notificationsDayPicked = "1";
-    [ObservableProperty] TimeSpan notificationsTimePicked = new TimeSpan(15, 0, 0);
-
-    bool areNotificationsEnabledPreviousValue;
-    string notificationsDayPickedPreviousValue;
-    TimeSpan notificationsTimePickedPreviousValue;
-
-    IUsosCalendarRepository usosCalendarRepository;
-    IGoogleCalendarRepository googleCalendarRepository;
     ILocalStorageManager localStorageManager;
-    ILogger? logger;
-    public SettingsViewModel(IUsosCalendarRepository usosCalendarRepository,
-        IGoogleCalendarRepository googleCalendarRepository,
-        ILocalStorageManager localStorageManager,
-        ILogger? logger = null)
+    INavigationService navigationService;
+    public SettingsViewModel(ILocalStorageManager localStorageManager, INavigationService navigationService)
     {
-        this.usosCalendarRepository = usosCalendarRepository;
-        this.googleCalendarRepository = googleCalendarRepository;
         this.localStorageManager = localStorageManager;
-
-        CalendarSettings.LoadNotificationSettingsAndInitializePreferences();
-        areNotificationsEnabledPreviousValue = AreNotificationsEnabled = CalendarSettings.AreCalendarNotificationsEnabled;
-        notificationsDayPickedPreviousValue = NotificationsDayPicked = CalendarSettings.DaysBeforeCalendarEventToSendNotification.ToString();
-        notificationsTimePickedPreviousValue = NotificationsTimePicked = CalendarSettings.TimeOfDayOfCalendarEventNotification;
+        this.navigationService = navigationService;
 
         _ = LoadLanguagesAsync();
-        this.logger = logger;
     }
 
-    public async void SettingsPage_Disappearing(object? sender, EventArgs e)
+    [RelayCommand]
+    async Task GoToNotificationsSubpageAsync()
     {
-        try
-        {
-            if (string.IsNullOrEmpty(NotificationsDayPicked)) NotificationsDayPicked = notificationsDayPickedPreviousValue;
-
-            bool didCalendarNotificationsSettingsChanged = AreNotificationsEnabled != areNotificationsEnabledPreviousValue ||
-                                                           NotificationsDayPicked != notificationsDayPickedPreviousValue || NotificationsTimePicked != notificationsTimePickedPreviousValue;
-
-            if (didCalendarNotificationsSettingsChanged)
-            {
-                localStorageManager.SetData(LocalStorageKeys.AreNotificationsEnabled, AreNotificationsEnabled.ToString());
-                localStorageManager.SetData(LocalStorageKeys.DaysBeforeCalendarEventToSendNotification, NotificationsDayPicked.ToString());
-                localStorageManager.SetData(LocalStorageKeys.TimeOfDayOfCalendarEventNotification, NotificationsTimePicked.ToString());
-
-                int notificationsDayPickedInt = int.Parse(NotificationsDayPicked);
-                await usosCalendarRepository.RefreshNotificationsAsync(AreNotificationsEnabled, notificationsDayPickedInt, NotificationsTimePicked);
-                await googleCalendarRepository.RefreshNotificationsAsync(AreNotificationsEnabled, notificationsDayPickedInt, NotificationsTimePicked);
-            }
-        }
-        catch (Exception ex)
-        {
-            logger?.LogCatchedException(ex);
-        }
+        await navigationService.PushAsync<NotificationsSubpage>();
     }
+
 
     [ObservableProperty] string currentLanguageName = CultureInfo.CurrentCulture.NativeName;
     [ObservableProperty] List<Language> languages;
@@ -79,12 +39,6 @@ public partial class SettingsViewModel : BaseViewModel
         {
             CurrentLanguageName = languageName;
         }
-    }
-
-    [RelayCommand]
-    void TroubleshootingButtonClicked()
-    {
-
     }
 
     [RelayCommand]

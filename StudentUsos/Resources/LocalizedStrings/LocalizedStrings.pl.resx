@@ -532,4 +532,10 @@
   <data name="NotificationsDiagnosis_AutoStartCouldNotOpenSettings" xml:space="preserve">
     <value>Nie znaleziono odpowiedniej strony z ustawieniami</value>
   </data>
+  <data name="CalendarNotifications" xml:space="preserve">
+    <value>Powiadomienia z kalendarza</value>
+  </data>
+  <data name="PushNotifications" xml:space="preserve">
+    <value>Powiadomienia natychmiastowe (push)</value>
+  </data>
 </root>

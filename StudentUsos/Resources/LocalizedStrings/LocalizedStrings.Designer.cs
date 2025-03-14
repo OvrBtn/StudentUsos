@@ -304,6 +304,15 @@ namespace StudentUsos.Resources.LocalizedStrings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Calendar notifications.
+        /// </summary>
+        internal static string CalendarNotifications {
+            get {
+                return ResourceManager.GetString("CalendarNotifications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to M|T|W|T|F|S|S.
         /// </summary>
         internal static string CalendarPage_DaysOfWeekLabels {
@@ -1041,6 +1050,15 @@ namespace StudentUsos.Resources.LocalizedStrings {
         internal static string Points {
             get {
                 return ResourceManager.GetString("Points", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Push notifications.
+        /// </summary>
+        internal static string PushNotifications {
+            get {
+                return ResourceManager.GetString("PushNotifications", resourceCulture);
             }
         }
         

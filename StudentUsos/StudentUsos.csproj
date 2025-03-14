@@ -101,6 +101,7 @@
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
 		<MauiImage Include="Resources\Images\NotificationNewGrade\*" />
+		<MauiImage Include="Resources\Images\Settings\*" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
@@ -220,6 +221,9 @@
 		<Compile Update="Features\Settings\Views\LogsPage.xaml.cs">
 		  <DependentUpon>LogsPage.xaml</DependentUpon>
 		</Compile>
+		<Compile Update="Features\Settings\Views\Subpages\NotificationsSubpage.xaml.cs">
+		  <DependentUpon>NotificationsSubpage.xaml</DependentUpon>
+		</Compile>
 		<Compile Update="Resources\LocalizedStrings\LocalizedStrings.Designer.cs">
 		  <DesignTime>True</DesignTime>
 		  <AutoGen>True</AutoGen>
@@ -332,6 +336,12 @@
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Features\Settings\Views\NotificationsDiagnosis\StateContentView.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Features\Settings\Views\Subpages\EmptyPageTemplate - Copy.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Features\Settings\Views\Subpages\NotificationsSubpage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Resources\ResourceDictionaries\Converters.xaml">

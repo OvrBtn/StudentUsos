@@ -1,6 +1,5 @@
 ﻿using StudentUsos.Controls;
 using StudentUsos.Features.Authorization.Services;
-using StudentUsos.Features.Settings.Views.NotificationsDiagnosis;
 using StudentUsos.Resources.LocalizedStrings;
 
 namespace StudentUsos.Features.Settings.Views;
@@ -12,7 +11,6 @@ public partial class SettingsPage : CustomContentPageNotAnimated
     ILogger? logger;
     public SettingsPage(SettingsViewModel settingsViewModel,
         INavigationService navigationService,
-        ILocalStorageManager localStorageManager,
         ILogger? logger = null)
     {
         this.navigationService = navigationService;
@@ -20,8 +18,6 @@ public partial class SettingsPage : CustomContentPageNotAnimated
 
         BindingContext = this.settingsViewModel = settingsViewModel;
         InitializeComponent();
-
-        this.Disappearing += settingsViewModel.SettingsPage_Disappearing;
 
         versionLabel.Text = LocalizedStrings.Version + " " + AppInfo.Current.VersionString;
     }
@@ -79,8 +75,5 @@ public partial class SettingsPage : CustomContentPageNotAnimated
         await navigationService.PushAsync<AppInfoPage>();
     }
 
-    private void TroubleshootingButton_Clicked(object sender, EventArgs e)
-    {
-        navigationService.PushAsync<NotificationsDiagnosisPage>();
-    }
+
 }

@@ -32,8 +32,8 @@ public class FirebasePushNotificationsService
 #if ANDROID
         return await GetFcmTokenFunc();
 #else
-            await Task.CompletedTask;
-            return string.Empty;
+        await Task.CompletedTask;
+        return string.Empty;
 #endif
     }
 
@@ -74,7 +74,12 @@ public class FirebasePushNotificationsService
         localStorageManager.SetData(LocalStorageKeys.FcmToken, token);
     }
 
-    public async Task SendFcmTokenToServerAsync(string token)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="token"></param>
+    /// <returns>true if FCM token was successfully sent to server, false otherwise</returns>
+    public async Task<bool> SendFcmTokenToServerAsync(string token)
     {
         Dictionary<string, string> args = new()
         {
@@ -84,6 +89,8 @@ public class FirebasePushNotificationsService
         if (result != null)
         {
             localStorageManager.Remove(LocalStorageKeys.FcmToken);
+            return true;
         }
+        return false;
     }
 }

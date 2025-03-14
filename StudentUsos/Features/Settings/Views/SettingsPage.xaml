@@ -36,6 +36,14 @@
 
             <Border >
                 <StackLayout Spacing="10">
+                    <Label FontSize="16" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.Notifications}" />
+                    <Button Text="{x:Static strings:LocalizedStrings.Troubleshooting}" Background="{StaticResource Primary}" 
+                            Clicked="TroubleshootingButton_Clicked"></Button>
+                </StackLayout>
+            </Border>
+
+            <Border >
+                <StackLayout Spacing="10">
                     <Label FontSize="16" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.Language}" />
                     <Button Text="{Binding CurrentLanguageName}" Background="{StaticResource Primary}" Command="{Binding LanguageButtonClickedCommand}"></Button>
                 </StackLayout>

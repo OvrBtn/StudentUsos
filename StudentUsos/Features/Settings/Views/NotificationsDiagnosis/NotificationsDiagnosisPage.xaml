@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:CustomContentPageNotAnimated
+    x:Class="StudentUsos.Features.Settings.Views.NotificationsDiagnosis.NotificationsDiagnosisPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:StudentUsos.Controls"
+    xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
+    xmlns:notificationsDiagnosis="clr-namespace:StudentUsos.Features.Settings.Views.NotificationsDiagnosis"
+    x:Name="this"
+    x:DataType="notificationsDiagnosis:NotificationsDiagnosisViewModel">
+
+    <controls:CustomContentPageNotAnimated.Resources>
+        <ResourceDictionary>
+            <Style TargetType="notificationsDiagnosis:StateContentView">
+                <Setter Property="WidthRequest" Value="20"></Setter>
+                <Setter Property="HeightRequest" Value="20"></Setter>
+                <Setter Property="Margin" Value="0,0,5,0"></Setter>
+            </Style>
+
+            <notificationsDiagnosis:StateToVisibilityConverter x:Key="StateToVisibilityConverter"/>
+
+        </ResourceDictionary>
+    </controls:CustomContentPageNotAnimated.Resources>
+
+    <StackLayout>
+
+        <ScrollView VerticalOptions="FillAndExpand">
+            <StackLayout Margin="30" VerticalOptions="FillAndExpand" Spacing="30">
+
+                <StackLayout>
+                    <Grid ColumnDefinitions="auto, *">
+                        <notificationsDiagnosis:StateContentView Grid.Column="0"
+                       CurrentState="{Binding FcmTokenInServerState}"/>
+                        <Label Grid.Column="1" Text="{x:Static strings:LocalizedStrings.NotificationsDiagnosis_FcmTokenTitle}"/>
+                    </Grid>
+                    <Label Text="{x:Static strings:LocalizedStrings.NotificationsDiagnosis_FcmTokenErrorMessage}" Margin="10,10,10,0"
+                           IsVisible="{Binding FcmTokenInServerState,Converter={StaticResource StateToVisibilityConverter}}"/>
+                </StackLayout>
+
+                <StackLayout IsVisible="{Binding IsBackgroundRestrictionsVisible}">
+                    <Grid ColumnDefinitions="auto, *">
+                        <notificationsDiagnosis:StateContentView Grid.Column="0" CurrentState="{Binding BackgroundRestrictionsState}"/>
+                        <Label Grid.Column="1" Text="{x:Static strings:LocalizedStrings.NotificationsDiagnosis_BackgroundRestrictedTitle}"/>
+                    </Grid>
+                    <StackLayout IsVisible="{Binding BackgroundRestrictionsState,Converter={StaticResource StateToVisibilityConverter}}"
+                                 Margin="10" Spacing="10">
+                        <Label Text="{x:Static strings:LocalizedStrings.NotificationsDiagnosis_BackgroundRestrictedErrorDescription}"/>
+                        <Button Text="{x:Static strings:LocalizedStrings.NotificationsDiagnosis_BackgroundRestrictedButton}"
+                                Command="{Binding BackgroundRestrictedButtonClickedCommand}"/>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout IsVisible="{Binding IsbatteryOptimizationRestrictionsVisible}">
+                    <Grid ColumnDefinitions="auto, *">
+                        <notificationsDiagnosis:StateContentView Grid.Column="0" CurrentState="{Binding BatteryOptimizationRestrictionsState}"/>
+                        <Label Grid.Column="1" Text="{x:Static strings:LocalizedStrings.NotificationsDiagnosis_BatteryOptimizationTitle}"/>
+                    </Grid>
+                    <StackLayout IsVisible="{Binding BatteryOptimizationRestrictionsState,Converter={StaticResource StateToVisibilityConverter}}" 
+                                 Margin="10" Spacing="10">
+                        <Label Text="{x:Static strings:LocalizedStrings.NotificationsDiagnosis_BatteryOptimizationErrorDescription}"/>
+                        <Button Text="{x:Static strings:LocalizedStrings.NotificationsDiagnosis_GoToSettings}"
+                                Command="{Binding BatteryOptimizationRestrictedButtonClickedCommand}"/>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout IsVisible="{Binding IsAutoStartRestrictionsVisible}">
+                    <Grid ColumnDefinitions="auto, *">
+                        <notificationsDiagnosis:StateContentView Grid.Column="0" CurrentState="{Binding AutoStartRestrictionsState}"/>
+                        <Label Grid.Column="1" Text="{x:Static strings:LocalizedStrings.NotificationsDiagnosis_AutoStartTitle}"/>
+                    </Grid>
+                    <StackLayout IsVisible="{Binding AutoStartRestrictionsState,Converter={StaticResource StateToVisibilityConverter}}"
+                                 Margin="10" Spacing="10">
+                        <Label Text="{x:Static strings:LocalizedStrings.NotificationsDiagnosis_AutoStartWarningMessage}"/>
+                        <Button Text="{x:Static strings:LocalizedStrings.NotificationsDiagnosis_GoToSettings}"
+                                Command="{Binding AutoStartRestrictedButtonClickedCommand}"/>
+                    </StackLayout>
+                </StackLayout>
+
+
+            </StackLayout>
+        </ScrollView>
+
+        <Button Text="{x:Static strings:LocalizedStrings.Analyse}" BackgroundColor="{StaticResource Primary}"
+                Command="{Binding AnalyseButtonClickedCommand}" Margin="30, 30, 30, 40"
+                IsVisible="{Binding IsAnalyseButtonVisible}"/>
+
+    </StackLayout>
+
+</controls:CustomContentPageNotAnimated>

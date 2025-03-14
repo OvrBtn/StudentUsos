@@ -82,6 +82,12 @@ public partial class SettingsViewModel : BaseViewModel
     }
 
     [RelayCommand]
+    void TroubleshootingButtonClicked()
+    {
+
+    }
+
+    [RelayCommand]
     void LanguageButtonClicked()
     {
         var options = Enumerable.Select<Language, string>(Languages, x => x.Name).ToList();

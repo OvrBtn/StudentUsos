@@ -196,6 +196,15 @@ namespace StudentUsos.Resources.LocalizedStrings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Analyse.
+        /// </summary>
+        internal static string Analyse {
+            get {
+                return ResourceManager.GetString("Analyse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Student USOS.
         /// </summary>
         internal static string AppName {
@@ -817,6 +826,108 @@ namespace StudentUsos.Resources.LocalizedStrings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Didn&apos;t find the appropriate settings page.
+        /// </summary>
+        internal static string NotificationsDiagnosis_AutoStartCouldNotOpenSettings {
+            get {
+                return ResourceManager.GetString("NotificationsDiagnosis_AutoStartCouldNotOpenSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checking if device manufacturer defined additional permission which might block this application from receiving notifications after device reboot.
+        /// </summary>
+        internal static string NotificationsDiagnosis_AutoStartTitle {
+            get {
+                return ResourceManager.GetString("NotificationsDiagnosis_AutoStartTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manufacturer of your device might have defined a permission which could block this application from starting after rebooting the device. By clicking button below the app will try to forward you to the right settings page..
+        /// </summary>
+        internal static string NotificationsDiagnosis_AutoStartWarningMessage {
+            get {
+                return ResourceManager.GetString("NotificationsDiagnosis_AutoStartWarningMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Allow running in background.
+        /// </summary>
+        internal static string NotificationsDiagnosis_BackgroundRestrictedButton {
+            get {
+                return ResourceManager.GetString("NotificationsDiagnosis_BackgroundRestrictedButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This application is not allowed to run in background, this could potentially block some notifications..
+        /// </summary>
+        internal static string NotificationsDiagnosis_BackgroundRestrictedErrorDescription {
+            get {
+                return ResourceManager.GetString("NotificationsDiagnosis_BackgroundRestrictedErrorDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checking if application is restricted from running in the background.
+        /// </summary>
+        internal static string NotificationsDiagnosis_BackgroundRestrictedTitle {
+            get {
+                return ResourceManager.GetString("NotificationsDiagnosis_BackgroundRestrictedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your device has battery optimization enabled for this app, this might break notifications.
+        /// </summary>
+        internal static string NotificationsDiagnosis_BatteryOptimizationErrorDescription {
+            get {
+                return ResourceManager.GetString("NotificationsDiagnosis_BatteryOptimizationErrorDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checking if battery optimization is enabled for this application.
+        /// </summary>
+        internal static string NotificationsDiagnosis_BatteryOptimizationTitle {
+            get {
+                return ResourceManager.GetString("NotificationsDiagnosis_BatteryOptimizationTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Synchronizing has failed. Next steps:
+        ///1. Server could be down - try again later.
+        ///2. Something might be wrong on the server - try signing out and signing in again.
+        ///3. If issue persists try contacting support (ways of contact can be found in Settings -&gt; App information)..
+        /// </summary>
+        internal static string NotificationsDiagnosis_FcmTokenErrorMessage {
+            get {
+                return ResourceManager.GetString("NotificationsDiagnosis_FcmTokenErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Updating device information on the server.
+        /// </summary>
+        internal static string NotificationsDiagnosis_FcmTokenTitle {
+            get {
+                return ResourceManager.GetString("NotificationsDiagnosis_FcmTokenTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go to settings.
+        /// </summary>
+        internal static string NotificationsDiagnosis_GoToSettings {
+            get {
+                return ResourceManager.GetString("NotificationsDiagnosis_GoToSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Notify.
         /// </summary>
         internal static string Notify {
@@ -1110,6 +1221,15 @@ namespace StudentUsos.Resources.LocalizedStrings {
         internal static string SurveysPage_SurveysToFill {
             get {
                 return ResourceManager.GetString("SurveysPage_SurveysToFill", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Troubleshooting.
+        /// </summary>
+        internal static string Troubleshooting {
+            get {
+                return ResourceManager.GetString("Troubleshooting", resourceCulture);
             }
         }
         

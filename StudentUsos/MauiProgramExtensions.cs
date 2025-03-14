@@ -24,6 +24,7 @@ using StudentUsos.Features.Person.Views;
 using StudentUsos.Features.SatisfactionSurveys.Services;
 using StudentUsos.Features.SatisfactionSurveys.Views;
 using StudentUsos.Features.Settings.Views;
+using StudentUsos.Features.Settings.Views.NotificationsDiagnosis;
 using StudentUsos.Features.StudentProgrammes.Repositories;
 using StudentUsos.Features.StudentProgrammes.Services;
 using StudentUsos.Features.UserInfo;
@@ -121,6 +122,8 @@ internal static class MauiProgramExtensions
 
         builder.Services.AddTransient<LogsPage>();
 
+        builder.Services.AddTransient<NotificationsDiagnosisPage>();
+
         return builder;
     }
 
@@ -159,6 +162,8 @@ internal static class MauiProgramExtensions
         builder.Services.AddTransient<PersonDetailsViewModel>();
 
         builder.Services.AddTransient<LogsViewModel>();
+
+        builder.Services.AddTransient<Features.Settings.Views.NotificationsDiagnosis.NotificationsDiagnosisViewModel>();
 
         return builder;
     }

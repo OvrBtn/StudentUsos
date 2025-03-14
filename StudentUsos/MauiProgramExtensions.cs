@@ -123,6 +123,7 @@ internal static class MauiProgramExtensions
         builder.Services.AddTransient<SettingsPage>();
         builder.Services.AddTransient<NotificationsSubpage>();
         builder.Services.AddTransient<AccountSubpage>();
+        builder.Services.AddTransient<ApplicationSubpage>();
         builder.Services.AddTransient<AppInfoPage>();
         builder.Services.AddTransient<NotificationsDiagnosisPage>();
 
@@ -165,6 +166,7 @@ internal static class MauiProgramExtensions
 
         builder.Services.AddTransient<SettingsViewModel>();
         builder.Services.AddTransient<NotificationsSubpageViewModel>();
+        builder.Services.AddTransient<ApplicationSubpageViewModel>();
         builder.Services.AddTransient<NotificationsDiagnosisViewModel>();
 
         return builder;

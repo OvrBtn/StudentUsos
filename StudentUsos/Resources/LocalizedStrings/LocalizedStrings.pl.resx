@@ -538,4 +538,7 @@
   <data name="PushNotifications" xml:space="preserve">
     <value>Powiadomienia natychmiastowe (push)</value>
   </data>
+  <data name="Application" xml:space="preserve">
+    <value>Aplikacja</value>
+  </data>
 </root>

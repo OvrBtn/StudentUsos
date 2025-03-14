@@ -536,4 +536,7 @@
   <data name="PushNotifications" xml:space="preserve">
     <value>Push notifications</value>
   </data>
+  <data name="Application" xml:space="preserve">
+    <value>Application</value>
+  </data>
 </root>

@@ -5,7 +5,6 @@ namespace StudentUsos.Features.Settings.Views;
 
 public partial class SettingsPage : CustomContentPageNotAnimated
 {
-    SettingsViewModel settingsViewModel;
     INavigationService navigationService;
     ILogger? logger;
     public SettingsPage(SettingsViewModel settingsViewModel,
@@ -15,13 +14,11 @@ public partial class SettingsPage : CustomContentPageNotAnimated
         this.navigationService = navigationService;
         this.logger = logger;
 
-        BindingContext = this.settingsViewModel = settingsViewModel;
+        BindingContext = settingsViewModel;
         InitializeComponent();
 
         versionLabel.Text = LocalizedStrings.Version + " " + AppInfo.Current.VersionString;
     }
-
-
 
     private void OpenLogsButton_Clicked(object sender, EventArgs e)
     {
@@ -54,11 +51,4 @@ public partial class SettingsPage : CustomContentPageNotAnimated
         }
         logger.SetAllowedModules(ids);
     }
-
-    private async void AppInfoButton_Clicked(object sender, EventArgs e)
-    {
-        await navigationService.PushAsync<AppInfoPage>();
-    }
-
-
 }

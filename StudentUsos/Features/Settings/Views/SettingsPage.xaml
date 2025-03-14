@@ -23,23 +23,30 @@
             </Border>
 
             <Border Padding="0">
-                <Grid>
-                    <Grid Margin="20" ColumnDefinitions="auto, *" ColumnSpacing="10">
-                        <Image Grid.Column="0" Source="person" WidthRequest="25"></Image>
-                        <Label Grid.Column="1" Text="{x:Static strings:LocalizedStrings.Account}"/>
+                <StackLayout>
+                    <Grid>
+                        <Grid Margin="20" ColumnDefinitions="auto, *" ColumnSpacing="10">
+                            <Image Grid.Column="0" Source="person" WidthRequest="25"></Image>
+                            <Label Grid.Column="1" Text="{x:Static strings:LocalizedStrings.Account}"/>
+                        </Grid>
+                        <Button BackgroundColor="Transparent" Command="{Binding GoToAccountSubpageCommand}"/>
                     </Grid>
-                    <Button BackgroundColor="Transparent" Command="{Binding GoToAccountSubpageCommand}"/>
-                </Grid>
-            </Border>
-
-            <Border >
-                <StackLayout Spacing="10">
-                    <Label FontSize="16" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.Language}" />
-                    <Button Text="{Binding CurrentLanguageName}" Background="{StaticResource Primary}" Command="{Binding LanguageButtonClickedCommand}"></Button>
+                    
+                    <StackLayout BackgroundColor="#444" HeightRequest="1" Margin="20,0"/>
+                    
+                    <Grid>
+                        <Grid Margin="20" ColumnDefinitions="auto, *" ColumnSpacing="10">
+                            <Image Grid.Column="0" Source="phone" WidthRequest="25"></Image>
+                            <Label Grid.Column="1" Text="{x:Static strings:LocalizedStrings.Application}"/>
+                        </Grid>
+                        <Button BackgroundColor="Transparent" Command="{Binding GoToApplicationSubpageCommand}"/>
+                    </Grid>
                 </StackLayout>
             </Border>
 
-           
+
+
+
 
             <Border>
                 <StackLayout Spacing="10">
@@ -51,14 +58,7 @@
                 </StackLayout>
             </Border>
 
-            <Border >
-                <StackLayout Spacing="10">
-                    <Label FontSize="16" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.SettingsPage_AppInfo}" />
-                    <StackLayout Spacing="10">
-                        <Button Text="{x:Static strings:LocalizedStrings.SettingsPage_AppInfo}" Clicked="AppInfoButton_Clicked" BackgroundColor="{StaticResource Primary}"/>
-                    </StackLayout>
-                </StackLayout>
-            </Border>
+
 
             <Label x:Name="versionLabel" FontSize="11" HorizontalTextAlignment="Center" Margin="0,15" TextColor="{StaticResource Gray300}" />
 

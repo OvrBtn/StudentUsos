@@ -15,7 +15,7 @@
                 <StackLayout>
                     <Button Text="{x:Static strings:LocalizedStrings.MorePage_RevokeAccess}" Padding="15"
                                 Clicked="RevokeAccessButton_Clicked" CornerRadius="0"/>
-                    <StackLayout BackgroundColor="#444" HeightRequest="1" Margin="20,0"></StackLayout>
+                    <StackLayout BackgroundColor="#444" HeightRequest="1" Margin="20,0"/>
                     <Button Text="{x:Static strings:LocalizedStrings.Logout}" Padding="15"
                                 Clicked="LogOutButton_Clicked_1" CornerRadius="0"/>
                 </StackLayout>

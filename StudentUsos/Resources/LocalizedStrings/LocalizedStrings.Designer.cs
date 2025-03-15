@@ -205,6 +205,15 @@ namespace StudentUsos.Resources.LocalizedStrings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Application.
+        /// </summary>
+        internal static string Application {
+            get {
+                return ResourceManager.GetString("Application", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Student USOS.
         /// </summary>
         internal static string AppName {
@@ -300,6 +309,15 @@ namespace StudentUsos.Resources.LocalizedStrings {
         internal static string CalendarEventType_Rector {
             get {
                 return ResourceManager.GetString("CalendarEventType_Rector", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Calendar notifications.
+        /// </summary>
+        internal static string CalendarNotifications {
+            get {
+                return ResourceManager.GetString("CalendarNotifications", resourceCulture);
             }
         }
         
@@ -435,6 +453,15 @@ namespace StudentUsos.Resources.LocalizedStrings {
         internal static string Default {
             get {
                 return ResourceManager.GetString("Default", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Diagnosis.
+        /// </summary>
+        internal static string Diagnosis {
+            get {
+                return ResourceManager.GetString("Diagnosis", resourceCulture);
             }
         }
         
@@ -937,6 +964,15 @@ namespace StudentUsos.Resources.LocalizedStrings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Operation canceled due to spam.
+        /// </summary>
+        internal static string OperationCanceledDueToSpam {
+            get {
+                return ResourceManager.GetString("OperationCanceledDueToSpam", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Participants.
         /// </summary>
         internal static string Participants {
@@ -1041,6 +1077,15 @@ namespace StudentUsos.Resources.LocalizedStrings {
         internal static string Points {
             get {
                 return ResourceManager.GetString("Points", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Push notifications.
+        /// </summary>
+        internal static string PushNotifications {
+            get {
+                return ResourceManager.GetString("PushNotifications", resourceCulture);
             }
         }
         
@@ -1180,6 +1225,15 @@ namespace StudentUsos.Resources.LocalizedStrings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reset local data.
+        /// </summary>
+        internal static string SettingsPage_ResetLocalData {
+            get {
+                return ResourceManager.GetString("SettingsPage_ResetLocalData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The application will still run on locally stored data, if you want to delete this data log out of the application..
         /// </summary>
         internal static string SettingsPage_RevokeAccessDescription {
@@ -1203,6 +1257,15 @@ namespace StudentUsos.Resources.LocalizedStrings {
         internal static string SettingsPage_TestingTabTitle {
             get {
                 return ResourceManager.GetString("SettingsPage_TestingTabTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Success.
+        /// </summary>
+        internal static string Success {
+            get {
+                return ResourceManager.GetString("Success", resourceCulture);
             }
         }
         

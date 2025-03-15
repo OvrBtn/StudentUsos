@@ -7,6 +7,7 @@ using StudentUsos.Features.Activities.Repositories;
 using StudentUsos.Features.Activities.Services;
 using StudentUsos.Features.Authorization.Services;
 using StudentUsos.Features.Person.Models;
+using StudentUsos.Features.Settings.Views.Subpages;
 using StudentUsos.Resources.LocalizedStrings;
 using System.Collections.ObjectModel;
 using System.Globalization;
@@ -30,8 +31,6 @@ public partial class ActivitiesViewModel : BaseViewModel
         this.activitiesService = activitiesService;
         this.logger = logger;
 
-        instance = this;
-
         TodayCommand = new Command(() => { DatePicked = DateTime.Today; DateOnlyPicked = DateOnly.FromDateTime(DateTimeOffset.Now.DateTime); });
         NextCommand = new Command(() => { DatePicked = DatePicked.AddDays(1); });
         PreviousCommand = new Command(() => { DatePicked = DatePicked.AddDays(-1); });
@@ -45,19 +44,20 @@ public partial class ActivitiesViewModel : BaseViewModel
 
         AuthorizationService.OnLogout += AuthorizationService_OnLogout;
         AuthorizationService.OnLoginSucceeded += AuthorizationService_OnAuthorizationFinished;
+
+        DiagnosisSubpage.OnLocalDataReseted += AuthorizationService_OnAuthorizationFinished;
     }
 
     private void AuthorizationService_OnAuthorizationFinished()
     {
-        if (instance != null) instance.DatePicked = DateTimeOffset.Now.DateTime;
+        DatePicked = DateTimeOffset.Now.DateTime;
     }
 
     private void AuthorizationService_OnLogout()
     {
-        if (instance is not null) instance.ActivitiesStateKey = StateKey.Loading;
+        ActivitiesStateKey = StateKey.Loading;
     }
 
-    static ActivitiesViewModel? instance;
     public Lecturer? Lecturer { get; private set; }
     [ObservableProperty] string mainStateKey = StateKey.Loading;
 

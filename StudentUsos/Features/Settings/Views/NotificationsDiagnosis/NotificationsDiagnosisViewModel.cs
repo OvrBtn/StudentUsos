@@ -1,14 +1,17 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using StudentUsos.Resources.LocalizedStrings;
 
 namespace StudentUsos.Features.Settings.Views.NotificationsDiagnosis;
 
 public partial class NotificationsDiagnosisViewModel : BaseViewModel
 {
     FirebasePushNotificationsService firebasePushNotificationsService;
-    public NotificationsDiagnosisViewModel(FirebasePushNotificationsService firebasePushNotificationsService)
+    IApplicationService applicationService;
+    public NotificationsDiagnosisViewModel(FirebasePushNotificationsService firebasePushNotificationsService, IApplicationService applicationService)
     {
         this.firebasePushNotificationsService = firebasePushNotificationsService;
+        this.applicationService = applicationService;
     }
 
     public void Init()
@@ -34,10 +37,18 @@ public partial class NotificationsDiagnosisViewModel : BaseViewModel
     [ObservableProperty] States autoStartRestrictionsState = States.Loading;
     [ObservableProperty] bool isAutoStartRestrictionsVisible;
 
+    static int analyseButtonClickedCounter;
 
     [RelayCommand]
     void AnalyseButtonClicked()
     {
+        if (analyseButtonClickedCounter >= 10)
+        {
+            applicationService.ShowToast(LocalizedStrings.OperationCanceledDueToSpam);
+            return;
+        }
+        analyseButtonClickedCounter++;
+
         _ = Analyse();
     }
 

@@ -25,6 +25,7 @@ using StudentUsos.Features.SatisfactionSurveys.Services;
 using StudentUsos.Features.SatisfactionSurveys.Views;
 using StudentUsos.Features.Settings.Views;
 using StudentUsos.Features.Settings.Views.NotificationsDiagnosis;
+using StudentUsos.Features.Settings.Views.Subpages;
 using StudentUsos.Features.StudentProgrammes.Repositories;
 using StudentUsos.Features.StudentProgrammes.Services;
 using StudentUsos.Features.UserInfo;
@@ -97,9 +98,6 @@ internal static class MauiProgramExtensions
         builder.Services.AddSingleton<MorePage>();
         builder.Services.AddSingleton<LoginPage>();
 
-        builder.Services.AddTransient<AppInfoPage>();
-        builder.Services.AddTransient<SettingsPage>();
-
         builder.Services.AddTransient<CalendarPage>();
         builder.Services.AddTransient<CalendarSettingsPage>();
 
@@ -122,6 +120,12 @@ internal static class MauiProgramExtensions
 
         builder.Services.AddTransient<LogsPage>();
 
+        builder.Services.AddTransient<SettingsPage>();
+        builder.Services.AddTransient<NotificationsSubpage>();
+        builder.Services.AddTransient<AccountSubpage>();
+        builder.Services.AddTransient<ApplicationSubpage>();
+        builder.Services.AddTransient<DiagnosisSubpage>();
+        builder.Services.AddTransient<AppInfoPage>();
         builder.Services.AddTransient<NotificationsDiagnosisPage>();
 
         return builder;
@@ -138,8 +142,6 @@ internal static class MauiProgramExtensions
         builder.Services.AddSingleton<MoreViewModel>();
 
         builder.Services.AddSingleton<LoginViewModel>();
-
-        builder.Services.AddTransient<SettingsViewModel>();
 
         builder.Services.AddTransient<CalendarSettingsViewModel>();
         builder.Services.AddTransient<CalendarViewModel>();
@@ -163,7 +165,10 @@ internal static class MauiProgramExtensions
 
         builder.Services.AddTransient<LogsViewModel>();
 
-        builder.Services.AddTransient<Features.Settings.Views.NotificationsDiagnosis.NotificationsDiagnosisViewModel>();
+        builder.Services.AddTransient<SettingsViewModel>();
+        builder.Services.AddTransient<NotificationsSubpageViewModel>();
+        builder.Services.AddTransient<ApplicationSubpageViewModel>();
+        builder.Services.AddTransient<NotificationsDiagnosisViewModel>();
 
         return builder;
     }

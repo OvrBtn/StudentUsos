@@ -145,6 +145,10 @@ public class Logger : ILogger
 
     async Task TrySendingLogsToServerAsync()
     {
+#if DEBUG
+        return;
+#endif
+
         var userInfo = userInfoRepository.Value.GetUserInfo();
         if (userInfo is null)
         {

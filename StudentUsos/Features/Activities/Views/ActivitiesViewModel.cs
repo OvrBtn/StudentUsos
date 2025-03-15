@@ -85,7 +85,6 @@ public partial class ActivitiesViewModel : BaseViewModel
                     ObservableDays[DateOnly.FromDateTime(currentTimeTableDay.Date)] = new(ActivityToCustomSheduleEvent(currentTimeTableDay.Activities));
                 }
             }
-
         }
 
         ActivitiesStateKey = StateKey.Loading;
@@ -167,6 +166,11 @@ public partial class ActivitiesViewModel : BaseViewModel
         get => dateOnlyPicked;
         set
         {
+            //Since binding to CustomSchedule uses TwoWay binding this setter gets called 2 times in a row
+            if (dateOnlyPicked == value)
+            {
+                return;
+            }
             SetProperty(ref dateOnlyPicked, value);
             if (ObservableDays.ContainsKey(dateOnlyPicked) == false)
             {
@@ -177,7 +181,8 @@ public partial class ActivitiesViewModel : BaseViewModel
             DateChanged?.Invoke();
         }
     }
-    DateOnly dateOnlyPicked = DateOnly.FromDateTime(DateTimeOffset.Now.DateTime);
+    //this field should not default to DateTime.Now since it will break the return in setter for lecturers, instead it should be set in Init
+    DateOnly dateOnlyPicked;
 
     public event Action DateChanged;
 

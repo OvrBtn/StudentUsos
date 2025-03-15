@@ -227,6 +227,9 @@
 		<Compile Update="Features\Settings\Views\Subpages\ApplicationSubpage.xaml.cs">
 		  <DependentUpon>ApplicationSubpage.xaml</DependentUpon>
 		</Compile>
+		<Compile Update="Features\Settings\Views\Subpages\DiagnosisSubpage.xaml.cs">
+		  <DependentUpon>DiagnosisSubpage.xaml</DependentUpon>
+		</Compile>
 		<Compile Update="Features\Settings\Views\Subpages\NotificationsSubpage.xaml.cs">
 		  <DependentUpon>NotificationsSubpage.xaml</DependentUpon>
 		</Compile>
@@ -350,7 +353,7 @@
 		<MauiXaml Update="Features\Settings\Views\Subpages\ApplicationSubpage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="Features\Settings\Views\Subpages\EmptyPageTemplate - Copy.xaml">
+		<MauiXaml Update="Features\Settings\Views\Subpages\DiagnosisSubpage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Features\Settings\Views\Subpages\NotificationsSubpage.xaml">

@@ -539,4 +539,16 @@
   <data name="Application" xml:space="preserve">
     <value>Application</value>
   </data>
+  <data name="Diagnosis" xml:space="preserve">
+    <value>Diagnosis</value>
+  </data>
+  <data name="SettingsPage_ResetLocalData" xml:space="preserve">
+    <value>Reset local data</value>
+  </data>
+  <data name="OperationCanceledDueToSpam" xml:space="preserve">
+    <value>Operation canceled due to spam</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
 </root>

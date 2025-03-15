@@ -180,11 +180,21 @@ public partial class GradesViewModel : BaseViewModel
     }
 
 
+    static int moreTermsClickedCounter;
+
     [ObservableProperty] Command openTermsListCommand;
     async Task MoreTermsButtonClickedAsync()
     {
         try
         {
+            if (moreTermsClickedCounter >= 15)
+            {
+                applicationService.ShowToast(LocalizedStrings.OperationCanceledDueToSpam);
+                return;
+            }
+
+            moreTermsClickedCounter++;
+
             //show popup with loading animation
             var popup = PickFromListPopup.CreateAndShow(LocalizedStrings.Semesters, new List<string>(), StateKey.Loading);
 

@@ -29,7 +29,7 @@
                             <Image Grid.Column="0" Source="person" WidthRequest="25"></Image>
                             <Label Grid.Column="1" Text="{x:Static strings:LocalizedStrings.Account}"/>
                         </Grid>
-                        <Button BackgroundColor="Transparent" Command="{Binding GoToAccountSubpageCommand}"/>
+                        <Button BackgroundColor="Transparent" Command="{Binding GoToAccountSubpageCommand}" CornerRadius="0"/>
                     </Grid>
                     
                     <StackLayout BackgroundColor="#444" HeightRequest="1" Margin="20,0"/>
@@ -39,28 +39,23 @@
                             <Image Grid.Column="0" Source="phone" WidthRequest="25"></Image>
                             <Label Grid.Column="1" Text="{x:Static strings:LocalizedStrings.Application}"/>
                         </Grid>
-                        <Button BackgroundColor="Transparent" Command="{Binding GoToApplicationSubpageCommand}"/>
+                        <Button BackgroundColor="Transparent" Command="{Binding GoToApplicationSubpageCommand}" CornerRadius="0"/>
                     </Grid>
                 </StackLayout>
             </Border>
 
-
-
-
-
-            <Border>
-                <StackLayout Spacing="10">
-                    <Label FontSize="16" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.SettingsPage_TestingTabTitle}" />
-                    <StackLayout Spacing="10">
-                        <Button Text="{x:Static strings:LocalizedStrings.SettingsPage_Logs}" Clicked="OpenLogsButton_Clicked" BackgroundColor="{StaticResource Primary}"/>
-                        <Button Text="{x:Static strings:LocalizedStrings.SettingsPage_LogsAllowedModulesButton}" Clicked="OpenLogsInfoButton_Clicked" BackgroundColor="{StaticResource Primary}"/>
-                    </StackLayout>
-                </StackLayout>
+            <Border Padding="0">
+                <Grid>
+                    <Grid Margin="20" ColumnDefinitions="auto, *" ColumnSpacing="10">
+                        <Image Grid.Column="0" Source="tools" WidthRequest="25"></Image>
+                        <Label Grid.Column="1" Text="{x:Static strings:LocalizedStrings.Diagnosis}"/>
+                    </Grid>
+                    <Button BackgroundColor="Transparent" Command="{Binding GoToDiagnosisSubpageCommand}"/>
+                </Grid>
             </Border>
 
 
-
-            <Label x:Name="versionLabel" FontSize="11" HorizontalTextAlignment="Center" Margin="0,15" TextColor="{StaticResource Gray300}" />
+            <Label x:Name="versionLabel" FontSize="11" HorizontalTextAlignment="Center" Margin="0,10" TextColor="{StaticResource Gray300}" />
 
         </StackLayout>
     </ScrollView>

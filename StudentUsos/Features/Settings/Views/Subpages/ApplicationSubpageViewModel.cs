@@ -12,8 +12,8 @@ namespace StudentUsos.Features.Settings.Views.Subpages
         ILocalStorageManager localStorageManager;
         public ApplicationSubpageViewModel(ILocalStorageManager localStorageManager)
         {
-            _ = LoadLanguagesAsync();
             this.localStorageManager = localStorageManager;
+            _ = LoadLanguagesAsync();
         }
 
         [ObservableProperty] string currentLanguageName = CultureInfo.CurrentCulture.NativeName;

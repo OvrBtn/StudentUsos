@@ -29,4 +29,10 @@ public partial class SettingsViewModel : BaseViewModel
         await navigationService.PushAsync<ApplicationSubpage>();
     }
 
+    [RelayCommand]
+    async Task GoToDiagnosisSubpageAsync()
+    {
+        await navigationService.PushAsync<DiagnosisSubpage>();
+    }
+
 }

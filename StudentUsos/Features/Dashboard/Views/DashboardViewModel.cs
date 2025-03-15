@@ -4,6 +4,7 @@ using StudentUsos.Features.Authorization;
 using StudentUsos.Features.Authorization.Services;
 using StudentUsos.Features.Calendar.Views;
 using StudentUsos.Features.Grades.Views;
+using StudentUsos.Features.Settings.Views.Subpages;
 using StudentUsos.Features.UserInfo;
 
 namespace StudentUsos.Features.Dashboard.Views;
@@ -50,6 +51,7 @@ public partial class DashboardViewModel : BaseViewModel
         };
 
         AuthorizationService.OnLoginSucceeded += AuthorizationService_OnLoginSucceeded;
+        DiagnosisSubpage.OnLocalDataReseted += AuthorizationService_OnLoginSucceeded;
 
         DashboardActivitiesViewModel.OnSynchronousLoadingFinished += SynchronousOperationFinished;
         DashboardActivitiesViewModel.OnAsynchronousLoadingFinished += AsynchronousOperationFinished;

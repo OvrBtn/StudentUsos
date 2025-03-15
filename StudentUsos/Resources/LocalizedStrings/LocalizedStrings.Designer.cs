@@ -457,6 +457,15 @@ namespace StudentUsos.Resources.LocalizedStrings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Diagnosis.
+        /// </summary>
+        internal static string Diagnosis {
+            get {
+                return ResourceManager.GetString("Diagnosis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         internal static string Errors_Error {
@@ -955,6 +964,15 @@ namespace StudentUsos.Resources.LocalizedStrings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Operation canceled due to spam.
+        /// </summary>
+        internal static string OperationCanceledDueToSpam {
+            get {
+                return ResourceManager.GetString("OperationCanceledDueToSpam", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Participants.
         /// </summary>
         internal static string Participants {
@@ -1207,6 +1225,15 @@ namespace StudentUsos.Resources.LocalizedStrings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reset local data.
+        /// </summary>
+        internal static string SettingsPage_ResetLocalData {
+            get {
+                return ResourceManager.GetString("SettingsPage_ResetLocalData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The application will still run on locally stored data, if you want to delete this data log out of the application..
         /// </summary>
         internal static string SettingsPage_RevokeAccessDescription {
@@ -1230,6 +1257,15 @@ namespace StudentUsos.Resources.LocalizedStrings {
         internal static string SettingsPage_TestingTabTitle {
             get {
                 return ResourceManager.GetString("SettingsPage_TestingTabTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Success.
+        /// </summary>
+        internal static string Success {
+            get {
+                return ResourceManager.GetString("Success", resourceCulture);
             }
         }
         

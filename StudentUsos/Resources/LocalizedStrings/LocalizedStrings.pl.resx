@@ -541,4 +541,16 @@
   <data name="Application" xml:space="preserve">
     <value>Aplikacja</value>
   </data>
+  <data name="Diagnosis" xml:space="preserve">
+    <value>Diagnostyka</value>
+  </data>
+  <data name="SettingsPage_ResetLocalData" xml:space="preserve">
+    <value>Zresetuj dane zapisane lokalnie</value>
+  </data>
+  <data name="OperationCanceledDueToSpam" xml:space="preserve">
+    <value>Operacja anulowana z powodu spamu</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Sukces</value>
+  </data>
 </root>

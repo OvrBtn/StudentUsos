@@ -1,15 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<local:PopupBase
+<toolkit:Popup
     x:Class="StudentUsos.PickFromListPopup"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
     xmlns:local="clr-namespace:StudentUsos.Views"
+    Color="Transparent"
+    Size="10000, 10000"
     x:Name="self">
 
-        <Border StrokeShape="RoundRectangle 20" Margin="30" Padding="30,30,30,0" VerticalOptions="CenterAndExpand" MaximumHeightRequest="500">
-            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+    <StackLayout Padding="10">
+        <StackLayout.GestureRecognizers>
+            <TapGestureRecognizer Tapped="BackgroundTapGestureRecognizer_Tapped"></TapGestureRecognizer>
+        </StackLayout.GestureRecognizers>
+
+        <Border StrokeShape="RoundRectangle 20" Margin="30" 
+                Padding="30,30,30,0" 
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand"
+                MaximumHeightRequest="500">
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
                 <Label x:Name="titleLabel" Text="{Binding PopupTitle,Source={x:Reference self}}" 
                        Margin="0,0,0,20" FontAttributes="Bold" 
                        FontSize="20" HorizontalTextAlignment="Center" />
@@ -54,5 +65,7 @@
 
             </StackLayout>
         </Border>
+        
+    </StackLayout>
 
-</local:PopupBase>
+</toolkit:Popup>

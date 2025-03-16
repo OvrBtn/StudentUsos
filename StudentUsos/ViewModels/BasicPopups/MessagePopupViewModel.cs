@@ -3,10 +3,14 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace StudentUsos.ViewModels;
 
-public partial class MessagePopupPageViewModel : PopupViewModelBase
+public partial class MessagePopupPageViewModel : ObservableObject
 {
-    public MessagePopupPageViewModel(MessagePopupPage.YesAndNoPopupParameters intent)
+    MessagePopupPage popup;
+
+    public MessagePopupPageViewModel(MessagePopupPage popup, MessagePopupPage.YesAndNoPopupParameters intent)
     {
+        this.popup = popup;
+
         YesAndNoParameters = intent;
 
         Title = intent.Title;
@@ -18,8 +22,10 @@ public partial class MessagePopupPageViewModel : PopupViewModelBase
         IsOkVisible = false;
     }
 
-    public MessagePopupPageViewModel(MessagePopupPage.OkPopupParameters intent)
+    public MessagePopupPageViewModel(MessagePopupPage popup, MessagePopupPage.OkPopupParameters intent)
     {
+        this.popup = popup;
+
         OkParameters = intent;
 
         Title = intent.Title;
@@ -48,21 +54,21 @@ public partial class MessagePopupPageViewModel : PopupViewModelBase
     [RelayCommand]
     void YesClicked()
     {
-        Close();
+        popup.Close();
         onYesClicked?.Invoke();
     }
 
     [RelayCommand]
     void NoClicked()
     {
-        Close();
+        popup.Close();
         onNoClicked?.Invoke();
     }
 
     [RelayCommand]
     void OkClicked()
     {
-        Close();
+        popup.Close();
         onOkClicked?.Invoke();
     }
 

@@ -6,15 +6,18 @@ public partial class CustomTabBarXaml : ContentView
     {
         InitializeComponent();
 
-        if (primary == null) primary = Utilities.GetColorFromResources("Primary");
-        SetBackgroundColors();
+        if (primary == null)
+        {
+            primary = Utilities.GetColorFromResources("Primary");
+        }
+        UpdateActiveTab();
 
         Shell.Current.Navigated += Current_Navigated;
     }
 
     private void Current_Navigated(object? sender, ShellNavigatedEventArgs e)
     {
-        SetBackgroundColors();
+        UpdateActiveTab();
     }
 
     ~CustomTabBarXaml()
@@ -28,41 +31,47 @@ public partial class CustomTabBarXaml : ContentView
     {
         activeIndex = 0;
         Shell.Current.GoToAsync("//DashboardPage");
-        SetBackgroundColors();
+        UpdateActiveTab();
     }
 
     private void GoToActivitiesPageButton_OnClick(object sender, EventArgs e)
     {
         activeIndex = 1;
         Shell.Current.GoToAsync("//ActivitiesPage", parameters: new ShellNavigationQueryParameters() { { "isShell", "true" } });
-        SetBackgroundColors();
+        UpdateActiveTab();
     }
 
     private void GoToMorePageButton_OnClick(object sender, EventArgs e)
     {
         activeIndex = 2;
         Shell.Current.GoToAsync("//MorePage");
-        SetBackgroundColors();
+        UpdateActiveTab();
     }
 
     static int activeIndex = 0;
 
-    void SetBackgroundColors()
+    void UpdateActiveTab()
     {
-        mainPageTab.BackgroundColor = Colors.Transparent;
-        activitiesTab.BackgroundColor = Colors.Transparent;
-        moreTab.BackgroundColor = Colors.Transparent;
+        mainPageTabImage.IsVisible = true;
+        activitiesTabImage.IsVisible = true;
+        moreTabImage.IsVisible = true;
+        mainPageTabImageFill.IsVisible = false;
+        activitiesTabImageFill.IsVisible = false;
+        moreTabImageFill.IsVisible = false;
         if (activeIndex == 0)
         {
-            mainPageTab.BackgroundColor = primary;
+            mainPageTabImage.IsVisible = false;
+            mainPageTabImageFill.IsVisible = true;
         }
         else if (activeIndex == 1)
         {
-            activitiesTab.BackgroundColor = primary;
+            activitiesTabImage.IsVisible = false;
+            activitiesTabImageFill.IsVisible = true;
         }
         else if (activeIndex == 2)
         {
-            moreTab.BackgroundColor = primary;
+            moreTabImage.IsVisible = false;
+            moreTabImageFill.IsVisible = true;
         }
     }
 }

@@ -102,6 +102,7 @@
 		<MauiImage Include="Resources\Images\*" />
 		<MauiImage Include="Resources\Images\NotificationNewGrade\*" />
 		<MauiImage Include="Resources\Images\Settings\*" />
+		<MauiImage Include="Resources\Images\TabBar\*" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
@@ -159,7 +160,6 @@
 		<None Remove="Resources\Images\star.png" />
 		<None Remove="Resources\Images\TabBar\tabbar_grid.png" />
 		<None Remove="Resources\Images\TabBar\tabbar_house.png" />
-		<None Remove="Resources\Images\TabBar\tabbar_timetable.png" />
 		<None Remove="Resources\Images\telephone.svg" />
 		<None Remove="Resources\Images\three_dots_vertical.png" />
 		<None Remove="Resources\Images\timetable.png" />
@@ -174,12 +174,6 @@
 	<ItemGroup>
 	  <EmbeddedResource Include="Resources\Images\Embedded\download.png" />
 	  <EmbeddedResource Include="Resources\Images\Embedded\rocket.png" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiImage Include="Resources\Images\TabBar\tabbar_grid.png" />
-	  <MauiImage Include="Resources\Images\TabBar\tabbar_house.png" />
-	  <MauiImage Include="Resources\Images\TabBar\tabbar_timetable.png" />
 	</ItemGroup>
 
 	<ItemGroup>

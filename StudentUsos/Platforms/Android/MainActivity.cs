@@ -107,7 +107,7 @@ public class MainActivity : MauiAppCompatActivity
     {
         try
         {
-            Window?.SetNavigationBarColor(Utilities.GetColorFromResources("BackgroundColor").ToAndroid());
+            Window?.SetNavigationBarColor(Utilities.GetColorFromResources("NavigationBarColor").ToAndroid());
 
             App.SetNavigationBarColor = new((color) => { Window?.SetNavigationBarColor(color.ToAndroid()); });
         }

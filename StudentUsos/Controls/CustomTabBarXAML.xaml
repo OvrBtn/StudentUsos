@@ -1,8 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="StudentUsos.Controls.CustomTabBarXaml"
-             BackgroundColor="{StaticResource Gray600}">
+             x:Class="StudentUsos.Controls.CustomTabBarXaml">
+    <ContentView.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="Transparent" Offset="0" />
+            <GradientStop Color="{StaticResource NavigationBarColor}" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentView.Background>
 
     <ContentView.Resources>
         <Style TargetType="Image">
@@ -17,17 +22,20 @@
         </Style>
     </ContentView.Resources>
 
-    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" HeightRequest="50" VerticalOptions="End">
         <Grid x:Name="mainPageTab">
-            <Image Source="tabbar_house.png"></Image>
+            <Image x:Name="mainPageTabImage" Source="tabbar_house"></Image>
+            <Image x:Name="mainPageTabImageFill" Source="tabbar_house_fill"></Image>
             <Button Clicked="GoToMainPageButton_OnClick"></Button>
         </Grid>
         <Grid x:Name="activitiesTab">
-            <Image Source="tabbar_timetable.png"></Image>
+            <Image x:Name="activitiesTabImage" Source="tabbar_timetable"></Image>
+            <Image x:Name="activitiesTabImageFill" Source="tabbar_timetable_fill"></Image>
             <Button Clicked="GoToActivitiesPageButton_OnClick"></Button>
         </Grid>
         <Grid x:Name="moreTab">
-            <Image Source="tabbar_grid.png"></Image>
+            <Image x:Name="moreTabImage" Source="tabbar_grid"></Image>
+            <Image x:Name="moreTabImageFill" Source="tabbar_grid_fill"></Image>
             <Button Clicked="GoToMorePageButton_OnClick"></Button>
         </Grid>
     </StackLayout>

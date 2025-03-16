@@ -81,7 +81,7 @@
         </ScrollView>
 
         <Button Text="{x:Static strings:LocalizedStrings.Analyse}" BackgroundColor="{StaticResource Primary}"
-                Command="{Binding AnalyseButtonClickedCommand}" Margin="30, 30, 30, 40"
+                Command="{Binding AnalyseButtonClickedCommand}" Margin="30, 30, 30, 80"
                 IsVisible="{Binding IsAnalyseButtonVisible}"/>
 
     </StackLayout>

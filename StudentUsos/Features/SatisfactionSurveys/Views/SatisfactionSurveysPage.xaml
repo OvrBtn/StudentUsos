@@ -25,7 +25,7 @@
                 <Label Text="{x:Static strings:LocalizedStrings.SurveysPage_SurveysToFill}" HorizontalTextAlignment="Center" FontSize="18" Margin="0,0,0,10"></Label>
                 <CollectionView ItemsSource="{Binding Surveys}" VerticalOptions="FillAndExpand">
                     <CollectionView.Footer>
-                        <StackLayout Margin="15"></StackLayout>
+                        <StackLayout Margin="30"></StackLayout>
                     </CollectionView.Footer>
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:SatisfactionSurvey">

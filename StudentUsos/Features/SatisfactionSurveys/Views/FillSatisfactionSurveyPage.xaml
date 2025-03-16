@@ -99,7 +99,7 @@
 
                                 </StackLayout>
 
-                                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="20,20,20,30" Spacing="10">
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="20,20,20,60" Spacing="10">
                                     <controls:CustomButton HorizontalOptions="FillAndExpand" Command="{Binding PreviousQuestionCommand}">
                                         <Frame Padding="10">
                                             <Image HeightRequest="30" Source="arrow_left.png"></Image>

@@ -11,7 +11,8 @@
     IsTabBarVisible="False"
     Shell.TabBarIsVisible="False">
 
-    <StackLayout toolkit:StateContainer.CurrentState="{Binding MainStateKey}" VerticalOptions="Center">
+    <StackLayout toolkit:StateContainer.CurrentState="{Binding MainStateKey}" 
+                 VerticalOptions="Center" Margin="0,0,0,40">
         <toolkit:StateContainer.StateViews>
 
             <ActivityIndicator toolkit:StateView.StateKey="Loading"></ActivityIndicator>

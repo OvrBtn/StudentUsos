@@ -21,7 +21,7 @@
             <CollectionView Margin="0,0,0,0" toolkit:StateView.StateKey="Loaded" ItemsSource="{Binding GroupsGroupedObservable}" VerticalOptions="FillAndExpand" 
                             IsGrouped="True" CompressedLayout.IsHeadless="True">
                 <CollectionView.Footer>
-                    <StackLayout Margin="15" CompressedLayout.IsHeadless="True"></StackLayout>
+                    <StackLayout Margin="30" CompressedLayout.IsHeadless="True"></StackLayout>
                 </CollectionView.Footer>
 
                 <CollectionView.GroupHeaderTemplate>

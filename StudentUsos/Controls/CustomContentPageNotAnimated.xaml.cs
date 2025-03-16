@@ -12,17 +12,19 @@ public partial class CustomContentPageNotAnimated : ContentPage
             if (value)
             {
                 AbsoluteLayout.SetLayoutBounds(ContentContainer, DefaultContentStackLayoutLayoutBounds);
+                App.NavigationBarColor = Utilities.GetColorFromResources("NavigationBarColor");
             }
             else
             {
                 AbsoluteLayout.SetLayoutBounds(ContentContainer, TabBarNotVisibleContentStackLayoutLayoutBounds);
+                App.NavigationBarColor = Utilities.GetColorFromResources("BackgroundColor");
             }
         }
     }
     bool isTabBarVisible;
 
-    Border TabBar { get; init; }
-    Border ContentContainer { get; init; }
+    VisualElement TabBar { get; init; }
+    VisualElement ContentContainer { get; init; }
     Rect DefaultContentStackLayoutLayoutBounds { get; init; }
     Rect TabBarNotVisibleContentStackLayoutLayoutBounds { get; init; }
 
@@ -31,8 +33,8 @@ public partial class CustomContentPageNotAnimated : ContentPage
         BindingContext = this;
         InitializeComponent();
 
-        TabBar = (GetTemplateChild("tabBar") as Border)!;
-        ContentContainer = (GetTemplateChild("contentContainer") as Border)!;
+        TabBar = (GetTemplateChild("tabBar") as VisualElement) ?? throw new NullReferenceException();
+        ContentContainer = (GetTemplateChild("contentContainer") as VisualElement) ?? throw new NullReferenceException();
         DefaultContentStackLayoutLayoutBounds = AbsoluteLayout.GetLayoutBounds(ContentContainer);
         TabBarNotVisibleContentStackLayoutLayoutBounds = new(0, 0, 1, 1);
 

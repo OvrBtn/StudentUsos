@@ -24,11 +24,13 @@ public class MainApplication : MauiApplication
     {
         base.OnCreate();
 
+#if RELEASE
         AndroidEnvironment.UnhandledExceptionRaiser += (sender, e) =>
         {
             Logger.Default?.Log(LogLevel.Fatal, e.Exception.ToString());
             e.Handled = true;
         };
+#endif
     }
 
     protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();

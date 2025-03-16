@@ -4,7 +4,6 @@ using StudentUsos.Features.Calendar;
 using StudentUsos.Features.Groups.Repositories;
 using StudentUsos.Features.Groups.Services;
 using StudentUsos.Resources.LocalizedStrings;
-using System.Diagnostics;
 using System.Globalization;
 
 namespace StudentUsos;
@@ -32,18 +31,18 @@ public partial class App : Application
 
         CalendarSettings.LoadNotificationSettingsAndInitializePreferences();
 
+#if RELEASE
         AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
         {
-            Debug.Fail(e.ExceptionObject.ToString());
             logger.Log(LogLevel.Fatal, e.ExceptionObject.ToString()!);
         };
 
         TaskScheduler.UnobservedTaskException += (sender, e) =>
         {
-            Debug.Fail(e.Exception.ToString());
             logger.Log(LogLevel.Fatal, e.Exception.ToString());
             e.SetObserved();
         };
+#endif
 
     }
 

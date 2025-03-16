@@ -72,6 +72,7 @@ public partial class LoginViewModel : BaseViewModel
         IsActivityIndicatorRunning = false;
         LocalDatabaseManager.Default.GenerateTables();
         await Shell.Current.GoToAsync("//DashboardPage");
+        App.NavigationBarColor = Utilities.GetColorFromResources("NavigationBarColor");
     }
 
     private void LoginFail()

@@ -55,7 +55,7 @@
             </Border>
 
 
-            <Label x:Name="versionLabel" FontSize="11" HorizontalTextAlignment="Center" Margin="0,10" TextColor="{StaticResource Gray300}" />
+            <Label x:Name="versionLabel" FontSize="11" HorizontalTextAlignment="Center" Margin="0,10, 0, 40" TextColor="{StaticResource Gray300}" />
 
         </StackLayout>
     </ScrollView>

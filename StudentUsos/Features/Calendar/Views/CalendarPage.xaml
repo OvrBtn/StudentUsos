@@ -162,6 +162,8 @@
                                     </BindableLayout.ItemTemplate>
                                 </StackLayout>
 
+                                <StackLayout Margin="20"></StackLayout>
+                                
                             </StackLayout>
                         </ScrollView>
                     </StackLayout>

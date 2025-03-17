@@ -1,14 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<local:PopupBase
+<toolkit:Popup
     x:Class="StudentUsos.DatePickerPopup"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:CustomCalendar="clr-namespace:CustomCalendar;assembly=ovrbtn.CustomCalendar.MAUI"
     xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
     xmlns:local="clr-namespace:StudentUsos.Views"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    Color="Transparent"
+    Size="10000, 10000"
     x:Name="self">
 
-    <AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" InputTransparent="True" CascadeInputTransparent="False">
+    <AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        <AbsoluteLayout.GestureRecognizers>
+            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
+        </AbsoluteLayout.GestureRecognizers>
             <Border AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5,0.5,0.85,0.45" BackgroundColor="{StaticResource BackgroundColor}">
                 <CustomCalendar:CustomCalendar
                     DayBackgroundColor="{StaticResource BackgroundColor2}"
@@ -20,4 +26,4 @@
             </Border>
         </AbsoluteLayout>
 
-</local:PopupBase>
+</toolkit:Popup>

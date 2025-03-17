@@ -3,10 +3,14 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace StudentUsos.ViewModels;
 
-public partial class EntryPopupViewModel : PopupViewModelBase
+public partial class EntryPopupViewModel : ObservableObject
 {
-    public EntryPopupViewModel(EntryPopup.EntryPopupParameters intent)
+    EntryPopup popup;
+
+    public EntryPopupViewModel(EntryPopup popup, EntryPopup.EntryPopupParameters intent)
     {
+        this.popup = popup;
+
         Parameters = intent;
 
         Title = intent.Title;
@@ -29,13 +33,13 @@ public partial class EntryPopupViewModel : PopupViewModelBase
     void ConfirmClicked()
     {
         Parameters.ConfirmAction?.Invoke(EntryText);
-        Close();
+        popup.Close();
     }
 
     [RelayCommand]
     void CancelClicked()
     {
         Parameters.CancelAction?.Invoke();
-        Close();
+        popup.Close();
     }
 }

@@ -9,14 +9,14 @@
     <ContentPage.ControlTemplate>
         <ControlTemplate>
 
-            <AbsoluteLayout CompressedLayout.IsHeadless="True" VerticalOptions="FillAndExpand">
-                <Border Margin="30, 0, 30, 0" Padding="0" x:Name="tabBar" ZIndex="5" StrokeShape="RoundRectangle 20" CompressedLayout.IsHeadless="True"
-                     AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional" AbsoluteLayout.LayoutBounds="0,0.99,1,50">
-                    <controls:CustomTabBarXaml></controls:CustomTabBarXaml>
-                </Border>
+            <AbsoluteLayout CompressedLayout.IsHeadless="True" VerticalOptions="FillAndExpand" Background="Transparent">
+                <StackLayout Margin="0, 0, 0, 0" Padding="0" x:Name="tabBar" ZIndex="99" BackgroundColor="Transparent"
+                             AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional" AbsoluteLayout.LayoutBounds="0,1,1,70">
+                    <controls:CustomTabBarXaml VerticalOptions="FillAndExpand"></controls:CustomTabBarXaml>
+                </StackLayout>
 
-                <Border AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,0.95" x:Name="contentContainer"
-                        StrokeThickness="0" ZIndex="1" VerticalOptions="FillAndExpand" Padding="0" StrokeShape="RoundRectangle 45" Margin="-1,5,-1,5" 
+                <Border AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" x:Name="contentContainer"
+                        StrokeThickness="0" ZIndex="1" VerticalOptions="FillAndExpand" Padding="0" StrokeShape="RoundRectangle 45" Margin="-1,0,-1,0" 
                          BackgroundColor="{StaticResource BackgroundColor}" CompressedLayout.IsHeadless="True">
                     <ContentPresenter Padding="0" CompressedLayout.IsHeadless="True"></ContentPresenter>
                 </Border>

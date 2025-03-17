@@ -102,6 +102,7 @@
 		<MauiImage Include="Resources\Images\*" />
 		<MauiImage Include="Resources\Images\NotificationNewGrade\*" />
 		<MauiImage Include="Resources\Images\Settings\*" />
+		<MauiImage Include="Resources\Images\TabBar\*" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
@@ -159,7 +160,6 @@
 		<None Remove="Resources\Images\star.png" />
 		<None Remove="Resources\Images\TabBar\tabbar_grid.png" />
 		<None Remove="Resources\Images\TabBar\tabbar_house.png" />
-		<None Remove="Resources\Images\TabBar\tabbar_timetable.png" />
 		<None Remove="Resources\Images\telephone.svg" />
 		<None Remove="Resources\Images\three_dots_vertical.png" />
 		<None Remove="Resources\Images\timetable.png" />
@@ -177,13 +177,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiImage Include="Resources\Images\TabBar\tabbar_grid.png" />
-	  <MauiImage Include="Resources\Images\TabBar\tabbar_house.png" />
-	  <MauiImage Include="Resources\Images\TabBar\tabbar_timetable.png" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="CommunityToolkit.Maui" Version="9.0.2" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="9.1.1" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
 		<PackageReference Include="DevExpress.Maui.Controls" Version="23.2.6" />
 		<PackageReference Include="DevExpress.Maui.Editors" Version="23.2.6" />

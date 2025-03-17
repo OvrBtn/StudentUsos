@@ -11,6 +11,9 @@
     <!--<Color x:Key="BackgroundColor3">#34353d</Color>-->
     <Color x:Key="BackgroundColor3">#2A2B31</Color>
 
+    <!--#111111-->
+    <Color x:Key="NavigationBarColor">#282828</Color>
+
     <Color x:Key="LecturePrimaryColor">#577590</Color>
     <Color x:Key="ClassesPrimaryColor">#77966D</Color>
     <Color x:Key="LaboratoryPrimaryColor">#856088</Color>

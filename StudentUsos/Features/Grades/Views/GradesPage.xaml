@@ -13,8 +13,10 @@
 
     <AbsoluteLayout>
 
-        <controls:FloatingButton AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="1,1,-1,-1" ZIndex="10" Margin="40,40"
-                                 ButtonCornerRadius="1500" AnimationLength="160" AnimationSpacing="120" ButtonClicked="FloatingButton_ButtonClicked">
+        <controls:FloatingButton AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="1,1,-1,-1" 
+                                 ZIndex="10" Margin="40,80"
+                                 ButtonCornerRadius="1500" AnimationLength="160" AnimationSpacing="120" 
+                                 ButtonClicked="FloatingButton_ButtonClicked">
             <controls:FloatingButton.ContentTemplate x:DataType="views:GradesPage">
                 <StackLayout Margin="0,0,0,10" Spacing="5">
                     <controls:CustomButton BackgroundColor="#50000000" HorizontalOptions="End" CornerRadius="1000"
@@ -85,7 +87,7 @@
                                 <Label Text="{x:Static strings:LocalizedStrings.GradesPage_Empty}" Style="{StaticResource CenteredLabel}"></Label>
                             </CollectionView.EmptyView>
                             <CollectionView.Footer>
-                                <StackLayout Margin="15" />
+                                <StackLayout Margin="30" />
                             </CollectionView.Footer>
                             <CollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="models:FinalGradeGroup">

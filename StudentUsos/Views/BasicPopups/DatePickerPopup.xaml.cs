@@ -1,8 +1,8 @@
-﻿using StudentUsos.Views;
+﻿using CommunityToolkit.Maui.Views;
 
 namespace StudentUsos;
 
-public partial class DatePickerPopup : PopupBase
+public partial class DatePickerPopup : Popup
 {
     public event Action<DatePickerPopup, DateOnly> OnPicked;
 
@@ -12,11 +12,6 @@ public partial class DatePickerPopup : PopupBase
     {
         InitializeComponent();
         BindingContext = this.viewModel = new DatePickerPopupViewModel(parameters);
-    }
-
-    protected override void OnAppearing()
-    {
-        var parameters = viewModel.Parameters;
 
         OnPicked += parameters.OnPicked;
 
@@ -31,8 +26,6 @@ public partial class DatePickerPopup : PopupBase
             customCalendar.ClickedDay = activeDay.Value;
             customCalendar.CurrentDateTime = activeDay.Value.ToDateTime(TimeOnly.MinValue);
         }
-
-        base.OnAppearing();
     }
 
     public struct DatePickerParameters
@@ -50,7 +43,13 @@ public partial class DatePickerPopup : PopupBase
         };
         ApplicationService.Default.MainThreadInvoke(() =>
         {
-            App.Current?.MainPage?.Navigation.PushModalAsync(new DatePickerPopup(parameters), false);
+            var popup = new DatePickerPopup(parameters);
+            App.Current?.MainPage?.ShowPopup(popup);
         });
+    }
+
+    private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+    {
+        this.Close();
     }
 }

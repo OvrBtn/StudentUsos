@@ -1,13 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<local:PopupBase
+<toolkit:Popup
     x:Class="StudentUsos.MessagePopupPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:vm="clr-namespace:StudentUsos.ViewModels"
     xmlns:local="clr-namespace:StudentUsos.Views"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    Color="Transparent"
     x:DataType="vm:MessagePopupPageViewModel">
     
     <!--<StackLayout Opacity="{Binding ContentOpacity}" BackgroundColor="#50000000" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">-->
+    <StackLayout Padding="10">
         <Frame Margin="30" Padding="15" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
             <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
                 <Label Text="{Binding Title}" Margin="0,0,0,5" FontAttributes="Bold" FontSize="20" HorizontalTextAlignment="Center" />
@@ -24,6 +27,7 @@
                 </StackLayout>
             </StackLayout>
         </Frame>
+    </StackLayout>
     <!--</StackLayout>-->
     
-</local:PopupBase>
+</toolkit:Popup>

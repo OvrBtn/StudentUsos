@@ -1,8 +1,8 @@
-﻿using StudentUsos.Views;
+﻿using CommunityToolkit.Maui.Views;
 
 namespace StudentUsos;
 
-public partial class PickFromListPopup : PopupBase
+public partial class PickFromListPopup : Popup
 {
     public string PopupTitle
     {
@@ -73,19 +73,10 @@ public partial class PickFromListPopup : PopupBase
         var popup = new PickFromListPopup(title, options, stateKey, onPicked);
         ApplicationService.Default.MainThreadInvoke(() =>
         {
-            App.Current?.MainPage?.Navigation.PushModalAsync(popup, false);
+            App.Current?.MainPage?.ShowPopup(popup);
         });
         return popup;
     }
-
-    public override void Close()
-    {
-        OnClosed?.Invoke();
-        Content.Opacity = 0;
-        base.Close();
-    }
-
-
 
     private void OptionsButton_Clicked(object sender, EventArgs e)
     {
@@ -108,11 +99,5 @@ public partial class PickFromListPopup : PopupBase
         public const string Loaded = nameof(Loaded);
         public const string Empty = nameof(Empty);
         public const string LoadingError = nameof(LoadingError);
-    }
-
-    protected override void OnDisappearing()
-    {
-        Content.Opacity = 0;
-        base.OnDisappearing();
     }
 }

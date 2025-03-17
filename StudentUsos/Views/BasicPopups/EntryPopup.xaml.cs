@@ -1,14 +1,14 @@
-﻿using StudentUsos.Views;
+﻿using CommunityToolkit.Maui.Views;
 
 namespace StudentUsos;
 
-public partial class EntryPopup : PopupBase
+public partial class EntryPopup : Popup
 {
     EntryPopupViewModel viewModel;
     public EntryPopup(EntryPopupParameters parameters)
     {
         InitializeComponent();
-        BindingContext = this.viewModel = new EntryPopupViewModel(parameters);
+        BindingContext = this.viewModel = new EntryPopupViewModel(this, parameters);
     }
 
     public struct EntryPopupParameters
@@ -42,7 +42,8 @@ public partial class EntryPopup : PopupBase
         };
         ApplicationService.Default.MainThreadInvoke(() =>
         {
-            App.Current?.MainPage?.Navigation.PushModalAsync(new EntryPopup(parameters), false);
+            var popup = new EntryPopup(parameters);
+            App.Current?.MainPage?.ShowPopup(popup);
         });
     }
 }

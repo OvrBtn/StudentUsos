@@ -1,20 +1,20 @@
-﻿using StudentUsos.Views;
+﻿using CommunityToolkit.Maui.Views;
 
 namespace StudentUsos;
 
-public partial class MessagePopupPage : PopupBase
+public partial class MessagePopupPage : Popup
 {
 
     public MessagePopupPage(YesAndNoPopupParameters parameters)
     {
         InitializeComponent();
-        BindingContext = new MessagePopupPageViewModel(parameters);
+        BindingContext = new MessagePopupPageViewModel(this, parameters);
     }
 
     public MessagePopupPage(OkPopupParameters parameters)
     {
         InitializeComponent();
-        BindingContext = new MessagePopupPageViewModel(parameters);
+        BindingContext = new MessagePopupPageViewModel(this, parameters);
     }
 
     public struct YesAndNoPopupParameters
@@ -50,7 +50,8 @@ public partial class MessagePopupPage : PopupBase
         };
         ApplicationService.Default.MainThreadInvoke(() =>
         {
-            App.Current?.MainPage?.Navigation!.PushModalAsync(new MessagePopupPage(parameters), false);
+            var popup = new MessagePopupPage(parameters);
+            App.Current?.MainPage?.ShowPopup(popup);
         });
     }
 
@@ -66,7 +67,8 @@ public partial class MessagePopupPage : PopupBase
         };
         ApplicationService.Default.MainThreadInvoke(() =>
         {
-            App.Current?.MainPage?.Navigation!.PushModalAsync(new MessagePopupPage(parameters), false);
+            var popup = new MessagePopupPage(parameters);
+            App.Current?.MainPage?.ShowPopup(popup);
         });
     }
 }

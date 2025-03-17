@@ -13,6 +13,11 @@
         <Button Text="{x:Static string:LocalizedStrings.LogsPage_RemoveAll}" Command="{Binding RemoveAllLogsCommand}"
                 Margin="10"/>
         <CollectionView Margin="0" ItemsSource="{Binding Logs}" VerticalOptions="FillAndExpand">
+            <CollectionView.FooterTemplate>
+                <DataTemplate>
+                    <StackLayout Margin="30"/>
+                </DataTemplate>
+            </CollectionView.FooterTemplate>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="logger:LogRecord">
                     <Label Text="{Binding LogRecordString}" Margin="30,10"></Label>

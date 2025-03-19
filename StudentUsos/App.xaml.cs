@@ -25,8 +25,6 @@ public partial class App : Application
 
         InitializeComponent();
 
-        _ = SetMainPageAsync();
-
         SetLanguageFromLocalStorage();
 
         CalendarSettings.LoadNotificationSettingsAndInitializePreferences();
@@ -114,31 +112,36 @@ public partial class App : Application
         return;
     }
 
-    async Task SetMainPageAsync()
+    protected override Window CreateWindow(IActivationState? activationState)
     {
-        MainPage = new AppShell();
+        var shell = new AppShell();
+        _ = PostCreateWindowInitialization(shell);
+        return new Window(shell);
+    }
+
+    async Task PostCreateWindowInitialization(AppShell shell)
+    {
         if (AuthorizationService.CheckIfLoggedIn() == false)
         {
-            await Shell.Current.GoToAsync("//LoginPage");
+            await shell.GoToAsync("//LoginPage");
+            return;
         }
-        else
+
+        //delay to let app load
+        await Task.Delay(4000);
+
+        //if those keys are set then previous app version wasn't integrated with server, checking if session is active (through internal server) doesn't make sense 
+        //since it will always be false until usos access tokens are sent to internal server
+        if (Preferences.ContainsKey(AuthorizationService.PreferencesKeys.AccessToken.ToString()) &&
+            Preferences.ContainsKey(AuthorizationService.PreferencesKeys.AccessTokenSecret.ToString()))
         {
-            //delay to let app load
-            await Task.Delay(4000);
+            return;
+        }
 
-            //if those keys are set then previous app version wasn't integrated with server, checking if session is active (through internal server) doesn't make sense 
-            //since it will always be false until usos access tokens are sent to internal server
-            if (Preferences.ContainsKey(AuthorizationService.PreferencesKeys.AccessToken.ToString()) &&
-                Preferences.ContainsKey(AuthorizationService.PreferencesKeys.AccessTokenSecret.ToString()))
-            {
-                return;
-            }
-
-            if (await AuthorizationService.IsSessionActiveAsync() == false)
-            {
-                MessagePopupPage.CreateAndShow(LocalizedStrings.SessionInvalidMessage_Title, LocalizedStrings.SessionInvalidMessage_Description,
-                    LocalizedStrings.Logout, LocalizedStrings.Later, () => AuthorizationService.LogoutAsync(), null);
-            }
+        if (await AuthorizationService.IsSessionActiveAsync() == false)
+        {
+            MessagePopupPage.CreateAndShow(LocalizedStrings.SessionInvalidMessage_Title, LocalizedStrings.SessionInvalidMessage_Description,
+                LocalizedStrings.Logout, LocalizedStrings.Later, () => AuthorizationService.LogoutAsync(), null);
         }
     }
 

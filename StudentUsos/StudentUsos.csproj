@@ -177,7 +177,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="CommunityToolkit.Maui" Version="9.1.1" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="11.1.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
 		<PackageReference Include="DevExpress.Maui.Controls" Version="23.2.6" />
 		<PackageReference Include="DevExpress.Maui.Editors" Version="23.2.6" />
@@ -192,8 +192,8 @@
 		<PackageReference Include="SkiaSharp.Extended.UI.Maui" Version="2.0.0" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
 		<PackageReference Include="SQLitePCLRaw.provider.dynamic_cdecl" Version="2.1.7" />
-		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.50" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.50" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.40" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.40" />
 	</ItemGroup>
 
 	<ItemGroup>

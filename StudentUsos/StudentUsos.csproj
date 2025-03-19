@@ -54,6 +54,10 @@
 		<ApplicationTitle>Studencki USOS</ApplicationTitle>
 	
 		<PublishTrimmed>True</PublishTrimmed>
+
+		<AndroidEnableMarshalMethods>true</AndroidEnableMarshalMethods>
+		<MauiEnableXamlCBindingWithSourceCompilation>true</MauiEnableXamlCBindingWithSourceCompilation>
+		
 	</PropertyGroup>
 
 	<ItemGroup Condition="$(TargetFramework.Contains('-android'))">

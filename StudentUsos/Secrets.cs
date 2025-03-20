@@ -33,8 +33,8 @@ public class Secrets
         isInitialized = true;
     }
 
-    public string InternalConsumerKey { get; init; }
-    public string InternalConsumerKeySecret { get; init; }
-    public string ServerUrl { get; init; }
+    public string InternalConsumerKey { get; set; }
+    public string InternalConsumerKeySecret { get; set; }
+    public string ServerUrl { get; set; }
 
 }

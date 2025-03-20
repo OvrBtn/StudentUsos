@@ -144,7 +144,7 @@
                                             <Label Margin="0,0,0,5" FontSize="18" HorizontalTextAlignment="Center"
                                                    Text="{Binding DashboardActivitiesViewModel.ActivitiesTitle}" FontAttributes="Bold"/>
                                             <StackLayout>
-                                                <CarouselView x:Name="carouselView" Margin="0,5,0,10" 
+                                                <CarouselView x:Name="carouselView" Margin="0,5,0,10" HorizontalScrollBarVisibility="Never"
                                                               CurrentItem="{Binding DashboardActivitiesViewModel.CurrentItemInCarousel, Mode=TwoWay}"
                                                               IndicatorView="activitiesIndicator" ItemsSource="{Binding DashboardActivitiesViewModel.Activities}" 
                                                               Loop="False" MinimumHeightRequest="20"

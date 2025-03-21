@@ -128,7 +128,7 @@ public partial class App : Application
         }
 
         //delay to let app load
-        await Task.Delay(4000);
+        await Task.Delay(5000);
 
         //if those keys are set then previous app version wasn't integrated with server, checking if session is active (through internal server) doesn't make sense 
         //since it will always be false until usos access tokens are sent to internal server

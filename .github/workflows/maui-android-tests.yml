@@ -4,15 +4,11 @@ on:
   workflow_dispatch: 
   push:
     branches:
-      - master
       - main
-      #- dev
       
   pull_request:
     branches:
-      - master
       - main
-      - dev
 
 jobs:
   build:
@@ -24,7 +20,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '8.0.x'
+          dotnet-version: '9.0.x'
 
       - name: Restore MAUI workload cache
         id: cache-maui

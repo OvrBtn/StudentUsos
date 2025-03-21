@@ -556,4 +556,10 @@
   <data name="WhatsNew" xml:space="preserve">
     <value>Co nowego</value>
   </data>
+  <data name="SettingsPage_ApplicationSubPage_WhatsNewFeatured" xml:space="preserve">
+    <value>Wyróżnione zmiany</value>
+  </data>
+  <data name="SettingsPage_ApplicationSubPage_WhatsNewGeneralChanges" xml:space="preserve">
+    <value>Ogólne zmiany</value>
+  </data>
 </root>

@@ -1189,6 +1189,24 @@ namespace StudentUsos.Resources.LocalizedStrings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Featured changes.
+        /// </summary>
+        internal static string SettingsPage_ApplicationSubPage_WhatsNewFeatured {
+            get {
+                return ResourceManager.GetString("SettingsPage_ApplicationSubPage_WhatsNewFeatured", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to General changes.
+        /// </summary>
+        internal static string SettingsPage_ApplicationSubPage_WhatsNewGeneralChanges {
+            get {
+                return ResourceManager.GetString("SettingsPage_ApplicationSubPage_WhatsNewGeneralChanges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Events from calendar.
         /// </summary>
         internal static string SettingsPage_CalendarEvents {

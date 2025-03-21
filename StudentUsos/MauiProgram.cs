@@ -18,7 +18,6 @@ using Microsoft.Extensions.Logging;
 using Android.Text;
 using StudentUsos.Platforms.Android;
 using DrawnUi.Maui.Draw;
-using Microsoft.Extensions.Logging;
 #endif
 
 namespace StudentUsos;

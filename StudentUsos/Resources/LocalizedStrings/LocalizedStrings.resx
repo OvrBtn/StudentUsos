@@ -554,4 +554,10 @@
   <data name="WhatsNew" xml:space="preserve">
     <value>What's new</value>
   </data>
+  <data name="SettingsPage_ApplicationSubPage_WhatsNewFeatured" xml:space="preserve">
+    <value>Featured changes</value>
+  </data>
+  <data name="SettingsPage_ApplicationSubPage_WhatsNewGeneralChanges" xml:space="preserve">
+    <value>General changes</value>
+  </data>
 </root>

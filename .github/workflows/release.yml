@@ -17,7 +17,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 8.0.x
+          dotnet-version: 9.0.x
 
       - name: Restore MAUI workload cache
         id: cache-maui
@@ -57,7 +57,7 @@ jobs:
         shell: pwsh
 
       - name: Build APK (Unsigned)
-        run: dotnet publish ./StudentUsos/StudentUsos.csproj -c Release -f net8.0-android --no-restore `
+        run: dotnet publish ./StudentUsos/StudentUsos.csproj -c Release -f net9.0-android --no-restore `
           -p:AndroidPackageFormat=apk `
           -p:AndroidKeyStore=true `
           -p:AndroidSigningKeyStore=release-key.keystore `

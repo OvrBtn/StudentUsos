@@ -16,40 +16,70 @@ public class LocalDatabaseManager : ILocalDatabaseManager
     public static ILocalDatabaseManager Default { get; private set; }
     SQLiteConnection dbConnection;
 
+    LocalDatabaseOptions option;
     public LocalDatabaseManager(LocalDatabaseOptions option = LocalDatabaseOptions.DefaultLocalFile)
     {
         Default = this;
+        this.option = option;
+    }
 
-        if (option == LocalDatabaseOptions.InMemory)
+    bool isInitialized;
+    object initializeLock = new();
+    /// <summary>
+    /// Initializing database is a bit heavy on startup time and using static constructor doesn't make
+    /// sense due to DI but in this way it is delayed to the moment when any method is actually called
+    /// </summary>
+    void EnsureInitialized()
+    {
+        if (isInitialized)
         {
-            dbConnection = new(":memory:");
-        }
-        else
-        {
-            dbConnection = new(Path.Combine(FileSystem.AppDataDirectory, "MainDB.db3"),
-                SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.FullMutex);
-            dbConnection.EnableWriteAheadLogging();
+            return;
         }
 
-        try
+        lock (initializeLock)
         {
-            GenerateTables();
-        }
-        catch
-        {
-            BackwardCompatibility.ResetLocalData();
-            LocalStorageManager.Default.SetData(LocalStorageKeys.IsAppRunningForTheFirstTime, true.ToString());
+            if (isInitialized)
+            {
+                return;
+            }
+
+            isInitialized = true;
+
+            if (option == LocalDatabaseOptions.InMemory)
+            {
+                dbConnection = new(":memory:");
+            }
+            else
+            {
+                dbConnection = new(Path.Combine(FileSystem.AppDataDirectory, "MainDB.db3"),
+                    SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.FullMutex);
+                dbConnection.EnableWriteAheadLogging();
+            }
+
+            try
+            {
+                GenerateTables();
+            }
+            catch
+            {
+                BackwardCompatibility.ResetLocalData();
+                LocalStorageManager.Default.SetData(LocalStorageKeys.IsAppRunningForTheFirstTime, true.ToString());
+            }
         }
     }
 
     public void ResetTables()
     {
+        EnsureInitialized();
+
         DeleteTables();
         GenerateTables();
     }
 
     public void GenerateTables()
     {
+        EnsureInitialized();
+
         dbConnection.CreateTable<Lecturer>();
         dbConnection.CreateTable<Activity>();
         dbConnection.CreateTable<Term>();
@@ -67,6 +97,8 @@ public class LocalDatabaseManager : ILocalDatabaseManager
 
     public void DeleteTables()
     {
+        EnsureInitialized();
+
         LocalStorageManager.Default.SetData(LocalStorageKeys.IsAppRunningForTheFirstTime, true.ToString());
         dbConnection.DropTable<Lecturer>();
         dbConnection.DropTable<Activity>();
@@ -85,28 +117,38 @@ public class LocalDatabaseManager : ILocalDatabaseManager
 
     public int ClearTable<T>()
     {
+        EnsureInitialized();
+
         return dbConnection.Execute("DELETE FROM " + typeof(T).Name);
     }
 
     public int ExecuteQuery(string query)
     {
+        EnsureInitialized();
+
         return dbConnection.Execute(query);
     }
 
     public T? Get<T>(Func<T, bool> predicate) where T : new()
     {
+        EnsureInitialized();
+
         var result = dbConnection.Table<T>().FirstOrDefault(predicate);
         return result;
     }
 
     public List<T> GetAll<T>(Func<T, bool> predicate) where T : new()
     {
+        EnsureInitialized();
+
         var result = dbConnection.Table<T>().Where(predicate).ToList();
         return result;
     }
 
     public List<T> GetAll<T>() where T : new()
     {
+        EnsureInitialized();
+
         var result = dbConnection.Table<T>().ToList();
         if (result == null) return new List<T>();
         return result;
@@ -114,11 +156,15 @@ public class LocalDatabaseManager : ILocalDatabaseManager
 
     public void InsertOrReplace<T>(T obj)
     {
+        EnsureInitialized();
+
         dbConnection.InsertOrReplace(obj);
     }
 
     public void InsertOrReplaceAll<T>(IEnumerable<T> list) where T : new()
     {
+        EnsureInitialized();
+
         foreach (var item in list)
         {
             dbConnection.InsertOrReplace(item);
@@ -127,22 +173,30 @@ public class LocalDatabaseManager : ILocalDatabaseManager
 
     public void Insert<T>(T obj) where T : new()
     {
+        EnsureInitialized();
+
         dbConnection.Insert(obj);
     }
 
     public void InsertAll<T>(IEnumerable<T> list) where T : new()
     {
+        EnsureInitialized();
+
         dbConnection.InsertAll(list);
     }
 
     public int Remove<T>(string whereBody)
     {
+        EnsureInitialized();
+
         string query = "DELETE FROM " + typeof(T).Name + " WHERE " + whereBody;
         return dbConnection.Execute(query);
     }
 
     public int Remove<T>(T obj) where T : class
     {
+        EnsureInitialized();
+
         if (obj is string)
         {
             throw new ArgumentException("Object to delete can't be a string");
@@ -152,6 +206,8 @@ public class LocalDatabaseManager : ILocalDatabaseManager
 
     public bool IsTableEmpty<T>() where T : new()
     {
+        EnsureInitialized();
+
         var result = dbConnection.Query<T>("SELECT * FROM " + typeof(T).Name + " LIMIT 1");
         if (result == null || result.Count == 0) return true;
         return false;

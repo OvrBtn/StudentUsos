@@ -14,6 +14,11 @@ public class Secrets
     const string FileName = "secrets.json";
     static bool isInitialized = false;
 
+    static Secrets()
+    {
+        Initialize();
+    }
+
     internal static void Initialize()
     {
         if (isInitialized)

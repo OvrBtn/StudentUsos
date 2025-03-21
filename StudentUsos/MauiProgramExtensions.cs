@@ -31,10 +31,11 @@ using StudentUsos.Features.StudentProgrammes.Services;
 using StudentUsos.Features.UserInfo;
 using StudentUsos.Services.LocalNotifications;
 using StudentUsos.Services.ServerConnection;
+using StudentUsos.Views.WhatsNew;
 
 namespace StudentUsos;
 
-internal static class MauiProgramExtensions
+internal static partial class MauiProgramExtensions
 {
     public static MauiAppBuilder RegisterServices(this MauiAppBuilder builder)
     {
@@ -127,6 +128,9 @@ internal static class MauiProgramExtensions
         builder.Services.AddTransient<DiagnosisSubpage>();
         builder.Services.AddTransient<AppInfoPage>();
         builder.Services.AddTransient<NotificationsDiagnosisPage>();
+
+        builder.Services.AddTransient<WhatsNewListPage>();
+        builder.Services.AddTransient<WhatsNewCarouselPage>();
 
         return builder;
     }

@@ -553,4 +553,7 @@
   <data name="Success" xml:space="preserve">
     <value>Sukces</value>
   </data>
+  <data name="WhatsNew" xml:space="preserve">
+    <value>Co nowego</value>
+  </data>
 </root>

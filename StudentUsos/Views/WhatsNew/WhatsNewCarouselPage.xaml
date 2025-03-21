@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="StudentUsos.Views.WhatsNew.WhatsNewCarouselPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:StudentUsos.Controls"
+    xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
+    xmlns:draw="http://schemas.appomobi.com/drawnUi/2023/draw"
+    xmlns:whatsnew="clr-namespace:StudentUsos.Views.WhatsNew"
+    BackgroundColor="{StaticResource BackgroundColor}"
+    x:DataType="whatsnew:WhatsNewCarouselPage"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="draw:SkiaLabel" x:Key="labelBaseStyle">
+                <Setter Property="TextColor" Value="White"></Setter>
+            </Style>
+            <Style TargetType="draw:SkiaLabel" x:Key="labelTextStyle" BasedOn="{StaticResource labelBaseStyle}">
+                <Setter Property="FontSize" Value="16"></Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout BackgroundColor="Transparent" VerticalOptions="Fill">
+
+        <Grid Margin="40,30,40,20">
+            <Label Text="{x:Static strings:LocalizedStrings.WhatsNew}" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="18"></Label>
+            <Image Source="x" HorizontalOptions="EndAndExpand" WidthRequest="25">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
+                </Image.GestureRecognizers>
+            </Image>
+        </Grid>
+
+        <StackLayout toolkit:StateContainer.CurrentState="{Binding MainStateKey}" VerticalOptions="FillAndExpand">
+            <toolkit:StateContainer.StateViews>
+
+                <StackLayout toolkit:StateView.StateKey="Loading" VerticalOptions="FillAndExpand">
+                </StackLayout>
+
+                <StackLayout toolkit:StateView.StateKey="Loaded" VerticalOptions="FillAndExpand">
+                    <draw:Canvas Gestures="Enabled" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
+
+                        <draw:SkiaCarousel 
+                        x:Name="mainCarousel"
+                        SelectedIndexChanged="MainCarousel_SelectedIndexChanged"
+                        BackgroundColor="Transparent"
+                        Bounces="True"
+                        HorizontalOptions="Fill"
+                        SidesOffset="20"
+                        Spacing="0"
+                        VerticalOptions="Fill">
+
+                            <draw:SkiaLayout>
+                                <draw:SkiaLabel Style="{StaticResource labelTextStyle}" HorizontalOptions="Center" Text="1" VerticalOptions="Center" />
+                            </draw:SkiaLayout>
+
+                            <draw:SkiaLayout>
+                                <draw:SkiaLabel Style="{StaticResource labelTextStyle}" HorizontalOptions="Center" Text="2" VerticalOptions="Center" />
+                            </draw:SkiaLayout>
+
+                        </draw:SkiaCarousel>
+
+                    </draw:Canvas>
+
+                    <IndicatorView x:Name="indicatorView" Count="10" Margin="0,10,0,30"></IndicatorView>
+                </StackLayout>
+
+            </toolkit:StateContainer.StateViews>
+        </StackLayout>
+
+    </StackLayout>
+
+</ContentPage>

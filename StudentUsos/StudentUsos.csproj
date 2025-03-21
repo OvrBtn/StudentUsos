@@ -185,6 +185,7 @@
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
 		<PackageReference Include="DevExpress.Maui.Controls" Version="23.2.6" />
 		<PackageReference Include="DevExpress.Maui.Editors" Version="23.2.6" />
+		<PackageReference Include="DrawnUi.MauiGraphics" Version="1.4.0.1" />
 		<PackageReference Include="Plugin.FirebasePushNotifications" Version="3.0.28" />
 		<TrimmableAssembly Include="DevExpress.Data.v24.1.3" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
@@ -259,6 +260,12 @@
 		</Compile>
 		<Compile Update="Views\MainLoadingPage.xaml.cs">
 		  <DependentUpon>MainLoadingPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\WhatsNew\WhatsNewCarouselPage.xaml.cs">
+		  <DependentUpon>WhatsNewCarouselPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\WhatsNew\WhatsNewListPage.xaml.cs">
+		  <DependentUpon>WhatsNewListPage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Views\TestPage.xaml.cs">
 		  <DependentUpon>TestPage.xaml</DependentUpon>
@@ -388,6 +395,12 @@
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\MainLoadingPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\WhatsNew\WhatsNewCarouselPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\WhatsNew\WhatsNewListPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\TestPage.xaml">

@@ -16,5 +16,7 @@ public enum LocalStorageKeys
     LoggingAllowedData,
     ChosenLanguageCode,
     ChosenLanguageName,
-    FcmToken
+    FcmToken,
+    WhatsNewCarouselLastId,
+    WhatsNewListLastId
 }

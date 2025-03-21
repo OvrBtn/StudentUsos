@@ -17,6 +17,7 @@ using Microsoft.Extensions.Logging;
 #if ANDROID
 using Android.Text;
 using StudentUsos.Platforms.Android;
+using Microsoft.Extensions.Logging;
 #endif
 
 namespace StudentUsos;

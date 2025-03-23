@@ -1,6 +1,5 @@
 ﻿using Plugin.LocalNotification;
 using StudentUsos.Features.Authorization.Services;
-using StudentUsos.Features.Calendar;
 using StudentUsos.Features.Groups.Repositories;
 using StudentUsos.Features.Groups.Services;
 using StudentUsos.Resources.LocalizedStrings;
@@ -26,8 +25,6 @@ public partial class App : Application
         InitializeComponent();
 
         SetLanguageFromLocalStorage();
-
-        CalendarSettings.LoadNotificationSettingsAndInitializePreferences();
 
 #if RELEASE
         AppDomain.CurrentDomain.UnhandledException += (sender, e) =>

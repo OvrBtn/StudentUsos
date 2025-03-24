@@ -8,6 +8,7 @@
     xmlns:authorization="using:StudentUsos.Features.Authorization"
     xmlns:views="clr-namespace:StudentUsos.Features.Dashboard.Views"
     xmlns:views1="clr-namespace:StudentUsos.Features.Activities.Views"
+    xmlns:local="clr-namespace:StudentUsos"
     Shell.NavBarIsVisible="False"
     Shell.FlyoutBehavior="Disabled"
     Shell.TabBarIsVisible="False">
@@ -19,5 +20,7 @@
     </TabBar>
 
     <ShellContent Title="Login" ContentTemplate="{DataTemplate authorization:LoginPage}" FlyoutItemIsVisible="False" Route="LoginPage" />
+    
+    <ShellContent Title="MainLoadingPage" ContentTemplate="{DataTemplate local:MainLoadingPage}" FlyoutItemIsVisible="False" Route="MainLoadingPage" />
 
 </Shell>

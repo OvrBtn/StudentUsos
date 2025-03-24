@@ -112,6 +112,7 @@ public partial class App : Application
     protected override Window CreateWindow(IActivationState? activationState)
     {
         var shell = new AppShell();
+        shell.GoToAsync("//MainLoadingPage");
         _ = PostCreateWindowInitialization(shell);
         return new Window(shell);
     }

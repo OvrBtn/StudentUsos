@@ -1360,6 +1360,24 @@ namespace StudentUsos.Resources.LocalizedStrings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Next.
+        /// </summary>
+        internal static string WhatsNewPage_Next {
+            get {
+                return ResourceManager.GetString("WhatsNewPage_Next", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Skip.
+        /// </summary>
+        internal static string WhatsNewPage_Skip {
+            get {
+                return ResourceManager.GetString("WhatsNewPage_Skip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Yes.
         /// </summary>
         internal static string Yes {

@@ -1,8 +1,6 @@
-﻿using StudentUsos.Controls;
+﻿namespace StudentUsos.Views.WhatsNew;
 
-namespace StudentUsos.Views.WhatsNew;
-
-public partial class WhatsNewListPage : CustomContentPageNotAnimated
+public partial class WhatsNewListPage : ContentPage
 {
     public WhatsNewListPage()
     {

@@ -17,7 +17,6 @@ using Microsoft.Extensions.Logging;
 #if ANDROID
 using Android.Text;
 using StudentUsos.Platforms.Android;
-using DrawnUi.Maui.Draw;
 #endif
 
 namespace StudentUsos;
@@ -48,7 +47,6 @@ public static class MauiProgram
             .RegisterServices()
 #if ANDROID
             .ConfigureStatusBarAndNavigationBarColorsForModalPages()
-            .UseDrawnUi()
 #endif
             .ConfigureFonts(fonts =>
             {

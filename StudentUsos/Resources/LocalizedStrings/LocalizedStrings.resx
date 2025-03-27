@@ -560,4 +560,10 @@
   <data name="SettingsPage_ApplicationSubPage_WhatsNewGeneralChanges" xml:space="preserve">
     <value>General changes</value>
   </data>
+  <data name="WhatsNewPage_Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="WhatsNewPage_Skip" xml:space="preserve">
+    <value>Skip</value>
+  </data>
 </root>

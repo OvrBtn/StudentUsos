@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using StudentUsos.Features.Calendar;
 using StudentUsos.Features.Calendar.Repositories;
+using System.Globalization;
 
 namespace StudentUsos.Features.Settings.Views.Subpages
 {
@@ -50,7 +51,7 @@ namespace StudentUsos.Features.Settings.Views.Subpages
                 {
                     localStorageManager.SetData(LocalStorageKeys.AreNotificationsEnabled, AreNotificationsEnabled.ToString());
                     localStorageManager.SetData(LocalStorageKeys.DaysBeforeCalendarEventToSendNotification, NotificationsDayPicked.ToString());
-                    localStorageManager.SetData(LocalStorageKeys.TimeOfDayOfCalendarEventNotification, NotificationsTimePicked.ToString());
+                    localStorageManager.SetData(LocalStorageKeys.TimeOfDayOfCalendarEventNotification, NotificationsTimePicked.ToString("c", CultureInfo.InvariantCulture));
 
                     int notificationsDayPickedInt = int.Parse(NotificationsDayPicked);
                     await usosCalendarRepository.RefreshNotificationsAsync(AreNotificationsEnabled, notificationsDayPickedInt, NotificationsTimePicked);

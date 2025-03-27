@@ -1,4 +1,6 @@
-﻿namespace StudentUsos.Features.Calendar;
+﻿using System.Globalization;
+
+namespace StudentUsos.Features.Calendar;
 
 public static class CalendarSettings
 {
@@ -35,10 +37,23 @@ public static class CalendarSettings
     }
     static TimeSpan timeOfDayOfCalendarEventNotification = new TimeSpan(15, 0, 0);
 
+    static CalendarSettings()
+    {
+        LoadNotificationSettingsAndInitializePreferences();
+    }
+
     public static void LoadNotificationSettingsAndInitializePreferences()
     {
+        //unit tests will trigger the cctor but since in unit tests
+        //environment there is no local storage then this should just return
+        if (LocalStorageManager.Default is null)
+        {
+            return;
+        }
+
         //getting data about calendar notifications or set the defaults
-        if (LocalStorageManager.Default.TryGettingData(LocalStorageKeys.AreNotificationsEnabled, out string result) && bool.TryParse(result, out bool parsedBool))
+        if (LocalStorageManager.Default.TryGettingData(LocalStorageKeys.AreNotificationsEnabled, out string result)
+            && bool.TryParse(result, out bool parsedBool))
         {
             areCalendarNotificationsEnabled = parsedBool;
         }
@@ -47,7 +62,8 @@ public static class CalendarSettings
             LocalStorageManager.Default.SetData(LocalStorageKeys.AreNotificationsEnabled, true.ToString());
         }
 
-        if (LocalStorageManager.Default.TryGettingData(LocalStorageKeys.DaysBeforeCalendarEventToSendNotification, out result) && int.TryParse(result, out int parsedInt))
+        if (LocalStorageManager.Default.TryGettingData(LocalStorageKeys.DaysBeforeCalendarEventToSendNotification, out result)
+            && int.TryParse(result, out int parsedInt))
         {
             daysBeforeCalendarEventToSendNotification = parsedInt;
         }
@@ -56,13 +72,15 @@ public static class CalendarSettings
             LocalStorageManager.Default.SetData(LocalStorageKeys.DaysBeforeCalendarEventToSendNotification, 1.ToString());
         }
 
-        if (LocalStorageManager.Default.TryGettingData(LocalStorageKeys.TimeOfDayOfCalendarEventNotification, out result) && TimeSpan.TryParse(result, out TimeSpan parsedTimeSpan))
+        if (LocalStorageManager.Default.TryGettingData(LocalStorageKeys.TimeOfDayOfCalendarEventNotification, out result)
+            && TimeSpan.TryParse(result, CultureInfo.InvariantCulture, out TimeSpan parsedTimeSpan))
         {
             timeOfDayOfCalendarEventNotification = parsedTimeSpan;
         }
         else
         {
-            LocalStorageManager.Default.SetData(LocalStorageKeys.TimeOfDayOfCalendarEventNotification, new TimeSpan(15, 0, 0).ToString());
+            LocalStorageManager.Default.SetData(LocalStorageKeys.TimeOfDayOfCalendarEventNotification,
+                new TimeSpan(15, 0, 0).ToString("c", CultureInfo.InvariantCulture));
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Plugin.LocalNotification;
 using StudentUsos.Features.Authorization.Services;
-using StudentUsos.Features.Calendar;
 using StudentUsos.Features.Groups.Repositories;
 using StudentUsos.Features.Groups.Services;
 using StudentUsos.Resources.LocalizedStrings;
@@ -26,8 +25,6 @@ public partial class App : Application
         InitializeComponent();
 
         SetLanguageFromLocalStorage();
-
-        CalendarSettings.LoadNotificationSettingsAndInitializePreferences();
 
 #if RELEASE
         AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
@@ -115,6 +112,7 @@ public partial class App : Application
     protected override Window CreateWindow(IActivationState? activationState)
     {
         var shell = new AppShell();
+        shell.GoToAsync("//MainLoadingPage");
         _ = PostCreateWindowInitialization(shell);
         return new Window(shell);
     }
@@ -128,7 +126,7 @@ public partial class App : Application
         }
 
         //delay to let app load
-        await Task.Delay(4000);
+        await Task.Delay(5000);
 
         //if those keys are set then previous app version wasn't integrated with server, checking if session is active (through internal server) doesn't make sense 
         //since it will always be false until usos access tokens are sent to internal server

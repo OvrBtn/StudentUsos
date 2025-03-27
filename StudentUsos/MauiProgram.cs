@@ -6,7 +6,6 @@ using CommunityToolkit.Maui;
 using CustomCalendar;
 using CustomSchedule;
 using DevExpress.Maui;
-using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Handlers;
 using Plugin.FirebasePushNotifications;
 using Plugin.FirebasePushNotifications.Platforms;
@@ -14,6 +13,7 @@ using Plugin.LocalNotification;
 using SkiaSharp;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 using StudentUsos.Features.Dashboard.Views;
+using Microsoft.Extensions.Logging;
 #if ANDROID
 using Android.Text;
 using StudentUsos.Platforms.Android;
@@ -25,8 +25,6 @@ public static class MauiProgram
 {
     public static MauiApp CreateMauiApp()
     {
-        Secrets.Initialize();
-
         AllowMultiLineTruncation();
 
         var builder = MauiApp.CreateBuilder();

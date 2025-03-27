@@ -257,6 +257,9 @@
 		<Compile Update="Features\Grades\Views\ModifyGradePage.xaml.cs">
 		  <DependentUpon>ModifyGradePage.xaml</DependentUpon>
 		</Compile>
+		<Compile Update="Views\MainLoadingPage.xaml.cs">
+		  <DependentUpon>MainLoadingPage.xaml</DependentUpon>
+		</Compile>
 		<Compile Update="Views\TestPage.xaml.cs">
 		  <DependentUpon>TestPage.xaml</DependentUpon>
 		</Compile>
@@ -382,6 +385,9 @@
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Features\Settings\Views\LogsPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\MainLoadingPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\TestPage.xaml">

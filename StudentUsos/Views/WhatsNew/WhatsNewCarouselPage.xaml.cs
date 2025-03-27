@@ -59,15 +59,14 @@ public partial class WhatsNewCarouselPage : ContentPage
     const int CurrentId = 1;
     public static void Initialize(ILocalStorageManager localStorageManager, INavigationService navigationService)
     {
-        if (localStorageManager.TryGettingData(LocalStorageKeys.WhatsNewListLastId, out string lastId) == false
-            || lastId == "0"
-            || lastId == CurrentId.ToString())
+        if (localStorageManager.TryGettingData(LocalStorageKeys.WhatsNewCarouselLastId, out string lastId)
+            && (lastId == "0" || lastId == CurrentId.ToString()))
         {
             return;
         }
 
-        navigationService.PushModalAsync<WhatsNewListPage>();
-        localStorageManager.SetData(LocalStorageKeys.WhatsNewListLastId, CurrentId.ToString());
+        navigationService.PushModalAsync<WhatsNewCarouselPage>();
+        localStorageManager.SetData(LocalStorageKeys.WhatsNewCarouselLastId, CurrentId.ToString());
     }
 
     private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)

@@ -30,9 +30,8 @@ public partial class WhatsNewListPage : ContentPage
     const int CurrentId = 0;
     public static void Initialize(ILocalStorageManager localStorageManager, INavigationService navigationService)
     {
-        if (localStorageManager.TryGettingData(LocalStorageKeys.WhatsNewListLastId, out string lastId) == false
-            || lastId == "0"
-            || lastId == CurrentId.ToString())
+        if (localStorageManager.TryGettingData(LocalStorageKeys.WhatsNewListLastId, out string lastId)
+            && (lastId == "0" || lastId == CurrentId.ToString()))
         {
             return;
         }

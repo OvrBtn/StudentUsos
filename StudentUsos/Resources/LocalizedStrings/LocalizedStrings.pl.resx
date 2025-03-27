@@ -568,4 +568,10 @@
   <data name="WhatsNewPage_Skip" xml:space="preserve">
     <value>Pomiń</value>
   </data>
+  <data name="WhatsNewItem_NewGradeTitle" xml:space="preserve">
+    <value>Powiadomienia natychmiastowe (push) dla nowych ocen.</value>
+  </data>
+  <data name="WhatsNewItem_NewGradeDetails" xml:space="preserve">
+    <value>W zależności od ustawień powiadomienia mogą być blokowane, wykonaj automatyczne sprawdzenie w Ustawienia -&gt;Powiadomienia -&gt;Rozwiązywanie problemów.</value>
+  </data>
 </root>

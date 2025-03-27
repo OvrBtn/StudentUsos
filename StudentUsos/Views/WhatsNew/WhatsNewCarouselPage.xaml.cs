@@ -1,9 +1,14 @@
-﻿namespace StudentUsos.Views.WhatsNew;
+﻿using StudentUsos.Features.Settings.Views.Subpages;
+
+namespace StudentUsos.Views.WhatsNew;
 
 public partial class WhatsNewCarouselPage : ContentPage
 {
-    public WhatsNewCarouselPage()
+    INavigationService navigationService;
+    public WhatsNewCarouselPage(INavigationService navigationService)
     {
+        this.navigationService = navigationService;
+
         InitializeComponent();
         BindingContext = this;
 
@@ -51,7 +56,7 @@ public partial class WhatsNewCarouselPage : ContentPage
         });
     }
 
-    const int CurrentId = 0;
+    const int CurrentId = 1;
     public static void Initialize(ILocalStorageManager localStorageManager, INavigationService navigationService)
     {
         if (localStorageManager.TryGettingData(LocalStorageKeys.WhatsNewListLastId, out string lastId) == false
@@ -115,5 +120,10 @@ public partial class WhatsNewCarouselPage : ContentPage
     void OnAnimationFinished()
     {
         isAnimating = false;
+    }
+
+    private void GoToSettingsButton_Clicked(object sender, EventArgs e)
+    {
+        _ = navigationService.PushAsync<NotificationsSubpage>();
     }
 }

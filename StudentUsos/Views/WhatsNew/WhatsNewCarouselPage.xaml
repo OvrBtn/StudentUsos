@@ -33,26 +33,15 @@
                     <Grid x:Name="itemsLayout" VerticalOptions="FillAndExpand">
 
                         <StackLayout>
-                            <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                                <Image Source="bell.png" WidthRequest="100"></Image>
-                            </StackLayout>
-                        </StackLayout>
-
-                        <StackLayout>
-                            <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                                <Image Source="credit_card.png" WidthRequest="100"></Image>
-                            </StackLayout>
-                        </StackLayout>
-
-                        <StackLayout>
-                            <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                                <Image Source="credit_card.png" WidthRequest="100"></Image>
-                            </StackLayout>
-                        </StackLayout>
-
-                        <StackLayout>
-                            <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                                <Image Source="credit_card.png" WidthRequest="100"></Image>
+                            <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" 
+                                         Spacing="20" Margin="30">
+                                <Label Text="{x:Static strings:LocalizedStrings.WhatsNewItem_NewGradeTitle}" HorizontalTextAlignment="Center"
+                                       FontSize="18" FontAttributes="Bold"/>
+                                <Image Source="whatsnew_newgrade.png"></Image>
+                                <Label Text="{x:Static strings:LocalizedStrings.WhatsNewItem_NewGradeDetails}"
+                                       HorizontalTextAlignment="Center"/>
+                                <Button Text="{x:Static strings:LocalizedStrings.NotificationsDiagnosis_GoToSettings}"
+                                        Clicked="GoToSettingsButton_Clicked"></Button>
                             </StackLayout>
                         </StackLayout>
 

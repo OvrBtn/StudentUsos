@@ -1360,6 +1360,24 @@ namespace StudentUsos.Resources.LocalizedStrings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Depending on your settings notifications might be blocked, do an automatic check in Settings -&gt; Notifications -&gt; Troubleshooting..
+        /// </summary>
+        internal static string WhatsNewItem_NewGradeDetails {
+            get {
+                return ResourceManager.GetString("WhatsNewItem_NewGradeDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Push notifications for new grade..
+        /// </summary>
+        internal static string WhatsNewItem_NewGradeTitle {
+            get {
+                return ResourceManager.GetString("WhatsNewItem_NewGradeTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Next.
         /// </summary>
         internal static string WhatsNewPage_Next {

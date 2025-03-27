@@ -566,4 +566,10 @@
   <data name="WhatsNewPage_Skip" xml:space="preserve">
     <value>Skip</value>
   </data>
+  <data name="WhatsNewItem_NewGradeTitle" xml:space="preserve">
+    <value>Push notifications for new grade.</value>
+  </data>
+  <data name="WhatsNewItem_NewGradeDetails" xml:space="preserve">
+    <value>Depending on your settings notifications might be blocked, do an automatic check in Settings -&gt; Notifications -&gt; Troubleshooting.</value>
+  </data>
 </root>

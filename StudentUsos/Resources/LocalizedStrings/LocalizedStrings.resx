@@ -570,6 +570,6 @@
     <value>Push notifications for new grade.</value>
   </data>
   <data name="WhatsNewItem_NewGradeDetails" xml:space="preserve">
-    <value>Depending on your settings notifications might be blocked, do an automatic check in Settings -&gt; Notifications -&gt; Troubleshooting.</value>
+    <value>Depending on your settings receiving notifications might be blocked. You can perform an automatic check in Settings -&gt; Notifications -&gt; Troubleshooting.</value>
   </data>
 </root>

@@ -1360,7 +1360,7 @@ namespace StudentUsos.Resources.LocalizedStrings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Depending on your settings notifications might be blocked, do an automatic check in Settings -&gt; Notifications -&gt; Troubleshooting..
+        ///   Looks up a localized string similar to Depending on your settings receiving notifications might be blocked. You can perform an automatic check in Settings -&gt; Notifications -&gt; Troubleshooting..
         /// </summary>
         internal static string WhatsNewItem_NewGradeDetails {
             get {

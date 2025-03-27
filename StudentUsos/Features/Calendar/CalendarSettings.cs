@@ -44,6 +44,13 @@ public static class CalendarSettings
 
     public static void LoadNotificationSettingsAndInitializePreferences()
     {
+        //unit tests will trigger the cctor but since in unit tests
+        //environment there is no local storage then this should just return
+        if (LocalStorageManager.Default is null)
+        {
+            return;
+        }
+
         //getting data about calendar notifications or set the defaults
         if (LocalStorageManager.Default.TryGettingData(LocalStorageKeys.AreNotificationsEnabled, out string result)
             && bool.TryParse(result, out bool parsedBool))

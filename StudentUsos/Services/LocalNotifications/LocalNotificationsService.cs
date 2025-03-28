@@ -30,7 +30,7 @@ public class LocalNotificationsService : ILocalNotificationsService
             localStorageManager.SetData(LocalStorageKeys.IdOfLastNotification, "0");
         }
         var id = localStorageManager.GetData(LocalStorageKeys.IdOfLastNotification);
-        if (int.TryParse(id, out int result))
+        if (id != null && int.TryParse(id, out int result))
         {
             result = result % int.MaxValue - 1;
             result++;

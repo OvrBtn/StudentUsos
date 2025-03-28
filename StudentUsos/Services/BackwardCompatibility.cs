@@ -129,6 +129,9 @@ public static class BackwardCompatibility
             var internalAccessTokenSecret = Preferences.Get(AuthorizationService.SecureStorageKeys.InternalAccessTokenSecret.ToString(), null);
             var googleCalendars = localDatabaseManager.GetAll<GoogleCalendar>();
 
+            var whatsNewCarouselLastId = localStorageManager.GetData(LocalStorageKeys.WhatsNewCarouselLastId);
+            var whatsNewListLastId = localStorageManager.GetData(LocalStorageKeys.WhatsNewListLastId);
+
             localDatabaseManager.ResetTables();
             localStorageManager.DeleteEverything();
             localNotificationsService.RemoveAll();
@@ -139,6 +142,9 @@ public static class BackwardCompatibility
             if (internalAccessToken is not null) Preferences.Set(AuthorizationService.SecureStorageKeys.InternalAccessToken.ToString(), internalAccessToken);
             if (internalAccessTokenSecret is not null) Preferences.Set(AuthorizationService.SecureStorageKeys.InternalAccessTokenSecret.ToString(), internalAccessTokenSecret);
             if (googleCalendars is not null && googleCalendars.Count > 0) localDatabaseManager.InsertAll(googleCalendars);
+
+            if (whatsNewCarouselLastId is not null) localStorageManager.SetData(LocalStorageKeys.WhatsNewCarouselLastId, whatsNewCarouselLastId);
+            if (whatsNewListLastId is not null) localStorageManager.SetData(LocalStorageKeys.WhatsNewListLastId, whatsNewListLastId);
         }
         catch (Exception ex) { Logger.Logger.Default?.LogCatchedException(ex); }
     }

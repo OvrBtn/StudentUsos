@@ -24,14 +24,16 @@ public class UsosCalendarEvent : IEquatable<UsosCalendarEvent>
     {
         get
         {
-            if (start == DateTime.MinValue && DateTime.TryParseExact(StartString, "dd.MM.yyyy", null, DateTimeStyles.None, out DateTime result)) start = result;
-            if (start.TimeOfDay != TimeSpan.Zero) start = Utilities.SetTimeToZero(start);
+            if (start == DateTime.MinValue && DateTime.TryParseExact(StartString, "dd.MM.yyyy HH:mm", null, DateTimeStyles.None, out DateTime result))
+            {
+                start = result;
+            }
             return start;
         }
         set
         {
             start = value;
-            startString = start.ToString("dd.MM.yyyy");
+            startString = start.ToString("dd.MM.yyyy HH:mm");
         }
     }
     DateTime start;
@@ -40,20 +42,16 @@ public class UsosCalendarEvent : IEquatable<UsosCalendarEvent>
     {
         get
         {
-            if (end == DateTime.MinValue && DateTime.TryParseExact(EndString, "dd.MM.yyyy", null, DateTimeStyles.None, out DateTime result))
+            if (end == DateTime.MinValue && DateTime.TryParseExact(EndString, "dd.MM.yyyy HH:mm", null, DateTimeStyles.None, out DateTime result))
             {
                 end = result;
-            }
-            if (end.TimeOfDay != TimeSpan.Zero)
-            {
-                end = Utilities.SetTimeToZero(end);
             }
             return end;
         }
         set
         {
             end = value;
-            endString = end.ToString("dd.MM.yyyy");
+            endString = end.ToString("dd.MM.yyyy HH:mm");
         }
     }
     DateTime end;
@@ -66,7 +64,7 @@ public class UsosCalendarEvent : IEquatable<UsosCalendarEvent>
             startString = value;
             if (DateTime.TryParseExact(startString, "yyyy-MM-dd HH:mm:ss", null, DateTimeStyles.None, out DateTime parsed))
             {
-                startString = parsed.ToString("dd.MM.yyyy");
+                startString = parsed.ToString("dd.MM.yyyy HH:mm");
             }
         }
     }
@@ -80,11 +78,18 @@ public class UsosCalendarEvent : IEquatable<UsosCalendarEvent>
             endString = value;
             if (DateTime.TryParseExact(endString, "yyyy-MM-dd HH:mm:ss", null, DateTimeStyles.None, out DateTime parsed))
             {
-                endString = parsed.ToString("dd.MM.yyyy");
+                endString = parsed.ToString("dd.MM.yyyy HH:mm");
             }
         }
     }
     string endString;
+
+    [Ignore]
+    public string MergedStartAndEndString
+    {
+        get => Utilities.MergeDateTimes(Start, End);
+    }
+
     public string Type { get => CalendarHelper.GetLocalizedEventTypeFromUsosType(TypeJson); }
     //This isn't actually a JSON, just a normal string because USOS API returns only the type in english.
     //It's written like that in case USOS API started returning JSON with other languages

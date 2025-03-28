@@ -72,9 +72,9 @@ public partial class CalendarMonth : ObservableObject
         {
             foreach (var item in data)
             {
-                if (DateTime.TryParseExact(item.StartString, "dd.MM.yyyy", null, DateTimeStyles.None, out DateTime startDate))
+                if (DateTime.TryParseExact(item.StartString, "dd.MM.yyyy HH:mm", null, DateTimeStyles.None, out DateTime startDate))
                 {
-                    DateTime endDate = DateTime.ParseExact(item.EndString, "dd.MM.yyyy", null);
+                    DateTime endDate = DateTime.ParseExact(item.EndString, "dd.MM.yyyy HH:mm", null);
                     var found = Days.Where(x => Utilities.CheckIfBetweenDates(FirstDayOfMonthToFullDate(x.Day), startDate, endDate)).ToList();
                     if (found != null)
                     {

@@ -1,4 +1,5 @@
-﻿using StudentUsos.Features.Settings.Views.Subpages;
+﻿using StudentUsos.Features.Authorization.Services;
+using StudentUsos.Features.Settings.Views.Subpages;
 
 namespace StudentUsos.Views.WhatsNew;
 
@@ -59,6 +60,12 @@ public partial class WhatsNewCarouselPage : ContentPage
     const int CurrentId = 1;
     public static void Initialize(ILocalStorageManager localStorageManager, INavigationService navigationService)
     {
+        if (AuthorizationService.CheckIfLoggedIn() == false || AuthorizationService.HasJustLoggedIn)
+        {
+            localStorageManager.SetData(LocalStorageKeys.WhatsNewCarouselLastId, CurrentId.ToString());
+            return;
+        }
+
         if (localStorageManager.TryGettingData(LocalStorageKeys.WhatsNewCarouselLastId, out string lastId)
             && (lastId == "0" || lastId == CurrentId.ToString()))
         {

@@ -32,7 +32,7 @@ public partial class WhatsNewListPage : ContentPage
     const int CurrentId = 0;
     public static void Initialize(ILocalStorageManager localStorageManager, INavigationService navigationService)
     {
-        if (AuthorizationService.CheckIfLoggedIn() == false || AuthorizationService.HasJustLoggedIn)
+        if (AuthorizationService.CheckIfSignedInAndRetrieveTokens() == false || AuthorizationService.HasJustLoggedIn)
         {
             localStorageManager.SetData(LocalStorageKeys.WhatsNewCarouselLastId, CurrentId.ToString());
             return;

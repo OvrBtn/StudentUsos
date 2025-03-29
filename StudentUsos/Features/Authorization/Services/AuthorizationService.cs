@@ -19,9 +19,7 @@ internal static class AuthorizationService
     public enum PreferencesKeys
     {
         AccessToken,
-        /// <summary>
-        /// Obsolete
-        /// </summary>
+        [Obsolete]
         AccessTokenSecret,
         Scopes,
     }
@@ -83,17 +81,32 @@ internal static class AuthorizationService
         }
     }
 
-    public static bool CheckIfLoggedIn()
+    public static bool CheckIfSignedInAndRetrieveTokens()
     {
         string? accessToken = Preferences.Get(PreferencesKeys.AccessToken.ToString(), null);
         bool containsKeys = accessToken != null;
         if (containsKeys)
         {
-            AccessToken = accessToken!;
-            InternalAccessToken = Preferences.Get(SecureStorageKeys.InternalAccessToken.ToString(), null)!;
-            InternalAccessTokenSecret = Preferences.Get(SecureStorageKeys.InternalAccessTokenSecret.ToString(), null)!;
+            RetrieveTokens();
         }
         return containsKeys;
+    }
+
+    public static void RetrieveTokensIfNotSet()
+    {
+        if (string.IsNullOrEmpty(AccessToken)
+            || string.IsNullOrEmpty(InternalAccessToken)
+            || string.IsNullOrEmpty(InternalAccessTokenSecret))
+        {
+            RetrieveTokens();
+        }
+    }
+
+    static void RetrieveTokens()
+    {
+        AccessToken = Preferences.Get(PreferencesKeys.AccessToken.ToString(), null)!;
+        InternalAccessToken = Preferences.Get(SecureStorageKeys.InternalAccessToken.ToString(), null)!;
+        InternalAccessTokenSecret = Preferences.Get(SecureStorageKeys.InternalAccessTokenSecret.ToString(), null)!;
     }
 
 

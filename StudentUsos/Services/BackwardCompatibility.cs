@@ -124,7 +124,8 @@ public static class BackwardCompatibility
             var scopes = Preferences.Get(AuthorizationService.PreferencesKeys.Scopes.ToString(), null);
             var accessToken = Preferences.Get(AuthorizationService.SecureStorageKeys.AccessToken.ToString(), null);
             //needed only for compatibility with versions <= 3.x.x
-            var accessTokenSecret = Preferences.Get("AccessTokenSecret", null);
+            var accessTokenSecret = Preferences.Get(AuthorizationService.PreferencesKeys.AccessTokenSecret.ToString(), null);
+
             var internalAccessToken = Preferences.Get(AuthorizationService.SecureStorageKeys.InternalAccessToken.ToString(), null);
             var internalAccessTokenSecret = Preferences.Get(AuthorizationService.SecureStorageKeys.InternalAccessTokenSecret.ToString(), null);
             var googleCalendars = localDatabaseManager.GetAll<GoogleCalendar>();

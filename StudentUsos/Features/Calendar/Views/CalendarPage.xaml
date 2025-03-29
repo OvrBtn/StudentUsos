@@ -122,9 +122,8 @@
                                                             <Label FontSize="14" LineHeight="0.8" Text="{Binding Name}" />
                                                             <Label Margin="0,0,0,2" FontSize="11" Text="{Binding Type}" />
                                                             <StackLayout Orientation="Horizontal" Spacing="5">
-                                                                <Label FontSize="11" Text="{Binding StartString}" TextColor="{StaticResource Gray300}" />
-                                                                <Label FontSize="11" Text="-" TextColor="{StaticResource Gray300}" />
-                                                                <Label FontSize="11" Text="{Binding EndString}" TextColor="{StaticResource Gray300}" />
+                                                                <Label FontSize="11" TextColor="{StaticResource Gray300}"
+                                                                       Text="{Binding MergedStartAndEndString}"/>
                                                             </StackLayout>
                                                             <Label Margin="0,3,0,0" FontSize="11" IsVisible="{Binding IsDayOff}" Text="{x:Static strings:LocalizedStrings.DayOff}" />
                                                         </StackLayout>

@@ -1189,6 +1189,24 @@ namespace StudentUsos.Resources.LocalizedStrings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Featured changes.
+        /// </summary>
+        internal static string SettingsPage_ApplicationSubPage_WhatsNewFeatured {
+            get {
+                return ResourceManager.GetString("SettingsPage_ApplicationSubPage_WhatsNewFeatured", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to General changes.
+        /// </summary>
+        internal static string SettingsPage_ApplicationSubPage_WhatsNewGeneralChanges {
+            get {
+                return ResourceManager.GetString("SettingsPage_ApplicationSubPage_WhatsNewGeneralChanges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Events from calendar.
         /// </summary>
         internal static string SettingsPage_CalendarEvents {
@@ -1329,6 +1347,51 @@ namespace StudentUsos.Resources.LocalizedStrings {
         internal static string Version {
             get {
                 return ResourceManager.GetString("Version", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to What&apos;s new.
+        /// </summary>
+        internal static string WhatsNew {
+            get {
+                return ResourceManager.GetString("WhatsNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Depending on your settings receiving notifications might be blocked. You can perform an automatic check in Settings -&gt; Notifications -&gt; Troubleshooting..
+        /// </summary>
+        internal static string WhatsNewItem_NewGradeDetails {
+            get {
+                return ResourceManager.GetString("WhatsNewItem_NewGradeDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Push notifications for new grade..
+        /// </summary>
+        internal static string WhatsNewItem_NewGradeTitle {
+            get {
+                return ResourceManager.GetString("WhatsNewItem_NewGradeTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Next.
+        /// </summary>
+        internal static string WhatsNewPage_Next {
+            get {
+                return ResourceManager.GetString("WhatsNewPage_Next", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Skip.
+        /// </summary>
+        internal static string WhatsNewPage_Skip {
+            get {
+                return ResourceManager.GetString("WhatsNewPage_Skip", resourceCulture);
             }
         }
         

@@ -553,4 +553,25 @@
   <data name="Success" xml:space="preserve">
     <value>Sukces</value>
   </data>
+  <data name="WhatsNew" xml:space="preserve">
+    <value>Co nowego</value>
+  </data>
+  <data name="SettingsPage_ApplicationSubPage_WhatsNewFeatured" xml:space="preserve">
+    <value>Wyróżnione zmiany</value>
+  </data>
+  <data name="SettingsPage_ApplicationSubPage_WhatsNewGeneralChanges" xml:space="preserve">
+    <value>Ogólne zmiany</value>
+  </data>
+  <data name="WhatsNewPage_Next" xml:space="preserve">
+    <value>Następne</value>
+  </data>
+  <data name="WhatsNewPage_Skip" xml:space="preserve">
+    <value>Pomiń</value>
+  </data>
+  <data name="WhatsNewItem_NewGradeTitle" xml:space="preserve">
+    <value>Powiadomienia natychmiastowe (push) dla nowych ocen.</value>
+  </data>
+  <data name="WhatsNewItem_NewGradeDetails" xml:space="preserve">
+    <value>W zależności od ustawień powiadomienia mogą być blokowane. Możesz to zweryfikować w Ustawienia -&gt; Powiadomienia -&gt; Rozwiązywanie problemów.</value>
+  </data>
 </root>

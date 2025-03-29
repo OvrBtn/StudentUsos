@@ -59,6 +59,8 @@ internal static class AuthorizationService
     public static event Action OnLoginSucceeded;
     public static event Action OnLoginFailed;
 
+    public static bool HasJustLoggedIn { get; private set; }
+
     public static void CheckForMissingScopes()
     {
         var scopesFromPreferences = Preferences.Get(PreferencesKeys.Scopes.ToString(), "");
@@ -215,6 +217,7 @@ internal static class AuthorizationService
             Preferences.Set(SecureStorageKeys.InternalAccessToken.ToString(), InternalAccessToken);
             Preferences.Set(SecureStorageKeys.InternalAccessTokenSecret.ToString(), InternalAccessTokenSecret);
 
+            HasJustLoggedIn = true;
             OnLoginSucceeded?.Invoke();
             OnAuthorizationFinished?.Invoke();
         }

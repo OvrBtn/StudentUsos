@@ -45,6 +45,9 @@ public static class MauiProgram
             .RegisterViews()
             .RegisterViewModels()
             .RegisterServices()
+#if ANDROID
+            .ConfigureStatusBarAndNavigationBarColorsForModalPages()
+#endif
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

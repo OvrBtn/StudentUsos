@@ -13,10 +13,9 @@ public class LocalStorageManager : ILocalStorageManager
         return Preferences.ContainsKey(data.ToString());
     }
 
-    public string GetData(LocalStorageKeys data)
+    public string? GetData(LocalStorageKeys data)
     {
-        if (Preferences.ContainsKey(data.ToString()) == false) throw new Exception("No local data");
-        var pref = Preferences.Get(data.ToString(), "");
+        var pref = Preferences.Get(data.ToString(), null);
         return pref;
     }
 

@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="StudentUsos.Views.WhatsNew.WhatsNewListPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:StudentUsos.Controls"
+    xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
+    xmlns:draw="http://schemas.appomobi.com/drawnUi/2023/draw"
+    BackgroundColor="{StaticResource BackgroundColor}"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
+
+    <StackLayout BackgroundColor="Transparent" VerticalOptions="Fill">
+
+        <Grid Margin="40,30,40,20">
+            <Label Text="{x:Static strings:LocalizedStrings.WhatsNew}" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="18"></Label>
+            <Image Source="x" HorizontalOptions="EndAndExpand" WidthRequest="25">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
+                </Image.GestureRecognizers>
+            </Image>
+        </Grid>
+
+    <ScrollView VerticalOptions="FillAndExpand">
+            <StackLayout x:Name="contentStackLayout" VerticalOptions="FillAndExpand" Margin="30,0,30,30">
+
+               
+            
+            </StackLayout>
+        </ScrollView>
+
+    </StackLayout>
+
+</ContentPage>

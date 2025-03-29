@@ -3,6 +3,7 @@ using StudentUsos.Features.Authorization.Services;
 using StudentUsos.Features.Groups.Repositories;
 using StudentUsos.Features.Groups.Services;
 using StudentUsos.Resources.LocalizedStrings;
+using StudentUsos.Views.WhatsNew;
 using System.Globalization;
 
 namespace StudentUsos;
@@ -39,6 +40,7 @@ public partial class App : Application
         };
 #endif
 
+
     }
 
     //Called after Android MainActivity ctor
@@ -65,6 +67,13 @@ public partial class App : Application
         }
 
         AuthorizationService.CheckForMissingScopes();
+
+        await Task.Delay(3000);
+
+        var localStorageManager = ServiceProvider.GetService<ILocalStorageManager>()!;
+        var navigationService = ServiceProvider.GetService<INavigationService>()!;
+        WhatsNewCarouselPage.Initialize(localStorageManager, navigationService);
+        WhatsNewListPage.Initialize(localStorageManager, navigationService);
     }
 
     async Task HandleEmptyLocalDatabaseAsync()

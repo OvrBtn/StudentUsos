@@ -25,6 +25,17 @@
             </StackLayout>
         </Border>
 
+        <Label FontSize="14" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.WhatsNew}" />
+        <Border Margin="0,5,0,20" Padding="0">
+            <StackLayout>
+                <Button Text="{x:Static strings:LocalizedStrings.SettingsPage_ApplicationSubPage_WhatsNewFeatured}" Padding="15"
+                     Clicked="FeaturedChangesButton_Clicked" CornerRadius="0"/>
+                <StackLayout BackgroundColor="#444" HeightRequest="1" Margin="20,0"/>
+                <Button Text="{x:Static strings:LocalizedStrings.SettingsPage_ApplicationSubPage_WhatsNewGeneralChanges}" Padding="15"
+                        Clicked="GeneralChangesButton_Clicked" CornerRadius="0"/>
+            </StackLayout>
+        </Border>
+
     </StackLayout>
 
 </controls:CustomContentPageNotAnimated>

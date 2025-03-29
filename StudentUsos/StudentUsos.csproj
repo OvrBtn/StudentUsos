@@ -107,6 +107,7 @@
 		<MauiImage Include="Resources\Images\NotificationNewGrade\*" />
 		<MauiImage Include="Resources\Images\Settings\*" />
 		<MauiImage Include="Resources\Images\TabBar\*" />
+		<MauiImage Include="Resources\Images\WhatsNew\*" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
@@ -260,6 +261,12 @@
 		<Compile Update="Views\MainLoadingPage.xaml.cs">
 		  <DependentUpon>MainLoadingPage.xaml</DependentUpon>
 		</Compile>
+		<Compile Update="Views\WhatsNew\WhatsNewCarouselPage.xaml.cs">
+		  <DependentUpon>WhatsNewCarouselPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\WhatsNew\WhatsNewListPage.xaml.cs">
+		  <DependentUpon>WhatsNewListPage.xaml</DependentUpon>
+		</Compile>
 		<Compile Update="Views\TestPage.xaml.cs">
 		  <DependentUpon>TestPage.xaml</DependentUpon>
 		</Compile>
@@ -388,6 +395,12 @@
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\MainLoadingPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\WhatsNew\WhatsNewCarouselPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\WhatsNew\WhatsNewListPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\TestPage.xaml">

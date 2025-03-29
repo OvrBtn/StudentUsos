@@ -60,7 +60,7 @@ public partial class WhatsNewCarouselPage : ContentPage
     const int CurrentId = 1;
     public static void Initialize(ILocalStorageManager localStorageManager, INavigationService navigationService)
     {
-        if (AuthorizationService.CheckIfLoggedIn() == false || AuthorizationService.HasJustLoggedIn)
+        if (AuthorizationService.CheckIfSignedInAndRetrieveTokens() == false || AuthorizationService.HasJustLoggedIn)
         {
             localStorageManager.SetData(LocalStorageKeys.WhatsNewCarouselLastId, CurrentId.ToString());
             return;

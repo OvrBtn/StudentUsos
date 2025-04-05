@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Plugin.FirebasePushNotifications;
 using Plugin.FirebasePushNotifications.Platforms;
+using StudentUsos.Features.Authorization.Services;
 using StudentUsos.Resources.LocalizedStrings;
 using StudentUsos.Services.ServerConnection;
 using System.Globalization;
@@ -17,6 +18,9 @@ public class CustomNotificationBuilder : NotificationBuilder
 
     public override bool ShouldHandleNotificationReceived(IDictionary<string, object> data)
     {
+#if DEBUG
+        return true;
+#endif
         if (data.ContainsKey("type"))
         {
             return true;
@@ -29,6 +33,11 @@ public class CustomNotificationBuilder : NotificationBuilder
         string type = string.Empty;
         if (data.TryGetValue("type", out object typeObject))
         {
+            //when handling push notifications the application scope is limited and
+            //the tokens might not be set by default causing issues with notification
+            //types requiring retrieving data from server or USOS API
+            AuthorizationService.RetrieveTokensIfNotSet();
+
             type = typeObject.ToString();
         }
         else

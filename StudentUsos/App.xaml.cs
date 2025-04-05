@@ -40,7 +40,6 @@ public partial class App : Application
         };
 #endif
 
-
     }
 
     //Called after Android MainActivity ctor
@@ -128,7 +127,7 @@ public partial class App : Application
 
     async Task PostCreateWindowInitialization(AppShell shell)
     {
-        if (AuthorizationService.CheckIfLoggedIn() == false)
+        if (AuthorizationService.CheckIfSignedInAndRetrieveTokens() == false)
         {
             await shell.GoToAsync("//LoginPage");
             return;

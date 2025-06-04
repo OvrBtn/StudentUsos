@@ -18,5 +18,6 @@ public enum LocalStorageKeys
     ChosenLanguageName,
     FcmToken,
     WhatsNewCarouselLastId,
-    WhatsNewListLastId
+    WhatsNewListLastId,
+    BackwardCompatibilityLastCheckedVersion
 }

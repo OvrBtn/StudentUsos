@@ -57,7 +57,7 @@ public partial class WhatsNewCarouselPage : ContentPage
         });
     }
 
-    const int CurrentId = 1;
+    const int CurrentId = 0;
     public static void Initialize(ILocalStorageManager localStorageManager, INavigationService navigationService)
     {
         if (AuthorizationService.CheckIfSignedInAndRetrieveTokens() == false || AuthorizationService.HasJustLoggedIn)
@@ -66,8 +66,7 @@ public partial class WhatsNewCarouselPage : ContentPage
             return;
         }
 
-        if (localStorageManager.TryGettingData(LocalStorageKeys.WhatsNewCarouselLastId, out string lastId)
-            && (lastId == "0" || lastId == CurrentId.ToString()))
+        if (CurrentId == 0 || (localStorageManager.TryGettingData(LocalStorageKeys.WhatsNewCarouselLastId, out string lastId) && lastId == CurrentId.ToString()))
         {
             return;
         }

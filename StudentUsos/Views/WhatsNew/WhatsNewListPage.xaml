@@ -20,11 +20,22 @@
             </Image>
         </Grid>
 
-    <ScrollView VerticalOptions="FillAndExpand">
+        <ScrollView VerticalOptions="FillAndExpand">
             <StackLayout x:Name="contentStackLayout" VerticalOptions="FillAndExpand" Margin="30,0,30,30">
 
-               
-            
+                <StackLayout>
+                    <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" 
+                    Spacing="20" Margin="30">
+                        <Label Text="{x:Static strings:LocalizedStrings.WhatsNewItem_NewGradeTitle}" HorizontalTextAlignment="Center"
+                               FontSize="18" FontAttributes="Bold"/>
+                        <Image Source="whatsnew_newgrade.png"></Image>
+                        <Label Text="{x:Static strings:LocalizedStrings.WhatsNewItem_NewGradeDetails}"
+                                HorizontalTextAlignment="Center"/>
+                        <Button Text="{x:Static strings:LocalizedStrings.NotificationsDiagnosis_GoToSettings}"
+                                Clicked="GoToSettingsButton_Clicked"></Button>
+                    </StackLayout>
+                </StackLayout>
+
             </StackLayout>
         </ScrollView>
 

@@ -42,8 +42,7 @@ public partial class WhatsNewListPage : ContentPage
             return;
         }
 
-        if (localStorageManager.TryGettingData(LocalStorageKeys.WhatsNewListLastId, out string lastId)
-            && (lastId == "0" || lastId == CurrentId.ToString()))
+        if (CurrentId == 0 || (localStorageManager.TryGettingData(LocalStorageKeys.WhatsNewListLastId, out string lastId) && lastId == CurrentId.ToString()))
         {
             return;
         }

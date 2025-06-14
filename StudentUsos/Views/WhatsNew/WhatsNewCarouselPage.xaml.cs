@@ -66,8 +66,7 @@ public partial class WhatsNewCarouselPage : ContentPage
             return;
         }
 
-        if (localStorageManager.TryGettingData(LocalStorageKeys.WhatsNewCarouselLastId, out string lastId)
-            && (lastId == "0" || lastId == CurrentId.ToString()))
+        if (CurrentId == 0 || (localStorageManager.TryGettingData(LocalStorageKeys.WhatsNewCarouselLastId, out string lastId) && lastId == CurrentId.ToString()))
         {
             return;
         }

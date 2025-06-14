@@ -57,7 +57,7 @@ public partial class WhatsNewCarouselPage : ContentPage
         });
     }
 
-    const int CurrentId = 1;
+    const int CurrentId = 0;
     public static void Initialize(ILocalStorageManager localStorageManager, INavigationService navigationService)
     {
         if (AuthorizationService.CheckIfSignedInAndRetrieveTokens() == false || AuthorizationService.HasJustLoggedIn)

@@ -7,49 +7,81 @@ using System.Text.Json;
 namespace StudentUsos.Services;
 
 /// <summary>
-/// Class for reseting locally saved data after app update
+/// Class repsonsible for handling compatibility between different versions
 /// </summary>
 public static class BackwardCompatibility
 {
-    /// <summary>
-    /// When changes in code are made that might not correlate with previous version (e.g. local databse structure has changed and exceptions might occur) 
-    /// add number of new version here so local data will be deleted
-    /// </summary>
-    static readonly string[] AppVersionsToReset = { "3.7.0", "3.7.2", "3.7.3", "4.0.3" };
-
-    public enum PrefencesEnum
-    {
-        ResetedVersions,
-        PreviousAppVersionsToReset
-    }
-
     public static string CurrentVersion => AppInfo.Current.VersionString;
 
-    public static void Check()
+    public static async Task Check()
     {
         try
         {
-#if DEBUG
-            //ResetLocalData();
-#endif
-            string resetedVersions = Preferences.Get(PrefencesEnum.ResetedVersions.ToString(), "");
-            string appVersionsToResetJoined = string.Join("|", AppVersionsToReset);
-            List<string> resetedVersionsList = resetedVersions.Split("|").ToList();
-            string previousAppVersionsToReset = Preferences.Get(PrefencesEnum.PreviousAppVersionsToReset.ToString(), "");
-            if (previousAppVersionsToReset != appVersionsToResetJoined && resetedVersionsList.Any(x => x == CurrentVersion) == false)
-            {
-                ResetLocalData();
-
-                resetedVersionsList.Add(CurrentVersion);
-                Preferences.Set(PrefencesEnum.ResetedVersions.ToString(), string.Join('|', resetedVersionsList));
-                Preferences.Set(PrefencesEnum.PreviousAppVersionsToReset.ToString(), appVersionsToResetJoined);
-            }
-
-            _ = CheckIfUsosKeysAreStoredLocallyAsync();
+            await CheckIfShouldResetOrSignOut();
+            await CheckIfUsosKeysAreStoredLocallyAsync();
         }
         catch (Exception ex)
         {
             Logger.Logger.Default?.LogCatchedException(ex);
+        }
+    }
+
+    static async Task CheckIfShouldResetOrSignOut()
+    {
+        var localStorageManager = App.ServiceProvider.GetService<ILocalStorageManager>()!;
+        string? lastCheckedVersion = localStorageManager.GetData(LocalStorageKeys.BackwardCompatibilityLastCheckedVersion);
+        if (lastCheckedVersion is null)
+        {
+            localStorageManager.SetData(LocalStorageKeys.BackwardCompatibilityLastCheckedVersion, CurrentVersion);
+            //if there were no previous checks because user updated from version which didn't have this implementation
+            //this will allow current check to always execute and make it compatible with older versions
+            lastCheckedVersion = "0.0.0";
+        }
+
+        if (lastCheckedVersion == CurrentVersion)
+        {
+            return;
+        }
+
+        using var stream = await FileSystem.OpenAppPackageFileAsync("versions.json");
+        using var reader = new StreamReader(stream);
+        var allVersionsJson = reader.ReadToEnd();
+        var allVersions = JsonSerializer.Deserialize(allVersionsJson, AppVersionInfoJsonContext.Default.ListAppVersionInfo);
+        if (allVersions is null)
+        {
+            return;
+        }
+
+        bool shouldResetLocalData = false;
+        bool shouldForceSignOut = false;
+        foreach (var versionInfo in allVersions)
+        {
+            //versionInfo.Version being bigger/later than CurrentVersion or smaller/earlier than lastCheckedVersion
+            if (string.Compare(versionInfo.Version, CurrentVersion) > 0 ||
+                string.Compare(versionInfo.Version, lastCheckedVersion) < 0)
+            {
+                continue;
+            }
+            if (versionInfo.ForceResetLocalData)
+            {
+                shouldResetLocalData = true;
+            }
+            if (versionInfo.ForceSignOut)
+            {
+                shouldForceSignOut = true;
+            }
+        }
+
+        if (shouldForceSignOut)
+        {
+            AuthorizationService.LogoutAsync();
+            localStorageManager.SetData(LocalStorageKeys.BackwardCompatibilityLastCheckedVersion, CurrentVersion);
+            return;
+        }
+        if (shouldResetLocalData)
+        {
+            ResetLocalData();
+            localStorageManager.SetData(LocalStorageKeys.BackwardCompatibilityLastCheckedVersion, CurrentVersion);
         }
     }
 

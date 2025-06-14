@@ -44,13 +44,11 @@ public class LocalStorageManager : ILocalStorageManager
     public void DeleteEverything()
     {
         //shouldn't be deleted, it's needed for BackwardCompatibility to work properly
-        var resetedVersions = Preferences.Get(BackwardCompatibility.PrefencesEnum.ResetedVersions.ToString(), null);
-        var previousAppVersionsToReset = Preferences.Get(BackwardCompatibility.PrefencesEnum.PreviousAppVersionsToReset.ToString(), null);
+        var lastCheckedVersion = Preferences.Get(LocalStorageKeys.BackwardCompatibilityLastCheckedVersion.ToString(), null);
 
         Preferences.Clear();
 
-        if (resetedVersions is not null) Preferences.Set(BackwardCompatibility.PrefencesEnum.ResetedVersions.ToString(), resetedVersions);
-        if (previousAppVersionsToReset is not null) Preferences.Set(BackwardCompatibility.PrefencesEnum.PreviousAppVersionsToReset.ToString(), previousAppVersionsToReset);
+        if (lastCheckedVersion is not null) Preferences.Set(LocalStorageKeys.BackwardCompatibilityLastCheckedVersion.ToString(), lastCheckedVersion);
     }
 
 }

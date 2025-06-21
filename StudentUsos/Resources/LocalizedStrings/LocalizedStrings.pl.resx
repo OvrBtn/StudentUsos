@@ -574,4 +574,7 @@
   <data name="WhatsNewItem_NewGradeDetails" xml:space="preserve">
     <value>W zależności od ustawień powiadomienia mogą być blokowane. Możesz to zweryfikować w Ustawienia -&gt; Powiadomienia -&gt; Rozwiązywanie problemów.</value>
   </data>
+  <data name="CampusMap" xml:space="preserve">
+    <value>Mapa kampusu</value>
+  </data>
 </root>

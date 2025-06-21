@@ -7,6 +7,7 @@ using StudentUsos.Features.Authorization;
 using StudentUsos.Features.Calendar.Repositories;
 using StudentUsos.Features.Calendar.Services;
 using StudentUsos.Features.Calendar.Views;
+using StudentUsos.Features.CampusMap.Views;
 using StudentUsos.Features.Dashboard.Views;
 using StudentUsos.Features.Grades.Repositories;
 using StudentUsos.Features.Grades.Services;
@@ -131,6 +132,8 @@ internal static partial class MauiProgramExtensions
 
         builder.Services.AddTransient<WhatsNewListPage>();
         builder.Services.AddTransient<WhatsNewCarouselPage>();
+
+        builder.Services.AddTransient<CampusMapPage>();
 
         return builder;
     }

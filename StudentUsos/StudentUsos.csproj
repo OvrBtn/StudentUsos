@@ -214,6 +214,9 @@
 		<Compile Update="Controls\CustomContentPageNotAnimated.xaml.cs">
 		  <DependentUpon>CustomContentPageNotAnimated.xaml</DependentUpon>
 		</Compile>
+		<Compile Update="Features\CampusMap\Views\CampusMapPage.xaml.cs">
+		  <DependentUpon>CampusMapPage.xaml</DependentUpon>
+		</Compile>
 		<Compile Update="Features\Settings\Views\NotificationsDiagnosis\NotificationsDiagnosisPage.xaml.cs">
 		  <DependentUpon>NotificationsDiagnosisPage.xaml</DependentUpon>
 		</Compile>
@@ -343,6 +346,9 @@
 		<MauiXaml Update="Controls\CustomContentPageNotAnimated.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+		<MauiXaml Update="Features\CampusMap\Views\CampusMapPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="Features\Dashboard\Layouts\ActivitiesDataTemplate.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
@@ -469,6 +475,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="Features\CampusMap\Services\" />
+	  <Folder Include="Features\CampusMap\Repositories\" />
 	  <Folder Include="Features\Dashboard\Layouts\" />
 	</ItemGroup>
 

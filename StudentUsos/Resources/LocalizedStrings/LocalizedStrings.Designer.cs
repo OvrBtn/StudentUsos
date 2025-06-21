@@ -385,6 +385,15 @@ namespace StudentUsos.Resources.LocalizedStrings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Campus map.
+        /// </summary>
+        internal static string CampusMap {
+            get {
+                return ResourceManager.GetString("CampusMap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         internal static string Cancel {

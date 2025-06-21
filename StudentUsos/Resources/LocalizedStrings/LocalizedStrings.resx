@@ -572,4 +572,7 @@
   <data name="WhatsNewItem_NewGradeDetails" xml:space="preserve">
     <value>Depending on your settings receiving notifications might be blocked. You can perform an automatic check in Settings -&gt; Notifications -&gt; Troubleshooting.</value>
   </data>
+  <data name="CampusMap" xml:space="preserve">
+    <value>Campus map</value>
+  </data>
 </root>

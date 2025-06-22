@@ -1,12 +1,24 @@
 ﻿using StudentUsos.Controls;
+using StudentUsos.Features.CampusMap.Services;
 
 namespace StudentUsos.Features.CampusMap.Views;
 
 public partial class CampusMapPage : CustomContentPageNotAnimated
 {
-    public CampusMapPage()
+
+    ICampusMapService campusMapService;
+    public CampusMapPage(ICampusMapService campusMapService)
     {
         InitializeComponent();
+
+        this.campusMapService = campusMapService;
+
+        Init();
+    }
+
+    void Init()
+    {
+
     }
 
     //bool isViewModelSet = false;
@@ -24,4 +36,15 @@ public partial class CampusMapPage : CustomContentPageNotAnimated
     //        viewModel.Init();
     //    });
     //}
+
+    private void OnSendMessageButtonClicked(object sender, EventArgs e)
+    {
+        hybridWebView.SendRawMessage($"Hello from C#!");
+    }
+
+    private async void OnHybridWebViewRawMessageReceived(object sender, HybridWebViewRawMessageReceivedEventArgs e)
+    {
+        var t = 5;
+        //await DisplayAlert("Raw Message Received", e.Message, "OK");
+    }
 }

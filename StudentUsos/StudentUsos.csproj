@@ -475,7 +475,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Features\CampusMap\Services\" />
 	  <Folder Include="Features\CampusMap\Repositories\" />
 	  <Folder Include="Features\Dashboard\Layouts\" />
 	</ItemGroup>

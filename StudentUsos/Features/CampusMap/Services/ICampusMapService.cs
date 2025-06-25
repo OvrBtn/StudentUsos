@@ -1,10 +1,14 @@
-﻿namespace StudentUsos.Features.CampusMap.Services;
+﻿using StudentUsos.Features.CampusMap.Models;
 
-interface ICampusMapService
+namespace StudentUsos.Features.CampusMap.Services;
+
+public interface ICampusMapService
 {
     public Task<string?> GetCampusMapSvg();
     public Task<string?> GetBuildingsData();
+    public Task<List<CampusBuilding>?> GetBuildingsDataDeserialized();
 
-    public Task<string> GetFloorSvg(string buildingId, string floor);
-    public Task<string> GetFloorData(string buildingId, string floor);
+    public Task<string?> GetFloorSvg(string buildingId, string floor);
+    public Task<string?> GetFloorData(string buildingId, string floor);
+    public Task<List<FloorData>?> GetFloorDataDeserialized(string buildingId, string floor);
 }

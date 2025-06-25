@@ -3,16 +3,45 @@
     x:Class="StudentUsos.Features.CampusMap.Views.CampusMapPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:android="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;assembly=Microsoft.Maui.Controls"
     xmlns:controls="clr-namespace:StudentUsos.Controls"
     xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
+    xmlns:campusMap="clr-namespace:StudentUsos.Features.CampusMap.Views"
+    xmlns:campusMapModels="clr-namespace:StudentUsos.Features.CampusMap.Models"
+    x:DataType="campusMap:CampusMapPage"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
 
-    <StackLayout Margin="30">
+    <Grid Margin="30" RowDefinitions="auto, auto, *" BackgroundColor="Green">
 
-        <HybridWebView x:Name="hybridWebView"
-                   RawMessageReceived="OnHybridWebViewRawMessageReceived"
-                   Grid.Row="1" />
+        <CollectionView Grid.Row="0" ItemsSource="{Binding Buildings}" BackgroundColor="Purple">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Horizontal"></LinearItemsLayout>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="campusMapModels:CampusBuilding">
+                    <Label Text="{Binding Id}"></Label>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
-    </StackLayout>
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Floors}" BackgroundColor="Yellow">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Horizontal"></LinearItemsLayout>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Label Text="{Binding .}"></Label>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Grid Grid.Row="2" Background="Red">
+
+            <ActivityIndicator/>
+            <HybridWebView x:Name="hybridWebView" RawMessageReceived="OnHybridWebViewRawMessageReceived" Background="Transparent"/>
+
+        </Grid>
+        
+    </Grid>
 
 </controls:CustomContentPageNotAnimated>

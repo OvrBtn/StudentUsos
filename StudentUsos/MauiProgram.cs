@@ -56,6 +56,7 @@ public static class MauiProgram
 
 
 #if DEBUG
+        builder.Services.AddHybridWebViewDeveloperTools();
         builder.Logging.AddDebug();
 #endif
 
@@ -64,6 +65,12 @@ public static class MauiProgram
 
 #if ANDROID
         builder.Services.AddSingleton<INotificationBuilder, CustomNotificationBuilder>();
+
+        WebViewHandler.Mapper.AppendToMapping("zoom", (handler, view) =>
+        {
+            handler.PlatformView.Settings.BuiltInZoomControls = true;
+            handler.PlatformView.Settings.DisplayZoomControls = true;
+        });
 #endif
 
         builder.Services.AddSingleton<FirebasePushNotificationsService>();

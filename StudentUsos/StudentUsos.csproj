@@ -126,6 +126,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiCss Remove="Resources\Raw\wwwroot\styles\app.css" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<MauiImage Remove="Resources\Images\put_logo.svg" />
 	</ItemGroup>
 

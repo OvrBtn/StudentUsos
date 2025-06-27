@@ -16,7 +16,7 @@ svg {
 }
 
 #rooms * {
-    fill: #00A6E5 !important;
+    fill: #2d2d2d !important;
     fill-opacity: 1 !important;
     stroke: white !important;
     stroke-width: 1px !important;

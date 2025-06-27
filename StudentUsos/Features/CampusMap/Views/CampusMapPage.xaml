@@ -11,37 +11,50 @@
     x:DataType="campusMap:CampusMapPage"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
 
-    <Grid Margin="30" RowDefinitions="auto, auto, *" BackgroundColor="Green">
+    <Grid Margin="0" RowDefinitions="auto, auto, *">
 
-        <CollectionView Grid.Row="0" ItemsSource="{Binding Buildings}" BackgroundColor="Purple">
+        <CollectionView Grid.Row="0" ItemsSource="{Binding Buildings}" HorizontalOptions="Center" Margin="0, 30, 0, 0">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Horizontal"></LinearItemsLayout>
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="campusMapModels:CampusBuilding">
-                    <Label Text="{Binding Id}"></Label>
+                    <Button Text="{Binding Id}" Margin="5, 0" BackgroundColor="{StaticResource Primary}"></Button>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <CollectionView Grid.Row="1" ItemsSource="{Binding Floors}" BackgroundColor="Yellow">
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Floors}" HorizontalOptions="Center" Margin="0,15,0,15">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Horizontal"></LinearItemsLayout>
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Label Text="{Binding .}"></Label>
+                <DataTemplate x:DataType="{x:Type x:String}">
+                    <Button Text="{Binding .}" Margin="5, 0" BackgroundColor="{StaticResource Primary}"></Button>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <Grid Grid.Row="2" Background="Red">
+        <Grid Grid.Row="2">
 
             <ActivityIndicator/>
             <HybridWebView x:Name="hybridWebView" RawMessageReceived="OnHybridWebViewRawMessageReceived" Background="Transparent"/>
 
         </Grid>
-        
+
+        <VerticalStackLayout Grid.RowSpan="3" VerticalOptions="End" HorizontalOptions="Fill" 
+                             InputTransparent="True" CascadeInputTransparent="False">
+            <Border HorizontalOptions="End" Style="{StaticResource BorderWithShadow}" Padding="0"
+                    BackgroundColor="{StaticResource Primary}" Margin="40, 80" Stroke="Transparent">
+                <Grid ColumnDefinitions="auto, auto">
+                    <Button Grid.Column="0" BackgroundColor="Transparent" Text="-" 
+                            FontSize="20" Padding="15, 10, 10, 10" CornerRadius="0"/>
+                    <Button Grid.Column="1" BackgroundColor="Transparent" Text="+" 
+                            FontSize="20" Padding="10, 10, 15, 10" CornerRadius="0"/>
+                </Grid>
+            </Border>
+        </VerticalStackLayout>
+
     </Grid>
 
 </controls:CustomContentPageNotAnimated>

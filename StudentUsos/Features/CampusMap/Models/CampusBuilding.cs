@@ -10,5 +10,6 @@ public class CampusBuilding
 {
     public string Id { get; set; }
     public Dictionary<string, string> Name { get; set; }
+    public string LocalizedName { get => Utilities.GetLocalizedString(Name); }
     public List<string> Floors { get; set; }
 }

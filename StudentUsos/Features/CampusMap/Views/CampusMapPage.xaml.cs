@@ -27,16 +27,18 @@ public partial class CampusMapPage : CustomContentPageNotAnimated
         _ = Init();
     }
 
-    public List<CampusBuilding> Buildings
+    public List<CampusBuilding> Buildings { get; set; }
+
+    public List<CampusBuilding> BuildingsWithMaps
     {
-        get => buildings;
+        get => buildingsWithMaps;
         set
         {
-            buildings = value;
+            buildingsWithMaps = value;
             OnPropertyChanged();
         }
     }
-    List<CampusBuilding> buildings = new();
+    List<CampusBuilding> buildingsWithMaps = new();
 
     public List<string> Floors
     {
@@ -77,14 +79,21 @@ public partial class CampusMapPage : CustomContentPageNotAnimated
     {
         await Task.Delay(3000);
 
-        Buildings = await campusMapService.GetBuildingsDataDeserialized() ?? new();
-        Buildings.Insert(0, new()
+        var buildingsFromApi = await campusMapService.GetBuildingsDataDeserialized() ?? new();
+        var buildingWithMaps = buildingsFromApi.Where(x => x.Floors is not null && x.Floors.Count > 0).ToList();
+
+        CampusBuilding campus = new()
         {
             Id = LocalizedStrings.Campus,
             LocalizedName = LocalizedStrings.Campus,
             Floors = new()
-        });
-        Floors = Buildings[0].Floors;
+        };
+
+        buildingsFromApi.Insert(0, campus);
+        buildingWithMaps.Insert(0, campus);
+
+        Buildings = buildingsFromApi;
+        BuildingsWithMaps = buildingWithMaps;
 
         _ = ShowCampusMap();
     }
@@ -221,7 +230,7 @@ public partial class CampusMapPage : CustomContentPageNotAnimated
     {
         var button = sender as Button;
         string clickedText = button!.Text;
-        int index = buildings.FindIndex(x => x.Id == clickedText);
+        int index = Buildings.FindIndex(x => x.Id == clickedText);
 
         if (index == CurrentBuildingIndex)
         {

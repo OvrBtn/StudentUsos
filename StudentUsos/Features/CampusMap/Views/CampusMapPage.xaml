@@ -13,7 +13,7 @@
 
     <Grid Margin="0" RowDefinitions="auto, auto, auto, *">
 
-        <CollectionView Grid.Row="0" ItemsSource="{Binding Buildings}" HorizontalOptions="Center" Margin="0, 30, 0, 0">
+        <CollectionView Grid.Row="0" ItemsSource="{Binding BuildingsWithMaps}" HorizontalOptions="Center" Margin="0, 30, 0, 0">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Horizontal"></LinearItemsLayout>
             </CollectionView.ItemsLayout>

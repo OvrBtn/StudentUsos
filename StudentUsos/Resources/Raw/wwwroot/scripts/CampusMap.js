@@ -100,15 +100,17 @@ function ReceiveFloorSvg(svg) {
 
 function roomIdToName(parsedJson, id) {
     names = [];
+    records = [];
     for (let i = 0; i < parsedJson.length; i++) {
         if (parsedJson[i].roomId == id) {
-            names.push(parsedJson[i].name);
+            records.push(parsedJson[i]);
         }
     }
-    if (names.length > 0) {
-        return names.join(",");
+    if (records.length == 0) {
+        return "";
     }
-    return "";
+    names = records.sort((a, b) => b.nameWeight - a.nameWeight).map(x => x.name);
+    return names.join(",");
 }
 
 function calculateCenterWithCentroidPlusNormals(svgPath) {

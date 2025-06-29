@@ -23,8 +23,6 @@ public partial class CampusMapPage : CustomContentPageNotAnimated
         this.applicationService = applicationService;
 
         hybridWebView.SetInvokeJavaScriptTarget(this);
-
-        _ = Init();
     }
 
     public List<CampusBuilding> Buildings { get; set; }
@@ -77,8 +75,6 @@ public partial class CampusMapPage : CustomContentPageNotAnimated
 
     async Task Init()
     {
-        await Task.Delay(3000);
-
         var buildingsFromApi = await campusMapService.GetBuildingsDataDeserialized() ?? new();
         var buildingWithMaps = buildingsFromApi.Where(x => x.Floors is not null && x.Floors.Count > 0).ToList();
 
@@ -110,6 +106,7 @@ public partial class CampusMapPage : CustomContentPageNotAnimated
         Dispatcher.Dispatch(() =>
         {
             isInitialized = true;
+            _ = Init();
         });
     }
 

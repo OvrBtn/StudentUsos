@@ -36,7 +36,7 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <Label Grid.Row="2" Text="{Binding CurrentFullLocation}" HorizontalTextAlignment="Center" Margin="0, 15, 0, 10" 
+        <Label Grid.Row="2" Text="{Binding CurrentFullLocation}" HorizontalTextAlignment="Center" Margin="15, 15, 15, 10" 
                FontAttributes="Bold" FontSize="18"/>
 
         <Grid Grid.Row="3">

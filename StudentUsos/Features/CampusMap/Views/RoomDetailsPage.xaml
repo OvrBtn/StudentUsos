@@ -22,12 +22,14 @@
                             <VisualState Name="Normal">
                                 <VisualState.Setters>
                                     <Setter Property="Opacity" Value="1" />
+                                    <Setter Property="TextColor" Value="White" />
                                 </VisualState.Setters>
                             </VisualState>
 
                             <VisualState Name="Disabled">
                                 <VisualState.Setters>
                                     <Setter Property="Opacity" Value="0.9" />
+                                    <Setter Property="TextColor" Value="Gray" />
                                 </VisualState.Setters>
                             </VisualState>
 

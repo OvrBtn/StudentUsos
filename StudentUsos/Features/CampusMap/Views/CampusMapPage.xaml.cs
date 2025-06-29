@@ -106,6 +106,8 @@ public partial class CampusMapPage : CustomContentPageNotAnimated
 
     async Task UpdateWebView(string buildingId, string floor)
     {
+        OnPropertyChanged(nameof(CurrentFullLocation));
+
         var svg = await campusMapService.GetFloorSvg(buildingId, floor) ?? string.Empty;
 
         var floorData = await campusMapService.GetFloorData(buildingId, floor) ?? string.Empty;
@@ -113,15 +115,13 @@ public partial class CampusMapPage : CustomContentPageNotAnimated
 
         _ = SendFloorSvgToHybridWebView(svg);
         _ = SendFloorDataToHybridWebView(floorData);
-
-        OnPropertyChanged(nameof(CurrentFullLocation));
     }
 
     async Task ShowCampusMap()
     {
+        OnPropertyChanged(nameof(CurrentFullLocation));
         var svg = await campusMapService.GetCampusMapSvg() ?? string.Empty;
         _ = SendCampusSvgToHybridWebView(svg);
-        OnPropertyChanged(nameof(CurrentFullLocation));
     }
 
 

@@ -64,7 +64,6 @@ function ReceiveFloorData(jsonString) {
         text.setAttributeNS(null, "style", "font-size: " + fontSize + "px;")
     }
 
-    centerScroll();
     assignOnClickEvents(children);
 }
 
@@ -96,6 +95,7 @@ function assignOnClickEvents(rooms) {
 function ReceiveFloorSvg(svg) {
     body = document.getElementsByTagName("body")[0];
     body.innerHTML = svg;
+    centerScroll();
 }
 
 function roomIdToName(parsedJson, id) {

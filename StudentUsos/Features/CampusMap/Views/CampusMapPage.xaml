@@ -11,7 +11,7 @@
     x:DataType="campusMap:CampusMapPage"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
 
-    <Grid Margin="0" RowDefinitions="auto, auto, *">
+    <Grid Margin="0" RowDefinitions="auto, auto, auto, *">
 
         <CollectionView Grid.Row="0" ItemsSource="{Binding Buildings}" HorizontalOptions="Center" Margin="0, 30, 0, 0">
             <CollectionView.ItemsLayout>
@@ -19,30 +19,34 @@
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="campusMapModels:CampusBuilding">
-                    <Button Text="{Binding Id}" Margin="5, 0" BackgroundColor="{StaticResource Primary}"></Button>
+                    <Button Text="{Binding Id}" Margin="5, 0" BackgroundColor="{StaticResource Primary}" Clicked="BuildingButton_Clicked"></Button>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <CollectionView Grid.Row="1" ItemsSource="{Binding Floors}" HorizontalOptions="Center" Margin="0,15,0,15">
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Floors}" HorizontalOptions="Center" Margin="0,15,0,0"
+                        IsVisible="{Binding Floors.Count, Converter={StaticResource CountToBoolConverter}}">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Horizontal"></LinearItemsLayout>
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="{x:Type x:String}">
-                    <Button Text="{Binding .}" Margin="5, 0" BackgroundColor="{StaticResource Primary}"></Button>
+                    <Button Text="{Binding .}" Margin="5, 0" BackgroundColor="{StaticResource Primary}" Clicked="FloorButton_Clicked"></Button>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <Grid Grid.Row="2">
+        <Label Grid.Row="2" Text="{Binding CurrentFullLocation}" HorizontalTextAlignment="Center" Margin="0, 15, 0, 10" 
+               FontAttributes="Bold" FontSize="18"/>
+
+        <Grid Grid.Row="3">
 
             <ActivityIndicator/>
-            <HybridWebView x:Name="hybridWebView" RawMessageReceived="OnHybridWebViewRawMessageReceived" Background="Transparent"/>
+            <HybridWebView x:Name="hybridWebView" Background="Transparent"/>
 
         </Grid>
 
-        <VerticalStackLayout Grid.RowSpan="3" VerticalOptions="End" HorizontalOptions="Fill" 
+        <VerticalStackLayout Grid.RowSpan="4" VerticalOptions="End" HorizontalOptions="Fill" 
                              InputTransparent="True" CascadeInputTransparent="False">
             <Border HorizontalOptions="End" Style="{StaticResource BorderWithShadow}" Padding="0"
                     BackgroundColor="{StaticResource Primary}" Margin="40, 80" Stroke="Transparent">

@@ -601,4 +601,7 @@
   <data name="CampusMapPage_SuggestionUnexpectedStatusCode" xml:space="preserve">
     <value>Sugestia nie została zapisana</value>
   </data>
+  <data name="Campus" xml:space="preserve">
+    <value>Kampus</value>
+  </data>
 </root>

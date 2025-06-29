@@ -51,31 +51,38 @@ public partial class CampusMapPage : CustomContentPageNotAnimated
 
     public List<RoomInfo> FloorData { get; private set; }
 
-    public string CurrentBuildingId { get; private set; } = "A23";
+    public string CurrentBuildingId { get; private set; } = LocalizedStrings.Campus;
     public string CurrentFloor { get; private set; } = "0";
+
+    public string CurrentFullLocation
+    {
+        get
+        {
+            if (CurrentBuildingIndex != 0)
+            {
+                return $"{Buildings[CurrentBuildingIndex].Id} - {Buildings[CurrentBuildingIndex].LocalizedName}, {CurrentFloor}";
+            }
+            else
+            {
+                return Buildings[CurrentBuildingIndex].LocalizedName;
+            }
+        }
+    }
 
     async Task Init()
     {
-
-        Buildings = await campusMapService.GetBuildingsDataDeserialized() ?? new();
-        Floors = Buildings[0].Floors;
-
         await Task.Delay(3000);
 
-        var svg = await campusMapService.GetFloorSvg(CurrentBuildingId, CurrentFloor) ?? string.Empty;
-        await SendFloorSvgToHybridWebView(svg);
-
-        var floorData = await campusMapService.GetFloorData(CurrentBuildingId, CurrentFloor) ?? string.Empty;
-        try
+        Buildings = await campusMapService.GetBuildingsDataDeserialized() ?? new();
+        Buildings.Insert(0, new()
         {
-            FloorData = JsonSerializer.Deserialize(floorData, RoomInfoJsonContext.Default.ListRoomInfo) ?? new();
-        }
-        catch (Exception e)
-        {
-            var t = 5;
-        }
+            Id = LocalizedStrings.Campus,
+            LocalizedName = LocalizedStrings.Campus,
+            Floors = new()
+        });
+        Floors = Buildings[0].Floors;
 
-        await SendFloorDataToHybridWebView(floorData);
+        _ = ShowCampusMap();
     }
 
     bool isInitialized = false;
@@ -93,14 +100,24 @@ public partial class CampusMapPage : CustomContentPageNotAnimated
         });
     }
 
-    private void OnSendMessageButtonClicked(object sender, EventArgs e)
+    async Task UpdateWebView(string buildingId, string floor)
     {
-        hybridWebView.SendRawMessage($"");
+        var svg = await campusMapService.GetFloorSvg(buildingId, floor) ?? string.Empty;
+
+        var floorData = await campusMapService.GetFloorData(buildingId, floor) ?? string.Empty;
+        FloorData = JsonSerializer.Deserialize(floorData, RoomInfoJsonContext.Default.ListRoomInfo) ?? new();
+
+        _ = SendFloorSvgToHybridWebView(svg);
+        _ = SendFloorDataToHybridWebView(floorData);
+
+        OnPropertyChanged(nameof(CurrentFullLocation));
     }
 
-    private async void OnHybridWebViewRawMessageReceived(object sender, HybridWebViewRawMessageReceivedEventArgs e)
+    async Task ShowCampusMap()
     {
-
+        var svg = await campusMapService.GetCampusMapSvg() ?? string.Empty;
+        _ = SendFloorSvgToHybridWebView(svg);
+        OnPropertyChanged(nameof(CurrentFullLocation));
     }
 
 
@@ -177,6 +194,48 @@ public partial class CampusMapPage : CustomContentPageNotAnimated
             HybridWebViewJsonContext.Default.Object,
             [floorSvg],
             [HybridWebViewJsonContext.Default.String]);
+    }
+
+    public int CurrentBuildingIndex { get; private set; } = 0;
+
+    private void BuildingButton_Clicked(object sender, EventArgs e)
+    {
+        var button = sender as Button;
+        string clickedText = button!.Text;
+        int index = buildings.FindIndex(x => x.Id == clickedText);
+
+        if (index == CurrentBuildingIndex)
+        {
+            return;
+        }
+        CurrentBuildingIndex = index;
+
+        Floors = Buildings[CurrentBuildingIndex].Floors;
+
+        CurrentBuildingId = clickedText;
+        if (CurrentBuildingIndex == 0)
+        {
+            _ = ShowCampusMap();
+        }
+        else
+        {
+            CurrentFloor = "0";
+            _ = UpdateWebView(CurrentBuildingId, CurrentFloor);
+        }
+    }
+
+    private void FloorButton_Clicked(object sender, EventArgs e)
+    {
+        var button = sender as Button;
+        string clickedText = button!.Text;
+
+        if (clickedText == CurrentFloor)
+        {
+            return;
+        }
+
+        CurrentFloor = clickedText;
+        _ = UpdateWebView(CurrentBuildingId, CurrentFloor);
     }
 }
 

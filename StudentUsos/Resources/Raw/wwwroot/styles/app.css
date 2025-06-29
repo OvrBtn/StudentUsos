@@ -16,14 +16,36 @@ svg {
     pointer-events: none;
 }
 
-#rooms * {
+#rooms *, #pomieszczenia * {
     fill: #2d2d2d !important;
     fill-opacity: 1 !important;
     stroke: white !important;
     stroke-width: 1px !important;
 }
 
+#interaction {
+    display: none;
+}
+
 #budowlanka_3pt *, #budowlanka_1pt *,
 #budowlanka_dot *, #drzwi *, #schody * {
     stroke: #AAA;
+}
+
+#drogi * {
+    fill: gray;
+}
+
+#here_i_am, #kioskIndicator, #hereIam {
+    display: none;
+}
+
+#ikony * {
+    fill: white;
+}
+
+#oznaczenia > text {
+    dominant-baseline: middle;
+    text-anchor: middle;
+    fill: white;
 }

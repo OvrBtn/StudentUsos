@@ -599,4 +599,7 @@
   <data name="CampusMapPage_SuggestionUnexpectedStatusCode" xml:space="preserve">
     <value>Suggestion could not be saved</value>
   </data>
+  <data name="Campus" xml:space="preserve">
+    <value>Campus</value>
+  </data>
 </root>

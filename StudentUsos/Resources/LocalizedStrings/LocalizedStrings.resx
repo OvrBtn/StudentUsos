@@ -575,4 +575,28 @@
   <data name="CampusMap" xml:space="preserve">
     <value>Campus map</value>
   </data>
+  <data name="RoomDetailsPage_AlternativeNames" xml:space="preserve">
+    <value>Alternative names</value>
+  </data>
+  <data name="RoomDetailsPage_RoomName" xml:space="preserve">
+    <value>Room name</value>
+  </data>
+  <data name="RoomDetailsPage_SuggestRoomName" xml:space="preserve">
+    <value>Suggest room name</value>
+  </data>
+  <data name="RoomDetailsPage_Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="RoomDetailsPage_AllowedCharacters" xml:space="preserve">
+    <value>Please use only letters, numbers, spaces, and basic punctuation (.,-_)</value>
+  </data>
+  <data name="CampusMapPage_SuggestionSentSuccessfully" xml:space="preserve">
+    <value>Suggestion sent successfully</value>
+  </data>
+  <data name="CampusMapPage_SuggestionAlreadyRecorder" xml:space="preserve">
+    <value>Suggestion not sent: Name for given room can be suggested only once</value>
+  </data>
+  <data name="CampusMapPage_SuggestionUnexpectedStatusCode" xml:space="preserve">
+    <value>Suggestion could not be saved</value>
+  </data>
 </root>

@@ -13,6 +13,7 @@ svg {
 
 #labels {
     fill: white;
+    pointer-events: none;
 }
 
 #rooms * {

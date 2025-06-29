@@ -1,5 +1,6 @@
 ﻿using StudentUsos.Features.CampusMap.Models;
 using StudentUsos.Services.ServerConnection;
+using System.Net;
 using System.Text.Json;
 
 namespace StudentUsos.Features.CampusMap.Services;
@@ -80,5 +81,23 @@ public class CampusMapService : ICampusMapService
             return null;
         }
         return response.Response;
+    }
+
+    public async Task<HttpStatusCode?> SendUserSuggestion(string suggestedName, string buildingId, string floor, string roomId, string studentNumber)
+    {
+        var payload = new Dictionary<string, string>()
+        {
+            { "SuggestedRoomName", suggestedName },
+            { "BuildingId", buildingId },
+            { "Floor", floor },
+            { "RoomId", roomId },
+            { "UserStudentNumber", studentNumber }
+        };
+        var response = await serverConnectionManager.SendAuthorizedPostRequestAsync("CampusMap/UserSuggestion", payload, AuthorizationMode.Full);
+        if (response is null || response.IsSuccess == false)
+        {
+            return null;
+        }
+        return response.HttpResponseMessage.StatusCode;
     }
 }

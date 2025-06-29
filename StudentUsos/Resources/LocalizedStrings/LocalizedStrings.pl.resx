@@ -577,4 +577,28 @@
   <data name="CampusMap" xml:space="preserve">
     <value>Mapa kampusu</value>
   </data>
+  <data name="RoomDetailsPage_AlternativeNames" xml:space="preserve">
+    <value>Alternatywne nazwy</value>
+  </data>
+  <data name="RoomDetailsPage_RoomName" xml:space="preserve">
+    <value>Nazwa sali</value>
+  </data>
+  <data name="RoomDetailsPage_SuggestRoomName" xml:space="preserve">
+    <value>Zasugeruj nazwę sali</value>
+  </data>
+  <data name="RoomDetailsPage_Send" xml:space="preserve">
+    <value>Wyślij</value>
+  </data>
+  <data name="RoomDetailsPage_AllowedCharacters" xml:space="preserve">
+    <value>Proszę używać tylko liter, cyfr, spacji oraz podstawowych znaków interpunkcyjnych (.,-_)</value>
+  </data>
+  <data name="CampusMapPage_SuggestionSentSuccessfully" xml:space="preserve">
+    <value>Sugestia została poprawnie wysłana</value>
+  </data>
+  <data name="CampusMapPage_SuggestionAlreadyRecorder" xml:space="preserve">
+    <value>Sugestia nie wysłana: Nazwa dla danej sali może zostać zasugerowana tylko raz.</value>
+  </data>
+  <data name="CampusMapPage_SuggestionUnexpectedStatusCode" xml:space="preserve">
+    <value>Sugestia nie została zapisana</value>
+  </data>
 </root>

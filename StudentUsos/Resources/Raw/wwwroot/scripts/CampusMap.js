@@ -1,11 +1,10 @@
 ﻿
-body = document.getElementsByTagName("body")[0];
 
 window.addEventListener(
     "HybridWebViewMessageReceived",
     function (e) {
         console.log(e);
-        
+
     });
 
 function ReceiveFloorData(jsonString) {
@@ -55,15 +54,18 @@ function ReceiveFloorData(jsonString) {
 
         textRect1 = text.getBBox()
 
-        fontSize = 15 * box.width * 0.3 / textRect1.width
-        minFontSize = 14
-        maxFontSize = 200000
+        const fontGrowthRate = 15;
+        const roomBoundingBoxMultiplier = 0.3;
+        fontSize = fontGrowthRate * box.width * roomBoundingBoxMultiplier / textRect1.width
+        minFontSize = 10
+        maxFontSize = 20
         if (fontSize < minFontSize) fontSize = minFontSize
         if (fontSize > maxFontSize) fontSize = maxFontSize
         text.setAttributeNS(null, "style", "font-size: " + fontSize + "px;")
-
-        centerScroll();
     }
+
+    centerScroll();
+    assignOnClickEvents(children);
 }
 
 function centerScroll() {
@@ -80,7 +82,19 @@ function centerScroll() {
     })
 }
 
+function assignOnClickEvents(rooms) {
+    for (i = 0; i < rooms.length; i++) {
+        rooms[i].addEventListener("click", async function (event) {
+            const clickedElement = event.target;
+            roomId = clickedElement.getAttribute("roomid");
+            console.log(roomId);
+            await window.HybridWebView.InvokeDotNet('ReceiveRoomClicked', [roomId]);
+        });
+    }
+}
+
 function ReceiveFloorSvg(svg) {
+    body = document.getElementsByTagName("body")[0];
     body.innerHTML = svg;
 }
 

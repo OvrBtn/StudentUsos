@@ -394,6 +394,33 @@ namespace StudentUsos.Resources.LocalizedStrings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Suggestion not sent: Name for given room can be suggested only once.
+        /// </summary>
+        internal static string CampusMapPage_SuggestionAlreadyRecorder {
+            get {
+                return ResourceManager.GetString("CampusMapPage_SuggestionAlreadyRecorder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Suggestion sent successfully.
+        /// </summary>
+        internal static string CampusMapPage_SuggestionSentSuccessfully {
+            get {
+                return ResourceManager.GetString("CampusMapPage_SuggestionSentSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Suggestion could not be saved.
+        /// </summary>
+        internal static string CampusMapPage_SuggestionUnexpectedStatusCode {
+            get {
+                return ResourceManager.GetString("CampusMapPage_SuggestionUnexpectedStatusCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         internal static string Cancel {
@@ -1122,6 +1149,51 @@ namespace StudentUsos.Resources.LocalizedStrings {
         internal static string PushNotifications_UsosNewGrade_InterpretedTitle {
             get {
                 return ResourceManager.GetString("PushNotifications_UsosNewGrade_InterpretedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please use only letters, numbers, spaces, and basic punctuation (.,-_).
+        /// </summary>
+        internal static string RoomDetailsPage_AllowedCharacters {
+            get {
+                return ResourceManager.GetString("RoomDetailsPage_AllowedCharacters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alternative names.
+        /// </summary>
+        internal static string RoomDetailsPage_AlternativeNames {
+            get {
+                return ResourceManager.GetString("RoomDetailsPage_AlternativeNames", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Room name.
+        /// </summary>
+        internal static string RoomDetailsPage_RoomName {
+            get {
+                return ResourceManager.GetString("RoomDetailsPage_RoomName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send.
+        /// </summary>
+        internal static string RoomDetailsPage_Send {
+            get {
+                return ResourceManager.GetString("RoomDetailsPage_Send", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Suggest room name.
+        /// </summary>
+        internal static string RoomDetailsPage_SuggestRoomName {
+            get {
+                return ResourceManager.GetString("RoomDetailsPage_SuggestRoomName", resourceCulture);
             }
         }
         

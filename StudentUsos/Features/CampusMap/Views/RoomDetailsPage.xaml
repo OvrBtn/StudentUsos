@@ -39,8 +39,8 @@
         </ResourceDictionary>
     </toolkit:Popup.Resources>
 
-    <StackLayout Padding="10" WidthRequest="500">
-        <Border Margin="20" Padding="10" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
+    <StackLayout Padding="10, 0" WidthRequest="500">
+        <Border Margin="20, 0" Padding="10" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
             <StackLayout Margin="10" Spacing="15">
 
                 <StackLayout IsVisible="{Binding Parameters.HasRoomName}">

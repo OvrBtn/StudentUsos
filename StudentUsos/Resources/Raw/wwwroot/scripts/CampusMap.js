@@ -98,6 +98,23 @@ function ReceiveFloorSvg(svg) {
     centerScroll();
 }
 
+function ReceiveCampusSvg(svg) {
+    body = document.getElementsByTagName("body")[0];
+    body.innerHTML = svg;
+    centerScroll();
+
+    campusBuildings = document.getElementById("pomieszczenia").children;
+    for (i = 0; i < campusBuildings.length; i++) {
+        campusBuildings[i].addEventListener("click", async function (event) {
+            const clickedElement = event.target;
+            roomId = clickedElement.getAttribute("id");
+            roomId = roomId.replace("warta_", "");
+            console.log(roomId);
+            await window.HybridWebView.InvokeDotNet('ReceiveCampusBuildingClicked', [roomId]);
+        });
+    }
+}
+
 function roomIdToName(parsedJson, id) {
     names = [];
     records = [];

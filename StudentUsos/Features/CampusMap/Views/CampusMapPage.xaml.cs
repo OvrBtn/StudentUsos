@@ -58,6 +58,10 @@ public partial class CampusMapPage : CustomContentPageNotAnimated
     {
         get
         {
+            if (Buildings.Count == 0)
+            {
+                return string.Empty;
+            }
             if (CurrentBuildingIndex != 0)
             {
                 return $"{Buildings[CurrentBuildingIndex].Id} - {Buildings[CurrentBuildingIndex].LocalizedName}, {CurrentFloor}";
@@ -116,7 +120,7 @@ public partial class CampusMapPage : CustomContentPageNotAnimated
     async Task ShowCampusMap()
     {
         var svg = await campusMapService.GetCampusMapSvg() ?? string.Empty;
-        _ = SendFloorSvgToHybridWebView(svg);
+        _ = SendCampusSvgToHybridWebView(svg);
         OnPropertyChanged(nameof(CurrentFullLocation));
     }
 
@@ -147,6 +151,21 @@ public partial class CampusMapPage : CustomContentPageNotAnimated
         });
     }
 
+    public void ReceiveCampusBuildingClicked(string buildingId)
+    {
+        var buildingDetails = Buildings.FirstOrDefault(x => x.Id == buildingId);
+        if (buildingDetails is null)
+        {
+            return;
+        }
+
+        CampusBuildingDetailsPage.CreateAndShow(new()
+        {
+            ShortName = buildingDetails.Id,
+            LongName = buildingDetails.LocalizedName
+        });
+    }
+
 
     UserInfo.UserInfo? currentUser = null;
     async Task SendSuggestion(string suggestedName, string roomId)
@@ -172,14 +191,6 @@ public partial class CampusMapPage : CustomContentPageNotAnimated
         }
     }
 
-    async Task SendFloorDataToHybridWebView(List<FloorData> floorData)
-    {
-        await hybridWebView.InvokeJavaScriptAsync<object>("ReceiveFloorData",
-            HybridWebViewJsonContext.Default.Object,
-            [JsonSerializer.Serialize(floorData)],
-            [HybridWebViewJsonContext.Default.String]);
-    }
-
     async Task SendFloorDataToHybridWebView(string floorData)
     {
         await hybridWebView.InvokeJavaScriptAsync<object>("ReceiveFloorData",
@@ -193,6 +204,14 @@ public partial class CampusMapPage : CustomContentPageNotAnimated
         await hybridWebView.InvokeJavaScriptAsync<object>("ReceiveFloorSvg",
             HybridWebViewJsonContext.Default.Object,
             [floorSvg],
+            [HybridWebViewJsonContext.Default.String]);
+    }
+
+    async Task SendCampusSvgToHybridWebView(string camusSvg)
+    {
+        await hybridWebView.InvokeJavaScriptAsync<object>("ReceiveCampusSvg",
+            HybridWebViewJsonContext.Default.Object,
+            [camusSvg],
             [HybridWebViewJsonContext.Default.String]);
     }
 

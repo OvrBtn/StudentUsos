@@ -221,6 +221,9 @@
 		<Compile Update="Features\CampusMap\Views\CampusMapPage.xaml.cs">
 		  <DependentUpon>CampusMapPage.xaml</DependentUpon>
 		</Compile>
+		<Compile Update="Features\CampusMap\Views\CampusBuildingDetailsPage.xaml.cs">
+		  <DependentUpon>CampusBuildingDetailsPage.xaml</DependentUpon>
+		</Compile>
 		<Compile Update="Features\CampusMap\Views\RoomDetailsPage.xaml.cs">
 		  <DependentUpon>RoomDetailsPage.xaml</DependentUpon>
 		</Compile>
@@ -354,6 +357,9 @@
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Features\CampusMap\Views\CampusMapPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Features\CampusMap\Views\CampusBuildingDetailsPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Features\CampusMap\Views\RoomDetailsPage.xaml">

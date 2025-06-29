@@ -4,7 +4,6 @@ namespace StudentUsos.Features.CampusMap.Views;
 
 public partial class RoomDetailsPage : Popup
 {
-    EntryPopupViewModel viewModel;
     public RoomDetailsPage(RoomDetailsParameters parameters)
     {
         InitializeComponent();

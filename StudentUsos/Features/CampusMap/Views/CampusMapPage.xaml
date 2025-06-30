@@ -8,7 +8,7 @@
     xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
     xmlns:campusMap="clr-namespace:StudentUsos.Features.CampusMap.Views"
     xmlns:campusMapModels="clr-namespace:StudentUsos.Features.CampusMap.Models"
-    x:DataType="campusMap:CampusMapPage"
+    x:DataType="campusMap:CampusMapViewModel"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
 
     <Grid Margin="0" RowDefinitions="auto, auto, *, auto">
@@ -19,7 +19,7 @@
                     <Label Grid.Column="0" Text="{Binding CurrentFullLocation}" HorizontalTextAlignment="Center"></Label>
                     <Image Grid.Column="1" Source="triangle.png" WidthRequest="10"/>
                 </Grid>
-                <Button BackgroundColor="Transparent" Clicked="BuildingButton_Clicked"></Button>
+                <Button BackgroundColor="Transparent" Command="{Binding BuildingButtonClickedCommand}"></Button>
             </Grid>
         </Border>
 
@@ -33,7 +33,7 @@
                         <Image Grid.Column="1" Source="triangle.png" WidthRequest="10"/>
                     </StackLayout>
                 </Grid>
-                <Button BackgroundColor="Transparent" Clicked="FloorButton_Clicked"></Button>
+                <Button BackgroundColor="Transparent" Command="{Binding FloorButtonClickedCommand}"></Button>
             </Grid>
         </Border>
 

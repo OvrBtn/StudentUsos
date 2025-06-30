@@ -137,6 +137,7 @@ internal static partial class MauiProgramExtensions
         builder.Services.AddTransient<WhatsNewCarouselPage>();
 
         builder.Services.AddTransient<CampusMapPage>();
+        builder.Services.AddTransient<CampusMapViewModel>();
 
         return builder;
     }

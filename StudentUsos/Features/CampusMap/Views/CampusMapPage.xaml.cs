@@ -22,6 +22,8 @@ public partial class CampusMapPage : CustomContentPageNotAnimated
         this.userInfoRepository = userInfoRepository;
         this.applicationService = applicationService;
 
+        BindingContext = this;
+
         hybridWebView.SetInvokeJavaScriptTarget(this);
     }
 
@@ -52,19 +54,31 @@ public partial class CampusMapPage : CustomContentPageNotAnimated
     public List<RoomInfo> FloorData { get; private set; }
 
     public string CurrentBuildingId { get; private set; } = LocalizedStrings.Campus;
-    public string CurrentFloor { get; private set; } = "0";
+    public string CurrentFloor
+    {
+        get
+        {
+            return currentFloor;
+        }
+        private set
+        {
+            currentFloor = value;
+            OnPropertyChanged();
+        }
+    }
+    string currentFloor = "";
 
     public string CurrentFullLocation
     {
         get
         {
-            if (Buildings.Count == 0)
+            if (Buildings is null || Buildings.Count == 0)
             {
                 return string.Empty;
             }
             if (CurrentBuildingIndex != 0)
             {
-                return $"{Buildings[CurrentBuildingIndex].Id} - {Buildings[CurrentBuildingIndex].LocalizedName}, {CurrentFloor}";
+                return $"{Buildings[CurrentBuildingIndex].Id} - {Buildings[CurrentBuildingIndex].LocalizedName}";
             }
             else
             {
@@ -92,6 +106,8 @@ public partial class CampusMapPage : CustomContentPageNotAnimated
         BuildingsWithMaps = buildingWithMaps;
 
         _ = ShowCampusMap();
+
+        CurrentFloor = "0";
     }
 
     bool isInitialized = false;
@@ -225,31 +241,51 @@ public partial class CampusMapPage : CustomContentPageNotAnimated
 
     private void BuildingButton_Clicked(object sender, EventArgs e)
     {
-        var button = sender as Button;
-        string clickedText = button!.Text;
-        int index = Buildings.FindIndex(x => x.Id == clickedText);
-
-        if (index == CurrentBuildingIndex)
+        PickFromListPopup.CreateAndShow(LocalizedStrings.Buildings,
+            BuildingsWithMaps.Select(x => $"{x.Id} - {x.LocalizedName}"),
+            onPicked: (pickedItem) =>
         {
-            return;
-        }
-        CurrentBuildingIndex = index;
+            int index = Buildings.IndexOf(BuildingsWithMaps[pickedItem.Index]);
 
-        Floors = Buildings[CurrentBuildingIndex].Floors;
+            if (index == CurrentBuildingIndex)
+            {
+                return;
+            }
 
-        CurrentBuildingId = clickedText;
-        if (CurrentBuildingIndex == 0)
-        {
-            _ = ShowCampusMap();
-        }
-        else
-        {
+            CurrentBuildingIndex = index;
+
+            Floors = Buildings[CurrentBuildingIndex].Floors;
             CurrentFloor = "0";
-            _ = UpdateWebView(CurrentBuildingId, CurrentFloor);
-        }
+
+            CurrentBuildingId = Buildings[CurrentBuildingIndex].Id;
+            if (CurrentBuildingIndex == 0)
+            {
+                _ = ShowCampusMap();
+            }
+            else
+            {
+                CurrentFloor = "0";
+                _ = UpdateWebView(CurrentBuildingId, CurrentFloor);
+            }
+        });
     }
 
     private void FloorButton_Clicked(object sender, EventArgs e)
+    {
+        PickFromListPopup.CreateAndShow(LocalizedStrings.Floors, Floors,
+            onPicked: (pickedItem) =>
+            {
+                if (pickedItem.Value == CurrentFloor)
+                {
+                    return;
+                }
+
+                CurrentFloor = pickedItem.Value;
+                _ = UpdateWebView(CurrentBuildingId, CurrentFloor);
+            });
+    }
+
+    private void FloorButton_Clicked2(object sender, EventArgs e)
     {
         var button = sender as Button;
         string clickedText = button!.Text;

@@ -250,6 +250,15 @@ namespace StudentUsos.Resources.LocalizedStrings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Buildings.
+        /// </summary>
+        internal static string Buildings {
+            get {
+                return ResourceManager.GetString("Buildings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Calendar.
         /// </summary>
         internal static string Calendar {
@@ -543,6 +552,15 @@ namespace StudentUsos.Resources.LocalizedStrings {
         internal static string FinalGrades {
             get {
                 return ResourceManager.GetString("FinalGrades", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Floors.
+        /// </summary>
+        internal static string Floors {
+            get {
+                return ResourceManager.GetString("Floors", resourceCulture);
             }
         }
         

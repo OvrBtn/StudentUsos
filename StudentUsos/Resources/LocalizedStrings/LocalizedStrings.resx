@@ -602,4 +602,10 @@
   <data name="Campus" xml:space="preserve">
     <value>Campus</value>
   </data>
+  <data name="Buildings" xml:space="preserve">
+    <value>Buildings</value>
+  </data>
+  <data name="Floors" xml:space="preserve">
+    <value>Floors</value>
+  </data>
 </root>

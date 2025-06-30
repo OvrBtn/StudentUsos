@@ -604,4 +604,10 @@
   <data name="Campus" xml:space="preserve">
     <value>Kampus</value>
   </data>
+  <data name="Buildings" xml:space="preserve">
+    <value>Budynki</value>
+  </data>
+  <data name="Floors" xml:space="preserve">
+    <value>Piętra</value>
+  </data>
 </root>

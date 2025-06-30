@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using StudentUsos.Features.CampusMap.Models;
 using StudentUsos.Features.CampusMap.Services;
 using StudentUsos.Features.UserInfo;
@@ -55,44 +56,13 @@ public partial class CampusMapViewModel : BaseViewModel
 
     public List<CampusBuilding> Buildings { get; set; }
 
-    public List<CampusBuilding> BuildingsWithMaps
-    {
-        get => buildingsWithMaps;
-        set
-        {
-            buildingsWithMaps = value;
-            OnPropertyChanged();
-        }
-    }
-    List<CampusBuilding> buildingsWithMaps = new();
-
-    public List<string> Floors
-    {
-        get => floors;
-        set
-        {
-            floors = value;
-            OnPropertyChanged();
-        }
-    }
-    List<string> floors = new();
+    [ObservableProperty] List<CampusBuilding> buildingsWithMaps = new();
+    [ObservableProperty] List<string> floors = new();
 
     public List<RoomInfo> FloorData { get; private set; }
 
     public string CurrentBuildingId { get; private set; } = LocalizedStrings.Campus;
-    public string CurrentFloor
-    {
-        get
-        {
-            return currentFloor;
-        }
-        private set
-        {
-            currentFloor = value;
-            OnPropertyChanged();
-        }
-    }
-    string currentFloor = "";
+    [ObservableProperty] string currentFloor = "";
 
     public string CurrentFullLocation
     {

@@ -1,4 +1,5 @@
-﻿using Android.Views;
+﻿using Android.OS;
+using Android.Views;
 using AndroidX.Activity;
 using Microsoft.Maui.LifecycleEvents;
 using Microsoft.Maui.Platform;
@@ -67,7 +68,13 @@ internal static partial class MauiProgramExtensions
                                 window.SetFlags(WindowManagerFlags.DrawsSystemBarBackgrounds, WindowManagerFlags.DrawsSystemBarBackgrounds);
                             }
 
-                            window.SetDecorFitsSystemWindows(!isColorTransparent);
+
+                            if ((int)Build.VERSION.SdkInt >= 30)
+                            {
+#pragma warning disable CA1416
+                                window.SetDecorFitsSystemWindows(!isColorTransparent);
+#pragma warning restore
+                            }
                         }
 
                     }), false);

@@ -41,23 +41,27 @@
 		<!--8618 - non-nullable values when exiting constructor-->
 		<NoWarn>0657;8618;SYSLIB1031</NoWarn>
 		<Nullable>enable</Nullable>
+
+		<!--needed for debugging older android versions-->
+		<!--<RuntimeIdentifiers Condition="$(TargetFramework.Contains('-android'))">android-arm;android-arm64;android-x86;android-x64</RuntimeIdentifiers>-->
+
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net9.0-android|AnyCPU'">
 
 		<AndroidPackageFormat>apk</AndroidPackageFormat>
-		
+
 		<!--<AndroidPackageFormat>aab</AndroidPackageFormat>
 		<AndroidUseAapt2>True</AndroidUseAapt2>
 		<AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>-->
-		
+
 		<ApplicationTitle>Studencki USOS</ApplicationTitle>
-	
+
 		<PublishTrimmed>True</PublishTrimmed>
 
 		<AndroidEnableMarshalMethods>true</AndroidEnableMarshalMethods>
 		<MauiEnableXamlCBindingWithSourceCompilation>true</MauiEnableXamlCBindingWithSourceCompilation>
-		
+
 	</PropertyGroup>
 
 	<ItemGroup Condition="$(TargetFramework.Contains('-android'))">
@@ -117,12 +121,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <AndroidResource Remove="Platforms\Android\Controls\**" />
-	  <Compile Remove="Platforms\Android\Controls\**" />
-	  <EmbeddedResource Remove="Platforms\Android\Controls\**" />
-	  <MauiCss Remove="Platforms\Android\Controls\**" />
-	  <MauiXaml Remove="Platforms\Android\Controls\**" />
-	  <None Remove="Platforms\Android\Controls\**" />
+		<AndroidResource Remove="Platforms\Android\Controls\**" />
+		<Compile Remove="Platforms\Android\Controls\**" />
+		<EmbeddedResource Remove="Platforms\Android\Controls\**" />
+		<MauiCss Remove="Platforms\Android\Controls\**" />
+		<MauiXaml Remove="Platforms\Android\Controls\**" />
+		<None Remove="Platforms\Android\Controls\**" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -177,8 +181,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Include="Resources\Images\Embedded\download.png" />
-	  <EmbeddedResource Include="Resources\Images\Embedded\rocket.png" />
+		<EmbeddedResource Include="Resources\Images\Embedded\download.png" />
+		<EmbeddedResource Include="Resources\Images\Embedded\rocket.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -203,120 +207,120 @@
 
 	<ItemGroup>
 		<Compile Update="Controls\FloatingButton.xaml.cs">
-		  <DependentUpon>FloatingButton.xaml</DependentUpon>
+			<DependentUpon>FloatingButton.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Controls\CustomTabBarXAML.xaml.cs">
-		  <DependentUpon>CustomTabBarXAML.xaml</DependentUpon>
+			<DependentUpon>CustomTabBarXAML.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Controls\CustomButton.xaml.cs">
-		  <DependentUpon>CustomButton.xaml</DependentUpon>
+			<DependentUpon>CustomButton.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Controls\CustomContentPageNotAnimated.xaml.cs">
-		  <DependentUpon>CustomContentPageNotAnimated.xaml</DependentUpon>
+			<DependentUpon>CustomContentPageNotAnimated.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Features\Settings\Views\NotificationsDiagnosis\NotificationsDiagnosisPage.xaml.cs">
-		  <DependentUpon>NotificationsDiagnosisPage.xaml</DependentUpon>
+			<DependentUpon>NotificationsDiagnosisPage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Features\Settings\Views\LogsPage.xaml.cs">
-		  <DependentUpon>LogsPage.xaml</DependentUpon>
+			<DependentUpon>LogsPage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Features\Settings\Views\Subpages\AccountSubpage.xaml.cs">
-		  <DependentUpon>AccountSubpage.xaml</DependentUpon>
+			<DependentUpon>AccountSubpage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Features\Settings\Views\Subpages\ApplicationSubpage.xaml.cs">
-		  <DependentUpon>ApplicationSubpage.xaml</DependentUpon>
+			<DependentUpon>ApplicationSubpage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Features\Settings\Views\Subpages\DiagnosisSubpage.xaml.cs">
-		  <DependentUpon>DiagnosisSubpage.xaml</DependentUpon>
+			<DependentUpon>DiagnosisSubpage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Features\Settings\Views\Subpages\NotificationsSubpage.xaml.cs">
-		  <DependentUpon>NotificationsSubpage.xaml</DependentUpon>
+			<DependentUpon>NotificationsSubpage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Resources\LocalizedStrings\LocalizedStrings.Designer.cs">
-		  <DesignTime>True</DesignTime>
-		  <AutoGen>True</AutoGen>
-		  <DependentUpon>LocalizedStrings.resx</DependentUpon>
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>LocalizedStrings.resx</DependentUpon>
 		</Compile>
 		<Compile Update="Views\BasicPopups\DatePickerPopup.xaml.cs">
-		  <DependentUpon>DatePickerPopup.xaml</DependentUpon>
+			<DependentUpon>DatePickerPopup.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Views\BasicPopups\MultipleChoicePopup.xaml.cs">
-		  <DependentUpon>MultipleChoicePopup.xaml</DependentUpon>
+			<DependentUpon>MultipleChoicePopup.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Features\Settings\Views\AppInfoPage.xaml.cs">
-		  <DependentUpon>AppInfoPage.xaml</DependentUpon>
+			<DependentUpon>AppInfoPage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Features\Grades\Views\GradesSummaryPage.xaml.cs">
-		  <DependentUpon>GradesSummaryPage.xaml</DependentUpon>
+			<DependentUpon>GradesSummaryPage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Features\Grades\Views\ScholarshipCalculatorPage.xaml.cs">
-		  <DependentUpon>ScholarshipCalculatorPage.xaml</DependentUpon>
+			<DependentUpon>ScholarshipCalculatorPage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Features\Grades\Views\GradeDetailsPage.xaml.cs">
-		  <DependentUpon>GradeDetailsPage.xaml</DependentUpon>
+			<DependentUpon>GradeDetailsPage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Features\Grades\Views\ModifyGradePage.xaml.cs">
-		  <DependentUpon>ModifyGradePage.xaml</DependentUpon>
+			<DependentUpon>ModifyGradePage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Views\MainLoadingPage.xaml.cs">
-		  <DependentUpon>MainLoadingPage.xaml</DependentUpon>
+			<DependentUpon>MainLoadingPage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Views\WhatsNew\WhatsNewCarouselPage.xaml.cs">
-		  <DependentUpon>WhatsNewCarouselPage.xaml</DependentUpon>
+			<DependentUpon>WhatsNewCarouselPage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Views\WhatsNew\WhatsNewListPage.xaml.cs">
-		  <DependentUpon>WhatsNewListPage.xaml</DependentUpon>
+			<DependentUpon>WhatsNewListPage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Views\TestPage.xaml.cs">
-		  <DependentUpon>TestPage.xaml</DependentUpon>
+			<DependentUpon>TestPage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Features\Person\Views\PersonDetailsPage.xaml.cs">
-		  <DependentUpon>PersonDetailsPage.xaml</DependentUpon>
+			<DependentUpon>PersonDetailsPage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Features\Groups\Views\StaffGroupDetailsPage.xaml.cs">
-		  <DependentUpon>StaffGroupDetailsPage.xaml</DependentUpon>
+			<DependentUpon>StaffGroupDetailsPage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Features\Payments\Views\PaymentsPage.xaml.cs">
-		  <DependentUpon>PaymentsPage.xaml</DependentUpon>
+			<DependentUpon>PaymentsPage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Features\SatisfactionSurveys\Views\FillSatisfactionSurveyPage.xaml.cs">
-		  <DependentUpon>FillSatisfactionSurveyPage.xaml</DependentUpon>
+			<DependentUpon>FillSatisfactionSurveyPage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Features\SatisfactionSurveys\Views\SatisfactionSurveysPage.xaml.cs">
-		  <DependentUpon>SatisfactionSurveysPage.xaml</DependentUpon>
+			<DependentUpon>SatisfactionSurveysPage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Features\Grades\Views\GradesPage.xaml.cs">
-		  <DependentUpon>GradesPage.xaml</DependentUpon>
+			<DependentUpon>GradesPage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Features\Calendar\Views\CalendarSettingsPage.xaml.cs">
-		  <DependentUpon>CalendarSettingsPage.xaml</DependentUpon>
+			<DependentUpon>CalendarSettingsPage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Views\BasicPopups\PickFromListPopup.xaml.cs">
-		  <DependentUpon>PickFromListPopup.xaml</DependentUpon>
+			<DependentUpon>PickFromListPopup.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Views\EmptyPageTemplate.xaml.cs">
-		  <DependentUpon>EmptyPageTemplate.xaml</DependentUpon>
+			<DependentUpon>EmptyPageTemplate.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Features\Settings\Views\SettingsPage.xaml.cs">
-		  <DependentUpon>SettingsPage.xaml</DependentUpon>
+			<DependentUpon>SettingsPage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Features\Menu\MorePage.xaml.cs">
-		  <DependentUpon>MorePage.xaml</DependentUpon>
+			<DependentUpon>MorePage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Features\Groups\Views\GroupDetailsPage.xaml.cs">
-		  <DependentUpon>GroupDetailsPage.xaml</DependentUpon>
+			<DependentUpon>GroupDetailsPage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Features\Groups\Views\GroupsPage.xaml.cs">
-		  <DependentUpon>GroupsPage.xaml</DependentUpon>
+			<DependentUpon>GroupsPage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Features\Calendar\Views\CalendarPage.xaml.cs">
-		  <DependentUpon>CalendarPage.xaml</DependentUpon>
+			<DependentUpon>CalendarPage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Features\Dashboard\Views\DashboardPage.xaml.cs">
 			<DependentUpon>DashboardPage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Controls\CustomBottomSheet.xaml.cs">
-		  <DependentUpon>CustomBottomSheet.xaml</DependentUpon>
+			<DependentUpon>CustomBottomSheet.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Features\Authorization\LoginPage.xaml.cs">
 			<DependentUpon>LoginPage.xaml</DependentUpon>
@@ -324,129 +328,129 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Update="Resources\LocalizedStrings\LocalizedStrings.resx">
-	    <Generator>ResXFileCodeGenerator</Generator>
-	    <LastGenOutput>LocalizedStrings.Designer.cs</LastGenOutput>
-	  </EmbeddedResource>
+		<EmbeddedResource Update="Resources\LocalizedStrings\LocalizedStrings.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>LocalizedStrings.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
 	</ItemGroup>
 
 	<ItemGroup>
 		<MauiXaml Update="Controls\FloatingButton.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Controls\CustomTabBarXAML.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Controls\CustomButton.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Controls\CustomContentPageNotAnimated.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Features\Dashboard\Layouts\ActivitiesDataTemplate.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Features\Dashboard\Layouts\CalendarDataTemplates.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Features\Settings\Views\NotificationsDiagnosis\NotificationsDiagnosisPage.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Features\Settings\Views\NotificationsDiagnosis\StateContentView.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Features\Settings\Views\Subpages\AccountSubpage.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Features\Settings\Views\Subpages\ApplicationSubpage.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Features\Settings\Views\Subpages\DiagnosisSubpage.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Features\Settings\Views\Subpages\NotificationsSubpage.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Resources\ResourceDictionaries\Converters.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\BasicPopups\DatePickerPopup.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\BasicPopups\MultipleChoicePopup.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Features\Settings\Views\AppInfoPage.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Features\Grades\Views\GradesSummaryPage.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Features\Grades\Views\ScholarshipCalculatorPage.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Features\Grades\Views\GradeDetailsPage.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Features\Grades\Views\ModifyGradePage.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Features\Settings\Views\LogsPage.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\MainLoadingPage.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\WhatsNew\WhatsNewCarouselPage.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\WhatsNew\WhatsNewListPage.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\TestPage.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Features\Person\Views\PersonDetailsPage.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Features\Groups\Views\StaffGroupDetailsPage.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Features\Payments\Views\PaymentsPage.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Features\SatisfactionSurveys\Views\FillSatisfactionSurveyPage.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Features\SatisfactionSurveys\Views\SatisfactionSurveysPage.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Features\Grades\Views\GradesPage.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Features\Calendar\Views\CalendarSettingsPage.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\BasicPopups\PickFromListPopup.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\EmptyPageTemplate.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Features\Settings\Views\SettingsPage.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Features\Menu\MorePage.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Features\Groups\Views\GroupDetailsPage.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Features\Groups\Views\GroupsPage.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Features\Calendar\Views\CalendarPage.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Features\Dashboard\Views\DashboardPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
@@ -458,7 +462,7 @@
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Controls\CustomBottomSheet.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Features\Authorization\LoginPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
@@ -469,9 +473,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Features\Dashboard\Layouts\" />
+		<Folder Include="Features\Dashboard\Layouts\" />
 	</ItemGroup>
 
-	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionStudenckiUSOSPUTMAUIHideInfoBar="True" /></VisualStudio></ProjectExtensions>
+	<ProjectExtensions>
+		<VisualStudio>
+			<UserProperties XamarinHotReloadDebuggerTimeoutExceptionStudenckiUSOSPUTMAUIHideInfoBar="True" />
+		</VisualStudio>
+	</ProjectExtensions>
 
 </Project>

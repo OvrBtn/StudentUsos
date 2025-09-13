@@ -610,4 +610,7 @@
   <data name="Floors" xml:space="preserve">
     <value>Piętra</value>
   </data>
+  <data name="Errors_ConnectionError" xml:space="preserve">
+    <value>Błąd połączenia</value>
+  </data>
 </root>

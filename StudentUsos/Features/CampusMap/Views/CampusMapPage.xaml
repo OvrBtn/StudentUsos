@@ -11,52 +11,71 @@
     x:DataType="campusMap:CampusMapViewModel"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
 
-    <Grid Margin="0" RowDefinitions="auto, auto, *, auto">
+    <Grid toolkit:StateContainer.CurrentState="{Binding MainStateKey}">
+        <toolkit:StateContainer.StateViews>
 
-        <Border Grid.Row="0" Padding="0" Margin="30,20,30,15" BackgroundColor="{StaticResource Primary}">
-            <Grid>
-                <Grid ColumnDefinitions="*, auto" Padding="15, 5">
-                    <Label Grid.Column="0" Text="{Binding CurrentFullLocation}" HorizontalTextAlignment="Center"></Label>
-                    <Image Grid.Column="1" Source="triangle.png" WidthRequest="10"/>
-                </Grid>
-                <Button BackgroundColor="Transparent" Command="{Binding BuildingButtonClickedCommand}"></Button>
-            </Grid>
-        </Border>
+            <ActivityIndicator toolkit:StateView.StateKey="Loading"></ActivityIndicator>
+            <Label toolkit:StateView.StateKey="ConnectionError" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.Errors_ConnectionError}"></Label>
 
-        <Border Grid.Row="1" Padding="0" Margin="30,0,30,15" BackgroundColor="{StaticResource Primary}"
+            <Grid toolkit:StateView.StateKey="Loaded" Margin="0" RowDefinitions="auto, auto, *, auto">
+
+                <Border Grid.Row="0" Padding="0" Margin="30,20,30,15" BackgroundColor="{StaticResource Primary}">
+                    <Grid>
+                        <Grid ColumnDefinitions="*, auto" Padding="15, 5">
+                            <Label Grid.Column="0" Text="{Binding CurrentFullLocation}" HorizontalTextAlignment="Center"></Label>
+                            <Image Grid.Column="1" Source="triangle.png" WidthRequest="10"/>
+                        </Grid>
+                        <Button BackgroundColor="Transparent" Command="{Binding BuildingButtonClickedCommand}"></Button>
+                    </Grid>
+                </Border>
+
+                <Border Grid.Row="1" Padding="0" Margin="30,0,30,15" BackgroundColor="{StaticResource Primary}"
                 IsVisible="{Binding Floors.Count, Converter={StaticResource CountToBoolConverter}}">
-            <Grid>
-                <Grid ColumnDefinitions="*, auto" Padding="15, 5">
-                    <Label Grid.Column="0" Text="{Binding CurrentFloor}" HorizontalTextAlignment="Center"></Label>
-                    <StackLayout HorizontalOptions="End" Spacing="5" VerticalOptions="Center">
-                        <Image Grid.Column="1" Source="triangle.png" WidthRequest="10" Rotation="180"/>
-                        <Image Grid.Column="1" Source="triangle.png" WidthRequest="10"/>
-                    </StackLayout>
+                    <Grid>
+                        <Grid ColumnDefinitions="*, auto" Padding="15, 5">
+                            <Label Grid.Column="0" Text="{Binding CurrentFloor}" HorizontalTextAlignment="Center"></Label>
+                            <StackLayout HorizontalOptions="End" Spacing="5" VerticalOptions="Center">
+                                <Image Grid.Column="1" Source="triangle.png" WidthRequest="10" Rotation="180"/>
+                                <Image Grid.Column="1" Source="triangle.png" WidthRequest="10"/>
+                            </StackLayout>
+                        </Grid>
+                        <Button BackgroundColor="Transparent" Command="{Binding FloorButtonClickedCommand}"></Button>
+                    </Grid>
+                </Border>
+
+                <Grid Grid.Row="2">
+                    <Grid toolkit:StateContainer.CurrentState="{Binding WebViewStateKey}">
+
+                        <toolkit:StateContainer.StateViews>
+
+                            <ActivityIndicator toolkit:StateView.StateKey="Loading"/>
+                            <Label toolkit:StateView.StateKey="ConnectionError" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.Errors_ConnectionError}"></Label>
+                            <Label toolkit:StateView.StateKey="LoadingError" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.Errors_LoadingError}"></Label>
+                            <StackLayout toolkit:StateView.StateKey="Loaded"></StackLayout>
+
+                        </toolkit:StateContainer.StateViews>
+
+                    </Grid>
+                    <HybridWebView x:Name="hybridWebView" BackgroundColor="Transparent"
+                                   IsVisible="{Binding IsWebViewVisibile}"/>
                 </Grid>
-                <Button BackgroundColor="Transparent" Command="{Binding FloorButtonClickedCommand}"></Button>
-            </Grid>
-        </Border>
 
-        <Grid Grid.Row="2">
-
-            <ActivityIndicator/>
-            <HybridWebView x:Name="hybridWebView" Background="Transparent"/>
-
-        </Grid>
-
-        <VerticalStackLayout Grid.RowSpan="3" VerticalOptions="End" HorizontalOptions="Fill" 
+                <VerticalStackLayout Grid.RowSpan="3" VerticalOptions="End" HorizontalOptions="Fill" 
                              InputTransparent="True" CascadeInputTransparent="False">
-            <Border HorizontalOptions="End" Style="{StaticResource BorderWithShadow}" Padding="0"
+                    <Border HorizontalOptions="End" Style="{StaticResource BorderWithShadow}" Padding="0"
                     BackgroundColor="{StaticResource Primary}" Margin="40, 80" Stroke="Transparent">
-                <Grid ColumnDefinitions="auto, auto">
-                    <Button Grid.Column="0" BackgroundColor="Transparent" Text="-" 
+                        <Grid ColumnDefinitions="auto, auto">
+                            <Button Grid.Column="0" BackgroundColor="Transparent" Text="-" 
                             FontSize="20" Padding="15, 10, 10, 10" CornerRadius="0"/>
-                    <Button Grid.Column="1" BackgroundColor="Transparent" Text="+" 
+                            <Button Grid.Column="1" BackgroundColor="Transparent" Text="+" 
                             FontSize="20" Padding="10, 10, 15, 10" CornerRadius="0"/>
-                </Grid>
-            </Border>
-        </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+                </VerticalStackLayout>
 
+            </Grid>
+
+        </toolkit:StateContainer.StateViews>
     </Grid>
 
 </controls:CustomContentPageNotAnimated>

@@ -32,7 +32,13 @@ public partial class CampusMapViewModel : BaseViewModel
 
     public async Task Init()
     {
-        var buildingsFromApi = await campusMapService.GetBuildingsDataDeserialized() ?? new();
+        var buildingsFromApi = await campusMapService.GetBuildingsDataDeserialized();
+        if (buildingsFromApi is null)
+        {
+            MainStateKey = StateKey.ConnectionError;
+            return;
+        }
+
         var buildingWithMaps = buildingsFromApi.Where(x => x.Floors is not null && x.Floors.Count > 0).ToList();
 
         CampusBuilding campus = new()
@@ -47,12 +53,17 @@ public partial class CampusMapViewModel : BaseViewModel
 
         Buildings = buildingsFromApi;
         BuildingsWithMaps = buildingWithMaps;
-
-        _ = ShowCampusMap();
-
         CurrentFloor = "0";
+        MainStateKey = StateKey.Loaded;
+
+        await ShowCampusMap();
+        WebViewStateKey = StateKey.Loaded;
     }
 
+    [ObservableProperty] string mainStateKey = StateKey.Loading;
+    [ObservableProperty, NotifyPropertyChangedFor(nameof(IsWebViewVisibile))] string webViewStateKey = StateKey.Loading;
+
+    public bool IsWebViewVisibile { get => WebViewStateKey == StateKey.Loaded; }
 
     public List<CampusBuilding> Buildings { get; set; }
 
@@ -85,22 +96,51 @@ public partial class CampusMapViewModel : BaseViewModel
 
     async Task UpdateWebView(string buildingId, string floor)
     {
+        WebViewStateKey = StateKey.Loading;
+
         OnPropertyChanged(nameof(CurrentFullLocation));
 
-        var svg = await campusMapService.GetFloorSvg(buildingId, floor) ?? string.Empty;
+        var svg = await campusMapService.GetFloorSvg(buildingId, floor);
+        if (svg is null)
+        {
+            WebViewStateKey = StateKey.ConnectionError;
+            return;
+        }
 
-        var floorData = await campusMapService.GetFloorData(buildingId, floor) ?? string.Empty;
-        FloorData = JsonSerializer.Deserialize(floorData, RoomInfoJsonContext.Default.ListRoomInfo) ?? new();
+        var floorData = await campusMapService.GetFloorData(buildingId, floor);
+        if (floorData is null)
+        {
+            WebViewStateKey = StateKey.ConnectionError;
+            return;
+        }
+
+        var floorDataDeserialized = JsonSerializer.Deserialize(floorData, RoomInfoJsonContext.Default.ListRoomInfo);
+        if (floorDataDeserialized is null)
+        {
+            WebViewStateKey = StateKey.LoadingError;
+            return;
+        }
+        FloorData = floorDataDeserialized;
 
         _ = CampusMapPage.SendFloorSvgToHybridWebView(svg);
         _ = CampusMapPage.SendFloorDataToHybridWebView(floorData);
+
+        WebViewStateKey = StateKey.Loaded;
     }
 
     async Task ShowCampusMap()
     {
+        WebViewStateKey = StateKey.Loading;
         OnPropertyChanged(nameof(CurrentFullLocation));
-        var svg = await campusMapService.GetCampusMapSvg() ?? string.Empty;
+        var svg = await campusMapService.GetCampusMapSvg();
+        if (svg is null)
+        {
+            WebViewStateKey = StateKey.ConnectionError;
+            return;
+        }
+
         _ = CampusMapPage.SendCampusSvgToHybridWebView(svg);
+        WebViewStateKey = StateKey.Loaded;
     }
 
     public void ReceiveRoomClicked(string roomId)

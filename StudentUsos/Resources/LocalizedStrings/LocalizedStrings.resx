@@ -608,4 +608,7 @@
   <data name="Floors" xml:space="preserve">
     <value>Floors</value>
   </data>
+  <data name="Errors_ConnectionError" xml:space="preserve">
+    <value>Connection error</value>
+  </data>
 </root>

@@ -60,11 +60,11 @@ public partial class CampusMapPage : CustomContentPageNotAnimated
             [HybridWebViewJsonContext.Default.String]);
     }
 
-    public async Task SendCampusSvgToHybridWebView(string camusSvg)
+    public async Task SendCampusSvgToHybridWebView(string campusSvg)
     {
         await hybridWebView.InvokeJavaScriptAsync<object>("ReceiveCampusSvg",
             HybridWebViewJsonContext.Default.Object,
-            [camusSvg],
+            [campusSvg],
             [HybridWebViewJsonContext.Default.String]);
     }
 

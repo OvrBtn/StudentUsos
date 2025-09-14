@@ -56,27 +56,25 @@
                         </toolkit:StateContainer.StateViews>
 
                     </Grid>
-                    <!--this grind with clipping is a workaround for bug reported in https://github.com/dotnet/maui/issues/31475-->
-                    <Grid IsClippedToBounds="True">
-                        <HybridWebView x:Name="hybridWebView" BackgroundColor="Transparent"
+
+                    <HybridWebView x:Name="hybridWebView" BackgroundColor="Transparent"
                             IsVisible="{Binding IsWebViewVisibile}"/>
-                    </Grid>
-                    </Grid>
-
-                    <VerticalStackLayout Grid.RowSpan="3" VerticalOptions="End" HorizontalOptions="Fill" 
-                             InputTransparent="True" CascadeInputTransparent="False">
-                        <Border HorizontalOptions="End" Style="{StaticResource BorderWithShadow}" Padding="0"
-                    BackgroundColor="{StaticResource Primary}" Margin="40, 80" Stroke="Transparent">
-                            <Grid ColumnDefinitions="auto, auto">
-                                <Button Grid.Column="0" BackgroundColor="Transparent" Text="-" 
-                            FontSize="20" Padding="15, 10, 10, 10" CornerRadius="0"/>
-                                <Button Grid.Column="1" BackgroundColor="Transparent" Text="+" 
-                            FontSize="20" Padding="10, 10, 15, 10" CornerRadius="0"/>
-                            </Grid>
-                        </Border>
-                    </VerticalStackLayout>
-
                 </Grid>
+
+                <VerticalStackLayout Grid.RowSpan="3" VerticalOptions="End" HorizontalOptions="Fill" 
+                             InputTransparent="True" CascadeInputTransparent="False">
+                    <Border HorizontalOptions="End" Style="{StaticResource BorderWithShadow}" Padding="0"
+                    BackgroundColor="{StaticResource Primary}" Margin="40, 80" Stroke="Transparent">
+                        <Grid ColumnDefinitions="auto, auto">
+                            <Button Grid.Column="0" BackgroundColor="Transparent" Text="-" 
+                            FontSize="20" Padding="15, 10, 10, 10" CornerRadius="0"/>
+                            <Button Grid.Column="1" BackgroundColor="Transparent" Text="+" 
+                            FontSize="20" Padding="10, 10, 15, 10" CornerRadius="0"/>
+                        </Grid>
+                    </Border>
+                </VerticalStackLayout>
+
+            </Grid>
 
         </toolkit:StateContainer.StateViews>
     </Grid>

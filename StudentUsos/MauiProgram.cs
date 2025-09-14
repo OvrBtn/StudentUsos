@@ -71,6 +71,11 @@ public static class MauiProgram
             handler.PlatformView.Settings.BuiltInZoomControls = true;
             handler.PlatformView.Settings.DisplayZoomControls = true;
         });
+
+        builder.ConfigureMauiHandlers(handlers =>
+        {
+            handlers.AddHandler<HybridWebView, HybridWebViewCustomHandler>();
+        });
 #endif
 
         builder.Services.AddSingleton<FirebasePushNotificationsService>();

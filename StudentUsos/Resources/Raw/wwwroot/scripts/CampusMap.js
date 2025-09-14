@@ -100,6 +100,20 @@ function centerScroll() {
     })
 }
 
+function bringDoorsToFront() {
+    const svg = document.querySelector('svg');
+    if (svg == null) {
+        return;
+    }
+
+    const drzwi = svg.querySelector('#drzwi');
+    if (drzwi == null) {
+        return;
+    }
+
+    drzwi.parentNode.appendChild(drzwi);
+}
+
 function assignOnClickEvents(rooms) {
     for (i = 0; i < rooms.length; i++) {
         rooms[i].addEventListener("click", async function (event) {
@@ -115,6 +129,7 @@ function ReceiveFloorSvg(svg) {
     body = document.getElementsByTagName("body")[0];
     body.innerHTML = svg;
     centerScroll();
+    bringDoorsToFront();
 }
 
 function ReceiveCampusSvg(svg) {

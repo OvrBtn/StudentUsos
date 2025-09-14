@@ -53,7 +53,7 @@
                             </CollectionView.Footer>
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
-                                    <Button Text="{Binding .}" HeightRequest="75" FontSize="15" 
+                                    <Button Text="{Binding .}" MinimumHeightRequest="75" FontSize="15" 
                                             BackgroundColor="{StaticResource Primary}" Margin="10" 
                                             Clicked="OptionsButton_Clicked"/>
                                 </DataTemplate>

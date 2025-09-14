@@ -69,6 +69,19 @@ function ReceiveFloorData(jsonString) {
     centerScroll();
 }
 
+window.addEventListener("load", () => {
+    centerScrollInitial();
+});
+
+//initially window.innerWidth will be 0 causing the scroll to not be correctly centered
+function centerScrollInitial() {
+    if (window.innerWidth === 0 || window.innerHeight === 0) {
+        setTimeout(centerScrollInitial, 10);
+        return;
+    }
+    centerScroll();
+}
+
 function centerScroll() {
     const svg = document.querySelector('svg');
     if (svg == null) {
@@ -76,7 +89,7 @@ function centerScroll() {
     }
     const bbox = svg.getBoundingClientRect();
 
-    const margin = parseFloat(window.getComputedStyle(svg).margin);
+    const margin = parseFloat(window.getComputedStyle(svg).marginLeft);
 
     const centerX = margin + bbox.width / 2;
     const centerY = margin + bbox.height / 2;
@@ -107,7 +120,6 @@ function ReceiveFloorSvg(svg) {
 function ReceiveCampusSvg(svg) {
     body = document.getElementsByTagName("body")[0];
     body.innerHTML = svg;
-    centerScroll();
 
     campusBuildings = document.getElementById("pomieszczenia").children;
     for (i = 0; i < campusBuildings.length; i++) {
@@ -119,6 +131,8 @@ function ReceiveCampusSvg(svg) {
             await window.HybridWebView.InvokeDotNet('ReceiveCampusBuildingClicked', [roomId]);
         });
     }
+
+    setTimeout(centerScroll(), 100);
 }
 
 function roomIdToName(parsedJson, id) {

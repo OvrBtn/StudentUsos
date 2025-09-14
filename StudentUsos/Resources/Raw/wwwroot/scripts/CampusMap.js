@@ -65,19 +65,25 @@ function ReceiveFloorData(jsonString) {
     }
 
     assignOnClickEvents(children);
+
+    centerScroll();
 }
 
 function centerScroll() {
     const svg = document.querySelector('svg');
-    const bbox = svg.getBBox();
+    if (svg == null) {
+        return;
+    }
+    const bbox = svg.getBoundingClientRect();
 
-    const centerX = bbox.x + bbox.width / 2;
-    const centerY = bbox.y + bbox.height / 2;
+    const margin = parseFloat(window.getComputedStyle(svg).margin);
+
+    const centerX = margin + bbox.width / 2;
+    const centerY = margin + bbox.height / 2;
 
     window.scrollTo({
         left: centerX - window.innerWidth / 2,
-        top: centerY - window.innerHeight / 2 + 75,
-        //behavior: 'smooth'
+        top: centerY - window.innerHeight / 2
     })
 }
 

@@ -236,7 +236,14 @@ public partial class CampusMapViewModel : BaseViewModel
                 }
                 else
                 {
-                    CurrentFloor = "0";
+                    if (Floors.Contains("0"))
+                    {
+                        CurrentFloor = "0";
+                    }
+                    else
+                    {
+                        CurrentFloor = Floors[0];
+                    }
                     _ = UpdateWebView(CurrentBuildingId, CurrentFloor);
                 }
             });

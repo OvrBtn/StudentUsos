@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace StudentUsos.Features.CampusMap.Views;
 
-public partial class CampusMapPage : CustomContentPageNotAnimated
+public partial class CampusMapPage : ContentPage
 {
     CampusMapViewModel viewModel;
     public CampusMapPage(CampusMapViewModel viewModel)

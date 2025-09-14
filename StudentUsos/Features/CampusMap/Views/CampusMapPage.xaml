@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<controls:CustomContentPageNotAnimated
+<!--CustomContentPage with built in tabbar is not used here since using 
+    Grid with clipping as a workaround with CustomContentPage causes random crashes.
+    Exact setting or minimal reproduction was not found.-->
+<ContentPage
     x:Class="StudentUsos.Features.CampusMap.Views.CampusMapPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -9,61 +12,70 @@
     xmlns:campusMap="clr-namespace:StudentUsos.Features.CampusMap.Views"
     xmlns:campusMapModels="clr-namespace:StudentUsos.Features.CampusMap.Models"
     x:DataType="campusMap:CampusMapViewModel"
+    BackgroundColor="{StaticResource BackgroundColor}"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
 
-    <Grid toolkit:StateContainer.CurrentState="{Binding MainStateKey}">
-        <toolkit:StateContainer.StateViews>
+    <Grid RowDefinitions="*, auto" RowSpacing="10">
 
-            <ActivityIndicator toolkit:StateView.StateKey="Loading"></ActivityIndicator>
-            <Label toolkit:StateView.StateKey="ConnectionError" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.Errors_ConnectionError}"></Label>
+        <Grid Grid.Row="0" toolkit:StateContainer.CurrentState="{Binding MainStateKey}">
+            <toolkit:StateContainer.StateViews>
 
-            <Grid toolkit:StateView.StateKey="Loaded" Margin="0" RowDefinitions="auto, auto, *">
+                <ActivityIndicator toolkit:StateView.StateKey="Loading"></ActivityIndicator>
+                <Label toolkit:StateView.StateKey="ConnectionError" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.Errors_ConnectionError}"></Label>
 
-                <Border Grid.Row="0" Padding="0" Margin="30,20,30,15" BackgroundColor="{StaticResource Primary}">
-                    <Grid>
-                        <Grid ColumnDefinitions="*, auto" Padding="15, 5">
-                            <Label Grid.Column="0" Text="{Binding CurrentFullLocation}" HorizontalTextAlignment="Center"></Label>
-                            <Image Grid.Column="1" Source="triangle.png" WidthRequest="10"/>
-                        </Grid>
-                        <Button BackgroundColor="Transparent" Command="{Binding BuildingButtonClickedCommand}"></Button>
-                    </Grid>
-                </Border>
+                <Grid toolkit:StateView.StateKey="Loaded" Margin="0" RowDefinitions="auto, auto, *">
 
-                <Border Grid.Row="1" Padding="0" Margin="30,0,30,15" BackgroundColor="{StaticResource Primary}"
-                IsVisible="{Binding Floors.Count, Converter={StaticResource CountToBoolConverter}}">
-                    <Grid>
-                        <Grid ColumnDefinitions="*, auto" Padding="15, 5">
-                            <Label Grid.Column="0" Text="{Binding CurrentFloor}" HorizontalTextAlignment="Center"></Label>
-                            <StackLayout HorizontalOptions="End" Spacing="5" VerticalOptions="Center">
-                                <Image Grid.Column="1" Source="triangle.png" WidthRequest="10" Rotation="180"/>
+                    <Border Grid.Row="0" Padding="0" Margin="30,20,30,15" BackgroundColor="{StaticResource Primary}">
+                        <Grid>
+                            <Grid ColumnDefinitions="*, auto" Padding="15, 5">
+                                <Label Grid.Column="0" Text="{Binding CurrentFullLocation}" HorizontalTextAlignment="Center"></Label>
                                 <Image Grid.Column="1" Source="triangle.png" WidthRequest="10"/>
-                            </StackLayout>
+                            </Grid>
+                            <Button BackgroundColor="Transparent" Command="{Binding BuildingButtonClickedCommand}"></Button>
                         </Grid>
-                        <Button BackgroundColor="Transparent" Command="{Binding FloorButtonClickedCommand}"></Button>
-                    </Grid>
-                </Border>
+                    </Border>
 
-                <Grid Grid.Row="2">
-                    <Grid toolkit:StateContainer.CurrentState="{Binding WebViewStateKey}">
+                    <Border Grid.Row="1" Padding="0" Margin="30,0,30,15" BackgroundColor="{StaticResource Primary}"
+                IsVisible="{Binding Floors.Count, Converter={StaticResource CountToBoolConverter}}">
+                        <Grid>
+                            <Grid ColumnDefinitions="*, auto" Padding="15, 5">
+                                <Label Grid.Column="0" Text="{Binding CurrentFloor}" HorizontalTextAlignment="Center"></Label>
+                                <StackLayout HorizontalOptions="End" Spacing="5" VerticalOptions="Center">
+                                    <Image Grid.Column="1" Source="triangle.png" WidthRequest="10" Rotation="180"/>
+                                    <Image Grid.Column="1" Source="triangle.png" WidthRequest="10"/>
+                                </StackLayout>
+                            </Grid>
+                            <Button BackgroundColor="Transparent" Command="{Binding FloorButtonClickedCommand}"></Button>
+                        </Grid>
+                    </Border>
 
-                        <toolkit:StateContainer.StateViews>
+                    <Grid Grid.Row="2">
+                        <Grid toolkit:StateContainer.CurrentState="{Binding WebViewStateKey}">
 
-                            <ActivityIndicator toolkit:StateView.StateKey="Loading"/>
-                            <Label toolkit:StateView.StateKey="ConnectionError" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.Errors_ConnectionError}"></Label>
-                            <Label toolkit:StateView.StateKey="LoadingError" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.Errors_LoadingError}"></Label>
-                            <StackLayout toolkit:StateView.StateKey="Loaded"></StackLayout>
+                            <toolkit:StateContainer.StateViews>
 
-                        </toolkit:StateContainer.StateViews>
+                                <ActivityIndicator toolkit:StateView.StateKey="Loading"/>
+                                <Label toolkit:StateView.StateKey="ConnectionError" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.Errors_ConnectionError}"></Label>
+                                <Label toolkit:StateView.StateKey="LoadingError" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.Errors_LoadingError}"></Label>
+                                <StackLayout toolkit:StateView.StateKey="Loaded"></StackLayout>
 
-                    </Grid>
+                            </toolkit:StateContainer.StateViews>
 
-                    <HybridWebView x:Name="hybridWebView" BackgroundColor="Transparent"
+                        </Grid>
+
+                        <!--this grid with clipping works as a workaround for https://github.com/dotnet/maui/issues/31475-->
+                        <Grid IsClippedToBounds="True">
+                            <HybridWebView x:Name="hybridWebView" BackgroundColor="Transparent"
                             IsVisible="{Binding IsWebViewVisibile}"/>
+                        </Grid>
+
+                    </Grid>
                 </Grid>
+            </toolkit:StateContainer.StateViews>
+        </Grid>
 
-            </Grid>
+        <controls:CustomTabBarXaml Grid.Row="1" VerticalOptions="FillAndExpand"></controls:CustomTabBarXaml>
 
-        </toolkit:StateContainer.StateViews>
     </Grid>
 
-</controls:CustomContentPageNotAnimated>
+</ContentPage>

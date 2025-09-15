@@ -115,9 +115,13 @@ function bringDoorsToFront() {
 }
 
 function assignOnClickEvents(rooms) {
-    for (i = 0; i < rooms.length; i++) {
+    for (let i = 0; i < rooms.length; i++) {
         rooms[i].addEventListener("click", async function (event) {
             const clickedElement = event.target;
+            for (let j = 0; j < rooms.length; j++) {
+                rooms[j].classList.remove("activeRoom");
+            }
+            clickedElement.classList.add("activeRoom");
             roomId = clickedElement.getAttribute("roomid");
             console.log(roomId);
             await window.HybridWebView.InvokeDotNet('ReceiveRoomClicked', [roomId]);

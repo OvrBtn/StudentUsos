@@ -23,6 +23,10 @@ svg {
     stroke-width: 1px !important;
 }
 
+#rooms .activeRoom {
+    fill: #00A6E5 !important;
+}
+
 #interaction {
     display: none;
 }

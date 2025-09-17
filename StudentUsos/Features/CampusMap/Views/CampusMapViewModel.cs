@@ -164,6 +164,7 @@ public partial class CampusMapViewModel : BaseViewModel
         RoomDetailsPage.CreateAndShow(new()
         {
             RoomName = primaryRoomInfo?.Name ?? string.Empty,
+            FullRoomInfos = foundRoomInfos.ToList(),
             AdditionalRoomNames = addtionalRoomInfos.Select(x => x.Name).ToList(),
             ConfirmAction = new((suggestedName) => _ = SendSuggestion(suggestedName, roomId))
         });

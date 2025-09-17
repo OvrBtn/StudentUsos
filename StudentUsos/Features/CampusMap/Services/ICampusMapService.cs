@@ -14,4 +14,7 @@ public interface ICampusMapService
     public Task<List<FloorData>?> GetFloorDataDeserialized(string buildingId, string floor);
 
     public Task<HttpStatusCode?> SendUserSuggestion(string suggestedName, string buildingId, string floor, string roomId, string studentNumber);
+
+    public Task<HttpStatusCode?> UpvoteUserSuggestion(string buildingId, string floor, int roomId, int suggestionId);
+    public Task<HttpStatusCode?> DownvoteUserSuggestion(string buildingId, string floor, int roomId, int suggestionId);
 }

@@ -1,4 +1,5 @@
 ﻿using StudentUsos.Features.CampusMap.Models;
+using StudentUsos.Features.UserInfo;
 using StudentUsos.Services.ServerConnection;
 using System.Net;
 using System.Text.Json;
@@ -8,9 +9,11 @@ namespace StudentUsos.Features.CampusMap.Services;
 public class CampusMapService : ICampusMapService
 {
     IServerConnectionManager serverConnectionManager;
-    public CampusMapService(IServerConnectionManager serverConnectionManager)
+    IUserInfoRepository userInfoRepository;
+    public CampusMapService(IServerConnectionManager serverConnectionManager, IUserInfoRepository userInfoRepository)
     {
         this.serverConnectionManager = serverConnectionManager;
+        this.userInfoRepository = userInfoRepository;
     }
 
     public async Task<string?> GetCampusMapSvg()
@@ -94,7 +97,55 @@ public class CampusMapService : ICampusMapService
             { "UserStudentNumber", studentNumber }
         };
         var response = await serverConnectionManager.SendAuthorizedPostRequestAsync("CampusMap/UserSuggestion", payload, AuthorizationMode.Full);
-        if (response is null || response.IsSuccess == false)
+        if (response is null)
+        {
+            return null;
+        }
+        return response.HttpResponseMessage.StatusCode;
+    }
+
+    public async Task<HttpStatusCode?> UpvoteUserSuggestion(string buildingId, string floor, int roomId, int suggestionId)
+    {
+        var userInfo = userInfoRepository.GetUserInfo();
+        if(userInfo is null)
+        {
+            return null;
+        }
+
+        var payload = new Dictionary<string, string>()
+        {
+            { "BuildingId", buildingId },
+            { "Floor", floor },
+            { "RoomId", roomId.ToString() },
+            { "InternalUserSuggestionId", suggestionId.ToString() },
+            { "StudentNumber", userInfo.StudentNumber }
+        };
+        var response = await serverConnectionManager.SendAuthorizedPostRequestAsync("CampusMap/UpvoteUserSuggestion", payload, AuthorizationMode.Full);
+        if (response is null)
+        {
+            return null;
+        }
+        return response.HttpResponseMessage.StatusCode;
+    }
+
+    public async Task<HttpStatusCode?> DownvoteUserSuggestion(string buildingId, string floor, int roomId, int suggestionId)
+    {
+        var userInfo = userInfoRepository.GetUserInfo();
+        if (userInfo is null)
+        {
+            return null;
+        }
+
+        var payload = new Dictionary<string, string>()
+        {
+            { "BuildingId", buildingId },
+            { "Floor", floor },
+            { "RoomId", roomId.ToString() },
+            { "InternalUserSuggestionId", suggestionId.ToString() },
+            { "StudentNumber", userInfo.StudentNumber }
+        };
+        var response = await serverConnectionManager.SendAuthorizedPostRequestAsync("CampusMap/DownvoteUserSuggestion", payload, AuthorizationMode.Full);
+        if (response is null)
         {
             return null;
         }

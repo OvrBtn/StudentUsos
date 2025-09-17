@@ -7,6 +7,7 @@
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
     xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
+    xmlns:models="clr-namespace:StudentUsos.Features.CampusMap.Models"
     x:DataType="local:RoomDetailsViewModel"
     Color="Transparent"
     xmlns:local="clr-namespace:StudentUsos.Features.CampusMap.Views">
@@ -52,7 +53,27 @@
 
                 <StackLayout IsVisible="{Binding Parameters.HasAdditionalRoomNames}">
                     <Label Text="{x:Static strings:LocalizedStrings.RoomDetailsPage_AlternativeNames}" FontSize="14" HorizontalTextAlignment="Center"/>
-                    <Label Text="{Binding Parameters.AdditionalRoomNamesJoined}" FontSize="14" HorizontalTextAlignment="Center"/>
+                    <!--<Label Text="{Binding Parameters.AdditionalRoomNamesJoined}" FontSize="14" HorizontalTextAlignment="Center"/>-->
+
+                    <CollectionView ItemsSource="{Binding Parameters.FullRoomInfos}" Margin="15,0,15,0">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:RoomInfo">
+                                <Grid ColumnDefinitions="*, auto, auto" Margin="0,5,0,5">
+                                    <Label Grid.Column="0" Text="{Binding Name}" VerticalTextAlignment="Center"></Label>
+                                    <Grid Grid.Column="1">
+                                        <Image Source="thumb_up.png" HeightRequest="25" Margin="10"/>
+                                        <Button BackgroundColor="Transparent" Command="{Binding Source={RelativeSource AncestorType={x:Type local:RoomDetailsViewModel}}, 
+                                            Path=UpvoteButtonPressedCommand}" CommandParameter="{Binding .}"/>
+                                    </Grid>
+                                    <Grid Grid.Column="2">
+                                        <Image Source="thumb_down.png" HeightRequest="25" Margin="10"/>
+                                        <Button BackgroundColor="Transparent" Command="{Binding Source={RelativeSource AncestorType={x:Type local:RoomDetailsViewModel}}, 
+                                            Path=DownvoteButtonPressedCommand}" CommandParameter="{Binding .}"></Button>
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
                 </StackLayout>
 
                 <StackLayout Spacing="5">

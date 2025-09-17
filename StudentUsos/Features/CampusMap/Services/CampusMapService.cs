@@ -61,14 +61,14 @@ public class CampusMapService : ICampusMapService
         return response.Response;
     }
 
-    public async Task<List<FloorData>?> GetFloorDataDeserialized(string buildingId, string floor)
+    public async Task<List<RoomInfo>?> GetFloorDataDeserialized(string buildingId, string floor)
     {
         var response = await GetFloorData(buildingId, floor);
         if (response is null)
         {
             return null;
         }
-        return JsonSerializer.Deserialize(response, FloorDataJsonContext.Default.ListFloorData);
+        return JsonSerializer.Deserialize(response, RoomInfoJsonContext.Default.ListRoomInfo);
     }
 
     public async Task<string?> GetFloorSvg(string buildingId, string floor)

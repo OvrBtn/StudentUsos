@@ -19,5 +19,6 @@ public enum LocalStorageKeys
     FcmToken,
     WhatsNewCarouselLastId,
     WhatsNewListLastId,
-    BackwardCompatibilityLastCheckedVersion
+    BackwardCompatibilityLastCheckedVersion,
+    CampusMapSvg
 }

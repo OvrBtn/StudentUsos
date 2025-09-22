@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using StudentUsos.Features.CampusMap.Models;
+using StudentUsos.Features.CampusMap.Repositories;
 using StudentUsos.Features.CampusMap.Services;
 using StudentUsos.Features.UserInfo;
 using StudentUsos.Resources.LocalizedStrings;
@@ -13,12 +14,17 @@ public partial class CampusMapViewModel : BaseViewModel
     ICampusMapService campusMapService;
     IUserInfoRepository userInfoRepository;
     IApplicationService applicationService;
+    ICampusMapRepository campusMapRepository;
 
-    public CampusMapViewModel(ICampusMapService campusMapService, IUserInfoRepository userInfoRepository, IApplicationService applicationService)
+    public CampusMapViewModel(ICampusMapService campusMapService,
+        IUserInfoRepository userInfoRepository,
+        IApplicationService applicationService,
+        ICampusMapRepository campusMapRepository)
     {
         this.campusMapService = campusMapService;
         this.userInfoRepository = userInfoRepository;
         this.applicationService = applicationService;
+        this.campusMapRepository = campusMapRepository;
     }
 
     //it might not be very MVVM but HybridWebView doesn't really support bindings and it has to be directly referenced
@@ -29,35 +35,67 @@ public partial class CampusMapViewModel : BaseViewModel
         CampusMapPage = page;
     }
 
-
-    public async Task Init()
+    void UpdateBuildingsList(List<CampusBuilding> buildings)
     {
-        var buildingsFromApi = await campusMapService.GetBuildingsDataDeserialized();
-        if (buildingsFromApi is null)
-        {
-            MainStateKey = StateKey.ConnectionError;
-            return;
-        }
-
-        var buildingWithMaps = buildingsFromApi.Where(x => x.Floors is not null && x.Floors.Count > 0).ToList();
+        var buildingWithMaps = buildings.Where(x => x.FloorsList is not null && x.FloorsList.Count > 0).ToList();
 
         CampusBuilding campus = new()
         {
             Id = LocalizedStrings.Campus,
             LocalizedName = LocalizedStrings.Campus,
-            Floors = new()
+            FloorsList = new()
         };
 
-        buildingsFromApi.Insert(0, campus);
+        buildings.Insert(0, campus);
         buildingWithMaps.Insert(0, campus);
 
-        Buildings = buildingsFromApi;
+        Buildings = buildings;
         BuildingsWithMaps = buildingWithMaps;
-        CurrentFloor = "0";
+    }
+
+    async Task InitWithLocalData()
+    {
+        var buildings = campusMapRepository.GetBuildingsData();
+        if (buildings.Count == 0)
+        {
+            return;
+        }
+
+        UpdateBuildingsList(buildings);
         MainStateKey = StateKey.Loaded;
 
         await ShowCampusMap();
         WebViewStateKey = StateKey.Loaded;
+    }
+
+    async Task InitWithRemoteData()
+    {
+        var buildingsFromApi = await campusMapService.GetBuildingsDataDeserialized();
+        if (buildingsFromApi is null)
+        {
+            if (MainStateKey != StateKey.Loaded)
+            {
+                MainStateKey = StateKey.ConnectionError;
+            }
+            return;
+        }
+
+        UpdateBuildingsList(buildingsFromApi);
+        MainStateKey = StateKey.Loaded;
+
+        if (WebViewStateKey != StateKey.Loaded)
+        {
+            await ShowCampusMap();
+        }
+        WebViewStateKey = StateKey.Loaded;
+
+        campusMapRepository.SaveBuildingsData(buildingsFromApi);
+    }
+
+    public async Task Init()
+    {
+        await InitWithLocalData();
+        await InitWithRemoteData();
     }
 
     [ObservableProperty] string mainStateKey = StateKey.Loading;
@@ -73,7 +111,7 @@ public partial class CampusMapViewModel : BaseViewModel
     public List<RoomInfo> FloorData { get; private set; }
 
     public string CurrentBuildingId { get; private set; } = LocalizedStrings.Campus;
-    [ObservableProperty] string currentFloor = "";
+    [ObservableProperty] string currentFloor = "0";
 
     public string CurrentFullLocation
     {
@@ -94,52 +132,107 @@ public partial class CampusMapViewModel : BaseViewModel
         }
     }
 
+    async Task LoadFloorMap(string buildingId, string floor)
+    {
+        var floorSvgLocal = campusMapRepository.GetFloorMap(buildingId, floor)?.FloorSvg;
+        if (floorSvgLocal is not null)
+        {
+            _ = CampusMapPage.SendFloorSvgToHybridWebView(floorSvgLocal);
+            await Task.Yield();
+        }
+
+        var floorSvgRemote = await campusMapService.GetFloorSvg(buildingId, floor);
+        if (floorSvgRemote is null)
+        {
+            if (floorSvgLocal is not null)
+            {
+                WebViewStateKey = StateKey.ConnectionError;
+            }
+        }
+
+        if (floorSvgRemote is not null && floorSvgLocal != floorSvgRemote)
+        {
+            campusMapRepository.SaveFloorMap(buildingId, floor, floorSvgRemote);
+            _ = CampusMapPage.SendFloorSvgToHybridWebView(floorSvgRemote);
+        }
+    }
+
+    async Task LoadFloorData(string buildingId, string floor)
+    {
+        var floorDataLocal = campusMapRepository.GetFloorData(buildingId, floor);
+        string? floorDataLocalSerialized = null;
+        if (floorDataLocal.Count > 0)
+        {
+            floorDataLocalSerialized = JsonSerializer.Serialize(floorDataLocal, RoomInfoJsonContext.Default.ListRoomInfo);
+            FloorData = floorDataLocal;
+            _ = CampusMapPage.SendFloorDataToHybridWebView(floorDataLocalSerialized);
+            WebViewStateKey = StateKey.Loaded;
+        }
+
+        var floorDataRemote = await campusMapService.GetFloorData(buildingId, floor);
+        if (floorDataRemote is null)
+        {
+            if (WebViewStateKey != StateKey.Loaded)
+            {
+                WebViewStateKey = StateKey.ConnectionError;
+            }
+            return;
+        }
+
+        var floorDataRemoteDeserialized = JsonSerializer.Deserialize(floorDataRemote, RoomInfoJsonContext.Default.ListRoomInfo);
+        if (floorDataRemoteDeserialized is null)
+        {
+            if (WebViewStateKey != StateKey.Loaded)
+            {
+                WebViewStateKey = StateKey.LoadingError;
+            }
+            return;
+        }
+
+        WebViewStateKey = StateKey.Loaded;
+
+        if (floorDataLocalSerialized != floorDataRemote)
+        {
+            FloorData = floorDataRemoteDeserialized;
+            campusMapRepository.SaveFloorData(buildingId, floor, floorDataRemoteDeserialized);
+            _ = CampusMapPage.SendFloorDataToHybridWebView(floorDataRemote);
+        }
+    }
+
     async Task UpdateWebView(string buildingId, string floor)
     {
         WebViewStateKey = StateKey.Loading;
 
-        OnPropertyChanged(nameof(CurrentFullLocation));
-
-        var svg = await campusMapService.GetFloorSvg(buildingId, floor);
-        if (svg is null)
-        {
-            WebViewStateKey = StateKey.ConnectionError;
-            return;
-        }
-
-        var floorData = await campusMapService.GetFloorData(buildingId, floor);
-        if (floorData is null)
-        {
-            WebViewStateKey = StateKey.ConnectionError;
-            return;
-        }
-
-        var floorDataDeserialized = JsonSerializer.Deserialize(floorData, RoomInfoJsonContext.Default.ListRoomInfo);
-        if (floorDataDeserialized is null)
-        {
-            WebViewStateKey = StateKey.LoadingError;
-            return;
-        }
-        FloorData = floorDataDeserialized;
-
-        _ = CampusMapPage.SendFloorSvgToHybridWebView(svg);
-        _ = CampusMapPage.SendFloorDataToHybridWebView(floorData);
-
-        WebViewStateKey = StateKey.Loaded;
+        await LoadFloorMap(buildingId, floor);
+        await LoadFloorData(buildingId, floor);
     }
 
     async Task ShowCampusMap()
     {
         WebViewStateKey = StateKey.Loading;
-        OnPropertyChanged(nameof(CurrentFullLocation));
-        var svg = await campusMapService.GetCampusMapSvg();
-        if (svg is null)
+
+        var campusMapLocal = campusMapRepository.GetCampusMap();
+        if (campusMapLocal is not null)
         {
-            WebViewStateKey = StateKey.ConnectionError;
+            _ = CampusMapPage.SendCampusSvgToHybridWebView(campusMapLocal);
+            WebViewStateKey = StateKey.Loaded;
+        }
+
+        var campusMapRemote = await campusMapService.GetCampusMapSvg();
+        if (campusMapRemote is null)
+        {
+            if (WebViewStateKey != StateKey.Loaded)
+            {
+                WebViewStateKey = StateKey.ConnectionError;
+            }
             return;
         }
 
-        _ = CampusMapPage.SendCampusSvgToHybridWebView(svg);
+        if (campusMapLocal != campusMapRemote)
+        {
+            _ = CampusMapPage.SendCampusSvgToHybridWebView(campusMapRemote);
+            campusMapRepository.SaveCampusMap(campusMapRemote);
+        }
         WebViewStateKey = StateKey.Loaded;
     }
 
@@ -227,7 +320,7 @@ public partial class CampusMapViewModel : BaseViewModel
 
                 CurrentBuildingIndex = index;
 
-                Floors = Buildings[CurrentBuildingIndex].Floors;
+                Floors = Buildings[CurrentBuildingIndex].FloorsList;
                 CurrentFloor = "0";
 
                 CurrentBuildingId = Buildings[CurrentBuildingIndex].Id;
@@ -247,6 +340,7 @@ public partial class CampusMapViewModel : BaseViewModel
                     }
                     _ = UpdateWebView(CurrentBuildingId, CurrentFloor);
                 }
+                OnPropertyChanged(nameof(CurrentFullLocation));
             });
     }
 
@@ -263,6 +357,7 @@ public partial class CampusMapViewModel : BaseViewModel
 
                 CurrentFloor = pickedItem.Value;
                 _ = UpdateWebView(CurrentBuildingId, CurrentFloor);
+                OnPropertyChanged(nameof(CurrentFullLocation));
             });
     }
 }

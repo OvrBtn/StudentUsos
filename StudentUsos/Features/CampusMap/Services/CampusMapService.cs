@@ -43,7 +43,8 @@ public class CampusMapService : ICampusMapService
         {
             return null;
         }
-        return JsonSerializer.Deserialize(json, CampusBuildingJsonContext.Default.ListCampusBuilding);
+        var deserialized = JsonSerializer.Deserialize(json, CampusBuildingJsonContext.Default.ListCampusBuilding);
+        return deserialized;
     }
 
     public async Task<string?> GetFloorData(string buildingId, string floor)
@@ -107,7 +108,7 @@ public class CampusMapService : ICampusMapService
     public async Task<HttpStatusCode?> UpvoteUserSuggestion(string buildingId, string floor, int roomId, int suggestionId)
     {
         var userInfo = userInfoRepository.GetUserInfo();
-        if(userInfo is null)
+        if (userInfo is null)
         {
             return null;
         }

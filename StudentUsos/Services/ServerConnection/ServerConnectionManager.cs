@@ -197,7 +197,7 @@ public class ServerConnectionManager : IServerConnectionManager
         AuthorizationMode authorization,
         int timeout = HttpClientDefaultTimeoutSeconds)
     {
-        string serializedPostBody = JsonSerializer.Serialize(requestPayload, UtilitiesJsonContext.Default.DictionaryStringString);
+        string serializedPostBody = JsonSerializer.Serialize(requestPayload, JsonContext.Default.DictionaryStringString);
 
         Dictionary<string, string> args = new();
         Dictionary<string, string> argsSecret = new();

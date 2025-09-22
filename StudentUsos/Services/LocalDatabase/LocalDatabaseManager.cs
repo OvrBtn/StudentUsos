@@ -2,6 +2,7 @@
 using StudentUsos.Features.AcademicTerms.Models;
 using StudentUsos.Features.Activities.Models;
 using StudentUsos.Features.Calendar.Models;
+using StudentUsos.Features.CampusMap.Models;
 using StudentUsos.Features.Grades.Models;
 using StudentUsos.Features.Groups.Models;
 using StudentUsos.Features.Payments.Models;
@@ -93,6 +94,9 @@ public class LocalDatabaseManager : ILocalDatabaseManager
         dbConnection.CreateTable<Payment>();
         dbConnection.CreateTable<UserInfo>();
         dbConnection.CreateTable<LogRecord>();
+        dbConnection.CreateTable<CampusBuilding>();
+        dbConnection.CreateTable<RoomInfo>();
+        dbConnection.CreateTable<FloorMap>();
     }
 
     public void DeleteTables()
@@ -113,6 +117,9 @@ public class LocalDatabaseManager : ILocalDatabaseManager
         dbConnection.DropTable<Payment>();
         dbConnection.DropTable<UserInfo>();
         dbConnection.DropTable<LogRecord>();
+        dbConnection.DropTable<CampusBuilding>();
+        dbConnection.DropTable<RoomInfo>();
+        dbConnection.DropTable<FloorMap>();
     }
 
     public int ClearTable<T>()

@@ -7,6 +7,7 @@ using StudentUsos.Features.Authorization;
 using StudentUsos.Features.Calendar.Repositories;
 using StudentUsos.Features.Calendar.Services;
 using StudentUsos.Features.Calendar.Views;
+using StudentUsos.Features.CampusMap.Repositories;
 using StudentUsos.Features.CampusMap.Services;
 using StudentUsos.Features.CampusMap.Views;
 using StudentUsos.Features.Dashboard.Views;
@@ -92,6 +93,7 @@ internal static partial class MauiProgramExtensions
         builder.Services.AddSingleton<ITermsRepository, TermsRepository>();
 
         builder.Services.AddSingleton<ICampusMapService, CampusMapService>();
+        builder.Services.AddSingleton<ICampusMapRepository, CampusMapRepository>();
 
         return builder;
     }

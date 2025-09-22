@@ -11,10 +11,10 @@ public partial class RoomInfoJsonContext : JsonSerializerContext
 public class RoomInfo
 {
     public int InternalId { get; set; }
-    public required int RoomId { get; set; }
-    public required string BuildingId { get; set; }
-    public required string Floor { get; set; }
-    public required string Name { get; set; }
-    public required int NameWeight { get; set; }
+    public int RoomId { get; set; }
+    public string BuildingId { get; set; }
+    public string Floor { get; set; }
+    public string Name { get; set; }
+    public int NameWeight { get; set; }
 
 }

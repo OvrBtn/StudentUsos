@@ -5,8 +5,10 @@ using System.Text.Json.Serialization;
 
 namespace StudentUsos.Helpers;
 
-[JsonSerializable(typeof(Dictionary<string, string>)), JsonConverter(typeof(JsonObjectToStringConverter))]
-internal partial class UtilitiesJsonContext : JsonSerializerContext
+[JsonSerializable(typeof(Dictionary<string, string>)), 
+    JsonConverter(typeof(JsonObjectToStringConverter)),
+    JsonSerializable(typeof(List<string>))]
+internal partial class JsonContext : JsonSerializerContext
 { }
 
 public static class Utilities
@@ -265,7 +267,7 @@ public static class Utilities
         try
         {
             if (string.IsNullOrEmpty(json)) return string.Empty;
-            var deserialized = JsonSerializer.Deserialize(json, UtilitiesJsonContext.Default.DictionaryStringString);
+            var deserialized = JsonSerializer.Deserialize(json, JsonContext.Default.DictionaryStringString);
             if (deserialized is null)
             {
                 return string.Empty;

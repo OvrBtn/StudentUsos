@@ -65,7 +65,6 @@ public partial class CampusMapViewModel : BaseViewModel
         MainStateKey = StateKey.Loaded;
 
         await ShowCampusMap();
-        WebViewStateKey = StateKey.Loaded;
     }
 
     async Task InitWithRemoteData()
@@ -87,7 +86,6 @@ public partial class CampusMapViewModel : BaseViewModel
         {
             await ShowCampusMap();
         }
-        WebViewStateKey = StateKey.Loaded;
 
         campusMapRepository.SaveBuildingsData(buildingsFromApi);
     }
@@ -171,7 +169,7 @@ public partial class CampusMapViewModel : BaseViewModel
         if (floorSvgLocal != floorSvgRemote)
         {
             campusMapRepository.SaveFloorMap(buildingId, floor, floorSvgRemote);
-            _ = CampusMapPage.SendFloorSvgToHybridWebView(floorSvgRemote);
+            await CampusMapPage.SendFloorSvgToHybridWebView(floorSvgRemote);
         }
 
         var floorDataRemote = await campusMapService.GetFloorData(buildingId, floor);
@@ -204,7 +202,7 @@ public partial class CampusMapViewModel : BaseViewModel
         {
             FloorData = floorDataRemoteDeserialized;
             campusMapRepository.SaveFloorData(buildingId, floor, floorDataRemoteDeserialized);
-            _ = CampusMapPage.SendFloorDataToHybridWebView(floorDataRemote);
+            await CampusMapPage.SendFloorDataToHybridWebView(floorDataRemote);
         }
 
         WebViewStateKey = StateKey.Loaded;
@@ -248,7 +246,7 @@ public partial class CampusMapViewModel : BaseViewModel
 
         if (campusMapLocal != campusMapRemote)
         {
-            _ = CampusMapPage.SendCampusSvgToHybridWebView(campusMapRemote);
+            await CampusMapPage.SendCampusSvgToHybridWebView(campusMapRemote);
             campusMapRepository.SaveCampusMap(campusMapRemote);
         }
         WebViewStateKey = StateKey.Loaded;

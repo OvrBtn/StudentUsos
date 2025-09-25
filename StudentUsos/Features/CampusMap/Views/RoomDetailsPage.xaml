@@ -51,7 +51,7 @@
                     <Label Text="{Binding Parameters.RoomName}" FontSize="20" HorizontalTextAlignment="Center"/>
                 </StackLayout>
 
-                <StackLayout IsVisible="{Binding Parameters.HasAdditionalRoomNames}">
+                <StackLayout IsVisible="{Binding Parameters.HasRoomName}">
                     <Label Text="{x:Static strings:LocalizedStrings.RoomDetailsPage_AlternativeNames}" FontSize="14" HorizontalTextAlignment="Center"/>
                     <!--<Label Text="{Binding Parameters.AdditionalRoomNamesJoined}" FontSize="14" HorizontalTextAlignment="Center"/>-->
 

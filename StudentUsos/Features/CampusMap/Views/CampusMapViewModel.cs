@@ -153,6 +153,12 @@ public partial class CampusMapViewModel : BaseViewModel
     async Task UpdateWebViewRemoteData(string buildingId, string floor, string? floorSvgLocal, string? floorDataLocal)
     {
         var floorSvgRemote = await campusMapService.GetFloorSvg(buildingId, floor);
+
+        if (buildingId != CurrentBuildingId || floor != CurrentFloor)
+        {
+            return;
+        }
+
         if (floorSvgRemote is null)
         {
             if (floorSvgLocal is null)
@@ -169,6 +175,12 @@ public partial class CampusMapViewModel : BaseViewModel
         }
 
         var floorDataRemote = await campusMapService.GetFloorData(buildingId, floor);
+
+        if (buildingId != CurrentBuildingId || floor != CurrentFloor)
+        {
+            return;
+        }
+
         if (floorDataRemote is null)
         {
             if (WebViewStateKey != StateKey.Loaded)
@@ -208,6 +220,7 @@ public partial class CampusMapViewModel : BaseViewModel
 
     async Task ShowCampusMap()
     {
+        string currentBuildingId = CurrentBuildingId;
         WebViewStateKey = StateKey.Loading;
 
         var campusMapLocal = campusMapRepository.GetCampusMap();
@@ -218,6 +231,12 @@ public partial class CampusMapViewModel : BaseViewModel
         }
 
         var campusMapRemote = await campusMapService.GetCampusMapSvg();
+
+        if (currentBuildingId != CurrentBuildingId)
+        {
+            return;
+        }
+
         if (campusMapRemote is null)
         {
             if (WebViewStateKey != StateKey.Loaded)

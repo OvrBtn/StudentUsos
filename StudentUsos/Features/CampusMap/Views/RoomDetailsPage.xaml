@@ -62,11 +62,13 @@
                                     <Label Grid.Column="0" Text="{Binding Name}" VerticalTextAlignment="Center"></Label>
                                     <Grid Grid.Column="1">
                                         <Image Source="thumb_up.png" HeightRequest="25" Margin="10"/>
+                                        <Image Source="thumbs_up_fill.png" HeightRequest="25" Margin="10" IsVisible="{Binding IsUpvoted}"/>
                                         <Button BackgroundColor="Transparent" Command="{Binding Source={RelativeSource AncestorType={x:Type local:RoomDetailsViewModel}}, 
                                             Path=UpvoteButtonPressedCommand}" CommandParameter="{Binding .}"/>
                                     </Grid>
                                     <Grid Grid.Column="2">
                                         <Image Source="thumb_down.png" HeightRequest="25" Margin="10"/>
+                                        <Image Source="thumbs_down_fill.png" HeightRequest="25" Margin="10" IsVisible="{Binding IsDownvoted}"/>
                                         <Button BackgroundColor="Transparent" Command="{Binding Source={RelativeSource AncestorType={x:Type local:RoomDetailsViewModel}}, 
                                             Path=DownvoteButtonPressedCommand}" CommandParameter="{Binding .}"></Button>
                                     </Grid>

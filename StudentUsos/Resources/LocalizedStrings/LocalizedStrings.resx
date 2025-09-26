@@ -611,4 +611,7 @@
   <data name="Errors_ConnectionError" xml:space="preserve">
     <value>Connection error</value>
   </data>
+  <data name="SomethingWentWrong" xml:space="preserve">
+    <value>Something went wrong</value>
+  </data>
 </root>

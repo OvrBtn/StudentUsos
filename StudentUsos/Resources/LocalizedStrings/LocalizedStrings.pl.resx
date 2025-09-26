@@ -613,4 +613,7 @@
   <data name="Errors_ConnectionError" xml:space="preserve">
     <value>Błąd połączenia</value>
   </data>
+  <data name="SomethingWentWrong" xml:space="preserve">
+    <value>Coś poszło nie tak</value>
+  </data>
 </root>

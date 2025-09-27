@@ -11,9 +11,22 @@ public partial class RoomDetailsPage : Popup
         BindingContext = new RoomDetailsViewModel(parameters);
     }
 
+    static bool isPopupActive = false;
+
+    protected override Task OnClosed(object? result, bool wasDismissedByTappingOutsideOfPopup, CancellationToken token = default)
+    {
+        isPopupActive = false; ;
+        return base.OnClosed(result, wasDismissedByTappingOutsideOfPopup, token);
+    }
 
     public static void CreateAndShow(RoomDetailsParameters parameters)
     {
+        if (isPopupActive)
+        {
+            return;
+        }
+
+        isPopupActive = true;
         ApplicationService.Default.MainThreadInvoke(() =>
         {
             var popup = new RoomDetailsPage(parameters);

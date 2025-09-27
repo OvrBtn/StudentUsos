@@ -26,7 +26,7 @@ public partial class PickFromListPopup : Popup
     IEnumerable<string> options;
 
     public event Action<PickedItem>? OnPicked;
-    public event Action OnClosed;
+    public event Action OnClosedEvent;
 
     public string CollectionStateKey
     {
@@ -68,8 +68,22 @@ public partial class PickFromListPopup : Popup
         OnPicked += onPicked;
     }
 
-    public static PickFromListPopup CreateAndShow(string title, IEnumerable<string> options, string stateKey = StateKey.Loaded, Action<PickedItem>? onPicked = null)
+    static bool isPopupActive = false;
+
+    protected override Task OnClosed(object? result, bool wasDismissedByTappingOutsideOfPopup, CancellationToken token = default)
     {
+        isPopupActive = false;
+        return base.OnClosed(result, wasDismissedByTappingOutsideOfPopup, token);
+    }
+
+    public static PickFromListPopup? CreateAndShow(string title, IEnumerable<string> options, string stateKey = StateKey.Loaded, Action<PickedItem>? onPicked = null)
+    {
+        if (isPopupActive)
+        {
+            return null;
+        }
+        isPopupActive = true;
+
         var popup = new PickFromListPopup(title, options, stateKey, onPicked);
         ApplicationService.Default.MainThreadInvoke(() =>
         {

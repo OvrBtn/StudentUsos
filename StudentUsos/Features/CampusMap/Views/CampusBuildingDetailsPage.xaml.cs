@@ -14,9 +14,21 @@ public partial class CampusBuildingDetailsPage : Popup
         BindingContext = this;
     }
 
+    static bool isPopupActive = false;
+    protected override Task OnClosed(object? result, bool wasDismissedByTappingOutsideOfPopup, CancellationToken token = default)
+    {
+        isPopupActive = false;
+        return base.OnClosed(result, wasDismissedByTappingOutsideOfPopup, token);
+    }
 
     public static void CreateAndShow(CampusBuildingDetailsParameters parameters)
     {
+        if (isPopupActive)
+        {
+            return;
+        }
+        isPopupActive = true;
+
         ApplicationService.Default.MainThreadInvoke(() =>
         {
             var popup = new CampusBuildingDetailsPage(parameters);

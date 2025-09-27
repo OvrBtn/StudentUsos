@@ -29,7 +29,7 @@ public partial class CampusMapPage : ContentPage
         Dispatcher.Dispatch(() =>
         {
             isInitialized = true;
-            _ = viewModel.Init();
+            _ = viewModel.InitAsync();
         });
     }
 

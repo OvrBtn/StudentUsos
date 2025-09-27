@@ -16,7 +16,7 @@ public class CampusMapService : ICampusMapService
         this.userInfoRepository = userInfoRepository;
     }
 
-    public async Task<string?> GetCampusMapSvg()
+    public async Task<string?> GetCampusMapSvgAsync()
     {
         var response = await serverConnectionManager.SendAuthorizedGetRequestAsync("CampusMap/CampusSvg", new(), AuthorizationMode.Full);
         if (response is null || response.IsSuccess == false)
@@ -26,7 +26,7 @@ public class CampusMapService : ICampusMapService
         return response.Response;
     }
 
-    public async Task<string?> GetBuildingsData()
+    public async Task<string?> GetBuildingsDataAsync()
     {
         var response = await serverConnectionManager.SendAuthorizedGetRequestAsync("CampusMap/BuildingsList", new(), AuthorizationMode.Full);
         if (response is null || response.IsSuccess == false)
@@ -36,9 +36,9 @@ public class CampusMapService : ICampusMapService
         return response.Response;
     }
 
-    public async Task<List<CampusBuilding>?> GetBuildingsDataDeserialized()
+    public async Task<List<CampusBuilding>?> GetBuildingsDataDeserializedAsync()
     {
-        var json = await GetBuildingsData();
+        var json = await GetBuildingsDataAsync();
         if (json is null)
         {
             return null;
@@ -47,7 +47,7 @@ public class CampusMapService : ICampusMapService
         return deserialized;
     }
 
-    public async Task<string?> GetFloorData(string buildingId, string floor)
+    public async Task<string?> GetFloorDataAsync(string buildingId, string floor)
     {
         var payload = new Dictionary<string, string>()
         {
@@ -62,9 +62,9 @@ public class CampusMapService : ICampusMapService
         return response.Response;
     }
 
-    public async Task<List<RoomInfo>?> GetFloorDataDeserialized(string buildingId, string floor)
+    public async Task<List<RoomInfo>?> GetFloorDataDeserializedAsync(string buildingId, string floor)
     {
-        var response = await GetFloorData(buildingId, floor);
+        var response = await GetFloorDataAsync(buildingId, floor);
         if (response is null)
         {
             return null;
@@ -72,7 +72,7 @@ public class CampusMapService : ICampusMapService
         return JsonSerializer.Deserialize(response, RoomInfoJsonContext.Default.ListRoomInfo);
     }
 
-    public async Task<string?> GetFloorSvg(string buildingId, string floor)
+    public async Task<string?> GetFloorSvgAsync(string buildingId, string floor)
     {
         var payload = new Dictionary<string, string>()
         {
@@ -87,7 +87,7 @@ public class CampusMapService : ICampusMapService
         return response.Response;
     }
 
-    public async Task<HttpStatusCode?> SendUserSuggestion(string suggestedName, string buildingId, string floor, string roomId, string studentNumber)
+    public async Task<HttpStatusCode?> SendUserSuggestionAsync(string suggestedName, string buildingId, string floor, string roomId, string studentNumber)
     {
         var payload = new Dictionary<string, string>()
         {
@@ -105,7 +105,7 @@ public class CampusMapService : ICampusMapService
         return response.HttpResponseMessage.StatusCode;
     }
 
-    public async Task<HttpStatusCode?> UpvoteUserSuggestion(string buildingId, string floor, int roomId, int suggestionId)
+    public async Task<HttpStatusCode?> UpvoteUserSuggestionAsync(string buildingId, string floor, int roomId, int suggestionId)
     {
         var userInfo = userInfoRepository.GetUserInfo();
         if (userInfo is null)
@@ -129,7 +129,7 @@ public class CampusMapService : ICampusMapService
         return response.HttpResponseMessage.StatusCode;
     }
 
-    public async Task<HttpStatusCode?> DownvoteUserSuggestion(string buildingId, string floor, int roomId, int suggestionId)
+    public async Task<HttpStatusCode?> DownvoteUserSuggestionAsync(string buildingId, string floor, int roomId, int suggestionId)
     {
         var userInfo = userInfoRepository.GetUserInfo();
         if (userInfo is null)
@@ -153,7 +153,7 @@ public class CampusMapService : ICampusMapService
         return response.HttpResponseMessage.StatusCode;
     }
 
-    public async Task<List<string>?> FetchIdsOfUsersUpvotes()
+    public async Task<List<string>?> FetchIdsOfUsersUpvotesAsync()
     {
         var response = await serverConnectionManager.SendAuthorizedGetRequestAsync("CampusMap/UsersUpvotes", new(), AuthorizationMode.Full);
         if (response is null || response.IsSuccess == false)
@@ -164,7 +164,7 @@ public class CampusMapService : ICampusMapService
         return JsonSerializer.Deserialize(response.Response, JsonContext.Default.ListString);
     }
 
-    public async Task<List<string>?> FetchIdsOfUsersDownvotes()
+    public async Task<List<string>?> FetchIdsOfUsersDownvotesAsync()
     {
         var response = await serverConnectionManager.SendAuthorizedGetRequestAsync("CampusMap/UsersDownvotes", new(), AuthorizationMode.Full);
         if (response is null || response.IsSuccess == false)

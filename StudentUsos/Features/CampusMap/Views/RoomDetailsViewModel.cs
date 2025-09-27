@@ -58,7 +58,7 @@ public partial class RoomDetailsViewModel : BaseViewModel
     bool isCurrentlyCastingVote = false;
 
     [RelayCommand]
-    async Task UpvoteButtonPressed(RoomInfo roomInfo)
+    async Task UpvoteButtonPressedAsync(RoomInfo roomInfo)
     {
         if (isCurrentlyCastingVote)
         {
@@ -67,7 +67,7 @@ public partial class RoomDetailsViewModel : BaseViewModel
 
         isCurrentlyCastingVote = true;
 
-        var statusCode = await campusMapService.UpvoteUserSuggestion(roomInfo.BuildingId, roomInfo.Floor, roomInfo.RoomId, roomInfo.InternalId);
+        var statusCode = await campusMapService.UpvoteUserSuggestionAsync(roomInfo.BuildingId, roomInfo.Floor, roomInfo.RoomId, roomInfo.InternalId);
         if (statusCode != System.Net.HttpStatusCode.OK)
         {
             applicationService.ShowToast(LocalizedStrings.SomethingWentWrong);
@@ -94,7 +94,7 @@ public partial class RoomDetailsViewModel : BaseViewModel
     }
 
     [RelayCommand]
-    async Task DownvoteButtonPressed(RoomInfo roomInfo)
+    async Task DownvoteButtonPressedAsync(RoomInfo roomInfo)
     {
         if (isCurrentlyCastingVote)
         {
@@ -103,7 +103,7 @@ public partial class RoomDetailsViewModel : BaseViewModel
 
         isCurrentlyCastingVote = true;
 
-        var statusCode = await campusMapService.DownvoteUserSuggestion(roomInfo.BuildingId, roomInfo.Floor, roomInfo.RoomId, roomInfo.InternalId);
+        var statusCode = await campusMapService.DownvoteUserSuggestionAsync(roomInfo.BuildingId, roomInfo.Floor, roomInfo.RoomId, roomInfo.InternalId);
         if (statusCode != System.Net.HttpStatusCode.OK)
         {
             applicationService.ShowToast(LocalizedStrings.SomethingWentWrong);

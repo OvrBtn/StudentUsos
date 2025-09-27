@@ -20,5 +20,8 @@ public enum LocalStorageKeys
     WhatsNewCarouselLastId,
     WhatsNewListLastId,
     BackwardCompatibilityLastCheckedVersion,
-    CampusMapSvg
+    CampusMapSvg,
+    IsCampusMapInitialized,
+    IdsOfUpvotedRoomInfos,
+    IdsOfDownvotedRoomInfos
 }

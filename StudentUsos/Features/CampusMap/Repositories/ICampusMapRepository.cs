@@ -16,4 +16,13 @@ public interface ICampusMapRepository
 
     public List<RoomInfo> GetFloorData(string buildingId, string floor);
     public void SaveFloorData(string buildingId, string floor, List<RoomInfo> roomInfos);
+
+    public void MarkAsUpvoted(RoomInfo roomInfo);
+    public void UnmarkAsUpvoted(RoomInfo roomInfo);
+    public void MarkAsDownvoted(RoomInfo roomInfo);
+    public void UnmarkAsDownvoted(RoomInfo roomInfo);
+    public bool IsUpvoted(RoomInfo roomInfo);
+    public bool IsDownvoted(RoomInfo roomInfo);
+    public void ImportUpvotes(List<string> upvotes);
+    public void ImportDownvotes(List<string> downvotes);
 }

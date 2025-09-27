@@ -17,4 +17,6 @@ public interface ICampusMapService
 
     public Task<HttpStatusCode?> UpvoteUserSuggestion(string buildingId, string floor, int roomId, int suggestionId);
     public Task<HttpStatusCode?> DownvoteUserSuggestion(string buildingId, string floor, int roomId, int suggestionId);
+    public Task<List<string>?> FetchIdsOfUsersUpvotes();
+    public Task<List<string>?> FetchIdsOfUsersDownvotes();
 }

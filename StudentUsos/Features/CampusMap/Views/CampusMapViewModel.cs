@@ -15,16 +15,18 @@ public partial class CampusMapViewModel : BaseViewModel
     IUserInfoRepository userInfoRepository;
     IApplicationService applicationService;
     ICampusMapRepository campusMapRepository;
-
+    ILocalStorageManager localStorageManager;
     public CampusMapViewModel(ICampusMapService campusMapService,
         IUserInfoRepository userInfoRepository,
         IApplicationService applicationService,
-        ICampusMapRepository campusMapRepository)
+        ICampusMapRepository campusMapRepository,
+        ILocalStorageManager localStorageManager)
     {
         this.campusMapService = campusMapService;
         this.userInfoRepository = userInfoRepository;
         this.applicationService = applicationService;
         this.campusMapRepository = campusMapRepository;
+        this.localStorageManager = localStorageManager;
     }
 
     //it might not be very MVVM but HybridWebView doesn't really support bindings and it has to be directly referenced
@@ -90,8 +92,30 @@ public partial class CampusMapViewModel : BaseViewModel
         campusMapRepository.SaveBuildingsData(buildingsFromApi);
     }
 
+    async Task InitializeLocallySavedUsersVotesAsync()
+    {
+        if (localStorageManager.TryGettingData(LocalStorageKeys.IsCampusMapInitialized, out string isCampusMapInitialized) &&
+            bool.TryParse(isCampusMapInitialized, out bool parsed) && parsed)
+        {
+            return;
+        }
+
+        var upvotes = await campusMapService.FetchIdsOfUsersUpvotes();
+        var downvotes = await campusMapService.FetchIdsOfUsersDownvotes();
+        if (upvotes is null || downvotes is null)
+        {
+            return;
+        }
+
+        campusMapRepository.ImportUpvotes(upvotes);
+        campusMapRepository.ImportDownvotes(downvotes);
+
+        localStorageManager.SetData(LocalStorageKeys.IsCampusMapInitialized, true.ToString());
+    }
+
     public async Task Init()
     {
+        _ = InitializeLocallySavedUsersVotesAsync();
         await InitWithLocalData();
         await InitWithRemoteData();
     }

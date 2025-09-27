@@ -152,4 +152,26 @@ public class CampusMapService : ICampusMapService
         }
         return response.HttpResponseMessage.StatusCode;
     }
+
+    public async Task<List<string>?> FetchIdsOfUsersUpvotes()
+    {
+        var response = await serverConnectionManager.SendAuthorizedGetRequestAsync("CampusMap/UsersUpvotes", new(), AuthorizationMode.Full);
+        if (response is null || response.IsSuccess == false)
+        {
+            return null;
+        }
+
+        return JsonSerializer.Deserialize(response.Response, JsonContext.Default.ListString);
+    }
+
+    public async Task<List<string>?> FetchIdsOfUsersDownvotes()
+    {
+        var response = await serverConnectionManager.SendAuthorizedGetRequestAsync("CampusMap/UsersDownvotes", new(), AuthorizationMode.Full);
+        if (response is null || response.IsSuccess == false)
+        {
+            return null;
+        }
+
+        return JsonSerializer.Deserialize(response.Response, JsonContext.Default.ListString);
+    }
 }

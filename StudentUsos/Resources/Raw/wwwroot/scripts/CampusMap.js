@@ -1,6 +1,4 @@
-﻿
-
-window.addEventListener(
+﻿window.addEventListener(
     "HybridWebViewMessageReceived",
     function (e) {
         console.log(e);
@@ -8,83 +6,94 @@ window.addEventListener(
     });
 
 function ReceiveFloorData(jsonString) {
+    const json = JSON.parse(jsonString);
 
-    console.log(jsonString);
+    const roomFillContainerId = "rooms";
+    const roomLabelContainerId = "labels";
 
-    json = JSON.parse(jsonString);
+    const svg = document.querySelector("svg");
 
-    roomFillContainerId = "rooms"
-    roomLabelContainerId = "labels"
-
-    svg = document.querySelector("svg")
-
-    const foundLabels = document.getElementById(roomLabelContainerId);
-    if (foundLabels != null) {
-        svg.removeChild(foundLabels);
+    // Remove existing labels if present
+    const existingLabels = document.getElementById(roomLabelContainerId);
+    if (existingLabels) {
+        svg.removeChild(existingLabels);
     }
 
-    roomLabelContainer = document.createElementNS("http://www.w3.org/2000/svg", "g")
-    roomLabelContainer.setAttributeNS(null, "id", roomLabelContainerId)
-    //svg.insertBefore(roomLabelContainer, svg.children[0])
-    svg.appendChild(roomLabelContainer)
+    // Create new label container
+    const roomLabelContainer = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    roomLabelContainer.setAttributeNS(null, "id", roomLabelContainerId);
+    svg.appendChild(roomLabelContainer);
 
-    container = document.getElementById(roomFillContainerId)
-    children = container.children
+    const container = document.getElementById(roomFillContainerId);
+    const children = container.children;
 
     for (let index = 0; index < children.length; index++) {
-        box = children[index].getBBox()
+        const child = children[index];
+        const box = child.getBBox();
 
-        let localCenter = calculateCenterWithCentroidPlusNormals(children[index]);
-        let point = svg.createSVGPoint();
+        // Compute label center
+        const localCenter = calculateCenterWithCentroidPlusNormals(child);
+        const point = svg.createSVGPoint();
         point.x = localCenter[0];
         point.y = localCenter[1];
-        let globalPoint = point.matrixTransform(children[index].getCTM());
-        let inverseMatrix = roomLabelContainer.getCTM().inverse();
-        let adjustedPoint = globalPoint.matrixTransform(inverseMatrix);
 
-        let xCenter = adjustedPoint.x;
-        let yCenter = adjustedPoint.y;
+        const globalPoint = point.matrixTransform(child.getCTM());
+        const adjustedPoint = globalPoint.matrixTransform(roomLabelContainer.getCTM().inverse());
 
-        text = document.createElementNS("http://www.w3.org/2000/svg", "text")
-        text.setAttributeNS(null, "class", "roomLabel")
+        const xCenter = adjustedPoint.x;
+        const yCenter = adjustedPoint.y;
+
+        // Create text element
+        const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        text.setAttributeNS(null, "class", "roomLabel");
         text.setAttributeNS(null, "dominant-baseline", "middle");
         text.setAttributeNS(null, "text-anchor", "middle");
         text.setAttributeNS(null, "x", xCenter);
         text.setAttributeNS(null, "y", yCenter);
-        text.setAttributeNS(null, "style", "font-size: 15px;")
+        text.setAttributeNS(null, "style", "font-size: 15px;");
 
-        roomId = children[index].getAttribute("roomid");
-        text.appendChild(document.createTextNode(roomIdToName(json, roomId)))
+        const roomId = child.getAttribute("roomid");
+        text.appendChild(document.createTextNode(roomIdToName(json, roomId)));
 
-        roomLabelContainer.appendChild(text)
+        roomLabelContainer.appendChild(text);
 
-        textRect1 = text.getBBox()
+        // Adjust font size dynamically
+        const textRect = text.getBBox();
+        const fontGrowthRate = 5;
 
-        const fontGrowthRate = 15;
-        const roomBoundingBoxMultiplier = 0.3;
-        fontSize = fontGrowthRate * box.width * roomBoundingBoxMultiplier / textRect1.width
-        minFontSize = 10
-        maxFontSize = 20
-        if (fontSize < minFontSize) fontSize = minFontSize
-        if (fontSize > maxFontSize) fontSize = maxFontSize
-        text.setAttributeNS(null, "style", "font-size: " + fontSize + "px;")
+        let fontSize = fontGrowthRate * box.width / textRect.width;
+        const minFontSize = 10;
+        const maxFontSize = 20;
+
+        if (fontSize < minFontSize) fontSize = minFontSize;
+        if (fontSize > maxFontSize) fontSize = maxFontSize;
+
+        text.setAttributeNS(null, "style", `font-size: ${fontSize}px;`);
     }
 
     assignOnClickEvents(children);
-
     centerScroll();
 }
+
 
 window.addEventListener("load", () => {
     centerScrollInitial();
 });
 
+let isLoaded = false;
+
 //initially window.innerWidth will be 0 causing the scroll to not be correctly centered
 function centerScrollInitial() {
+
+    if (isLoaded) {
+        return;
+    }
+
     if (window.innerWidth === 0 || window.innerHeight === 0) {
         setTimeout(centerScrollInitial, 10);
         return;
     }
+    isLoaded = true;
     centerScroll();
 }
 
@@ -122,57 +131,65 @@ function bringDoorsToFront() {
 
 function assignOnClickEvents(rooms) {
     for (let i = 0; i < rooms.length; i++) {
-        rooms[i].addEventListener("click", async function (event) {
-            const clickedElement = event.target;
+        rooms[i].addEventListener("click", async (event) => {
+            const clickedElement = event.currentTarget;
+
             for (let j = 0; j < rooms.length; j++) {
                 rooms[j].classList.remove("activeRoom");
             }
+
             clickedElement.classList.add("activeRoom");
-            roomId = clickedElement.getAttribute("roomid");
-            console.log(roomId);
-            await window.HybridWebView.InvokeDotNet('ReceiveRoomClicked', [roomId]);
+
+            const roomId = clickedElement.getAttribute("roomid");
+
+            await window.HybridWebView.InvokeDotNet("ReceiveRoomClicked", [roomId]);
         });
     }
 }
 
 function ReceiveFloorSvg(svg) {
-    body = document.getElementsByTagName("body")[0];
+    const body = document.getElementsByTagName("body")[0];
     body.innerHTML = svg;
     centerScroll();
     bringDoorsToFront();
 }
 
 function ReceiveCampusSvg(svg) {
-    body = document.getElementsByTagName("body")[0];
+    const body = document.body;
     body.innerHTML = svg;
 
-    campusBuildings = document.getElementById("pomieszczenia").children;
-    for (i = 0; i < campusBuildings.length; i++) {
-        campusBuildings[i].addEventListener("click", async function (event) {
-            const clickedElement = event.target;
-            roomId = clickedElement.getAttribute("id");
+    const campusBuildings = document.getElementById("pomieszczenia").children;
+
+    for (let i = 0; i < campusBuildings.length; i++) {
+        campusBuildings[i].addEventListener("click", async (event) => {
+            const clickedElement = event.currentTarget;
+            let roomId = clickedElement.getAttribute("id");
             roomId = roomId.replace("warta_", "");
-            console.log(roomId);
-            await window.HybridWebView.InvokeDotNet('ReceiveCampusBuildingClicked', [roomId]);
+
+            await window.HybridWebView.InvokeDotNet("ReceiveCampusBuildingClicked", [roomId]);
         });
     }
 
-    setTimeout(centerScroll(), 100);
+    //setTimeout(centerScroll, 100);
 }
 
 function roomIdToName(parsedJson, id) {
-    names = [];
-    records = [];
-    for (let i = 0; i < parsedJson.length; i++) {
-        if (parsedJson[i].roomId == id) {
-            records.push(parsedJson[i]);
-        }
-    }
-    if (records.length == 0) {
+    const numberOfNamesToShow = 1;
+
+    const records = parsedJson.filter(record => record.roomId == id);
+
+    if (records.length === 0) {
+        console.log("returning emtpy");
         return "";
     }
-    names = records.sort((a, b) => b.nameWeight - a.nameWeight).map(x => x.name).slice(0, 1);
-    return names.join(",");
+
+    const names = records
+        .sort((a, b) => b.nameWeight - a.nameWeight)
+        .map(record => record.name)
+        .slice(0, numberOfNamesToShow);
+
+    console.log("returning = " + names.join(","));
+    return names.join(", ");
 }
 
 function calculateCenterWithCentroidPlusNormals(svgPath) {

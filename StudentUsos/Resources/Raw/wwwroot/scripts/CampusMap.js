@@ -72,7 +72,6 @@ function ReceiveFloorData(jsonString) {
     }
 
     assignOnClickEvents(children);
-    centerScroll();
 }
 
 
@@ -129,9 +128,17 @@ function bringDoorsToFront() {
     drzwi.parentNode.appendChild(drzwi);
 }
 
+let isCurrentlyClicking = false;
+
 function assignOnClickEvents(rooms) {
     for (let i = 0; i < rooms.length; i++) {
         rooms[i].addEventListener("click", async (event) => {
+
+            if (isCurrentlyClicking) {
+                return;
+            }
+            isCurrentlyClicking = true;
+
             const clickedElement = event.currentTarget;
 
             for (let j = 0; j < rooms.length; j++) {
@@ -143,6 +150,8 @@ function assignOnClickEvents(rooms) {
             const roomId = clickedElement.getAttribute("roomid");
 
             await window.HybridWebView.InvokeDotNet("ReceiveRoomClicked", [roomId]);
+
+            setTimeout(() => { isCurrentlyClicking = false; }, 100);
         });
     }
 }
@@ -169,8 +178,6 @@ function ReceiveCampusSvg(svg) {
             await window.HybridWebView.InvokeDotNet("ReceiveCampusBuildingClicked", [roomId]);
         });
     }
-
-    //setTimeout(centerScroll, 100);
 }
 
 function roomIdToName(parsedJson, id) {
@@ -179,7 +186,6 @@ function roomIdToName(parsedJson, id) {
     const records = parsedJson.filter(record => record.roomId == id);
 
     if (records.length === 0) {
-        console.log("returning emtpy");
         return "";
     }
 
@@ -188,7 +194,6 @@ function roomIdToName(parsedJson, id) {
         .map(record => record.name)
         .slice(0, numberOfNamesToShow);
 
-    console.log("returning = " + names.join(","));
     return names.join(", ");
 }
 

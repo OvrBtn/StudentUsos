@@ -17,6 +17,12 @@ function ReceiveFloorData(jsonString) {
     roomLabelContainerId = "labels"
 
     svg = document.querySelector("svg")
+
+    const foundLabels = document.getElementById(roomLabelContainerId);
+    if (foundLabels != null) {
+        svg.removeChild(foundLabels);
+    }
+
     roomLabelContainer = document.createElementNS("http://www.w3.org/2000/svg", "g")
     roomLabelContainer.setAttributeNS(null, "id", roomLabelContainerId)
     //svg.insertBefore(roomLabelContainer, svg.children[0])
@@ -165,7 +171,7 @@ function roomIdToName(parsedJson, id) {
     if (records.length == 0) {
         return "";
     }
-    names = records.sort((a, b) => b.nameWeight - a.nameWeight).map(x => x.name);
+    names = records.sort((a, b) => b.nameWeight - a.nameWeight).map(x => x.name).slice(0, 1);
     return names.join(",");
 }
 

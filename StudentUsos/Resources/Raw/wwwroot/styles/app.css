@@ -1,0 +1,56 @@
+﻿body {
+    background: #1b1b1b;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+}
+
+svg {
+    margin: 50px;
+}
+
+#labels {
+    fill: white;
+    pointer-events: none;
+}
+
+#rooms *, #pomieszczenia * {
+    fill: #2d2d2d !important;
+    fill-opacity: 1 !important;
+    stroke: white !important;
+    stroke-width: 1px !important;
+}
+
+#rooms .activeRoom {
+    fill: #00A6E5 !important;
+}
+
+#interaction {
+    display: none;
+}
+
+#budowlanka_3pt *, #budowlanka_1pt *,
+#budowlanka_dot *, #drzwi *, #schody * {
+    stroke: #AAA;
+}
+
+#drogi * {
+    fill: gray;
+}
+
+#here_i_am, #kioskIndicator, #hereIam {
+    display: none;
+}
+
+#ikony * {
+    fill: white;
+}
+
+#oznaczenia > text {
+    dominant-baseline: middle;
+    text-anchor: middle;
+    fill: white;
+    pointer-events: none;
+}

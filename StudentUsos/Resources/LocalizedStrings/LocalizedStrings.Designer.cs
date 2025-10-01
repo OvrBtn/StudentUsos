@@ -19,7 +19,7 @@ namespace StudentUsos.Resources.LocalizedStrings {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class LocalizedStrings {
@@ -250,6 +250,15 @@ namespace StudentUsos.Resources.LocalizedStrings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Buildings.
+        /// </summary>
+        internal static string Buildings {
+            get {
+                return ResourceManager.GetString("Buildings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Calendar.
         /// </summary>
         internal static string Calendar {
@@ -385,6 +394,51 @@ namespace StudentUsos.Resources.LocalizedStrings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Campus.
+        /// </summary>
+        internal static string Campus {
+            get {
+                return ResourceManager.GetString("Campus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Campus map.
+        /// </summary>
+        internal static string CampusMap {
+            get {
+                return ResourceManager.GetString("CampusMap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Suggestion not sent: Name for given room can be suggested only once.
+        /// </summary>
+        internal static string CampusMapPage_SuggestionAlreadyRecorder {
+            get {
+                return ResourceManager.GetString("CampusMapPage_SuggestionAlreadyRecorder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Suggestion sent successfully.
+        /// </summary>
+        internal static string CampusMapPage_SuggestionSentSuccessfully {
+            get {
+                return ResourceManager.GetString("CampusMapPage_SuggestionSentSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Suggestion could not be saved.
+        /// </summary>
+        internal static string CampusMapPage_SuggestionUnexpectedStatusCode {
+            get {
+                return ResourceManager.GetString("CampusMapPage_SuggestionUnexpectedStatusCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         internal static string Cancel {
@@ -466,6 +520,15 @@ namespace StudentUsos.Resources.LocalizedStrings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Connection error.
+        /// </summary>
+        internal static string Errors_ConnectionError {
+            get {
+                return ResourceManager.GetString("Errors_ConnectionError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         internal static string Errors_Error {
@@ -498,6 +561,15 @@ namespace StudentUsos.Resources.LocalizedStrings {
         internal static string FinalGrades {
             get {
                 return ResourceManager.GetString("FinalGrades", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Floors.
+        /// </summary>
+        internal static string Floors {
+            get {
+                return ResourceManager.GetString("Floors", resourceCulture);
             }
         }
         
@@ -1117,6 +1189,51 @@ namespace StudentUsos.Resources.LocalizedStrings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please use only letters, numbers, spaces, and basic punctuation (.,-_).
+        /// </summary>
+        internal static string RoomDetailsPage_AllowedCharacters {
+            get {
+                return ResourceManager.GetString("RoomDetailsPage_AllowedCharacters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alternative names.
+        /// </summary>
+        internal static string RoomDetailsPage_AlternativeNames {
+            get {
+                return ResourceManager.GetString("RoomDetailsPage_AlternativeNames", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Room name.
+        /// </summary>
+        internal static string RoomDetailsPage_RoomName {
+            get {
+                return ResourceManager.GetString("RoomDetailsPage_RoomName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send.
+        /// </summary>
+        internal static string RoomDetailsPage_Send {
+            get {
+                return ResourceManager.GetString("RoomDetailsPage_Send", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Suggest room name.
+        /// </summary>
+        internal static string RoomDetailsPage_SuggestRoomName {
+            get {
+                return ResourceManager.GetString("RoomDetailsPage_SuggestRoomName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No surveys to fill.
         /// </summary>
         internal static string SatisfactionSurveysPage_Empty {
@@ -1275,6 +1392,15 @@ namespace StudentUsos.Resources.LocalizedStrings {
         internal static string SettingsPage_TestingTabTitle {
             get {
                 return ResourceManager.GetString("SettingsPage_TestingTabTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Something went wrong.
+        /// </summary>
+        internal static string SomethingWentWrong {
+            get {
+                return ResourceManager.GetString("SomethingWentWrong", resourceCulture);
             }
         }
         

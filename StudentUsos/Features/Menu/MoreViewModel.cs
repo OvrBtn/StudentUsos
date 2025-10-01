@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using StudentUsos.Features.Authorization.Services;
 using StudentUsos.Features.Calendar.Views;
+using StudentUsos.Features.CampusMap.Views;
 using StudentUsos.Features.Grades.Views;
 using StudentUsos.Features.Groups.Views;
 using StudentUsos.Features.Payments.Views;
@@ -64,6 +65,12 @@ public partial class MoreViewModel : BaseViewModel
     async Task GoToPaymentsPageAsync()
     {
         await navigationService.PushAsync<PaymentsPage>();
+    }
+
+    [RelayCommand]
+    async Task GoToCampusMapPageAsync()
+    {
+        await navigationService.PushAsync<CampusMapPage>();
     }
 
     [RelayCommand]

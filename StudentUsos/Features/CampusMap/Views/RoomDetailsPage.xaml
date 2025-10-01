@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup
+    x:Class="StudentUsos.Features.CampusMap.Views.RoomDetailsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:StudentUsos.ViewModels"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
+    xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
+    xmlns:models="clr-namespace:StudentUsos.Features.CampusMap.Models"
+    x:DataType="local:RoomDetailsViewModel"
+    Color="Transparent"
+    xmlns:local="clr-namespace:StudentUsos.Features.CampusMap.Views">
+
+    <toolkit:Popup.Resources>
+        <ResourceDictionary>
+
+            <Style TargetType="Button">
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup Name="CommonStates">
+
+                            <VisualState Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="Opacity" Value="1" />
+                                    <Setter Property="TextColor" Value="White" />
+                                </VisualState.Setters>
+                            </VisualState>
+
+                            <VisualState Name="Disabled">
+                                <VisualState.Setters>
+                                    <Setter Property="Opacity" Value="0.9" />
+                                    <Setter Property="TextColor" Value="Gray" />
+                                </VisualState.Setters>
+                            </VisualState>
+
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+        </ResourceDictionary>
+    </toolkit:Popup.Resources>
+
+    <StackLayout Padding="10, 0" WidthRequest="500">
+        <Border Margin="20, 0" Padding="10" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
+            <StackLayout Margin="10" Spacing="15">
+
+                <StackLayout IsVisible="{Binding Parameters.HasRoomName}">
+                    <Label Text="{x:Static strings:LocalizedStrings.RoomDetailsPage_RoomName}" FontSize= "20" HorizontalTextAlignment="Center"/>
+                    <Label Text="{Binding Parameters.RoomName}" FontSize="20" HorizontalTextAlignment="Center"/>
+                </StackLayout>
+
+                <StackLayout IsVisible="{Binding Parameters.HasRoomName}">
+                    <Label Text="{x:Static strings:LocalizedStrings.RoomDetailsPage_AlternativeNames}" FontSize="14" HorizontalTextAlignment="Center"/>
+                    <!--<Label Text="{Binding Parameters.AdditionalRoomNamesJoined}" FontSize="14" HorizontalTextAlignment="Center"/>-->
+
+                    <CollectionView ItemsSource="{Binding Parameters.FullRoomInfos}" Margin="15,0,15,0">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:RoomInfo">
+                                <Grid ColumnDefinitions="*, auto, auto" Margin="0,5,0,5">
+                                    <Label Grid.Column="0" Text="{Binding Name}" VerticalTextAlignment="Center"></Label>
+                                    <Grid Grid.Column="1">
+                                        <Image Source="thumb_up.png" HeightRequest="25" Margin="10"/>
+                                        <Image Source="thumbs_up_fill.png" HeightRequest="25" Margin="10" IsVisible="{Binding IsUpvoted}"/>
+                                        <Button BackgroundColor="Transparent" Command="{Binding Source={RelativeSource AncestorType={x:Type local:RoomDetailsViewModel}}, 
+                                            Path=UpvoteButtonPressedCommand}" CommandParameter="{Binding .}"/>
+                                    </Grid>
+                                    <Grid Grid.Column="2">
+                                        <Image Source="thumb_down.png" HeightRequest="25" Margin="10"/>
+                                        <Image Source="thumbs_down_fill.png" HeightRequest="25" Margin="10" IsVisible="{Binding IsDownvoted}"/>
+                                        <Button BackgroundColor="Transparent" Command="{Binding Source={RelativeSource AncestorType={x:Type local:RoomDetailsViewModel}}, 
+                                            Path=DownvoteButtonPressedCommand}" CommandParameter="{Binding .}"></Button>
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+
+                <StackLayout Spacing="5">
+                    <Label Text="{x:Static strings:LocalizedStrings.RoomDetailsPage_SuggestRoomName}" HorizontalTextAlignment="Center"></Label>
+                    <dxe:MultilineEdit TextColor="White"
+                                       BorderColor="{StaticResource Primary}" MaxLineCount="2" MinLineCount="1"
+                                       CursorColor="{StaticResource Primary}" FocusedBorderColor="{StaticResource Primary}"
+                                       MaxCharacterCount="30" TextChangedCommand="{Binding TextChangedCommand}"
+                                       ErrorColor="Red" ErrorText="{x:Static strings:LocalizedStrings.RoomDetailsPage_AllowedCharacters}"
+                                       HasError="{Binding HasError}" MaxCharacterCountOverflowMode="LimitInput"
+                                       Text="{Binding UserSuggestion, Mode=TwoWay}"/>
+                    <Button Text="{x:Static strings:LocalizedStrings.RoomDetailsPage_Send}" Margin="0,5,0,0"
+                            Command="{Binding SendButtonPressedCommand}"
+                            IsEnabled="{Binding IsSendButtonEnabled}"/>
+                </StackLayout>
+
+            </StackLayout>
+        </Border>
+    </StackLayout>
+
+</toolkit:Popup>

@@ -5,8 +5,10 @@ using System.Text.Json.Serialization;
 
 namespace StudentUsos.Helpers;
 
-[JsonSerializable(typeof(Dictionary<string, string>)), JsonConverter(typeof(JsonObjectToStringConverter))]
-internal partial class UtilitiesJsonContext : JsonSerializerContext
+[JsonSerializable(typeof(Dictionary<string, string>)), 
+    JsonConverter(typeof(JsonObjectToStringConverter)),
+    JsonSerializable(typeof(List<string>))]
+internal partial class JsonContext : JsonSerializerContext
 { }
 
 public static class Utilities
@@ -265,22 +267,32 @@ public static class Utilities
         try
         {
             if (string.IsNullOrEmpty(json)) return string.Empty;
-            var deserialized = JsonSerializer.Deserialize(json, UtilitiesJsonContext.Default.DictionaryStringString);
+            var deserialized = JsonSerializer.Deserialize(json, JsonContext.Default.DictionaryStringString);
             if (deserialized is null)
             {
                 return string.Empty;
             }
 
-            if (deserialized.TryGetValue(languageName, out var result) && string.IsNullOrEmpty(result) == false) return result;
-            //first backup language
-            if (deserialized.TryGetValue("en", out var result2) && string.IsNullOrEmpty(result2) == false) return result2;
-            //second backup language
-            if (deserialized.TryGetValue("pl", out var result3)) return result3;
-            return string.Empty;
+            return GetLocalizedString(deserialized, languageName);
         }
         catch
         {
             return "localized string error";
         }
+    }
+
+    public static string GetLocalizedString(Dictionary<string, string> variants)
+    {
+        return GetLocalizedString(variants, CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+    }
+
+    public static string GetLocalizedString(Dictionary<string, string> variants, string languageName)
+    {
+        if (variants.TryGetValue(languageName, out var result) && string.IsNullOrEmpty(result) == false) return result;
+        //first backup language
+        if (variants.TryGetValue("en", out var result2) && string.IsNullOrEmpty(result2) == false) return result2;
+        //second backup language
+        if (variants.TryGetValue("pl", out var result3)) return result3;
+        return string.Empty;
     }
 }

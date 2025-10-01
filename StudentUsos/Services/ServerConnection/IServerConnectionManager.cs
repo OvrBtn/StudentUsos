@@ -78,7 +78,7 @@ public interface IServerConnectionManager
         int timeout = HttpClientDefaultTimeoutSeconds);
 
     /// <summary>
-    /// Works same as <see cref="SendAuthorizedPostRequestAsync(string, Dictionary{string, string}, AuthorizationMode, int)"/>
+    /// Works same as <see cref="SendAuthorizedPostRequestAsync(string, string, AuthorizationMode, int)"/>
     /// but handles serializing post body
     /// </summary>
     /// <param name="endpoint">Last segments of url, without /api/v1 e.g. logs/log</param>

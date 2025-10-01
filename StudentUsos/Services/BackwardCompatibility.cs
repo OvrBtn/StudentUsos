@@ -122,7 +122,7 @@ public static class BackwardCompatibility
         }
 
         Preferences.Set(AuthorizationService.SecureStorageKeys.AccessToken.ToString(), accessToken);
-        var deserialized = JsonSerializer.Deserialize(result.Response, UtilitiesJsonContext.Default.DictionaryStringString);
+        var deserialized = JsonSerializer.Deserialize(result.Response, JsonContext.Default.DictionaryStringString);
         if (deserialized is null)
         {
             return;

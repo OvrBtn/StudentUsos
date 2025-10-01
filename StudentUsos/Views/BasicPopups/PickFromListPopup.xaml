@@ -46,14 +46,14 @@
                         <CollectionView x:Name="optionsCollectionView" toolkit:StateView.StateKey="Loaded"
                                         VerticalOptions="FillAndExpand" ItemsSource="{Binding Options,Source={x:Reference self}}">
                             <CollectionView.ItemsLayout>
-                                <LinearItemsLayout SnapPointsAlignment="Center" SnapPointsType="Mandatory" Orientation="Vertical"></LinearItemsLayout>
+                                <LinearItemsLayout Orientation="Vertical"></LinearItemsLayout>
                             </CollectionView.ItemsLayout>
                             <CollectionView.Footer>
                                 <StackLayout Margin="15"></StackLayout>
                             </CollectionView.Footer>
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
-                                    <Button Text="{Binding .}" HeightRequest="75" FontSize="15" 
+                                    <Button Text="{Binding .}" MinimumHeightRequest="75" FontSize="15" 
                                             BackgroundColor="{StaticResource Primary}" Margin="10" 
                                             Clicked="OptionsButton_Clicked"/>
                                 </DataTemplate>

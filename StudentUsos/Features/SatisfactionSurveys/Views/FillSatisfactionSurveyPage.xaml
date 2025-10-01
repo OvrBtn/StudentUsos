@@ -94,7 +94,7 @@
                                     <dxe:MultilineEdit IsVisible="{Binding CurrentQuestion.AllowComment}" TextColor="White"
                                                        BorderColor="{StaticResource Primary}" MaxLineCount="15" MinLineCount="5"
                                                        CursorColor="{StaticResource Primary}" FocusedBorderColor="{StaticResource Primary}"
-                                                       MaxCharacterCount="{Binding CurrentQuestion.CommentMaxLength}"
+                                                       MaxCharacterCount="{Binding CurrentQuestion.CommentMaxLength}" MaxCharacterCountOverflowMode="LimitInput"
                                                        Text="{Binding CurrentQuestion.Comment, Mode=TwoWay}"/>
 
                                 </StackLayout>

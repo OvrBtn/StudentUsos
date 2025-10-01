@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup
+    x:Class="StudentUsos.Features.CampusMap.Views.CampusBuildingDetailsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:StudentUsos.ViewModels"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
+    xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
+    x:DataType="local:CampusBuildingDetailsPage"
+    Color="Transparent"
+    xmlns:local="clr-namespace:StudentUsos.Features.CampusMap.Views">
+
+    <StackLayout Padding="10, 0" WidthRequest="500">
+        <Border Margin="20,0" Padding="10" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
+            <StackLayout Margin="10" Spacing="15">
+
+                <StackLayout>
+                    <Label Text="{Binding Parameters.ShortName}" FontSize= "20" HorizontalTextAlignment="Center"/>
+                    <Label Text="{Binding Parameters.LongName}" FontSize="20" HorizontalTextAlignment="Center"/>
+                </StackLayout>
+
+            </StackLayout>
+        </Border>
+    </StackLayout>
+
+</toolkit:Popup>

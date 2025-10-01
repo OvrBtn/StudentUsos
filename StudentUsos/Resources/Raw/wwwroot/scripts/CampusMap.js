@@ -149,9 +149,10 @@ function assignOnClickEvents(rooms) {
 
             const roomId = clickedElement.getAttribute("roomid");
 
-            await window.HybridWebView.InvokeDotNet("ReceiveRoomClicked", [roomId]);
-
             setTimeout(() => { isCurrentlyClicking = false; }, 100);
+
+            window.HybridWebView.InvokeDotNet("ReceiveRoomClicked", [roomId]);
+
         });
     }
 }

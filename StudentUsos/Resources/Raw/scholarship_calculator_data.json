@@ -20,7 +20,7 @@
     "HasMultiplier": false,
     "IsSectionTitle": true,
     "Text": {
-      "pl": "WYSTĄPIENIA SEMINARYJNE LUB KONFERENCYJNE:"
+      "pl": "WYSTĄPIENIA SEMINARYJNE LUB KONFERENCYJNE: "
     }
   },
   {
@@ -32,15 +32,15 @@
     "HasMultiplier": false,
     "IsSectionTitle": true,
     "Text": {
-      "pl": "UCZELNIANE"
+      "pl": "UCZELNIANE "
     }
   },
   {
     "Id": 3,
     "ParentId": 2,
     "Depth": 3,
-    "PointMinimum": 2,
-    "PointMaximum": 2,
+    "PointMinimum": 16,
+    "PointMaximum": 16,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -51,8 +51,8 @@
     "Id": 4,
     "ParentId": 2,
     "Depth": 3,
-    "PointMinimum": 3,
-    "PointMaximum": 3,
+    "PointMinimum": 24,
+    "PointMaximum": 24,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -63,24 +63,24 @@
     "Id": 5,
     "ParentId": 2,
     "Depth": 3,
-    "PointMinimum": 4,
-    "PointMaximum": 4,
+    "PointMinimum": 32,
+    "PointMaximum": 32,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
-      "pl": "Autorstwo/współautorstwo i przedstawienie posteru na seminarium/konferencji  uczelnianej"
+      "pl": "Autorstwo/współautorstwo i przedstawienie posteru na seminarium/konferencji uczelnianej"
     }
   },
   {
     "Id": 6,
     "ParentId": 2,
     "Depth": 3,
-    "PointMinimum": 5,
-    "PointMaximum": 5,
+    "PointMinimum": 40,
+    "PointMaximum": 40,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
-      "pl": "Autorstwo/współautorstwo i wygłoszenie referatu na seminarium/konferencji  uczelnianej"
+      "pl": "Autorstwo/współautorstwo i wygłoszenie referatu na seminarium/konferencji uczelnianej"
     }
   },
   {
@@ -92,15 +92,15 @@
     "HasMultiplier": false,
     "IsSectionTitle": true,
     "Text": {
-      "pl": "KRAJOWE"
+      "pl": "KRAJOWE "
     }
   },
   {
     "Id": 8,
     "ParentId": 7,
     "Depth": 3,
-    "PointMinimum": 5,
-    "PointMaximum": 5,
+    "PointMinimum": 40,
+    "PointMaximum": 40,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -111,8 +111,8 @@
     "Id": 9,
     "ParentId": 7,
     "Depth": 3,
-    "PointMinimum": 6,
-    "PointMaximum": 6,
+    "PointMinimum": 48,
+    "PointMaximum": 48,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -123,24 +123,24 @@
     "Id": 10,
     "ParentId": 7,
     "Depth": 3,
-    "PointMinimum": 7,
-    "PointMaximum": 7,
+    "PointMinimum": 56,
+    "PointMaximum": 56,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
-      "pl": "Autorstwo/współautorstwo i przedstawienie posteru na seminarium/konferencji  krajowej"
+      "pl": "Autorstwo/współautorstwo i przedstawienie posteru na seminarium/konferencji krajowej"
     }
   },
   {
     "Id": 11,
     "ParentId": 7,
     "Depth": 3,
-    "PointMinimum": 8,
-    "PointMaximum": 8,
+    "PointMinimum": 64,
+    "PointMaximum": 64,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
-      "pl": "Autorstwo/współautorstwo i wygłoszenie referatu na seminarium/konferencji  krajowej"
+      "pl": "Autorstwo/współautorstwo i wygłoszenie referatu na seminarium/konferencji krajowej"
     }
   },
   {
@@ -152,15 +152,15 @@
     "HasMultiplier": false,
     "IsSectionTitle": true,
     "Text": {
-      "pl": "MIĘDZYNARODOWE"
+      "pl": "MIĘDZYNARODOWE "
     }
   },
   {
     "Id": 13,
     "ParentId": 12,
     "Depth": 3,
-    "PointMinimum": 8,
-    "PointMaximum": 8,
+    "PointMinimum": 64,
+    "PointMaximum": 64,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -171,8 +171,8 @@
     "Id": 14,
     "ParentId": 12,
     "Depth": 3,
-    "PointMinimum": 9,
-    "PointMaximum": 9,
+    "PointMinimum": 72,
+    "PointMaximum": 72,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -183,24 +183,24 @@
     "Id": 15,
     "ParentId": 12,
     "Depth": 3,
-    "PointMinimum": 10,
-    "PointMaximum": 10,
+    "PointMinimum": 80,
+    "PointMaximum": 80,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
-      "pl": "Autorstwo/współautorstwo i przedstawienie posteru na seminarium/konferencji  międzynarodowej"
+      "pl": "Autorstwo/współautorstwo i przedstawienie posteru na seminarium/konferencji międzynarodowej"
     }
   },
   {
     "Id": 16,
     "ParentId": 12,
     "Depth": 3,
-    "PointMinimum": 11,
-    "PointMaximum": 11,
+    "PointMinimum": 88,
+    "PointMaximum": 88,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
-      "pl": "Autorstwo/współautorstwo i wygłoszenie referatu na seminarium/konferencji  międzynarodowej"
+      "pl": "Autorstwo/współautorstwo i wygłoszenie referatu na seminarium/konferencji międzynarodowej"
     }
   },
   {
@@ -219,30 +219,43 @@
     "Id": 18,
     "ParentId": 17,
     "Depth": 2,
-    "PointMinimum": 3,
-    "PointMaximum": 3,
+    "PointMinimum": 24,
+    "PointMaximum": 24,
     "HasMultiplier": true,
-    "MultiplierLabel": " liczba publikacji",
+    "MultiplierLabel": "liczba publikacji x liczba punktów",
     "IsSectionTitle": false,
     "Text": {
-      "pl": "Książki/czasopisma polskie"
+      "pl": "Publikacja naukowa poddana recenzji naukowej, niefigurująca w bazach Web of Science ani Scopus oraz nieznajdująca się w wykazie czasopism Ministerstwa Nauki i Szkolnictwa Wyższego "
     }
   },
   {
     "Id": 19,
     "ParentId": 17,
     "Depth": 2,
-    "PointMinimum": 5,
-    "PointMaximum": 5,
+    "PointMinimum": 40,
+    "PointMaximum": 40,
     "HasMultiplier": true,
-    "MultiplierLabel": " liczba publikacji",
+    "MultiplierLabel": "liczba publikacji x liczba punktów",
     "IsSectionTitle": false,
     "Text": {
-      "pl": "Książki/czasopisma zagraniczne"
+      "pl": "Publikacja naukowa ujęta w wykazie czasopism Ministerstwa Nauki i Szkolnictwa Wyższego, ale niefigurująca w bazach Web of Science ani Scopus "
     }
   },
   {
     "Id": 20,
+    "ParentId": 17,
+    "Depth": 2,
+    "PointMinimum": 80,
+    "PointMaximum": 80,
+    "HasMultiplier": true,
+    "MultiplierLabel": "liczba publikacji x liczba punktów",
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Publikacja naukowa figurująca w bazie Web of Science lub Scopus "
+    }
+  },
+  {
+    "Id": 21,
     "ParentId": 0,
     "Depth": 1,
     "PointMinimum": 0,
@@ -250,15 +263,15 @@
     "HasMultiplier": false,
     "IsSectionTitle": true,
     "Text": {
-      "pl": "PATENTY"
+      "pl": "PATENTY "
     }
   },
   {
-    "Id": 21,
-    "ParentId": 20,
+    "Id": 22,
+    "ParentId": 21,
     "Depth": 2,
-    "PointMinimum": 4,
-    "PointMaximum": 4,
+    "PointMinimum": 32,
+    "PointMaximum": 32,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -266,11 +279,11 @@
     }
   },
   {
-    "Id": 22,
-    "ParentId": 20,
+    "Id": 23,
+    "ParentId": 21,
     "Depth": 2,
-    "PointMinimum": 6,
-    "PointMaximum": 6,
+    "PointMinimum": 48,
+    "PointMaximum": 48,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -278,11 +291,11 @@
     }
   },
   {
-    "Id": 23,
-    "ParentId": 20,
+    "Id": 24,
+    "ParentId": 21,
     "Depth": 2,
-    "PointMinimum": 8,
-    "PointMaximum": 8,
+    "PointMinimum": 80,
+    "PointMaximum": 80,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -290,11 +303,11 @@
     }
   },
   {
-    "Id": 24,
-    "ParentId": 20,
+    "Id": 25,
+    "ParentId": 21,
     "Depth": 2,
-    "PointMinimum": 9,
-    "PointMaximum": 9,
+    "PointMinimum": 96,
+    "PointMaximum": 96,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -302,7 +315,7 @@
     }
   },
   {
-    "Id": 25,
+    "Id": 26,
     "ParentId": 0,
     "Depth": 1,
     "PointMinimum": 0,
@@ -310,24 +323,35 @@
     "HasMultiplier": false,
     "IsSectionTitle": true,
     "Text": {
-      "pl": "PROJEKTY BADAWCZE ZWIĄZANE Z KIERUNKIEM STUDIÓW "
-    }
-  },
-  {
-    "Id": 26,
-    "ParentId": 25,
-    "Depth": 2,
-    "PointMinimum": 5,
-    "PointMaximum": 5,
-    "HasMultiplier": true,
-    "MultiplierLabel": " liczba projektów",
-    "IsSectionTitle": false,
-    "Text": {
-      "pl": "Udział w projekcie badawczym związanym z kierunkiem studiów i realizowanym lub  współrealizowanym przez Politechnikę Poznańską "
+      "pl": "PROJEKTY BADAWCZE ZWIĄZANE Z KIERUNKIEM STUDIÓW REALIZOWANE LUB WSPÓŁREALIZOWANE PRZEZ POLITECHNIKĘ POZNAŃSKĄ ORAZ PROJEKTY PAN, ESA, NASA "
     }
   },
   {
     "Id": 27,
+    "ParentId": 26,
+    "Depth": 2,
+    "PointMinimum": 40,
+    "PointMaximum": 40,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Udział w jednym projekcie badawczym"
+    }
+  },
+  {
+    "Id": 28,
+    "ParentId": 26,
+    "Depth": 2,
+    "PointMinimum": 80,
+    "PointMaximum": 80,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Udział w dwóch i więcej projektach badawczych"
+    }
+  },
+  {
+    "Id": 29,
     "ParentId": 0,
     "Depth": 1,
     "PointMinimum": 0,
@@ -335,15 +359,15 @@
     "HasMultiplier": false,
     "IsSectionTitle": true,
     "Text": {
-      "pl": "MIĘDZYNARODOWE KONKURSY/OLIMPIADY WIEDZY ZWIĄZANE Z KIERUNKIEM STUDIÓW"
+      "pl": "MIĘDZYNARODOWE KONKURSY/OLIMPIADY WIEDZY ZWIĄZANE Z KIERUNKIEM STUDIÓW "
     }
   },
   {
-    "Id": 28,
-    "ParentId": 27,
+    "Id": 30,
+    "ParentId": 29,
     "Depth": 2,
-    "PointMinimum": 2,
-    "PointMaximum": 2,
+    "PointMinimum": 16,
+    "PointMaximum": 16,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -351,11 +375,11 @@
     }
   },
   {
-    "Id": 29,
-    "ParentId": 27,
+    "Id": 31,
+    "ParentId": 29,
     "Depth": 2,
-    "PointMinimum": 7,
-    "PointMaximum": 7,
+    "PointMinimum": 56,
+    "PointMaximum": 56,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -363,11 +387,11 @@
     }
   },
   {
-    "Id": 30,
-    "ParentId": 27,
+    "Id": 32,
+    "ParentId": 29,
     "Depth": 2,
-    "PointMinimum": 8,
-    "PointMaximum": 8,
+    "PointMinimum": 64,
+    "PointMaximum": 64,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -375,11 +399,11 @@
     }
   },
   {
-    "Id": 31,
-    "ParentId": 27,
+    "Id": 33,
+    "ParentId": 29,
     "Depth": 2,
-    "PointMinimum": 9,
-    "PointMaximum": 9,
+    "PointMinimum": 72,
+    "PointMaximum": 72,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -387,11 +411,11 @@
     }
   },
   {
-    "Id": 32,
-    "ParentId": 27,
+    "Id": 34,
+    "ParentId": 29,
     "Depth": 2,
-    "PointMinimum": 10,
-    "PointMaximum": 10,
+    "PointMinimum": 80,
+    "PointMaximum": 80,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -399,11 +423,11 @@
     }
   },
   {
-    "Id": 33,
-    "ParentId": 27,
+    "Id": 35,
+    "ParentId": 29,
     "Depth": 2,
-    "PointMinimum": 11,
-    "PointMaximum": 11,
+    "PointMinimum": 88,
+    "PointMaximum": 88,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -411,11 +435,11 @@
     }
   },
   {
-    "Id": 34,
-    "ParentId": 27,
+    "Id": 36,
+    "ParentId": 29,
     "Depth": 2,
-    "PointMinimum": 12,
-    "PointMaximum": 12,
+    "PointMinimum": 96,
+    "PointMaximum": 96,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -423,7 +447,7 @@
     }
   },
   {
-    "Id": 35,
+    "Id": 37,
     "ParentId": 0,
     "Depth": 1,
     "PointMinimum": 0,
@@ -431,51 +455,27 @@
     "HasMultiplier": false,
     "IsSectionTitle": true,
     "Text": {
-      "pl": "INNE KONKURSY - ARCHITEKTURA/URBANISTYKA"
-    }
-  },
-  {
-    "Id": 36,
-    "ParentId": 35,
-    "Depth": 2,
-    "PointMinimum": 0,
-    "PointMaximum": 0,
-    "HasMultiplier": false,
-    "IsSectionTitle": true,
-    "Text": {
-      "pl": "WOJEWÓDZKIE"
-    }
-  },
-  {
-    "Id": 37,
-    "ParentId": 36,
-    "Depth": 3,
-    "PointMinimum": 5,
-    "PointMaximum": 5,
-    "HasMultiplier": false,
-    "IsSectionTitle": false,
-    "Text": {
-      "pl": "Wyróżnienie w konkursie 2 pkt  Drugie i trzecie miejsce w konkursie 3 pkt  Pierwsze miejsce w konkursie"
+      "pl": "INNE KONKURSY - ARCHITEKTURA/URBANISTYKA "
     }
   },
   {
     "Id": 38,
-    "ParentId": 35,
+    "ParentId": 37,
     "Depth": 2,
     "PointMinimum": 0,
     "PointMaximum": 0,
     "HasMultiplier": false,
     "IsSectionTitle": true,
     "Text": {
-      "pl": "KRAJOWE"
+      "pl": "WOJEWÓDZKIE "
     }
   },
   {
     "Id": 39,
     "ParentId": 38,
     "Depth": 3,
-    "PointMinimum": 4,
-    "PointMaximum": 4,
+    "PointMinimum": 16,
+    "PointMaximum": 16,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -486,8 +486,8 @@
     "Id": 40,
     "ParentId": 38,
     "Depth": 3,
-    "PointMinimum": 6,
-    "PointMaximum": 6,
+    "PointMinimum": 24,
+    "PointMaximum": 24,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -498,8 +498,8 @@
     "Id": 41,
     "ParentId": 38,
     "Depth": 3,
-    "PointMinimum": 8,
-    "PointMaximum": 8,
+    "PointMinimum": 40,
+    "PointMaximum": 40,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -508,34 +508,22 @@
   },
   {
     "Id": 42,
-    "ParentId": 35,
+    "ParentId": 37,
     "Depth": 2,
     "PointMinimum": 0,
     "PointMaximum": 0,
     "HasMultiplier": false,
     "IsSectionTitle": true,
     "Text": {
-      "pl": "MIĘDZYNARODOWE"
+      "pl": "KRAJOWE "
     }
   },
   {
     "Id": 43,
     "ParentId": 42,
     "Depth": 3,
-    "PointMinimum": 2,
-    "PointMaximum": 2,
-    "HasMultiplier": false,
-    "IsSectionTitle": false,
-    "Text": {
-      "pl": "Udział"
-    }
-  },
-  {
-    "Id": 44,
-    "ParentId": 42,
-    "Depth": 3,
-    "PointMinimum": 7,
-    "PointMaximum": 7,
+    "PointMinimum": 32,
+    "PointMaximum": 32,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -543,11 +531,11 @@
     }
   },
   {
-    "Id": 45,
+    "Id": 44,
     "ParentId": 42,
     "Depth": 3,
-    "PointMinimum": 9,
-    "PointMaximum": 9,
+    "PointMinimum": 48,
+    "PointMaximum": 48,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -555,11 +543,11 @@
     }
   },
   {
-    "Id": 46,
+    "Id": 45,
     "ParentId": 42,
     "Depth": 3,
-    "PointMinimum": 12,
-    "PointMaximum": 12,
+    "PointMinimum": 64,
+    "PointMaximum": 64,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -567,347 +555,23 @@
     }
   },
   {
+    "Id": 46,
+    "ParentId": 37,
+    "Depth": 2,
+    "PointMinimum": 0,
+    "PointMaximum": 0,
+    "HasMultiplier": false,
+    "IsSectionTitle": true,
+    "Text": {
+      "pl": "MIĘDZYNARODOWE "
+    }
+  },
+  {
     "Id": 47,
-    "ParentId": 0,
-    "Depth": 1,
-    "PointMinimum": 0,
-    "PointMaximum": 0,
-    "HasMultiplier": false,
-    "IsSectionTitle": true,
-    "Text": {
-      "pl": "KOŁA NAUKOWE:"
-    }
-  },
-  {
-    "Id": 48,
-    "ParentId": 47,
-    "Depth": 2,
-    "PointMinimum": 1,
-    "PointMaximum": 1,
-    "HasMultiplier": false,
-    "IsSectionTitle": false,
-    "Text": {
-      "pl": "Członek"
-    }
-  },
-  {
-    "Id": 49,
-    "ParentId": 47,
-    "Depth": 2,
-    "PointMinimum": 3,
-    "PointMaximum": 3,
-    "HasMultiplier": false,
-    "IsSectionTitle": false,
-    "Text": {
-      "pl": "Aktywny członek, skarbnik"
-    }
-  },
-  {
-    "Id": 50,
-    "ParentId": 47,
-    "Depth": 2,
-    "PointMinimum": 4,
-    "PointMaximum": 4,
-    "HasMultiplier": false,
-    "IsSectionTitle": false,
-    "Text": {
-      "pl": "Sekretarz, koordynator akcji"
-    }
-  },
-  {
-    "Id": 51,
-    "ParentId": 47,
-    "Depth": 2,
-    "PointMinimum": 5,
-    "PointMaximum": 5,
-    "HasMultiplier": false,
-    "IsSectionTitle": false,
-    "Text": {
-      "pl": "Przewodniczący sekcji, lider"
-    }
-  },
-  {
-    "Id": 52,
-    "ParentId": 47,
-    "Depth": 2,
-    "PointMinimum": 6,
-    "PointMaximum": 6,
-    "HasMultiplier": false,
-    "IsSectionTitle": false,
-    "Text": {
-      "pl": "Wiceprzewodniczący koła"
-    }
-  },
-  {
-    "Id": 53,
-    "ParentId": 47,
-    "Depth": 2,
-    "PointMinimum": 7,
-    "PointMaximum": 7,
-    "HasMultiplier": false,
-    "IsSectionTitle": false,
-    "Text": {
-      "pl": "Przewodniczący koła"
-    }
-  },
-  {
-    "Id": 54,
-    "ParentId": 0,
-    "Depth": 1,
-    "PointMinimum": 0,
-    "PointMaximum": 0,
-    "HasMultiplier": false,
-    "IsSectionTitle": true,
-    "Text": {
-      "pl": "INNE"
-    }
-  },
-  {
-    "Id": 55,
-    "ParentId": 54,
-    "Depth": 2,
-    "PointMinimum": 0,
-    "PointMaximum": 0,
-    "HasMultiplier": false,
-    "IsSectionTitle": true,
-    "Text": {
-      "pl": "SAMORZĄD, ORGANIZACJE, KOMISJE"
-    }
-  },
-  {
-    "Id": 56,
-    "ParentId": 55,
+    "ParentId": 46,
     "Depth": 3,
-    "PointMinimum": 0,
-    "PointMaximum": 0,
-    "HasMultiplier": false,
-    "IsSectionTitle": true,
-    "Text": {
-      "pl": "Samorząd"
-    }
-  },
-  {
-    "Id": 57,
-    "ParentId": 56,
-    "Depth": 4,
-    "PointMinimum": 1,
-    "PointMaximum": 1,
-    "HasMultiplier": false,
-    "IsSectionTitle": false,
-    "Text": {
-      "pl": "Członek"
-    }
-  },
-  {
-    "Id": 58,
-    "ParentId": 56,
-    "Depth": 4,
-    "PointMinimum": 3,
-    "PointMaximum": 3,
-    "HasMultiplier": false,
-    "IsSectionTitle": false,
-    "Text": {
-      "pl": "Aktywny członek"
-    }
-  },
-  {
-    "Id": 59,
-    "ParentId": 56,
-    "Depth": 4,
-    "PointMinimum": 4,
-    "PointMaximum": 4,
-    "HasMultiplier": false,
-    "IsSectionTitle": false,
-    "Text": {
-      "pl": "Wiceprzewodniczący WRSS, członek KR/KW"
-    }
-  },
-  {
-    "Id": 60,
-    "ParentId": 56,
-    "Depth": 4,
-    "PointMinimum": 5,
-    "PointMaximum": 5,
-    "HasMultiplier": false,
-    "IsSectionTitle": false,
-    "Text": {
-      "pl": "Koordynator akcji"
-    }
-  },
-  {
-    "Id": 61,
-    "ParentId": 56,
-    "Depth": 4,
-    "PointMinimum": 6,
-    "PointMaximum": 6,
-    "HasMultiplier": false,
-    "IsSectionTitle": false,
-    "Text": {
-      "pl": "Sekretarz, Wiceprzewodniczący SSPP, Przewodniczący WRSS"
-    }
-  },
-  {
-    "Id": 62,
-    "ParentId": 56,
-    "Depth": 4,
-    "PointMinimum": 7,
-    "PointMaximum": 7,
-    "HasMultiplier": false,
-    "IsSectionTitle": false,
-    "Text": {
-      "pl": "Przewodniczący"
-    }
-  },
-  {
-    "Id": 63,
-    "ParentId": 55,
-    "Depth": 3,
-    "PointMinimum": 0,
-    "PointMaximum": 0,
-    "HasMultiplier": false,
-    "IsSectionTitle": true,
-    "Text": {
-      "pl": "Organizacje"
-    }
-  },
-  {
-    "Id": 64,
-    "ParentId": 63,
-    "Depth": 4,
-    "PointMinimum": 1,
-    "PointMaximum": 1,
-    "HasMultiplier": false,
-    "IsSectionTitle": false,
-    "Text": {
-      "pl": "Członek"
-    }
-  },
-  {
-    "Id": 65,
-    "ParentId": 63,
-    "Depth": 4,
-    "PointMinimum": 3,
-    "PointMaximum": 3,
-    "HasMultiplier": false,
-    "IsSectionTitle": false,
-    "Text": {
-      "pl": "Aktywny członek"
-    }
-  },
-  {
-    "Id": 66,
-    "ParentId": 63,
-    "Depth": 4,
-    "PointMinimum": 4,
-    "PointMaximum": 4,
-    "HasMultiplier": false,
-    "IsSectionTitle": false,
-    "Text": {
-      "pl": "Sekretarz, koordynator akcji"
-    }
-  },
-  {
-    "Id": 67,
-    "ParentId": 63,
-    "Depth": 4,
-    "PointMinimum": 5,
-    "PointMaximum": 5,
-    "HasMultiplier": false,
-    "IsSectionTitle": false,
-    "Text": {
-      "pl": "Przewodniczący sekcji, lider"
-    }
-  },
-  {
-    "Id": 68,
-    "ParentId": 63,
-    "Depth": 4,
-    "PointMinimum": 6,
-    "PointMaximum": 6,
-    "HasMultiplier": false,
-    "IsSectionTitle": false,
-    "Text": {
-      "pl": "Wiceprzewodniczący organizacji"
-    }
-  },
-  {
-    "Id": 69,
-    "ParentId": 63,
-    "Depth": 4,
-    "PointMinimum": 7,
-    "PointMaximum": 7,
-    "HasMultiplier": false,
-    "IsSectionTitle": false,
-    "Text": {
-      "pl": "Przewodniczący organizacji"
-    }
-  },
-  {
-    "Id": 70,
-    "ParentId": 55,
-    "Depth": 3,
-    "PointMinimum": 0,
-    "PointMaximum": 0,
-    "HasMultiplier": false,
-    "IsSectionTitle": true,
-    "Text": {
-      "pl": "Komisje"
-    }
-  },
-  {
-    "Id": 71,
-    "ParentId": 70,
-    "Depth": 4,
-    "PointMinimum": 1,
-    "PointMaximum": 1,
-    "HasMultiplier": false,
-    "IsSectionTitle": false,
-    "Text": {
-      "pl": "Członek komisji"
-    }
-  },
-  {
-    "Id": 72,
-    "ParentId": 70,
-    "Depth": 4,
-    "PointMinimum": 3,
-    "PointMaximum": 3,
-    "HasMultiplier": false,
-    "IsSectionTitle": false,
-    "Text": {
-      "pl": "Aktywny członek komisji"
-    }
-  },
-  {
-    "Id": 73,
-    "ParentId": 70,
-    "Depth": 4,
-    "PointMinimum": 4,
-    "PointMaximum": 4,
-    "HasMultiplier": false,
-    "IsSectionTitle": false,
-    "Text": {
-      "pl": "Członek KS/OKS"
-    }
-  },
-  {
-    "Id": 74,
-    "ParentId": 54,
-    "Depth": 2,
-    "PointMinimum": 0,
-    "PointMaximum": 0,
-    "HasMultiplier": false,
-    "IsSectionTitle": true,
-    "Text": {
-      "pl": "ZAWODY MIĘDZYNARODOWE NP. FORMUŁA STUDENT, SAE AERO DESIGN"
-    }
-  },
-  {
-    "Id": 75,
-    "ParentId": 74,
-    "Depth": 3,
-    "PointMinimum": 2,
-    "PointMaximum": 2,
+    "PointMinimum": 16,
+    "PointMaximum": 16,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -915,11 +579,395 @@
     }
   },
   {
+    "Id": 48,
+    "ParentId": 46,
+    "Depth": 3,
+    "PointMinimum": 56,
+    "PointMaximum": 56,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Wyróżnienie w konkursie"
+    }
+  },
+  {
+    "Id": 49,
+    "ParentId": 46,
+    "Depth": 3,
+    "PointMinimum": 72,
+    "PointMaximum": 72,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Drugie i trzecie miejsce w konkursie"
+    }
+  },
+  {
+    "Id": 50,
+    "ParentId": 46,
+    "Depth": 3,
+    "PointMinimum": 96,
+    "PointMaximum": 96,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Pierwsze miejsce w konkursie"
+    }
+  },
+  {
+    "Id": 51,
+    "ParentId": 0,
+    "Depth": 1,
+    "PointMinimum": 0,
+    "PointMaximum": 0,
+    "HasMultiplier": false,
+    "IsSectionTitle": true,
+    "Text": {
+      "pl": "KOŁA NAUKOWE "
+    }
+  },
+  {
+    "Id": 52,
+    "ParentId": 51,
+    "Depth": 2,
+    "PointMinimum": 8,
+    "PointMaximum": 8,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Członek"
+    }
+  },
+  {
+    "Id": 53,
+    "ParentId": 51,
+    "Depth": 2,
+    "PointMinimum": 24,
+    "PointMaximum": 24,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Aktywny członek, skarbnik"
+    }
+  },
+  {
+    "Id": 54,
+    "ParentId": 51,
+    "Depth": 2,
+    "PointMinimum": 32,
+    "PointMaximum": 32,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Sekretarz, koordynator akcji"
+    }
+  },
+  {
+    "Id": 55,
+    "ParentId": 51,
+    "Depth": 2,
+    "PointMinimum": 40,
+    "PointMaximum": 40,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Przewodniczący sekcji, lider"
+    }
+  },
+  {
+    "Id": 56,
+    "ParentId": 51,
+    "Depth": 2,
+    "PointMinimum": 48,
+    "PointMaximum": 48,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Wiceprzewodniczący koła"
+    }
+  },
+  {
+    "Id": 57,
+    "ParentId": 51,
+    "Depth": 2,
+    "PointMinimum": 56,
+    "PointMaximum": 56,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Przewodniczący koła"
+    }
+  },
+  {
+    "Id": 58,
+    "ParentId": 0,
+    "Depth": 1,
+    "PointMinimum": 0,
+    "PointMaximum": 0,
+    "HasMultiplier": false,
+    "IsSectionTitle": true,
+    "Text": {
+      "pl": "INNE "
+    }
+  },
+  {
+    "Id": 59,
+    "ParentId": 58,
+    "Depth": 2,
+    "PointMinimum": 0,
+    "PointMaximum": 0,
+    "HasMultiplier": false,
+    "IsSectionTitle": true,
+    "Text": {
+      "pl": "SAMORZĄD, ORGANIZACJE, KOMISJE "
+    }
+  },
+  {
+    "Id": 60,
+    "ParentId": 59,
+    "Depth": 3,
+    "PointMinimum": 0,
+    "PointMaximum": 0,
+    "HasMultiplier": false,
+    "IsSectionTitle": true,
+    "Text": {
+      "pl": "SAMORZĄD "
+    }
+  },
+  {
+    "Id": 61,
+    "ParentId": 60,
+    "Depth": 4,
+    "PointMinimum": 8,
+    "PointMaximum": 8,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Członek"
+    }
+  },
+  {
+    "Id": 62,
+    "ParentId": 60,
+    "Depth": 4,
+    "PointMinimum": 24,
+    "PointMaximum": 24,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Aktywny członek"
+    }
+  },
+  {
+    "Id": 63,
+    "ParentId": 60,
+    "Depth": 4,
+    "PointMinimum": 32,
+    "PointMaximum": 32,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Wiceprzewodniczący WRSS, członek KR/KW"
+    }
+  },
+  {
+    "Id": 64,
+    "ParentId": 60,
+    "Depth": 4,
+    "PointMinimum": 40,
+    "PointMaximum": 40,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Koordynator akcji"
+    }
+  },
+  {
+    "Id": 65,
+    "ParentId": 60,
+    "Depth": 4,
+    "PointMinimum": 48,
+    "PointMaximum": 48,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Sekretarz, Wiceprzewodniczący SSPP, Przewodniczący WRSS"
+    }
+  },
+  {
+    "Id": 66,
+    "ParentId": 60,
+    "Depth": 4,
+    "PointMinimum": 56,
+    "PointMaximum": 56,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Przewodniczący"
+    }
+  },
+  {
+    "Id": 67,
+    "ParentId": 59,
+    "Depth": 3,
+    "PointMinimum": 0,
+    "PointMaximum": 0,
+    "HasMultiplier": false,
+    "IsSectionTitle": true,
+    "Text": {
+      "pl": "ORGANIZACJE "
+    }
+  },
+  {
+    "Id": 68,
+    "ParentId": 67,
+    "Depth": 4,
+    "PointMinimum": 8,
+    "PointMaximum": 8,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Członek"
+    }
+  },
+  {
+    "Id": 69,
+    "ParentId": 67,
+    "Depth": 4,
+    "PointMinimum": 24,
+    "PointMaximum": 24,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Aktywny członek"
+    }
+  },
+  {
+    "Id": 70,
+    "ParentId": 67,
+    "Depth": 4,
+    "PointMinimum": 32,
+    "PointMaximum": 32,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Sekretarz, koordynator akcji"
+    }
+  },
+  {
+    "Id": 71,
+    "ParentId": 67,
+    "Depth": 4,
+    "PointMinimum": 40,
+    "PointMaximum": 40,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Przewodniczący sekcji, lider"
+    }
+  },
+  {
+    "Id": 72,
+    "ParentId": 67,
+    "Depth": 4,
+    "PointMinimum": 48,
+    "PointMaximum": 48,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Wiceprzewodniczący organizacji"
+    }
+  },
+  {
+    "Id": 73,
+    "ParentId": 67,
+    "Depth": 4,
+    "PointMinimum": 56,
+    "PointMaximum": 56,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Przewodniczący organizacji"
+    }
+  },
+  {
+    "Id": 74,
+    "ParentId": 59,
+    "Depth": 3,
+    "PointMinimum": 0,
+    "PointMaximum": 0,
+    "HasMultiplier": false,
+    "IsSectionTitle": true,
+    "Text": {
+      "pl": "KOMISJE "
+    }
+  },
+  {
+    "Id": 75,
+    "ParentId": 74,
+    "Depth": 4,
+    "PointMinimum": 8,
+    "PointMaximum": 8,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Członek komisji"
+    }
+  },
+  {
     "Id": 76,
     "ParentId": 74,
+    "Depth": 4,
+    "PointMinimum": 24,
+    "PointMaximum": 24,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Aktywny członek komisji (innej niż KS/OKS)"
+    }
+  },
+  {
+    "Id": 77,
+    "ParentId": 74,
+    "Depth": 4,
+    "PointMinimum": 32,
+    "PointMaximum": 32,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Aktywny członek KS/OKS"
+    }
+  },
+  {
+    "Id": 78,
+    "ParentId": 58,
+    "Depth": 2,
+    "PointMinimum": 0,
+    "PointMaximum": 0,
+    "HasMultiplier": false,
+    "IsSectionTitle": true,
+    "Text": {
+      "pl": "ZAWODY MIĘDZYNARODOWE NP. FORMUŁA STUDENT, SAE AERO DESIGN, RAILWAY CHALLENGE "
+    }
+  },
+  {
+    "Id": 79,
+    "ParentId": 78,
     "Depth": 3,
-    "PointMinimum": 4,
-    "PointMaximum": 4,
+    "PointMinimum": 16,
+    "PointMaximum": 16,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Udział"
+    }
+  },
+  {
+    "Id": 80,
+    "ParentId": 78,
+    "Depth": 3,
+    "PointMinimum": 32,
+    "PointMaximum": 32,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -927,11 +975,11 @@
     }
   },
   {
-    "Id": 77,
-    "ParentId": 74,
+    "Id": 81,
+    "ParentId": 78,
     "Depth": 3,
-    "PointMinimum": 6,
-    "PointMaximum": 6,
+    "PointMinimum": 48,
+    "PointMaximum": 48,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -939,11 +987,11 @@
     }
   },
   {
-    "Id": 78,
-    "ParentId": 74,
+    "Id": 82,
+    "ParentId": 78,
     "Depth": 3,
-    "PointMinimum": 9,
-    "PointMaximum": 9,
+    "PointMinimum": 72,
+    "PointMaximum": 72,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -951,11 +999,11 @@
     }
   },
   {
-    "Id": 79,
-    "ParentId": 74,
+    "Id": 83,
+    "ParentId": 78,
     "Depth": 3,
-    "PointMinimum": 12,
-    "PointMaximum": 12,
+    "PointMinimum": 96,
+    "PointMaximum": 96,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -963,7 +1011,7 @@
     }
   },
   {
-    "Id": 80,
+    "Id": 84,
     "ParentId": -1,
     "Depth": 0,
     "PointMinimum": 0,
@@ -975,71 +1023,23 @@
     }
   },
   {
-    "Id": 81,
-    "ParentId": 80,
-    "Depth": 1,
-    "PointMinimum": 0,
-    "PointMaximum": 0,
-    "HasMultiplier": false,
-    "IsSectionTitle": true,
-    "Text": {
-      "pl": "WOJEWÓDZKIE"
-    }
-  },
-  {
-    "Id": 82,
-    "ParentId": 81,
-    "Depth": 2,
-    "PointMinimum": 2,
-    "PointMaximum": 2,
-    "HasMultiplier": false,
-    "IsSectionTitle": false,
-    "Text": {
-      "pl": "Wyróżnienie w konkursie/festiwalu"
-    }
-  },
-  {
-    "Id": 83,
-    "ParentId": 81,
-    "Depth": 2,
-    "PointMinimum": 3,
-    "PointMaximum": 3,
-    "HasMultiplier": false,
-    "IsSectionTitle": false,
-    "Text": {
-      "pl": "Drugie i trzecie miejsce w konkursie/festiwalu"
-    }
-  },
-  {
-    "Id": 84,
-    "ParentId": 81,
-    "Depth": 2,
-    "PointMinimum": 5,
-    "PointMaximum": 5,
-    "HasMultiplier": false,
-    "IsSectionTitle": false,
-    "Text": {
-      "pl": "Pierwsze miejsce w konkursie/festiwalu"
-    }
-  },
-  {
     "Id": 85,
-    "ParentId": 80,
+    "ParentId": 84,
     "Depth": 1,
     "PointMinimum": 0,
     "PointMaximum": 0,
     "HasMultiplier": false,
     "IsSectionTitle": true,
     "Text": {
-      "pl": "KRAJOWE"
+      "pl": " WOJEWÓDZKIE "
     }
   },
   {
     "Id": 86,
     "ParentId": 85,
     "Depth": 2,
-    "PointMinimum": 4,
-    "PointMaximum": 4,
+    "PointMinimum": 16,
+    "PointMaximum": 16,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -1050,8 +1050,8 @@
     "Id": 87,
     "ParentId": 85,
     "Depth": 2,
-    "PointMinimum": 6,
-    "PointMaximum": 6,
+    "PointMinimum": 24,
+    "PointMaximum": 24,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -1062,8 +1062,8 @@
     "Id": 88,
     "ParentId": 85,
     "Depth": 2,
-    "PointMinimum": 8,
-    "PointMaximum": 8,
+    "PointMinimum": 40,
+    "PointMaximum": 40,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -1072,34 +1072,22 @@
   },
   {
     "Id": 89,
-    "ParentId": 80,
+    "ParentId": 84,
     "Depth": 1,
     "PointMinimum": 0,
     "PointMaximum": 0,
     "HasMultiplier": false,
     "IsSectionTitle": true,
     "Text": {
-      "pl": "MIĘDZYNARODOWE"
+      "pl": "KRAJOWE "
     }
   },
   {
     "Id": 90,
     "ParentId": 89,
     "Depth": 2,
-    "PointMinimum": 2,
-    "PointMaximum": 2,
-    "HasMultiplier": false,
-    "IsSectionTitle": false,
-    "Text": {
-      "pl": "Udział w konkursie/festiwalu"
-    }
-  },
-  {
-    "Id": 91,
-    "ParentId": 89,
-    "Depth": 2,
-    "PointMinimum": 7,
-    "PointMaximum": 7,
+    "PointMinimum": 32,
+    "PointMaximum": 32,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -1107,11 +1095,11 @@
     }
   },
   {
-    "Id": 92,
+    "Id": 91,
     "ParentId": 89,
     "Depth": 2,
-    "PointMinimum": 9,
-    "PointMaximum": 9,
+    "PointMinimum": 48,
+    "PointMaximum": 48,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -1119,11 +1107,11 @@
     }
   },
   {
-    "Id": 93,
+    "Id": 92,
     "ParentId": 89,
     "Depth": 2,
-    "PointMinimum": 12,
-    "PointMaximum": 12,
+    "PointMinimum": 64,
+    "PointMaximum": 64,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -1131,23 +1119,83 @@
     }
   },
   {
-    "Id": 94,
-    "ParentId": 80,
+    "Id": 93,
+    "ParentId": 84,
     "Depth": 1,
     "PointMinimum": 0,
     "PointMaximum": 0,
     "HasMultiplier": false,
     "IsSectionTitle": true,
     "Text": {
-      "pl": "INNE – CHÓR VOLANTES SONI, POLIGRODZIANIE, RADIO AFERA"
+      "pl": "MIĘDZYNARODOWE "
+    }
+  },
+  {
+    "Id": 94,
+    "ParentId": 93,
+    "Depth": 2,
+    "PointMinimum": 16,
+    "PointMaximum": 16,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Udział w konkursie/festiwalu"
     }
   },
   {
     "Id": 95,
-    "ParentId": 94,
+    "ParentId": 93,
     "Depth": 2,
-    "PointMinimum": 1,
-    "PointMaximum": 1,
+    "PointMinimum": 56,
+    "PointMaximum": 56,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Wyróżnienie w konkursie/festiwalu"
+    }
+  },
+  {
+    "Id": 96,
+    "ParentId": 93,
+    "Depth": 2,
+    "PointMinimum": 72,
+    "PointMaximum": 72,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Drugie i trzecie miejsce w konkursie/festiwalu"
+    }
+  },
+  {
+    "Id": 97,
+    "ParentId": 93,
+    "Depth": 2,
+    "PointMinimum": 96,
+    "PointMaximum": 96,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Pierwsze miejsce w konkursie/festiwalu"
+    }
+  },
+  {
+    "Id": 98,
+    "ParentId": 84,
+    "Depth": 1,
+    "PointMinimum": 0,
+    "PointMaximum": 0,
+    "HasMultiplier": false,
+    "IsSectionTitle": true,
+    "Text": {
+      "pl": "INNE – CHÓR VOLANTES SONI, POLIGRODZIANIE, RADIO AFERA "
+    }
+  },
+  {
+    "Id": 99,
+    "ParentId": 98,
+    "Depth": 2,
+    "PointMinimum": 8,
+    "PointMaximum": 8,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -1155,11 +1203,11 @@
     }
   },
   {
-    "Id": 96,
-    "ParentId": 94,
+    "Id": 100,
+    "ParentId": 98,
     "Depth": 2,
-    "PointMinimum": 3,
-    "PointMaximum": 3,
+    "PointMinimum": 24,
+    "PointMaximum": 24,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -1167,7 +1215,7 @@
     }
   },
   {
-    "Id": 97,
+    "Id": 101,
     "ParentId": -1,
     "Depth": 0,
     "PointMinimum": 0,
@@ -1179,23 +1227,23 @@
     }
   },
   {
-    "Id": 98,
-    "ParentId": 97,
+    "Id": 102,
+    "ParentId": 101,
     "Depth": 1,
     "PointMinimum": 0,
     "PointMaximum": 0,
     "HasMultiplier": false,
     "IsSectionTitle": true,
     "Text": {
-      "pl": "KRAJOWE"
+      "pl": "KRAJOWE "
     }
   },
   {
-    "Id": 99,
-    "ParentId": 98,
+    "Id": 103,
+    "ParentId": 102,
     "Depth": 2,
-    "PointMinimum": 1,
-    "PointMaximum": 1,
+    "PointMinimum": 8,
+    "PointMaximum": 8,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -1203,95 +1251,143 @@
     }
   },
   {
-    "Id": 100,
-    "ParentId": 98,
-    "Depth": 2,
-    "PointMinimum": 1,
-    "PointMaximum": 1,
-    "HasMultiplier": false,
-    "IsSectionTitle": false,
-    "Text": {
-      "pl": "Awans do Akademickich Mistrzostw Polski/Integracyjnych Mistrzostw Polski/Indywidualnych i Drużynowych Mistrzostw Polski"
-    }
-  },
-  {
-    "Id": 101,
-    "ParentId": 98,
-    "Depth": 2,
-    "PointMinimum": 2,
-    "PointMaximum": 2,
-    "HasMultiplier": false,
-    "IsSectionTitle": false,
-    "Text": {
-      "pl": "Awans do półfinałów Akademickich Mistrzostw Polski/Integracyjnych Mistrzostw  Polski/Indywidualnych i Drużynowych Mistrzostw Polski"
-    }
-  },
-  {
-    "Id": 102,
-    "ParentId": 98,
-    "Depth": 2,
-    "PointMinimum": 3,
-    "PointMaximum": 3,
-    "HasMultiplier": false,
-    "IsSectionTitle": false,
-    "Text": {
-      "pl": "Medal półfinałów Akademickich Mistrzostw Polski/Integracyjnych Mistrzostw Polski/  Indywidualnych i Drużynowych Mistrzostw Polski"
-    }
-  },
-  {
-    "Id": 103,
-    "ParentId": 98,
-    "Depth": 2,
-    "PointMinimum": 4,
-    "PointMaximum": 4,
-    "HasMultiplier": false,
-    "IsSectionTitle": false,
-    "Text": {
-      "pl": "Punktujący finaliści Akademickich Mistrzostw Polski/Integracyjnych Mistrzostw  Polski/Indywidualnych i Drużynowych Mistrzostw Polski"
-    }
-  },
-  {
     "Id": 104,
-    "ParentId": 98,
+    "ParentId": 102,
     "Depth": 2,
-    "PointMinimum": 5,
-    "PointMaximum": 7,
+    "PointMinimum": 8,
+    "PointMaximum": 8,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
-      "pl": "Wynik punktujący do drużynowego medalu Akademickich Mistrzostw Polski/  Integracyjnych Mistrzostw Polski/Indywidualnych i Drużynowych Mistrzostw Polski"
+      "pl": "Awans  do  Akademickich  Mistrzostw  Polski/Integracyjnych  Mistrzostw  Polski/Indywidualnych i Drużynowych Mistrzostw Polski"
     }
   },
   {
     "Id": 105,
-    "ParentId": 98,
+    "ParentId": 102,
     "Depth": 2,
-    "PointMinimum": 8,
-    "PointMaximum": 10,
+    "PointMinimum": 16,
+    "PointMaximum": 16,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
-      "pl": "Medaliści w konkurencjach indywidualnych lub w zespołowych grach sportowych  Akademickich Mistrzostw Polski/Integracyjnych Mistrzostw Polski/Indywidualnych  i Drużynowych Mistrzostw Polski - podium"
+      "pl": "Awans do półfinałów Akademickich Mistrzostw Polski/Integracyjnych Mistrzostw Polski/Indywidualnych i Drużynowych Mistrzostw Polski"
     }
   },
   {
     "Id": 106,
-    "ParentId": 97,
+    "ParentId": 102,
+    "Depth": 2,
+    "PointMinimum": 24,
+    "PointMaximum": 24,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Medal półfinałów Akademickich Mistrzostw Polski/Integracyjnych Mistrzostw Polski/Indywidualnych i Drużynowych Mistrzostw Polski"
+    }
+  },
+  {
+    "Id": 107,
+    "ParentId": 102,
+    "Depth": 2,
+    "PointMinimum": 32,
+    "PointMaximum": 32,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Punktujący finaliści Akademickich Mistrzostw Polski/Integracyjnych Mistrzostw Polski/Indywidualnych i Drużynowych Mistrzostw Polski"
+    }
+  },
+  {
+    "Id": 108,
+    "ParentId": 102,
+    "Depth": 2,
+    "PointMinimum": 40,
+    "PointMaximum": 40,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Wynik punktujący do drużynowego medalu Akademickich Mistrzostw Polski/Integracyjnych Mistrzostw Polski/Indywidualnych i Drużynowych Mistrzostw Polski, brązowy medal"
+    }
+  },
+  {
+    "Id": 109,
+    "ParentId": 102,
+    "Depth": 2,
+    "PointMinimum": 48,
+    "PointMaximum": 48,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Wynik punktujący do drużynowego medalu Akademickich Mistrzostw Polski/Integracyjnych Mistrzostw Polski/Indywidualnych i Drużynowych Mistrzostw Polski, srebrny medal"
+    }
+  },
+  {
+    "Id": 110,
+    "ParentId": 102,
+    "Depth": 2,
+    "PointMinimum": 56,
+    "PointMaximum": 56,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Wynik punktujący do drużynowego medalu Akademickich Mistrzostw Polski/Integracyjnych Mistrzostw Polski/Indywidualnych i Drużynowych Mistrzostw Polski, złoty medal"
+    }
+  },
+  {
+    "Id": 111,
+    "ParentId": 102,
+    "Depth": 2,
+    "PointMinimum": 64,
+    "PointMaximum": 64,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Medaliści w konkurencjach indywidualnych lub w zespołowych grach sportowych Akademickich Mistrzostw Polski/Integracyjnych Mistrzostw Polski/Indywidualnych i Drużynowych Mistrzostw Polski, brązowy medal"
+    }
+  },
+  {
+    "Id": 112,
+    "ParentId": 102,
+    "Depth": 2,
+    "PointMinimum": 72,
+    "PointMaximum": 72,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Medaliści w konkurencjach indywidualnych lub w zespołowych grach sportowych Akademickich Mistrzostw Polski/Integracyjnych Mistrzostw Polski/Indywidualnych i Drużynowych Mistrzostw Polski, srebrny medal"
+    }
+  },
+  {
+    "Id": 113,
+    "ParentId": 102,
+    "Depth": 2,
+    "PointMinimum": 80,
+    "PointMaximum": 80,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Medaliści w konkurencjach indywidualnych lub w zespołowych grach sportowych Akademickich Mistrzostw Polski/Integracyjnych Mistrzostw Polski/Indywidualnych i Drużynowych Mistrzostw Polski, złoty medal"
+    }
+  },
+  {
+    "Id": 114,
+    "ParentId": 101,
     "Depth": 1,
     "PointMinimum": 0,
     "PointMaximum": 0,
     "HasMultiplier": false,
     "IsSectionTitle": true,
     "Text": {
-      "pl": "EUROPEJSKIE"
+      "pl": "EUROPEJSKIE "
     }
   },
   {
-    "Id": 107,
-    "ParentId": 106,
+    "Id": 115,
+    "ParentId": 114,
     "Depth": 2,
-    "PointMinimum": 7,
-    "PointMaximum": 7,
+    "PointMinimum": 56,
+    "PointMaximum": 56,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -1299,35 +1395,59 @@
     }
   },
   {
-    "Id": 108,
-    "ParentId": 106,
+    "Id": 116,
+    "ParentId": 114,
     "Depth": 2,
-    "PointMinimum": 8,
-    "PointMaximum": 8,
+    "PointMinimum": 64,
+    "PointMaximum": 64,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
-      "pl": "Akademickie Mistrzostwa Europy, konkurencje indywidualne lub w grach  zespołowych - udział"
+      "pl": "Akademickie Mistrzostwa Europy, konkurencje indywidualne lub w grach zespołowych - udział"
     }
   },
   {
-    "Id": 109,
-    "ParentId": 106,
+    "Id": 117,
+    "ParentId": 114,
     "Depth": 2,
-    "PointMinimum": 9,
-    "PointMaximum": 11,
+    "PointMinimum": 72,
+    "PointMaximum": 72,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
-      "pl": "Akademickie Mistrzostwa Europy, konkurencje indywidualne lub w grach  zespołowych - podium"
+      "pl": "Akademickie Mistrzostwa Europy, konkurencje indywidualne lub w grach zespołowych, brązowy medal"
     }
   },
   {
-    "Id": 110,
-    "ParentId": 106,
+    "Id": 118,
+    "ParentId": 114,
     "Depth": 2,
-    "PointMinimum": 12,
-    "PointMaximum": 12,
+    "PointMinimum": 80,
+    "PointMaximum": 80,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Akademickie Mistrzostwa Europy, konkurencje indywidualne lub w grach zespołowych, srebrny medal"
+    }
+  },
+  {
+    "Id": 119,
+    "ParentId": 114,
+    "Depth": 2,
+    "PointMinimum": 88,
+    "PointMaximum": 88,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Akademickie Mistrzostwa Europy, konkurencje indywidualne lub w grach zespołowych, złoty medal"
+    }
+  },
+  {
+    "Id": 120,
+    "ParentId": 114,
+    "Depth": 2,
+    "PointMinimum": 96,
+    "PointMaximum": 96,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -1335,35 +1455,59 @@
     }
   },
   {
-    "Id": 111,
-    "ParentId": 106,
+    "Id": 121,
+    "ParentId": 114,
     "Depth": 2,
-    "PointMinimum": 13,
-    "PointMaximum": 15,
+    "PointMinimum": 104,
+    "PointMaximum": 104,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
-      "pl": "Mistrzostwa Europy, konkurencje indywidualne lub w grach zespołowych - podium"
+      "pl": "Mistrzostwa Europy, konkurencje indywidualne lub w grach zespołowych, brązowy medal"
     }
   },
   {
-    "Id": 112,
-    "ParentId": 97,
+    "Id": 122,
+    "ParentId": 114,
+    "Depth": 2,
+    "PointMinimum": 112,
+    "PointMaximum": 112,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Mistrzostwa Europy, konkurencje indywidualne lub w grach zespołowych, srebrny medal"
+    }
+  },
+  {
+    "Id": 123,
+    "ParentId": 114,
+    "Depth": 2,
+    "PointMinimum": 120,
+    "PointMaximum": 120,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Mistrzostwa Europy, konkurencje indywidualne lub w grach zespołowych, złoty medal"
+    }
+  },
+  {
+    "Id": 124,
+    "ParentId": 101,
     "Depth": 1,
     "PointMinimum": 0,
     "PointMaximum": 0,
     "HasMultiplier": false,
     "IsSectionTitle": true,
     "Text": {
-      "pl": "OGÓLNOŚWIATOWE"
+      "pl": "OGÓLNOŚWIATOWE "
     }
   },
   {
-    "Id": 113,
-    "ParentId": 112,
+    "Id": 125,
+    "ParentId": 124,
     "Depth": 2,
-    "PointMinimum": 10,
-    "PointMaximum": 10,
+    "PointMinimum": 80,
+    "PointMaximum": 80,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -1371,35 +1515,59 @@
     }
   },
   {
-    "Id": 114,
-    "ParentId": 112,
+    "Id": 126,
+    "ParentId": 124,
     "Depth": 2,
-    "PointMinimum": 11,
-    "PointMaximum": 11,
+    "PointMinimum": 88,
+    "PointMaximum": 88,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
-      "pl": "Akademickie Mistrzostwa Świata, konkurencje indywidualne lub w grach  zespołowych - udział"
+      "pl": "Akademickie Mistrzostwa Świata, konkurencje indywidualne lub w grach zespołowych - udział"
     }
   },
   {
-    "Id": 115,
-    "ParentId": 112,
+    "Id": 127,
+    "ParentId": 124,
     "Depth": 2,
-    "PointMinimum": 12,
-    "PointMaximum": 14,
+    "PointMinimum": 96,
+    "PointMaximum": 96,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
-      "pl": "Akademickie Mistrzostwa Świata, konkurencje indywidualne lub w grach  zespołowych - podium"
+      "pl": "Akademickie Mistrzostwa Świata, konkurencje indywidualne lub w grach zespołowych, brązowy medal"
     }
   },
   {
-    "Id": 116,
-    "ParentId": 112,
+    "Id": 128,
+    "ParentId": 124,
     "Depth": 2,
-    "PointMinimum": 15,
-    "PointMaximum": 15,
+    "PointMinimum": 104,
+    "PointMaximum": 104,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Akademickie Mistrzostwa Świata, konkurencje indywidualne lub w grach zespołowych, srebrny medal"
+    }
+  },
+  {
+    "Id": 129,
+    "ParentId": 124,
+    "Depth": 2,
+    "PointMinimum": 112,
+    "PointMaximum": 112,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Akademickie Mistrzostwa Świata, konkurencje indywidualne lub w grach zespołowych, złoty medal"
+    }
+  },
+  {
+    "Id": 130,
+    "ParentId": 124,
+    "Depth": 2,
+    "PointMinimum": 120,
+    "PointMaximum": 120,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
@@ -1407,39 +1575,87 @@
     }
   },
   {
-    "Id": 117,
-    "ParentId": 112,
+    "Id": 131,
+    "ParentId": 124,
     "Depth": 2,
-    "PointMinimum": 16,
-    "PointMaximum": 18,
+    "PointMinimum": 128,
+    "PointMaximum": 128,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
-      "pl": "Uniwersjada, konkurencje indywidualne lub w grach zespołowych - podium"
+      "pl": "Uniwersjada, konkurencje indywidualne lub w grach zespołowych, brązowy medal"
     }
   },
   {
-    "Id": 118,
-    "ParentId": 112,
+    "Id": 132,
+    "ParentId": 124,
     "Depth": 2,
-    "PointMinimum": 17,
-    "PointMaximum": 17,
+    "PointMinimum": 136,
+    "PointMaximum": 136,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
-      "pl": "Mistrzostwa Świata konkurencje indywidualne lub w grach zespołowych/Igrzyska  Olimpijskie - udział"
+      "pl": "Uniwersjada, konkurencje indywidualne lub w grach zespołowych, srebrny medal"
     }
   },
   {
-    "Id": 119,
-    "ParentId": 112,
+    "Id": 133,
+    "ParentId": 124,
     "Depth": 2,
-    "PointMinimum": 18,
-    "PointMaximum": 20,
+    "PointMinimum": 144,
+    "PointMaximum": 144,
     "HasMultiplier": false,
     "IsSectionTitle": false,
     "Text": {
-      "pl": "Mistrzostwa Świata konkurencje indywidualne lub w grach zespołowych/Igrzyska  Olimpijskie - podium"
+      "pl": "Uniwersjada, konkurencje indywidualne lub w grach zespołowych, złoty medal"
+    }
+  },
+  {
+    "Id": 134,
+    "ParentId": 124,
+    "Depth": 2,
+    "PointMinimum": 136,
+    "PointMaximum": 136,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Mistrzostwa Świata konkurencje indywidualne lub w grach zespołowych/Igrzyska Olimpijskie - udział"
+    }
+  },
+  {
+    "Id": 135,
+    "ParentId": 124,
+    "Depth": 2,
+    "PointMinimum": 144,
+    "PointMaximum": 144,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Mistrzostwa Świata konkurencje indywidualne lub w grach zespołowych/Igrzyska Olimpijskie, brązowy medal"
+    }
+  },
+  {
+    "Id": 136,
+    "ParentId": 124,
+    "Depth": 2,
+    "PointMinimum": 152,
+    "PointMaximum": 152,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Mistrzostwa Świata konkurencje indywidualne lub w grach zespołowych/Igrzyska Olimpijskie, srebrny medal"
+    }
+  },
+  {
+    "Id": 137,
+    "ParentId": 124,
+    "Depth": 2,
+    "PointMinimum": 160,
+    "PointMaximum": 160,
+    "HasMultiplier": false,
+    "IsSectionTitle": false,
+    "Text": {
+      "pl": "Mistrzostwa Świata konkurencje indywidualne lub w grach zespołowych/Igrzyska Olimpijskie, złoty medal"
     }
   }
 

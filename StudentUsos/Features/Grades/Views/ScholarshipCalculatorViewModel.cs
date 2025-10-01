@@ -17,8 +17,8 @@ public partial class ScholarshipCalculatorViewModel : BaseViewModel
     {
         GradeAverage = gradeAverage;
         RecordOnClickCommand = new(RecordOnClick);
-        PointsMinimum = GradeAverage * 10;
-        PointsMaximum = GradeAverage * 10;
+        PointsMinimum = GradeAverage * 100;
+        PointsMaximum = GradeAverage * 100;
 
         await Task.Delay(20);
         string jsonData = await ReadJsonWithScholarshipDataAsync();

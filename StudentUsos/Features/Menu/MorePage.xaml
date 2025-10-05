@@ -36,7 +36,7 @@
 
     <ScrollView>
 
-        <Grid RowDefinitions="180,180,180" ColumnDefinitions="*, *" Margin="30"
+        <Grid RowDefinitions="180,180,180, 180" ColumnDefinitions="*, *" Margin="30"
                   ColumnSpacing="10" RowSpacing="10" VerticalOptions="FillAndExpand">
 
             <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource ButtonBorderStyle}">
@@ -90,6 +90,16 @@
             </Border>
 
             <Border Grid.Row="2" Grid.Column="1" Style="{StaticResource ButtonBorderStyle}">
+                <Grid VerticalOptions="FillAndExpand" CompressedLayout.IsHeadless="True">
+                    <StackLayout Padding="15,40" Spacing="10" VerticalOptions="CenterAndExpand" CompressedLayout.IsHeadless="True">
+                        <Image Source="map" ></Image>
+                        <Label FontSize="14" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.CampusMap}" />
+                    </StackLayout>
+                    <Button Command="{Binding GoToCampusMapPageCommand}" />
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="3" Grid.Column="0" Style="{StaticResource ButtonBorderStyle}">
                 <Grid VerticalOptions="FillAndExpand" CompressedLayout.IsHeadless="True">
                     <StackLayout Padding="15,40" Spacing="10" VerticalOptions="CenterAndExpand" CompressedLayout.IsHeadless="True">
                         <Image Source="gear256.png" ></Image>

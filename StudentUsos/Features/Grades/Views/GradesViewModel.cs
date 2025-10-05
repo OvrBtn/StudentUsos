@@ -197,6 +197,10 @@ public partial class GradesViewModel : BaseViewModel
 
             //show popup with loading animation
             var popup = PickFromListPopup.CreateAndShow(LocalizedStrings.Semesters, new List<string>(), StateKey.Loading);
+            if (popup is null)
+            {
+                return;
+            }
 
             var studentProgrammes = await studentProgrammeService.GetStudentProgrammesAsync();
             if (studentProgrammes == null || studentProgrammes.Count == 0)

@@ -24,6 +24,12 @@
             <StackLayout x:Name="contentStackLayout" VerticalOptions="FillAndExpand" Margin="30,0,30,30">
 
                 <StackLayout>
+                    <Label Text="{x:Static strings:LocalizedStrings.CampusMap}" HorizontalTextAlignment="Center"
+                               FontSize="18" FontAttributes="Bold"/>
+                    <Image Source="whatsnew_campusmap.png"></Image>
+                </StackLayout>
+                
+                <StackLayout>
                     <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" 
                     Spacing="20" Margin="30">
                         <Label Text="{x:Static strings:LocalizedStrings.WhatsNewItem_NewGradeTitle}" HorizontalTextAlignment="Center"

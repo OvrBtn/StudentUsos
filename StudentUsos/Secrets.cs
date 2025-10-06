@@ -7,6 +7,12 @@ namespace StudentUsos;
 public partial class SecretsJsonContext : JsonSerializerContext
 { }
 
+/// <summary>
+/// These secrets are not really meant to be secret since they are bundled inside the .apk.
+/// Main purpose of this class is to centralize all constants which would be otherwise hardcoded.
+/// Any keys to external services should not be stored here.
+/// </summary>
+//TODO: maybe rename this to Constants
 public class Secrets
 {
     public static Secrets Default { get; private set; }

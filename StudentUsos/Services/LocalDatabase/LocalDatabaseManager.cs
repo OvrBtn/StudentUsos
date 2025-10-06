@@ -197,6 +197,8 @@ public class LocalDatabaseManager : ILocalDatabaseManager
         EnsureInitialized();
 
         string query = "DELETE FROM " + typeof(T).Name + " WHERE " + whereBody;
+        //replaced due to change to sqlite-net-e package which doesn't allow double quotation marks in queries
+        query = query.Replace('"', '\'');
         return dbConnection.Execute(query);
     }
 

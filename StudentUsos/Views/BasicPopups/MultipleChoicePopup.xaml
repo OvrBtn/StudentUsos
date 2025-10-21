@@ -5,8 +5,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
-    xmlns:local="clr-namespace:StudentUsos.Views"
+    xmlns:local="clr-namespace:StudentUsos"
     Color="Transparent"
+    x:DataType="local:MultipleChoicePopup"
     x:Name="self">
 
     <toolkit:Popup.Resources>
@@ -35,7 +36,7 @@
         <Border Margin="30" Padding="30,30,30,0" VerticalOptions="Center" MaximumHeightRequest="500" StrokeShape="RoundRectangle 20"
                 BackgroundColor="{StaticResource BackgroundColor2}">
             <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                <Label x:Name="titleLabel" Text="{Binding PopupTitle,Source={x:Reference self}}" Margin="0,0,0,20" FontAttributes="Bold" FontSize="15" HorizontalTextAlignment="Center" />
+                <Label x:Name="titleLabel" Text="{Binding PopupTitle, Source={x:Reference self}}" Margin="0,0,0,20" FontAttributes="Bold" FontSize="15" HorizontalTextAlignment="Center" />
 
                 <StackLayout toolkit:StateContainer.CurrentState="{Binding CollectionStateKey,Source={x:Reference self}}" 
                              VerticalOptions="FillAndExpand">
@@ -58,7 +59,7 @@
                                 <StackLayout Margin="0"></StackLayout>
                             </CollectionView.Footer>
                             <CollectionView.ItemTemplate>
-                                <DataTemplate>
+                                <DataTemplate x:DataType="local:MultipleChoicePopup+Item">
                                     <Border Padding="10, 20" StrokeShape="RoundRectangle 20" Margin="0,0,0,3" BackgroundColor="{StaticResource BackgroundColor}">
                                         <Border.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding ItemClicked}"></TapGestureRecognizer>

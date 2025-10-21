@@ -20,7 +20,7 @@
                         <Label Margin="0,3,0,0" FontSize="10" HorizontalTextAlignment="Center" IsVisible="{Binding IsDayOff}" Text="{x:Static strings:LocalizedStrings.DayOff}" />
                     </StackLayout>
                 </StackLayout>
-                <Button BackgroundColor="Transparent"
+                <Button BackgroundColor="Transparent" x:DataType="views:DashboardViewModel"
                      Command="{Binding OpenCalendarPageCommand,Source={RelativeSource AncestorType={x:Type views:DashboardViewModel}}}"/>
             </Grid>
         </Border>
@@ -40,7 +40,7 @@
                         </StackLayout>
                     </StackLayout>
                 </StackLayout>
-                <Button BackgroundColor="Transparent"
+                <Button BackgroundColor="Transparent" x:DataType="views:DashboardViewModel"
                       Command="{Binding OpenCalendarPageCommand,Source={RelativeSource AncestorType={x:Type views:DashboardViewModel}}}"/>
             </Grid>
         </Border>

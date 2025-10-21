@@ -14,10 +14,10 @@ public partial class App : Application
 
     public static IServiceProvider ServiceProvider { get; private set; }
     FirebasePushNotificationsService firebasePushNotificationsService;
-    ILogger logger;
+    ILogger? logger;
     public App(IServiceProvider serviceProvider,
         FirebasePushNotificationsService firebasePushNotificationsService,
-        ILogger logger = null)
+        ILogger? logger = null)
     {
         ServiceProvider = serviceProvider;
         this.firebasePushNotificationsService = firebasePushNotificationsService;
@@ -30,12 +30,12 @@ public partial class App : Application
 #if RELEASE
         AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
         {
-            logger.Log(LogLevel.Fatal, e.ExceptionObject.ToString()!);
+            logger?.Log(LogLevel.Fatal, e.ExceptionObject.ToString()!);
         };
 
         TaskScheduler.UnobservedTaskException += (sender, e) =>
         {
-            logger.Log(LogLevel.Fatal, e.Exception.ToString());
+            logger?.Log(LogLevel.Fatal, e.Exception.ToString());
             e.SetObserved();
         };
 #endif
@@ -47,7 +47,7 @@ public partial class App : Application
     {
         base.OnStart();
 
-        BackwardCompatibility.Check();
+        _ = BackwardCompatibility.Check();
 
         _ = firebasePushNotificationsService.InitNotificationsAsync();
 

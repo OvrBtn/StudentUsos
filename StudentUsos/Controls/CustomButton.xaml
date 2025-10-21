@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="StudentUsos.Controls.CustomButton"
              xmlns:controls="clr-namespace:StudentUsos.Controls"
+             x:DataType="controls:CustomButton"
              VerticalOptions="FillAndExpand"
              HorizontalOptions="FillAndExpand"
              x:Name="self">

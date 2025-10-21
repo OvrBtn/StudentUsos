@@ -24,7 +24,7 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="views:Option">
                     <Button Text="{Binding Value}" BackgroundColor="{StaticResource Primary}" 
-                            Command="{Binding EditFirstTermCommand, Source={RelativeSource AncestorType={x:Type views:ModifyGradeViewModel}}}" 
+                            Command="{Binding EditFirstTermCommand, Source={RelativeSource AncestorType={x:Type views:ModifyGradeViewModel}}, x:DataType=views:ModifyGradeViewModel}" 
                             CommandParameter="{Binding Value}" CornerRadius="15"/>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
@@ -44,7 +44,7 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="views:Option">
                     <Button Text="{Binding Value}" BackgroundColor="{StaticResource Primary}" 
-                       Command="{Binding EditSecondTermCommand, Source={RelativeSource AncestorType={x:Type views:ModifyGradeViewModel}}}" 
+                       Command="{Binding EditSecondTermCommand, Source={RelativeSource AncestorType={x:Type views:ModifyGradeViewModel}}, x:DataType=views:ModifyGradeViewModel}" 
                        CommandParameter="{Binding Value}" CornerRadius="15"/>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

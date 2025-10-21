@@ -33,9 +33,11 @@ public static class MauiProgram
         builder.Services.AddSingleton<INotificationBuilder, CustomNotificationBuilder>();
 #endif
 
+#pragma warning disable CA1416
         builder
             .UseMauiApp<App>()
             .UseMauiCommunityToolkit()
+#pragma warning restore
             .UseSkiaSharp()
             .UseCustomCalendar()
             .UseCustomSchedule()
@@ -45,6 +47,7 @@ public static class MauiProgram
             .RegisterViews()
             .RegisterViewModels()
             .RegisterServices()
+
 #if ANDROID
             .ConfigureStatusBarAndNavigationBarColorsForModalPages()
 #endif

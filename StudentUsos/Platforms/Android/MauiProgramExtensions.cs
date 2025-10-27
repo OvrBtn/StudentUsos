@@ -53,8 +53,8 @@ internal static partial class MauiProgramExtensions
                             {
                                 return;
                             }
-                            dialog.Window.SetStatusBarColor(platformStatusBarColor);
-                            dialog.Window.SetNavigationBarColor(platformNavigationBarColor);
+                            dialog?.Window?.SetStatusBarColor(platformStatusBarColor);
+                            dialog?.Window?.SetNavigationBarColor(platformNavigationBarColor);
 
                             bool isColorTransparent = platformStatusBarColor == Android.Graphics.Color.Transparent;
                             if (isColorTransparent)

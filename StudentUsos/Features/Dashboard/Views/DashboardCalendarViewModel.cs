@@ -16,7 +16,7 @@ public partial class DashboardCalendarViewModel : BaseViewModel
     IGoogleCalendarService googleCalendarService;
     IGoogleCalendarRepository googleCalendarRepository;
     IApplicationService applicationService;
-    ILogger logger;
+    ILogger? logger;
     public DashboardCalendarViewModel(IUsosCalendarService usosCalendarService,
         IUsosCalendarRepository usosCalendarRepository,
         IGoogleCalendarService googleCalendarService,

@@ -91,7 +91,7 @@ public partial class FloatingButton : ContentView
             isAnimating = false;
             return;
         }
-        var buttons = (childElements as Layout).Children.ToList();
+        var buttons = (childElements as Layout)?.Children.ToList() ?? new();
         if (AreButtonsVisible == false)
         {
 

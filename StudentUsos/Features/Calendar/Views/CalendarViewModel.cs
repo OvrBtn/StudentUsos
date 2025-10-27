@@ -221,7 +221,7 @@ public partial class CalendarViewModel : BaseViewModel
                 {
                     //find events that occur in currently given day
                     var eventsFound = events.Where(x => Utilities.CheckIfBetweenDates(day.FullDateTime, x.Start, x.End)).ToList();
-                    Utilities.ListsDifference(day.EventsGoogleCalendar.Where(x => x.Calendar.Name == events[0].Calendar.Name).ToList(),
+                    Utilities.ListsDifference(day.EventsGoogleCalendar.Where(x => x.Calendar?.Name == events[0].Calendar?.Name).ToList(),
                     eventsFound, out List<GoogleCalendarEvent> localExceptApi, out List<GoogleCalendarEvent> apiExceptLocal, GoogleCalendarEvent.AreEqual);
 
                     //when event is added to calendar and saved in local database but isn't present in API response

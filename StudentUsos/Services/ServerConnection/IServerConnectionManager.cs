@@ -14,7 +14,7 @@ public interface IServerConnectionManager
     /// <returns>USOS API response</returns>
     public Task<string?> SendRequestToUsosAsync(string methodName,
         Dictionary<string, string> arguments,
-        Action<string> onRequestFinished = null,
+        Action<string>? onRequestFinished = null,
         int timeout = HttpClientDefaultTimeoutSeconds);
 
     /// <summary>
@@ -28,7 +28,7 @@ public interface IServerConnectionManager
     /// <returns></returns>
     public Task<RequestResult?> SendGetRequestAsync(string endpoint,
         Dictionary<string, string> requestPayload,
-        Dictionary<string, string> additionalDataToHashButNotSend = null,
+        Dictionary<string, string>? additionalDataToHashButNotSend = null,
         int timeout = HttpClientDefaultTimeoutSeconds);
 
     /// <summary>
@@ -59,7 +59,7 @@ public interface IServerConnectionManager
     public Task<RequestResult?> SendPostRequestAsync(string endpoint,
         string postBody,
         Dictionary<string, string> requestHeaders,
-        Dictionary<string, string> additionalDataToHashButNotSend = null,
+        Dictionary<string, string>? additionalDataToHashButNotSend = null,
         int timeout = HttpClientDefaultTimeoutSeconds);
 
     /// <summary>

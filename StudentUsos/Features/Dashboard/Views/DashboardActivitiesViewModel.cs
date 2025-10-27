@@ -156,9 +156,12 @@ public partial class DashboardActivitiesViewModel : BaseViewModel
         if (dataFromLocalDb is not null)
         {
             var timetableDay = dataFromLocalDb.Result.FirstOrDefault();
-            Activities = timetableDay.Activities.ToObservableCollection();
-            if (timetableDay.IsDayOff) ActivitiesStateKey = StateKey.Empty;
-            else ActivitiesStateKey = StateKey.Loaded;
+            if (timetableDay is not null)
+            {
+                Activities = timetableDay.Activities.ToObservableCollection();
+                if (timetableDay.IsDayOff) ActivitiesStateKey = StateKey.Empty;
+                else ActivitiesStateKey = StateKey.Loaded;
+            }
 
             return dataFromLocalDb.Result;
         }
@@ -178,7 +181,7 @@ public partial class DashboardActivitiesViewModel : BaseViewModel
                 }
                 return null;
             }
-            var firstTimetableDay = resultFromApi.Result.FirstOrDefault();
+            var firstTimetableDay = resultFromApi.Result.First();
             if (Utilities.CompareCollections(Activities, firstTimetableDay.Activities, Activity.Comparer) == false)
             {
                 applicationService.MainThreadInvoke(() =>

@@ -55,7 +55,7 @@ public partial class CalendarDay : ObservableObject
 
     public void AddEvent(GoogleCalendarEvent googleGoogleCalendarEvent)
     {
-        if (EventsGoogleCalendar.Any(x => x.CalendarName == googleGoogleCalendarEvent.Calendar.Name) == false)
+        if (googleGoogleCalendarEvent.Calendar is not null && EventsGoogleCalendar.Any(x => x.CalendarName == googleGoogleCalendarEvent.Calendar.Name) == false)
         {
             EventIndicator? eventIndicator = null;
             if (googleGoogleCalendarEvent.Calendar is not null)
@@ -81,7 +81,7 @@ public partial class CalendarDay : ObservableObject
     public void RemoveEvent(GoogleCalendarEvent googleGoogleCalendarEvent)
     {
         EventsGoogleCalendar.Remove(googleGoogleCalendarEvent);
-        var found = EventsIndicators.Where(x => x.Color == googleGoogleCalendarEvent.Calendar.Color).ToList();
+        var found = EventsIndicators.Where(x => x.Color == googleGoogleCalendarEvent.Calendar?.Color).ToList();
         if (found.Count > 0)
         {
             EventsIndicators.Remove(found[0]);

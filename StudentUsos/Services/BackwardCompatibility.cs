@@ -75,14 +75,15 @@ public static class BackwardCompatibility
         if (shouldForceSignOut)
         {
             AuthorizationService.LogoutAsync();
-            localStorageManager.SetData(LocalStorageKeys.BackwardCompatibilityLastCheckedVersion, CurrentVersion);
             return;
         }
+
         if (shouldResetLocalData)
         {
             ResetLocalData();
-            localStorageManager.SetData(LocalStorageKeys.BackwardCompatibilityLastCheckedVersion, CurrentVersion);
         }
+
+        localStorageManager.SetData(LocalStorageKeys.BackwardCompatibilityLastCheckedVersion, CurrentVersion);
     }
 
     public static event Action OnCompatibilityRegisterSucceeded;

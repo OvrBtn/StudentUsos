@@ -19,6 +19,7 @@ namespace StudentUsos.Features.Settings.Views.Subpages
             this.usosCalendarRepository = usosCalendarRepository;
             this.googleCalendarRepository = googleCalendarRepository;
             this.localStorageManager = localStorageManager;
+            this.logger = logger;
         }
 
         public void Init()

@@ -10,7 +10,7 @@ class NavigationService : INavigationService
     public NavigationService(IServiceProvider serviceProvider)
     {
         _serviceProvider = serviceProvider;
-        this.navigation = App.Current?.MainPage?.Navigation!;
+        this.navigation = App.Current?.Windows[0]?.Navigation!;
 
         Default = this;
     }

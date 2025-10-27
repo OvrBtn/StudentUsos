@@ -57,7 +57,7 @@ public partial class CustomBottomSheet : ContentPage
             return;
         }
         CurrentInstance = this;
-        App.Current?.MainPage?.Navigation.PushModalAsync(this);
+        App.Current?.Windows[0]?.Navigation.PushModalAsync(this);
         ShowDelayedAsync();
     }
 
@@ -94,9 +94,9 @@ public partial class CustomBottomSheet : ContentPage
         CurrentInstance = null;
         devExpressBottomSheet?.Close();
         OnClose?.Invoke();
-        if (App.Current?.MainPage?.Navigation.ModalStack.Count > 0)
+        if (App.Current?.Windows[0].Navigation.ModalStack.Count > 0)
         {
-            App.Current?.MainPage?.Navigation.PopModalAsync();
+            App.Current?.Windows[0].Navigation.PopModalAsync();
         }
     }
 

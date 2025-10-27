@@ -43,7 +43,7 @@ public partial class EntryPopup : Popup
         ApplicationService.Default.MainThreadInvoke(() =>
         {
             var popup = new EntryPopup(parameters);
-            App.Current?.MainPage?.ShowPopup(popup);
+            App.Current?.Windows[0].Page?.ShowPopup(popup);
         });
     }
 }

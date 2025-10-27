@@ -93,7 +93,7 @@ public partial class MultipleChoicePopup : Popup
         MultipleChoicePopup popup = new(title, options, stateKey);
         ApplicationService.Default.MainThreadInvoke(() =>
         {
-            App.Current?.MainPage?.ShowPopup(popup);
+            App.Current?.Windows[0].Page?.ShowPopup(popup);
         });
         return popup;
     }

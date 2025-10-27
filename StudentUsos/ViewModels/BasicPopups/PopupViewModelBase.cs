@@ -9,6 +9,6 @@ public partial class PopupViewModelBase : BaseViewModel
     public void Close()
     {
         ContentOpacity = 0;
-        App.Current?.Windows[0]?.Navigation.PopModalAsync(false);
+        App.Current?.Windows[0].Page?.Navigation.PopModalAsync(false);
     }
 }

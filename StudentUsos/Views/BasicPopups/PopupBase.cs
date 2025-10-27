@@ -50,6 +50,6 @@ public class PopupBase : ContentPage
 
     public virtual void Close()
     {
-        App.Current?.Windows[0]?.Navigation.PopModalAsync(false);
+        App.Current?.Windows[0].Page?.Navigation.PopModalAsync(false);
     }
 }

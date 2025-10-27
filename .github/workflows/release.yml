@@ -56,9 +56,19 @@ jobs:
           [IO.File]::WriteAllBytes("StudentUsos/release-key.keystore", [Convert]::FromBase64String($base64))
         shell: pwsh
 
-      - name: Build APK (Unsigned)
+      - name: Build APK
         run: dotnet publish ./StudentUsos/StudentUsos.csproj -c Release -f net9.0-android --no-restore `
           -p:AndroidPackageFormat=apk `
+          -p:AndroidKeyStore=true `
+          -p:AndroidSigningKeyStore=release-key.keystore `
+          -p:AndroidSigningKeyAlias="${{ secrets.ANDROID_KEY_ALIAS }}" `
+          -p:AndroidSigningKeyPass="${{ secrets.ANDROID_KEY_PASSWORD }}" `
+          -p:AndroidSigningStorePass="${{ secrets.ANDROID_KEYSTORE_PASSWORD }}"
+        shell: pwsh
+
+      - name: Build AAB
+        run: dotnet publish ./StudentUsos/StudentUsos.csproj -c Release -f net9.0-android --no-restore `
+          -p:AndroidPackageFormat=aab `
           -p:AndroidKeyStore=true `
           -p:AndroidSigningKeyStore=release-key.keystore `
           -p:AndroidSigningKeyAlias="${{ secrets.ANDROID_KEY_ALIAS }}" `
@@ -72,4 +82,5 @@ jobs:
         with:
           files: |
             ./StudentUsos/bin/Release/**/publish/*-Signed.apk
+            ./StudentUsos/bin/Release/**/publish/*-Signed.aab
           token: ${{ secrets.GITHUB_TOKEN }}

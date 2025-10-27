@@ -21,11 +21,13 @@ public class CustomNotificationBuilder : NotificationBuilder
 #if DEBUG
         return true;
 #endif
+#pragma warning disable CS0162
         if (data.ContainsKey("type"))
         {
             return true;
         }
         return base.ShouldHandleNotificationReceived(data);
+#pragma warning restore
     }
 
     public override async void OnNotificationReceived(IDictionary<string, object> data)

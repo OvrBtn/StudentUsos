@@ -11,7 +11,7 @@ public static class NotificationsDiagnosisHelper
     {
         try
         {
-            if (Build.VERSION.SdkInt < BuildVersionCodes.P)
+            if ((int)Build.VERSION.SdkInt < 28)
             {
                 return false;
             }
@@ -24,9 +24,11 @@ public static class NotificationsDiagnosisHelper
             }
 
             const string opstrRunAnyInBackground = "android:run_any_in_background";
+#pragma warning disable CA1416
             var mode = appOps.UnsafeCheckOpNoThrow(opstrRunAnyInBackground,
                 Android.OS.Process.MyUid(),
                 context.PackageName!);
+#pragma warning restore
             return mode == AppOpsManagerMode.Ignored;
         }
         catch (Exception e)
@@ -51,7 +53,7 @@ public static class NotificationsDiagnosisHelper
 
     public static bool IsBatteryOptimizationEnabled()
     {
-        if (Build.VERSION.SdkInt < BuildVersionCodes.M)
+        if ((int)Build.VERSION.SdkInt < 23)
         {
             return false;
         }
@@ -64,17 +66,21 @@ public static class NotificationsDiagnosisHelper
 
         var context = Android.App.Application.Context;
 
+#pragma warning disable CA1416
         return powerManager.IsIgnoringBatteryOptimizations(context.PackageName) == false;
+#pragma warning restore
     }
 
     public static void RequestDisableBatteryOptimization()
     {
-        if (Build.VERSION.SdkInt < BuildVersionCodes.M)
+        if ((int)Build.VERSION.SdkInt < 23)
         {
             return;
         }
         var context = Android.App.Application.Context;
+#pragma warning disable CA1416
         var intent = new Intent(Android.Provider.Settings.ActionIgnoreBatteryOptimizationSettings);
+#pragma warning restore
         intent.SetFlags(ActivityFlags.NewTask);
         context.StartActivity(intent);
     }

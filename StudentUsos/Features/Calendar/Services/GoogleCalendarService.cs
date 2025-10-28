@@ -23,7 +23,7 @@ public class GoogleCalendarService : IGoogleCalendarService
         {
             using var response = await httpClient.GetAsync(calendar.Url);
             string responseString = await response.Content.ReadAsStringAsync();
-            return GetGoogleCalendarEvents(responseString);
+            return GetGoogleCalendarEvents(responseString, calendar);
         }
         catch (HttpRequestException)
         {
@@ -35,7 +35,7 @@ public class GoogleCalendarService : IGoogleCalendarService
         }
     }
 
-    public List<GoogleCalendarEvent> GetGoogleCalendarEvents(string icsFileContent, GoogleCalendar? calendar = null)
+    public List<GoogleCalendarEvent> GetGoogleCalendarEvents(string icsFileContent, GoogleCalendar calendar)
     {
         try
         {

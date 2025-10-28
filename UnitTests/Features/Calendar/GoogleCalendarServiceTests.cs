@@ -1,4 +1,5 @@
 ﻿using Moq;
+using StudentUsos.Features.Calendar.Models;
 using StudentUsos.Features.Calendar.Repositories;
 using StudentUsos.Features.Calendar.Services;
 
@@ -18,7 +19,7 @@ public class GoogleCalendarServiceTests
         var icsFile = MockDataHelper.LoadFile("GoogleEvents.txt", "Calendar");
 
         //Act
-        var events = googleCalendarService.GetGoogleCalendarEvents(icsFile);
+        var events = googleCalendarService.GetGoogleCalendarEvents(icsFile, new GoogleCalendar() { Id = 1, Name = "test" });
 
         //Assert
         Assert.Equal(2, events.Count);

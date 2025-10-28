@@ -9,7 +9,7 @@ public interface IGoogleCalendarService
     /// </summary>
     /// <param name="calendar"></param>
     public Task<List<GoogleCalendarEvent>> GetGoogleCalendarEventsAsync(GoogleCalendar calendar);
-    public List<GoogleCalendarEvent> GetGoogleCalendarEvents(string icsFileContent, GoogleCalendar? calendar = null);
+    public List<GoogleCalendarEvent> GetGoogleCalendarEvents(string icsFileContent, GoogleCalendar calendar);
 
     public Task<GoogleCalendar?> CreateCalendarAsync(string url);
 }

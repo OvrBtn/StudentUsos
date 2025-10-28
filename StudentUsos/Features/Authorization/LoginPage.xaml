@@ -18,9 +18,9 @@
             <ActivityIndicator toolkit:StateView.StateKey="Loading"></ActivityIndicator>
 
             <StackLayout toolkit:StateView.StateKey="Loaded" Margin="20" VerticalOptions="Center">
-                <Image Margin="50,0,50,0" Source="app_icon_256" WidthRequest="300"/>
+                <Image Margin="50,0,50,-20" Source="app_icon_256" WidthRequest="300"/>
 
-                <StackLayout Margin="10,30,10,100">
+                <StackLayout Margin="10,0,10,100">
                     <Label Text="{x:Static strings:LocalizedStrings.AppName_FirstPart}" FontSize="40" HorizontalTextAlignment="Center" 
                TextColor="{StaticResource TextColor}" VerticalTextAlignment="Center"/>
                     <Label Text="{x:Static strings:LocalizedStrings.AppName_SecondPart}" FontSize="35" HorizontalTextAlignment="Center"  

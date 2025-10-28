@@ -54,7 +54,7 @@ public partial class CalendarViewModel : BaseViewModel
 
     [ObservableProperty] ObservableCollection<UsosCalendarEvent> eventsData = new();
     [ObservableProperty] ObservableCollection<GoogleCalendarEvent> eventsDataGoogleCalendar = new();
-    public static List<GoogleCalendar> GoogleCalendars { get; set; }
+    public List<GoogleCalendar> GoogleCalendars { get; set; }
 
     public async Task InitAsync()
     {

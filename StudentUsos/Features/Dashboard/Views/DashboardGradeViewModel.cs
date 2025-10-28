@@ -62,7 +62,7 @@ public partial class DashboardGradeViewModel : BaseViewModel
                 {
                     LatestFinalGradeStateKey = StateKey.Empty;
                 }
-                else if (server is not null && local is not null && server.IsCourseExamAndGradeEqual(local) == false)
+                else if (server is not null && server.IsCourseExamAndGradeEqual(local) == false)
                 {
                     LatestFinalGrade = server;
                     LatestFinalGradeStateKey = StateKey.Loaded;

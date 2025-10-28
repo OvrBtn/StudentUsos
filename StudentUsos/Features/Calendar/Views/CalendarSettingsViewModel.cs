@@ -95,12 +95,13 @@ public partial class CalendarSettingsViewModel : BaseViewModel
             {
                 return;
             }
-            CalendarViewModel.GoogleCalendars.Add(googleCalendar);
+
             Calendars.Add(googleCalendar);
             googleCalendarRepository.SaveCalendar(googleCalendar);
-            //Add events from new calendar to calendar view
+
             if (calendarViewModel != null)
             {
+                calendarViewModel.GoogleCalendars.Add(googleCalendar);
                 var events = await googleCalendarService.GetGoogleCalendarEventsAsync(googleCalendar);
                 calendarViewModel.SetGoogleEventsServer(events, calendarViewModel.CalendarMonths);
             }

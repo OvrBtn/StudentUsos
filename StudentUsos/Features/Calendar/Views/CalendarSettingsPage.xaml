@@ -38,7 +38,7 @@
         <CollectionView Margin="0,15,0,0" ItemsSource="{Binding Calendars}" VerticalOptions="FillAndExpand">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:GoogleCalendar">
-                    <Border Margin="0,0,0,5" BackgroundColor="{StaticResource BackgroundColor3}">
+                    <Border Margin="0,0,0,5" BackgroundColor="{StaticResource BackgroundColor2}">
                         <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
                             <Label HorizontalOptions="FillAndExpand" Text="{Binding Name}" />
                             <StackLayout HorizontalOptions="End">

@@ -154,10 +154,6 @@ public partial class DashboardCalendarViewModel : BaseViewModel
                 continue;
             }
             calendarEvents.Add(new(googleEvents[i]));
-            if (calendarEvents.Count > MaxCalendarEvents)
-            {
-                break;
-            }
         }
 
         calendarEvents = calendarEvents.Where(x => now <= x.EndDateTime)

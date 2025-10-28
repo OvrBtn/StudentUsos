@@ -32,7 +32,7 @@ public class LocalNotificationsService : ILocalNotificationsService
         var id = localStorageManager.GetData(LocalStorageKeys.IdOfLastNotification);
         if (id != null && int.TryParse(id, out int result))
         {
-            result = result % int.MaxValue - 1;
+            result = result % (int.MaxValue - 1);
             result++;
             localStorageManager.SetData(LocalStorageKeys.IdOfLastNotification, result.ToString());
             return result;
@@ -63,7 +63,10 @@ public class LocalNotificationsService : ILocalNotificationsService
         int id = GetIdForNewNotification();
         if (await LocalNotificationCenter.Current.AreNotificationsEnabled() == false)
         {
-            if (hasRequestedNotificationPermission) return id;
+            if (hasRequestedNotificationPermission)
+            {
+                return id;
+            }
             hasRequestedNotificationPermission = true;
             applicationService.MainThreadInvoke(async () =>
             {

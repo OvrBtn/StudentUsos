@@ -39,11 +39,15 @@
 
 		<!--0657 - using attributes with generated properties-->
 		<!--8618 - non-nullable values when exiting constructor-->
-		<NoWarn>0657;8618;SYSLIB1031</NoWarn>
+		<!--CS0067 - is never used-->
+		<NoWarn>0657;8618;SYSLIB1031;CS0067</NoWarn>
 		<Nullable>enable</Nullable>
 
 		<!--needed for debugging older android versions-->
 		<!--<RuntimeIdentifiers Condition="$(TargetFramework.Contains('-android'))">android-arm;android-arm64;android-x86;android-x64</RuntimeIdentifiers>-->
+
+		<!--https://learn.microsoft.com/en-us/dotnet/maui/fundamentals/data-binding/compiled-bindings?view=net-maui-9.0-->
+		<MauiEnableXamlCBindingWithSourceCompilation>true</MauiEnableXamlCBindingWithSourceCompilation>
 
 	</PropertyGroup>
 

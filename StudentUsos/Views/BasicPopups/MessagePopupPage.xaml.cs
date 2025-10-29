@@ -51,7 +51,7 @@ public partial class MessagePopupPage : Popup
         ApplicationService.Default.MainThreadInvoke(() =>
         {
             var popup = new MessagePopupPage(parameters);
-            App.Current?.MainPage?.ShowPopup(popup);
+            App.Current?.Windows[0].Page?.ShowPopup(popup);
         });
     }
 
@@ -68,7 +68,7 @@ public partial class MessagePopupPage : Popup
         ApplicationService.Default.MainThreadInvoke(() =>
         {
             var popup = new MessagePopupPage(parameters);
-            App.Current?.MainPage?.ShowPopup(popup);
+            App.Current?.Windows[0].Page?.ShowPopup(popup);
         });
     }
 }

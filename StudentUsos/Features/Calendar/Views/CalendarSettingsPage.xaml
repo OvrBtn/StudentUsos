@@ -43,8 +43,11 @@
                             <Label HorizontalOptions="FillAndExpand" Text="{Binding Name}" />
                             <StackLayout HorizontalOptions="End">
                                 <Border Padding="12">
-                                    <ImageButton Command="{Binding Source={x:Reference self}, Path=BindingContext.TrashOnClick}" CommandParameter="{Binding .}" 
-                                                                 HeightRequest="20" Source="trash3.svg" WidthRequest="20" />
+                                    <ImageButton Command="{Binding Source={x:RelativeSource AncestorType={x:Type views:CalendarSettingsViewModel}}, 
+                                        Path=TrashOnClick, 
+                                        x:DataType=views:CalendarSettingsViewModel}" 
+                                        CommandParameter="{Binding .}" 
+                                        HeightRequest="20" Source="trash3.svg" WidthRequest="20" />
                                 </Border>
                             </StackLayout>
                         </StackLayout>

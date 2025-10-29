@@ -38,7 +38,7 @@ public partial class CalendarSettingsViewModel : BaseViewModel
             {
                 foreach (var day in month.Days)
                 {
-                    var found = day.EventsGoogleCalendar.Where(x => x.Calendar.Name == calendar.Name).ToList();
+                    var found = day.EventsGoogleCalendar.Where(x => x.Calendar?.Name == calendar.Name).ToList();
                     foreach (var e in found)
                     {
                         day.RemoveEvent(e);

@@ -4,7 +4,9 @@
              x:Class="StudentUsos.Controls.CustomBottomSheet"
              xmlns:dxc="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
              ControlTemplate="{DynamicResource SwipeablePopupTemplate}"
+             xmlns:local="clr-namespace:StudentUsos.Controls"
              x:Name="this"
+             x:DataType="local:CustomBottomSheet"
              BackgroundColor="Transparent">
 
     <ContentPage.Resources>

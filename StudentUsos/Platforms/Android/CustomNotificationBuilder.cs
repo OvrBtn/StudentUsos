@@ -21,17 +21,19 @@ public class CustomNotificationBuilder : NotificationBuilder
 #if DEBUG
         return true;
 #endif
+#pragma warning disable CS0162
         if (data.ContainsKey("type"))
         {
             return true;
         }
         return base.ShouldHandleNotificationReceived(data);
+#pragma warning restore
     }
 
     public override async void OnNotificationReceived(IDictionary<string, object> data)
     {
-        string type = string.Empty;
-        if (data.TryGetValue("type", out object typeObject))
+        string? type = string.Empty;
+        if (data is not null && data.TryGetValue("type", out object? typeObject))
         {
             //when handling push notifications the application scope is limited and
             //the tokens might not be set by default causing issues with notification
@@ -62,10 +64,10 @@ public class CustomNotificationBuilder : NotificationBuilder
 
         try
         {
-            var examId = data["examId"].ToString();
-            var examSessionNumber = data["examSessionNumber"].ToString();
+            var examId = data["examId"].ToString()!;
+            var examSessionNumber = data["examSessionNumber"].ToString()!;
 
-            var serverConnectionManager = App.ServiceProvider.GetService<IServerConnectionManager>();
+            var serverConnectionManager = App.ServiceProvider.GetService<IServerConnectionManager>()!;
 
             Dictionary<string, string> args = new()
             {
@@ -78,13 +80,19 @@ public class CustomNotificationBuilder : NotificationBuilder
             {
                 return;
             }
+
             var deserialized = JsonSerializer.Deserialize(result, UsosNewGradePushNotificationDetailsJsonContext.Default.UsosNewGradePushNotificationDetails);
+            if (deserialized is null)
+            {
+                return;
+            }
+
             if (LocalStorageManager.Default.TryGettingData(LocalStorageKeys.ChosenLanguageCode, out string languageCode))
             {
                 CultureInfo culture = new CultureInfo(languageCode);
                 CultureInfo.CurrentCulture = culture;
                 CultureInfo.CurrentUICulture = culture;
-                if (deserialized.CourseEdition.CourseNameLocalized.TryGetValue(languageCode, out string courseNameLocalized))
+                if (deserialized.CourseEdition.CourseNameLocalized.TryGetValue(languageCode, out string? courseNameLocalized))
                 {
                     data["body"] = courseNameLocalized;
                 }
@@ -96,7 +104,7 @@ public class CustomNotificationBuilder : NotificationBuilder
             else
             {
                 string currentCultureCode = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
-                if (deserialized.CourseEdition.CourseNameLocalized.TryGetValue(currentCultureCode, out string courseNameLocalized))
+                if (deserialized.CourseEdition.CourseNameLocalized.TryGetValue(currentCultureCode, out string? courseNameLocalized))
                 {
                     data["body"] = courseNameLocalized;
                 }

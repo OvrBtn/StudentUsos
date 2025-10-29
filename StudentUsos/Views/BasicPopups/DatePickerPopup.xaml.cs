@@ -44,7 +44,7 @@ public partial class DatePickerPopup : Popup
         ApplicationService.Default.MainThreadInvoke(() =>
         {
             var popup = new DatePickerPopup(parameters);
-            App.Current?.MainPage?.ShowPopup(popup);
+            App.Current?.Windows[0].Page?.ShowPopup(popup);
         });
     }
 

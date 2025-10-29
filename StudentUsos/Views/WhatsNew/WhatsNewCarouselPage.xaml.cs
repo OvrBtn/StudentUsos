@@ -18,8 +18,8 @@ public partial class WhatsNewCarouselPage : ContentPage
         for (int i = 0; i < items.Count; i++)
         {
             var view = items[i] as View;
-            view.VerticalOptions = LayoutOptions.FillAndExpand;
-            view.HorizontalOptions = LayoutOptions.FillAndExpand;
+            view!.VerticalOptions = LayoutOptions.FillAndExpand;
+            view!.HorizontalOptions = LayoutOptions.FillAndExpand;
             if (i == 0)
             {
                 continue;
@@ -114,11 +114,11 @@ public partial class WhatsNewCarouselPage : ContentPage
         const int animationLength = 750;
         Utilities.Animate(this, progress =>
         {
-            previousView.TranslationX = -1 * screenWidth * progress;
+            previousView!.TranslationX = -1 * screenWidth * progress;
         }, animationLength, Easing.CubicInOut);
         Utilities.Animate(this, progress =>
         {
-            currentView.TranslationX = (1 - progress) * screenWidth;
+            currentView!.TranslationX = (1 - progress) * screenWidth;
         }, animationLength, Easing.CubicInOut, finished: (_, _) => OnAnimationFinished());
     }
 

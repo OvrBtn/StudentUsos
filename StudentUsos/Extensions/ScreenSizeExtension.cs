@@ -1,5 +1,6 @@
 ﻿namespace StudentUsos.Extensions;
 
+[AcceptEmptyServiceProvider]
 public class ScreenSizeExtension : IMarkupExtension
 {
     public enum TypeOptions

@@ -182,7 +182,7 @@ public partial class FinalGrade : ObservableObject
         Group = group;
     }
 
-    public bool IsCourseExamAndGradeEqual(FinalGrade grade)
+    public bool IsCourseExamAndGradeEqual(FinalGrade? grade)
     {
         if (grade == null) { return false; }
         return CourseUnitId == grade.CourseUnitId && CourseName == grade.CourseName && ExamId == grade.ExamId && DateModified == grade.DateModified

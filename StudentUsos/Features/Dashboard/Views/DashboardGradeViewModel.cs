@@ -42,8 +42,8 @@ public partial class DashboardGradeViewModel : BaseViewModel
         LatestFinalGradeStateKey = StateKey.Loading;
         try
         {
-            FinalGrade local = gradesRepository.GetLatestGrade();
-            if (local != null)
+            FinalGrade? local = gradesRepository.GetLatestGrade();
+            if (local is not null)
             {
                 LatestFinalGrade = local;
                 LatestFinalGradeStateKey = StateKey.Loaded;
@@ -58,11 +58,11 @@ public partial class DashboardGradeViewModel : BaseViewModel
             var server = await gradesService.GetLatestGradeServerAsync();
             applicationService.MainThreadInvoke(() =>
             {
-                if (server != null && server.IsEmpty)
+                if (server is not null && server.IsEmpty)
                 {
                     LatestFinalGradeStateKey = StateKey.Empty;
                 }
-                else if (server != null && server.IsCourseExamAndGradeEqual(local) == false)
+                else if (server is not null && server.IsCourseExamAndGradeEqual(local) == false)
                 {
                     LatestFinalGrade = server;
                     LatestFinalGradeStateKey = StateKey.Loaded;

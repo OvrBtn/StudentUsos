@@ -29,7 +29,7 @@
                         <DataTemplate x:DataType="models:ScholarshipCalculatorRecord">
 
                             <controls:CustomButton VerticalOptions="Start" HorizontalOptions="Start"
-                                               Command="{Binding RecordOnClickCommand,Source={RelativeSource AncestorType={x:Type views:ScholarshipCalculatorViewModel}}}"
+                                                   Command="{Binding RecordOnClickCommand, Source={RelativeSource AncestorType={x:Type views:ScholarshipCalculatorViewModel}}, x:DataType=views:ScholarshipCalculatorViewModel}"
                                                CommandParameter="{Binding .}">
                                 <controls:CustomButton.Margin>
                                     <MultiBinding Converter="{StaticResource MarginConverter}">

@@ -6,11 +6,11 @@ namespace StudentUsos.Features.Settings.Views.Subpages;
 public partial class DiagnosisSubpage : CustomContentPageNotAnimated
 {
     INavigationService navigationService;
-    ILogger? logger;
-    IApplicationService applicationService;
+    ILogger logger;
+    IApplicationService? applicationService;
     public DiagnosisSubpage(INavigationService navigationService,
-        ILogger? logger = null,
-        IApplicationService applicationService = null)
+        ILogger logger,
+        IApplicationService? applicationService = null)
     {
         InitializeComponent();
 
@@ -48,7 +48,7 @@ public partial class DiagnosisSubpage : CustomContentPageNotAnimated
         {
             if (item.IsChecked) ids.Add(item.Id);
         }
-        logger.SetAllowedModules(ids);
+        logger?.SetAllowedModules(ids);
     }
 
     public static event Action OnLocalDataReseted;
@@ -58,13 +58,13 @@ public partial class DiagnosisSubpage : CustomContentPageNotAnimated
     {
         if (resetCounter >= 2)
         {
-            applicationService.ShowToast(LocalizedStrings.OperationCanceledDueToSpam);
+            applicationService?.ShowToast(LocalizedStrings.OperationCanceledDueToSpam);
             return;
         }
 
         resetCounter++;
         BackwardCompatibility.ResetLocalData();
         OnLocalDataReseted?.Invoke();
-        applicationService.ShowToast(LocalizedStrings.Success);
+        applicationService?.ShowToast(LocalizedStrings.Success);
     }
 }

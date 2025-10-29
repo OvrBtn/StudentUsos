@@ -148,7 +148,7 @@ public class Logger : ILogger
 #if DEBUG
         return;
 #endif
-
+#pragma warning disable CS0162
         var userInfo = userInfoRepository.Value.GetUserInfo();
         if (userInfo is null)
         {
@@ -185,5 +185,6 @@ public class Logger : ILogger
         {
             localDatabaseManager.Value.ExecuteQuery($"UPDATE {nameof(LogRecord)} SET {nameof(LogRecord.IsSynchronizedWithServer)} = 1 WHERE {nameof(LogRecord.CreationDateUnix)} <= {unixTime};");
         }
+#pragma warning restore
     }
 }

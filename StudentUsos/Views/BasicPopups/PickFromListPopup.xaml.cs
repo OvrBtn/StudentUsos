@@ -87,7 +87,7 @@ public partial class PickFromListPopup : Popup
         var popup = new PickFromListPopup(title, options, stateKey, onPicked);
         ApplicationService.Default.MainThreadInvoke(() =>
         {
-            App.Current?.MainPage?.ShowPopup(popup);
+            App.Current?.Windows[0].Page?.ShowPopup(popup);
         });
         return popup;
     }

@@ -142,6 +142,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<None Remove="Platforms\Android\Resources\layout\widget.xml" />
 		<None Remove="Resources\Images\arrow.svg" />
 		<None Remove="Resources\Images\arrow_down.png" />
 		<None Remove="Resources\Images\arrow_left.png" />
@@ -507,6 +508,19 @@
 
 	<ItemGroup>
 		<Folder Include="Features\Dashboard\Layouts\" />
+		<Folder Include="Platforms\Android\Resources\drawable\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <AndroidResource Update="Platforms\Android\Resources\layout\widget_activity_item.xml">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </AndroidResource>
+	  <AndroidResource Update="Platforms\Android\Resources\layout\widget.xml">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </AndroidResource>
+	  <AndroidResource Update="Platforms\Android\Resources\xml\appwidgetprovider.xml">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </AndroidResource>
 	</ItemGroup>
 
 	<ProjectExtensions>

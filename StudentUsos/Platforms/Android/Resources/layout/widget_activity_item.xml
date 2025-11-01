@@ -9,7 +9,7 @@
         android:id="@+id/tvTime"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:text="08:00 - 09:30"
+        android:text=""
         android:gravity="center_vertical"
         android:textStyle="bold"/>
 
@@ -23,18 +23,24 @@
             android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Mathematics"/>
+            android:text=""/>
+
+		<TextView
+	        android:id="@+id/tvType"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text=""/>
 
 		<TextView
             android:id="@+id/tvRoom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Room 101"/>
+            android:text=""/>
 
 		<TextView
             android:id="@+id/tvBuilding"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Main Building"/>
+            android:text=""/>
 	</LinearLayout>
 </LinearLayout>

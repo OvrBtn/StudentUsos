@@ -1,6 +1,5 @@
 ﻿using Android.App;
 using Android.Content;
-using Android.Util;
 using Android.Widget;
 using StudentUsos.Features.Activities.Repositories;
 using Activity = StudentUsos.Features.Activities.Models.Activity;
@@ -10,10 +9,10 @@ namespace StudentUsos.Platforms.Android
     [Service(Permission = "android.permission.BIND_REMOTEVIEWS")]
     public class ScheduleRemoteViewsService : RemoteViewsService
     {
-        public override IRemoteViewsFactory OnGetViewFactory(Intent intent)
+        public override IRemoteViewsFactory OnGetViewFactory(Intent? intent)
         {
-            bool showTomorrow = intent.GetBooleanExtra("showTomorrow", false);
-            return new ScheduleRemoteViewsFactory(ApplicationContext, showTomorrow);
+            bool showTomorrow = intent?.GetBooleanExtra("showTomorrow", false) ?? false;
+            return new ScheduleRemoteViewsFactory(ApplicationContext!, showTomorrow);
         }
     }
 
@@ -39,31 +38,28 @@ namespace StudentUsos.Platforms.Android
 
         public RemoteViews GetViewAt(int position)
         {
-            Log.Debug("ScheduleWidget", "comment");
-
             var activity = activities[position];
-            var rv = new RemoteViews(context.PackageName, Resource.Layout.widget_activity_item);
+            var remoteViews = new RemoteViews(context.PackageName, Resource.Layout.widget_activity_item);
 
-            rv.SetTextViewText(Resource.Id.tvTime, $"{activity.StartTime} - {activity.EndTime}");
-            rv.SetTextViewText(Resource.Id.tvName, activity.Name);
-            rv.SetTextViewText(Resource.Id.tvRoom, $"Room: {activity.RoomNumber}");
-            rv.SetTextViewText(Resource.Id.tvBuilding, activity.BuildingName);
+            remoteViews.SetTextViewText(Resource.Id.tvTime, $"{activity.StartTime} - {activity.EndTime}");
+            remoteViews.SetTextViewText(Resource.Id.tvName, activity.Name);
+            remoteViews.SetTextViewText(Resource.Id.tvType, activity.ClassTypeName);
+            remoteViews.SetTextViewText(Resource.Id.tvRoom, activity.RoomNumber);
+            remoteViews.SetTextViewText(Resource.Id.tvBuilding, activity.BuildingName);
 
-            return rv;
+            return remoteViews;
         }
 
-        public RemoteViews LoadingView => null;
+        public RemoteViews LoadingView => new RemoteViews(context.PackageName, Resource.Layout.widget_activity_item);
         public int ViewTypeCount => 1;
         public long GetItemId(int position) => position;
         public bool HasStableIds => true;
 
         private void LoadData()
         {
-            DateTime date = DateTime.Today.AddDays(showTomorrow ? 1 : 0);
-            Log.Debug("ScheduleWidget", date.ToString());
+            DateTime date = ActivitiesWidgetHelper.GetCurrentDate().AddDays(showTomorrow ? 1 : 0);
             var activitiesRepository = App.ServiceProvider.GetService<IActivitiesRepository>()!;
             activities = activitiesRepository!.GetActivities(date)?.AllActivities ?? new();
-            Log.Debug("ScheduleWidget", activities.Count.ToString());
         }
     }
 }

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/widget_root"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@android:color/white"
     android:padding="8dp">
@@ -20,7 +20,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Today's Schedule"
+            android:text=""
             android:textStyle="bold"
             android:textSize="16sp"
             android:textColor="@android:color/black" />
@@ -29,7 +29,7 @@
             android:id="@+id/btnToggleDay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tomorrow"
+            android:text=""
             android:textSize="14sp" />
 	</LinearLayout>
 
@@ -43,10 +43,11 @@
         android:clipToPadding="false" />
 
 	<TextView
-        android:id="@+id/emptyView"
+        android:id="@+id/stateView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Loading schedule..."
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text=""
         android:gravity="center"
         android:padding="8dp" />
 

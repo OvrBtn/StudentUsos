@@ -30,7 +30,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
-            android:padding="5dp"
+            android:padding="15dp"
+            android:textAllCaps="false"
             android:background="@drawable/round_background_button"
             android:textColor="@android:color/white"
             android:textSize="14sp" />

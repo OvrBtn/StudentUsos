@@ -147,6 +147,34 @@ public partial class Activity : ObservableObject
 
     public ActivityType Type { get; set; } = ActivityType.Student;
 
+    public enum ClassTypes
+    {
+        Laboratory,
+        Lecture,
+        Classes,
+        Other
+    }
+
+    public ClassTypes ClassType
+    {
+        get
+        {
+            string classTypeString = ClassTypeNameJson.ToString()!.ToLower();
+            if (classTypeString.Contains("lecture"))
+            {
+                return ClassTypes.Lecture;
+            }
+            else if (classTypeString.Contains("laboratory"))
+            {
+                return ClassTypes.Laboratory;
+            }
+            else if (classTypeString.Contains("classes"))
+            {
+                return ClassTypes.Classes;
+            }
+            return ClassTypes.Other;
+        }
+    }
 
     bool isBusy = false;
     [RelayCommand]

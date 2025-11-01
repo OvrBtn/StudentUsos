@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@android:color/white"
-    android:padding="8dp">
+    android:background="@color/widgetBackgroundColor"
+    android:padding="20dp">
 
 	<LinearLayout
         android:id="@+id/headerLayout"
@@ -22,14 +22,17 @@
             android:layout_height="wrap_content"
             android:text=""
             android:textStyle="bold"
-            android:textSize="16sp"
-            android:textColor="@android:color/black" />
+			android:textColor="@android:color/white"
+            android:textSize="16sp"/>
 
 		<Button
             android:id="@+id/btnToggleDay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
+            android:padding="5dp"
+            android:background="@drawable/round_background_button"
+            android:textColor="@android:color/white"
             android:textSize="14sp" />
 	</LinearLayout>
 
@@ -38,8 +41,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:dividerHeight="4dp"
-        android:divider="@android:color/darker_gray"
-        android:paddingTop="4dp"
+        android:divider="@android:color/transparent"
+        android:paddingTop="8dp"
         android:clipToPadding="false" />
 
 	<TextView
@@ -48,6 +51,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:text=""
+		android:textColor="@android:color/white"
         android:gravity="center"
         android:padding="8dp" />
 

@@ -510,10 +510,24 @@
 
 	<ItemGroup>
 		<Folder Include="Features\Dashboard\Layouts\" />
-		<Folder Include="Platforms\Android\Resources\drawable\" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidResource Update="Platforms\Android\Resources\drawable\round_background_button.xml">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </AndroidResource>
+	  <AndroidResource Update="Platforms\Android\Resources\drawable\activity_round_background_default.xml">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </AndroidResource>
+	  <AndroidResource Update="Platforms\Android\Resources\drawable\activity_round_background_classes.xml">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </AndroidResource>
+	  <AndroidResource Update="Platforms\Android\Resources\drawable\activity_round_background_laboratory.xml">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </AndroidResource>
+	  <AndroidResource Update="Platforms\Android\Resources\drawable\activity_round_background_lecture.xml">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </AndroidResource>
 	  <AndroidResource Update="Platforms\Android\Resources\layout\widget_activity_item.xml">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </AndroidResource>

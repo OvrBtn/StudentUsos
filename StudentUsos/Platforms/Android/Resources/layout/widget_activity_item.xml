@@ -1,46 +1,63 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_item_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="4dp">
+    android:clipToPadding="true"
+    android:clipChildren="true"
+    android:clipToOutline="true" 
+    android:padding="8dp">
 
 	<TextView
-        android:id="@+id/tvTime"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:gravity="center_vertical"
-        android:textStyle="bold"/>
+		android:id="@+id/tvTime"
+		android:layout_height="match_parent"
+		android:layout_width="wrap_content" 
+        android:layout_gravity="start" 
+        android:gravity="center"      
+		android:text=""
+        android:textAlignment="center"
+		android:textColor="@android:color/white"
+	    android:textStyle="bold"/>
+
+	<LinearLayout
+        android:layout_height="match_parent"
+		android:layout_width="25dp">
+	</LinearLayout>
 
 	<LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:background="@android:color/transparent"
         android:orientation="vertical">
 
 		<TextView
             android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+			android:textColor="@android:color/white"
             android:text=""/>
 
 		<TextView
 	        android:id="@+id/tvType"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
+			android:textColor="@android:color/white"
 	        android:text=""/>
 
 		<TextView
             android:id="@+id/tvRoom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+			android:textColor="@android:color/white"
             android:text=""/>
 
 		<TextView
             android:id="@+id/tvBuilding"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+			android:textColor="@android:color/white"
             android:text=""/>
 	</LinearLayout>
 </LinearLayout>

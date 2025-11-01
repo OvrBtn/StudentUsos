@@ -11,8 +11,7 @@ namespace StudentUsos.Platforms.Android
             int year = calendar.Get(CalendarField.Year);
             int month = calendar.Get(CalendarField.Month) + 1;
             int day = calendar.Get(CalendarField.DayOfMonth);
-            //return new(year, month, day);
-            return new(2025, 11, 4);
+            return new(year, month, day);
         }
     }
 }

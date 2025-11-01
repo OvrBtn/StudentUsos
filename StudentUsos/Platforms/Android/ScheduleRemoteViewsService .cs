@@ -47,7 +47,6 @@ namespace StudentUsos.Platforms.Android
             remoteViews.SetTextViewText(Resource.Id.tvRoom, activity.RoomNumber);
             remoteViews.SetTextViewText(Resource.Id.tvBuilding, activity.BuildingName);
 
-            //remoteViews.SetInt(Resource.Id.activity_item_root, "setBackgroundColor", activity.GetRibbonColor().ToAndroid());
             if (activity.ClassType == Activity.ClassTypes.Classes)
             {
                 remoteViews.SetInt(Resource.Id.activity_item_root, "setBackgroundResource", Resource.Drawable.activity_round_background_classes);

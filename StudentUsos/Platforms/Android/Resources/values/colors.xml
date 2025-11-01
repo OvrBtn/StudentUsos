@@ -2,5 +2,8 @@
 <resources>
 	<color name="colorPrimary">#00A6E5</color>
     <color name="colorPrimaryDark">#1b1b1b</color>
-    <color name="colorAccent">#00A6E5</color>
+	<color name="colorAccent">#00A6E5</color>
+
+	<color name="widgetBackgroundColor">#1b1b1b</color>
+	<color name="widgetButtonBackgroundColor">#282828</color>
 </resources>

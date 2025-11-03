@@ -3,4 +3,5 @@
 	<string name="widget_title_tomorrow">Jutro</string>
 	<string name="widget_day_off">Dzień wolny!</string>
 	<string name="widget_no_data">Brak danych. Otwórz aplikację aby odświeżyć.</string>
+	<string name="widget_activities_schedule">Plan zajęć</string>
 </resources>

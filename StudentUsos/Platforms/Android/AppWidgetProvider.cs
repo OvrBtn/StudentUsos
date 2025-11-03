@@ -11,7 +11,7 @@ using Uri = Android.Net.Uri;
 
 namespace StudentUsos.Platforms.Android
 {
-    [BroadcastReceiver(Label = "Schedule Widget", Exported = true)]
+    [BroadcastReceiver(Label = "@string/widget_activities_schedule", Exported = true)]
     [IntentFilter(new[] { "android.appwidget.action.APPWIDGET_UPDATE", TOGGLE_DAY_ACTION })]
     [MetaData("android.appwidget.provider", Resource = "@xml/appwidgetprovider")]
     public class AppWidget : AppWidgetProvider

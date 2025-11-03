@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_item_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:clipToPadding="true"
+    android:clipChildren="true"
+    android:clipToOutline="true" 
+    android:padding="8dp">
+
+	<TextView
+		android:id="@+id/tvTime"
+		android:layout_height="match_parent"
+		android:layout_width="wrap_content" 
+        android:layout_gravity="start" 
+        android:gravity="center"      
+		android:text=""
+        android:textSize="13dp"
+        android:textAlignment="center"
+		android:textColor="@android:color/white"
+        android:layout_marginRight="15dp"
+	    android:textStyle="bold"/>
+
+	<LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:orientation="vertical">
+
+		<TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+			android:textColor="@android:color/white"
+            android:textSize="13dp"
+            android:text=""/>
+
+		<TextView
+	        android:id="@+id/tvType"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+			android:textColor="@android:color/white"
+            android:textSize="10dp"
+	        android:text=""/>
+
+		<TextView
+            android:id="@+id/tvRoom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+			android:textColor="@android:color/white"
+            android:textSize="10dp"
+            android:text=""/>
+
+		<TextView
+            android:id="@+id/tvBuilding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+			android:textColor="@android:color/white"
+            android:textSize="10dp"
+            android:text=""/>
+	</LinearLayout>
+</LinearLayout>

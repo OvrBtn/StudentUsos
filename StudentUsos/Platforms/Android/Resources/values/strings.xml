@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="widget_title_today">Today</string>
+	<string name="widget_title_tomorrow">Tomorrow</string>
+	<string name="widget_day_off">Day off!</string>
+	<string name="widget_no_data">No data. Open the app to refresh.</string>
+	<string name="widget_activities_schedule">Activities schedule</string>
+</resources>

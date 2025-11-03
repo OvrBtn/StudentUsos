@@ -142,6 +142,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<None Remove="Platforms\Android\Resources\drawable\activities_widget_preview.png" />
+		<None Remove="Platforms\Android\Resources\layout\widget.xml" />
+		<None Remove="Platforms\Android\Resources\values-pl\strings.xml" />
+		<None Remove="Platforms\Android\Resources\values\strings.xml" />
 		<None Remove="Resources\Images\arrow.svg" />
 		<None Remove="Resources\Images\arrow_down.png" />
 		<None Remove="Resources\Images\arrow_left.png" />
@@ -507,6 +511,42 @@
 
 	<ItemGroup>
 		<Folder Include="Features\Dashboard\Layouts\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <AndroidResource Update="Platforms\Android\Resources\drawable\activities_widget_preview.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </AndroidResource>
+	  <AndroidResource Update="Platforms\Android\Resources\drawable\round_background_button.xml">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </AndroidResource>
+	  <AndroidResource Update="Platforms\Android\Resources\drawable\activity_round_background_default.xml">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </AndroidResource>
+	  <AndroidResource Update="Platforms\Android\Resources\drawable\activity_round_background_classes.xml">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </AndroidResource>
+	  <AndroidResource Update="Platforms\Android\Resources\drawable\activity_round_background_laboratory.xml">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </AndroidResource>
+	  <AndroidResource Update="Platforms\Android\Resources\drawable\activity_round_background_lecture.xml">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </AndroidResource>
+	  <AndroidResource Update="Platforms\Android\Resources\layout\widget_activity_item.xml">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </AndroidResource>
+	  <AndroidResource Update="Platforms\Android\Resources\layout\widget.xml">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </AndroidResource>
+	  <AndroidResource Update="Platforms\Android\Resources\values-pl\strings.xml">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </AndroidResource>
+	  <AndroidResource Update="Platforms\Android\Resources\values\strings.xml">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </AndroidResource>
+	  <AndroidResource Update="Platforms\Android\Resources\xml\appwidgetprovider.xml">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </AndroidResource>
 	</ItemGroup>
 
 	<ProjectExtensions>

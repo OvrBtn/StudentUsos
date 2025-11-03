@@ -142,6 +142,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<None Remove="Platforms\Android\Resources\drawable\activities_widget_preview.png" />
 		<None Remove="Platforms\Android\Resources\layout\widget.xml" />
 		<None Remove="Platforms\Android\Resources\values-pl\strings.xml" />
 		<None Remove="Platforms\Android\Resources\values\strings.xml" />
@@ -513,6 +514,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidResource Update="Platforms\Android\Resources\drawable\activities_widget_preview.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </AndroidResource>
 	  <AndroidResource Update="Platforms\Android\Resources\drawable\round_background_button.xml">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </AndroidResource>

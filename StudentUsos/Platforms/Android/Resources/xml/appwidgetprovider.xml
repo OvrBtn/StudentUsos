@@ -9,4 +9,4 @@
     android:resizeMode="horizontal|vertical"
     android:updatePeriodMillis="1000"
     android:initialLayout="@layout/widget"
-    android:previewImage="@drawable/test" />
+    android:previewImage="@drawable/activities_widget_preview" />

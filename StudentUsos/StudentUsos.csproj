@@ -549,6 +549,13 @@
 	  </AndroidResource>
 	</ItemGroup>
 
+	<ItemGroup Condition="'$(TargetFramework)' == 'net9.0-android'">
+		<!--newer versions require min API to be >= 23 hence older version-->
+	  <PackageReference Include="Xamarin.AndroidX.Work.Runtime">
+	    <Version>2.9.1.1</Version>
+	  </PackageReference>
+	</ItemGroup>
+
 	<ProjectExtensions>
 		<VisualStudio>
 			<UserProperties XamarinHotReloadDebuggerTimeoutExceptionStudenckiUSOSPUTMAUIHideInfoBar="True" />

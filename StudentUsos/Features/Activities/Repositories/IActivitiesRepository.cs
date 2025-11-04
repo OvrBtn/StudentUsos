@@ -12,4 +12,7 @@ public interface IActivitiesRepository
     public GetActivitiesResult? GetActivities(DateTime date);
     public GetActivitiesResult? GetAllActivities();
     public void Replace(IEnumerable<TimetableDay> timetableDays);
+
+    public Task CompareAndScheduleNotifications(List<Activity> oldActivities, List<Activity> newActivities);
+
 }

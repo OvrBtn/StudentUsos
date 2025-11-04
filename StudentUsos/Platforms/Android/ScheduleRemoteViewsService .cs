@@ -74,7 +74,7 @@ namespace StudentUsos.Platforms.Android
 
         private void LoadData()
         {
-            DateTime date = ActivitiesWidgetHelper.GetCurrentDate().AddDays(showTomorrow ? 1 : 0);
+            DateTime date = AndroidHelper.GetCurrentDate().AddDays(showTomorrow ? 1 : 0);
             var activitiesRepository = App.ServiceProvider.GetService<IActivitiesRepository>()!;
             activities = activitiesRepository!.GetActivities(date)?.AllActivities ?? new();
         }

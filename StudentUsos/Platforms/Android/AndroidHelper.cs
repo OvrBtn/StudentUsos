@@ -2,7 +2,7 @@
 
 namespace StudentUsos.Platforms.Android
 {
-    public static class ActivitiesWidgetHelper
+    public static class AndroidHelper
     {
         //avoid using DateTime.Now since loading .NET's timezone database on Android can be slow
         public static DateTime GetCurrentDate()

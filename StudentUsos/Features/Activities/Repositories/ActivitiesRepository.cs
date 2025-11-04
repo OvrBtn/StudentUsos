@@ -12,6 +12,11 @@ public class ActivitiesRepository : IActivitiesRepository
         this.logger = logger;
     }
 
+    public Task CompareAndScheduleNotifications(List<Activity> oldActivities, List<Activity> newActivities)
+    {
+        return Task.CompletedTask;
+    }
+
     public GetActivitiesResult? GetActivities(DateTime date)
     {
         try

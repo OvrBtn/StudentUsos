@@ -95,6 +95,10 @@ internal static partial class MauiProgramExtensions
         builder.Services.AddSingleton<ICampusMapService, CampusMapService>();
         builder.Services.AddSingleton<ICampusMapRepository, CampusMapRepository>();
 
+#if ANDROID
+        builder.Services.AddSingleton<IBackgroundJobService, BackgroundJobServiceAndroid>();
+#endif
+
         return builder;
     }
 

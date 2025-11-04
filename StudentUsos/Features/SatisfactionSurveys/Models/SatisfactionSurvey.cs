@@ -32,11 +32,13 @@ public partial class SatisfactionSurvey : ObservableObject
     [JsonPropertyName("lecturer")]
     public Lecturer Lecturer { get; set; }
 
+    [JsonIgnore]
     public FillSatisfactionSurveyViewModel ViewModel;
 
     [ObservableProperty]
     float filledPercentage = 0f;
 
+    [JsonIgnore]
     public SatisfactionSurveysViewModel SatisfactionSurveysViewModel { get; set; }
 
     public SatisfactionSurvey()

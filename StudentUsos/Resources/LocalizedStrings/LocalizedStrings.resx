@@ -614,4 +614,16 @@
   <data name="SomethingWentWrong" xml:space="preserve">
     <value>Something went wrong</value>
   </data>
+  <data name="ChangeInActivitiesSchedule" xml:space="preserve">
+    <value>Change in activities schedule</value>
+  </data>
+  <data name="ActivitiesScheduleUpdateNotification_Added" xml:space="preserve">
+    <value>Added</value>
+  </data>
+  <data name="ActivitiesScheduleUpdateNotification_Removed" xml:space="preserve">
+    <value>Removed</value>
+  </data>
+  <data name="ActivitiesScheduleUpdateNotification_Updated" xml:space="preserve">
+    <value>Updated</value>
+  </data>
 </root>

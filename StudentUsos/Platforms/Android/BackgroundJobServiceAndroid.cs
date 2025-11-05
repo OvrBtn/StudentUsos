@@ -19,6 +19,7 @@ public class BackgroundJobServiceAndroid : IBackgroundJobService
 
     void InitializeActivitiesSynchronizationJob()
     {
+
         var context = Android.App.Application.Context;
 
         var workRequest = PeriodicWorkRequest.Builder
@@ -27,7 +28,7 @@ public class BackgroundJobServiceAndroid : IBackgroundJobService
 
         WorkManager.GetInstance(context).EnqueueUniquePeriodicWork(
             "ActivitiesSynchronizationWorker",
-            ExistingPeriodicWorkPolicy.Keep!,
+            ExistingPeriodicWorkPolicy.CancelAndReenqueue!,
             workRequest);
     }
 }

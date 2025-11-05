@@ -187,6 +187,33 @@ namespace StudentUsos.Resources.LocalizedStrings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Added.
+        /// </summary>
+        internal static string ActivitiesScheduleUpdateNotification_Added {
+            get {
+                return ResourceManager.GetString("ActivitiesScheduleUpdateNotification_Added", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removed.
+        /// </summary>
+        internal static string ActivitiesScheduleUpdateNotification_Removed {
+            get {
+                return ResourceManager.GetString("ActivitiesScheduleUpdateNotification_Removed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Updated.
+        /// </summary>
+        internal static string ActivitiesScheduleUpdateNotification_Updated {
+            get {
+                return ResourceManager.GetString("ActivitiesScheduleUpdateNotification_Updated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add.
         /// </summary>
         internal static string Add {
@@ -444,6 +471,15 @@ namespace StudentUsos.Resources.LocalizedStrings {
         internal static string Cancel {
             get {
                 return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change in activities schedule.
+        /// </summary>
+        internal static string ChangeInActivitiesSchedule {
+            get {
+                return ResourceManager.GetString("ChangeInActivitiesSchedule", resourceCulture);
             }
         }
         

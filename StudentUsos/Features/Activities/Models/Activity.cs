@@ -207,7 +207,13 @@ public partial class Activity : ObservableObject
     /// <returns></returns>
     public static bool Comparer(Activity a1, Activity a2)
     {
-        return a1.Name == a2.Name && a1.StartDateTime == a2.StartDateTime && a1.EndDateTime == a2.EndDateTime && a1.CourseId == a2.CourseId;
+        return a1.Name == a2.Name &&
+            a1.StartDateTime == a2.StartDateTime &&
+            a1.EndDateTime == a2.EndDateTime &&
+            a1.CourseId == a2.CourseId &&
+            a1.RoomNumber == a2.RoomNumber &&
+            a1.BuildingName == a2.BuildingName &&
+            a1.ClassTypeName == a2.ClassTypeName;
     }
 
     [ObservableProperty]

@@ -1,10 +1,13 @@
 ﻿using Android.Content;
+using Android.Util;
 using AndroidX.Work;
 using StudentUsos.Features.Activities.Models;
 using StudentUsos.Features.Activities.Repositories;
 using StudentUsos.Features.Activities.Services;
+using StudentUsos.Features.Authorization.Services;
 using StudentUsos.Resources.LocalizedStrings;
 using StudentUsos.Services.LocalNotifications;
+using Activity = StudentUsos.Features.Activities.Models.Activity;
 
 namespace StudentUsos.Platforms.Android;
 
@@ -14,62 +17,67 @@ public class ActivitiesSynchronizationWorker : Worker
     {
     }
 
+    IServiceProvider serviceProvider;
+    IActivitiesRepository activitiesRepository;
+    IActivitiesService activitiesService;
+    ILocalNotificationsService localNotificationsService;
+    ILogger? logger;
+
     public override Result DoWork()
     {
         try
         {
-            SynchronizeAndScheduleNotifications().Wait();
+            serviceProvider = App.ServiceProvider;
+            activitiesRepository = serviceProvider.GetService<IActivitiesRepository>()!;
+            activitiesService = serviceProvider.GetService<IActivitiesService>()!;
+            localNotificationsService = serviceProvider.GetService<ILocalNotificationsService>()!;
+            logger = serviceProvider.GetService<ILogger>();
 
-            return Result.InvokeSuccess();
+            //worker is created without fully loading the app, hence loading tokens has to be triggered manually
+            AuthorizationService.CheckIfSignedInAndRetrieveTokens();
+
+            bool isSuccessful = SynchronizeAndScheduleNotifications().GetAwaiter().GetResult();
+
+            return isSuccessful ? Result.InvokeSuccess() : Result.InvokeRetry();
         }
         catch (Exception ex)
         {
+            logger?.LogCatchedException(ex);
             return Result.InvokeFailure();
         }
     }
 
-    async Task SynchronizeAndScheduleNotifications()
+    async Task<bool> SynchronizeAndScheduleNotifications()
     {
         try
         {
-
-            var serviceProvider = App.ServiceProvider;
-            var activitiesRepository = serviceProvider.GetService<IActivitiesRepository>()!;
-            var activitiesService = serviceProvider.GetService<IActivitiesService>()!;
-
-            //var t = serviceProvider.GetService<ILocalNotificationsService>()!;
-            //await t.ScheduleNotificationAsync(new()
-            //{
-            //    Description = "tesdt",
-            //    Group = "test",
-            //    ScheduledDateTime = DateTime.Now.AddSeconds(10),
-            //    Subtitle = "test",
-            //    Title = "test"
-            //});
-
             var local = activitiesRepository.GetAllActivities();
             var remote = await activitiesService.GetActivitiesOfCurrentUserApiAsync(AndroidHelper.GetCurrentDate(), 7);
             if (local is null || remote is null)
             {
-                return;
+                return false;
             }
 
             activitiesRepository.Replace(remote.Result);
 
-            localNotificationsService = serviceProvider.GetService<ILocalNotificationsService>()!;
             await CompareAndScheduleNotifications(local, remote);
+
+            return true;
         }
-        catch (Exception e)
+        catch (Exception ex)
         {
-            var t = 5;
+            logger?.LogCatchedException(ex);
+            return false;
         }
 
     }
 
-    ILocalNotificationsService localNotificationsService;
-
     async Task ScheduleNotification(string description)
     {
+#if DEBUG
+        Log.Debug("StudentUsos", $"SCHEDULING at {AndroidHelper.GetCurrentDate().AddSeconds(10)} NOTIFICATION: {description.Replace('\n', ' ')}");
+#endif
+
         LocalNotification notification = new()
         {
             ScheduledDateTime = AndroidHelper.GetCurrentDate().AddSeconds(10),
@@ -85,11 +93,13 @@ public class ActivitiesSynchronizationWorker : Worker
     {
         try
         {
-            remote.Result[1].Activities.Add(remote.Result[2].Activities[0]);
+            remote.Result = new() { remote.Result[0] };
+            remote.Result[0].Activities.RemoveAt(0);
 
             foreach (var timetableDayLocal in local.Result)
             {
                 var timetableDayRemote = remote.Result.Where(x => x.Date.Date == timetableDayLocal.Date.Date).FirstOrDefault();
+
                 //edge case in which last synchronization was done previous day so 1 local and 1 remote timetable day won't have a match
                 if (timetableDayRemote is null)
                 {
@@ -98,7 +108,6 @@ public class ActivitiesSynchronizationWorker : Worker
 
                 foreach (var localActivity in timetableDayLocal.Activities)
                 {
-
                     var remoteActivity = timetableDayRemote.Activities.FirstOrDefault(x =>
                     x.UnitId == localActivity.UnitId && x.CourseId == localActivity.CourseId);
 
@@ -124,9 +133,9 @@ public class ActivitiesSynchronizationWorker : Worker
                 }
             }
         }
-        catch (Exception e)
+        catch (Exception ex)
         {
-            var t = 5;
+            logger?.LogCatchedException(ex);
         }
     }
 

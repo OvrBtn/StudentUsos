@@ -43,6 +43,13 @@ public partial class App : Application
         };
 #endif
 
+        AuthorizationService.OnLoginSucceeded += AuthorizationService_OnLoginSucceeded;
+
+    }
+
+    private void AuthorizationService_OnLoginSucceeded()
+    {
+        backgroundJobService?.InitializeJobs();
     }
 
     //Called after Android MainActivity ctor

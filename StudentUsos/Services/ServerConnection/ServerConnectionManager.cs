@@ -279,6 +279,11 @@ public class ServerConnectionManager : IServerConnectionManager
 
     void TryLogging(string methodName, string response)
     {
+        if (logger is null)
+        {
+            return;
+        }
+
         bool canLog = methodName switch
         {
             _ when methodName.StartsWith("services/tt") => logger.IsModuleAllowed(LoggingPermission.Activities),

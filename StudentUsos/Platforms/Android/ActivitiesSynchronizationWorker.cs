@@ -56,7 +56,7 @@ public class ActivitiesSynchronizationWorker : Worker
         {
             int.TryParse(runsCountString, out runsCount);
         }
-        runsCount = (runsCount + 1) % (int.MaxValue - 1);
+        runsCount = (runsCount + 1) % int.MaxValue;
         localStorageManager.SetData(LocalStorageKeys.ActivitiesSynchronizationBackgroundWorker_AmountOfRuns, runsCount.ToString());
     }
 

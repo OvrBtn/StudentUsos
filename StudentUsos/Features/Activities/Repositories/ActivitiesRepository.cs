@@ -83,6 +83,7 @@ public class ActivitiesRepository : IActivitiesRepository
 
         LocalNotification notification = new()
         {
+            //10 seconds delay so notification isn't seen as in the past and so it isn't ignored
             ScheduledDateTime = DateTimeOffset.Now.DateTime.AddSeconds(10),
             Title = LocalizedStrings.ChangeInActivitiesSchedule,
             Description = description,
@@ -101,9 +102,6 @@ public class ActivitiesRepository : IActivitiesRepository
     {
         try
         {
-            remote = new() { remote[0] };
-            remote[0].Activities.RemoveAt(0);
-
             foreach (var timetableDayLocal in local)
             {
                 var timetableDayRemote = remote.Where(x => x.Date.Date == timetableDayLocal.Date.Date).FirstOrDefault();
@@ -149,7 +147,7 @@ public class ActivitiesRepository : IActivitiesRepository
 
     string ActivityToFormattedString(Activity activity)
     {
-        return $"{activity.Name}\n{activity.StartDateTime.ToString()} - {activity.EndDateTime.ToString()}\n{activity.ClassTypeName}" +
+        return $"{activity.Name}\n{activity.StartDateTime.ToString("g")} - {activity.EndDateTime.ToString("g")}\n{activity.ClassTypeName}" +
             $"\n{activity.RoomNumber} - {activity.BuildingName}";
     }
 

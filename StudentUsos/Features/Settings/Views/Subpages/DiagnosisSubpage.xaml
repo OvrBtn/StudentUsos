@@ -8,13 +8,13 @@
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
 
     <ScrollView>
-        <StackLayout Margin="30">
+        <StackLayout Margin="30" Spacing="20">
 
-            <!--<Label FontSize="14" HorizontalTextAlignment="Center"--> 
-                           <!--Text="{x:Static strings:LocalizedStrings.SettingsPage_TestingTabTitle}" />-->
-            <Border Padding="0" Margin="0,0,0,20">
+            <!--<Label FontSize="14" HorizontalTextAlignment="Center"-->
+            <!--Text="{x:Static strings:LocalizedStrings.SettingsPage_TestingTabTitle}" />-->
+            <Border Padding="0">
                 <StackLayout>
-                        <Button Text="{x:Static strings:LocalizedStrings.SettingsPage_Logs}" Padding="15"
+                    <Button Text="{x:Static strings:LocalizedStrings.SettingsPage_Logs}" Padding="15"
                                 Clicked="OpenLogsButton_Clicked" CornerRadius="0"/>
 
                     <StackLayout BackgroundColor="#444" HeightRequest="1" Margin="20,0"/>
@@ -28,6 +28,17 @@
                 <StackLayout>
                     <Button Text="{x:Static strings:LocalizedStrings.SettingsPage_ResetLocalData}" Padding="15"
                             Clicked="ResetLocalDataButton_Clicked" CornerRadius="0"/>
+                </StackLayout>
+            </Border>
+
+            <Border Padding="0" Margin="0,0,0,20">
+                <StackLayout>
+                    <Label Text="{x:Static strings:LocalizedStrings.Checksums}" Padding="15" HorizontalTextAlignment="Center"/>
+
+                    <Grid ColumnDefinitions="auto, auto" Margin="25, 0, 25, 15" ColumnSpacing="10" HorizontalOptions="Center">
+                        <Label Grid.Column="0" Text="ActivitiesBackgroundSync"/>
+                        <Label x:Name="activitiesSyncRunsLabel" Grid.Column="1"/>
+                    </Grid>
                 </StackLayout>
             </Border>
 

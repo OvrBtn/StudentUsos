@@ -628,4 +628,7 @@
   <data name="ActivitiesScheduleUpdateNotification_Updated" xml:space="preserve">
     <value>Zmieniono</value>
   </data>
+  <data name="Checksums" xml:space="preserve">
+    <value>Sumy kontrolne</value>
+  </data>
 </root>

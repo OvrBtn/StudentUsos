@@ -8,15 +8,26 @@ public partial class DiagnosisSubpage : CustomContentPageNotAnimated
     INavigationService navigationService;
     ILogger logger;
     IApplicationService? applicationService;
+    ILocalStorageManager localStorageManager;
     public DiagnosisSubpage(INavigationService navigationService,
         ILogger logger,
+        ILocalStorageManager localStorageManager,
         IApplicationService? applicationService = null)
     {
         InitializeComponent();
 
         this.navigationService = navigationService;
         this.logger = logger;
+        this.localStorageManager = localStorageManager;
         this.applicationService = applicationService;
+
+        InitChecksums();
+    }
+
+    void InitChecksums()
+    {
+        var activitiesSyncRuns = localStorageManager.GetData(LocalStorageKeys.ActivitiesSynchronizationBackgroundWorker_AmountOfRuns) ?? "0";
+        activitiesSyncRunsLabel.Text = activitiesSyncRuns;
     }
 
     private void OpenLogsButton_Clicked(object sender, EventArgs e)

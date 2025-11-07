@@ -484,6 +484,15 @@ namespace StudentUsos.Resources.LocalizedStrings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Checksums.
+        /// </summary>
+        internal static string Checksums {
+            get {
+                return ResourceManager.GetString("Checksums", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Comment.
         /// </summary>
         internal static string Comment {

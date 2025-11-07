@@ -626,4 +626,7 @@
   <data name="ActivitiesScheduleUpdateNotification_Updated" xml:space="preserve">
     <value>Updated</value>
   </data>
+  <data name="Checksums" xml:space="preserve">
+    <value>Checksums</value>
+  </data>
 </root>

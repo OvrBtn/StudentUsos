@@ -20,6 +20,7 @@ public class ActivitiesSynchronizationWorker : Worker
     IServiceProvider serviceProvider;
     IActivitiesRepository activitiesRepository;
     IActivitiesService activitiesService;
+    ILocalStorageManager localStorageManager;
     ILogger? logger;
 
     public override Result DoWork()
@@ -29,7 +30,10 @@ public class ActivitiesSynchronizationWorker : Worker
             serviceProvider = App.ServiceProvider;
             activitiesRepository = serviceProvider.GetService<IActivitiesRepository>()!;
             activitiesService = serviceProvider.GetService<IActivitiesService>()!;
+            localStorageManager = serviceProvider.GetService<ILocalStorageManager>()!;
             logger = serviceProvider.GetService<ILogger>();
+
+            IncreaseRunsCount();
 
             //worker is created without fully loading the app, hence loading tokens has to be triggered manually
             AuthorizationService.CheckIfSignedInAndRetrieveTokens();
@@ -43,6 +47,17 @@ public class ActivitiesSynchronizationWorker : Worker
             logger?.LogCatchedException(ex);
             return Result.InvokeFailure();
         }
+    }
+
+    void IncreaseRunsCount()
+    {
+        int runsCount = 0;
+        if (localStorageManager.TryGettingData(LocalStorageKeys.ActivitiesSynchronizationBackgroundWorker_AmountOfRuns, out var runsCountString))
+        {
+            int.TryParse(runsCountString, out runsCount);
+        }
+        runsCount = (runsCount + 1) % (int.MaxValue - 1);
+        localStorageManager.SetData(LocalStorageKeys.ActivitiesSynchronizationBackgroundWorker_AmountOfRuns, runsCount.ToString());
     }
 
     async Task<bool> SynchronizeAndScheduleNotifications()

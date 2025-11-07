@@ -142,7 +142,14 @@ public partial class DashboardActivitiesViewModel : BaseViewModel
 
             var activitiesFromApi = await LoadActivitiesApiAsync();
             OnAsynchronousLoadingFinished?.Invoke();
-            if (activitiesFromApi is not null) activitiesRepository.Replace(activitiesFromApi);
+            if (activitiesFromApi is not null)
+            {
+                activitiesRepository.Replace(activitiesFromApi);
+                if (activitiesFromLocalDb is not null)
+                {
+                    await activitiesRepository.CompareAndScheduleNotificationsAsync(activitiesFromLocalDb, activitiesFromApi);
+                }
+            }
         }
         catch (Exception ex)
         {

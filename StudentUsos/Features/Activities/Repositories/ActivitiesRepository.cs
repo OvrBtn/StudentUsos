@@ -94,14 +94,19 @@ public class ActivitiesRepository : IActivitiesRepository
 
     public async Task CompareAndScheduleNotificationsAsync(GetActivitiesResult local, GetActivitiesResult remote)
     {
+        await CompareAndScheduleNotificationsAsync(local.Result, remote.Result);
+    }
+
+    public async Task CompareAndScheduleNotificationsAsync(List<TimetableDay> local, List<TimetableDay> remote)
+    {
         try
         {
-            remote.Result = new() { remote.Result[0] };
-            remote.Result[0].Activities.RemoveAt(0);
+            remote = new() { remote[0] };
+            remote[0].Activities.RemoveAt(0);
 
-            foreach (var timetableDayLocal in local.Result)
+            foreach (var timetableDayLocal in local)
             {
-                var timetableDayRemote = remote.Result.Where(x => x.Date.Date == timetableDayLocal.Date.Date).FirstOrDefault();
+                var timetableDayRemote = remote.Where(x => x.Date.Date == timetableDayLocal.Date.Date).FirstOrDefault();
 
                 //edge case in which last synchronization was done previous day so 1 local and 1 remote timetable day won't have a match
                 if (timetableDayRemote is null)

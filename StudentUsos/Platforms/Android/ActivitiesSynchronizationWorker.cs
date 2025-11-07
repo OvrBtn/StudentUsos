@@ -20,7 +20,6 @@ public class ActivitiesSynchronizationWorker : Worker
     IServiceProvider serviceProvider;
     IActivitiesRepository activitiesRepository;
     IActivitiesService activitiesService;
-    ILocalNotificationsService localNotificationsService;
     ILogger? logger;
 
     public override Result DoWork()
@@ -30,7 +29,6 @@ public class ActivitiesSynchronizationWorker : Worker
             serviceProvider = App.ServiceProvider;
             activitiesRepository = serviceProvider.GetService<IActivitiesRepository>()!;
             activitiesService = serviceProvider.GetService<IActivitiesService>()!;
-            localNotificationsService = serviceProvider.GetService<ILocalNotificationsService>()!;
             logger = serviceProvider.GetService<ILogger>();
 
             //worker is created without fully loading the app, hence loading tokens has to be triggered manually
@@ -60,7 +58,7 @@ public class ActivitiesSynchronizationWorker : Worker
 
             activitiesRepository.Replace(remote.Result);
 
-            await CompareAndScheduleNotifications(local, remote);
+            await activitiesRepository.CompareAndScheduleNotificationsAsync(local, remote);
 
             return true;
         }
@@ -69,79 +67,6 @@ public class ActivitiesSynchronizationWorker : Worker
             logger?.LogCatchedException(ex);
             return false;
         }
-
     }
-
-    async Task ScheduleNotification(string description)
-    {
-#if DEBUG
-        Log.Debug("StudentUsos", $"SCHEDULING at {AndroidHelper.GetCurrentDate().AddSeconds(10)} NOTIFICATION: {description.Replace('\n', ' ')}");
-#endif
-
-        LocalNotification notification = new()
-        {
-            ScheduledDateTime = AndroidHelper.GetCurrentDate().AddSeconds(10),
-            Title = LocalizedStrings.ChangeInActivitiesSchedule,
-            Description = description,
-            Group = "ActivitiesSynchronization",
-            Subtitle = ""
-        };
-        await localNotificationsService.ScheduleNotificationAsync(notification);
-    }
-
-    async Task CompareAndScheduleNotifications(GetActivitiesResult local, GetActivitiesResult remote)
-    {
-        try
-        {
-            remote.Result = new() { remote.Result[0] };
-            remote.Result[0].Activities.RemoveAt(0);
-
-            foreach (var timetableDayLocal in local.Result)
-            {
-                var timetableDayRemote = remote.Result.Where(x => x.Date.Date == timetableDayLocal.Date.Date).FirstOrDefault();
-
-                //edge case in which last synchronization was done previous day so 1 local and 1 remote timetable day won't have a match
-                if (timetableDayRemote is null)
-                {
-                    continue;
-                }
-
-                foreach (var localActivity in timetableDayLocal.Activities)
-                {
-                    var remoteActivity = timetableDayRemote.Activities.FirstOrDefault(x =>
-                    x.UnitId == localActivity.UnitId && x.CourseId == localActivity.CourseId);
-
-                    if (remoteActivity is null)
-                    {
-                        await ScheduleNotification($"🗑️ {LocalizedStrings.ActivitiesScheduleUpdateNotification_Removed}\n{ActivityToString(localActivity)}");
-                    }
-                    else if (Activity.Comparer(localActivity, remoteActivity) == false)
-                    {
-                        await ScheduleNotification($"✏️ {LocalizedStrings.ActivitiesScheduleUpdateNotification_Updated}\n" +
-                            $"{ActivityToString(localActivity)}\n↓\n{ActivityToString(remoteActivity)}");
-                    }
-
-                    if (remoteActivity is not null)
-                    {
-                        timetableDayRemote.Activities.Remove(remoteActivity);
-                    }
-                }
-
-                foreach (var remoteActivity in timetableDayRemote.Activities)
-                {
-                    await ScheduleNotification($"➕ {LocalizedStrings.ActivitiesScheduleUpdateNotification_Added}\n{ActivityToString(remoteActivity)}");
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            logger?.LogCatchedException(ex);
-        }
-    }
-
-    string ActivityToString(Activity activity)
-    {
-        return $"{activity.Name}\n{activity.StartDateTime.ToString()} - {activity.EndDateTime.ToString()}\n{activity.ClassTypeName}" +
-            $"\n{activity.RoomNumber} - {activity.BuildingName}";
-    }
+    
 }

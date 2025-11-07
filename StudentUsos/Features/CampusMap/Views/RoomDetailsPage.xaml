@@ -63,16 +63,16 @@
                                     <Grid Grid.Column="1">
                                         <Image Source="thumb_up.png" HeightRequest="25" Margin="10"/>
                                         <Image Source="thumbs_up_fill.png" HeightRequest="25" Margin="10" IsVisible="{Binding IsUpvoted}"/>
-                                        <Button BackgroundColor="Transparent" x:DataType="local:RoomDetailsViewModel" 
+                                        <Button BackgroundColor="Transparent"
                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type local:RoomDetailsViewModel}}, 
-                                            Path=UpvoteButtonPressedCommand}" CommandParameter="{Binding .}"/>
+                                            Path=UpvoteButtonPressedCommand, x:DataType=local:RoomDetailsViewModel}" CommandParameter="{Binding .}"/>
                                     </Grid>
                                     <Grid Grid.Column="2">
                                         <Image Source="thumb_down.png" HeightRequest="25" Margin="10"/>
                                         <Image Source="thumbs_down_fill.png" HeightRequest="25" Margin="10" IsVisible="{Binding IsDownvoted}"/>
-                                        <Button BackgroundColor="Transparent" x:DataType="local:RoomDetailsViewModel" 
+                                        <Button BackgroundColor="Transparent"
                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type local:RoomDetailsViewModel}}, 
-                                            Path=DownvoteButtonPressedCommand}" CommandParameter="{Binding .}"></Button>
+                                            Path=DownvoteButtonPressedCommand, x:DataType=local:RoomDetailsViewModel}" CommandParameter="{Binding .}"></Button>
                                     </Grid>
                                 </Grid>
                             </DataTemplate>

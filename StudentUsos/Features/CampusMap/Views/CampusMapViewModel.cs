@@ -94,7 +94,7 @@ public partial class CampusMapViewModel : BaseViewModel
 
     async Task InitializeLocallySavedUsersVotesAsync()
     {
-        if (localStorageManager.TryGettingData(LocalStorageKeys.IsCampusMapInitialized, out string isCampusMapInitialized) &&
+        if (localStorageManager.TryGettingString(LocalStorageKeys.IsCampusMapInitialized, out string isCampusMapInitialized) &&
             bool.TryParse(isCampusMapInitialized, out bool parsed) && parsed)
         {
             return;
@@ -110,7 +110,7 @@ public partial class CampusMapViewModel : BaseViewModel
         campusMapRepository.ImportUpvotes(upvotes);
         campusMapRepository.ImportDownvotes(downvotes);
 
-        localStorageManager.SetData(LocalStorageKeys.IsCampusMapInitialized, true.ToString());
+        localStorageManager.SetString(LocalStorageKeys.IsCampusMapInitialized, true.ToString());
     }
 
     public async Task InitAsync()

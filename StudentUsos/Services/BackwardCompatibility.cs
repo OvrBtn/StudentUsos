@@ -29,10 +29,10 @@ public static class BackwardCompatibility
     static async Task CheckIfShouldResetOrSignOut()
     {
         var localStorageManager = App.ServiceProvider.GetService<ILocalStorageManager>()!;
-        string? lastCheckedVersion = localStorageManager.GetData(LocalStorageKeys.BackwardCompatibilityLastCheckedVersion);
+        string? lastCheckedVersion = localStorageManager.GetString(LocalStorageKeys.BackwardCompatibilityLastCheckedVersion);
         if (lastCheckedVersion is null)
         {
-            localStorageManager.SetData(LocalStorageKeys.BackwardCompatibilityLastCheckedVersion, CurrentVersion);
+            localStorageManager.SetString(LocalStorageKeys.BackwardCompatibilityLastCheckedVersion, CurrentVersion);
             //if there were no previous checks because user updated from version which didn't have this implementation
             //this will allow current check to always execute and make it compatible with older versions
             lastCheckedVersion = "0.0.0";
@@ -83,7 +83,7 @@ public static class BackwardCompatibility
             ResetLocalData();
         }
 
-        localStorageManager.SetData(LocalStorageKeys.BackwardCompatibilityLastCheckedVersion, CurrentVersion);
+        localStorageManager.SetString(LocalStorageKeys.BackwardCompatibilityLastCheckedVersion, CurrentVersion);
     }
 
     public static event Action OnCompatibilityRegisterSucceeded;
@@ -163,8 +163,8 @@ public static class BackwardCompatibility
             var internalAccessTokenSecret = Preferences.Get(AuthorizationService.SecureStorageKeys.InternalAccessTokenSecret.ToString(), null);
             var googleCalendars = localDatabaseManager.GetAll<GoogleCalendar>();
 
-            var whatsNewCarouselLastId = localStorageManager.GetData(LocalStorageKeys.WhatsNewCarouselLastId);
-            var whatsNewListLastId = localStorageManager.GetData(LocalStorageKeys.WhatsNewListLastId);
+            var whatsNewCarouselLastId = localStorageManager.GetString(LocalStorageKeys.WhatsNewCarouselLastId);
+            var whatsNewListLastId = localStorageManager.GetString(LocalStorageKeys.WhatsNewListLastId);
 
             localDatabaseManager.ResetTables();
             localStorageManager.DeleteEverything();
@@ -177,8 +177,8 @@ public static class BackwardCompatibility
             if (internalAccessTokenSecret is not null) Preferences.Set(AuthorizationService.SecureStorageKeys.InternalAccessTokenSecret.ToString(), internalAccessTokenSecret);
             if (googleCalendars is not null && googleCalendars.Count > 0) localDatabaseManager.InsertAll(googleCalendars);
 
-            if (whatsNewCarouselLastId is not null) localStorageManager.SetData(LocalStorageKeys.WhatsNewCarouselLastId, whatsNewCarouselLastId);
-            if (whatsNewListLastId is not null) localStorageManager.SetData(LocalStorageKeys.WhatsNewListLastId, whatsNewListLastId);
+            if (whatsNewCarouselLastId is not null) localStorageManager.SetString(LocalStorageKeys.WhatsNewCarouselLastId, whatsNewCarouselLastId);
+            if (whatsNewListLastId is not null) localStorageManager.SetString(LocalStorageKeys.WhatsNewListLastId, whatsNewListLastId);
         }
         catch (Exception ex) { Logger.Logger.Default?.LogCatchedException(ex); }
     }

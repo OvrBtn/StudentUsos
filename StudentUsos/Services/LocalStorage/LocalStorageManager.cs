@@ -8,37 +8,37 @@ public class LocalStorageManager : ILocalStorageManager
         Default = this;
     }
 
-    public bool ContainsData(LocalStorageKeys data)
+    public bool ContainsData(LocalStorageKeys key)
     {
-        return Preferences.ContainsKey(data.ToString());
+        return Preferences.ContainsKey(key.ToString());
     }
 
-    public string? GetData(LocalStorageKeys data)
+    public string? GetString(LocalStorageKeys key)
     {
-        var pref = Preferences.Get(data.ToString(), null);
+        var pref = Preferences.Get(key.ToString(), null);
         return pref;
     }
 
-    public bool TryGettingData(LocalStorageKeys data, out string result)
+    public bool TryGettingString(LocalStorageKeys key, out string value)
     {
-        var pref = Preferences.Get(data.ToString(), null);
+        var pref = Preferences.Get(key.ToString(), null);
         if (pref is null)
         {
-            result = "";
+            value = "";
             return false;
         }
-        result = pref;
+        value = pref;
         return true;
     }
 
-    public void SetData(LocalStorageKeys data, string value)
+    public void SetString(LocalStorageKeys key, string value)
     {
-        Preferences.Set(data.ToString(), value);
+        Preferences.Set(key.ToString(), value);
     }
 
-    public void Remove(LocalStorageKeys data)
+    public void Remove(LocalStorageKeys key)
     {
-        Preferences.Remove(data.ToString());
+        Preferences.Remove(key.ToString());
     }
 
     public void DeleteEverything()

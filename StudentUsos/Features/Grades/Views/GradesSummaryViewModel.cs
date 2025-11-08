@@ -25,7 +25,7 @@ public partial class GradesSummaryViewModel : BaseViewModel
 
     async void SetEctsPointsSumAsync()
     {
-        if (localStorageManager.TryGettingData(LocalStorageKeys.EctsPointsSum, out string result))
+        if (localStorageManager.TryGettingString(LocalStorageKeys.EctsPointsSum, out string result))
         {
             EctsPointsSum = result;
             MainStateKey = StateKey.Loaded;
@@ -34,7 +34,7 @@ public partial class GradesSummaryViewModel : BaseViewModel
         if (pointsApi != null && pointsApi != EctsPointsSum)
         {
             EctsPointsSum = pointsApi;
-            localStorageManager.SetData(LocalStorageKeys.EctsPointsSum, pointsApi);
+            localStorageManager.SetString(LocalStorageKeys.EctsPointsSum, pointsApi);
             MainStateKey = StateKey.Loaded;
         }
     }

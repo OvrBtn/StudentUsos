@@ -50,9 +50,9 @@ namespace StudentUsos.Features.Settings.Views.Subpages
 
                 if (didCalendarNotificationsSettingsChanged)
                 {
-                    localStorageManager.SetData(LocalStorageKeys.AreNotificationsEnabled, AreNotificationsEnabled.ToString());
-                    localStorageManager.SetData(LocalStorageKeys.DaysBeforeCalendarEventToSendNotification, NotificationsDayPicked.ToString());
-                    localStorageManager.SetData(LocalStorageKeys.TimeOfDayOfCalendarEventNotification, NotificationsTimePicked.ToString("c", CultureInfo.InvariantCulture));
+                    localStorageManager.SetString(LocalStorageKeys.AreNotificationsEnabled, AreNotificationsEnabled.ToString());
+                    localStorageManager.SetString(LocalStorageKeys.DaysBeforeCalendarEventToSendNotification, NotificationsDayPicked.ToString());
+                    localStorageManager.SetString(LocalStorageKeys.TimeOfDayOfCalendarEventNotification, NotificationsTimePicked.ToString("c", CultureInfo.InvariantCulture));
 
                     int notificationsDayPickedInt = int.Parse(NotificationsDayPicked);
                     await usosCalendarRepository.RefreshNotificationsAsync(AreNotificationsEnabled, notificationsDayPickedInt, NotificationsTimePicked);

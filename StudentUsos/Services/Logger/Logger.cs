@@ -55,7 +55,7 @@ public class Logger : ILogger
     {
         if (allowedModules is null)
         {
-            if (localStorageManager.Value.TryGettingData(LocalStorageKeys.LoggingAllowedData, out string permissions))
+            if (localStorageManager.Value.TryGettingString(LocalStorageKeys.LoggingAllowedData, out string permissions))
             {
                 allowedModules = permissions.Split("|").ToList();
             }
@@ -78,7 +78,7 @@ public class Logger : ILogger
 
     public void SetAllowedModules(IEnumerable<string> newAllowedModules)
     {
-        localStorageManager.Value.SetData(LocalStorageKeys.LoggingAllowedData, string.Join("|", newAllowedModules));
+        localStorageManager.Value.SetString(LocalStorageKeys.LoggingAllowedData, string.Join("|", newAllowedModules));
         allowedModules = new(newAllowedModules);
     }
 

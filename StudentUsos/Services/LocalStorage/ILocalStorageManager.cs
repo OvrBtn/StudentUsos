@@ -2,10 +2,10 @@
 
 public interface ILocalStorageManager
 {
-    public bool ContainsData(LocalStorageKeys data);
-    public string? GetData(LocalStorageKeys data);
-    public bool TryGettingData(LocalStorageKeys data, out string result);
-    public void SetData(LocalStorageKeys data, string value);
-    public void Remove(LocalStorageKeys data);
+    public bool ContainsData(LocalStorageKeys key);
+    public string? GetString(LocalStorageKeys key);
+    public bool TryGettingString(LocalStorageKeys key, out string value);
+    public void SetString(LocalStorageKeys key, string value);
+    public void Remove(LocalStorageKeys key);
     public void DeleteEverything();
 }

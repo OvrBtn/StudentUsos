@@ -37,7 +37,7 @@ public partial class LoginViewModel : BaseViewModel
             areEventsSet = true;
         }
 
-        if (LocalStorageManager.Default.TryGettingData(LocalStorageKeys.LoginAttemptCounter, out string result) && int.TryParse(result, null, out int attemptCount))
+        if (LocalStorageManager.Default.TryGettingString(LocalStorageKeys.LoginAttemptCounter, out string result) && int.TryParse(result, null, out int attemptCount))
         {
             if (attemptCount >= 2) IsAdditionalLoginOptionVisible = true;
         }
@@ -47,13 +47,13 @@ public partial class LoginViewModel : BaseViewModel
     {
         IsActivityIndicatorRunning = true;
 
-        if (LocalStorageManager.Default.TryGettingData(LocalStorageKeys.LoginAttemptCounter, out string result) && int.TryParse(result, null, out int attemptCount))
+        if (LocalStorageManager.Default.TryGettingString(LocalStorageKeys.LoginAttemptCounter, out string result) && int.TryParse(result, null, out int attemptCount))
         {
             attemptCount++;
-            LocalStorageManager.Default.SetData(LocalStorageKeys.LoginAttemptCounter, attemptCount.ToString());
+            LocalStorageManager.Default.SetString(LocalStorageKeys.LoginAttemptCounter, attemptCount.ToString());
             if (attemptCount >= 2) IsAdditionalLoginOptionVisible = true;
         }
-        else LocalStorageManager.Default.SetData(LocalStorageKeys.LoginAttemptCounter, "1");
+        else LocalStorageManager.Default.SetString(LocalStorageKeys.LoginAttemptCounter, "1");
 
         AuthorizationService.BeginLoginAsync(AuthorizationService.Mode.RedirectWithCallback);
     }
@@ -67,7 +67,7 @@ public partial class LoginViewModel : BaseViewModel
 
     private async void LoginSuccessAsync()
     {
-        LocalStorageManager.Default.SetData(LocalStorageKeys.LoginAttemptCounter, "0");
+        LocalStorageManager.Default.SetString(LocalStorageKeys.LoginAttemptCounter, "0");
         IsAdditionalLoginOptionVisible = false;
         IsActivityIndicatorRunning = false;
         LocalDatabaseManager.Default.GenerateTables();

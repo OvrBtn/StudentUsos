@@ -158,7 +158,7 @@ internal static class AuthorizationService
                 throw new Exception("Deserialization issue");
             }
             requestToken = accessTokenRequestResultDeserialized["requestToken"];
-            LocalStorageManager.Default.SetData(LocalStorageKeys.RequestToken, requestToken);
+            LocalStorageManager.Default.SetString(LocalStorageKeys.RequestToken, requestToken);
 
             string authorizeUrl = accessTokenRequestResultDeserialized["authorizeURL"];
             await Browser.OpenAsync(authorizeUrl, BrowserLaunchMode.SystemPreferred);
@@ -196,7 +196,7 @@ internal static class AuthorizationService
             OnContinueLogging?.Invoke();
             if (requestToken == null)
             {
-                if (LocalStorageManager.Default.TryGettingData(LocalStorageKeys.RequestToken, out string requestTokenFromPrefrences))
+                if (LocalStorageManager.Default.TryGettingString(LocalStorageKeys.RequestToken, out string requestTokenFromPrefrences))
                 {
                     requestToken = requestTokenFromPrefrences;
                 }

@@ -62,17 +62,17 @@ public partial class WhatsNewCarouselPage : ContentPage
     {
         if (AuthorizationService.CheckIfSignedInAndRetrieveTokens() == false || AuthorizationService.HasJustLoggedIn)
         {
-            localStorageManager.SetData(LocalStorageKeys.WhatsNewCarouselLastId, CurrentId.ToString());
+            localStorageManager.SetString(LocalStorageKeys.WhatsNewCarouselLastId, CurrentId.ToString());
             return;
         }
 
-        if (CurrentId == 0 || (localStorageManager.TryGettingData(LocalStorageKeys.WhatsNewCarouselLastId, out string lastId) && lastId == CurrentId.ToString()))
+        if (CurrentId == 0 || (localStorageManager.TryGettingString(LocalStorageKeys.WhatsNewCarouselLastId, out string lastId) && lastId == CurrentId.ToString()))
         {
             return;
         }
 
         navigationService.PushModalAsync<WhatsNewCarouselPage>();
-        localStorageManager.SetData(LocalStorageKeys.WhatsNewCarouselLastId, CurrentId.ToString());
+        localStorageManager.SetString(LocalStorageKeys.WhatsNewCarouselLastId, CurrentId.ToString());
     }
 
     private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)

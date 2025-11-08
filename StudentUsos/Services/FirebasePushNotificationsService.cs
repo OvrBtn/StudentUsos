@@ -42,7 +42,7 @@ public class FirebasePushNotificationsService
         await CheckNotificationsPermissionsAsync(permissions);
         await RegisterPushNotificationsAsync(firebasePushNotification);
 
-        if (localStorageManager.TryGettingData(LocalStorageKeys.FcmToken, out string fcmToken))
+        if (localStorageManager.TryGettingString(LocalStorageKeys.FcmToken, out string fcmToken))
         {
             await SendFcmTokenToServerAsync(fcmToken);
         }
@@ -64,14 +64,14 @@ public class FirebasePushNotificationsService
 
     private async void FirebasePushNotification_TokenRefreshed(object? sender, FirebasePushNotificationTokenEventArgs e)
     {
-        localStorageManager.SetData(LocalStorageKeys.FcmToken, e.Token);
+        localStorageManager.SetString(LocalStorageKeys.FcmToken, e.Token);
 
         await SendFcmTokenToServerAsync(e.Token);
     }
 
     public void CacheFcmToken(string token)
     {
-        localStorageManager.SetData(LocalStorageKeys.FcmToken, token);
+        localStorageManager.SetString(LocalStorageKeys.FcmToken, token);
     }
 
     /// <summary>

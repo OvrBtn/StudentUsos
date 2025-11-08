@@ -15,7 +15,7 @@ public class LocalStorageManagerMock : ILocalStorageManager
         dictionary = new();
     }
 
-    public string GetData(LocalStorageKeys data)
+    public string GetString(LocalStorageKeys data)
     {
         return dictionary[data.ToString()];
     }
@@ -25,12 +25,12 @@ public class LocalStorageManagerMock : ILocalStorageManager
         dictionary.Remove(data.ToString());
     }
 
-    public void SetData(LocalStorageKeys data, string value)
+    public void SetString(LocalStorageKeys data, string value)
     {
         dictionary[data.ToString()] = value;
     }
 
-    public bool TryGettingData(LocalStorageKeys data, out string result)
+    public bool TryGettingString(LocalStorageKeys data, out string result)
     {
         if (dictionary.ContainsKey(data.ToString()))
         {

@@ -12,7 +12,7 @@ public class ActivitiesRepository : IActivitiesRepository
     ILocalDatabaseManager localDatabaseManager;
     ILocalNotificationsService localNotificationsService;
     ILogger? logger;
-    public ActivitiesRepository(ILocalDatabaseManager localDatabaseManager, 
+    public ActivitiesRepository(ILocalDatabaseManager localDatabaseManager,
         ILocalNotificationsService localNotificationsService,
         ILogger? logger = null)
     {
@@ -75,22 +75,42 @@ public class ActivitiesRepository : IActivitiesRepository
         }
     }
 
+    Random random = new();
+
     async Task ScheduleNotification(string description)
     {
+        //when scheduling multiple notifications and the exact same time sometimes some of them are not shown
+        //using random delay seems to fix this
+        int delaySeconds = random.Next(5, 50);
 #if DEBUG && ANDROID
-        Log.Debug("StudentUsos", $"SCHEDULING at {DateTimeOffset.Now.AddSeconds(10)} NOTIFICATION: {description.Replace('\n', ' ')}");
+        Log.Debug("StudentUsos", $"SCHEDULING at {DateTimeOffset.Now.AddSeconds(delaySeconds)} NOTIFICATION: {description.Replace('\n', ' ')}");
 #endif
 
         LocalNotification notification = new()
         {
-            //10 seconds delay so notification isn't seen as in the past and so it isn't ignored
-            ScheduledDateTime = DateTimeOffset.Now.DateTime.AddSeconds(10),
+            ScheduledDateTime = DateTimeOffset.Now.DateTime.AddSeconds(delaySeconds),
             Title = LocalizedStrings.ChangeInActivitiesSchedule,
             Description = description,
             Group = "ActivitiesSynchronization",
             Subtitle = ""
         };
         await localNotificationsService.ScheduleNotificationAsync(notification);
+    }
+
+    async Task ScheduleAddedNotification(Activity activity)
+    {
+        await ScheduleNotification($"➕ {LocalizedStrings.ActivitiesScheduleUpdateNotification_Added}\n{ActivityToFormattedString(activity)}");
+    }
+
+    async Task ScheduleRemovedNotification(Activity activity)
+    {
+        await ScheduleNotification($"🗑️ {LocalizedStrings.ActivitiesScheduleUpdateNotification_Removed}\n{ActivityToFormattedString(activity)}");
+    }
+
+    async Task ScheduleChangedNotification(Activity localActivity, Activity remoteActivity)
+    {
+        await ScheduleNotification($"✏️ {LocalizedStrings.ActivitiesScheduleUpdateNotification_Updated}\n" +
+                $"{ActivityToFormattedString(localActivity)}\n↓\n{ActivityToFormattedString(remoteActivity)}");
     }
 
     public async Task CompareAndScheduleNotificationsAsync(GetActivitiesResult local, GetActivitiesResult remote)
@@ -112,36 +132,100 @@ public class ActivitiesRepository : IActivitiesRepository
                     continue;
                 }
 
-                foreach (var localActivity in timetableDayLocal.Activities)
+                //copy to avoid modifying the original collection
+                var localActivitiesCopy = new List<Activity>(timetableDayLocal.Activities);
+                var remoteActivitesCopy = new List<Activity>(timetableDayRemote.Activities);
+
+                while (localActivitiesCopy.Count > 0)
                 {
-                    var remoteActivity = timetableDayRemote.Activities.FirstOrDefault(x =>
-                    x.UnitId == localActivity.UnitId && x.CourseId == localActivity.CourseId);
+                    //this could have been simple if USOS had unique ids for activities
+                    //but when two (or more) activities for the same subject are scheduled during one day
+                    //they share the same UnitId and CourseId making it impossible to compare them and detect changes
+                    //hence the separation of unique and non-unique activities
 
-                    if (remoteActivity is null)
+                    var localActivity = localActivitiesCopy[0];
+                    var localActivitiesEqualUnitAndCourse = localActivitiesCopy.Where(x => x.UnitId == localActivity.UnitId &&
+                    x.CourseId == localActivity.CourseId).ToList();
+
+                    var remoteActivitiesEqualUnitAndCourse = remoteActivitesCopy.Where(x => x.UnitId == localActivity.UnitId &&
+                    x.CourseId == localActivity.CourseId).ToList();
+                    var remoteActivity = remoteActivitiesEqualUnitAndCourse.FirstOrDefault();
+
+                    if (localActivitiesEqualUnitAndCourse.Count <= 1 && remoteActivitiesEqualUnitAndCourse.Count <= 1)
                     {
-                        await ScheduleNotification($"🗑️ {LocalizedStrings.ActivitiesScheduleUpdateNotification_Removed}\n{ActivityToFormattedString(localActivity)}");
+                        await HandleUniqueActivitiesAsync(localActivitiesCopy, remoteActivitesCopy, localActivity, remoteActivity);
                     }
-                    else if (Activity.Comparer(localActivity, remoteActivity) == false)
+                    else
                     {
-                        await ScheduleNotification($"✏️ {LocalizedStrings.ActivitiesScheduleUpdateNotification_Updated}\n" +
-                            $"{ActivityToFormattedString(localActivity)}\n↓\n{ActivityToFormattedString(remoteActivity)}");
+                        await HandleDuplicateAcitivitiesAsync(localActivitiesCopy, remoteActivitesCopy, localActivitiesEqualUnitAndCourse, remoteActivitiesEqualUnitAndCourse);
                     }
 
-                    if (remoteActivity is not null)
-                    {
-                        timetableDayRemote.Activities.Remove(remoteActivity);
-                    }
                 }
 
-                foreach (var remoteActivity in timetableDayRemote.Activities)
+                foreach (var remoteActivity in remoteActivitesCopy)
                 {
-                    await ScheduleNotification($"➕ {LocalizedStrings.ActivitiesScheduleUpdateNotification_Added}\n{ActivityToFormattedString(remoteActivity)}");
+                    await ScheduleAddedNotification(remoteActivity);
                 }
             }
         }
         catch (Exception ex)
         {
             logger?.LogCatchedException(ex);
+        }
+    }
+
+    async Task HandleUniqueActivitiesAsync(List<Activity> localActivitiesCopy, List<Activity> remoteActivitesCopy, Activity localActivity, Activity? remoteActivity)
+    {
+        if (remoteActivity is null)
+        {
+            await ScheduleRemovedNotification(localActivity);
+        }
+        else if (Activity.Comparer(localActivity, remoteActivity) == false)
+        {
+            await ScheduleChangedNotification(localActivity, remoteActivity);
+        }
+
+        localActivitiesCopy.Remove(localActivity);
+        if (remoteActivity is not null)
+        {
+            remoteActivitesCopy.Remove(remoteActivity);
+        }
+    }
+
+    async Task HandleDuplicateAcitivitiesAsync(List<Activity> localActivitiesCopy, List<Activity> remoteActivitesCopy, List<Activity> localFound, List<Activity> remoteFound)
+    {
+        //in this case trying to send activities about changes would be too messy and could lead to false notifications
+        //hence it's limited to notifying about added and removed activities
+
+        //remove unchanged activities from both lists
+        for (int i = 0; i < localFound.Count; i++)
+        {
+            var remote = remoteFound.Where(x => Activity.Comparer(localFound[i], x)).ToList();
+            if (remote.Count == 0)
+            {
+                continue;
+            }
+            localActivitiesCopy.Remove(localFound[i]);
+            localFound.RemoveAt(i);
+            i--;
+            foreach (var item in remote)
+            {
+                remoteActivitesCopy.Remove(item);
+                remoteFound.Remove(item);
+            }
+        }
+
+        //treat all remaining local activities as removed
+        //and all remaining remote activities as added
+        foreach (var localActivity in localFound)
+        {
+            await ScheduleRemovedNotification(localActivity);
+            localActivitiesCopy.Remove(localActivity);
+        }
+        foreach (var remoteActivity in remoteFound)
+        {
+            await ScheduleAddedNotification(remoteActivity);
+            remoteActivitesCopy.Remove(remoteActivity);
         }
     }
 

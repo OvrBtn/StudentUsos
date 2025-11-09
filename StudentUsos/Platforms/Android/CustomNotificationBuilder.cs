@@ -87,7 +87,7 @@ public class CustomNotificationBuilder : NotificationBuilder
                 return;
             }
 
-            if (LocalStorageManager.Default.TryGettingData(LocalStorageKeys.ChosenLanguageCode, out string languageCode))
+            if (LocalStorageManager.Default.TryGettingString(LocalStorageKeys.ChosenLanguageCode, out string languageCode))
             {
                 CultureInfo culture = new CultureInfo(languageCode);
                 CultureInfo.CurrentCulture = culture;

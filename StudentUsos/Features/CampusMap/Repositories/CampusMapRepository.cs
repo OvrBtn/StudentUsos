@@ -16,7 +16,7 @@ public class CampusMapRepository : ICampusMapRepository
 
     public string? GetCampusMap()
     {
-        if (localStorageManager.TryGettingData(LocalStorageKeys.CampusMapSvg, out string svg))
+        if (localStorageManager.TryGettingString(LocalStorageKeys.CampusMapSvg, out string svg))
         {
             return svg;
         }
@@ -25,7 +25,7 @@ public class CampusMapRepository : ICampusMapRepository
 
     public void SaveCampusMap(string svg)
     {
-        localStorageManager.SetData(LocalStorageKeys.CampusMapSvg, svg);
+        localStorageManager.SetString(LocalStorageKeys.CampusMapSvg, svg);
     }
 
     public List<CampusBuilding> GetBuildingsData()
@@ -86,11 +86,11 @@ public class CampusMapRepository : ICampusMapRepository
 
         string upvoted, downvoted;
 
-        if (localStorageManager.TryGettingData(LocalStorageKeys.IdsOfUpvotedRoomInfos, out upvoted) == false ||
-            localStorageManager.TryGettingData(LocalStorageKeys.IdsOfDownvotedRoomInfos, out downvoted) == false)
+        if (localStorageManager.TryGettingString(LocalStorageKeys.IdsOfUpvotedRoomInfos, out upvoted) == false ||
+            localStorageManager.TryGettingString(LocalStorageKeys.IdsOfDownvotedRoomInfos, out downvoted) == false)
         {
-            localStorageManager.SetData(LocalStorageKeys.IdsOfUpvotedRoomInfos, string.Empty);
-            localStorageManager.SetData(LocalStorageKeys.IdsOfDownvotedRoomInfos, string.Empty);
+            localStorageManager.SetString(LocalStorageKeys.IdsOfUpvotedRoomInfos, string.Empty);
+            localStorageManager.SetString(LocalStorageKeys.IdsOfDownvotedRoomInfos, string.Empty);
             return;
         }
 
@@ -102,8 +102,8 @@ public class CampusMapRepository : ICampusMapRepository
 
     void SaveListsOfVotes()
     {
-        localStorageManager.SetData(LocalStorageKeys.IdsOfUpvotedRoomInfos, string.Join('|', idsOfUpvotedRoomInfos));
-        localStorageManager.SetData(LocalStorageKeys.IdsOfDownvotedRoomInfos, string.Join('|', idsOfDownvotedRoomInfos));
+        localStorageManager.SetString(LocalStorageKeys.IdsOfUpvotedRoomInfos, string.Join('|', idsOfUpvotedRoomInfos));
+        localStorageManager.SetString(LocalStorageKeys.IdsOfDownvotedRoomInfos, string.Join('|', idsOfDownvotedRoomInfos));
     }
 
     public void MarkAsUpvoted(RoomInfo roomInfo)

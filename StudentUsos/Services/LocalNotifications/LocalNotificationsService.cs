@@ -14,7 +14,7 @@ public class LocalNotificationsService : ILocalNotificationsService
 
     public bool AreAnyNotificationsEnabled()
     {
-        if (localStorageManager.TryGettingData(LocalStorageKeys.AreNotificationsEnabled, out string result) == false ||
+        if (localStorageManager.TryGettingString(LocalStorageKeys.AreNotificationsEnabled, out string result) == false ||
             bool.TryParse(result, out bool parsedToBool) == false || parsedToBool == false)
         {
             return false;
@@ -25,16 +25,16 @@ public class LocalNotificationsService : ILocalNotificationsService
 
     int GetIdForNewNotification()
     {
-        if (localStorageManager.ContainsData(LocalStorageKeys.IdOfLastNotification) == false)
+        if (localStorageManager.ContainsKey(LocalStorageKeys.IdOfLastNotification) == false)
         {
-            localStorageManager.SetData(LocalStorageKeys.IdOfLastNotification, "0");
+            localStorageManager.SetString(LocalStorageKeys.IdOfLastNotification, "0");
         }
-        var id = localStorageManager.GetData(LocalStorageKeys.IdOfLastNotification);
+        var id = localStorageManager.GetString(LocalStorageKeys.IdOfLastNotification);
         if (id != null && int.TryParse(id, out int result))
         {
             result = result % (int.MaxValue - 1);
             result++;
-            localStorageManager.SetData(LocalStorageKeys.IdOfLastNotification, result.ToString());
+            localStorageManager.SetString(LocalStorageKeys.IdOfLastNotification, result.ToString());
             return result;
         }
         return -1;

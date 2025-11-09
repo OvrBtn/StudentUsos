@@ -24,7 +24,7 @@ namespace StudentUsos.Features.Settings.Views.Subpages
             using var reader = new StreamReader(stream);
             string jsonString = reader.ReadToEnd();
             Languages = JsonSerializer.Deserialize(jsonString, LanguageJsonContext.Default.ListLanguage) ?? new();
-            if (localStorageManager.TryGettingData(LocalStorageKeys.ChosenLanguageName, out string languageName))
+            if (localStorageManager.TryGettingString(LocalStorageKeys.ChosenLanguageName, out string languageName))
             {
                 CurrentLanguageName = languageName;
             }
@@ -48,8 +48,8 @@ namespace StudentUsos.Features.Settings.Views.Subpages
                     var chosen = Languages[obj.Index - 1];
                     CurrentLanguageName = chosen.Name;
                     SetAppLanguage(chosen.Code);
-                    localStorageManager.SetData(LocalStorageKeys.ChosenLanguageName, chosen.Name);
-                    localStorageManager.SetData(LocalStorageKeys.ChosenLanguageCode, chosen.Code);
+                    localStorageManager.SetString(LocalStorageKeys.ChosenLanguageName, chosen.Name);
+                    localStorageManager.SetString(LocalStorageKeys.ChosenLanguageCode, chosen.Code);
                 }
                 MessagePopupPage.CreateAndShow(LocalizedStrings.Language, LocalizedStrings.SettingsPage_ChangingLanguageMessage, "ok");
 

@@ -169,7 +169,7 @@ public partial class DashboardViewModel : BaseViewModel
 
     public void LoadUserName()
     {
-        if (localStorageManager.TryGettingData(LocalStorageKeys.UserName, out string name))
+        if (localStorageManager.TryGettingString(LocalStorageKeys.UserName, out string name))
         {
             FirstName = name;
             UserInfoStateKey = StateKey.Loaded;
@@ -229,7 +229,7 @@ public partial class DashboardViewModel : BaseViewModel
         try
         {
             FirstName = userInfo.FirstName;
-            localStorageManager.SetData(LocalStorageKeys.UserName, FirstName);
+            localStorageManager.SetString(LocalStorageKeys.UserName, FirstName);
             LastName = userInfo.LastName;
             IndexNumber = userInfo.StudentNumber;
             UserInfoStateKey = StudentNumberStateKey = StateKey.Loaded;

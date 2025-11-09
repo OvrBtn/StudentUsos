@@ -38,17 +38,17 @@ public partial class WhatsNewListPage : ContentPage
     {
         if (AuthorizationService.CheckIfSignedInAndRetrieveTokens() == false || AuthorizationService.HasJustLoggedIn)
         {
-            localStorageManager.SetData(LocalStorageKeys.WhatsNewCarouselLastId, CurrentId.ToString());
+            localStorageManager.SetString(LocalStorageKeys.WhatsNewCarouselLastId, CurrentId.ToString());
             return;
         }
 
-        if (CurrentId == 0 || (localStorageManager.TryGettingData(LocalStorageKeys.WhatsNewListLastId, out string lastId) && lastId == CurrentId.ToString()))
+        if (CurrentId == 0 || (localStorageManager.TryGettingString(LocalStorageKeys.WhatsNewListLastId, out string lastId) && lastId == CurrentId.ToString()))
         {
             return;
         }
 
         navigationService.PushModalAsync<WhatsNewListPage>();
-        localStorageManager.SetData(LocalStorageKeys.WhatsNewListLastId, CurrentId.ToString());
+        localStorageManager.SetString(LocalStorageKeys.WhatsNewListLastId, CurrentId.ToString());
     }
 
     private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)

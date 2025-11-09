@@ -66,7 +66,7 @@ public class UsosCalendarServiceTests
         //Arrange
         var usosCalendarRepoMock = new Mock<IUsosCalendarRepository>();
 
-        localStorageManagerMock.SetData(StudentUsos.Services.LocalStorage.LocalStorageKeys.LastSecondaryCalendarUpdate, DateTime.Now.ToString());
+        localStorageManagerMock.SetString(StudentUsos.Services.LocalStorage.LocalStorageKeys.LastSecondaryCalendarUpdate, DateTime.Now.ToString());
 
         var usosCalendarService = new UsosCalendarService(usosCalendarRepoMock.Object,
             serverConnectionMock.Object,
@@ -109,7 +109,7 @@ public class UsosCalendarServiceTests
         //Arrange
         var usosCalendarRepoMock = new Mock<IUsosCalendarRepository>();
 
-        localStorageManagerMock.SetData(StudentUsos.Services.LocalStorage.LocalStorageKeys.LastPrimaryCalendarUpdate, DateTime.Now.ToString());
+        localStorageManagerMock.SetString(StudentUsos.Services.LocalStorage.LocalStorageKeys.LastPrimaryCalendarUpdate, DateTime.Now.ToString());
 
         var usosCalendarService = new UsosCalendarService(usosCalendarRepoMock.Object,
             serverConnectionMock.Object,

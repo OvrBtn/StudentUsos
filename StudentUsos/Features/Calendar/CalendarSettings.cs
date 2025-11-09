@@ -52,34 +52,34 @@ public static class CalendarSettings
         }
 
         //getting data about calendar notifications or set the defaults
-        if (LocalStorageManager.Default.TryGettingData(LocalStorageKeys.AreNotificationsEnabled, out string result)
+        if (LocalStorageManager.Default.TryGettingString(LocalStorageKeys.AreNotificationsEnabled, out string result)
             && bool.TryParse(result, out bool parsedBool))
         {
             areCalendarNotificationsEnabled = parsedBool;
         }
         else
         {
-            LocalStorageManager.Default.SetData(LocalStorageKeys.AreNotificationsEnabled, true.ToString());
+            LocalStorageManager.Default.SetString(LocalStorageKeys.AreNotificationsEnabled, true.ToString());
         }
 
-        if (LocalStorageManager.Default.TryGettingData(LocalStorageKeys.DaysBeforeCalendarEventToSendNotification, out result)
+        if (LocalStorageManager.Default.TryGettingString(LocalStorageKeys.DaysBeforeCalendarEventToSendNotification, out result)
             && int.TryParse(result, out int parsedInt))
         {
             daysBeforeCalendarEventToSendNotification = parsedInt;
         }
         else
         {
-            LocalStorageManager.Default.SetData(LocalStorageKeys.DaysBeforeCalendarEventToSendNotification, 1.ToString());
+            LocalStorageManager.Default.SetString(LocalStorageKeys.DaysBeforeCalendarEventToSendNotification, 1.ToString());
         }
 
-        if (LocalStorageManager.Default.TryGettingData(LocalStorageKeys.TimeOfDayOfCalendarEventNotification, out result)
+        if (LocalStorageManager.Default.TryGettingString(LocalStorageKeys.TimeOfDayOfCalendarEventNotification, out result)
             && TimeSpan.TryParse(result, CultureInfo.InvariantCulture, out TimeSpan parsedTimeSpan))
         {
             timeOfDayOfCalendarEventNotification = parsedTimeSpan;
         }
         else
         {
-            LocalStorageManager.Default.SetData(LocalStorageKeys.TimeOfDayOfCalendarEventNotification,
+            LocalStorageManager.Default.SetString(LocalStorageKeys.TimeOfDayOfCalendarEventNotification,
                 new TimeSpan(15, 0, 0).ToString("c", CultureInfo.InvariantCulture));
         }
     }

@@ -81,7 +81,7 @@ public partial class App : Application
         var groupsService = ServiceProvider.GetService<IGroupsService>()!;
         var groupsRepository = ServiceProvider.GetService<IGroupsRepository>()!;
 
-        localStorageManager.SetData(LocalStorageKeys.IsAppRunningForTheFirstTime, false.ToString());
+        localStorageManager.SetString(LocalStorageKeys.IsAppRunningForTheFirstTime, false.ToString());
 
         var groupsServer = await groupsService.GetGroupedGroupsServerAsync(false, true);
         if (groupsServer == null)
@@ -96,13 +96,13 @@ public partial class App : Application
 
     static bool CheckIfAppRunningForTheFirstTime()
     {
-        if (LocalStorageManager.Default.TryGettingData(LocalStorageKeys.IsAppRunningForTheFirstTime, out string result))
+        if (LocalStorageManager.Default.TryGettingString(LocalStorageKeys.IsAppRunningForTheFirstTime, out string result))
         {
             return bool.Parse(result);
         }
         else
         {
-            LocalStorageManager.Default.SetData(LocalStorageKeys.IsAppRunningForTheFirstTime, bool.TrueString);
+            LocalStorageManager.Default.SetString(LocalStorageKeys.IsAppRunningForTheFirstTime, bool.TrueString);
             return true;
         }
     }
@@ -178,7 +178,7 @@ public partial class App : Application
 
     static void SetLanguageFromLocalStorage()
     {
-        if (LocalStorageManager.Default.TryGettingData(LocalStorageKeys.ChosenLanguageCode, out string languageCode))
+        if (LocalStorageManager.Default.TryGettingString(LocalStorageKeys.ChosenLanguageCode, out string languageCode))
         {
             CultureInfo culture = new CultureInfo(languageCode);
             CultureInfo.CurrentCulture = culture;

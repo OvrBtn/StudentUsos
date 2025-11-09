@@ -1,4 +1,5 @@
-﻿namespace StudentUsos.Services.LocalStorage;
+﻿
+namespace StudentUsos.Services.LocalStorage;
 
 public class LocalStorageManager : ILocalStorageManager
 {
@@ -8,37 +9,39 @@ public class LocalStorageManager : ILocalStorageManager
         Default = this;
     }
 
-    public bool ContainsData(LocalStorageKeys data)
+    public bool ContainsKey(LocalStorageKeys key)
     {
-        return Preferences.ContainsKey(data.ToString());
+        return Preferences.ContainsKey(key.ToString());
     }
 
-    public string? GetData(LocalStorageKeys data)
+    public string? GetString(LocalStorageKeys key, string? defaultValue = null)
     {
-        var pref = Preferences.Get(data.ToString(), null);
-        return pref;
-    }
-
-    public bool TryGettingData(LocalStorageKeys data, out string result)
-    {
-        var pref = Preferences.Get(data.ToString(), null);
-        if (pref is null)
+        if (Preferences.ContainsKey(key.ToString()) == false)
         {
-            result = "";
-            return false;
+            return defaultValue;
         }
-        result = pref;
-        return true;
+        return Preferences.Get(key.ToString(), defaultValue);
     }
 
-    public void SetData(LocalStorageKeys data, string value)
+    public bool TryGettingString(LocalStorageKeys key, out string value)
     {
-        Preferences.Set(data.ToString(), value);
+        if (Preferences.ContainsKey(key.ToString()))
+        {
+            value = Preferences.Get(key.ToString(), string.Empty);
+            return true;
+        }
+        value = string.Empty;
+        return false;
     }
 
-    public void Remove(LocalStorageKeys data)
+    public void SetString(LocalStorageKeys key, string value)
     {
-        Preferences.Remove(data.ToString());
+        Preferences.Set(key.ToString(), value);
+    }
+
+    public void Remove(LocalStorageKeys key)
+    {
+        Preferences.Remove(key.ToString());
     }
 
     public void DeleteEverything()
@@ -51,4 +54,67 @@ public class LocalStorageManager : ILocalStorageManager
         if (lastCheckedVersion is not null) Preferences.Set(LocalStorageKeys.BackwardCompatibilityLastCheckedVersion.ToString(), lastCheckedVersion);
     }
 
+    public int GetInt(LocalStorageKeys key, int defaultValue = default)
+    {
+        return Preferences.Get(key.ToString(), defaultValue);
+    }
+
+    public bool TryGettingInt(LocalStorageKeys key, out int value)
+    {
+        if (Preferences.ContainsKey(key.ToString()))
+        {
+            value = Preferences.Get(key.ToString(), default(int));
+            return true;
+        }
+        value = default(int);
+        return false;
+    }
+
+    public void SetInt(LocalStorageKeys key, int value)
+    {
+        Preferences.Set(key.ToString(), value);
+    }
+
+    public bool GetBool(LocalStorageKeys key, bool defaultValue = false)
+    {
+        return Preferences.Get(key.ToString(), defaultValue);
+    }
+
+    public bool TryGettingBool(LocalStorageKeys key, out bool value)
+    {
+        if (Preferences.ContainsKey(key.ToString()))
+        {
+            value = Preferences.Get(key.ToString(), default(bool));
+            return true;
+        }
+        value = default(bool);
+        return false;
+    }
+
+    public void SetBool(LocalStorageKeys key, bool value)
+    {
+        Preferences.Set(key.ToString(), value);
+
+    }
+
+    public DateTime GetDateTime(LocalStorageKeys key, DateTime defaultValue = default)
+    {
+        return Preferences.Get(key.ToString(), defaultValue);
+    }
+
+    public bool TryGettingDateTime(LocalStorageKeys key, out DateTime value)
+    {
+        if (Preferences.ContainsKey(key.ToString()))
+        {
+            value = Preferences.Get(key.ToString(), default(DateTime));
+            return true;
+        }
+        value = default(DateTime);
+        return false;
+    }
+
+    public void SetDateTime(LocalStorageKeys key, DateTime value)
+    {
+        Preferences.Set(key.ToString(), value);
+    }
 }

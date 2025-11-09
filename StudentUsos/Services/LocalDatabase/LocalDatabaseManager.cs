@@ -64,7 +64,7 @@ public class LocalDatabaseManager : ILocalDatabaseManager
             catch
             {
                 BackwardCompatibility.ResetLocalData();
-                LocalStorageManager.Default.SetData(LocalStorageKeys.IsAppRunningForTheFirstTime, true.ToString());
+                LocalStorageManager.Default.SetString(LocalStorageKeys.IsAppRunningForTheFirstTime, true.ToString());
             }
         }
     }
@@ -103,7 +103,7 @@ public class LocalDatabaseManager : ILocalDatabaseManager
     {
         EnsureInitialized();
 
-        LocalStorageManager.Default.SetData(LocalStorageKeys.IsAppRunningForTheFirstTime, true.ToString());
+        LocalStorageManager.Default.SetString(LocalStorageKeys.IsAppRunningForTheFirstTime, true.ToString());
         dbConnection.DropTable<Lecturer>();
         dbConnection.DropTable<Activity>();
         dbConnection.DropTable<Term>();

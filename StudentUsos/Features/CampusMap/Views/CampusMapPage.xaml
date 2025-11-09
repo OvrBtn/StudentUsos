@@ -25,7 +25,7 @@
 
                 <Grid toolkit:StateView.StateKey="Loaded" Margin="0" RowDefinitions="auto, auto, *">
 
-                    <Border Grid.Row="0" Padding="0" Margin="30,20,30,15" BackgroundColor="{StaticResource Primary}">
+                    <Border Grid.Row="0" Padding="0" Margin="30,20,30,15" BackgroundColor="{StaticResource BackgroundColor2}">
                         <Grid>
                             <Grid ColumnDefinitions="*, auto" Padding="15, 5">
                                 <Label Grid.Column="0" Text="{Binding CurrentFullLocation}" HorizontalTextAlignment="Center"></Label>
@@ -35,7 +35,7 @@
                         </Grid>
                     </Border>
 
-                    <Border Grid.Row="1" Padding="0" Margin="30,0,30,15" BackgroundColor="{StaticResource Primary}"
+                    <Border Grid.Row="1" Padding="0" Margin="30,0,30,15" BackgroundColor="{StaticResource BackgroundColor2}"
                 IsVisible="{Binding Floors.Count, Converter={StaticResource CountToBoolConverter}}">
                         <Grid>
                             <Grid ColumnDefinitions="*, auto" Padding="15, 5">

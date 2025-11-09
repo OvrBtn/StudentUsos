@@ -23,33 +23,39 @@
                 <ActivityIndicator toolkit:StateView.StateKey="Loading"></ActivityIndicator>
                 <Label toolkit:StateView.StateKey="ConnectionError" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.Errors_ConnectionError}"></Label>
 
-                <Grid toolkit:StateView.StateKey="Loaded" Margin="0" RowDefinitions="auto, auto, *">
+                <Grid toolkit:StateView.StateKey="Loaded" Margin="0">
 
-                    <Border Grid.Row="0" Padding="0" Margin="30,20,30,15" BackgroundColor="{StaticResource BackgroundColor2}">
-                        <Grid>
-                            <Grid ColumnDefinitions="*, auto" Padding="15, 5">
-                                <Label Grid.Column="0" Text="{Binding CurrentFullLocation}" HorizontalTextAlignment="Center"></Label>
-                                <Image Grid.Column="1" Source="triangle.png" WidthRequest="10"/>
-                            </Grid>
-                            <Button BackgroundColor="Transparent" Command="{Binding BuildingButtonClickedCommand}"></Button>
-                        </Grid>
-                    </Border>
+                    <StackLayout ZIndex="3">
 
-                    <Border Grid.Row="1" Padding="0" Margin="30,0,30,15" BackgroundColor="{StaticResource BackgroundColor2}"
-                IsVisible="{Binding Floors.Count, Converter={StaticResource CountToBoolConverter}}">
-                        <Grid>
-                            <Grid ColumnDefinitions="*, auto" Padding="15, 5">
-                                <Label Grid.Column="0" Text="{Binding CurrentFloor}" HorizontalTextAlignment="Center"></Label>
-                                <StackLayout HorizontalOptions="End" Spacing="5" VerticalOptions="Center">
-                                    <Image Grid.Column="1" Source="triangle.png" WidthRequest="10" Rotation="180"/>
+                        <Border Grid.Row="0" Padding="0" Margin="30,20,30,15" 
+                                BackgroundColor="{StaticResource BackgroundColor2}" Style="{StaticResource BorderWithShadow}">
+                            <Grid>
+                                <Grid ColumnDefinitions="*, auto" Padding="15, 5">
+                                    <Label Grid.Column="0" Text="{Binding CurrentFullLocation}" HorizontalTextAlignment="Center"></Label>
                                     <Image Grid.Column="1" Source="triangle.png" WidthRequest="10"/>
-                                </StackLayout>
+                                </Grid>
+                                <Button BackgroundColor="Transparent" Command="{Binding BuildingButtonClickedCommand}"></Button>
                             </Grid>
-                            <Button BackgroundColor="Transparent" Command="{Binding FloorButtonClickedCommand}"></Button>
-                        </Grid>
-                    </Border>
+                        </Border>
 
-                    <Grid Grid.Row="2">
+                        <Border Grid.Row="1" Padding="0" Margin="30,0,30,15" BackgroundColor="{StaticResource BackgroundColor2}"
+                                IsVisible="{Binding Floors.Count, Converter={StaticResource CountToBoolConverter}}"
+                                Style="{StaticResource BorderWithShadow}">
+                            <Grid>
+                                <Grid ColumnDefinitions="*, auto" Padding="15, 5">
+                                    <Label Grid.Column="0" Text="{Binding CurrentFloor}" HorizontalTextAlignment="Center"></Label>
+                                    <StackLayout HorizontalOptions="End" Spacing="5" VerticalOptions="Center">
+                                        <Image Grid.Column="1" Source="triangle.png" WidthRequest="10" Rotation="180"/>
+                                        <Image Grid.Column="1" Source="triangle.png" WidthRequest="10"/>
+                                    </StackLayout>
+                                </Grid>
+                                <Button BackgroundColor="Transparent" Command="{Binding FloorButtonClickedCommand}"></Button>
+                            </Grid>
+                        </Border>
+
+                    </StackLayout>
+
+                    <Grid Grid.Row="2" ZIndex="2">
                         <Grid toolkit:StateContainer.CurrentState="{Binding WebViewStateKey}">
 
                             <toolkit:StateContainer.StateViews>

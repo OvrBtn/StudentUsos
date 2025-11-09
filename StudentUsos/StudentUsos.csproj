@@ -555,6 +555,12 @@
 	  </PackageReference>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <MauiImage Update="Resources\Images\WhatsNew\whatsnew_activities_widget_preview.png">
+	    <CopyToOutputDirectory></CopyToOutputDirectory>
+	  </MauiImage>
+	</ItemGroup>
+
 	<ProjectExtensions>
 		<VisualStudio>
 			<UserProperties XamarinHotReloadDebuggerTimeoutExceptionStudenckiUSOSPUTMAUIHideInfoBar="True" />

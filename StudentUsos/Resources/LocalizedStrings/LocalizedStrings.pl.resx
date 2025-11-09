@@ -640,6 +640,18 @@
   <data name="DiagnosisSubpage_ActivitiesBackgroundSynchronization" xml:space="preserve">
     <value>Synchronizacja planu zajęć w tle</value>
   </data>
+  <data name="WhatsNewItem_ActivitiesScheduleWidget" xml:space="preserve">
+    <value>Widget z planem zajęć</value>
+  </data>
+  <data name="WhatsNewItem_ScheduleChangeNotificationTitle" xml:space="preserve">
+    <value>Powiadomienia o zmianach w planie zajęć</value>
+  </data>
+  <data name="WhatsNewItem_ScheduleChangeNotificationDescription1" xml:space="preserve">
+    <value>* Aby ta funkcja działała w pełni poprawnie, urządzenie nie powinno blokować aplikacji przed działaniem w tle. Aby zweryfikować swoje ustawienia, możesz skorzystać z funkcji dostępnej w: Ustawienia → Powiadomienia → Rozwiązywanie problemów.</value>
+  </data>
+  <data name="WhatsNewItem_ScheduleChangeNotificationDescription2" xml:space="preserve">
+    <value>** Sprawdzeniu podlega 7 następnych dni, włącznie z dniem dzisiejszym.</value>
+  </data>
   <data name="CampusMap_Map" xml:space="preserve">
     <value>Mapa</value>
   </data>

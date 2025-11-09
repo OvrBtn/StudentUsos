@@ -33,7 +33,7 @@ public partial class WhatsNewListPage : ContentPage
         this.navigationService = navigationService;
     }
 
-    const int CurrentId = 2;
+    const int CurrentId = 3;
     public static void Initialize(ILocalStorageManager localStorageManager, INavigationService navigationService)
     {
         if (AuthorizationService.CheckIfSignedInAndRetrieveTokens() == false || AuthorizationService.HasJustLoggedIn)

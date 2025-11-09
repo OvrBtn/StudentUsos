@@ -9,18 +9,18 @@
     <ContentPage.ControlTemplate>
         <ControlTemplate>
 
-            <AbsoluteLayout CompressedLayout.IsHeadless="True" VerticalOptions="FillAndExpand" Background="Transparent">
-                <StackLayout Margin="0, 0, 0, 0" Padding="0" x:Name="tabBar" ZIndex="99" BackgroundColor="Transparent"
-                             AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional" AbsoluteLayout.LayoutBounds="0,1,1,70">
-                    <controls:CustomTabBarXaml VerticalOptions="FillAndExpand"></controls:CustomTabBarXaml>
-                </StackLayout>
+            <Grid VerticalOptions="FillAndExpand" Background="Transparent">
 
-                <Border AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" x:Name="contentContainer"
-                        StrokeThickness="0" ZIndex="1" VerticalOptions="FillAndExpand" Padding="0" StrokeShape="RoundRectangle 45" Margin="-1,0,-1,0" 
-                         BackgroundColor="{StaticResource BackgroundColor}" CompressedLayout.IsHeadless="True">
-                    <ContentPresenter Padding="0" CompressedLayout.IsHeadless="True"></ContentPresenter>
+                <Border x:Name="contentContainer" StrokeThickness="0" VerticalOptions="FillAndExpand" Padding="0" StrokeShape="RoundRectangle 45" Margin="-1,0,-1,0" 
+                         BackgroundColor="{StaticResource BackgroundColor}">
+                    <ContentPresenter Padding="0"></ContentPresenter>
                 </Border>
-            </AbsoluteLayout>
+                
+                <StackLayout Margin="0, 0, 0, 0" Padding="0" x:Name="tabBar" BackgroundColor="Transparent" VerticalOptions="EndAndExpand">
+                    <controls:CustomTabBarXaml HeightRequest="70"></controls:CustomTabBarXaml>
+                </StackLayout>
+                
+            </Grid>
 
         </ControlTemplate>
     </ContentPage.ControlTemplate>

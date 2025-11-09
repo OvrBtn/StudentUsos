@@ -24,9 +24,10 @@ public class UsosCalendarRepository : IUsosCalendarRepository
 
     public List<UsosCalendarEvent> GetEvents(int year, int month)
     {
-        DateTime targetMonth = new(year, month, 1);
-        return localDatabaseManager.GetAll<UsosCalendarEvent>(x => x.Start.Year <= targetMonth.Year && x.Start.Month <= targetMonth.Month
-                                                                                                    && x.End.Year >= targetMonth.Year && x.End.Month >= targetMonth.Month);
+        int targetMonths = year * 12 + month;
+        return localDatabaseManager.GetAll<UsosCalendarEvent>(x => 
+        x.Start.Year * 12 + x.Start.Month <= targetMonths &&
+        x.End.Year * 12 + x.End.Month >= targetMonths);
     }
 
     public void SaveEvents(IEnumerable<UsosCalendarEvent> events)

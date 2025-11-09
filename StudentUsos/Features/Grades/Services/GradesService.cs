@@ -153,13 +153,23 @@ public class GradesService : IGradesService
             List<FinalGrade> grades = new();
             List<FinalGradeGroup> gradesGrouped = new();
 
-            //API request
-            var arguments = new Dictionary<string, string> { { "term_ids", academicTermId },
-                { "fields", "value_symbol|passes|value_description|exam_id|exam_session_number|counts_into_average|comment|grade_type_id|date_modified|date_acquisition|modification_author" }};
+            var arguments = new Dictionary<string, string> 
+            { 
+                { "term_ids", academicTermId },
+                { "fields", "value_symbol|passes|value_description|exam_id|exam_session_number|counts_into_average|comment|grade_type_id|date_modified|date_acquisition|modification_author" }
+            };
             var result = await serverConnectionManager.SendRequestToUsosAsync("services/grades/terms2", arguments);
             if (result == null) return null;
+
             var deserialized = JsonSerializer.Deserialize(result, FinalGradeJsonContext.Default.DictionaryStringDictionaryStringCourseIdJsonObject);
             if (deserialized is null)
+            {
+                return null;
+            }
+
+            // Handles edge case where at the start of every semester USOS will return only this:
+            // "{\"2024Z\": {}}"
+            if (deserialized.ContainsKey(academicTermId) == false)
             {
                 return null;
             }
@@ -170,8 +180,6 @@ public class GradesService : IGradesService
 
             var groupsJson = deserialized[academicTermId];
 
-            // Handles edge case where at the start of every semester USOS will return only this:
-            // "{\"2024Z\": {}}"
             if (groupsJson.Count == 0)
             {
                 return new();
@@ -179,12 +187,15 @@ public class GradesService : IGradesService
 
             foreach (var group in groups)
             {
-                //TODO: compiled thinks it will never return null but I think it did (see comment below)
-                CourseIdJsonObject? course = groupsJson[group.CourseId];
+                if(groupsJson.TryGetValue(group.CourseId, out var course) == false)
+                {
+                    continue;
+                }
                 if (course is null)
                 {
-                    return new List<FinalGrade>(); // for some reason at the start of new term USOS is returning just "{{ "2023L": {} }}"
+                    return new();
                 }
+
                 var courseUnits = course.CourseUnitsGrades;
                 var courseUnit = courseUnits[group.CourseUnitId];
                 foreach (var term in courseUnit)

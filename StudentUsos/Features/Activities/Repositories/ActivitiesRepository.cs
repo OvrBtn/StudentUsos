@@ -134,7 +134,7 @@ public class ActivitiesRepository : IActivitiesRepository
 
                 //copy to avoid modifying the original collection
                 var localActivitiesCopy = new List<Activity>(timetableDayLocal.Activities);
-                var remoteActivitesCopy = new List<Activity>(timetableDayRemote.Activities);
+                var remoteActivitiesCopy = new List<Activity>(timetableDayRemote.Activities);
 
                 while (localActivitiesCopy.Count > 0)
                 {
@@ -147,22 +147,22 @@ public class ActivitiesRepository : IActivitiesRepository
                     var localActivitiesEqualUnitAndCourse = localActivitiesCopy.Where(x => x.UnitId == localActivity.UnitId &&
                     x.CourseId == localActivity.CourseId).ToList();
 
-                    var remoteActivitiesEqualUnitAndCourse = remoteActivitesCopy.Where(x => x.UnitId == localActivity.UnitId &&
+                    var remoteActivitiesEqualUnitAndCourse = remoteActivitiesCopy.Where(x => x.UnitId == localActivity.UnitId &&
                     x.CourseId == localActivity.CourseId).ToList();
                     var remoteActivity = remoteActivitiesEqualUnitAndCourse.FirstOrDefault();
 
                     if (localActivitiesEqualUnitAndCourse.Count <= 1 && remoteActivitiesEqualUnitAndCourse.Count <= 1)
                     {
-                        await HandleUniqueActivitiesAsync(localActivitiesCopy, remoteActivitesCopy, localActivity, remoteActivity);
+                        await HandleUniqueActivitiesAsync(localActivitiesCopy, remoteActivitiesCopy, localActivity, remoteActivity);
                     }
                     else
                     {
-                        await HandleDuplicateAcitivitiesAsync(localActivitiesCopy, remoteActivitesCopy, localActivitiesEqualUnitAndCourse, remoteActivitiesEqualUnitAndCourse);
+                        await HandleDuplicateActivitiesAsync(localActivitiesCopy, remoteActivitiesCopy, localActivitiesEqualUnitAndCourse, remoteActivitiesEqualUnitAndCourse);
                     }
 
                 }
 
-                foreach (var remoteActivity in remoteActivitesCopy)
+                foreach (var remoteActivity in remoteActivitiesCopy)
                 {
                     await ScheduleAddedNotification(remoteActivity);
                 }
@@ -174,7 +174,7 @@ public class ActivitiesRepository : IActivitiesRepository
         }
     }
 
-    async Task HandleUniqueActivitiesAsync(List<Activity> localActivitiesCopy, List<Activity> remoteActivitesCopy, Activity localActivity, Activity? remoteActivity)
+    async Task HandleUniqueActivitiesAsync(List<Activity> localActivitiesCopy, List<Activity> remoteActivitiesCopy, Activity localActivity, Activity? remoteActivity)
     {
         if (remoteActivity is null)
         {
@@ -188,11 +188,11 @@ public class ActivitiesRepository : IActivitiesRepository
         localActivitiesCopy.Remove(localActivity);
         if (remoteActivity is not null)
         {
-            remoteActivitesCopy.Remove(remoteActivity);
+            remoteActivitiesCopy.Remove(remoteActivity);
         }
     }
 
-    async Task HandleDuplicateAcitivitiesAsync(List<Activity> localActivitiesCopy, List<Activity> remoteActivitesCopy, List<Activity> localFound, List<Activity> remoteFound)
+    async Task HandleDuplicateActivitiesAsync(List<Activity> localActivitiesCopy, List<Activity> remoteActivitiesCopy, List<Activity> localFound, List<Activity> remoteFound)
     {
         //in this case trying to send activities about changes would be too messy and could lead to false notifications
         //hence it's limited to notifying about added and removed activities
@@ -210,7 +210,7 @@ public class ActivitiesRepository : IActivitiesRepository
             i--;
             foreach (var item in remote)
             {
-                remoteActivitesCopy.Remove(item);
+                remoteActivitiesCopy.Remove(item);
                 remoteFound.Remove(item);
             }
         }
@@ -225,7 +225,7 @@ public class ActivitiesRepository : IActivitiesRepository
         foreach (var remoteActivity in remoteFound)
         {
             await ScheduleAddedNotification(remoteActivity);
-            remoteActivitesCopy.Remove(remoteActivity);
+            remoteActivitiesCopy.Remove(remoteActivity);
         }
     }
 

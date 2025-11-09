@@ -51,13 +51,9 @@ public class ActivitiesSynchronizationWorker : Worker
 
     void IncreaseRunsCount()
     {
-        int runsCount = 0;
-        if (localStorageManager.TryGettingData(LocalStorageKeys.ActivitiesSynchronizationBackgroundWorker_AmountOfRuns, out var runsCountString))
-        {
-            int.TryParse(runsCountString, out runsCount);
-        }
+        int runsCount = localStorageManager.GetInt(LocalStorageKeys.ActivitiesSynchronizationBackgroundWorker_AmountOfRuns, 0);
         runsCount = (runsCount + 1) % int.MaxValue;
-        localStorageManager.SetData(LocalStorageKeys.ActivitiesSynchronizationBackgroundWorker_AmountOfRuns, runsCount.ToString());
+        localStorageManager.SetInt(LocalStorageKeys.ActivitiesSynchronizationBackgroundWorker_AmountOfRuns, runsCount);
     }
 
     async Task<bool> SynchronizeAndScheduleNotifications()
@@ -73,7 +69,12 @@ public class ActivitiesSynchronizationWorker : Worker
 
             activitiesRepository.Replace(remote.Result);
 
-            await activitiesRepository.CompareAndScheduleNotificationsAsync(local, remote);
+            bool areNotificationsEnabled = localStorageManager.GetBool(LocalStorageKeys.ActivitiesSynchronizationBackgroundWorker_ShouldSendNotifications, true);
+
+            if (areNotificationsEnabled)
+            {
+                await activitiesRepository.CompareAndScheduleNotificationsAsync(local, remote);
+            }
 
             return true;
         }
@@ -83,5 +84,5 @@ public class ActivitiesSynchronizationWorker : Worker
             return false;
         }
     }
-    
+
 }

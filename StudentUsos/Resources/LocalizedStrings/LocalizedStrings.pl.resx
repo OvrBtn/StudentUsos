@@ -631,4 +631,13 @@
   <data name="Checksums" xml:space="preserve">
     <value>Sumy kontrolne</value>
   </data>
+  <data name="SettingsPage_BackgroundSynchronization" xml:space="preserve">
+    <value>Synchronizacja w tle</value>
+  </data>
+  <data name="NotificationsSubpage_NotificationsAboutChangesInSchedule" xml:space="preserve">
+    <value>Powiadomienia o zmianach w planie zajęć</value>
+  </data>
+  <data name="DiagnosisSubpage_ActivitiesBackgroundSynchronization" xml:space="preserve">
+    <value>Synchronizacja planu zajęć w tle</value>
+  </data>
 </root>

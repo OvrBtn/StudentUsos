@@ -24,5 +24,7 @@ public enum LocalStorageKeys
     IsCampusMapInitialized,
     IdsOfUpvotedRoomInfos,
     IdsOfDownvotedRoomInfos,
-    ActivitiesSynchronizationBackgroundWorker_AmountOfRuns
+    ActivitiesSynchronizationBackgroundWorker_AmountOfRuns,
+    ActivitiesSynchronizationBackgroundWorker_IsEnabled,
+    ActivitiesSynchronizationBackgroundWorker_ShouldSendNotifications,
 }

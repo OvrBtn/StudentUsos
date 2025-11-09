@@ -39,7 +39,15 @@
 
             <Label FontSize="14" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.PushNotifications}" />
             <Border Padding="0" Margin="0,5,0,20">
-                    <Button Text="{x:Static strings:LocalizedStrings.Troubleshooting}" Padding="15" Clicked="TroubleshootingButton_Clicked"/>
+                <Button Text="{x:Static strings:LocalizedStrings.Troubleshooting}" Padding="15" Clicked="TroubleshootingButton_Clicked"/>
+            </Border>
+
+            <Label FontSize="14" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.SettingsPage_BackgroundSynchronization}" />
+            <Border Margin="0,5,0,20" Padding="0">
+                <Grid ColumnDefinitions="*, auto" HorizontalOptions="Fill" Margin="20, 0">
+                    <Label Grid.Column="0" Text="{x:Static strings:LocalizedStrings.NotificationsSubpage_NotificationsAboutChangesInSchedule}" Margin="0,20"></Label>
+                    <Switch Grid.Column="1" x:Name="ActivitiesBackgroundSyncNotificationsSwitch" Toggled="ActivitiesBackgroundSyncNotificationsSwitch_Toggled"></Switch>
+                </Grid>
             </Border>
 
         </StackLayout>

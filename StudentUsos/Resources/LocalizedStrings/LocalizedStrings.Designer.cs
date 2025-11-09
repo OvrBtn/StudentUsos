@@ -565,6 +565,15 @@ namespace StudentUsos.Resources.LocalizedStrings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Activities schedule background synchronization.
+        /// </summary>
+        internal static string DiagnosisSubpage_ActivitiesBackgroundSynchronization {
+            get {
+                return ResourceManager.GetString("DiagnosisSubpage_ActivitiesBackgroundSynchronization", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Connection error.
         /// </summary>
         internal static string Errors_ConnectionError {
@@ -1072,6 +1081,15 @@ namespace StudentUsos.Resources.LocalizedStrings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Notifications about changes to the activities schedule.
+        /// </summary>
+        internal static string NotificationsSubpage_NotificationsAboutChangesInSchedule {
+            get {
+                return ResourceManager.GetString("NotificationsSubpage_NotificationsAboutChangesInSchedule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Notify.
         /// </summary>
         internal static string Notify {
@@ -1365,6 +1383,15 @@ namespace StudentUsos.Resources.LocalizedStrings {
         internal static string SettingsPage_ApplicationSubPage_WhatsNewGeneralChanges {
             get {
                 return ResourceManager.GetString("SettingsPage_ApplicationSubPage_WhatsNewGeneralChanges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Background synchronization.
+        /// </summary>
+        internal static string SettingsPage_BackgroundSynchronization {
+            get {
+                return ResourceManager.GetString("SettingsPage_BackgroundSynchronization", resourceCulture);
             }
         }
         

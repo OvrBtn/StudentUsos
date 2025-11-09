@@ -26,8 +26,8 @@ public partial class DiagnosisSubpage : CustomContentPageNotAnimated
 
     void InitChecksums()
     {
-        var activitiesSyncRuns = localStorageManager.GetData(LocalStorageKeys.ActivitiesSynchronizationBackgroundWorker_AmountOfRuns) ?? "0";
-        activitiesSyncRunsLabel.Text = activitiesSyncRuns;
+        var activitiesSyncRuns = localStorageManager.GetInt(LocalStorageKeys.ActivitiesSynchronizationBackgroundWorker_AmountOfRuns, 0);
+        activitiesSyncRunsLabel.Text = activitiesSyncRuns.ToString();
     }
 
     private void OpenLogsButton_Clicked(object sender, EventArgs e)

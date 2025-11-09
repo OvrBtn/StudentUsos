@@ -8,11 +8,11 @@
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
 
     <ScrollView>
-        <StackLayout Margin="30" Spacing="20">
+        <StackLayout Margin="30">
 
             <!--<Label FontSize="14" HorizontalTextAlignment="Center"-->
             <!--Text="{x:Static strings:LocalizedStrings.SettingsPage_TestingTabTitle}" />-->
-            <Border Padding="0">
+            <Border Padding="0" Margin="0,0,0,20">
                 <StackLayout>
                     <Button Text="{x:Static strings:LocalizedStrings.SettingsPage_Logs}" Padding="15"
                                 Clicked="OpenLogsButton_Clicked" CornerRadius="0"/>
@@ -24,19 +24,18 @@
                 </StackLayout>
             </Border>
 
-            <Border Padding="0">
+            <Border Padding="0" Margin="0,0,0,20">
                 <StackLayout>
                     <Button Text="{x:Static strings:LocalizedStrings.SettingsPage_ResetLocalData}" Padding="15"
                             Clicked="ResetLocalDataButton_Clicked" CornerRadius="0"/>
                 </StackLayout>
             </Border>
 
-            <Border Padding="0" Margin="0,0,0,20">
+            <Label FontSize="14" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.Checksums}" />
+            <Border Padding="0" Margin="0,5,0,20">
                 <StackLayout>
-                    <Label Text="{x:Static strings:LocalizedStrings.Checksums}" Padding="15" HorizontalTextAlignment="Center"/>
-
-                    <Grid ColumnDefinitions="auto, auto" Margin="25, 0, 25, 15" ColumnSpacing="10" HorizontalOptions="Center">
-                        <Label Grid.Column="0" Text="ActivitiesBackgroundSync"/>
+                    <Grid ColumnDefinitions="*, auto" ColumnSpacing="10" HorizontalOptions="Fill" Margin="30,0">
+                        <Label Grid.Column="0" Text="{x:Static strings:LocalizedStrings.DiagnosisSubpage_ActivitiesBackgroundSynchronization}" Margin="0, 15"/>
                         <Label x:Name="activitiesSyncRunsLabel" Grid.Column="1"/>
                     </Grid>
                 </StackLayout>

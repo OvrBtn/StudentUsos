@@ -9,7 +9,7 @@ public class LocalStorageManager : ILocalStorageManager
         Default = this;
     }
 
-    public bool ContainsData(LocalStorageKeys key)
+    public bool ContainsKey(LocalStorageKeys key)
     {
         return Preferences.ContainsKey(key.ToString());
     }

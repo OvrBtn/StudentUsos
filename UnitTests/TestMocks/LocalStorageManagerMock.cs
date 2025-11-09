@@ -5,7 +5,7 @@ namespace UnitTests.TestMocks;
 public class LocalStorageManagerMock : ILocalStorageManager
 {
     Dictionary<string, string> dictionary = new();
-    public bool ContainsData(LocalStorageKeys data)
+    public bool ContainsKey(LocalStorageKeys data)
     {
         return dictionary.ContainsKey(data.ToString());
     }

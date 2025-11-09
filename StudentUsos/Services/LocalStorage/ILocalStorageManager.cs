@@ -2,7 +2,7 @@
 
 public interface ILocalStorageManager
 {
-    public bool ContainsData(LocalStorageKeys key);
+    public bool ContainsKey(LocalStorageKeys key);
     public void Remove(LocalStorageKeys key);
     public void DeleteEverything();
 

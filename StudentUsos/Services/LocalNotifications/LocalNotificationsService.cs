@@ -25,7 +25,7 @@ public class LocalNotificationsService : ILocalNotificationsService
 
     int GetIdForNewNotification()
     {
-        if (localStorageManager.ContainsData(LocalStorageKeys.IdOfLastNotification) == false)
+        if (localStorageManager.ContainsKey(LocalStorageKeys.IdOfLastNotification) == false)
         {
             localStorageManager.SetString(LocalStorageKeys.IdOfLastNotification, "0");
         }

@@ -6,7 +6,7 @@ public interface ILocalStorageManager
     public void Remove(LocalStorageKeys key);
     public void DeleteEverything();
 
-    public string? GetString(LocalStorageKeys key, string? defaultValue);
+    public string? GetString(LocalStorageKeys key, string? defaultValue = null);
     public bool TryGettingString(LocalStorageKeys key, out string value);
     public void SetString(LocalStorageKeys key, string value);
 

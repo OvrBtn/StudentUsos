@@ -614,4 +614,28 @@
   <data name="SomethingWentWrong" xml:space="preserve">
     <value>Something went wrong</value>
   </data>
+  <data name="ChangeInActivitiesSchedule" xml:space="preserve">
+    <value>Change in activities schedule</value>
+  </data>
+  <data name="ActivitiesScheduleUpdateNotification_Added" xml:space="preserve">
+    <value>Added</value>
+  </data>
+  <data name="ActivitiesScheduleUpdateNotification_Removed" xml:space="preserve">
+    <value>Removed</value>
+  </data>
+  <data name="ActivitiesScheduleUpdateNotification_Updated" xml:space="preserve">
+    <value>Updated</value>
+  </data>
+  <data name="Checksums" xml:space="preserve">
+    <value>Checksums</value>
+  </data>
+  <data name="SettingsPage_BackgroundSynchronization" xml:space="preserve">
+    <value>Background synchronization</value>
+  </data>
+  <data name="NotificationsSubpage_NotificationsAboutChangesInSchedule" xml:space="preserve">
+    <value>Notifications about changes to the activities schedule</value>
+  </data>
+  <data name="DiagnosisSubpage_ActivitiesBackgroundSynchronization" xml:space="preserve">
+    <value>Activities schedule background synchronization</value>
+  </data>
 </root>

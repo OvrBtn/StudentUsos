@@ -10,11 +10,11 @@
     <ScrollView>
         <StackLayout Margin="30">
 
-            <!--<Label FontSize="14" HorizontalTextAlignment="Center"--> 
-                           <!--Text="{x:Static strings:LocalizedStrings.SettingsPage_TestingTabTitle}" />-->
+            <!--<Label FontSize="14" HorizontalTextAlignment="Center"-->
+            <!--Text="{x:Static strings:LocalizedStrings.SettingsPage_TestingTabTitle}" />-->
             <Border Padding="0" Margin="0,0,0,20">
                 <StackLayout>
-                        <Button Text="{x:Static strings:LocalizedStrings.SettingsPage_Logs}" Padding="15"
+                    <Button Text="{x:Static strings:LocalizedStrings.SettingsPage_Logs}" Padding="15"
                                 Clicked="OpenLogsButton_Clicked" CornerRadius="0"/>
 
                     <StackLayout BackgroundColor="#444" HeightRequest="1" Margin="20,0"/>
@@ -24,10 +24,20 @@
                 </StackLayout>
             </Border>
 
-            <Border Padding="0">
+            <Border Padding="0" Margin="0,0,0,20">
                 <StackLayout>
                     <Button Text="{x:Static strings:LocalizedStrings.SettingsPage_ResetLocalData}" Padding="15"
                             Clicked="ResetLocalDataButton_Clicked" CornerRadius="0"/>
+                </StackLayout>
+            </Border>
+
+            <Label FontSize="14" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.Checksums}" />
+            <Border Padding="0" Margin="0,5,0,20">
+                <StackLayout>
+                    <Grid ColumnDefinitions="*, auto" ColumnSpacing="10" HorizontalOptions="Fill" Margin="30,0">
+                        <Label Grid.Column="0" Text="{x:Static strings:LocalizedStrings.DiagnosisSubpage_ActivitiesBackgroundSynchronization}" Margin="0, 15"/>
+                        <Label x:Name="activitiesSyncRunsLabel" Grid.Column="1"/>
+                    </Grid>
                 </StackLayout>
             </Border>
 

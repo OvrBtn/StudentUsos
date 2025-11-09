@@ -20,9 +20,17 @@
         <!--<Label FontSize="14" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.SettingsPage_AppInfo}" />-->
         <Border Margin="0,5,0,20" Padding="0">
             <StackLayout Spacing="10">
-                    <Button Text="{x:Static strings:LocalizedStrings.SettingsPage_AppInfo}" Padding="15"
+                <Button Text="{x:Static strings:LocalizedStrings.SettingsPage_AppInfo}" Padding="15"
                             Clicked="AppInfoButton_Clicked"/>
             </StackLayout>
+        </Border>
+
+        <Label FontSize="14" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.SettingsPage_BackgroundSynchronization}" />
+        <Border Margin="0,5,0,20" Padding="0">
+            <Grid ColumnDefinitions="*, auto" HorizontalOptions="Fill" Margin="20, 0">
+                <Label Grid.Column="0" Text="{x:Static strings:LocalizedStrings.Schedule}" Margin="0, 20"></Label>
+                <Switch Grid.Column="1" x:Name="ActivitiesBackgroundSyncSwitch" Toggled="ActivitiesBackgroundSyncSwitch_Toggled"></Switch>
+            </Grid>
         </Border>
 
         <Label FontSize="14" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.WhatsNew}" />

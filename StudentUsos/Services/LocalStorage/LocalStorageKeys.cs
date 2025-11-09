@@ -23,5 +23,8 @@ public enum LocalStorageKeys
     CampusMapSvg,
     IsCampusMapInitialized,
     IdsOfUpvotedRoomInfos,
-    IdsOfDownvotedRoomInfos
+    IdsOfDownvotedRoomInfos,
+    ActivitiesSynchronizationBackgroundWorker_AmountOfRuns,
+    ActivitiesSynchronizationBackgroundWorker_IsEnabled,
+    ActivitiesSynchronizationBackgroundWorker_ShouldSendNotifications,
 }

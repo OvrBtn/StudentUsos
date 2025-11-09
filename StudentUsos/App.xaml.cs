@@ -14,13 +14,16 @@ public partial class App : Application
 
     public static IServiceProvider ServiceProvider { get; private set; }
     FirebasePushNotificationsService firebasePushNotificationsService;
+    IBackgroundJobService? backgroundJobService;
     ILogger? logger;
     public App(IServiceProvider serviceProvider,
         FirebasePushNotificationsService firebasePushNotificationsService,
+        IBackgroundJobService? backgroundJobService = null,
         ILogger? logger = null)
     {
         ServiceProvider = serviceProvider;
         this.firebasePushNotificationsService = firebasePushNotificationsService;
+        this.backgroundJobService = backgroundJobService;
         this.logger = logger;
 
         InitializeComponent();
@@ -40,6 +43,13 @@ public partial class App : Application
         };
 #endif
 
+        AuthorizationService.OnLoginSucceeded += AuthorizationService_OnLoginSucceeded;
+
+    }
+
+    private void AuthorizationService_OnLoginSucceeded()
+    {
+        backgroundJobService?.InitializeJobs();
     }
 
     //Called after Android MainActivity ctor
@@ -132,6 +142,8 @@ public partial class App : Application
             await shell.GoToAsync("//LoginPage");
             return;
         }
+
+        backgroundJobService?.InitializeJobs();
 
         //delay to let app load
         await Task.Delay(5000);

@@ -20,4 +20,5 @@ public interface IActivitiesService
     /// <param name="userId">default value is "-1" meaning a timetable of currently logged in user will be displayed, other values will create page containing staff timetable using services/tt/staff method</param>
     /// <returns><see cref="GetActivitiesResult"/> containing response status and retrieved data</returns>
     public Task<GetActivitiesResult?> GetActivitiesApiAsync(DateTime date, string userId, int numberOfDays = 1);
+
 }

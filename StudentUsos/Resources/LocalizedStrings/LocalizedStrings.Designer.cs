@@ -187,6 +187,33 @@ namespace StudentUsos.Resources.LocalizedStrings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Added.
+        /// </summary>
+        internal static string ActivitiesScheduleUpdateNotification_Added {
+            get {
+                return ResourceManager.GetString("ActivitiesScheduleUpdateNotification_Added", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removed.
+        /// </summary>
+        internal static string ActivitiesScheduleUpdateNotification_Removed {
+            get {
+                return ResourceManager.GetString("ActivitiesScheduleUpdateNotification_Removed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Updated.
+        /// </summary>
+        internal static string ActivitiesScheduleUpdateNotification_Updated {
+            get {
+                return ResourceManager.GetString("ActivitiesScheduleUpdateNotification_Updated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add.
         /// </summary>
         internal static string Add {
@@ -448,6 +475,24 @@ namespace StudentUsos.Resources.LocalizedStrings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change in activities schedule.
+        /// </summary>
+        internal static string ChangeInActivitiesSchedule {
+            get {
+                return ResourceManager.GetString("ChangeInActivitiesSchedule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checksums.
+        /// </summary>
+        internal static string Checksums {
+            get {
+                return ResourceManager.GetString("Checksums", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Comment.
         /// </summary>
         internal static string Comment {
@@ -516,6 +561,15 @@ namespace StudentUsos.Resources.LocalizedStrings {
         internal static string Diagnosis {
             get {
                 return ResourceManager.GetString("Diagnosis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Activities schedule background synchronization.
+        /// </summary>
+        internal static string DiagnosisSubpage_ActivitiesBackgroundSynchronization {
+            get {
+                return ResourceManager.GetString("DiagnosisSubpage_ActivitiesBackgroundSynchronization", resourceCulture);
             }
         }
         
@@ -1027,6 +1081,15 @@ namespace StudentUsos.Resources.LocalizedStrings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Notifications about changes to the activities schedule.
+        /// </summary>
+        internal static string NotificationsSubpage_NotificationsAboutChangesInSchedule {
+            get {
+                return ResourceManager.GetString("NotificationsSubpage_NotificationsAboutChangesInSchedule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Notify.
         /// </summary>
         internal static string Notify {
@@ -1320,6 +1383,15 @@ namespace StudentUsos.Resources.LocalizedStrings {
         internal static string SettingsPage_ApplicationSubPage_WhatsNewGeneralChanges {
             get {
                 return ResourceManager.GetString("SettingsPage_ApplicationSubPage_WhatsNewGeneralChanges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Background synchronization.
+        /// </summary>
+        internal static string SettingsPage_BackgroundSynchronization {
+            get {
+                return ResourceManager.GetString("SettingsPage_BackgroundSynchronization", resourceCulture);
             }
         }
         

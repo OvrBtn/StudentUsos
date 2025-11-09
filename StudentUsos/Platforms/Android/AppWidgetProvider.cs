@@ -98,7 +98,7 @@ namespace StudentUsos.Platforms.Android
 
         static void SetStateText(Context context, RemoteViews views, bool showTomorrow)
         {
-            DateTime date = ActivitiesWidgetHelper.GetCurrentDate().AddDays(showTomorrow ? 1 : 0);
+            DateTime date = AndroidHelper.GetCurrentDate().AddDays(showTomorrow ? 1 : 0);
             var activitiesRepository = App.ServiceProvider.GetService<IActivitiesRepository>()!;
             var activities = activitiesRepository!.GetActivities(date);
             if (activities is null)

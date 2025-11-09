@@ -12,4 +12,8 @@ public interface IActivitiesRepository
     public GetActivitiesResult? GetActivities(DateTime date);
     public GetActivitiesResult? GetAllActivities();
     public void Replace(IEnumerable<TimetableDay> timetableDays);
+
+    public Task CompareAndScheduleNotificationsAsync(GetActivitiesResult local, GetActivitiesResult remote);
+    public Task CompareAndScheduleNotificationsAsync(List<TimetableDay> local, List<TimetableDay> remote);
+
 }

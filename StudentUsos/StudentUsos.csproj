@@ -212,7 +212,7 @@
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="ovrbtn.CustomCalendar.MAUI" Version="1.0.11" />
 		<PackageReference Include="ovrbtn.CustomSchedule.MAUI" Version="1.0.9" />
-		<PackageReference Include="Plugin.LocalNotification" Version="10.1.8" />
+		<PackageReference Include="Plugin.LocalNotification" Version="12.0.2" />
 		<PackageReference Include="SkiaSharp.Extended.UI.Maui" Version="2.0.0" />
 		<!--<PackageReference Include="sqlite-net-pcl" Version="1.8.116" />-->
 		<!--sqlite-net-e and SourceGear.sqlite3 are a replacement for sqlite-net-pcl due to 16 KB page size change-->
@@ -547,6 +547,12 @@
 	  <AndroidResource Update="Platforms\Android\Resources\xml\appwidgetprovider.xml">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </AndroidResource>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net9.0-android'">
+	  <PackageReference Include="Xamarin.AndroidX.Work.Runtime">
+	    <Version>2.9.1.1</Version>
+	  </PackageReference>
 	</ItemGroup>
 
 	<ProjectExtensions>

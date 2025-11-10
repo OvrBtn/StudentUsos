@@ -1567,6 +1567,15 @@ namespace StudentUsos.Resources.LocalizedStrings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Widget with activities schedule.
+        /// </summary>
+        internal static string WhatsNewItem_ActivitiesScheduleWidget {
+            get {
+                return ResourceManager.GetString("WhatsNewItem_ActivitiesScheduleWidget", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Depending on your settings receiving notifications might be blocked. You can perform an automatic check in Settings -&gt; Notifications -&gt; Troubleshooting..
         /// </summary>
         internal static string WhatsNewItem_NewGradeDetails {
@@ -1581,6 +1590,33 @@ namespace StudentUsos.Resources.LocalizedStrings {
         internal static string WhatsNewItem_NewGradeTitle {
             get {
                 return ResourceManager.GetString("WhatsNewItem_NewGradeTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to * For this feature to work properly, the device should not prevent the app from running in the background. To verify your settings, you can use the option available under Settings → Notifications → Troubleshooting..
+        /// </summary>
+        internal static string WhatsNewItem_ScheduleChangeNotificationDescription1 {
+            get {
+                return ResourceManager.GetString("WhatsNewItem_ScheduleChangeNotificationDescription1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ** The check covers the next 7 days, including today..
+        /// </summary>
+        internal static string WhatsNewItem_ScheduleChangeNotificationDescription2 {
+            get {
+                return ResourceManager.GetString("WhatsNewItem_ScheduleChangeNotificationDescription2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notifications about changes in schedule.
+        /// </summary>
+        internal static string WhatsNewItem_ScheduleChangeNotificationTitle {
+            get {
+                return ResourceManager.GetString("WhatsNewItem_ScheduleChangeNotificationTitle", resourceCulture);
             }
         }
         

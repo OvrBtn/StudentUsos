@@ -11,22 +11,22 @@
     
     <!--<StackLayout Opacity="{Binding ContentOpacity}" BackgroundColor="#50000000" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">-->
     <StackLayout Padding="10">
-        <Frame Margin="30" Padding="15" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+        <Border Margin="30" Padding="15" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" BackgroundColor="{StaticResource BackgroundColor}">
             <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
                 <Label Text="{Binding Title}" Margin="0,0,0,5" FontAttributes="Bold" FontSize="20" HorizontalTextAlignment="Center" />
                 <Label Text="{Binding Description}" Margin="0,0,0,8" HorizontalTextAlignment="Center" VerticalOptions="FillAndExpand" />
                 <StackLayout IsVisible="{Binding IsYesNoVisible}" Margin="0,5,0,0" HorizontalOptions="CenterAndExpand" Orientation="Horizontal" Spacing="15">
-                    <Button Text="{Binding No}" Padding="15,12" BackgroundColor="{StaticResource BackgroundColor}" Command="{Binding NoClickedCommand}" FontSize="15" 
+                    <Button Text="{Binding No}" Padding="15,12" BackgroundColor="{StaticResource BackgroundColor2}" Command="{Binding NoClickedCommand}" FontSize="15" 
                             TextColor="{StaticResource TextColor}" TextTransform="None" />
-                    <Button Text="{Binding Yes}" Padding="15,12" BackgroundColor="{StaticResource BackgroundColor}" Command="{Binding YesClickedCommand}" FontSize="15" 
+                    <Button Text="{Binding Yes}" Padding="15,12" BackgroundColor="{StaticResource BackgroundColor2}" Command="{Binding YesClickedCommand}" FontSize="15" 
                             TextColor="{DynamicResource Text}" TextTransform="None" />
                 </StackLayout>
                 <StackLayout IsVisible="{Binding IsOkVisible}" Margin="0,15,0,0" HorizontalOptions="CenterAndExpand">
-                    <Button Text="{Binding Ok}" Padding="15,12" BackgroundColor="{StaticResource BackgroundColor}" Command="{Binding OkClickedCommand}"
+                    <Button Text="{Binding Ok}" Padding="15,12" BackgroundColor="{StaticResource BackgroundColor2}" Command="{Binding OkClickedCommand}"
                             FontSize="15" TextColor="{StaticResource TextColor}" TextTransform="None" CornerRadius="20"/>
                 </StackLayout>
             </StackLayout>
-        </Frame>
+        </Border>
     </StackLayout>
     <!--</StackLayout>-->
     

@@ -35,4 +35,10 @@ public partial class CampusBuildingDetailsPage : Popup
             App.Current?.Windows[0]?.Page?.ShowPopup(popup);
         });
     }
+
+    private void Button_Clicked(object sender, EventArgs e)
+    {
+        Parameters.GoToBuildingMap?.Invoke();
+        Close();
+    }
 }

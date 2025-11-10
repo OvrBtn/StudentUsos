@@ -103,10 +103,11 @@ function centerScroll() {
     }
     const bbox = svg.getBoundingClientRect();
 
-    const margin = parseFloat(window.getComputedStyle(svg).marginLeft);
+    const marginLeft = parseFloat(window.getComputedStyle(svg).marginLeft);
+    const marginTop = parseFloat(window.getComputedStyle(svg).marginTop);
 
-    const centerX = margin + bbox.width / 2;
-    const centerY = margin + bbox.height / 2;
+    const centerX = marginLeft + bbox.width / 2;
+    const centerY = marginTop + bbox.height / 2;
 
     window.scrollTo({
         left: centerX - window.innerWidth / 2,

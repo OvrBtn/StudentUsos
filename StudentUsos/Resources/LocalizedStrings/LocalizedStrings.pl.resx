@@ -640,4 +640,7 @@
   <data name="DiagnosisSubpage_ActivitiesBackgroundSynchronization" xml:space="preserve">
     <value>Synchronizacja planu zajęć w tle</value>
   </data>
+  <data name="CampusMap_Map" xml:space="preserve">
+    <value>Mapa</value>
+  </data>
 </root>

@@ -17,6 +17,7 @@
         </StackLayout.GestureRecognizers>
 
         <Border StrokeShape="RoundRectangle 20" Margin="30" 
+                BackgroundColor="{StaticResource BackgroundColor}"
                 Padding="30,30,30,0" 
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand"
@@ -55,7 +56,7 @@
                             <CollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="x:String">
                                     <Button Text="{Binding .}" MinimumHeightRequest="75" FontSize="15" 
-                                            BackgroundColor="{StaticResource Primary}" Margin="10" 
+                                            BackgroundColor="{StaticResource BackgroundColor2}" Margin="10" 
                                             Clicked="OptionsButton_Clicked"/>
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>

@@ -314,7 +314,11 @@ public partial class CampusMapViewModel : BaseViewModel
         CampusBuildingDetailsPage.CreateAndShow(new()
         {
             ShortName = buildingDetails.Id,
-            LongName = buildingDetails.LocalizedName
+            LongName = buildingDetails.LocalizedName,
+            GoToBuildingMap = new(() =>
+            {
+                ShowDefaultFloor(buildingDetails);
+            })
         });
     }
 
@@ -351,37 +355,42 @@ public partial class CampusMapViewModel : BaseViewModel
             BuildingsWithMaps.Select(x => $"{x.Id} - {x.LocalizedName}"),
             onPicked: (pickedItem) =>
             {
-                int index = Buildings.IndexOf(BuildingsWithMaps[pickedItem.Index]);
-
-                if (index == CurrentBuildingIndex)
-                {
-                    return;
-                }
-
-                CurrentBuildingIndex = index;
-
-                Floors = Buildings[CurrentBuildingIndex].FloorsList;
-                CurrentFloor = "0";
-
-                CurrentBuildingId = Buildings[CurrentBuildingIndex].Id;
-                if (CurrentBuildingIndex == 0)
-                {
-                    _ = ShowCampusMapAsync();
-                }
-                else
-                {
-                    if (Floors.Contains("0"))
-                    {
-                        CurrentFloor = "0";
-                    }
-                    else
-                    {
-                        CurrentFloor = Floors[0];
-                    }
-                    _ = UpdateWebViewAsync(CurrentBuildingId, CurrentFloor);
-                }
-                OnPropertyChanged(nameof(CurrentFullLocation));
+                ShowDefaultFloor(BuildingsWithMaps[pickedItem.Index]);
             });
+    }
+
+    void ShowDefaultFloor(CampusBuilding building)
+    {
+        int index = Buildings.IndexOf(building);
+
+        if (index == CurrentBuildingIndex)
+        {
+            return;
+        }
+
+        CurrentBuildingIndex = index;
+
+        Floors = Buildings[CurrentBuildingIndex].FloorsList;
+        CurrentFloor = "0";
+
+        CurrentBuildingId = Buildings[CurrentBuildingIndex].Id;
+        if (CurrentBuildingIndex == 0)
+        {
+            _ = ShowCampusMapAsync();
+        }
+        else
+        {
+            if (Floors.Contains("0"))
+            {
+                CurrentFloor = "0";
+            }
+            else
+            {
+                CurrentFloor = Floors[0];
+            }
+            _ = UpdateWebViewAsync(CurrentBuildingId, CurrentFloor);
+        }
+        OnPropertyChanged(nameof(CurrentFullLocation));
     }
 
     [RelayCommand]

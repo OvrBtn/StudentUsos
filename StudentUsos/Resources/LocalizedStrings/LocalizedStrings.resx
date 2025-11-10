@@ -638,4 +638,7 @@
   <data name="DiagnosisSubpage_ActivitiesBackgroundSynchronization" xml:space="preserve">
     <value>Activities schedule background synchronization</value>
   </data>
+  <data name="CampusMap_Map" xml:space="preserve">
+    <value>Map</value>
+  </data>
 </root>

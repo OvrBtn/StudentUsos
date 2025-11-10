@@ -439,6 +439,15 @@ namespace StudentUsos.Resources.LocalizedStrings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Map.
+        /// </summary>
+        internal static string CampusMap_Map {
+            get {
+                return ResourceManager.GetString("CampusMap_Map", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Suggestion not sent: Name for given room can be suggested only once.
         /// </summary>
         internal static string CampusMapPage_SuggestionAlreadyRecorder {

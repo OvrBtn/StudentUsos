@@ -4,5 +4,7 @@ public class CampusBuildingDetailsParameters
 {
     public required string ShortName { get; set; }
     public required string LongName { get; set; }
+
+    public Action GoToBuildingMap { get; set; }
 }
 

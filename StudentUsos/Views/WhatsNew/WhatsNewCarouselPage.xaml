@@ -13,7 +13,7 @@
 
     <StackLayout BackgroundColor="Transparent" VerticalOptions="Fill">
 
-        <Grid Margin="40,30,40,20">
+        <Grid Margin="40,70,40,20">
             <Label Text="{x:Static strings:LocalizedStrings.WhatsNew}" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="18"></Label>
             <!--<Image Source="x" HorizontalOptions="EndAndExpand" WidthRequest="25">
                 <Image.GestureRecognizers>
@@ -47,7 +47,7 @@
 
                     </Grid>
 
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="30" Spacing="20">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="30,30,30,70" Spacing="20">
                         <Button Text="{x:Static strings:LocalizedStrings.WhatsNewPage_Skip}" BackgroundColor="{StaticResource BackgroundColor2}"
                                 Clicked="SkipButton_Clicked" HorizontalOptions="FillAndExpand" Padding="15"/>
                         <Button x:Name="nextButton" Text="{x:Static strings:LocalizedStrings.WhatsNewPage_Next}" BackgroundColor="{StaticResource Primary}"

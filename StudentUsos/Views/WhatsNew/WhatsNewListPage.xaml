@@ -11,7 +11,7 @@
 
     <StackLayout BackgroundColor="Transparent" VerticalOptions="Fill">
 
-        <Grid Margin="40,30,40,20">
+        <Grid Margin="40,70,40,20">
             <Label Text="{x:Static strings:LocalizedStrings.WhatsNew}" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="18"></Label>
             <Image Source="x" HorizontalOptions="EndAndExpand" WidthRequest="25">
                 <Image.GestureRecognizers>

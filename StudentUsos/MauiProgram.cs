@@ -49,15 +49,11 @@ public static class MauiProgram
             .RegisterViewModels()
             .RegisterServices()
 #if ANDROID
-    .ConfigureLifecycleEvents(events =>
-    {
-        events.AddAndroid(android => android.OnCreate((activity, bundle) => MakeStatusBarTranslucent(activity)));
-    })
-#endif
-
-
-#if ANDROID
-            //.ConfigureStatusBarAndNavigationBarColorsForModalPages()
+            .ConfigureLifecycleEvents(events =>
+            {
+                events.AddAndroid(android => android.OnCreate((activity, bundle) => MakeStatusBarTranslucent(activity)));
+            })
+            .ConfigureStatusBarAndNavigationBarColorsForModalPages()
 #endif
             .ConfigureFonts(fonts =>
             {

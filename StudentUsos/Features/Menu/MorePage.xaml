@@ -34,9 +34,9 @@
         </ResourceDictionary>
     </controls:CustomContentPageNotAnimated.Resources>
 
-    <ScrollView>
+    <ScrollView VerticalOptions="Fill">
 
-        <Grid RowDefinitions="180,180,180, 180" ColumnDefinitions="*, *" Margin="30,70,30,30"
+        <Grid RowDefinitions="180,180,180, 180" ColumnDefinitions="*, *" Margin="30,70,30,70"
                   ColumnSpacing="10" RowSpacing="10" VerticalOptions="FillAndExpand">
 
             <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource ButtonBorderStyle}">

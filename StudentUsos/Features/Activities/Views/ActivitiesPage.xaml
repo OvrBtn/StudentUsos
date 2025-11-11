@@ -18,7 +18,7 @@
             <AbsoluteLayout toolkit:StateView.StateKey="Loaded" VerticalOptions="FillAndExpand" Margin="0,40,0,0">
 
                 <controls:CustomButton x:Name="TodayButton" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="1,1,-1,-1" 
-                                       ZIndex="10" Margin="40,80"
+                                       ZIndex="10" Margin="40,130"
                                Command="{Binding TodayCommand}" BackgroundColor="{StaticResource Primary}" 
                                        Shadow="{StaticResource defaultBlackShadow}"
                                IsVisible="{Binding IsTodayButtonVisible}">

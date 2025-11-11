@@ -60,7 +60,7 @@
 
                             <toolkit:StateContainer.StateViews>
 
-                                <ActivityIndicator toolkit:StateView.StateKey="Loading"/>
+                                <ActivityIndicator toolkit:StateView.StateKey="Loading" Margin="0,40,0,0"/>
                                 <Label toolkit:StateView.StateKey="ConnectionError" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.Errors_ConnectionError}"></Label>
                                 <Label toolkit:StateView.StateKey="LoadingError" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.Errors_LoadingError}"></Label>
                                 <StackLayout toolkit:StateView.StateKey="Loaded"></StackLayout>

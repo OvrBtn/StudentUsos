@@ -18,8 +18,6 @@ public class PopupBase : ContentPage
     protected override void OnAppearing()
     {
         Color color = new Color(13, 13, 13);
-        App.NavigationBarColor = color;
-        App.StatusBarColor = color;
 
         if (Content != null)
         {
@@ -42,8 +40,7 @@ public class PopupBase : ContentPage
 
     protected override void OnDisappearing()
     {
-        App.NavigationBarColor = defaultBackgroundColor;
-        App.StatusBarColor = defaultBackgroundColor;
+
         this.Content.Opacity = 0;
         base.OnDisappearing();
     }

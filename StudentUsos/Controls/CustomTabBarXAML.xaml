@@ -22,7 +22,7 @@
         </Style>
     </ContentView.Resources>
 
-    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" HeightRequest="50" VerticalOptions="End">
+    <StackLayout x:Name="tabbarContainer" Orientation="Horizontal" HorizontalOptions="FillAndExpand" HeightRequest="50" VerticalOptions="End">
         <Grid x:Name="mainPageTab">
             <Image x:Name="mainPageTabImage" Source="tabbar_house"></Image>
             <Image x:Name="mainPageTabImageFill" Source="tabbar_house_fill"></Image>

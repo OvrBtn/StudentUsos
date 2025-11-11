@@ -9,7 +9,7 @@
     xmlns:string="clr-namespace:StudentUsos.Resources.LocalizedStrings"
     x:DataType="views:LogsViewModel">
 
-    <StackLayout>
+    <StackLayout Margin="0,45,0,0">
         <Button Text="{x:Static string:LocalizedStrings.LogsPage_RemoveAll}" Command="{Binding RemoveAllLogsCommand}"
                 Margin="10"/>
         <CollectionView Margin="0" ItemsSource="{Binding Logs}" VerticalOptions="FillAndExpand">

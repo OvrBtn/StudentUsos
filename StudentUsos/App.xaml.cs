@@ -11,6 +11,7 @@ namespace StudentUsos;
 public partial class App : Application
 {
     public static int StatusBarHeight { get; set; }
+    public static int NavigationBarHeight { get; set; }
 
     public static IServiceProvider ServiceProvider { get; private set; }
     FirebasePushNotificationsService firebasePushNotificationsService;
@@ -162,31 +163,6 @@ public partial class App : Application
                 LocalizedStrings.Logout, LocalizedStrings.Later, () => AuthorizationService.LogoutAsync(), null);
         }
     }
-
-    internal static Action<Color> SetNavigationBarColor { get; set; }
-    public static Color? NavigationBarColor
-    {
-        get => navigationBarColor;
-        set
-        {
-            if (navigationBarColor == value || SetNavigationBarColor == null) return;
-            navigationBarColor = value;
-            SetNavigationBarColor(value ?? Colors.Gray);
-        }
-    }
-    static Color? navigationBarColor = Utilities.GetColorFromResources("BackgroundColor");
-    internal static Action<Color> SetStatusBarColor { get; set; }
-    public static Color? StatusBarColor
-    {
-        get => statusBarColor;
-        set
-        {
-            if (statusBarColor == value || SetNavigationBarColor == null) return;
-            statusBarColor = value;
-            SetStatusBarColor(value ?? Colors.Gray);
-        }
-    }
-    static Color? statusBarColor = Utilities.GetColorFromResources("BackgroundColor");
 
     static void SetLanguageFromLocalStorage()
     {

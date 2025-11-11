@@ -14,7 +14,7 @@
     <AbsoluteLayout>
 
         <controls:FloatingButton AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="1,1,-1,-1" 
-                                 ZIndex="10" Margin="40,80"
+                                 ZIndex="10" Margin="40,140"
                                  ButtonCornerRadius="1500" AnimationLength="160" AnimationSpacing="120" 
                                  ButtonClicked="FloatingButton_ButtonClicked">
             <controls:FloatingButton.ContentTemplate x:DataType="views:GradesPage">
@@ -57,7 +57,7 @@
 
         <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" ZIndex="5">
 
-            <controls:CustomButton HeightRequest="50" Margin="30,0,30,0" HorizontalOptions="FillAndExpand" VerticalOptions="Start" Command="{Binding OpenTermsListCommand}" 
+            <controls:CustomButton HeightRequest="50" Margin="30,50,30,0" HorizontalOptions="FillAndExpand" VerticalOptions="Start" Command="{Binding OpenTermsListCommand}" 
                                IsVisible="{Binding CurrentlyDisplayedTerm.Name, Converter={StaticResource StringToBoolConverter}}">
                 <StackLayout Orientation="Horizontal" Spacing="15" HorizontalOptions="CenterAndExpand">
                     <Label Text="{Binding CurrentlyDisplayedTerm.Name}" FontSize="16" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center"></Label>

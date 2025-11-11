@@ -13,6 +13,8 @@ public partial class CustomTabBarXaml : ContentView
         UpdateActiveTab();
 
         Shell.Current.Navigated += Current_Navigated;
+
+        tabbarContainer.Margin = new(0, 0, 0, App.NavigationBarHeight);
     }
 
     private void Current_Navigated(object? sender, ShellNavigatedEventArgs e)

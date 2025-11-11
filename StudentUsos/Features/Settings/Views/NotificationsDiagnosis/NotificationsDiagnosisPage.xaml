@@ -25,7 +25,7 @@
     <StackLayout>
 
         <ScrollView VerticalOptions="FillAndExpand">
-            <StackLayout Margin="30" VerticalOptions="FillAndExpand" Spacing="30">
+            <StackLayout Margin="30,70,30,30" VerticalOptions="FillAndExpand" Spacing="30">
 
                 <StackLayout>
                     <Grid ColumnDefinitions="auto, *">
@@ -81,7 +81,7 @@
         </ScrollView>
 
         <Button Text="{x:Static strings:LocalizedStrings.Analyse}" BackgroundColor="{StaticResource Primary}"
-                Command="{Binding AnalyseButtonClickedCommand}" Margin="30, 30, 30, 80"
+                Command="{Binding AnalyseButtonClickedCommand}" Margin="30, 30, 30, 120"
                 IsVisible="{Binding IsAnalyseButtonVisible}"/>
 
     </StackLayout>

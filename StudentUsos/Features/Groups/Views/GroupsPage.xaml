@@ -23,6 +23,9 @@
                 <CollectionView.Footer>
                     <StackLayout Margin="30" CompressedLayout.IsHeadless="True"></StackLayout>
                 </CollectionView.Footer>
+                <CollectionView.Header>
+                    <StackLayout Margin="0,40,0,0"></StackLayout>
+                </CollectionView.Header>
 
                 <CollectionView.GroupHeaderTemplate>
                     <DataTemplate x:DataType="models:GroupsGrouped">

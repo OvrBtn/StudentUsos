@@ -33,13 +33,13 @@
     <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
         <StackLayout Margin="0, 0, 0, 0" Padding="0" ZIndex="99" BackgroundColor="Transparent"
-               AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional" AbsoluteLayout.LayoutBounds="0,1,1,70">
+               AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional" AbsoluteLayout.LayoutBounds="0,1,1,-1">
             <controls:CustomTabBarXaml VerticalOptions="FillAndExpand"></controls:CustomTabBarXaml>
         </StackLayout>
 
         <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
             <ScrollView VerticalOptions="FillAndExpand">
-                <StackLayout VerticalOptions="FillAndExpand">
+                <StackLayout VerticalOptions="FillAndExpand" Margin="0,40,0,0">
 
                     <Grid Margin="30" ColumnDefinitions="*,auto" ColumnSpacing="20">
                         <StackLayout toolkit:StateContainer.CurrentState="{Binding UserInfoStateKey}" Grid.Column="0">

@@ -16,7 +16,7 @@
             <ActivityIndicator toolkit:StateView.StateKey="Loading"></ActivityIndicator>
             
             <ScrollView toolkit:StateView.StateKey="Loaded">
-                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="30">
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="30,70,30,30">
                     <Grid ColumnDefinitions="40, *" ColumnSpacing="10" HorizontalOptions="CenterAndExpand">
                         <Frame Grid.Column="0" Margin="0,4,0,4" Padding="5" BackgroundColor="{Binding Person.InitialsBackgroundColor}" CornerRadius="90" HeightRequest="40" WidthRequest="40">
                             <Label FontSize="12" HorizontalOptions="CenterAndExpand" Text="{Binding Person.Initials}" VerticalOptions="CenterAndExpand" />

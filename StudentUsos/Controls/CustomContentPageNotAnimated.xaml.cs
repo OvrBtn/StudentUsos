@@ -12,12 +12,10 @@ public partial class CustomContentPageNotAnimated : ContentPage
             if (value)
             {
                 AbsoluteLayout.SetLayoutBounds(ContentContainer, DefaultContentStackLayoutLayoutBounds);
-                App.NavigationBarColor = Utilities.GetColorFromResources("NavigationBarColor");
             }
             else
             {
                 AbsoluteLayout.SetLayoutBounds(ContentContainer, TabBarNotVisibleContentStackLayoutLayoutBounds);
-                App.NavigationBarColor = Utilities.GetColorFromResources("BackgroundColor");
             }
         }
     }

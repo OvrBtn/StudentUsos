@@ -8,7 +8,7 @@
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
 
     <ScrollView>
-        <StackLayout Margin="30">
+        <StackLayout Margin="30,70,30,30">
 
             <!--<Label FontSize="14" HorizontalTextAlignment="Center"-->
             <!--Text="{x:Static strings:LocalizedStrings.SettingsPage_TestingTabTitle}" />-->

@@ -9,41 +9,45 @@
     xmlns:subpages="clr-namespace:StudentUsos.Features.Settings.Views.Subpages"
     x:DataType="subpages:ApplicationSubpageViewModel">
 
-    <StackLayout Margin="30">
+    <ScrollView>
 
-        <Label FontSize="14" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.Language}" />
-        <Border Margin="0,5,0,10" Padding="0">
-            <Button Text="{Binding CurrentLanguageName}" Padding="15"
+        <StackLayout Margin="30,70,30,30">
+
+            <Label FontSize="14" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.Language}" />
+            <Border Margin="0,5,0,10" Padding="0">
+                <Button Text="{Binding CurrentLanguageName}" Padding="15"
                         Command="{Binding LanguageButtonClickedCommand}"/>
-        </Border>
+            </Border>
 
-        <!--<Label FontSize="14" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.SettingsPage_AppInfo}" />-->
-        <Border Margin="0,5,0,20" Padding="0">
-            <StackLayout Spacing="10">
-                <Button Text="{x:Static strings:LocalizedStrings.SettingsPage_AppInfo}" Padding="15"
+            <!--<Label FontSize="14" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.SettingsPage_AppInfo}" />-->
+            <Border Margin="0,5,0,20" Padding="0">
+                <StackLayout Spacing="10">
+                    <Button Text="{x:Static strings:LocalizedStrings.SettingsPage_AppInfo}" Padding="15"
                             Clicked="AppInfoButton_Clicked"/>
-            </StackLayout>
-        </Border>
+                </StackLayout>
+            </Border>
 
-        <Label FontSize="14" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.SettingsPage_BackgroundSynchronization}" />
-        <Border Margin="0,5,0,20" Padding="0">
-            <Grid ColumnDefinitions="*, auto" HorizontalOptions="Fill" Margin="20, 0">
-                <Label Grid.Column="0" Text="{x:Static strings:LocalizedStrings.Schedule}" Margin="0, 20"></Label>
-                <Switch Grid.Column="1" x:Name="ActivitiesBackgroundSyncSwitch" Toggled="ActivitiesBackgroundSyncSwitch_Toggled"></Switch>
-            </Grid>
-        </Border>
+            <Label FontSize="14" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.SettingsPage_BackgroundSynchronization}" />
+            <Border Margin="0,5,0,20" Padding="0">
+                <Grid ColumnDefinitions="*, auto" HorizontalOptions="Fill" Margin="20, 0">
+                    <Label Grid.Column="0" Text="{x:Static strings:LocalizedStrings.Schedule}" Margin="0, 20"></Label>
+                    <Switch Grid.Column="1" x:Name="ActivitiesBackgroundSyncSwitch" Toggled="ActivitiesBackgroundSyncSwitch_Toggled"></Switch>
+                </Grid>
+            </Border>
 
-        <Label FontSize="14" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.WhatsNew}" />
-        <Border Margin="0,5,0,20" Padding="0">
-            <StackLayout>
-                <Button Text="{x:Static strings:LocalizedStrings.SettingsPage_ApplicationSubPage_WhatsNewFeatured}" Padding="15"
+            <Label FontSize="14" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.WhatsNew}" />
+            <Border Margin="0,5,0,20" Padding="0">
+                <StackLayout>
+                    <Button Text="{x:Static strings:LocalizedStrings.SettingsPage_ApplicationSubPage_WhatsNewFeatured}" Padding="15"
                      Clicked="FeaturedChangesButton_Clicked" CornerRadius="0"/>
-                <StackLayout BackgroundColor="#444" HeightRequest="1" Margin="20,0"/>
-                <Button Text="{x:Static strings:LocalizedStrings.SettingsPage_ApplicationSubPage_WhatsNewGeneralChanges}" Padding="15"
+                    <StackLayout BackgroundColor="#444" HeightRequest="1" Margin="20,0"/>
+                    <Button Text="{x:Static strings:LocalizedStrings.SettingsPage_ApplicationSubPage_WhatsNewGeneralChanges}" Padding="15"
                         Clicked="GeneralChangesButton_Clicked" CornerRadius="0"/>
-            </StackLayout>
-        </Border>
+                </StackLayout>
+            </Border>
 
-    </StackLayout>
+        </StackLayout>
+
+    </ScrollView>
 
 </controls:CustomContentPageNotAnimated>

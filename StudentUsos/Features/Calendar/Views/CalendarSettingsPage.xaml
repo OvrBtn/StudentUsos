@@ -15,7 +15,7 @@
     </controls:CustomContentPageNotAnimated.Resources>
 
 
-    <StackLayout Margin="20,20,20,0">
+    <StackLayout Margin="20,70,20,0">
         <Label Margin="0,5,0,10" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.CalendarSettingsPage_AddedCalendars}" />
 
         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="10">

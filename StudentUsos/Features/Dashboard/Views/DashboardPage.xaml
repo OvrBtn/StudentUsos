@@ -33,7 +33,7 @@
     <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
         <StackLayout Margin="0, 0, 0, 0" Padding="0" ZIndex="99" BackgroundColor="Transparent"
-               AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional" AbsoluteLayout.LayoutBounds="0,1,1,70">
+               AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional" AbsoluteLayout.LayoutBounds="0,1,1,-1">
             <controls:CustomTabBarXaml VerticalOptions="FillAndExpand"></controls:CustomTabBarXaml>
         </StackLayout>
 

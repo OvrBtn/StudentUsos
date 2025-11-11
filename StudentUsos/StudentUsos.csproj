@@ -7,6 +7,8 @@
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net9.0-tizen</TargetFrameworks> -->
 		<OutputType Condition="'$(TargetFramework)' != 'net9.0'">Exe</OutputType>
+		<AndroidCompileSdkVersion>36</AndroidCompileSdkVersion>
+		<AndroidTargetSdkVersion>36</AndroidTargetSdkVersion>
 		<RootNamespace>StudentUsos</RootNamespace>
 		<UseMaui>true</UseMaui>
 		<SingleProject>true</SingleProject>

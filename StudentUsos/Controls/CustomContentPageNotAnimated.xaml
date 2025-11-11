@@ -17,7 +17,7 @@
                 </Border>
                 
                 <StackLayout Margin="0, 0, 0, 0" Padding="0" x:Name="tabBar" BackgroundColor="Transparent" VerticalOptions="EndAndExpand">
-                    <controls:CustomTabBarXaml HeightRequest="70"></controls:CustomTabBarXaml>
+                    <controls:CustomTabBarXaml></controls:CustomTabBarXaml>
                 </StackLayout>
                 
             </Grid>

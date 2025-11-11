@@ -42,13 +42,10 @@ public class MainActivity : MauiAppCompatActivity
 
         RequestedOrientation = ScreenOrientation.Portrait;
 
-        SetNavigationBar();
-
         SetStatusBarHeight();
+        SetNavigationBarHeight();
 
         CheckUri(this.Intent);
-
-        App.SetStatusBarColor = new((color) => { Window?.SetStatusBarColor(color.ToAndroid()); });
 
         FirebasePushNotificationsService.GetFcmTokenFuncInitialize(() =>
         {
@@ -103,15 +100,21 @@ public class MainActivity : MauiAppCompatActivity
         catch (Exception ex) { Logger.Default?.LogCatchedException(ex); }
     }
 
-    void SetNavigationBar()
+    void SetNavigationBarHeight()
     {
-        try
+        if (Resources is null || Resources.DisplayMetrics is null)
         {
-            Window?.SetNavigationBarColor(Utilities.GetColorFromResources("NavigationBarColor").ToAndroid());
-
-            App.SetNavigationBarColor = new((color) => { Window?.SetNavigationBarColor(color.ToAndroid()); });
+            return;
         }
-        catch (Exception ex) { Logger.Default?.LogCatchedException(ex); }
+        int resourceId = Resources.GetIdentifier("navigation_bar_height", "dimen", "android");
 
+        if (resourceId > 0)
+        {
+            App.NavigationBarHeight = (int)(Resources.GetDimensionPixelSize(resourceId) / Resources.DisplayMetrics.Density);
+        }
+        else
+        {
+            App.NavigationBarHeight = 0;
+        }
     }
 }

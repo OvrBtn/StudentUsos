@@ -80,7 +80,7 @@
             </toolkit:StateContainer.StateViews>
         </Grid>
 
-        <controls:CustomTabBarXaml VerticalOptions="EndAndExpand" HeightRequest="70"></controls:CustomTabBarXaml>
+        <controls:CustomTabBarXaml VerticalOptions="EndAndExpand"></controls:CustomTabBarXaml>
 
     </Grid>
 

@@ -7,7 +7,7 @@
     xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings">
 
     <ScrollView>
-        <StackLayout Margin="30" Spacing="20">
+        <StackLayout Margin="30,70,30,30" Spacing="20">
 
             <StackLayout Spacing="10">
                 <Label Text="Studencki USOS" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="18"></Label>

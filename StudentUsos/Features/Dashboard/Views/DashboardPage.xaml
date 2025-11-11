@@ -39,7 +39,7 @@
 
         <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
             <ScrollView VerticalOptions="FillAndExpand">
-                <StackLayout VerticalOptions="FillAndExpand">
+                <StackLayout VerticalOptions="FillAndExpand" Margin="0,40,0,0">
 
                     <Grid Margin="30" ColumnDefinitions="*,auto" ColumnSpacing="20">
                         <StackLayout toolkit:StateContainer.CurrentState="{Binding UserInfoStateKey}" Grid.Column="0">

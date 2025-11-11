@@ -15,7 +15,7 @@
     </controls:CustomContentPageNotAnimated.Resources>
 
     <StackLayout Margin="0">
-        <Grid ColumnDefinitions="auto, auto" Margin="0,20,0,20" HorizontalOptions="Center" VerticalOptions="Center" ColumnSpacing="5">
+        <Grid ColumnDefinitions="auto, auto" Margin="0,70,0,20" HorizontalOptions="Center" VerticalOptions="Center" ColumnSpacing="5">
             <Label Grid.Column="0" Text="{x:Static strings:LocalizedStrings.Points}"></Label>
             <Label Grid.Column="1" Text="{Binding PointsString}"></Label>
         </Grid>

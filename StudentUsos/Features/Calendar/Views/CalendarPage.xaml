@@ -21,7 +21,7 @@
         </Style>
     </controls:CustomContentPageNotAnimated.Resources>
 
-    <StackLayout toolkit:StateContainer.CurrentState="{Binding MainStateKey}" Margin="20,20,20,0" CompressedLayout.IsHeadless="True">
+    <StackLayout toolkit:StateContainer.CurrentState="{Binding MainStateKey}" Margin="20,60,20,0" CompressedLayout.IsHeadless="True">
         <toolkit:StateContainer.StateViews>
 
             <ActivityIndicator toolkit:StateView.StateKey="Loading"></ActivityIndicator>

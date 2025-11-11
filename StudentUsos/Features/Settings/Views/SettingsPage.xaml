@@ -10,7 +10,7 @@
     x:DataType="views:SettingsViewModel">
 
     <ScrollView>
-        <StackLayout Padding="30" Spacing="10">
+        <StackLayout Padding="30, 70, 30, 30" Spacing="10">
 
             <Border Padding="0">
                 <Grid>

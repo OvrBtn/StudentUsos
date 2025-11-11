@@ -17,7 +17,7 @@
         <views:SkLottieImageSourceConverter x:Key="sKLottieImageSourceConverter"></views:SkLottieImageSourceConverter>
     </controls:CustomContentPageNotAnimated.Resources>
 
-    <AbsoluteLayout>
+    <AbsoluteLayout Margin="0,40,0,0">
 
         <StackLayout IsVisible="{Binding IsSuccessLottieVisible}" AbsoluteLayout.LayoutFlags="All"
                 Margin="20" AbsoluteLayout.LayoutBounds="0,0,1,1">

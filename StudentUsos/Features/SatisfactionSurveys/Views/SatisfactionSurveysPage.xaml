@@ -27,6 +27,9 @@
                     <CollectionView.Footer>
                         <StackLayout Margin="30"></StackLayout>
                     </CollectionView.Footer>
+                    <CollectionView.Header>
+                        <StackLayout Margin="0,40,0,0"></StackLayout>
+                    </CollectionView.Header>
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:SatisfactionSurvey">
                             <Frame Padding="0" Margin="30,5,30,5">

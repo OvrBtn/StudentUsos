@@ -28,7 +28,7 @@
 
             <CollectionView toolkit:StateView.StateKey="Loaded" ItemsSource="{Binding Payments}" VerticalOptions="FillAndExpand">
                 <CollectionView.Header>
-                    <Label Margin="30,30,30,10" FontSize="18" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.Payments}" />
+                    <Label Margin="30,70,30,10" FontSize="18" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.Payments}" />
                 </CollectionView.Header>
                 <CollectionView.Footer>
                     <StackLayout Margin="30" />

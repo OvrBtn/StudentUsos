@@ -32,7 +32,14 @@ function ReceiveFloorData(jsonString) {
         const box = child.getBBox();
 
         // Compute label center
-        const localCenter = calculateCenterWithCentroidPlusNormals(child);
+        let localCenter = calculateCenterWithCentroidPlusNormals(child);
+        if (Number.isNaN(localCenter[0]) || Number.isNaN(localCenter[1])) {
+            localCenter = [
+                box.x + box.width / 2,
+                box.y + box.height / 2
+            ];
+        }
+
         const point = svg.createSVGPoint();
         point.x = localCenter[0];
         point.y = localCenter[1];

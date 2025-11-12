@@ -31,3 +31,4 @@ Currently it's not planned.
 
 # Features
 
+<img src="Resources/Features.png"/>

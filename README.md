@@ -14,11 +14,12 @@ or in [Releases tab](https://github.com/OvrBtn/StudentUsos/releases) (but then y
 
 # Screenshots
 <div>
-<img src="Resources/1.png" width="15%"/>
-<img src="Resources/2.png" width="15%"/>
-<img src="Resources/3.png" width="15%"/>
-<img src="Resources/4.png" width="15%"/>
-<img src="Resources/5.png" width="15%"/>
+<img src="Resources/Screenshots/1.png" width="15%"/>
+<img src="Resources/Screenshots/2.png" width="15%"/>
+<img src="Resources/Screenshots/3.png" width="15%"/>
+<img src="Resources/Screenshots/4.png" width="15%"/>
+<img src="Resources/Screenshots/5.png" width="15%"/>
+<img src="Resources/Screenshots/6.png" width="15%"/>
 </div>
 
 # Contributing
@@ -27,3 +28,6 @@ This repo currently doesn't allow contributions. Any pull requests will get auto
 # FAQ
 ## Is there going to be a iOS version?
 Currently it's not planned.
+
+# Features
+

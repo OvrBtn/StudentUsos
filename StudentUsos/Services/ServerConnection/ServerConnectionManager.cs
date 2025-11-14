@@ -303,10 +303,6 @@ public class ServerConnectionManager : IServerConnectionManager
             string responseShorter = response.Substring(0, Math.Min(response.Length, maxLenghtForLogs));
             logger.Log(LogLevel.Info, methodName + " => " + responseShorter);
         }
-        else
-        {
-            logger.Log(LogLevel.Info, methodName);
-        }
     }
 
 }

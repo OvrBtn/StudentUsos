@@ -6,5 +6,6 @@ public class CampusBuildingDetailsParameters
     public required string LongName { get; set; }
 
     public Action GoToBuildingMap { get; set; }
+    public bool HasFloorMaps { get; set; }
 }
 

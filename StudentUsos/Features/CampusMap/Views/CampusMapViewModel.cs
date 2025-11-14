@@ -318,7 +318,8 @@ public partial class CampusMapViewModel : BaseViewModel
             GoToBuildingMap = new(() =>
             {
                 ShowDefaultFloor(buildingDetails);
-            })
+            }),
+            HasFloorMaps = BuildingsWithMaps.Any(x => x.Id == buildingDetails.Id)
         });
     }
 

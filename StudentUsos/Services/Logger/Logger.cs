@@ -143,22 +143,22 @@ public class Logger : ILogger
     }
 
 
-    async Task TrySendingLogsToServerAsync()
+    public async Task<bool> TrySendingLogsToServerAsync()
     {
 #if DEBUG
-        return;
+        return false;
 #endif
 #pragma warning disable CS0162
         var userInfo = userInfoRepository.Value.GetUserInfo();
         if (userInfo is null)
         {
-            return;
+            return false;
         }
 
         var allLogs = localDatabaseManager.Value.GetAll<LogRecord>();
         if (allLogs.Count == 0)
         {
-            return;
+            return false;
         }
 
         long unixTime;
@@ -184,7 +184,9 @@ public class Logger : ILogger
         if (result is not null && result.IsSuccess)
         {
             localDatabaseManager.Value.ExecuteQuery($"UPDATE {nameof(LogRecord)} SET {nameof(LogRecord.IsSynchronizedWithServer)} = 1 WHERE {nameof(LogRecord.CreationDateUnix)} <= {unixTime};");
+            return true;
         }
+        return false;
 #pragma warning restore
     }
 }

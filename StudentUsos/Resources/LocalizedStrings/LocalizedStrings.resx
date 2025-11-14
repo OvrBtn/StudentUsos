@@ -349,7 +349,7 @@
     <value>Log out</value>
   </data>
   <data name="LogsPage_RemoveAll" xml:space="preserve">
-    <value>Remove all</value>
+    <value>Remove all logs</value>
   </data>
   <data name="Modification" xml:space="preserve">
     <value>Modification</value>
@@ -652,5 +652,11 @@
   </data>
   <data name="CampusMap_Map" xml:space="preserve">
     <value>Map</value>
+  </data>
+  <data name="LogsPage_SendAllLogs" xml:space="preserve">
+    <value>Send all logs</value>
+  </data>
+  <data name="CopiedToClipboard" xml:space="preserve">
+    <value>Copied to clipboard</value>
   </data>
 </root>

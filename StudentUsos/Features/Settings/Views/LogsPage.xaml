@@ -9,9 +9,11 @@
     xmlns:string="clr-namespace:StudentUsos.Resources.LocalizedStrings"
     x:DataType="views:LogsViewModel">
 
-    <StackLayout Margin="0,45,0,0">
+    <StackLayout Margin="20,45,20,0">
         <Button Text="{x:Static string:LocalizedStrings.LogsPage_RemoveAll}" Command="{Binding RemoveAllLogsCommand}"
-                Margin="10"/>
+                Margin="5"/>
+        <Button Text="{x:Static string:LocalizedStrings.LogsPage_SendAllLogs}" Command="{Binding SendAllLogsCommand}"
+                Margin="5"/>
         <CollectionView Margin="0" ItemsSource="{Binding Logs}" VerticalOptions="FillAndExpand">
             <CollectionView.FooterTemplate>
                 <DataTemplate>
@@ -20,7 +22,11 @@
             </CollectionView.FooterTemplate>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="logger:LogRecord">
-                    <Label Text="{Binding LogRecordString}" Margin="30,10"></Label>
+                    <Grid>
+                        <Label Text="{Binding LogRecordString}" Margin="30,10"></Label>
+                        <Button Command="{Binding LogClickedCommand, Source={RelativeSource AncestorType={x:Type views:LogsViewModel}}, x:DataType=views:LogsViewModel}"
+                            CommandParameter="{Binding .}" BackgroundColor="Transparent"/>
+                    </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

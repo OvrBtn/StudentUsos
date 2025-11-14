@@ -529,6 +529,15 @@ namespace StudentUsos.Resources.LocalizedStrings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copied to clipboard.
+        /// </summary>
+        internal static string CopiedToClipboard {
+            get {
+                return ResourceManager.GetString("CopiedToClipboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hi.
         /// </summary>
         internal static string Dashboard_Hello {
@@ -907,11 +916,20 @@ namespace StudentUsos.Resources.LocalizedStrings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Remove all.
+        ///   Looks up a localized string similar to Remove all logs.
         /// </summary>
         internal static string LogsPage_RemoveAll {
             get {
                 return ResourceManager.GetString("LogsPage_RemoveAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send all logs.
+        /// </summary>
+        internal static string LogsPage_SendAllLogs {
+            get {
+                return ResourceManager.GetString("LogsPage_SendAllLogs", resourceCulture);
             }
         }
         

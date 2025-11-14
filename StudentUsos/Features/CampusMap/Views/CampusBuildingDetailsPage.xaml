@@ -11,12 +11,13 @@
     Color="Transparent"
     xmlns:local="clr-namespace:StudentUsos.Features.CampusMap.Views">
 
-    <StackLayout Padding="10, 0" WidthRequest="500">
-        <Border Margin="20,0" Padding="10" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource BackgroundColor}">
-            <StackLayout Margin="10" Spacing="15">
+    <StackLayout Padding="10" WidthRequest="500">
+        <Border Margin="0" Padding="30" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource BackgroundColor}">
+            <StackLayout Margin="0" Spacing="15">
                 <Label Text="{Binding Parameters.ShortName}" FontSize= "20" HorizontalTextAlignment="Center"/>
                 <Label Text="{Binding Parameters.LongName}" FontSize="18" HorizontalTextAlignment="Center"/>
-                <Button Text="{x:Static strings:LocalizedStrings.CampusMap_Map}" Clicked="Button_Clicked" Margin="0, 5, 0, 5"></Button>
+                <Button Text="{x:Static strings:LocalizedStrings.CampusMap_Map}" IsVisible="{Binding Parameters.HasFloorMaps}"
+                        Clicked="Button_Clicked"></Button>
             </StackLayout>
         </Border>
     </StackLayout>

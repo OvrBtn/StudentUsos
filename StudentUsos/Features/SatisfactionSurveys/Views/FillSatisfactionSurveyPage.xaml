@@ -17,7 +17,7 @@
         <views:SkLottieImageSourceConverter x:Key="sKLottieImageSourceConverter"></views:SkLottieImageSourceConverter>
     </controls:CustomContentPageNotAnimated.Resources>
 
-    <AbsoluteLayout Margin="0,40,0,0">
+    <AbsoluteLayout Margin="0,0,0,0">
 
         <StackLayout IsVisible="{Binding IsSuccessLottieVisible}" AbsoluteLayout.LayoutFlags="All"
                 Margin="20" AbsoluteLayout.LayoutBounds="0,0,1,1">
@@ -44,7 +44,7 @@
             <Button Text="{x:Static strings:LocalizedStrings.TryAgain}" Command="{Binding TryAgainCommand}" Margin="0,0,0,30"></Button>
         </StackLayout>
 
-        <StackLayout Margin="0" toolkit:StateContainer.CurrentState="{Binding MainStateKey}" 
+        <StackLayout Margin="0,0,0,0" toolkit:StateContainer.CurrentState="{Binding MainStateKey}" 
                      IsVisible="{Binding IsAnyLottieVisible, Converter={StaticResource NegateBoolConverter}}"
                      AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" VerticalOptions="FillAndExpand">
 
@@ -64,7 +64,7 @@
 
                     <Border AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" Padding="0" Margin="2.5" IsVisible="true"
                         BackgroundColor="{StaticResource BackgroundColor}" StrokeThickness="0" StrokeShape="RoundRectangle 45,45,45,45" >
-                        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0,20,0,0">
+                        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0,60,0,0">
 
                             <StackLayout VerticalOptions="FillAndExpand">
                                 <Label Margin="0,10,0,5" FontAttributes="Bold" FontSize="18" Text="{Binding SatisfactionSurvey.Name}" HorizontalTextAlignment="Center"></Label>
@@ -99,7 +99,7 @@
 
                                 </StackLayout>
 
-                                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="20,20,20,60" Spacing="10">
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="20,20,20,130" Spacing="10">
                                     <controls:CustomButton HorizontalOptions="FillAndExpand" Command="{Binding PreviousQuestionCommand}">
                                         <Frame Padding="10">
                                             <Image HeightRequest="30" Source="arrow_left.png"></Image>

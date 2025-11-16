@@ -1,0 +1,50 @@
+[
+  {
+    "id": "53686",
+    "user": {
+      "id": "123123",
+      "first_name": "XYZ",
+      "last_name": "XYZ"
+    },
+    "saldo_amount": 22.0,
+    "chosen_installment_plan": null,
+    "who_chose_plan": null,
+    "date_of_plan_choice": null,
+    "available_installment_plans": null,
+    "type": {
+      "id": "",
+      "description": {
+        "pl": "Inne",
+        "en": "Other"
+      }
+    },
+    "description": {
+      "pl": "WIiT op\u0142ata za ELS studia stacjonarne (2023Z)",
+      "en": ""
+    },
+    "state": "paid",
+    "account_number": "123123123123123123123",
+    "payment_deadline": "2023-10-30",
+    "bonus_deadline": null,
+    "bonus_amount": null,
+    "has_bonus": false,
+    "interest": null,
+    "total_amount": 22.0,
+    "currency": {
+      "id": "PLN",
+      "name": {
+        "pl": "Z\u0142oty polski",
+        "en": ""
+      }
+    },
+    "faculty": {
+      "id": "03000000",
+      "name": {
+        "pl": "Wydzia\u0142 Informatyki i Telekomunikacji",
+        "en": "Faculty of Computing and Telecommunications"
+      }
+    },
+    "default_choice_date": null,
+    "debt_type": "charged_installment"
+  }
+]

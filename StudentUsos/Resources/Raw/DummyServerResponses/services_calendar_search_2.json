@@ -1,0 +1,35 @@
+[
+  {
+    "id": "405",
+    "name": {
+      "pl": "ferie zimowe",
+      "en": ""
+    },
+    "start_date": "2025-12-24 00:00:00",
+    "end_date": "2026-01-06 23:59:00",
+    "type": "break",
+    "is_day_off": true
+  },
+  {
+    "id": "415",
+    "name": {
+      "pl": "Dzie\u0144 ustawowo wolny od pracy",
+      "en": ""
+    },
+    "start_date": "2025-12-24 00:00:00",
+    "end_date": "2025-12-24 23:59:00",
+    "type": "public_holidays",
+    "is_day_off": true
+  },
+  {
+    "id": "416",
+    "name": {
+      "pl": "Bo\u017ce Narodzenie",
+      "en": ""
+    },
+    "start_date": "2025-12-25 00:00:00",
+    "end_date": "2025-12-26 23:59:00",
+    "type": "holidays",
+    "is_day_off": true
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "id": "123123",
+    "user": {
+      "id": "123123",
+      "first_name": "Jan",
+      "last_name": "Kowalski"
+    },
+    "programme": {
+      "id": "S1Inf1",
+      "description": {
+        "pl": "Informatyka - Stacjonarne - Pierwszego stopnia",
+        "en": "Computing - Full-time - First-cycle"
+      }
+    },
+    "status": "active",
+    "admission_date": "2023-10-01",
+    "is_primary": true,
+    "stages": [
+      {
+        "id": "104538",
+        "code": "S1Inf1-5",
+        "description": {
+          "pl": "Informatyka - Stacjonarne - Pierwszego stopnia - Pi\u0105ty semestr",
+          "en": null
+        }
+      }
+    ]
+  }
+]

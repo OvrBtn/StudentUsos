@@ -1,0 +1,233 @@
+[
+  {
+    "start_time": "2025-11-13 09:45:00",
+    "end_time": "2025-11-13 11:15:00",
+    "name": {
+      "pl": "Zarz\u0105dzanie bazami SQL i NoSQL - Wyk\u0142ad",
+      "en": "Management of SQL and NoSQL databases - Lecture"
+    },
+    "building_name": {
+      "pl": "A23 - CW - Centrum Wyk\u0142adowe",
+      "en": ""
+    },
+    "room_number": "3",
+    "lecturer_ids": [ 351 ],
+    "course_id": "S1Inf1>SQL",
+    "classtype_name": {
+      "pl": "Wyk\u0142ad",
+      "en": "Lecture"
+    },
+    "unit_id": 27522,
+    "group_number": 1
+  },
+  {
+    "start_time": "2025-11-13 11:45:00",
+    "end_time": "2025-11-13 13:15:00",
+    "name": {
+      "pl": "Komunikacja cz\u0142owiek-komputer - Wyk\u0142ad",
+      "en": "Human-Computer Interaction - Lecture"
+    },
+    "building_name": {
+      "pl": "A23 - CW - Centrum Wyk\u0142adowe",
+      "en": ""
+    },
+    "room_number": "3",
+    "lecturer_ids": [ 708 ],
+    "course_id": "S1Inf1>KCK",
+    "classtype_name": {
+      "pl": "Wyk\u0142ad",
+      "en": "Lecture"
+    },
+    "unit_id": 27516,
+    "group_number": 1
+  },
+  {
+    "start_time": "2025-11-13 13:30:00",
+    "end_time": "2025-11-13 15:00:00",
+    "name": {
+      "pl": "Sztuczna inteligencja - Laboratorium",
+      "en": "Artificial Intelligence - Laboratory"
+    },
+    "building_name": {
+      "pl": "A23a - BT - Biblioteka Techniczna",
+      "en": ""
+    },
+    "room_number": "L.2.7.16",
+    "lecturer_ids": [ 408 ],
+    "course_id": "S1Inf1>SI",
+    "classtype_name": {
+      "pl": "Laboratorium",
+      "en": "Laboratory"
+    },
+    "unit_id": 27519,
+    "group_number": 9
+  },
+  {
+    "start_time": "2025-11-13 15:10:00",
+    "end_time": "2025-11-13 16:40:00",
+    "name": {
+      "pl": "In\u017cynieria oprogramowania - Laboratorium",
+      "en": "Software engineering - Laboratory"
+    },
+    "building_name": {
+      "pl": "A1 - BM - Budowa Maszyn, budynek z zegarem",
+      "en": ""
+    },
+    "room_number": "1",
+    "lecturer_ids": [ 425 ],
+    "course_id": "S1Inf1>IO",
+    "classtype_name": {
+      "pl": "Laboratorium",
+      "en": "Laboratory"
+    },
+    "unit_id": 27515,
+    "group_number": 9
+  },
+  {
+    "start_time": "2025-11-14 08:00:00",
+    "end_time": "2025-11-14 09:30:00",
+    "name": {
+      "pl": "Wspomaganie decyzji - Laboratorium",
+      "en": "Decision support - Laboratory"
+    },
+    "building_name": {
+      "pl": "A23 - CW - Centrum Wyk\u0142adowe",
+      "en": ""
+    },
+    "room_number": "43",
+    "lecturer_ids": [ 423 ],
+    "course_id": "S1Inf1>WDEC",
+    "classtype_name": {
+      "pl": "Laboratorium",
+      "en": "Laboratory"
+    },
+    "unit_id": 27529,
+    "group_number": 9
+  },
+  {
+    "start_time": "2025-11-14 09:45:00",
+    "end_time": "2025-11-14 11:15:00",
+    "name": {
+      "pl": "Sieci komputerowe 2 - Laboratorium",
+      "en": "Computer networks 2 - Laboratory"
+    },
+    "building_name": {
+      "pl": "A23a - BT - Biblioteka Techniczna",
+      "en": ""
+    },
+    "room_number": "L.1.6.16",
+    "lecturer_ids": [ 2046 ],
+    "course_id": "S1Inf1>SK2",
+    "classtype_name": {
+      "pl": "Laboratorium",
+      "en": "Laboratory"
+    },
+    "unit_id": 27521,
+    "group_number": 9
+  },
+  {
+    "start_time": "2025-11-17 09:45:00",
+    "end_time": "2025-11-17 11:15:00",
+    "name": {
+      "pl": "In\u017cynieria oprogramowania - Wyk\u0142ad",
+      "en": "Software engineering - Lecture"
+    },
+    "building_name": {
+      "pl": "A23 - CW - Centrum Wyk\u0142adowe",
+      "en": ""
+    },
+    "room_number": "3",
+    "lecturer_ids": [ 1434 ],
+    "course_id": "S1Inf1>IO",
+    "classtype_name": {
+      "pl": "Wyk\u0142ad",
+      "en": "Lecture"
+    },
+    "unit_id": 27514,
+    "group_number": 1
+  },
+  {
+    "start_time": "2025-11-17 11:45:00",
+    "end_time": "2025-11-17 13:15:00",
+    "name": {
+      "pl": "Wspomaganie decyzji - Wyk\u0142ad",
+      "en": "Decision support - Lecture"
+    },
+    "building_name": {
+      "pl": "A23 - CW - Centrum Wyk\u0142adowe",
+      "en": ""
+    },
+    "room_number": "3",
+    "lecturer_ids": [ 590 ],
+    "course_id": "S1Inf1>WDEC",
+    "classtype_name": {
+      "pl": "Wyk\u0142ad",
+      "en": "Lecture"
+    },
+    "unit_id": 27528,
+    "group_number": 1
+  },
+  {
+    "start_time": "2025-11-18 09:45:00",
+    "end_time": "2025-11-18 11:15:00",
+    "name": {
+      "pl": "Systemy wbudowane - Wyk\u0142ad",
+      "en": "Embedded systems - Lecture"
+    },
+    "building_name": {
+      "pl": "",
+      "en": ""
+    },
+    "room_number": "",
+    "lecturer_ids": [ 407, 699 ],
+    "course_id": "S1Inf1>SWang",
+    "classtype_name": {
+      "pl": "Wyk\u0142ad",
+      "en": "Lecture"
+    },
+    "unit_id": 27526,
+    "group_number": 107
+  },
+  {
+    "start_time": "2025-11-18 13:30:00",
+    "end_time": "2025-11-18 15:00:00",
+    "name": {
+      "pl": "Zarz\u0105dzanie bazami SQL i NoSQL - Laboratorium",
+      "en": "Management of SQL and NoSQL databases - Laboratory"
+    },
+    "building_name": {
+      "pl": "A23a - BT - Biblioteka Techniczna",
+      "en": ""
+    },
+    "room_number": "L.1.6.22",
+    "lecturer_ids": [ 155 ],
+    "course_id": "S1Inf1>SQL",
+    "classtype_name": {
+      "pl": "Laboratorium",
+      "en": "Laboratory"
+    },
+    "unit_id": 27523,
+    "group_number": 9
+  },
+  {
+    "start_time": "2025-11-18 15:10:00",
+    "end_time": "2025-11-18 16:40:00",
+    "name": {
+      "pl": "Sieci komputerowe 2 - Wyk\u0142ad",
+      "en": "Computer networks 2 - Lecture"
+    },
+    "building_name": {
+      "pl": "A1a - \u0141\u0105cznik",
+      "en": ""
+    },
+    "room_number": "A",
+    "lecturer_ids": [ 1004 ],
+    "course_id": "S1Inf1>SK2",
+    "classtype_name": {
+      "pl": "Wyk\u0142ad",
+      "en": "Lecture"
+    },
+    "unit_id": 27520,
+    "group_number": 1
+  }
+]

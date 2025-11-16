@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace StudentUsos.Helpers;
 
-[JsonSerializable(typeof(Dictionary<string, string>)), 
+[JsonSerializable(typeof(Dictionary<string, string>)),
     JsonConverter(typeof(JsonObjectToStringConverter)),
     JsonSerializable(typeof(List<string>))]
 internal partial class JsonContext : JsonSerializerContext
@@ -13,6 +13,24 @@ internal partial class JsonContext : JsonSerializerContext
 
 public static class Utilities
 {
+    public static async Task<string?> ReadRawFileAsync(string name)
+    {
+        try
+        {
+            string content = string.Empty;
+            using (var stream = await FileSystem.OpenAppPackageFileAsync(name))
+            using (var reader = new StreamReader(stream))
+            {
+                content = await reader.ReadToEndAsync();
+            }
+            return content;
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
+    }
+
     public static float Lerp(float value, float min, float max)
     {
         return value * (max - min) + min;

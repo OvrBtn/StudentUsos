@@ -1,0 +1,13 @@
+[
+  {
+    "id": "401",
+    "name": {
+      "pl": "Sesja egzaminacyjna zimowa",
+      "en": ""
+    },
+    "start_date": "2026-02-04 00:00:00",
+    "end_date": "2026-03-01 23:59:00",
+    "type": "exam_session",
+    "is_day_off": false
+  }
+]

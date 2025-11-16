@@ -1,0 +1,14 @@
+[
+  {
+    "id": "2024L",
+    "name": {
+      "pl": "Semestr letni 2024/2025",
+      "en": "Summer semester 2024/2025"
+    },
+    "start_date": "2025-03-01",
+    "end_date": "2025-06-22",
+    "order_key": 360.0,
+    "finish_date": "2025-09-30",
+    "is_active": true
+  }
+]

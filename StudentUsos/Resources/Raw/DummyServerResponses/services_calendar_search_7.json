@@ -1,0 +1,35 @@
+[
+  {
+    "id": "420",
+    "name": {
+      "pl": "Dzie\u0144 ustawowo wolny od pracy",
+      "en": ""
+    },
+    "start_date": "2026-05-01 00:00:00",
+    "end_date": "2026-05-01 23:59:00",
+    "type": "public_holidays",
+    "is_day_off": true
+  },
+  {
+    "id": "421",
+    "name": {
+      "pl": "\u015awi\u0119to Konstytucji 3 Maja",
+      "en": ""
+    },
+    "start_date": "2026-05-03 00:00:00",
+    "end_date": "2026-05-03 23:59:00",
+    "type": "holidays",
+    "is_day_off": true
+  },
+  {
+    "id": "422",
+    "name": {
+      "pl": "Zes\u0142anie Ducha \u015awi\u0119tego",
+      "en": ""
+    },
+    "start_date": "2026-05-24 00:00:00",
+    "end_date": "2026-05-24 23:59:00",
+    "type": "holidays",
+    "is_day_off": true
+  }
+]

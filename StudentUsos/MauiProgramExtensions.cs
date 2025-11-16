@@ -49,7 +49,22 @@ internal static partial class MauiProgramExtensions
 
         builder.Services.AddSingleton<INavigationService, NavigationService>();
 
-        builder.Services.AddSingleton<IServerConnectionManager, ServerConnectionManager>();
+        builder.Services.AddSingleton<ServerConnectionManager>();
+        builder.Services.AddSingleton<GuestServerConnectionManager>();
+        builder.Services.AddSingleton<IServerConnectionManager>(sp =>
+        {
+#if DEBUG
+            bool isGuestMode = true;
+#else
+            bool isGuestMode = Preferences.Get(LocalStorageKeys.IsGuestMode.ToString(), false);
+#endif
+            if (isGuestMode)
+            {
+                return new SwitchableServerConnectionManager(sp.GetRequiredService<GuestServerConnectionManager>());
+            }
+            return new SwitchableServerConnectionManager(sp.GetRequiredService<ServerConnectionManager>());
+        });
+
         builder.Services.AddSingleton(new Lazy<IServerConnectionManager>(() => App.ServiceProvider.GetService<IServerConnectionManager>()!));
 
         builder.Services.AddSingleton<ILocalDatabaseManager, LocalDatabaseManager>();

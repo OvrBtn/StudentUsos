@@ -1,13 +1,8 @@
 ﻿using Android.Content;
-using Android.Util;
 using AndroidX.Work;
-using StudentUsos.Features.Activities.Models;
 using StudentUsos.Features.Activities.Repositories;
 using StudentUsos.Features.Activities.Services;
 using StudentUsos.Features.Authorization.Services;
-using StudentUsos.Resources.LocalizedStrings;
-using StudentUsos.Services.LocalNotifications;
-using Activity = StudentUsos.Features.Activities.Models.Activity;
 
 namespace StudentUsos.Platforms.Android;
 
@@ -27,6 +22,13 @@ public class ActivitiesSynchronizationWorker : Worker
     {
         try
         {
+            //there is a chance that some issues occur due to multiple workers running in the same time (I wasn't able to reproduce
+            //so I'm doing a bit of guessing) hence a bit of randomness and it's possible that worker is trying to run code
+            //dependent on the rest of the app before it has a chance to fully initialize
+            Random random = new();
+            int delay = random.Next(7000, 8000);
+            Task.Delay(delay).Wait();
+
             serviceProvider = App.ServiceProvider;
             activitiesRepository = serviceProvider.GetService<IActivitiesRepository>()!;
             activitiesService = serviceProvider.GetService<IActivitiesService>()!;
@@ -60,6 +62,8 @@ public class ActivitiesSynchronizationWorker : Worker
     {
         try
         {
+            await LocalDatabaseManager.WaitUntilInitializedAsync();
+
             var local = activitiesRepository.GetAllActivities();
             var remote = await activitiesService.GetActivitiesOfCurrentUserApiAsync(AndroidHelper.GetCurrentDate(), 7);
             if (local is null || remote is null)

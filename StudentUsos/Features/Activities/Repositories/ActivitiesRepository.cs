@@ -151,6 +151,8 @@ public class ActivitiesRepository : IActivitiesRepository
                     x.CourseId == localActivity.CourseId).ToList();
                     var remoteActivity = remoteActivitiesEqualUnitAndCourse.FirstOrDefault();
 
+                    remoteActivity = null;
+
                     if (localActivitiesEqualUnitAndCourse.Count <= 1 && remoteActivitiesEqualUnitAndCourse.Count <= 1)
                     {
                         await HandleUniqueActivitiesAsync(localActivitiesCopy, remoteActivitiesCopy, localActivity, remoteActivity);

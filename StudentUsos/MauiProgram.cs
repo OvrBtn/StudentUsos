@@ -24,6 +24,9 @@ namespace StudentUsos;
 
 public static class MauiProgram
 {
+    static TaskCompletionSource BuildingTaskCompletionSource = new(TaskCreationOptions.RunContinuationsAsynchronously);
+    public static Task BuildingTask = BuildingTaskCompletionSource.Task;
+
     public static MauiApp CreateMauiApp()
     {
         AllowMultiLineTruncation();
@@ -87,7 +90,11 @@ public static class MauiProgram
 
         builder.Services.AddSingleton<FirebasePushNotificationsService>();
 
-        return builder.Build();
+        var app = builder.Build();
+
+        BuildingTaskCompletionSource.TrySetResult();
+
+        return app;
     }
 
     static void InitializeSkiaSharp()

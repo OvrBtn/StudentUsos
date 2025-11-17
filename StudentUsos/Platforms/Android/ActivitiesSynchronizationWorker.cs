@@ -29,6 +29,8 @@ public class ActivitiesSynchronizationWorker : Worker
             int delay = random.Next(7000, 8000);
             Task.Delay(delay).Wait();
 
+            MauiProgram.BuildingTask.Wait();
+
             serviceProvider = App.ServiceProvider;
             activitiesRepository = serviceProvider.GetService<IActivitiesRepository>()!;
             activitiesService = serviceProvider.GetService<IActivitiesService>()!;

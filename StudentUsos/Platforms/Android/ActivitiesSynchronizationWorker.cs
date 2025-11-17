@@ -16,6 +16,7 @@ public class ActivitiesSynchronizationWorker : Worker
     IActivitiesRepository activitiesRepository;
     IActivitiesService activitiesService;
     ILocalStorageManager localStorageManager;
+    ILocalDatabaseManager localDatabaseManager;
     ILogger? logger;
 
     public override Result DoWork()
@@ -35,7 +36,13 @@ public class ActivitiesSynchronizationWorker : Worker
             activitiesRepository = serviceProvider.GetService<IActivitiesRepository>()!;
             activitiesService = serviceProvider.GetService<IActivitiesService>()!;
             localStorageManager = serviceProvider.GetService<ILocalStorageManager>()!;
+            localDatabaseManager = serviceProvider.GetService<ILocalDatabaseManager>()!;
             logger = serviceProvider.GetService<ILogger>();
+
+            if (localDatabaseManager is LocalDatabaseManager dbManager)
+            {
+                dbManager.EnsureInitialized();
+            }
 
             IncreaseRunsCount();
 

@@ -38,7 +38,7 @@ public class LocalDatabaseManager : ILocalDatabaseManager
     /// Initializing database is a bit heavy on startup time and using static constructor doesn't make
     /// sense due to DI but in this way it is delayed to the moment when any method is actually called
     /// </summary>
-    void EnsureInitialized()
+    public void EnsureInitialized()
     {
         if (isInitialized)
         {

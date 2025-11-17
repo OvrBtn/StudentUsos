@@ -329,7 +329,7 @@ public partial class ActivitiesViewModel : BaseViewModel
         return scheduleEvent;
     }
 
-    object cacheResultLock;
+    object cacheResultLock = new();
     void CacheResult(IEnumerable<TimetableDay> timetableDays)
     {
         lock (cacheResultLock)

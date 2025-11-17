@@ -52,6 +52,8 @@ public class LocalDatabaseManager : ILocalDatabaseManager
                 return;
             }
 
+            isInitialized = true;
+
             if (option == LocalDatabaseOptions.InMemory)
             {
                 dbConnection = new(":memory:");
@@ -73,12 +75,11 @@ public class LocalDatabaseManager : ILocalDatabaseManager
                 LocalStorageManager.Default.SetString(LocalStorageKeys.IsAppRunningForTheFirstTime, true.ToString());
             }
 
-            isInitialized = true;
             taskCompletionSource.TrySetResult();
         }
     }
 
-    readonly object dbLock = new();
+    object dbLock = new();
 
     public void ResetTables()
     {

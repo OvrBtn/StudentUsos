@@ -8,5 +8,10 @@
     "Version": "4.3.0",
     "ForceResetLocalData": true,
     "ForceSignOut": false
+  },
+  {
+    "Version": "4.3.2",
+    "ForceResetLocalData": true,
+    "ForceSignOut": false
   }
 ]

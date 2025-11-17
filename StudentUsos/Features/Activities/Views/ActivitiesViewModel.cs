@@ -329,11 +329,15 @@ public partial class ActivitiesViewModel : BaseViewModel
         return scheduleEvent;
     }
 
+    object cacheResultLock = new();
     void CacheResult(IEnumerable<TimetableDay> timetableDays)
     {
-        foreach (var timetableDay in timetableDays)
+        lock (cacheResultLock)
         {
-            cachedActivities[DateOnly.FromDateTime(timetableDay.Date)] = timetableDay.Activities;
+            foreach (var timetableDay in timetableDays)
+            {
+                cachedActivities[DateOnly.FromDateTime(timetableDay.Date)] = timetableDay.Activities;
+            }
         }
     }
 

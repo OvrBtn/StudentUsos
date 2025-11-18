@@ -40,7 +40,7 @@ public class Term
         if (DateTime.TryParseExact(StartDate, "yyyy-MM-dd", null, DateTimeStyles.None, out DateTime startDateTime) &&
             DateTime.TryParseExact(FinishDate, "yyyy-MM-dd", null, DateTimeStyles.None, out DateTime finishDateTime))
         {
-            if (Utilities.CheckIfBetweenDates(DateTimeOffset.Now.DateTime, startDateTime, finishDateTime)) return true;
+            if (Utilities.CheckIfBetweenDates(DateAndTimeProvider.Current.Now, startDateTime, finishDateTime)) return true;
             return false;
         }
         return false;

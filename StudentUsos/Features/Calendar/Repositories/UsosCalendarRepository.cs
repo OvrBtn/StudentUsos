@@ -62,7 +62,7 @@ public class UsosCalendarRepository : IUsosCalendarRepository
         foreach (var item in events)
         {
             var notifyTime = item.Start.AddDays(notifyDaysBeforeEvent * -1);
-            if (notifyTime < DateTimeOffset.Now.DateTime)
+            if (notifyTime < DateAndTimeProvider.Current.Now)
             {
                 continue;
             }

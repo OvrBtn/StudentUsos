@@ -41,7 +41,7 @@ public class GradesService : IGradesService
     readonly int updatingFromApiCooldown = 10;
     public async Task UpdateGradeDistributionAndRefreshChartAsync(FinalGradeGroup finalGradeGroup)
     {
-        if (DateTimeOffset.Now.DateTime - finalGradeGroup.lastChartUpdate < TimeSpan.FromSeconds(updatingFromApiCooldown)) return;
+        if (DateAndTimeProvider.Current.Now - finalGradeGroup.lastChartUpdate < TimeSpan.FromSeconds(updatingFromApiCooldown)) return;
         string gradeDistributionBefore = finalGradeGroup.FirstTermGrade.GradeDistribution;
         await AssignGradeDistributionsAsync(new[] { finalGradeGroup });
         if (gradeDistributionBefore != finalGradeGroup.FirstTermGrade.GradeDistribution)
@@ -57,7 +57,7 @@ public class GradesService : IGradesService
             }
             finalGradeGroup.BuildGradeDistributionChart();
         }
-        finalGradeGroup.lastChartUpdate = DateTimeOffset.Now.DateTime;
+        finalGradeGroup.lastChartUpdate = DateAndTimeProvider.Current.Now;
     }
 
     public async Task AssignGradeDistributionsAsync(IEnumerable<FinalGradeGroup> finalGradeGroups)

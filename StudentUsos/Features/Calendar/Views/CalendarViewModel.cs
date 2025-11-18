@@ -111,8 +111,8 @@ public partial class CalendarViewModel : BaseViewModel
 
     [ObservableProperty] CustomObservableEvents customObservableEvents = new();
     [ObservableProperty] Command<CustomDay> customCalendarClickedCommand;
-    [ObservableProperty] DateTime customCalendarMinDate = DateTimeOffset.Now.DateTime;
-    [ObservableProperty] DateTime customCalendarMaxDate = DateTimeOffset.Now.DateTime.AddMonths(CalendarSettings.MonthsToGetInTotal - 1);
+    [ObservableProperty] DateTime customCalendarMinDate = DateAndTimeProvider.Current.Now;
+    [ObservableProperty] DateTime customCalendarMaxDate = DateAndTimeProvider.Current.Now.AddMonths(CalendarSettings.MonthsToGetInTotal - 1);
 
     void CustomCalendarClicked(CustomDay customDay)
     {
@@ -137,7 +137,7 @@ public partial class CalendarViewModel : BaseViewModel
     /// <param name="amountOfMonths">Amount of months to generate from today</param>
     public ObservableCollection<CalendarMonth> GenerateEmptyMonths(int amountOfMonths)
     {
-        var date = DateTimeOffset.Now.DateTime;
+        var date = DateAndTimeProvider.Current.Now;
         date = date.AddDays(-1 * date.Day + 1);
         date = Utilities.SetTimeToZero(date);
         ObservableCollection<CalendarMonth> calendarMonths = new();

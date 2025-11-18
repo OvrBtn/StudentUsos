@@ -33,11 +33,11 @@ public class UsosCalendarService : IUsosCalendarService
         //if dates of last updates with USOS API is not set or if there are no record in API's events table in local database set last update dates to force making webrequests
         if (localStorageManager.TryGettingString(LocalStorageKeys.LastPrimaryCalendarUpdate, out var lastPrimaryEventsUpdate) == false || isTableEmpty)
         {
-            localStorageManager.SetString(LocalStorageKeys.LastPrimaryCalendarUpdate, DateTimeOffset.Now.DateTime.AddYears(-1).ToString());
+            localStorageManager.SetString(LocalStorageKeys.LastPrimaryCalendarUpdate, DateAndTimeProvider.Current.Now.AddYears(-1).ToString());
         }
         if (localStorageManager.TryGettingString(LocalStorageKeys.LastSecondaryCalendarUpdate, out var lastSecondaryUpdate) == false || isTableEmpty)
         {
-            localStorageManager.SetString(LocalStorageKeys.LastSecondaryCalendarUpdate, DateTimeOffset.Now.DateTime.AddYears(-1).ToString());
+            localStorageManager.SetString(LocalStorageKeys.LastSecondaryCalendarUpdate, DateAndTimeProvider.Current.Now.AddYears(-1).ToString());
         }
     }
 
@@ -84,16 +84,16 @@ public class UsosCalendarService : IUsosCalendarService
 
             bool canGetPrimary = localStorageManager.TryGettingString(LocalStorageKeys.LastPrimaryCalendarUpdate, out var lastPrimaryEventsUpdate) &&
                                  (DateTime.TryParse(lastPrimaryEventsUpdate, out DateTime lastPrimaryEventsDate) &&
-                                  DateTime.Compare(DateTimeOffset.Now.DateTime, lastPrimaryEventsDate.AddDays(CalendarSettings.PrimaryEventsUpdateInterval)) >= 0);
+                                  DateTime.Compare(DateAndTimeProvider.Current.Now, lastPrimaryEventsDate.AddDays(CalendarSettings.PrimaryEventsUpdateInterval)) >= 0);
 
             bool canGetSecondary = localStorageManager.TryGettingString(LocalStorageKeys.LastSecondaryCalendarUpdate, out var lastSecondaryUpdate) &&
                                    (DateTime.TryParse(lastSecondaryUpdate, out DateTime lastSecondaryDate) &&
-                                    DateTime.Compare(DateTimeOffset.Now.DateTime, lastSecondaryDate.AddDays(CalendarSettings.SecondaryEventsUpdateInterval)) >= 0);
+                                    DateTime.Compare(DateAndTimeProvider.Current.Now, lastSecondaryDate.AddDays(CalendarSettings.SecondaryEventsUpdateInterval)) >= 0);
 
             List<Task<(DateTime date, bool isPrimaryUpdate, List<UsosCalendarEvent>)?>> tasks = new();
             for (int i = 0; i < CalendarSettings.MonthsToGetInTotal; i++)
             {
-                var date = DateTimeOffset.Now.DateTime.AddMonths(i);
+                var date = DateAndTimeProvider.Current.Now.AddMonths(i);
                 if (i < CalendarSettings.PrimaryUpdateMonths && canGetPrimary)
                 {
                     tasks.Add(GetEventsAsync(facultyId, date.Month, date.Year, true));
@@ -118,11 +118,11 @@ public class UsosCalendarService : IUsosCalendarService
 
             if (canGetPrimary)
             {
-                localStorageManager.SetString(LocalStorageKeys.LastPrimaryCalendarUpdate, DateTimeOffset.Now.DateTime.ToString());
+                localStorageManager.SetString(LocalStorageKeys.LastPrimaryCalendarUpdate, DateAndTimeProvider.Current.Now.ToString());
             }
             if (canGetSecondary)
             {
-                localStorageManager.SetString(LocalStorageKeys.LastSecondaryCalendarUpdate, DateTimeOffset.Now.DateTime.ToString());
+                localStorageManager.SetString(LocalStorageKeys.LastSecondaryCalendarUpdate, DateAndTimeProvider.Current.Now.ToString());
             }
 
             return results.Select(x => x!.Value).ToList();

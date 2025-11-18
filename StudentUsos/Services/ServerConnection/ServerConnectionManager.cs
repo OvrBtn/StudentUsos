@@ -220,7 +220,7 @@ public class ServerConnectionManager : IServerConnectionManager
 
     void AddStaticPublicArguments(ref Dictionary<string, string> args)
     {
-        args.Add(TimestampKey, DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString());
+        args.Add(TimestampKey, DateAndTimeProvider.Current.UtcNow.ToUnixTimeSeconds().ToString());
         args.Add(InstallationKey, AuthorizationService.Installation);
         args.Add(InternalConsumerKeyKey, Secrets.Default.InternalConsumerKey);
         args.Add(ApiVersionKey, apiVersion);

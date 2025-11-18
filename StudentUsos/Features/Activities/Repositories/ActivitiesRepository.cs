@@ -88,7 +88,7 @@ public class ActivitiesRepository : IActivitiesRepository
 
         LocalNotification notification = new()
         {
-            ScheduledDateTime = DateTimeOffset.Now.DateTime.AddSeconds(delaySeconds),
+            ScheduledDateTime = DateAndTimeProvider.Current.Now.AddSeconds(delaySeconds),
             Title = LocalizedStrings.ChangeInActivitiesSchedule,
             Description = description,
             Group = "ActivitiesSynchronization",

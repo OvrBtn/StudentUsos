@@ -39,7 +39,7 @@ public class Logger : ILogger
         await Task.Delay(8000);
 
         const int deleteLogsAfterDays = 1;
-        var deleteThresholdUnixtime = DateTimeOffset.UtcNow.AddDays(deleteLogsAfterDays * -1).ToUnixTimeSeconds();
+        var deleteThresholdUnixtime = DateAndTimeProvider.Current.UtcNow.AddDays(deleteLogsAfterDays * -1).ToUnixTimeSeconds();
         localDatabaseManager.Value.Remove<LogRecord>($"CreationDateUnix < {deleteThresholdUnixtime} AND IsSynchronizedWithServer = 1");
 
         //if unhandled exception happens it might not get sent to server, this makes sure it does

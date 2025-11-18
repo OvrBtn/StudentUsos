@@ -42,6 +42,17 @@ internal static partial class MauiProgramExtensions
 {
     public static MauiAppBuilder RegisterServices(this MauiAppBuilder builder)
     {
+#if DEBUG
+        bool isGuestMode = true;
+#else
+        bool isGuestMode = Preferences.Get(LocalStorageKeys.IsGuestMode.ToString(), false);
+#endif
+
+        if (isGuestMode)
+        {
+            DateAndTimeProvider.SwitchProvider(new GuestDateAndTimeProvider());
+        }
+
         builder.Services.AddSingleton<IApplicationService, ApplicationService>();
         builder.Services.AddSingleton(new Lazy<IApplicationService>(() => App.ServiceProvider.GetService<IApplicationService>()!));
 
@@ -53,11 +64,6 @@ internal static partial class MauiProgramExtensions
         builder.Services.AddSingleton<GuestServerConnectionManager>();
         builder.Services.AddSingleton<IServerConnectionManager>(sp =>
         {
-#if DEBUG
-            bool isGuestMode = true;
-#else
-            bool isGuestMode = Preferences.Get(LocalStorageKeys.IsGuestMode.ToString(), false);
-#endif
             if (isGuestMode)
             {
                 return new SwitchableServerConnectionManager(sp.GetRequiredService<GuestServerConnectionManager>());

@@ -14,6 +14,9 @@ public class LogRecord
     public string Message { get; set; }
     public string ExceptionMessage { get; set; }
     public string ExceptionSerialized { get; set; }
+    public string? DeviceInfo { get; set; }
+    public string? OperatingSystem { get; set; }
+    public string? OperatingSystemVersion { get; set; }
     public string CallerName { get; set; }
     public string CallerLineNumber { get; set; }
     public string CreationDate { get; set; } = DateTimeOffset.UtcNow.DateTime.ToString(CultureInfo.InvariantCulture);

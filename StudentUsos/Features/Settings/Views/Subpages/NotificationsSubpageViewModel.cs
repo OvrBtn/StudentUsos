@@ -50,7 +50,7 @@ namespace StudentUsos.Features.Settings.Views.Subpages
 
                 if (didCalendarNotificationsSettingsChanged)
                 {
-                    localStorageManager.SetString(LocalStorageKeys.AreNotificationsEnabled, AreNotificationsEnabled.ToString());
+                    localStorageManager.SetString(LocalStorageKeys.AreCalendarNotificationsEnabled, AreNotificationsEnabled.ToString());
                     localStorageManager.SetString(LocalStorageKeys.DaysBeforeCalendarEventToSendNotification, NotificationsDayPicked.ToString());
                     localStorageManager.SetString(LocalStorageKeys.TimeOfDayOfCalendarEventNotification, NotificationsTimePicked.ToString("c", CultureInfo.InvariantCulture));
 

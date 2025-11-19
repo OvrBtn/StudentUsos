@@ -51,6 +51,8 @@ public partial class App : Application
     private void AuthorizationService_OnLoginSucceeded()
     {
         backgroundJobService?.InitializeJobs();
+        _ = firebasePushNotificationsService.InitNotificationsAsync();
+        _ = CheckPermissionsAsync();
     }
 
     //Called after Android MainActivity ctor
@@ -59,10 +61,6 @@ public partial class App : Application
         base.OnStart();
 
         _ = BackwardCompatibility.Check();
-
-        _ = firebasePushNotificationsService.InitNotificationsAsync();
-
-        _ = CheckPermissionsAsync();
 
         _ = DelayedInitializationAsync();
     }
@@ -145,6 +143,8 @@ public partial class App : Application
         }
 
         backgroundJobService?.InitializeJobs();
+        _ = firebasePushNotificationsService.InitNotificationsAsync();
+        _ = CheckPermissionsAsync();
 
         //delay to let app load
         await Task.Delay(5000);

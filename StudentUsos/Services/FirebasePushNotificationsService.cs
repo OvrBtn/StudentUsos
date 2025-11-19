@@ -10,15 +10,18 @@ public class FirebasePushNotificationsService
     INotificationPermissions permissions;
     IFirebasePushNotification firebasePushNotification;
     ILocalStorageManager localStorageManager;
+    ILogger logger;
     public FirebasePushNotificationsService(IServerConnectionManager serverConnectionManager,
         INotificationPermissions permissions,
         IFirebasePushNotification firebasePushNotification,
-        ILocalStorageManager localStorageManager)
+        ILocalStorageManager localStorageManager,
+        ILogger logger)
     {
         this.serverConnectionManager = serverConnectionManager;
         this.permissions = permissions;
         this.firebasePushNotification = firebasePushNotification;
         this.localStorageManager = localStorageManager;
+        this.logger = logger;
     }
 
     static Func<Task<string>> GetFcmTokenFunc { get; set; }
@@ -39,12 +42,20 @@ public class FirebasePushNotificationsService
 
     public async Task InitNotificationsAsync()
     {
-        await CheckNotificationsPermissionsAsync(permissions);
-        await RegisterPushNotificationsAsync(firebasePushNotification);
-
-        if (localStorageManager.TryGettingString(LocalStorageKeys.FcmToken, out string fcmToken))
+        try
         {
-            await SendFcmTokenToServerAsync(fcmToken);
+            await CheckNotificationsPermissionsAsync(permissions);
+            await RegisterPushNotificationsAsync(firebasePushNotification);
+
+            if (localStorageManager.TryGettingString(LocalStorageKeys.FcmToken, out string fcmToken))
+            {
+                await SendFcmTokenToServerAsync(fcmToken);
+            }
+        }
+        catch (Exception e)
+        {
+            //limiting logging to warning since used library will throw exception even when firebase is simply not available
+            logger.Log(LogLevel.Warn, e);
         }
     }
 
@@ -58,8 +69,16 @@ public class FirebasePushNotificationsService
 
     async Task RegisterPushNotificationsAsync(IFirebasePushNotification firebasePushNotification)
     {
-        await firebasePushNotification.RegisterForPushNotificationsAsync();
-        firebasePushNotification.TokenRefreshed += FirebasePushNotification_TokenRefreshed;
+        try
+        {
+            await firebasePushNotification.RegisterForPushNotificationsAsync();
+            firebasePushNotification.TokenRefreshed += FirebasePushNotification_TokenRefreshed;
+        }
+        catch (Exception e)
+        {
+            //limiting logging to warning since used library will throw exception even when firebase is simply not available
+            logger.Log(LogLevel.Warn, e);
+        }
     }
 
     private async void FirebasePushNotification_TokenRefreshed(object? sender, FirebasePushNotificationTokenEventArgs e)

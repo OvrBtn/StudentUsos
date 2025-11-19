@@ -116,6 +116,25 @@ public class Logger : ILogger
         LogInternal(logLevel, message, ex, callerName, callerLineNumber);
     }
 
+    string GetSerializedDeviceInfo()
+    {
+        var info = new
+        {
+            Manufacturer = DeviceInfo.Manufacturer,
+            Model = DeviceInfo.Model,
+            Name = DeviceInfo.Name,
+            OsVersion = DeviceInfo.VersionString,
+            Platform = DeviceInfo.Platform.ToString(),
+            Idiom = DeviceInfo.Idiom.ToString()
+        };
+
+        string infoString = $"Device: {info.Manufacturer} {info.Model} ({info.Name})\n" +
+                  $"OS: {info.Platform} {info.OsVersion}\n" +
+                  $"Idiom: {info.Idiom}";
+
+        return infoString;
+    }
+
     void LogInternal(LogLevel logLevel,
         string message,
         Exception? ex,
@@ -134,6 +153,14 @@ public class Logger : ILogger
             CallerName = callerName,
             CallerLineNumber = callerLineNumber.ToString()
         };
+
+        if (logLevel != LogLevel.Info)
+        {
+            log.DeviceInfo = GetSerializedDeviceInfo();
+            log.OperatingSystem = DeviceInfo.Platform.ToString();
+            log.OperatingSystemVersion = DeviceInfo.VersionString;
+        }
+
         localDatabaseManager.Value.Insert(log);
 
         if (logLevel >= LogLevel.Error)

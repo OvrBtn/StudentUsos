@@ -33,6 +33,7 @@ public class LocalDatabaseManager : ILocalDatabaseManager
     }
 
     bool isInitialized;
+    bool isInitializing = false;
     object initializeLock = new();
     /// <summary>
     /// Initializing database is a bit heavy on startup time and using static constructor doesn't make
@@ -47,12 +48,13 @@ public class LocalDatabaseManager : ILocalDatabaseManager
 
         lock (initializeLock)
         {
-            if (isInitialized)
+            if (isInitialized || isInitializing)
             {
                 return;
             }
 
-            isInitialized = true;
+            isInitializing = true;
+
 
             if (option == LocalDatabaseOptions.InMemory)
             {
@@ -75,6 +77,8 @@ public class LocalDatabaseManager : ILocalDatabaseManager
                 LocalStorageManager.Default.SetString(LocalStorageKeys.IsAppRunningForTheFirstTime, true.ToString());
             }
 
+            isInitialized = true;
+            isInitializing = false;
             taskCompletionSource.TrySetResult();
         }
     }

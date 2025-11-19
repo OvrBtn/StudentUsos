@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using StudentUsos.Features.Authorization.Services;
+using StudentUsos.Services.ServerConnection;
 
 namespace StudentUsos.Features.Authorization;
 
@@ -23,14 +25,23 @@ public partial class LoginViewModel : BaseViewModel
     /// </summary>
     static bool areEventsSet = false;
 
-    public LoginViewModel()
+    IServerConnectionManager serverConnectionManager;
+    ILocalDatabaseManager localDatabaseManager;
+    ILocalStorageManager localStorageManager;
+    public LoginViewModel(IServerConnectionManager serverConnectionManager,
+        ILocalDatabaseManager localDatabaseManager,
+        ILocalStorageManager localStorageManager)
     {
+        this.serverConnectionManager = serverConnectionManager;
+        this.localDatabaseManager = localDatabaseManager;
+        this.localStorageManager = localStorageManager;
+
         LoginCommand = new Command(OnLoginClicked);
         LoginWithPinCommand = new Command(OnLoginWithPINClicked);
 
         if (areEventsSet == false)
         {
-            AuthorizationService.OnLoginSucceeded += LoginSuccessAsync;
+            AuthorizationService.OnLoginSucceeded += () => { _ = LoginSuccessAsync(); };
             AuthorizationService.OnLoginFailed += LoginFail;
             AuthorizationService.OnContinueLogging += () => { MainStateKey = StateKey.Loading; };
             AuthorizationService.OnAuthorizationFinished += () => { MainStateKey = StateKey.Loaded; };
@@ -47,13 +58,13 @@ public partial class LoginViewModel : BaseViewModel
     {
         IsActivityIndicatorRunning = true;
 
-        if (LocalStorageManager.Default.TryGettingString(LocalStorageKeys.LoginAttemptCounter, out string result) && int.TryParse(result, null, out int attemptCount))
+        if (localStorageManager.TryGettingString(LocalStorageKeys.LoginAttemptCounter, out string result) && int.TryParse(result, null, out int attemptCount))
         {
             attemptCount++;
-            LocalStorageManager.Default.SetString(LocalStorageKeys.LoginAttemptCounter, attemptCount.ToString());
+            localStorageManager.SetString(LocalStorageKeys.LoginAttemptCounter, attemptCount.ToString());
             if (attemptCount >= 2) IsAdditionalLoginOptionVisible = true;
         }
-        else LocalStorageManager.Default.SetString(LocalStorageKeys.LoginAttemptCounter, "1");
+        else localStorageManager.SetString(LocalStorageKeys.LoginAttemptCounter, "1");
 
         AuthorizationService.BeginLoginAsync(AuthorizationService.Mode.RedirectWithCallback);
     }
@@ -65,17 +76,30 @@ public partial class LoginViewModel : BaseViewModel
         AuthorizationService.BeginLoginAsync(AuthorizationService.Mode.UsePinCode);
     }
 
-    private async void LoginSuccessAsync()
+    private async Task LoginSuccessAsync()
     {
-        LocalStorageManager.Default.SetString(LocalStorageKeys.LoginAttemptCounter, "0");
+        localStorageManager.SetString(LocalStorageKeys.LoginAttemptCounter, "0");
         IsAdditionalLoginOptionVisible = false;
         IsActivityIndicatorRunning = false;
-        LocalDatabaseManager.Default.GenerateTables();
+        //create new tables from scratch or
+        //drop all tables and then regenerate them in case there is something left from guest mode
+        localDatabaseManager.ResetTables();
         await Shell.Current.GoToAsync("//DashboardPage");
     }
 
     private void LoginFail()
     {
         IsActivityIndicatorRunning = false;
+    }
+
+    [RelayCommand]
+    async Task SignInAsGuest()
+    {
+        if (serverConnectionManager is SwitchableServerConnectionManager manager)
+        {
+            manager.SwitchImplementation(new GuestServerConnectionManager());
+        }
+        DateAndTimeProvider.SwitchProvider(new GuestDateAndTimeProvider());
+        await LoginSuccessAsync();
     }
 }

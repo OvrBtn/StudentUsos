@@ -4,9 +4,9 @@ namespace StudentUsos.Features.Authorization;
 
 public partial class LoginPage : CustomContentPageNotAnimated
 {
-    public LoginPage()
+    public LoginPage(LoginViewModel loginViewModel)
     {
-        BindingContext = new LoginViewModel();
+        BindingContext = loginViewModel;
         InitializeComponent();
     }
 }

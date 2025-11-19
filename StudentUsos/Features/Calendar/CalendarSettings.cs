@@ -52,14 +52,14 @@ public static class CalendarSettings
         }
 
         //getting data about calendar notifications or set the defaults
-        if (LocalStorageManager.Default.TryGettingString(LocalStorageKeys.AreNotificationsEnabled, out string result)
+        if (LocalStorageManager.Default.TryGettingString(LocalStorageKeys.AreCalendarNotificationsEnabled, out string result)
             && bool.TryParse(result, out bool parsedBool))
         {
             areCalendarNotificationsEnabled = parsedBool;
         }
         else
         {
-            LocalStorageManager.Default.SetString(LocalStorageKeys.AreNotificationsEnabled, true.ToString());
+            LocalStorageManager.Default.SetString(LocalStorageKeys.AreCalendarNotificationsEnabled, true.ToString());
         }
 
         if (LocalStorageManager.Default.TryGettingString(LocalStorageKeys.DaysBeforeCalendarEventToSendNotification, out result)

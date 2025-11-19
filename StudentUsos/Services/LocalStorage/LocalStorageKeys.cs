@@ -9,7 +9,7 @@ public enum LocalStorageKeys
     LastSecondaryCalendarUpdate,
     IsAppRunningForTheFirstTime,
     IdOfLastNotification,
-    AreNotificationsEnabled,
+    AreCalendarNotificationsEnabled,
     DaysBeforeCalendarEventToSendNotification,
     TimeOfDayOfCalendarEventNotification,
     EctsPointsSum,

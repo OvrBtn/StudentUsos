@@ -12,16 +12,6 @@ public class LocalNotificationsService : ILocalNotificationsService
         this.applicationService = applicationService;
     }
 
-    public bool AreAnyNotificationsEnabled()
-    {
-        if (localStorageManager.TryGettingString(LocalStorageKeys.AreNotificationsEnabled, out string result) == false ||
-            bool.TryParse(result, out bool parsedToBool) == false || parsedToBool == false)
-        {
-            return false;
-        }
-        return true;
-    }
-
 
     int GetIdForNewNotification()
     {
@@ -61,7 +51,7 @@ public class LocalNotificationsService : ILocalNotificationsService
     async Task<int> AddNotificationAsync(NotificationRequest notification)
     {
         int id = GetIdForNewNotification();
-        if (await LocalNotificationCenter.Current.AreNotificationsEnabled() == false)
+        if (await HasOsLevelPermissionToScheduleNotificationsAsync() == false)
         {
             if (hasRequestedNotificationPermission)
             {
@@ -92,5 +82,10 @@ public class LocalNotificationsService : ILocalNotificationsService
     {
         LocalNotificationCenter.Current.ClearAll();
         LocalNotificationCenter.Current.CancelAll();
+    }
+
+    public async Task<bool> HasOsLevelPermissionToScheduleNotificationsAsync()
+    {
+        return await LocalNotificationCenter.Current.AreNotificationsEnabled();
     }
 }

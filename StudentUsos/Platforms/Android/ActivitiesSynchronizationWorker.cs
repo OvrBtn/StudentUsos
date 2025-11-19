@@ -3,6 +3,7 @@ using AndroidX.Work;
 using StudentUsos.Features.Activities.Repositories;
 using StudentUsos.Features.Activities.Services;
 using StudentUsos.Features.Authorization.Services;
+using StudentUsos.Services.LocalNotifications;
 
 namespace StudentUsos.Platforms.Android;
 
@@ -17,6 +18,7 @@ public class ActivitiesSynchronizationWorker : Worker
     IActivitiesService activitiesService;
     ILocalStorageManager localStorageManager;
     ILocalDatabaseManager localDatabaseManager;
+    ILocalNotificationsService localNotificationsService;
     ILogger? logger;
 
     public override Result DoWork()
@@ -37,6 +39,7 @@ public class ActivitiesSynchronizationWorker : Worker
             activitiesService = serviceProvider.GetService<IActivitiesService>()!;
             localStorageManager = serviceProvider.GetService<ILocalStorageManager>()!;
             localDatabaseManager = serviceProvider.GetService<ILocalDatabaseManager>()!;
+            localNotificationsService = serviceProvider.GetService<ILocalNotificationsService>()!;
             logger = serviceProvider.GetService<ILogger>();
 
             if (localDatabaseManager is LocalDatabaseManager dbManager)
@@ -84,7 +87,7 @@ public class ActivitiesSynchronizationWorker : Worker
 
             bool areNotificationsEnabled = localStorageManager.GetBool(LocalStorageKeys.ActivitiesSynchronizationBackgroundWorker_ShouldSendNotifications, true);
 
-            if (areNotificationsEnabled)
+            if (areNotificationsEnabled && await localNotificationsService.HasOsLevelPermissionToScheduleNotificationsAsync())
             {
                 await activitiesRepository.CompareAndScheduleNotificationsAsync(local, remote);
             }

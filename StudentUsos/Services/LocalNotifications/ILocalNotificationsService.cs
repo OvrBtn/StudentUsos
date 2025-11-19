@@ -2,7 +2,7 @@
 
 public interface ILocalNotificationsService
 {
-    public bool AreAnyNotificationsEnabled();
+    public Task<bool> HasOsLevelPermissionToScheduleNotificationsAsync();
     public Task<int> ScheduleNotificationAsync(LocalNotification notification);
     public void Remove(int id);
     public void RemoveAll();

@@ -12,6 +12,9 @@ public partial class CalendarPage : CustomContentPageNotAnimated
         BindingContext = this.calendarViewModel = calendarViewModel;
         _ = calendarViewModel.InitDelayedAsync();
         InitializeComponent();
+
+        //needed for guest mode to force the calendar to show past month as present
+        customCalendar.CurrentDateTime = DateAndTimeProvider.Current.Now;
     }
 
     private async void SettingsButton_Clicked(object sender, EventArgs e)

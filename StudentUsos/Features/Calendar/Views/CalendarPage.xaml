@@ -40,6 +40,7 @@
                 <Grid RowDefinitions="1.2*,*" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
 
                     <calendar:CustomCalendar 
+                        x:Name="customCalendar"
                         Grid.Row="0"
                         VerticalOptions="FillAndExpand" 
                         HorizontalOptions="FillAndExpand"

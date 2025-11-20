@@ -1,34 +1,23 @@
 [
   {
-    "id": "405",
+    "id": "312",
     "name": {
-      "pl": "ferie zimowe",
+      "pl": "Przerwa wakacyjna",
       "en": ""
     },
-    "start_date": "2025-12-24 00:00:00",
-    "end_date": "2026-01-06 23:59:00",
+    "start_date": "2025-07-07 00:00:00",
+    "end_date": "2025-09-07 23:59:00",
     "type": "break",
     "is_day_off": true
   },
   {
-    "id": "417",
+    "id": "325",
     "name": {
-      "pl": "Nowy Rokl",
+      "pl": "\u015awi\u0119to Wojska Polskiego",
       "en": ""
     },
-    "start_date": "2026-01-01 00:00:00",
-    "end_date": "2026-01-01 23:59:00",
-    "type": "public_holidays",
-    "is_day_off": true
-  },
-  {
-    "id": "418",
-    "name": {
-      "pl": "\u015awi\u0119to Trzech Kr\u00f3li",
-      "en": ""
-    },
-    "start_date": "2026-01-06 00:00:00",
-    "end_date": "2026-01-06 23:59:00",
+    "start_date": "2025-08-15 00:00:00",
+    "end_date": "2025-08-15 23:59:00",
     "type": "holidays",
     "is_day_off": true
   }

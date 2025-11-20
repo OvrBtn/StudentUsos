@@ -1,24 +1,46 @@
 [
   {
-    "id": "419",
+    "id": "413",
     "name": {
-      "pl": "Wielkanoc",
+      "pl": "Wszystkich \u015awi\u0119tych",
       "en": ""
     },
-    "start_date": "2026-04-05 00:00:00",
-    "end_date": "2026-04-06 23:59:00",
+    "start_date": "2025-11-01 00:00:00",
+    "end_date": "2025-11-01 23:59:00",
     "type": "holidays",
     "is_day_off": true
   },
   {
-    "id": "407",
+    "id": "404",
     "name": {
-      "pl": "ferie wiosenne",
+      "pl": "dzie\u0144 przed Narodowym \u015awi\u0119tem Niepodleg\u0142o\u015bci",
       "en": ""
     },
-    "start_date": "2026-04-07 00:00:00",
-    "end_date": "2026-04-07 23:59:00",
-    "type": "break",
+    "start_date": "2025-11-10 00:00:00",
+    "end_date": "2025-11-10 23:59:00",
+    "type": "rector",
+    "is_day_off": true
+  },
+  {
+    "id": "414",
+    "name": {
+      "pl": "\u015awi\u0119to Niepodleg\u0142o\u015bci",
+      "en": ""
+    },
+    "start_date": "2025-11-11 00:00:00",
+    "end_date": "2025-11-11 23:59:00",
+    "type": "holidays",
+    "is_day_off": true
+  },
+  {
+    "id": "441",
+    "name": {
+      "pl": "z uwagi na wizyt\u0119 polskiego astronauty dr. S\u0142awosza Uzna\u0144skiego-Wi\u015bniewskiego",
+      "en": ""
+    },
+    "start_date": "2025-11-18 08:00:00",
+    "end_date": "2025-11-18 13:30:00",
+    "type": "rector",
     "is_day_off": true
   }
 ]

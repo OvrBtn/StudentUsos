@@ -1,13 +1,24 @@
 [
   {
-    "id": "401",
+    "id": "402",
     "name": {
-      "pl": "Sesja egzaminacyjna zimowa",
+      "pl": "Uroczysta Inauguracja Roku Akademickiego 2025/2026",
       "en": ""
     },
-    "start_date": "2026-02-04 00:00:00",
-    "end_date": "2026-03-01 23:59:00",
-    "type": "exam_session",
-    "is_day_off": false
+    "start_date": "2025-10-08 00:00:00",
+    "end_date": "2025-10-08 23:59:00",
+    "type": "rector",
+    "is_day_off": true
+  },
+  {
+    "id": "403",
+    "name": {
+      "pl": "dzie\u0144 przed Wszystkich \u015awi\u0119tych",
+      "en": ""
+    },
+    "start_date": "2025-10-31 00:00:00",
+    "end_date": "2025-10-31 23:59:00",
+    "type": "rector",
+    "is_day_off": true
   }
 ]

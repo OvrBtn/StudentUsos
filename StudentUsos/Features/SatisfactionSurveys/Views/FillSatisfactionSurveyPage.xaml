@@ -41,7 +41,7 @@
                      VerticalOptions="FillAndExpand"
                      IsAnimationEnabled="true"
                      Source="fail_lottie_animation.json"/>
-            <Button Text="{x:Static strings:LocalizedStrings.TryAgain}" Command="{Binding TryAgainCommand}" Margin="0,0,0,30"></Button>
+            <Button Text="{x:Static strings:LocalizedStrings.TryAgain}" Command="{Binding TryAgainCommand}" Margin="0,0,0,70"></Button>
         </StackLayout>
 
         <StackLayout Margin="0,0,0,0" toolkit:StateContainer.CurrentState="{Binding MainStateKey}" 

@@ -1,13 +1,35 @@
 [
   {
-    "id": "401",
+    "id": "312",
     "name": {
-      "pl": "Sesja egzaminacyjna zimowa",
+      "pl": "Przerwa wakacyjna",
       "en": ""
     },
-    "start_date": "2026-02-04 00:00:00",
-    "end_date": "2026-03-01 23:59:00",
+    "start_date": "2025-07-07 00:00:00",
+    "end_date": "2025-09-07 23:59:00",
+    "type": "break",
+    "is_day_off": true
+  },
+  {
+    "id": "314",
+    "name": {
+      "pl": "Sesja egzaminacyjna jesienna",
+      "en": ""
+    },
+    "start_date": "2025-09-08 00:00:00",
+    "end_date": "2025-09-21 23:59:00",
     "type": "exam_session",
     "is_day_off": false
+  },
+  {
+    "id": "313",
+    "name": {
+      "pl": "Przerwa wakacyjna",
+      "en": ""
+    },
+    "start_date": "2025-09-22 00:00:00",
+    "end_date": "2025-09-30 23:59:00",
+    "type": "break",
+    "is_day_off": true
   }
 ]

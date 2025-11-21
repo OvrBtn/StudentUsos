@@ -1,5 +1,5 @@
 ﻿using Moq;
-using StudentUsos.Services;
+using StudentUsos.Services.Application;
 
 namespace UnitTests.TestMocks;
 

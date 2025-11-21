@@ -42,11 +42,7 @@ internal static partial class MauiProgramExtensions
 {
     public static MauiAppBuilder RegisterServices(this MauiAppBuilder builder)
     {
-#if DEBUG
-        bool isGuestMode = true;
-#else
         bool isGuestMode = Preferences.Get(LocalStorageKeys.IsGuestMode.ToString(), false);
-#endif
 
         if (isGuestMode)
         {

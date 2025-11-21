@@ -48,14 +48,24 @@ public partial class LoginViewModel : BaseViewModel
             areEventsSet = true;
         }
 
-        if (LocalStorageManager.Default.TryGettingString(LocalStorageKeys.LoginAttemptCounter, out string result) && int.TryParse(result, null, out int attemptCount))
+        if (localStorageManager.TryGettingString(LocalStorageKeys.LoginAttemptCounter, out string result) && int.TryParse(result, null, out int attemptCount))
         {
             if (attemptCount >= 2) IsAdditionalLoginOptionVisible = true;
         }
     }
 
+    void SwitchToDefaultServices()
+    {
+        if (serverConnectionManager is SwitchableServerConnectionManager manager)
+        {
+            manager.SwitchImplementation(App.ServiceProvider.GetService<ServerConnectionManager>()!);
+        }
+        DateAndTimeProvider.SwitchProvider(new DefaultDateAndTimeProvider());
+    }
+
     private void OnLoginClicked()
     {
+        SwitchToDefaultServices();
         IsActivityIndicatorRunning = true;
 
         if (localStorageManager.TryGettingString(LocalStorageKeys.LoginAttemptCounter, out string result) && int.TryParse(result, null, out int attemptCount))
@@ -71,6 +81,7 @@ public partial class LoginViewModel : BaseViewModel
 
     private void OnLoginWithPINClicked()
     {
+        SwitchToDefaultServices();
         IsActivityIndicatorRunning = true;
 
         AuthorizationService.BeginLoginAsync(AuthorizationService.Mode.UsePinCode);
@@ -97,7 +108,7 @@ public partial class LoginViewModel : BaseViewModel
     {
         if (serverConnectionManager is SwitchableServerConnectionManager manager)
         {
-            manager.SwitchImplementation(new GuestServerConnectionManager());
+            manager.SwitchImplementation(App.ServiceProvider.GetService<GuestServerConnectionManager>()!);
         }
         DateAndTimeProvider.SwitchProvider(new GuestDateAndTimeProvider());
         await LoginSuccessAsync();

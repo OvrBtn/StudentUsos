@@ -43,20 +43,20 @@ internal static partial class MauiProgramExtensions
     public static MauiAppBuilder RegisterServices(this MauiAppBuilder builder)
     {
         builder.Services.AddSingleton<IApplicationService, ApplicationService>();
-        builder.Services.AddSingleton(new Lazy<IApplicationService>(() => App.ServiceProvider.GetService<IApplicationService>()!));
+        builder.Services.AddSingleton(provider => new Lazy<IApplicationService>(() => provider.GetService<IApplicationService>()!));
 
         builder.Services.AddSingleton<ILogger, Logger>();
 
         builder.Services.AddSingleton<INavigationService, NavigationService>();
 
         builder.Services.AddSingleton<IServerConnectionManager, ServerConnectionManager>();
-        builder.Services.AddSingleton(new Lazy<IServerConnectionManager>(() => App.ServiceProvider.GetService<IServerConnectionManager>()!));
+        builder.Services.AddSingleton(provider => new Lazy<IServerConnectionManager>(() => provider.GetService<IServerConnectionManager>()!));
 
         builder.Services.AddSingleton<ILocalDatabaseManager, LocalDatabaseManager>();
-        builder.Services.AddSingleton(new Lazy<ILocalDatabaseManager>(() => App.ServiceProvider.GetService<ILocalDatabaseManager>()!));
+        builder.Services.AddSingleton(provider => new Lazy<ILocalDatabaseManager>(() => provider.GetService<ILocalDatabaseManager>()!));
 
         builder.Services.AddSingleton<ILocalStorageManager, LocalStorageManager>();
-        builder.Services.AddSingleton(new Lazy<ILocalStorageManager>(() => App.ServiceProvider.GetService<ILocalStorageManager>()!));
+        builder.Services.AddSingleton(provider => new Lazy<ILocalStorageManager>(() => provider.GetService<ILocalStorageManager>()!));
 
         builder.Services.AddSingleton<ILocalNotificationsService, LocalNotificationsService>();
 
@@ -64,7 +64,7 @@ internal static partial class MauiProgramExtensions
         builder.Services.AddSingleton<IActivitiesService, ActivitiesService>();
 
         builder.Services.AddSingleton<IUserInfoRepository, UserInfoRepository>();
-        builder.Services.AddSingleton(new Lazy<IUserInfoRepository>(() => App.ServiceProvider.GetService<IUserInfoRepository>()!));
+        builder.Services.AddSingleton(provider => new Lazy<IUserInfoRepository>(() => provider.GetService<IUserInfoRepository>()!));
         builder.Services.AddSingleton<IUserInfoService, UserInfoService>();
 
         builder.Services.AddSingleton<IGroupsService, GroupsService>();

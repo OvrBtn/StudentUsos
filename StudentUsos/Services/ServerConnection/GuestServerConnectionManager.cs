@@ -30,9 +30,32 @@ public class GuestServerConnectionManager : IServerConnectionManager
 
 
 #pragma warning disable CS8603
-    public Task<RequestResult?> SendAuthorizedGetRequestAsync(string endpoint, Dictionary<string, string> requestPayload, AuthorizationMode authorization, int timeout = 10)
+    public async Task<RequestResult?> SendAuthorizedGetRequestAsync(string endpoint, Dictionary<string, string> requestPayload, AuthorizationMode authorization, int timeout = 10)
     {
-        return Task.FromResult<RequestResult?>(null);
+        string? content = null;
+        if (endpoint == "CampusMap/BuildingsList")
+        {
+            content = await Utilities.ReadRawFileAsync("DummyServerResponses/campus_map_buildings.json");
+        }
+        else if (endpoint == "CampusMap/CampusSvg")
+        {
+            content = await Utilities.ReadRawFileAsync("DummyServerResponses/campus_map.svg");
+        }
+        else if (endpoint == "CampusMap/FloorSvg")
+        {
+            content = await Utilities.ReadRawFileAsync("DummyServerResponses/a23_0.svg");
+        }
+        else if (endpoint == "CampusMap/FloorData")
+        {
+            content = await Utilities.ReadRawFileAsync("DummyServerResponses/a23_0_floor_data.json");
+        }
+
+        if (content is not null)
+        {
+            return new(true, new(), content);
+        }
+
+        return null;
     }
 
     public Task<RequestResult?> SendAuthorizedPostRequestAsync(string endpoint, string postBody, AuthorizationMode authorization, int timeout = 10)

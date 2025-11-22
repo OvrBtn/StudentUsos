@@ -16,14 +16,17 @@ public partial class App : Application
     public static IServiceProvider ServiceProvider { get; private set; }
     FirebasePushNotificationsService firebasePushNotificationsService;
     IBackgroundJobService? backgroundJobService;
+    ILocalStorageManager localStorageManager;
     ILogger? logger;
     public App(IServiceProvider serviceProvider,
         FirebasePushNotificationsService firebasePushNotificationsService,
+        ILocalStorageManager localStorageManager,
         IBackgroundJobService? backgroundJobService = null,
         ILogger? logger = null)
     {
         ServiceProvider = serviceProvider;
         this.firebasePushNotificationsService = firebasePushNotificationsService;
+        this.localStorageManager = localStorageManager;
         this.backgroundJobService = backgroundJobService;
         this.logger = logger;
 
@@ -136,7 +139,9 @@ public partial class App : Application
 
     async Task PostCreateWindowInitialization(AppShell shell)
     {
-        if (AuthorizationService.CheckIfSignedInAndRetrieveTokens() == false)
+        bool isGuestMode = localStorageManager.GetBool(LocalStorageKeys.IsGuestMode, false);
+
+        if (AuthorizationService.CheckIfSignedInAndRetrieveTokens() == false && isGuestMode == false)
         {
             await shell.GoToAsync("//LoginPage");
             return;

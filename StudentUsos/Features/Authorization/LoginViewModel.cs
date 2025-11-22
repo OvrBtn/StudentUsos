@@ -111,6 +111,7 @@ public partial class LoginViewModel : BaseViewModel
             manager.SwitchImplementation(App.ServiceProvider.GetService<GuestServerConnectionManager>()!);
         }
         DateAndTimeProvider.SwitchProvider(new GuestDateAndTimeProvider());
+        localStorageManager.SetBool(LocalStorageKeys.IsGuestMode, true);
         await LoginSuccessAsync();
     }
 }

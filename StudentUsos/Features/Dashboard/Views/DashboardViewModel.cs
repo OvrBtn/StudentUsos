@@ -63,6 +63,12 @@ public partial class DashboardViewModel : BaseViewModel
         DashboardGradeViewModel.OnAsynchronousLoadingFinished += AsynchronousOperationFinished;
 
         BackwardCompatibility.OnCompatibilityRegisterSucceeded += BackwardCompatibility_OnCompatibilityRegisterSucceeded;
+
+        bool isGuestMode = localStorageManager.GetBool(LocalStorageKeys.IsGuestMode, false);
+        if (isGuestMode)
+        {
+            _ = InitAsync();
+        }
     }
 
     private void BackwardCompatibility_OnCompatibilityRegisterSucceeded()

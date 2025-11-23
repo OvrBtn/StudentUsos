@@ -14,6 +14,14 @@ internal partial class ActivityJsonContext : JsonSerializerContext
 
 public partial class Activity : ObservableObject
 {
+    //This id is here only as a workaround for a bug which causes activities in local database to be doubled.
+    //It's likely caused by background worker but reproducing it and fixing the exact source of the issue 
+    //turned out to be too problematic. 
+    //Also yes it has to be built from so many properties because usos doesn't provide any id and using UnitId/CourseId is not reliable.
+    [PrimaryKey]
+    public string InternalId => UnitId + CourseId + StartDateTime.ToString(CultureInfo.InvariantCulture) +
+        EndDateTime.ToString(CultureInfo.InvariantCulture);
+
     //data saved to local database
     [JsonPropertyName("unit_id"), JsonConverter(typeof(JsonObjectToStringConverter))]
     public string UnitId { get; set; }

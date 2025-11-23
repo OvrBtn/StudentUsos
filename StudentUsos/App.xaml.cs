@@ -122,11 +122,19 @@ public partial class App : Application
     async Task CheckPermissionsAsync()
     {
         await Task.Delay(4000);
-        if (await LocalNotificationCenter.Current.AreNotificationsEnabled() == false)
+        try
         {
-            await LocalNotificationCenter.Current.RequestNotificationPermission();
+            if (await LocalNotificationCenter.Current.AreNotificationsEnabled() == false)
+            {
+                await LocalNotificationCenter.Current.RequestNotificationPermission();
+            }
         }
-        return;
+        catch
+        {
+#if DEBUG
+            throw;
+#endif
+        }
     }
 
     protected override Window CreateWindow(IActivationState? activationState)

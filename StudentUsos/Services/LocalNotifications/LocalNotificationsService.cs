@@ -60,9 +60,19 @@ public class LocalNotificationsService : ILocalNotificationsService
             hasRequestedNotificationPermission = true;
             applicationService.MainThreadInvoke(async () =>
             {
-                await LocalNotificationCenter.Current.RequestNotificationPermission();
-                notification.NotificationId = id;
-                await LocalNotificationCenter.Current.Show(notification);
+                try
+                {
+                    //this will crash when called from background worker hence the try catch
+                    await LocalNotificationCenter.Current.RequestNotificationPermission();
+                    notification.NotificationId = id;
+                    await LocalNotificationCenter.Current.Show(notification);
+                }
+                catch
+                {
+#if DEBUG
+                    throw;
+#endif
+                }
             });
         }
         else

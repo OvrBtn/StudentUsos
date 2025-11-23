@@ -134,10 +134,10 @@ public partial class DashboardActivitiesViewModel : BaseViewModel
             {
                 TimeSpan refreshActivitiesThreshold = new(0, 30, 0);
                 //to limit making requests for activities every time app is open
-                if (DateAndTimeProvider.Current.Now - firstAcitivity.CreationDate < refreshActivitiesThreshold)
-                {
-                    return;
-                }
+                //if (DateAndTimeProvider.Current.Now - firstAcitivity.CreationDate < refreshActivitiesThreshold)
+                //{
+                //    return;
+                //}
             }
 
             var activitiesFromApi = await LoadActivitiesApiAsync();

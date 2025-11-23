@@ -13,10 +13,13 @@ public class SwitchableServerConnectionManager : IServerConnectionManager
         serverConnectionManager = defaultManager;
     }
 
+    public static event Action<IServerConnectionManager> Switched;
+
     IServerConnectionManager serverConnectionManager;
     public void SwitchImplementation(IServerConnectionManager serverConnectionManager)
     {
         this.serverConnectionManager = serverConnectionManager;
+        Switched?.Invoke(serverConnectionManager);
     }
 
     public Task<RequestResult?> SendAuthorizedGetRequestAsync(string endpoint, Dictionary<string, string> requestPayload, AuthorizationMode authorization, int timeout = 10)

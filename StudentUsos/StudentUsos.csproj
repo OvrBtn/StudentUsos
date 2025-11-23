@@ -65,7 +65,7 @@
 
 		<PublishTrimmed>True</PublishTrimmed>
 
-		<AndroidEnableMarshalMethods>true</AndroidEnableMarshalMethods>
+		<AndroidEnableMarshalMethods>false</AndroidEnableMarshalMethods>
 		<MauiEnableXamlCBindingWithSourceCompilation>true</MauiEnableXamlCBindingWithSourceCompilation>
 
 	</PropertyGroup>

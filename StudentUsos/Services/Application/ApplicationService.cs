@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
 
-namespace StudentUsos.Services;
+namespace StudentUsos.Services.Application;
 
 /// <summary>
 /// Main purpose of this is to abstract any methods which are MAUI specific so they can be mocked in unit tests

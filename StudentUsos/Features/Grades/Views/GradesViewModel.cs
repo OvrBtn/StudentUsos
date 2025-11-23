@@ -210,7 +210,7 @@ public partial class GradesViewModel : BaseViewModel
             }
 
             //find the earliest admission date (probably there can be more than one student programme)
-            DateTime minAdmissionDate = DateTimeOffset.Now.DateTime;
+            DateTime minAdmissionDate = DateAndTimeProvider.Current.Now;
             foreach (var programme in studentProgrammes)
             {
                 if (DateTime.TryParseExact(programme.AdmissionDate, "yyyy-MM-dd", null, DateTimeStyles.None, out DateTime result) && result < minAdmissionDate)
@@ -220,7 +220,7 @@ public partial class GradesViewModel : BaseViewModel
             }
 
             //get terms between when user was admissioned and now
-            var terms = await termsService.GetTermsAsync(minAdmissionDate, DateTimeOffset.Now.DateTime);
+            var terms = await termsService.GetTermsAsync(minAdmissionDate, DateAndTimeProvider.Current.Now);
             if (terms == null || terms.Count == 0)
             {
                 popup.CollectionStateKey = StateKey.ConnectionError;

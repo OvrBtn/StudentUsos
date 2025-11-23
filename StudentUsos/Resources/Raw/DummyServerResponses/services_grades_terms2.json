@@ -1,0 +1,463 @@
+{
+  "2024L": {
+    "S1Inf1>ASK": {
+      "course_units_grades": {
+        "27638": [
+          {
+            "1": {
+              "value_symbol": "2.0",
+              "passes": true,
+              "value_description": {
+                "pl": "Niedostateczny",
+                "en": "Unsatisfactory"
+              },
+              "exam_id": 47894,
+              "exam_session_number": 1,
+              "counts_into_average": "T",
+              "comment": null,
+              "grade_type_id": "EGZ-STD",
+              "date_modified": "2025-07-04 12:58:55",
+              "date_acquisition": "2025-07-04 00:00:00",
+              "modification_author": {
+                "id": "708",
+                "first_name": "Jan",
+                "last_name": "Kowalski"
+              }
+            },
+            "2": null
+          }
+        ],
+        "27639": [
+          {
+            "1": {
+              "value_symbol": "3.5",
+              "passes": true,
+              "value_description": {
+                "pl": "Dostateczny plus",
+                "en": "Satisfactory plus"
+              },
+              "exam_id": 47826,
+              "exam_session_number": 1,
+              "counts_into_average": "T",
+              "comment": null,
+              "grade_type_id": "STD",
+              "date_modified": "2025-06-18 17:35:47",
+              "date_acquisition": "2025-06-18 00:00:00",
+              "modification_author": {
+                "id": "332",
+                "first_name": "Jan",
+                "last_name": "Kowalski"
+              }
+            },
+            "2": null
+          }
+        ]
+      },
+      "course_grades": []
+    },
+    "S1Inf1>GRAF": {
+      "course_units_grades": {
+        "27642": [
+          {
+            "1": {
+              "value_symbol": "5.0",
+              "passes": true,
+              "value_description": {
+                "pl": "Bardzo dobry",
+                "en": "Very good"
+              },
+              "exam_id": 47836,
+              "exam_session_number": 1,
+              "counts_into_average": "T",
+              "comment": null,
+              "grade_type_id": "STD",
+              "date_modified": "2025-06-09 11:15:45",
+              "date_acquisition": "2025-06-04 00:00:00",
+              "modification_author": {
+                "id": "1194",
+                "first_name": "Jan",
+                "last_name": "Kowalski"
+              }
+            },
+            "2": null
+          }
+        ],
+        "27643": [
+          {
+            "1": {
+              "value_symbol": "5.0",
+              "passes": true,
+              "value_description": {
+                "pl": "Bardzo dobry",
+                "en": "Very good"
+              },
+              "exam_id": 47837,
+              "exam_session_number": 1,
+              "counts_into_average": "T",
+              "comment": null,
+              "grade_type_id": "STD",
+              "date_modified": "2025-06-10 16:05:43",
+              "date_acquisition": "2025-06-10 00:00:00",
+              "modification_author": {
+                "id": "285",
+                "first_name": "Jan",
+                "last_name": "Kowalski"
+              }
+            },
+            "2": null
+          }
+        ]
+      },
+      "course_grades": []
+    },
+    "S1Inf1>JANG4": {
+      "course_units_grades": {
+        "27646": [
+          {
+            "1": {
+              "value_symbol": "5.0",
+              "passes": true,
+              "value_description": {
+                "pl": "Bardzo dobry",
+                "en": "Very good"
+              },
+              "exam_id": 47890,
+              "exam_session_number": 1,
+              "counts_into_average": "T",
+              "comment": null,
+              "grade_type_id": "STD",
+              "date_modified": "2025-05-25 08:26:03",
+              "date_acquisition": "2025-05-25 00:00:00",
+              "modification_author": {
+                "id": "128288",
+                "first_name": "Jan",
+                "last_name": "Kowalski"
+              }
+            },
+            "2": null
+          }
+        ],
+        "27647": [
+          {
+            "1": {
+              "value_symbol": "NB",
+              "passes": true,
+              "value_description": {
+                "pl": "Nieobecność",
+                "en": "Absence"
+              },
+              "exam_id": 47905,
+              "exam_session_number": 1,
+              "counts_into_average": "T",
+              "comment": null,
+              "grade_type_id": "EGZ-STD",
+              "date_modified": "2025-06-25 10:20:17",
+              "date_acquisition": "2025-06-25 00:00:00",
+              "modification_author": {
+                "id": "1846",
+                "first_name": "Jan",
+                "last_name": "Kowalski"
+              }
+            },
+            "2": {
+              "value_symbol": "3.0",
+              "passes": true,
+              "value_description": {
+                "pl": "Dostateczny",
+                "en": "Satisfactory"
+              },
+              "exam_id": 47905,
+              "exam_session_number": 1,
+              "counts_into_average": "T",
+              "comment": null,
+              "grade_type_id": "EGZ-STD",
+              "date_modified": "2025-06-25 10:20:17",
+              "date_acquisition": "2025-06-25 00:00:00",
+              "modification_author": {
+                "id": "1846",
+                "first_name": "Jan",
+                "last_name": "Kowalski"
+              }
+            }
+          }
+        ]
+      },
+      "course_grades": []
+    },
+    "S1Inf1>PMC": {
+      "course_units_grades": {
+        "27654": [
+          {
+            "1": {
+              "value_symbol": "5.0",
+              "passes": true,
+              "value_description": {
+                "pl": "Bardzo dobry",
+                "en": "Very good"
+              },
+              "exam_id": 47860,
+              "exam_session_number": 1,
+              "counts_into_average": "T",
+              "comment": null,
+              "grade_type_id": "STD",
+              "date_modified": "2025-06-19 13:44:30",
+              "date_acquisition": "2025-06-17 00:00:00",
+              "modification_author": {
+                "id": "366",
+                "first_name": "Jan",
+                "last_name": "Kowalski"
+              }
+            },
+            "2": null
+          }
+        ],
+        "27655": [
+          {
+            "1": {
+              "value_symbol": "5.0",
+              "passes": true,
+              "value_description": {
+                "pl": "Bardzo dobry",
+                "en": "Very good"
+              },
+              "exam_id": 47861,
+              "exam_session_number": 1,
+              "counts_into_average": "T",
+              "comment": null,
+              "grade_type_id": "STD",
+              "date_modified": "2025-06-19 13:42:58",
+              "date_acquisition": "2025-06-17 00:00:00",
+              "modification_author": {
+                "id": "366",
+                "first_name": "Jan",
+                "last_name": "Kowalski"
+              }
+            },
+            "2": null
+          }
+        ]
+      },
+      "course_grades": []
+    },
+    "S1Inf1>SAD": {
+      "course_units_grades": {
+        "27656": [
+          {
+            "1": {
+              "value_symbol": "5.0",
+              "passes": true,
+              "value_description": {
+                "pl": "Bardzo dobry",
+                "en": "Very good"
+              },
+              "exam_id": 47901,
+              "exam_session_number": 1,
+              "counts_into_average": "T",
+              "comment": null,
+              "grade_type_id": "EGZ-STD",
+              "date_modified": "2025-06-30 12:05:15",
+              "date_acquisition": "2025-06-27 00:00:00",
+              "modification_author": {
+                "id": "2108",
+                "first_name": "Jan",
+                "last_name": "Kowalski"
+              }
+            },
+            "2": null
+          }
+        ],
+        "27657": [
+          {
+            "1": {
+              "value_symbol": "4.0",
+              "passes": true,
+              "value_description": {
+                "pl": "Dobry",
+                "en": "Good"
+              },
+              "exam_id": 47865,
+              "exam_session_number": 1,
+              "counts_into_average": "T",
+              "comment": null,
+              "grade_type_id": "STD",
+              "date_modified": "2025-06-17 11:45:48",
+              "date_acquisition": "2025-06-10 00:00:00",
+              "modification_author": {
+                "id": "2484",
+                "first_name": "Jan",
+                "last_name": "Kowalski"
+              }
+            },
+            "2": null
+          }
+        ]
+      },
+      "course_grades": []
+    },
+    "S1Inf1>SBD": {
+      "course_units_grades": {
+        "27658": [
+          {
+            "1": {
+              "value_symbol": "3.0",
+              "passes": true,
+              "value_description": {
+                "pl": "Dostateczny",
+                "en": "Satisfactory"
+              },
+              "exam_id": 47902,
+              "exam_session_number": 1,
+              "counts_into_average": "T",
+              "comment": null,
+              "grade_type_id": "EGZ-STD",
+              "date_modified": "2025-07-05 21:16:09",
+              "date_acquisition": "2025-07-03 00:00:00",
+              "modification_author": {
+                "id": "351",
+                "first_name": "Jan",
+                "last_name": "Kowalski"
+              }
+            },
+            "2": null
+          }
+        ],
+        "27659": [
+          {
+            "1": {
+              "value_symbol": "4.5",
+              "passes": true,
+              "value_description": {
+                "pl": "Dobry plus",
+                "en": "Good plus"
+              },
+              "exam_id": 47866,
+              "exam_session_number": 1,
+              "counts_into_average": "T",
+              "comment": null,
+              "grade_type_id": "STD",
+              "date_modified": "2025-06-18 11:23:47",
+              "date_acquisition": "2025-06-18 00:00:00",
+              "modification_author": {
+                "id": "351",
+                "first_name": "Jan",
+                "last_name": "Kowalski"
+              }
+            },
+            "2": null
+          }
+        ]
+      },
+      "course_grades": []
+    },
+    "S1Inf1>SK1": {
+      "course_units_grades": {
+        "27660": [
+          {
+            "1": {
+              "value_symbol": "4.5",
+              "passes": true,
+              "value_description": {
+                "pl": "Dobry plus",
+                "en": "Good plus"
+              },
+              "exam_id": 47869,
+              "exam_session_number": 1,
+              "counts_into_average": "T",
+              "comment": null,
+              "grade_type_id": "STD",
+              "date_modified": "2025-06-17 23:57:16",
+              "date_acquisition": "2025-06-12 00:00:00",
+              "modification_author": {
+                "id": "1589",
+                "first_name": "Jan",
+                "last_name": "Kowalski"
+              }
+            },
+            "2": null
+          }
+        ],
+        "27661": [
+          {
+            "1": {
+              "value_symbol": "5.0",
+              "passes": true,
+              "value_description": {
+                "pl": "Bardzo dobry",
+                "en": "Very good"
+              },
+              "exam_id": 47870,
+              "exam_session_number": 1,
+              "counts_into_average": "T",
+              "comment": null,
+              "grade_type_id": "STD",
+              "date_modified": "2025-06-18 12:30:56",
+              "date_acquisition": "2025-06-18 00:00:00",
+              "modification_author": {
+                "id": "2050",
+                "first_name": "Jan",
+                "last_name": "Kowalski"
+              }
+            },
+            "2": null
+          }
+        ]
+      },
+      "course_grades": []
+    },
+    "S1Inf1>UBI": {
+      "course_units_grades": {
+        "27662": [
+          {
+            "1": {
+              "value_symbol": "5.0",
+              "passes": true,
+              "value_description": {
+                "pl": "Bardzo dobry",
+                "en": "Very good"
+              },
+              "exam_id": 47876,
+              "exam_session_number": 1,
+              "counts_into_average": "T",
+              "comment": null,
+              "grade_type_id": "STD",
+              "date_modified": "2025-06-18 11:18:35",
+              "date_acquisition": "2025-06-17 00:00:00",
+              "modification_author": {
+                "id": "512",
+                "first_name": "Jan",
+                "last_name": "Kowalski"
+              }
+            },
+            "2": null
+          }
+        ],
+        "27663": [
+          {
+            "1": {
+              "value_symbol": "5.0",
+              "passes": true,
+              "value_description": {
+                "pl": "Bardzo dobry",
+                "en": "Very good"
+              },
+              "exam_id": 47877,
+              "exam_session_number": 1,
+              "counts_into_average": "T",
+              "comment": null,
+              "grade_type_id": "STD",
+              "date_modified": "2025-06-17 13:43:09",
+              "date_acquisition": "2025-06-17 00:00:00",
+              "modification_author": {
+                "id": "512",
+                "first_name": "Jan",
+                "last_name": "Kowalski"
+              }
+            },
+            "2": null
+          }
+        ]
+      },
+      "course_grades": []
+    }
+  }
+}

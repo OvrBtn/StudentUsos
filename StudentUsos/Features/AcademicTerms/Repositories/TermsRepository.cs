@@ -40,7 +40,7 @@ public class TermsRepository : ITermsRepository
         {
             bool isStartDateParsed = DateTime.TryParseExact(item.StartDate, "yyyy-MM-dd", null, DateTimeStyles.None, out DateTime startResult);
             bool isFinishDateParsed = DateTime.TryParseExact(item.FinishDate, "yyyy-MM-dd", null, DateTimeStyles.None, out DateTime finishResult);
-            if (isStartDateParsed && isFinishDateParsed && Utilities.CheckIfBetweenDates(DateTimeOffset.Now.DateTime, startResult, finishResult))
+            if (isStartDateParsed && isFinishDateParsed && Utilities.CheckIfBetweenDates(DateAndTimeProvider.Current.Now, startResult, finishResult))
             {
                 term = item;
                 return true;

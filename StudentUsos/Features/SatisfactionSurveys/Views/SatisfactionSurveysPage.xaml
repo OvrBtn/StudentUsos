@@ -10,7 +10,7 @@
     xmlns:models="using:StudentUsos.Features.SatisfactionSurveys.Models"
     x:DataType="views:SatisfactionSurveysViewModel">
 
-    <StackLayout Margin="00,30,0,0" toolkit:StateContainer.CurrentState="{Binding MainStateKey}">
+    <StackLayout Margin="0,70,0,0" toolkit:StateContainer.CurrentState="{Binding MainStateKey}">
         <toolkit:StateContainer.StateViews>
 
             <Label toolkit:StateView.StateKey="LoadingError" Padding="20" Style="{StaticResource CenteredLabel}" Text="{x:Static strings:LocalizedStrings.Errors_LoadingError}" />
@@ -28,7 +28,7 @@
                         <StackLayout Margin="30"></StackLayout>
                     </CollectionView.Footer>
                     <CollectionView.Header>
-                        <StackLayout Margin="0,40,0,0"></StackLayout>
+                        <StackLayout Margin="0,0,0,0"></StackLayout>
                     </CollectionView.Header>
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:SatisfactionSurvey">

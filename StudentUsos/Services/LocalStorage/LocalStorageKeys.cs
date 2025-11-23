@@ -27,4 +27,5 @@ public enum LocalStorageKeys
     ActivitiesSynchronizationBackgroundWorker_AmountOfRuns,
     ActivitiesSynchronizationBackgroundWorker_IsEnabled,
     ActivitiesSynchronizationBackgroundWorker_ShouldSendNotifications,
+    IsGuestMode
 }

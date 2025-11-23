@@ -33,7 +33,7 @@ public partial class FinalGradeGroup : BaseViewModel
     }
 
     //cooldown to avoid spamming too many requests to API
-    public DateTime lastChartUpdate = DateTimeOffset.Now.DateTime.AddYears(-1);
+    public DateTime lastChartUpdate = DateAndTimeProvider.Current.Now.AddYears(-1);
 
     public void BuildGradeDistributionChart()
     {

@@ -1,0 +1,612 @@
+{
+  "2024L": {
+    "S1Inf1>ASK": [
+      {
+        "grades_distribution": [
+          {
+            "percentage": 0,
+            "grade_symbol": "2.0"
+          },
+          {
+            "percentage": 40,
+            "grade_symbol": "3.0"
+          },
+          {
+            "percentage": 9,
+            "grade_symbol": "3.5"
+          },
+          {
+            "percentage": 9,
+            "grade_symbol": "4.0"
+          },
+          {
+            "percentage": 8,
+            "grade_symbol": "4.5"
+          },
+          {
+            "percentage": 33,
+            "grade_symbol": "5.0"
+          },
+          {
+            "percentage": 0,
+            "grade_symbol": "NK"
+          },
+          {
+            "percentage": 1,
+            "grade_symbol": "NB"
+          }
+        ],
+        "course_unit": { "id": "27639" }
+      },
+      {
+        "grades_distribution": [
+          {
+            "percentage": 0,
+            "grade_symbol": "2.0"
+          },
+          {
+            "percentage": 7,
+            "grade_symbol": "3.0"
+          },
+          {
+            "percentage": 8,
+            "grade_symbol": "3.5"
+          },
+          {
+            "percentage": 28,
+            "grade_symbol": "4.0"
+          },
+          {
+            "percentage": 34,
+            "grade_symbol": "4.5"
+          },
+          {
+            "percentage": 23,
+            "grade_symbol": "5.0"
+          },
+          {
+            "percentage": 1,
+            "grade_symbol": "NB"
+          },
+          {
+            "percentage": 0,
+            "grade_symbol": "NK"
+          }
+        ],
+        "course_unit": { "id": "27638" }
+      }
+    ],
+    "S1Inf1>GRAF": [
+      {
+        "grades_distribution": [
+          {
+            "percentage": 0,
+            "grade_symbol": "2.0"
+          },
+          {
+            "percentage": 1,
+            "grade_symbol": "3.0"
+          },
+          {
+            "percentage": 1,
+            "grade_symbol": "3.5"
+          },
+          {
+            "percentage": 6,
+            "grade_symbol": "4.0"
+          },
+          {
+            "percentage": 16,
+            "grade_symbol": "4.5"
+          },
+          {
+            "percentage": 77,
+            "grade_symbol": "5.0"
+          },
+          {
+            "percentage": 0,
+            "grade_symbol": "NK"
+          },
+          {
+            "percentage": 0,
+            "grade_symbol": "NB"
+          }
+        ],
+        "course_unit": { "id": "27642" }
+      },
+      {
+        "grades_distribution": [
+          {
+            "percentage": 0,
+            "grade_symbol": "2.0"
+          },
+          {
+            "percentage": 1,
+            "grade_symbol": "3.0"
+          },
+          {
+            "percentage": 2,
+            "grade_symbol": "3.5"
+          },
+          {
+            "percentage": 10,
+            "grade_symbol": "4.0"
+          },
+          {
+            "percentage": 13,
+            "grade_symbol": "4.5"
+          },
+          {
+            "percentage": 72,
+            "grade_symbol": "5.0"
+          },
+          {
+            "percentage": 1,
+            "grade_symbol": "NK"
+          },
+          {
+            "percentage": 0,
+            "grade_symbol": "NB"
+          }
+        ],
+        "course_unit": { "id": "27643" }
+      }
+    ],
+    "S1Inf1>JANG4": [
+      {
+        "grades_distribution": [
+          {
+            "percentage": 0,
+            "grade_symbol": "2.0"
+          },
+          {
+            "percentage": 1,
+            "grade_symbol": "3.0"
+          },
+          {
+            "percentage": 5,
+            "grade_symbol": "3.5"
+          },
+          {
+            "percentage": 8,
+            "grade_symbol": "4.0"
+          },
+          {
+            "percentage": 27,
+            "grade_symbol": "4.5"
+          },
+          {
+            "percentage": 59,
+            "grade_symbol": "5.0"
+          },
+          {
+            "percentage": 1,
+            "grade_symbol": "NK"
+          },
+          {
+            "percentage": 0,
+            "grade_symbol": "NB"
+          }
+        ],
+        "course_unit": { "id": "27646" }
+      },
+      {
+        "grades_distribution": [
+          {
+            "percentage": 0,
+            "grade_symbol": "2.0"
+          },
+          {
+            "percentage": 2,
+            "grade_symbol": "3.0"
+          },
+          {
+            "percentage": 6,
+            "grade_symbol": "3.5"
+          },
+          {
+            "percentage": 19,
+            "grade_symbol": "4.0"
+          },
+          {
+            "percentage": 35,
+            "grade_symbol": "4.5"
+          },
+          {
+            "percentage": 38,
+            "grade_symbol": "5.0"
+          },
+          {
+            "percentage": 1,
+            "grade_symbol": "NB"
+          },
+          {
+            "percentage": 0,
+            "grade_symbol": "NK"
+          }
+        ],
+        "course_unit": { "id": "27647" }
+      }
+    ],
+    "S1Inf1>PMC": [
+      {
+        "grades_distribution": [
+          {
+            "percentage": 0,
+            "grade_symbol": "2.0"
+          },
+          {
+            "percentage": 13,
+            "grade_symbol": "3.0"
+          },
+          {
+            "percentage": 28,
+            "grade_symbol": "3.5"
+          },
+          {
+            "percentage": 17,
+            "grade_symbol": "4.0"
+          },
+          {
+            "percentage": 17,
+            "grade_symbol": "4.5"
+          },
+          {
+            "percentage": 24,
+            "grade_symbol": "5.0"
+          },
+          {
+            "percentage": 1,
+            "grade_symbol": "NK"
+          },
+          {
+            "percentage": 0,
+            "grade_symbol": "NB"
+          }
+        ],
+        "course_unit": { "id": "27654" }
+      },
+      {
+        "grades_distribution": [
+          {
+            "percentage": 0,
+            "grade_symbol": "2.0"
+          },
+          {
+            "percentage": 13,
+            "grade_symbol": "3.0"
+          },
+          {
+            "percentage": 28,
+            "grade_symbol": "3.5"
+          },
+          {
+            "percentage": 17,
+            "grade_symbol": "4.0"
+          },
+          {
+            "percentage": 17,
+            "grade_symbol": "4.5"
+          },
+          {
+            "percentage": 24,
+            "grade_symbol": "5.0"
+          },
+          {
+            "percentage": 1,
+            "grade_symbol": "NK"
+          },
+          {
+            "percentage": 0,
+            "grade_symbol": "NB"
+          }
+        ],
+        "course_unit": { "id": "27655" }
+      }
+    ],
+    "S1Inf1>SK1": [
+      {
+        "grades_distribution": [
+          {
+            "percentage": 0,
+            "grade_symbol": "2.0"
+          },
+          {
+            "percentage": 5,
+            "grade_symbol": "3.0"
+          },
+          {
+            "percentage": 13,
+            "grade_symbol": "3.5"
+          },
+          {
+            "percentage": 31,
+            "grade_symbol": "4.0"
+          },
+          {
+            "percentage": 32,
+            "grade_symbol": "4.5"
+          },
+          {
+            "percentage": 18,
+            "grade_symbol": "5.0"
+          },
+          {
+            "percentage": 0,
+            "grade_symbol": "NK"
+          },
+          {
+            "percentage": 1,
+            "grade_symbol": "NB"
+          }
+        ],
+        "course_unit": { "id": "27660" }
+      },
+      {
+        "grades_distribution": [
+          {
+            "percentage": 1,
+            "grade_symbol": "2.0"
+          },
+          {
+            "percentage": 10,
+            "grade_symbol": "3.0"
+          },
+          {
+            "percentage": 14,
+            "grade_symbol": "3.5"
+          },
+          {
+            "percentage": 41,
+            "grade_symbol": "4.0"
+          },
+          {
+            "percentage": 12,
+            "grade_symbol": "4.5"
+          },
+          {
+            "percentage": 22,
+            "grade_symbol": "5.0"
+          },
+          {
+            "percentage": 0,
+            "grade_symbol": "NK"
+          },
+          {
+            "percentage": 0,
+            "grade_symbol": "NB"
+          }
+        ],
+        "course_unit": { "id": "27661" }
+      }
+    ],
+    "S1Inf1>SAD": [
+      {
+        "grades_distribution": [
+          {
+            "percentage": 0,
+            "grade_symbol": "2.0"
+          },
+          {
+            "percentage": 10,
+            "grade_symbol": "3.0"
+          },
+          {
+            "percentage": 20,
+            "grade_symbol": "3.5"
+          },
+          {
+            "percentage": 32,
+            "grade_symbol": "4.0"
+          },
+          {
+            "percentage": 18,
+            "grade_symbol": "4.5"
+          },
+          {
+            "percentage": 19,
+            "grade_symbol": "5.0"
+          },
+          {
+            "percentage": 0,
+            "grade_symbol": "NK"
+          },
+          {
+            "percentage": 1,
+            "grade_symbol": "NB"
+          }
+        ],
+        "course_unit": { "id": "27657" }
+      },
+      {
+        "grades_distribution": [
+          {
+            "percentage": 0,
+            "grade_symbol": "2.0"
+          },
+          {
+            "percentage": 1,
+            "grade_symbol": "3.0"
+          },
+          {
+            "percentage": 5,
+            "grade_symbol": "3.5"
+          },
+          {
+            "percentage": 17,
+            "grade_symbol": "4.0"
+          },
+          {
+            "percentage": 22,
+            "grade_symbol": "4.5"
+          },
+          {
+            "percentage": 55,
+            "grade_symbol": "5.0"
+          },
+          {
+            "percentage": 1,
+            "grade_symbol": "NB"
+          },
+          {
+            "percentage": 0,
+            "grade_symbol": "NK"
+          }
+        ],
+        "course_unit": { "id": "27656" }
+      }
+    ],
+    "S1Inf1>SBD": [
+      {
+        "grades_distribution": [
+          {
+            "percentage": 1,
+            "grade_symbol": "2.0"
+          },
+          {
+            "percentage": 32,
+            "grade_symbol": "3.0"
+          },
+          {
+            "percentage": 20,
+            "grade_symbol": "3.5"
+          },
+          {
+            "percentage": 11,
+            "grade_symbol": "4.0"
+          },
+          {
+            "percentage": 19,
+            "grade_symbol": "4.5"
+          },
+          {
+            "percentage": 16,
+            "grade_symbol": "5.0"
+          },
+          {
+            "percentage": 1,
+            "grade_symbol": "NK"
+          },
+          {
+            "percentage": 0,
+            "grade_symbol": "NB"
+          }
+        ],
+        "course_unit": { "id": "27659" }
+      },
+      {
+        "grades_distribution": [
+          {
+            "percentage": 0,
+            "grade_symbol": "2.0"
+          },
+          {
+            "percentage": 70,
+            "grade_symbol": "3.0"
+          },
+          {
+            "percentage": 7,
+            "grade_symbol": "3.5"
+          },
+          {
+            "percentage": 9,
+            "grade_symbol": "4.0"
+          },
+          {
+            "percentage": 7,
+            "grade_symbol": "4.5"
+          },
+          {
+            "percentage": 6,
+            "grade_symbol": "5.0"
+          },
+          {
+            "percentage": 1,
+            "grade_symbol": "NB"
+          },
+          {
+            "percentage": 0,
+            "grade_symbol": "NK"
+          }
+        ],
+        "course_unit": { "id": "27658" }
+      }
+    ],
+    "S1Inf1>UBI": [
+      {
+        "grades_distribution": [
+          {
+            "percentage": 0,
+            "grade_symbol": "2.0"
+          },
+          {
+            "percentage": 0,
+            "grade_symbol": "3.0"
+          },
+          {
+            "percentage": 2,
+            "grade_symbol": "3.5"
+          },
+          {
+            "percentage": 19,
+            "grade_symbol": "4.0"
+          },
+          {
+            "percentage": 48,
+            "grade_symbol": "4.5"
+          },
+          {
+            "percentage": 31,
+            "grade_symbol": "5.0"
+          },
+          {
+            "percentage": 0,
+            "grade_symbol": "NK"
+          },
+          {
+            "percentage": 0,
+            "grade_symbol": "NB"
+          }
+        ],
+        "course_unit": { "id": "27662" }
+      },
+      {
+        "grades_distribution": [
+          {
+            "percentage": 0,
+            "grade_symbol": "2.0"
+          },
+          {
+            "percentage": 0,
+            "grade_symbol": "3.0"
+          },
+          {
+            "percentage": 2,
+            "grade_symbol": "3.5"
+          },
+          {
+            "percentage": 20,
+            "grade_symbol": "4.0"
+          },
+          {
+            "percentage": 49,
+            "grade_symbol": "4.5"
+          },
+          {
+            "percentage": 30,
+            "grade_symbol": "5.0"
+          },
+          {
+            "percentage": 0,
+            "grade_symbol": "NK"
+          },
+          {
+            "percentage": 0,
+            "grade_symbol": "NB"
+          }
+        ],
+        "course_unit": { "id": "27663" }
+      }
+    ]
+  }
+}

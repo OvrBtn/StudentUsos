@@ -907,6 +907,15 @@ namespace StudentUsos.Resources.LocalizedStrings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sign in as guest.
+        /// </summary>
+        internal static string LoginPage_SigInAsGuest {
+            get {
+                return ResourceManager.GetString("LoginPage_SigInAsGuest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Log out.
         /// </summary>
         internal static string Logout {
@@ -1131,6 +1140,15 @@ namespace StudentUsos.Resources.LocalizedStrings {
         internal static string OperationCanceledDueToSpam {
             get {
                 return ResourceManager.GetString("OperationCanceledDueToSpam", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Or.
+        /// </summary>
+        internal static string Or {
+            get {
+                return ResourceManager.GetString("Or", resourceCulture);
             }
         }
         

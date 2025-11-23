@@ -1,0 +1,57 @@
+{
+  "2023L": {
+    "C_CS>TS30": "0.00",
+    "S1Inf1>AiSD": "5.00",
+    "S1Inf1>ELEK": "3.00",
+    "S1Inf1>FIZ": "3.00",
+    "S1Inf1>JANG2": "2.00",
+    "S1Inf1>MET": "3.00",
+    "S1Inf1>PDEK": "2.00",
+    "S1Inf1>PLOW": "2.00",
+    "S1Inf1>PROB": "5.00",
+    "S1Inf1>SOP": "5.00"
+  },
+  "2023Z": {
+    "C_CS>TS30": "0.00",
+    "S1Inf1>ALIN": "2.00",
+    "S1Inf1>ANAM": "6.00",
+    "S1Inf1>BHP": "0.00",
+    "S1Inf1>BIBL": "0.00",
+    "S1Inf1>JANG": "2.00",
+    "S1Inf1>LOG": "3.00",
+    "S1Inf1>MATD": "6.00",
+    "S1Inf1>NINF": "3.00",
+    "S1Inf1>PYTHON": "4.00",
+    "S1Inf1>WdI": "4.00"
+  },
+  "2024L": {
+    "S1Inf1>ASK": "5.00",
+    "S1Inf1>GRAF": "4.00",
+    "S1Inf1>JANG4": "2.00",
+    "S1Inf1>PMC": "3.00",
+    "S1Inf1>SAD": "4.00",
+    "S1Inf1>SBD": "5.00",
+    "S1Inf1>SK1": "4.00",
+    "S1Inf1>UBI": "3.00"
+  },
+  "2024Z": {
+    "S1Inf1>AUT": "3.00",
+    "S1Inf1>BOP": "4.00",
+    "S1Inf1>FIZ2": "1.00",
+    "S1Inf1>JANG3": "2.00",
+    "S1Inf1>OKOM": "4.00",
+    "S1Inf1>POB": "3.00",
+    "S1Inf1>PSW": "5.00",
+    "S1Inf1>PTC": "5.00",
+    "S1Inf1>ROBOT": "3.00"
+  },
+  "2025Z": {
+    "S1Inf1>IO": "4.00",
+    "S1Inf1>KCK": "2.00",
+    "S1Inf1>SI": "4.00",
+    "S1Inf1>SK2": "5.00",
+    "S1Inf1>SQL": "5.00",
+    "S1Inf1>SWang": "5.00",
+    "S1Inf1>WDEC": "5.00"
+  }
+}

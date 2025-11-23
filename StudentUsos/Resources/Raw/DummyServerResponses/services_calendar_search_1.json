@@ -1,0 +1,46 @@
+[
+  {
+    "id": "323",
+    "name": {
+      "pl": "Zes\u0142anie Ducha \u015awi\u0119tego",
+      "en": ""
+    },
+    "start_date": "2025-06-08 00:00:00",
+    "end_date": "2025-06-08 23:59:00",
+    "type": "holidays",
+    "is_day_off": true
+  },
+  {
+    "id": "324",
+    "name": {
+      "pl": "Bo\u017ce Cia\u0142o",
+      "en": ""
+    },
+    "start_date": "2025-06-19 00:00:00",
+    "end_date": "2025-06-19 23:56:00",
+    "type": "holidays",
+    "is_day_off": true
+  },
+  {
+    "id": "310",
+    "name": {
+      "pl": "dzie\u0144 po Bo\u017cym Ciele",
+      "en": ""
+    },
+    "start_date": "2025-06-20 00:00:00",
+    "end_date": "2025-06-20 23:59:00",
+    "type": "rector",
+    "is_day_off": true
+  },
+  {
+    "id": "311",
+    "name": {
+      "pl": "Sesja egzaminacyjna letnia",
+      "en": ""
+    },
+    "start_date": "2025-06-23 00:00:00",
+    "end_date": "2025-07-06 23:59:00",
+    "type": "exam_session",
+    "is_day_off": false
+  }
+]

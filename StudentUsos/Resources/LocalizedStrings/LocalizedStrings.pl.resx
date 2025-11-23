@@ -661,4 +661,10 @@
   <data name="CopiedToClipboard" xml:space="preserve">
     <value>Skopiowano do schowka</value>
   </data>
+  <data name="Or" xml:space="preserve">
+    <value>Lub</value>
+  </data>
+  <data name="LoginPage_SigInAsGuest" xml:space="preserve">
+    <value>Zaloguj jako gość</value>
+  </data>
 </root>

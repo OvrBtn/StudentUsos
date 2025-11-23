@@ -36,6 +36,17 @@
                     </StackLayout>
                 </StackLayout>
 
+                <StackLayout Margin="50,30">
+                    <Grid ColumnDefinitions="*,auto,*" ColumnSpacing="20">
+                        <Border Grid.Column="0" BackgroundColor="Gray" HeightRequest="2"></Border>
+                        <Label Grid.Column="1" Text="{x:Static strings:LocalizedStrings.Or}"></Label>
+                        <Border Grid.Column="2" BackgroundColor="Gray" HeightRequest="2"></Border>
+                    </Grid>
+                </StackLayout>
+
+                <Button Margin="50,0" Command="{Binding SignInAsGuestCommand}"
+                        Text="{x:Static strings:LocalizedStrings.LoginPage_SigInAsGuest}"></Button>
+
             </StackLayout>
 
         </toolkit:StateContainer.StateViews>

@@ -659,4 +659,10 @@
   <data name="CopiedToClipboard" xml:space="preserve">
     <value>Copied to clipboard</value>
   </data>
+  <data name="Or" xml:space="preserve">
+    <value>Or</value>
+  </data>
+  <data name="LoginPage_SigInAsGuest" xml:space="preserve">
+    <value>Sign in as guest</value>
+  </data>
 </root>

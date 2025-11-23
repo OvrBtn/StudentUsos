@@ -1,0 +1,186 @@
+[
+  {
+    "internalId": 37,
+    "roomId": 0,
+    "buildingId": "A23",
+    "floor": "0",
+    "name": "XYZ",
+    "nameWeight": 10
+  },
+  {
+    "internalId": 38,
+    "roomId": 1,
+    "buildingId": "A23",
+    "floor": "0",
+    "name": "XYZ",
+    "nameWeight": 10
+  },
+  {
+    "internalId": 39,
+    "roomId": 3,
+    "buildingId": "A23",
+    "floor": "0",
+    "name": "XYZ",
+    "nameWeight": 11
+  },
+  {
+    "internalId": 40,
+    "roomId": 5,
+    "buildingId": "A23",
+    "floor": "0",
+    "name": "XYZ",
+    "nameWeight": 10
+  },
+  {
+    "internalId": 41,
+    "roomId": 6,
+    "buildingId": "A23",
+    "floor": "0",
+    "name": "XYZ",
+    "nameWeight": 10
+  },
+  {
+    "internalId": 42,
+    "roomId": 8,
+    "buildingId": "A23",
+    "floor": "0",
+    "name": "XYZ",
+    "nameWeight": 10
+  },
+  {
+    "internalId": 43,
+    "roomId": 15,
+    "buildingId": "A23",
+    "floor": "0",
+    "name": "XYZ",
+    "nameWeight": 11
+  },
+  {
+    "internalId": 44,
+    "roomId": 16,
+    "buildingId": "A23",
+    "floor": "0",
+    "name": "XYZ",
+    "nameWeight": 10
+  },
+  {
+    "internalId": 45,
+    "roomId": 17,
+    "buildingId": "A23",
+    "floor": "0",
+    "name": "XYZ",
+    "nameWeight": 11
+  },
+  {
+    "internalId": 46,
+    "roomId": 42,
+    "buildingId": "A23",
+    "floor": "0",
+    "name": "XYZ",
+    "nameWeight": 10
+  },
+  {
+    "internalId": 47,
+    "roomId": 43,
+    "buildingId": "A23",
+    "floor": "0",
+    "name": "XYZ",
+    "nameWeight": 10
+  },
+  {
+    "internalId": 48,
+    "roomId": 44,
+    "buildingId": "A23",
+    "floor": "0",
+    "name": "XYZ",
+    "nameWeight": 10
+  },
+  {
+    "internalId": 49,
+    "roomId": 45,
+    "buildingId": "A23",
+    "floor": "0",
+    "name": "XYZ",
+    "nameWeight": 10
+  },
+  {
+    "internalId": 50,
+    "roomId": 46,
+    "buildingId": "A23",
+    "floor": "0",
+    "name": "XYZ",
+    "nameWeight": 10
+  },
+  {
+    "internalId": 51,
+    "roomId": 47,
+    "buildingId": "A23",
+    "floor": "0",
+    "name": "XYZ",
+    "nameWeight": 10
+  },
+  {
+    "internalId": 846,
+    "roomId": 0,
+    "buildingId": "A23",
+    "floor": "0",
+    "name": "XYZ",
+    "nameWeight": 12
+  },
+  {
+    "internalId": 847,
+    "roomId": 0,
+    "buildingId": "A23",
+    "floor": "0",
+    "name": "XYZ",
+    "nameWeight": 10
+  },
+  {
+    "internalId": 848,
+    "roomId": 1,
+    "buildingId": "A23",
+    "floor": "0",
+    "name": "XYZ",
+    "nameWeight": 11
+  },
+  {
+    "internalId": 849,
+    "roomId": 1,
+    "buildingId": "A23",
+    "floor": "0",
+    "name": "XYZ",
+    "nameWeight": 11
+  },
+  {
+    "internalId": 857,
+    "roomId": 12,
+    "buildingId": "A23",
+    "floor": "0",
+    "name": "XYZ",
+    "nameWeight": 10
+  },
+  {
+    "internalId": 858,
+    "roomId": 13,
+    "buildingId": "A23",
+    "floor": "0",
+    "name": "XYZ",
+    "nameWeight": 10
+  },
+  {
+    "internalId": 859,
+    "roomId": 14,
+    "buildingId": "A23",
+    "floor": "0",
+    "name": "XYZ",
+    "nameWeight": 10
+  },
+  {
+    "internalId": 877,
+    "roomId": 2,
+    "buildingId": "A23",
+    "floor": "0",
+    "name": "XYZ",
+    "nameWeight": 1
+  }
+]

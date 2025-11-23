@@ -31,7 +31,7 @@ public partial class ActivitiesViewModel : BaseViewModel
         this.activitiesService = activitiesService;
         this.logger = logger;
 
-        TodayCommand = new Command(() => { DatePicked = DateTime.Today; DateOnlyPicked = DateOnly.FromDateTime(DateTimeOffset.Now.DateTime); });
+        TodayCommand = new Command(() => { DatePicked = DateTime.Today; DateOnlyPicked = DateOnly.FromDateTime(DateAndTimeProvider.Current.Now); });
         NextCommand = new Command(() => { DatePicked = DatePicked.AddDays(1); });
         PreviousCommand = new Command(() => { DatePicked = DatePicked.AddDays(-1); });
         ScheduleSwipedCommand = new(ScheduleSwiped);
@@ -50,7 +50,7 @@ public partial class ActivitiesViewModel : BaseViewModel
 
     private void AuthorizationService_OnAuthorizationFinished()
     {
-        DatePicked = DateTimeOffset.Now.DateTime;
+        DatePicked = DateAndTimeProvider.Current.Now;
     }
 
     private void AuthorizationService_OnLogout()
@@ -88,8 +88,8 @@ public partial class ActivitiesViewModel : BaseViewModel
         }
 
         ActivitiesStateKey = StateKey.Loading;
-        DatePicked = DateTimeOffset.Now.DateTime;
-        DateOnlyPicked = DateOnly.FromDateTime(DateTimeOffset.Now.DateTime);
+        DatePicked = DateAndTimeProvider.Current.Now;
+        DateOnlyPicked = DateOnly.FromDateTime(DateAndTimeProvider.Current.Now);
 
         MainStateKey = StateKey.Loaded;
     }

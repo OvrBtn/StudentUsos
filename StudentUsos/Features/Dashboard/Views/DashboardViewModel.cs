@@ -6,6 +6,7 @@ using StudentUsos.Features.Calendar.Views;
 using StudentUsos.Features.Grades.Views;
 using StudentUsos.Features.Settings.Views.Subpages;
 using StudentUsos.Features.UserInfo;
+using StudentUsos.Services.ServerConnection;
 
 namespace StudentUsos.Features.Dashboard.Views;
 
@@ -63,6 +64,16 @@ public partial class DashboardViewModel : BaseViewModel
         DashboardGradeViewModel.OnAsynchronousLoadingFinished += AsynchronousOperationFinished;
 
         BackwardCompatibility.OnCompatibilityRegisterSucceeded += BackwardCompatibility_OnCompatibilityRegisterSucceeded;
+
+        SwitchableServerConnectionManager.Switched += SwitchableServerConnectionManager_Switched;
+    }
+
+    private void SwitchableServerConnectionManager_Switched(IServerConnectionManager obj)
+    {
+        if (obj is GuestServerConnectionManager)
+        {
+            _ = InitAsync();
+        }
     }
 
     private void BackwardCompatibility_OnCompatibilityRegisterSucceeded()

@@ -1,0 +1,254 @@
+[
+  {
+    "start_time": "2025-06-02 09:45:00",
+    "end_time": "2025-06-02 11:15:00",
+    "name": {
+      "pl": "Systemy baz danych - Laboratorium",
+      "en": "Database systems - Laboratory"
+    },
+    "building_name": {
+      "pl": "A23a - BT - Biblioteka Techniczna",
+      "en": ""
+    },
+    "room_number": "L.1.6.22",
+    "lecturer_ids": [ 351 ],
+    "course_id": "S1Inf1>SBD",
+    "classtype_name": {
+      "pl": "Laboratorium",
+      "en": "Laboratory"
+    },
+    "unit_id": 27659,
+    "group_number": 13
+  },
+  {
+    "start_time": "2025-06-02 15:10:00",
+    "end_time": "2025-06-02 16:40:00",
+    "name": {
+      "pl": "Architektura system\u00f3w komputerowych - Wyk\u0142ad",
+      "en": "Computer System Architecture - Lecture"
+    },
+    "building_name": {
+      "pl": "A23 - CW - Centrum Wyk\u0142adowe",
+      "en": ""
+    },
+    "room_number": "2",
+    "lecturer_ids": [ 332, 708 ],
+    "course_id": "S1Inf1>ASK",
+    "classtype_name": {
+      "pl": "Wyk\u0142ad",
+      "en": "Lecture"
+    },
+    "unit_id": 27638,
+    "group_number": 1
+  },
+  {
+    "start_time": "2025-06-03 09:45:00",
+    "end_time": "2025-06-03 11:15:00",
+    "name": {
+      "pl": "Projektowanie mikrosystem\u00f3w cyfrowych - Wyk\u0142ad",
+      "en": "Digital microsystems design - Lecture"
+    },
+    "building_name": {
+      "pl": "A23 - CW - Centrum Wyk\u0142adowe",
+      "en": ""
+    },
+    "room_number": "2",
+    "lecturer_ids": [ 366 ],
+    "course_id": "S1Inf1>PMC",
+    "classtype_name": {
+      "pl": "Wyk\u0142ad",
+      "en": "Lecture"
+    },
+    "unit_id": 27654,
+    "group_number": 106
+  },
+  {
+    "start_time": "2025-06-03 11:45:00",
+    "end_time": "2025-06-03 13:15:00",
+    "name": {
+      "pl": "Statystyka i analiza danych - Laboratorium",
+      "en": "Statistics and data analysis - Laboratory"
+    },
+    "building_name": {
+      "pl": "A1 - BM - Budowa Maszyn, budynek z zegarem",
+      "en": ""
+    },
+    "room_number": "1",
+    "lecturer_ids": [ 2484 ],
+    "course_id": "S1Inf1>SAD",
+    "classtype_name": {
+      "pl": "Laboratorium",
+      "en": "Laboratory"
+    },
+    "unit_id": 27657,
+    "group_number": 4
+  },
+  {
+    "start_time": "2025-06-03 15:10:00",
+    "end_time": "2025-06-03 16:40:00",
+    "name": {
+      "pl": "Grafika komputerowa i wizualizacja - Laboratorium",
+      "en": "Computer Graphics and Visualization - Laboratory"
+    },
+    "building_name": {
+      "pl": "A3",
+      "en": ""
+    },
+    "room_number": "110",
+    "lecturer_ids": [ 285 ],
+    "course_id": "S1Inf1>GRAF",
+    "classtype_name": {
+      "pl": "Laboratorium",
+      "en": "Laboratory"
+    },
+    "unit_id": 27643,
+    "group_number": 13
+  },
+  {
+    "start_time": "2025-06-03 16:50:00",
+    "end_time": "2025-06-03 18:20:00",
+    "name": {
+      "pl": "Architektura system\u00f3w komputerowych - Laboratorium",
+      "en": "Computer System Architecture - Laboratory"
+    },
+    "building_name": {
+      "pl": "A23a - BT - Biblioteka Techniczna",
+      "en": ""
+    },
+    "room_number": "L.2.6.20",
+    "lecturer_ids": [ 332 ],
+    "course_id": "S1Inf1>ASK",
+    "classtype_name": {
+      "pl": "Laboratorium",
+      "en": "Laboratory"
+    },
+    "unit_id": 27639,
+    "group_number": 13
+  },
+  {
+    "start_time": "2025-06-04 11:45:00",
+    "end_time": "2025-06-04 13:15:00",
+    "name": {
+      "pl": "Statystyka i analiza danych - Wyk\u0142ad",
+      "en": "Statistics and data analysis - Lecture"
+    },
+    "building_name": {
+      "pl": "A23 - CW - Centrum Wyk\u0142adowe",
+      "en": ""
+    },
+    "room_number": "2",
+    "lecturer_ids": [ 2108 ],
+    "course_id": "S1Inf1>SAD",
+    "classtype_name": {
+      "pl": "Wyk\u0142ad",
+      "en": "Lecture"
+    },
+    "unit_id": 27656,
+    "group_number": 1
+  },
+  {
+    "start_time": "2025-06-04 13:30:00",
+    "end_time": "2025-06-04 15:00:00",
+    "name": {
+      "pl": "Grafika komputerowa i wizualizacja - Wyk\u0142ad",
+      "en": "Computer Graphics and Visualization - Lecture"
+    },
+    "building_name": {
+      "pl": "A23 - CW - Centrum Wyk\u0142adowe",
+      "en": ""
+    },
+    "room_number": "2",
+    "lecturer_ids": [ 1194 ],
+    "course_id": "S1Inf1>GRAF",
+    "classtype_name": {
+      "pl": "Wyk\u0142ad",
+      "en": "Lecture"
+    },
+    "unit_id": 27642,
+    "group_number": 100
+  },
+  {
+    "start_time": "2025-06-04 16:50:00",
+    "end_time": "2025-06-04 18:20:00",
+    "name": {
+      "pl": "Grafika komputerowa i wizualizacja - Wyk\u0142ad",
+      "en": "Computer Graphics and Visualization - Lecture"
+    },
+    "building_name": {
+      "pl": "A23 - CW - Centrum Wyk\u0142adowe",
+      "en": ""
+    },
+    "room_number": "2",
+    "lecturer_ids": [ 1194 ],
+    "course_id": "S1Inf1>GRAF",
+    "classtype_name": {
+      "pl": "Wyk\u0142ad",
+      "en": "Lecture"
+    },
+    "unit_id": 27642,
+    "group_number": 100
+  },
+  {
+    "start_time": "2025-06-05 09:45:00",
+    "end_time": "2025-06-05 11:15:00",
+    "name": {
+      "pl": "J\u0119zyk angielski - \u0106wiczenia",
+      "en": "English - Classes"
+    },
+    "building_name": {
+      "pl": "A3",
+      "en": ""
+    },
+    "room_number": "650",
+    "lecturer_ids": [ 128288 ],
+    "course_id": "S1Inf1>JANG4",
+    "classtype_name": {
+      "pl": "\u0106wiczenia",
+      "en": "Classes"
+    },
+    "unit_id": 27646,
+    "group_number": 5
+  },
+  {
+    "start_time": "2025-06-05 13:30:00",
+    "end_time": "2025-06-05 15:00:00",
+    "name": {
+      "pl": "Systemy baz danych - Wyk\u0142ad",
+      "en": "Database systems - Lecture"
+    },
+    "building_name": {
+      "pl": "A23 - CW - Centrum Wyk\u0142adowe",
+      "en": ""
+    },
+    "room_number": "2",
+    "lecturer_ids": [ 351 ],
+    "course_id": "S1Inf1>SBD",
+    "classtype_name": {
+      "pl": "Wyk\u0142ad",
+      "en": "Lecture"
+    },
+    "unit_id": 27658,
+    "group_number": 1
+  },
+  {
+    "start_time": "2025-06-05 15:10:00",
+    "end_time": "2025-06-05 16:40:00",
+    "name": {
+      "pl": "Projektowanie mikrosystem\u00f3w cyfrowych - Laboratorium",
+      "en": "Digital microsystems design - Laboratory"
+    },
+    "building_name": {
+      "pl": "A3",
+      "en": ""
+    },
+    "room_number": "508k",
+    "lecturer_ids": [ 366 ],
+    "course_id": "S1Inf1>PMC",
+    "classtype_name": {
+      "pl": "Laboratorium",
+      "en": "Laboratory"
+    },
+    "unit_id": 27655,
+    "group_number": 13
+  }
+]

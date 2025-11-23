@@ -19,8 +19,8 @@ public class LogRecord
     public string? OperatingSystemVersion { get; set; }
     public string CallerName { get; set; }
     public string CallerLineNumber { get; set; }
-    public string CreationDate { get; set; } = DateTimeOffset.UtcNow.DateTime.ToString(CultureInfo.InvariantCulture);
-    public long CreationDateUnix { get; set; } = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+    public string CreationDate { get; set; } = DateAndTimeProvider.Current.UtcNow.ToString(CultureInfo.InvariantCulture);
+    public long CreationDateUnix { get; set; } = DateAndTimeProvider.Current.UtcNow.ToUnixTimeSeconds();
 
     [JsonIgnore]
     public bool IsSynchronizedWithServer { get; set; }

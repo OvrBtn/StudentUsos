@@ -46,7 +46,7 @@ public class TimetableDay
     public TimetableDay(DateTime date)
     {
         Date = date.Date;
-        CreationDate = DateTimeOffset.Now.DateTime;
+        CreationDate = DateAndTimeProvider.Current.Now;
     }
 
     /// <summary>

@@ -32,7 +32,7 @@ public class StudentProgrammeService : IStudentProgrammeService
             //return data from local database if it isn't older than 7 days
             TimeSpan refreshInterval = TimeSpan.FromDays(7);
             var localData = studentProgrammeRepository.GetAll();
-            if (localData.Count > 0 && DateTime.TryParse(localData[0].CreationDate, out DateTime parsed) && DateTimeOffset.Now.DateTime - parsed < refreshInterval)
+            if (localData.Count > 0 && DateTime.TryParse(localData[0].CreationDate, out DateTime parsed) && DateAndTimeProvider.Current.Now - parsed < refreshInterval)
             {
                 return localData;
             }
@@ -78,7 +78,7 @@ public class StudentProgrammeService : IStudentProgrammeService
         foreach (var item in deserialized)
         {
             StudentProgramme programme = item.ToStudentProgramme();
-            programme.CreationDate = DateTimeOffset.Now.DateTime.ToString();
+            programme.CreationDate = DateAndTimeProvider.Current.Now.ToString();
             studentProgrammes.Add(programme);
         }
         return studentProgrammes;

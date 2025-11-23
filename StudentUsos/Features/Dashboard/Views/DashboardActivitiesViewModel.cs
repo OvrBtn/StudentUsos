@@ -45,7 +45,7 @@ public partial class DashboardActivitiesViewModel : BaseViewModel
         //on Android doesn't slow down the startup time
         ApplicationService.Default.WorkerThreadInvoke(() =>
         {
-            ActivitiesTitle = DateTimeOffset.Now.DateTime.ToString("dd MMMM yyyy, dddd");
+            ActivitiesTitle = DateAndTimeProvider.Current.Now.ToString("dd MMMM yyyy, dddd");
         });
 
         ActivitiesStateKey = StateKey.Loading;
@@ -77,21 +77,21 @@ public partial class DashboardActivitiesViewModel : BaseViewModel
         {
             var current = Activities[i];
             //DateTime representing midnight
-            DateTime timeZero = Utilities.SetTimeToZero(DateTimeOffset.Now.DateTime);
+            DateTime timeZero = Utilities.SetTimeToZero(DateAndTimeProvider.Current.Now);
             //If activity is the first one during the day and it hasn't started yet set timer to time remaining to it's beggining
-            if (i == 0 && DateTime.Compare(DateTimeOffset.Now.DateTime, current.StartDateTime) <= 0 && DateTime.Compare(DateTimeOffset.Now.DateTime, timeZero) > 0)
+            if (i == 0 && DateTime.Compare(DateAndTimeProvider.Current.Now, current.StartDateTime) <= 0 && DateTime.Compare(DateAndTimeProvider.Current.Now, timeZero) > 0)
             {
-                Update(current.StartDateTime - DateTimeOffset.Now.DateTime, current.StartDateTime - DateTime.Today, i);
+                Update(current.StartDateTime - DateAndTimeProvider.Current.Now, current.StartDateTime - DateTime.Today, i);
             }
             //Set timer to time left to end of the break between classes
-            if (i > 0 && DateTime.Compare(DateTimeOffset.Now.DateTime, Activities[i - 1].EndDateTime) > 0 && DateTime.Compare(DateTimeOffset.Now.DateTime, current.StartDateTime) < 0)
+            if (i > 0 && DateTime.Compare(DateAndTimeProvider.Current.Now, Activities[i - 1].EndDateTime) > 0 && DateTime.Compare(DateAndTimeProvider.Current.Now, current.StartDateTime) < 0)
             {
-                Update(current.StartDateTime - DateTimeOffset.Now.DateTime, current.StartDateTime - Activities[i - 1].EndDateTime, i);
+                Update(current.StartDateTime - DateAndTimeProvider.Current.Now, current.StartDateTime - Activities[i - 1].EndDateTime, i);
             }
             //if activity has started set timer to time left to it's end
-            if (DateTime.Compare(DateTimeOffset.Now.DateTime, Activities[i].StartDateTime) > 0 && DateTime.Compare(DateTimeOffset.Now.DateTime, current.EndDateTime) < 0)
+            if (DateTime.Compare(DateAndTimeProvider.Current.Now, Activities[i].StartDateTime) > 0 && DateTime.Compare(DateAndTimeProvider.Current.Now, current.EndDateTime) < 0)
             {
-                Update(current.EndDateTime - DateTimeOffset.Now.DateTime, current.EndDateTime - current.StartDateTime, i);
+                Update(current.EndDateTime - DateAndTimeProvider.Current.Now, current.EndDateTime - current.StartDateTime, i);
             }
 
             //Handles updating timer
@@ -134,7 +134,7 @@ public partial class DashboardActivitiesViewModel : BaseViewModel
             {
                 TimeSpan refreshActivitiesThreshold = new(0, 30, 0);
                 //to limit making requests for activities every time app is open
-                if (DateTimeOffset.Now.DateTime - firstAcitivity.CreationDate < refreshActivitiesThreshold)
+                if (DateAndTimeProvider.Current.Now - firstAcitivity.CreationDate < refreshActivitiesThreshold)
                 {
                     return;
                 }
@@ -159,7 +159,7 @@ public partial class DashboardActivitiesViewModel : BaseViewModel
 
     List<TimetableDay>? LoadActivitiesLocalDb()
     {
-        var dataFromLocalDb = activitiesRepository.GetActivities(DateTimeOffset.Now.DateTime);
+        var dataFromLocalDb = activitiesRepository.GetActivities(DateAndTimeProvider.Current.Now);
         if (dataFromLocalDb is not null)
         {
             var timetableDay = dataFromLocalDb.Result.FirstOrDefault();
@@ -179,7 +179,7 @@ public partial class DashboardActivitiesViewModel : BaseViewModel
     {
         try
         {
-            var resultFromApi = await activitiesService.GetActivitiesOfCurrentUserApiAsync(DateTimeOffset.Now.DateTime, 7);
+            var resultFromApi = await activitiesService.GetActivitiesOfCurrentUserApiAsync(DateAndTimeProvider.Current.Now, 7);
             if (resultFromApi is null)
             {
                 if (ActivitiesStateKey == StateKey.Loading)

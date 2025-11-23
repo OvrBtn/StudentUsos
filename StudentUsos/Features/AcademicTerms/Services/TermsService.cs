@@ -53,7 +53,7 @@ public class TermsService : ITermsService
             var result = await serverConnectionManager.SendRequestToUsosAsync("services/terms/search",
                 new Dictionary<string, string>
                 {
-                    { "min_finish_date", DateTimeOffset.Now.DateTime.ToString("yyyy-MM-dd") }
+                    { "min_finish_date", DateAndTimeProvider.Current.Now.ToString("yyyy-MM-dd") }
                 });
             if (result is null)
             {

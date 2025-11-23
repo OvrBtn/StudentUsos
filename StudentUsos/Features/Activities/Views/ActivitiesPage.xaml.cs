@@ -69,7 +69,7 @@ public partial class ActivitiesPage : CustomContentPageNotAnimated, IQueryAttrib
 
     void ChangeTodayButtonVisibility()
     {
-        bool isTodaySelected = activitiesViewModel.DateOnlyPicked == DateOnly.FromDateTime(DateTimeOffset.Now.DateTime);
+        bool isTodaySelected = activitiesViewModel.DateOnlyPicked == DateOnly.FromDateTime(DateAndTimeProvider.Current.Now);
         if (isTodaySelected == false && (int)Math.Round(TodayButton.Opacity) == 1)
         {
             return;

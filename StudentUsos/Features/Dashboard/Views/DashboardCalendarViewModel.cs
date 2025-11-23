@@ -92,7 +92,7 @@ public partial class DashboardCalendarViewModel : BaseViewModel
 
             if (usosEvents.Count != CalendarSettings.MonthsToGetInTotal)
             {
-                var date = DateTimeOffset.Now.DateTime;
+                var date = DateAndTimeProvider.Current.Now;
                 for (int i = 0; i < CalendarSettings.MonthsToGetInTotal; i++)
                 {
                     if (usosEvents.Any(x => x.date.Year == date.Year && x.date.Month == date.Month) == false)
@@ -136,7 +136,7 @@ public partial class DashboardCalendarViewModel : BaseViewModel
 
     List<CalendarEvent> GroupCalendarEvents(List<UsosCalendarEvent> usosEvents, List<GoogleCalendarEvent> googleEvents)
     {
-        var now = DateTimeOffset.Now.DateTime;
+        var now = DateAndTimeProvider.Current.Now;
         List<CalendarEvent> calendarEvents = new();
 
         var usosEventsSorted = usosEvents.Where(x => x.End >= now)

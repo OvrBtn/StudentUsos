@@ -35,7 +35,7 @@ public class StudentProgramme
         {
             FacultyId = programme.Faculty.Id;
             FacultyNameJson = programme.Faculty.NameJson;
-            CreationDate = DateTimeOffset.Now.DateTime.ToString();
+            CreationDate = DateAndTimeProvider.Current.Now.ToString();
         }
         catch (Exception ex) { Logger.Default?.LogCatchedException(ex); }
     }

@@ -1,0 +1,24 @@
+[
+  {
+    "id": "311",
+    "name": {
+      "pl": "Sesja egzaminacyjna letnia",
+      "en": ""
+    },
+    "start_date": "2025-06-23 00:00:00",
+    "end_date": "2025-07-06 23:59:00",
+    "type": "exam_session",
+    "is_day_off": false
+  },
+  {
+    "id": "312",
+    "name": {
+      "pl": "Przerwa wakacyjna",
+      "en": ""
+    },
+    "start_date": "2025-07-07 00:00:00",
+    "end_date": "2025-09-07 23:59:00",
+    "type": "break",
+    "is_day_off": true
+  }
+]

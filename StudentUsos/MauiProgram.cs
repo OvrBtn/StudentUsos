@@ -47,7 +47,7 @@ public static class MauiProgram
             .UseCustomSchedule()
             .UseLocalNotification()
             .UseDevExpress()
-            .UseFirebasePushNotifications()
+            //.UseFirebasePushNotifications()
             .RegisterViews()
             .RegisterViewModels()
             .RegisterServices()
@@ -90,9 +90,26 @@ public static class MauiProgram
 
         builder.Services.AddSingleton<FirebasePushNotificationsService>();
 
+        //temp solution to get some more information about random crashes reported by Google Play Console
+        Exception? ex = null;
+        try
+        {
+            builder.UseFirebasePushNotifications();
+        }
+        catch (Exception e)
+        {
+            ex = e;
+        }
+
         var app = builder.Build();
 
         BuildingTaskCompletionSource.TrySetResult();
+
+        var logger = app.Services.GetService<Services.Logger.ILogger>();
+        if (ex is not null)
+        {
+            logger?.LogCatchedException(ex);
+        }
 
         return app;
     }

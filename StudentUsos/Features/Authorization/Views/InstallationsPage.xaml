@@ -31,8 +31,13 @@
                 </CollectionView.Footer>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:UsosInstallation">
-                        <Border Margin="30,4">
-                        <Label Text="{Binding Name}"></Label>
+                        <Border Margin="30,4" Padding="0">
+                            <Grid>
+                                <Label Text="{Binding Name}" Margin="20"></Label>
+                                <Button Command="{Binding InstallationClickedCommand, x:DataType=authorization:InstallationsViewModel,
+                                    Source={RelativeSource AncestorType={x:Type authorization:InstallationsViewModel}}}"
+                                        CommandParameter="{Binding .}" BackgroundColor="Transparent"/>
+                            </Grid>
                         </Border>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

@@ -11,6 +11,12 @@ public partial class InstallationsPage : CustomContentPageNotAnimated
         InitializeComponent();
     }
 
+    protected override void OnNavigatedFrom(NavigatedFromEventArgs args)
+    {
+        base.OnNavigatedFrom(args);
+        viewModel.TaskCompletionSource.TrySetResult(null);
+    }
+
     bool isViewModelSet = false;
     protected override void OnNavigatedTo(NavigatedToEventArgs args)
     {

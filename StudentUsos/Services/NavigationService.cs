@@ -56,4 +56,25 @@ class NavigationService : INavigationService
     {
         return navigation.PopToRootAsync(isAnimated);
     }
+
+    public async Task<TReturn?> PushAndReturnAsync<TPage, TReturn>(bool isAnimated = true) where TPage : ContentPage
+    {
+        var page = _serviceProvider.GetService<TPage>();
+        if (page is null)
+        {
+            throw new ArgumentException("Page not injected into dependency container");
+        }
+
+        await navigation.PushAsync(page, isAnimated);
+
+        if (page is INavigationResultProvider<TReturn> pageResultProvider)
+        {
+            return await pageResultProvider.TaskCompletionSource.Task;
+        }
+        else if (page.BindingContext is INavigationResultProvider<TReturn> bindingContextResultProvider)
+        {
+            return await bindingContextResultProvider.TaskCompletionSource.Task;
+        }
+        throw new InvalidOperationException($"Either page or it's binding context must implement {nameof(INavigationResultProvider<TReturn>)}");
+    }
 }

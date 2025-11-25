@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using StudentUsos.Features.Authorization.Models;
 using StudentUsos.Features.Authorization.Services;
 using StudentUsos.Features.Authorization.Views;
 using StudentUsos.Services.ServerConnection;
@@ -30,18 +31,18 @@ public partial class LoginViewModel : BaseViewModel
     ILocalDatabaseManager localDatabaseManager;
     ILocalStorageManager localStorageManager;
     INavigationService navigationService;
+    IUsosInstallationsService usosInstallationsService;
     public LoginViewModel(IServerConnectionManager serverConnectionManager,
         ILocalDatabaseManager localDatabaseManager,
         ILocalStorageManager localStorageManager,
-        INavigationService navigationService)
+        INavigationService navigationService,
+        IUsosInstallationsService usosInstallationsService)
     {
         this.serverConnectionManager = serverConnectionManager;
         this.localDatabaseManager = localDatabaseManager;
         this.localStorageManager = localStorageManager;
         this.navigationService = navigationService;
-
-        LoginCommand = new Command(OnLoginClicked);
-        LoginWithPinCommand = new Command(OnLoginWithPINClicked);
+        this.usosInstallationsService = usosInstallationsService;
 
         if (areEventsSet == false)
         {
@@ -67,13 +68,17 @@ public partial class LoginViewModel : BaseViewModel
         DateAndTimeProvider.SwitchProvider(new DefaultDateAndTimeProvider());
     }
 
-    private void OnLoginClicked()
+    [RelayCommand]
+    async Task OnLoginClickedAsync()
     {
         SwitchToDefaultServices();
 
-        navigationService.PushAsync<InstallationsPage>();
-
-        return;
+        var installation = await navigationService.PushAndReturnAsync<InstallationsPage, UsosInstallation>();
+        if (installation is null)
+        {
+            return;
+        }
+        usosInstallationsService.SaveCurrentInstallation(installation.InstallationUrl);
 
         IsActivityIndicatorRunning = true;
 
@@ -88,15 +93,23 @@ public partial class LoginViewModel : BaseViewModel
         AuthorizationService.BeginLoginAsync(AuthorizationService.Mode.RedirectWithCallback);
     }
 
-    private void OnLoginWithPINClicked()
+    [RelayCommand]
+    async Task OnLoginWithPinClickedAsync()
     {
         SwitchToDefaultServices();
         IsActivityIndicatorRunning = true;
 
+        var installation = await navigationService.PushAndReturnAsync<InstallationsPage, UsosInstallation>();
+        if (installation is null)
+        {
+            return;
+        }
+        usosInstallationsService.SaveCurrentInstallation(installation.InstallationUrl);
+
         AuthorizationService.BeginLoginAsync(AuthorizationService.Mode.UsePinCode);
     }
 
-    private async Task LoginSuccessAsync()
+    async Task LoginSuccessAsync()
     {
         localStorageManager.SetString(LocalStorageKeys.LoginAttemptCounter, "0");
         IsAdditionalLoginOptionVisible = false;

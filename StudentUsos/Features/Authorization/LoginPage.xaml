@@ -28,11 +28,11 @@
                 </StackLayout>
 
                 <StackLayout Margin="50,0">
-                    <Button BackgroundColor="{StaticResource Primary}" Command="{Binding LoginCommand}" Text="{x:Static strings:LocalizedStrings.LoginPage_Login}" 
+                    <Button BackgroundColor="{StaticResource Primary}" Command="{Binding LoginClickedCommand}" Text="{x:Static strings:LocalizedStrings.LoginPage_Login}" 
                     VerticalOptions="Center" Padding="0,12"/>
                     <StackLayout IsVisible="{Binding IsAdditionalLoginOptionVisible}">
                         <Label Text="{x:Static strings:LocalizedStrings.LoginPage_IssueWithLogin}" HorizontalTextAlignment="Center" Margin="0,20,0,10"></Label>
-                        <Button BackgroundColor="{StaticResource Primary}" Command="{Binding LoginWithPinCommand}" Text="{x:Static strings:LocalizedStrings.LoginPage_LoginWithPIN}" VerticalOptions="Center" />
+                        <Button BackgroundColor="{StaticResource Primary}" Command="{Binding LoginWithPinClickedCommand}" Text="{x:Static strings:LocalizedStrings.LoginPage_LoginWithPIN}" VerticalOptions="Center" />
                     </StackLayout>
                 </StackLayout>
 

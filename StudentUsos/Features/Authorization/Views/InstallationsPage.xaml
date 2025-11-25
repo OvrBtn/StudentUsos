@@ -14,34 +14,39 @@
     Shell.TabBarIsVisible="False">
 
     <Grid toolkit:StateContainer.CurrentState="{Binding MainStateKey}" 
-                 VerticalOptions="Fill" Margin="0,0,0,40">
+                 VerticalOptions="Fill" Margin="0,0,0,0">
         <toolkit:StateContainer.StateViews>
 
             <ActivityIndicator toolkit:StateView.StateKey="Loading"></ActivityIndicator>
             <Label toolkit:StateView.StateKey="ConnectionError" Text="{x:Static strings:LocalizedStrings.Errors_Error}" VerticalOptions="Center" HorizontalOptions="Center"/>
 
-            <CollectionView toolkit:StateView.StateKey="Loaded" ItemsSource="{Binding Installations}" VerticalOptions="Fill">
-                <CollectionView.Header>
-                    <StackLayout Margin="30, 70, 30, 30">
-                        <dxe:MultilineEdit LabelText="Search"></dxe:MultilineEdit>
-                    </StackLayout>
-                </CollectionView.Header>
-                <CollectionView.Footer>
-                    <StackLayout Margin="30"></StackLayout>
-                </CollectionView.Footer>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:UsosInstallation">
-                        <Border Margin="30,4" Padding="0">
-                            <Grid>
-                                <Label Text="{Binding Name}" Margin="20"></Label>
-                                <Button Command="{Binding InstallationClickedCommand, x:DataType=authorization:InstallationsViewModel,
+            <Grid toolkit:StateView.StateKey="Loaded" VerticalOptions="Fill" RowDefinitions="auto, *">
+
+                <dxe:MultilineEdit Grid.Row="0" LabelText="{x:Static strings:LocalizedStrings.Search}" Margin="30,70,30,0"></dxe:MultilineEdit>
+
+                <CollectionView Grid.Row="1" ItemsSource="{Binding Installations}" VerticalOptions="Fill">
+                    <CollectionView.Header>
+                        <StackLayout Margin="30,0,30,30">
+                        </StackLayout>
+                    </CollectionView.Header>
+                    <CollectionView.Footer>
+                        <StackLayout Margin="30"></StackLayout>
+                    </CollectionView.Footer>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:UsosInstallation">
+                            <Border Margin="30,4" Padding="0">
+                                <Grid>
+                                    <Label Text="{Binding Name}" Margin="20"></Label>
+                                    <Button Command="{Binding InstallationClickedCommand, x:DataType=authorization:InstallationsViewModel,
                                     Source={RelativeSource AncestorType={x:Type authorization:InstallationsViewModel}}}"
                                         CommandParameter="{Binding .}" BackgroundColor="Transparent"/>
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </Grid>
 
         </toolkit:StateContainer.StateViews>
     </Grid>

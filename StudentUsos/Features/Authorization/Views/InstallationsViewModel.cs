@@ -32,7 +32,7 @@ public partial class InstallationsViewModel : BaseViewModel, INavigationResultPr
             return;
         }
 
-        Installations = result;
+        Installations = result.OrderBy(x => x.Name).ToList();
         MainStateKey = StateKey.Loaded;
     }
 

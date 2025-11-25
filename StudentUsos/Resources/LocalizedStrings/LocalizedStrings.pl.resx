@@ -667,4 +667,7 @@
   <data name="LoginPage_SigInAsGuest" xml:space="preserve">
     <value>Zaloguj jako gość</value>
   </data>
+  <data name="Search" xml:space="preserve">
+    <value>Szukaj</value>
+  </data>
 </root>

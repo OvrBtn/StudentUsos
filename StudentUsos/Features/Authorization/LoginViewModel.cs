@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using StudentUsos.Features.Authorization.Services;
+using StudentUsos.Features.Authorization.Views;
 using StudentUsos.Services.ServerConnection;
 
 namespace StudentUsos.Features.Authorization;
@@ -28,13 +29,16 @@ public partial class LoginViewModel : BaseViewModel
     IServerConnectionManager serverConnectionManager;
     ILocalDatabaseManager localDatabaseManager;
     ILocalStorageManager localStorageManager;
+    INavigationService navigationService;
     public LoginViewModel(IServerConnectionManager serverConnectionManager,
         ILocalDatabaseManager localDatabaseManager,
-        ILocalStorageManager localStorageManager)
+        ILocalStorageManager localStorageManager,
+        INavigationService navigationService)
     {
         this.serverConnectionManager = serverConnectionManager;
         this.localDatabaseManager = localDatabaseManager;
         this.localStorageManager = localStorageManager;
+        this.navigationService = navigationService;
 
         LoginCommand = new Command(OnLoginClicked);
         LoginWithPinCommand = new Command(OnLoginWithPINClicked);
@@ -66,6 +70,11 @@ public partial class LoginViewModel : BaseViewModel
     private void OnLoginClicked()
     {
         SwitchToDefaultServices();
+
+        navigationService.PushAsync<InstallationsPage>();
+
+        return;
+
         IsActivityIndicatorRunning = true;
 
         if (localStorageManager.TryGettingString(LocalStorageKeys.LoginAttemptCounter, out string result) && int.TryParse(result, null, out int attemptCount))

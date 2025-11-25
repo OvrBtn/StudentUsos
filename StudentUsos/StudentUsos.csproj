@@ -239,6 +239,9 @@
 		<Compile Update="Controls\CustomContentPageNotAnimated.xaml.cs">
 			<DependentUpon>CustomContentPageNotAnimated.xaml</DependentUpon>
 		</Compile>
+		<Compile Update="Features\Authorization\Views\InstallationsPage.xaml.cs">
+		  <DependentUpon>InstallationsPage.xaml</DependentUpon>
+		</Compile>
 		<Compile Update="Features\CampusMap\Views\CampusMapPage.xaml.cs">
 		  <DependentUpon>CampusMapPage.xaml</DependentUpon>
 		</Compile>
@@ -376,6 +379,9 @@
 		</MauiXaml>
 		<MauiXaml Update="Controls\CustomContentPageNotAnimated.xaml">
 			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Features\Authorization\Views\InstallationsPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Features\CampusMap\Views\CampusMapPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>

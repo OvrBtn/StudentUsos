@@ -9,8 +9,6 @@ namespace StudentUsos.Features.Authorization.Services;
 
 internal static class AuthorizationService
 {
-
-    public static string Installation { get; } = "https://usosapps.put.poznan.pl/";
     static List<string> scopes = new List<string> { "email", "offline_access", "studies", "grades", "payments", "surveys_filling", "other_emails" };
     public static string AccessToken { get; set; }
     public static string InternalAccessToken { get; set; }
@@ -35,6 +33,7 @@ internal static class AuthorizationService
     }
 
     static IServerConnectionManager serverConnectionManager;
+    static IUsosInstallationsService usosInstallationsService;
     static AuthorizationService()
     {
 #if ANDROID
@@ -42,6 +41,7 @@ internal static class AuthorizationService
 #endif
 
         serverConnectionManager = App.ServiceProvider?.GetService<IServerConnectionManager>()!;
+        usosInstallationsService = App.ServiceProvider?.GetService<IUsosInstallationsService>()!;
 
         var firebasePushNotificationsService = App.ServiceProvider?.GetService<FirebasePushNotificationsService>();
         if (firebasePushNotificationsService is not null)
@@ -88,6 +88,13 @@ internal static class AuthorizationService
         if (containsKeys)
         {
             RetrieveTokens();
+
+            //compatibility between versions < 4.1.0 and >= 4.1.0
+            //might be removed in the future if there are no more devices on versions < 4.1.0
+            if (usosInstallationsService.GetCurrentInstallation() is null)
+            {
+                usosInstallationsService.SaveCurrentInstallation("https://usosapps.put.poznan.pl/");
+            }
         }
         return containsKeys;
     }

@@ -16,12 +16,14 @@ public class Logger : ILogger
     Lazy<IServerConnectionManager> serverConnectionManager;
     Lazy<IApplicationService> applicationService;
     Lazy<IUserInfoRepository> userInfoRepository;
+    Lazy<IUsosInstallationsService> usosInstallationsService;
     public Logger(
         Lazy<ILocalStorageManager> localStorageManager,
         Lazy<ILocalDatabaseManager> localDatabaseManager,
         Lazy<IServerConnectionManager> serverConnectionManager,
         Lazy<IApplicationService> applicationService,
-        Lazy<IUserInfoRepository> userInfoRepository)
+        Lazy<IUserInfoRepository> userInfoRepository,
+        Lazy<IUsosInstallationsService> usosInstallationsService)
     {
         Default = this;
 
@@ -30,6 +32,7 @@ public class Logger : ILogger
         this.serverConnectionManager = serverConnectionManager;
         this.applicationService = applicationService;
         this.userInfoRepository = userInfoRepository;
+        this.usosInstallationsService = usosInstallationsService;
 
         _ = RunLogCleanupAsync();
     }
@@ -199,10 +202,16 @@ public class Logger : ILogger
             unixTime = DateTimeOffset.Now.AddMilliseconds(20).ToUnixTimeSeconds();
         }
 
+        var installation = usosInstallationsService.Value.GetCurrentInstallation();
+        if (installation is null)
+        {
+            return false;
+        }
+
         var args = new LogRequestPayload()
         {
             Logs = allLogs,
-            Installation = AuthorizationService.Installation,
+            Installation = installation,
             UserUsosId = userInfo.Id
         };
         var serialized = JsonSerializer.Serialize(args, LogRequestPayloadJsonContext.Default.LogRequestPayload);

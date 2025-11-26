@@ -57,7 +57,7 @@ jobs:
         shell: pwsh
 
       - name: Build APK
-        run: dotnet publish ./StudentUsos/StudentUsos.csproj -c Release -f net9.0-android --no-restore `
+        run: dotnet publish ./StudentUsos/StudentUsos.csproj -c Release -f net9.0-android -bl --no-restore `
           -p:AndroidPackageFormat=apk `
           -p:AndroidKeyStore=true `
           -p:AndroidSigningKeyStore=release-key.keystore `
@@ -83,4 +83,6 @@ jobs:
           files: |
             ./StudentUsos/bin/Release/**/publish/*-Signed.apk
             ./StudentUsos/bin/Release/**/publish/*-Signed.aab
+            ./*.binlog
+            ./**/*.binlog
           token: ${{ secrets.GITHUB_TOKEN }}

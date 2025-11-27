@@ -151,7 +151,8 @@ public class Logger : ILogger
             ExceptionMessage = exceptionMessage,
             ExceptionSerialized = exceptionSerialized,
             CallerName = callerName,
-            CallerLineNumber = callerLineNumber.ToString()
+            CallerLineNumber = callerLineNumber.ToString(),
+            AppVersion = AppInfo.Current.VersionString
         };
 
         if (logLevel != LogLevel.Info)

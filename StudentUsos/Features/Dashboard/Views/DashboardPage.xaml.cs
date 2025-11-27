@@ -14,6 +14,16 @@ public partial class DashboardPage : ContentPage
         viewModel.LoadUserName();
 
         viewModel.DashboardActivitiesViewModel.OnCurrentActivityChanged += DashboardActivitiesViewModel_OnCurrentActivityChanged;
+        carouselView.Loaded += CarouselView_Loaded;
+    }
+
+    private void CarouselView_Loaded(object? sender, EventArgs e)
+    {
+        if (activityToScrollTo is null)
+        {
+            return;
+        }
+        TryScrollingToItem(activityToScrollTo);
     }
 
     bool scrolled = false;
@@ -45,15 +55,33 @@ public partial class DashboardPage : ContentPage
         });
     }
 
+    Activity? activityToScrollTo;
+
     public bool TryScrollingToItem(Activity activity)
     {
-        if (carouselView == null || carouselView.ItemsSource == null) return false;
+        if (carouselView is null)
+        {
+            return false;
+        }
+
+        if (carouselView.IsLoaded == false)
+        {
+            activityToScrollTo = activity;
+            return true;
+        }
+
+        if (carouselView.ItemsSource == null)
+        {
+            return false;
+        }
+
         int index = new List<Activity>(carouselView.ItemsSource.Cast<Activity>()).FindIndex(x => x.Name == activity.Name && x.CourseId == activity.CourseId);
         if (index >= 0)
         {
             carouselView.ScrollTo(index);
             activitiesIndicator.Position = carouselView.Position;
         }
+        activityToScrollTo = null;
         return true;
     }
 }

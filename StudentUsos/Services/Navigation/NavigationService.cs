@@ -67,14 +67,14 @@ class NavigationService : INavigationService
 
         await navigation.PushAsync(page, isAnimated);
 
-        if (page is INavigationResultProvider<TReturn> pageResultProvider)
+        if (page is INavigableWithResult<TReturn> pageResultProvider)
         {
             return await pageResultProvider.TaskCompletionSource.Task;
         }
-        else if (page.BindingContext is INavigationResultProvider<TReturn> bindingContextResultProvider)
+        else if (page.BindingContext is INavigableWithResult<TReturn> bindingContextResultProvider)
         {
             return await bindingContextResultProvider.TaskCompletionSource.Task;
         }
-        throw new InvalidOperationException($"Either page or it's binding context must implement {nameof(INavigationResultProvider<TReturn>)}");
+        throw new InvalidOperationException($"Either page or it's binding context must implement {nameof(INavigableWithResult<TReturn>)}");
     }
 }

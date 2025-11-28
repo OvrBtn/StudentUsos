@@ -1,6 +1,6 @@
 ﻿namespace StudentUsos.Services.Navigation;
 
-public interface INavigationResultProvider<T>
+public interface INavigableWithResult<T>
 {
     public TaskCompletionSource<T?> TaskCompletionSource { get; set; }
 }

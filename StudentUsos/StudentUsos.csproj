@@ -519,7 +519,6 @@
 
 	<ItemGroup>
 		<Folder Include="Features\Dashboard\Layouts\" />
-		<Folder Include="Services\Navigation\" />
 	</ItemGroup>
 
 	<ItemGroup>

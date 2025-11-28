@@ -5,7 +5,7 @@ using StudentUsos.Features.Authorization.Services;
 
 namespace StudentUsos.Features.Authorization.Views;
 
-public partial class InstallationsViewModel : BaseViewModel, INavigationResultProvider<UsosInstallation>
+public partial class InstallationsViewModel : BaseViewModel, INavigableWithResult<UsosInstallation>
 {
     IUsosInstallationsService usosInstallationsService;
     INavigationService navigationService;

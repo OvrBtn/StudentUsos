@@ -17,6 +17,7 @@ public class LogRecord
     public string? DeviceInfo { get; set; }
     public string? OperatingSystem { get; set; }
     public string? OperatingSystemVersion { get; set; }
+    public string AppVersion { get; set; }
     public string CallerName { get; set; }
     public string CallerLineNumber { get; set; }
     public string CreationDate { get; set; } = DateAndTimeProvider.Current.UtcNow.ToString(CultureInfo.InvariantCulture);
@@ -28,6 +29,7 @@ public class LogRecord
     [JsonIgnore, Ignore]
     public string LogRecordString
     {
-        get => $"{LogLevel}|{CreationDate}|{CallerName}|{CallerLineNumber}|{Message}|{ExceptionMessage}";
+        get => $"{LogLevel}|{CreationDate}|{AppVersion}|{DeviceInfo?.Replace("\r", "").Replace("\n", "") ?? string.Empty}|" +
+            $"{CallerName}|{CallerLineNumber}|{Message}|{ExceptionMessage}";
     }
 }

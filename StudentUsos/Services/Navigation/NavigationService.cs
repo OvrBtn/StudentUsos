@@ -31,6 +31,28 @@ class NavigationService : INavigationService
         return page;
     }
 
+    public async Task<TPage> PushAsync<TPage, TParameter>(TParameter parameter, bool isAnimated = true) where TPage : ContentPage
+    {
+        var page = _serviceProvider.GetService<TPage>();
+        if (page is null)
+        {
+            throw new ArgumentException("Page not injected into dependency container");
+        }
+
+        if (page is INavigableWithParameter<TParameter> param)
+        {
+            param.OnNavigated(parameter);
+        }
+        if (page.BindingContext is INavigableWithParameter<TParameter> paramBindingContext)
+        {
+            paramBindingContext.OnNavigated(parameter);
+        }
+
+        await navigation.PushAsync(page, isAnimated);
+        return page;
+    }
+
+
     public async Task<T> PushModalAsync<T>(bool isAnimated = true) where T : ContentPage
     {
         var page = _serviceProvider.GetService<T>();

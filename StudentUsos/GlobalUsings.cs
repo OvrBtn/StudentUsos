@@ -6,4 +6,5 @@ global using StudentUsos.Services.Application;
 global using StudentUsos.Services.LocalDatabase;
 global using StudentUsos.Services.LocalStorage;
 global using StudentUsos.Services.Logger;
+global using StudentUsos.Services.Navigation;
 global using StudentUsos.ViewModels;

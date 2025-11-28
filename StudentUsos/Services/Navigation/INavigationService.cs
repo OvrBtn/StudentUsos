@@ -1,4 +1,4 @@
-﻿namespace StudentUsos.Services;
+﻿namespace StudentUsos.Services.Navigation;
 
 public interface INavigationService
 {

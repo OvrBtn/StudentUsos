@@ -167,6 +167,7 @@ internal static partial class MauiProgramExtensions
         builder.Services.AddTransient<CampusMapPage>();
 
         builder.Services.AddTransient<InstallationsPage>();
+        builder.Services.AddTransient<LoginResultPage>();
 
         return builder;
     }
@@ -213,6 +214,7 @@ internal static partial class MauiProgramExtensions
         builder.Services.AddTransient<CampusMapViewModel>();
 
         builder.Services.AddTransient<InstallationsViewModel>();
+        builder.Services.AddTransient<LoginResultViewModel>();
 
         return builder;
     }

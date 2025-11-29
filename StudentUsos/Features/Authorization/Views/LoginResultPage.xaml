@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:CustomContentPageNotAnimated
+    x:Class="StudentUsos.Features.Authorization.Views.LoginResultPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:authorization="using:StudentUsos.Features.Authorization.Views"
+    xmlns:controls="clr-namespace:StudentUsos.Controls"
+    xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
+    xmlns:models="clr-namespace:StudentUsos.Features.Authorization.Models"
+    xmlns:skiaextended="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
+    xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:DataType="authorization:LoginResultViewModel"
+    IsTabBarVisible="False"
+    Shell.TabBarIsVisible="False">
+
+    <Grid
+        Margin="0,0,0,0"
+        toolkit:StateContainer.CurrentState="{Binding MainStateKey}"
+        VerticalOptions="Fill">
+
+        <toolkit:StateContainer.StateViews>
+
+            <StackLayout toolkit:StateView.StateKey="Loading" VerticalOptions="Center">
+                <ActivityIndicator VerticalOptions="Center" />
+                <Button
+                    Margin="50"
+                    IsVisible="{Binding IsCancelButtonVisible}"
+                    Text="{x:Static strings:LocalizedStrings.Cancel}"
+                    Command="{Binding CancelOnClickCommand}" />
+            </StackLayout>
+
+            <Label
+                toolkit:StateView.StateKey="ConnectionError"
+                HorizontalOptions="Center"
+                Text="{x:Static strings:LocalizedStrings.Errors_Error}"
+                VerticalOptions="Center" />
+
+            <Grid Margin="20" toolkit:StateView.StateKey="Success">
+                <skiaextended:SKLottieView
+                    HorizontalOptions="FillAndExpand"
+                    IsAnimationEnabled="true"
+                    IsVisible="True"
+                    Progress="{Binding Progress}"
+                    RepeatCount="0"
+                    Source="success_lottie_animation.json"
+                    VerticalOptions="FillAndExpand"
+                    WidthRequest="500" />
+            </Grid>
+
+            <Grid
+                Margin="20"
+                toolkit:StateView.StateKey="Fail"
+                RowDefinitions="*,auto">
+                <skiaextended:SKLottieView
+                    Grid.Row="0"
+                    IsAnimationEnabled="true"
+                    Progress="{Binding Progress}"
+                    RepeatCount="0"
+                    Source="fail_lottie_animation.json" />
+
+                <StackLayout
+                    Grid.Row="1"
+                    Margin="20,20,20,150"
+                    Spacing="15">
+                    <Button Command="{Binding TryAgainCommand}" Text="{x:Static strings:LocalizedStrings.LoginPage_TryAgain}" />
+
+                    <Grid ColumnDefinitions="*,auto,*" ColumnSpacing="20">
+                        <Border
+                            Grid.Column="0"
+                            BackgroundColor="Gray"
+                            HeightRequest="2" />
+                        <Label
+                            Grid.Column="1"
+                            Text="{x:Static strings:LocalizedStrings.Or}"
+                            TextTransform="Lowercase" />
+                        <Border
+                            Grid.Column="2"
+                            BackgroundColor="Gray"
+                            HeightRequest="2" />
+                    </Grid>
+
+                    <Button Command="{Binding TryAgainUsingPinCodeCommand}" Text="{x:Static strings:LocalizedStrings.LoginPage_TryAgainWithPinCode}" />
+                </StackLayout>
+
+            </Grid>
+
+        </toolkit:StateContainer.StateViews>
+    </Grid>
+
+</controls:CustomContentPageNotAnimated>

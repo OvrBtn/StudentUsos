@@ -39,7 +39,6 @@ public partial class InstallationsViewModel : BaseViewModel, INavigableWithResul
     [RelayCommand]
     async Task InstallationClicked(UsosInstallation installation)
     {
-        TaskCompletionSource.SetResult(installation);
-        await navigationService.PopAsync();
+        await navigationService.PushAsync<LoginResultPage, UsosInstallation>(installation);
     }
 }

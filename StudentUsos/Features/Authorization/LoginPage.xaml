@@ -3,53 +3,70 @@
     x:Class="StudentUsos.Features.Authorization.LoginPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:authorization="using:StudentUsos.Features.Authorization"
     xmlns:controls="clr-namespace:StudentUsos.Controls"
     xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-    xmlns:authorization="using:StudentUsos.Features.Authorization"
     x:DataType="authorization:LoginViewModel"
     IsTabBarVisible="False"
     Shell.TabBarIsVisible="False">
 
-    <StackLayout toolkit:StateContainer.CurrentState="{Binding MainStateKey}" 
-                 VerticalOptions="Center" Margin="0,0,0,40">
-        <toolkit:StateContainer.StateViews>
+    <StackLayout Margin="0,0,0,40" VerticalOptions="Center">
 
-            <ActivityIndicator toolkit:StateView.StateKey="Loading"></ActivityIndicator>
+        <StackLayout
+            Margin="20"
+            toolkit:StateView.StateKey="Loaded"
+            VerticalOptions="Center">
+            <Image
+                Margin="50,0,50,-20"
+                Source="app_icon_256"
+                WidthRequest="300" />
 
-            <StackLayout toolkit:StateView.StateKey="Loaded" Margin="20" VerticalOptions="Center">
-                <Image Margin="50,0,50,-20" Source="app_icon_256" WidthRequest="300"/>
-
-                <StackLayout Margin="10,0,10,100">
-                    <Label Text="{x:Static strings:LocalizedStrings.AppName_FirstPart}" FontSize="40" HorizontalTextAlignment="Center" 
-               TextColor="{StaticResource TextColor}" VerticalTextAlignment="Center"/>
-                    <Label Text="{x:Static strings:LocalizedStrings.AppName_SecondPart}" FontSize="35" HorizontalTextAlignment="Center"  
-                   TextColor="{StaticResource TextColor}" VerticalTextAlignment="Center"/>
-                </StackLayout>
-
-                <StackLayout Margin="50,0">
-                    <Button BackgroundColor="{StaticResource Primary}" Command="{Binding LoginClickedCommand}" Text="{x:Static strings:LocalizedStrings.LoginPage_Login}" 
-                    VerticalOptions="Center" Padding="0,12"/>
-                    <StackLayout IsVisible="{Binding IsAdditionalLoginOptionVisible}">
-                        <Label Text="{x:Static strings:LocalizedStrings.LoginPage_IssueWithLogin}" HorizontalTextAlignment="Center" Margin="0,20,0,10"></Label>
-                        <Button BackgroundColor="{StaticResource Primary}" Command="{Binding LoginWithPinClickedCommand}" Text="{x:Static strings:LocalizedStrings.LoginPage_LoginWithPIN}" VerticalOptions="Center" />
-                    </StackLayout>
-                </StackLayout>
-
-                <StackLayout Margin="50,30">
-                    <Grid ColumnDefinitions="*,auto,*" ColumnSpacing="20">
-                        <Border Grid.Column="0" BackgroundColor="Gray" HeightRequest="2"></Border>
-                        <Label Grid.Column="1" Text="{x:Static strings:LocalizedStrings.Or}"></Label>
-                        <Border Grid.Column="2" BackgroundColor="Gray" HeightRequest="2"></Border>
-                    </Grid>
-                </StackLayout>
-
-                <Button Margin="50,0" Command="{Binding SignInAsGuestCommand}"
-                        Text="{x:Static strings:LocalizedStrings.LoginPage_SigInAsGuest}"></Button>
-
+            <StackLayout Margin="10,0,10,100">
+                <Label
+                    FontSize="40"
+                    HorizontalTextAlignment="Center"
+                    Text="{x:Static strings:LocalizedStrings.AppName_FirstPart}"
+                    TextColor="{StaticResource TextColor}"
+                    VerticalTextAlignment="Center" />
+                <Label
+                    FontSize="35"
+                    HorizontalTextAlignment="Center"
+                    Text="{x:Static strings:LocalizedStrings.AppName_SecondPart}"
+                    TextColor="{StaticResource TextColor}"
+                    VerticalTextAlignment="Center" />
             </StackLayout>
 
-        </toolkit:StateContainer.StateViews>
+            <StackLayout Margin="50,0">
+                <Button
+                    Padding="0,12"
+                    BackgroundColor="{StaticResource Primary}"
+                    Command="{Binding LoginClickedCommand}"
+                    Text="{x:Static strings:LocalizedStrings.LoginPage_Login}"
+                    VerticalOptions="Center" />
+            </StackLayout>
+
+            <StackLayout Margin="50,15">
+                <Grid ColumnDefinitions="*,auto,*" ColumnSpacing="20">
+                    <Border
+                        Grid.Column="0"
+                        BackgroundColor="Gray"
+                        HeightRequest="2" />
+                    <Label Grid.Column="1" Text="{x:Static strings:LocalizedStrings.Or}" TextTransform="Lowercase" />
+                    <Border
+                        Grid.Column="2"
+                        BackgroundColor="Gray"
+                        HeightRequest="2" />
+                </Grid>
+            </StackLayout>
+
+            <Button
+                Margin="50,0"
+                Command="{Binding SignInAsGuestCommand}"
+                Text="{x:Static strings:LocalizedStrings.LoginPage_SigInAsGuest}" />
+
+        </StackLayout>
+
     </StackLayout>
 
 </controls:CustomContentPageNotAnimated>

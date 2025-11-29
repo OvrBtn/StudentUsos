@@ -670,4 +670,10 @@
   <data name="Search" xml:space="preserve">
     <value>Szukaj</value>
   </data>
+  <data name="LoginPage_TryAgain" xml:space="preserve">
+    <value>Spróbuj ponownie</value>
+  </data>
+  <data name="LoginPage_TryAgainWithPinCode" xml:space="preserve">
+    <value>Spróbuj ponownie przy pomocy kodu PIN</value>
+  </data>
 </root>

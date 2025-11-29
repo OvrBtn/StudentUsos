@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using StudentUsos.Features.Authorization.Services;
 using StudentUsos.Features.Authorization.Views;
 using StudentUsos.Services.ServerConnection;
 
@@ -13,15 +14,30 @@ public partial class LoginViewModel : BaseViewModel
     ILocalDatabaseManager localDatabaseManager;
     ILocalStorageManager localStorageManager;
     INavigationService navigationService;
+    IUsosInstallationsService usosInstallationsService;
     public LoginViewModel(IServerConnectionManager serverConnectionManager,
         ILocalDatabaseManager localDatabaseManager,
         ILocalStorageManager localStorageManager,
-        INavigationService navigationService)
+        INavigationService navigationService,
+        IUsosInstallationsService usosInstallationsService)
     {
         this.serverConnectionManager = serverConnectionManager;
         this.localDatabaseManager = localDatabaseManager;
         this.localStorageManager = localStorageManager;
         this.navigationService = navigationService;
+        this.usosInstallationsService = usosInstallationsService;
+
+        _ = PreloadInstallatons();
+    }
+
+    async Task PreloadInstallatons()
+    {
+        if (usosInstallationsService is not UsosInstallationsService service)
+        {
+            return;
+        }
+        var installations = await service.GetUsosInstallationsAsync();
+        service.UsosInstallationsCache = installations;
     }
 
     void SwitchToDefaultServices()

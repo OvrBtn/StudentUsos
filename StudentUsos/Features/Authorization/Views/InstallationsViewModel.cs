@@ -25,14 +25,42 @@ public partial class InstallationsViewModel : BaseViewModel, INavigableWithResul
 
     public async Task InitAsync()
     {
+        if (usosInstallationsService is UsosInstallationsService service && service.UsosInstallationsCache is not null)
+        {
+            Installations = service.UsosInstallationsCache.OrderBy(x => x.Name).ToList();
+            MainStateKey = StateKey.Loaded;
+        }
+
         var result = await usosInstallationsService.GetUsosInstallationsAsync();
         if (result is null)
         {
-            MainStateKey = StateKey.ConnectionError;
+            if (MainStateKey == StateKey.Loading)
+            {
+                MainStateKey = StateKey.ConnectionError;
+            }
             return;
         }
 
-        Installations = result.OrderBy(x => x.Name).ToList();
+        result = result.OrderBy(x => x.Name).ToList();
+
+        bool areDifferent = false;
+        if (Installations.Count == result.Count)
+        {
+            for (int i = 0; i < result.Count; i++)
+            {
+                if (Installations[i].Equals(result[i]) == false)
+                {
+                    areDifferent = true;
+                }
+            }
+        }
+
+        if (Installations.Count != 0 && areDifferent == false)
+        {
+            return;
+        }
+
+        Installations = result;
         MainStateKey = StateKey.Loaded;
     }
 

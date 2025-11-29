@@ -18,7 +18,7 @@
         <toolkit:StateContainer.StateViews>
 
             <ActivityIndicator toolkit:StateView.StateKey="Loading"></ActivityIndicator>
-            <Label toolkit:StateView.StateKey="ConnectionError" Text="{x:Static strings:LocalizedStrings.Errors_Error}" VerticalOptions="Center" HorizontalOptions="Center"/>
+            <Label toolkit:StateView.StateKey="ConnectionError" Text="{x:Static strings:LocalizedStrings.Errors_ConnectionError}" VerticalOptions="Center" HorizontalOptions="Center"/>
 
             <Grid toolkit:StateView.StateKey="Loaded" VerticalOptions="Fill" RowDefinitions="auto, *">
 

@@ -24,6 +24,8 @@ public class UsosInstallationsService : IUsosInstallationsService
         localStorageManager.SetString(LocalStorageKeys.UsosInstallationsService_CurrentInstallation, installationUrl);
     }
 
+    public List<UsosInstallation>? UsosInstallationsCache { get; set; } = null;
+
     public async Task<List<UsosInstallation>?> GetUsosInstallationsAsync()
     {
         var result = await serverConnectionManager.Value.SendAuthorizedGetRequestAsync("usos/UsosInstallations", new(), AuthorizationMode.StaticInternalsOnly);

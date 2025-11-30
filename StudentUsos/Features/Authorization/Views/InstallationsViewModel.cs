@@ -56,6 +56,10 @@ public partial class InstallationsViewModel : BaseViewModel, INavigableWithResul
                 }
             }
         }
+        else
+        {
+            areDifferent = true;
+        }
 
         if (Installations.Count != 0 && areDifferent == false)
         {

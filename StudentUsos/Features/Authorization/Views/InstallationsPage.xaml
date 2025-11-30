@@ -22,7 +22,8 @@
 
             <Grid toolkit:StateView.StateKey="Loaded" VerticalOptions="Fill" RowDefinitions="auto, *">
 
-                <dxe:MultilineEdit Grid.Row="0" LabelText="{x:Static strings:LocalizedStrings.Search}" Margin="30,70,30,0"></dxe:MultilineEdit>
+                <dxe:MultilineEdit x:Name="textEdit" Grid.Row="0" LabelText="{x:Static strings:LocalizedStrings.Search}" Margin="30,70,30,0"
+                                   TextChangedCommand="{Binding TextChangedCommand}" Text="{Binding EditorText, Mode=TwoWay}"></dxe:MultilineEdit>
 
                 <CollectionView Grid.Row="1" ItemsSource="{Binding Installations}" VerticalOptions="Fill">
                     <CollectionView.Header>

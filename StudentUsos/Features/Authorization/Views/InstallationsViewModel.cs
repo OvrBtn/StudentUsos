@@ -20,6 +20,7 @@ public partial class InstallationsViewModel : BaseViewModel, INavigableWithResul
 
     [ObservableProperty]
     List<UsosInstallation> installations = new();
+    List<UsosInstallation> originalInstallations = new();
 
     public TaskCompletionSource<UsosInstallation?> TaskCompletionSource { get; set; } = new();
 
@@ -28,6 +29,7 @@ public partial class InstallationsViewModel : BaseViewModel, INavigableWithResul
         if (usosInstallationsService is UsosInstallationsService service && service.UsosInstallationsCache is not null)
         {
             Installations = service.UsosInstallationsCache.OrderBy(x => x.Name).ToList();
+            originalInstallations = Installations;
             MainStateKey = StateKey.Loaded;
         }
 
@@ -61,6 +63,7 @@ public partial class InstallationsViewModel : BaseViewModel, INavigableWithResul
         }
 
         Installations = result;
+        originalInstallations = Installations;
         MainStateKey = StateKey.Loaded;
     }
 
@@ -68,5 +71,14 @@ public partial class InstallationsViewModel : BaseViewModel, INavigableWithResul
     async Task InstallationClicked(UsosInstallation installation)
     {
         await navigationService.PushAsync<LoginResultPage, UsosInstallation>(installation);
+    }
+
+    [ObservableProperty]
+    string editorText;
+
+    [RelayCommand]
+    void TextChanged()
+    {
+        Installations = UsosInstallation.FuzzySearch(originalInstallations, EditorText).ToList();
     }
 }

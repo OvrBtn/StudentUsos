@@ -1,4 +1,7 @@
-﻿namespace StudentUsos.Helpers;
+﻿using System.Globalization;
+using System.Text;
+
+namespace StudentUsos.Helpers;
 
 public static class FuzzyStringComparer
 {
@@ -41,5 +44,35 @@ public static class FuzzyStringComparer
         int distance = DamerauLevenshtein(s, t);
 
         return 1.0 - (double)distance / Math.Max(s.Length, t.Length);
+    }
+
+    public static string Normalize(string text)
+    {
+        return new string(text
+            .ToLowerInvariant()
+            .Normalize(NormalizationForm.FormD)
+            .Where(c => CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
+            .ToArray());
+    }
+
+    public static string GetAcronym(string name)
+    {
+        return string.Join("", name
+            .Split(' ', StringSplitOptions.RemoveEmptyEntries)
+            .Select(w => char.ToUpper(w[0])));
+    }
+
+    public static string GetAcronymStartingWithUpperOnly(string name)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+            return "";
+
+        var words = name.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+        var acronymLetters = words
+            .Where(w => char.IsUpper(w[0]))
+            .Select(w => w[0]);
+
+        return string.Concat(acronymLetters);
     }
 }

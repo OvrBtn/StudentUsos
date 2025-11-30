@@ -32,7 +32,7 @@ public partial class LoginResultViewModel : BaseViewModel, INavigableWithParamet
     bool isResumedThroughDeepLink = false;
     private void MainActivity_OnIntentRecreatedWithData(Dictionary<string, string?> dictionary)
     {
-        if (dictionary.TryGetValue("oauth_verifier", out string? verifier) && verifier is not null)
+        if (dictionary.TryGetValue("oauth_verifier", out string? verifier) && verifier is not null && currentAuthorizationMode == AuthorizationService.Mode.RedirectWithCallback)
         {
             isResumedThroughDeepLink = true;
         }
@@ -48,7 +48,7 @@ public partial class LoginResultViewModel : BaseViewModel, INavigableWithParamet
             return;
         }
         IsCancelButtonVisible = true;
-        if (isResumedThroughDeepLink == false)
+        if (isResumedThroughDeepLink == false && currentAuthorizationMode == AuthorizationService.Mode.RedirectWithCallback)
         {
             AuthorizationService_OnLoginFailed();
         }
@@ -90,8 +90,12 @@ public partial class LoginResultViewModel : BaseViewModel, INavigableWithParamet
         await InitiateSigningInAsync(AuthorizationService.Mode.RedirectWithCallback);
     }
 
+    AuthorizationService.Mode currentAuthorizationMode;
+
     async Task InitiateSigningInAsync(AuthorizationService.Mode mode)
     {
+        currentAuthorizationMode = mode;
+
         isResumedThroughDeepLink = false;
         IsCancelButtonVisible = false;
         MainStateKey = StateKey.Loading;

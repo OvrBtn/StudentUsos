@@ -8,8 +8,11 @@ public partial class EntryPopup : Popup
     public EntryPopup(EntryPopupParameters parameters)
     {
         InitializeComponent();
+        this.parameters = parameters;
         BindingContext = this.viewModel = new EntryPopupViewModel(this, parameters);
     }
+
+    EntryPopupParameters parameters;
 
     public struct EntryPopupParameters
     {
@@ -45,5 +48,15 @@ public partial class EntryPopup : Popup
             var popup = new EntryPopup(parameters);
             App.Current?.Windows[0].Page?.ShowPopup(popup);
         });
+    }
+
+    protected override Task OnClosed(object? result, bool wasDismissedByTappingOutsideOfPopup, CancellationToken token = default)
+    {
+        //this also somehow handles navigation bar back button
+        if (wasDismissedByTappingOutsideOfPopup)
+        {
+            parameters.CancelAction?.Invoke();
+        }
+        return base.OnClosed(result, wasDismissedByTappingOutsideOfPopup, token);
     }
 }

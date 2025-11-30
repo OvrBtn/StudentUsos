@@ -157,7 +157,7 @@ internal static class AuthorizationService
             var accessTokenRequestResult = await serverConnectionManager.SendGetRequestAsync("authorization/authorizeurl", arguments);
             if (accessTokenRequestResult is null || accessTokenRequestResult.IsSuccess == false)
             {
-                throw new Exception("Request to USOS API has failed");
+                throw new Exception($"Request to USOS API has failed: {accessTokenRequestResult?.Response}");
             }
             var accessTokenRequestResultDeserialized = JsonSerializer.Deserialize<Dictionary<string, string>>(accessTokenRequestResult.Response);
             if (accessTokenRequestResultDeserialized is null)
@@ -190,7 +190,7 @@ internal static class AuthorizationService
     static void OnCatch(Action onLoginFailed)
     {
         onLoginFailed?.Invoke();
-        ApplicationService.Default.ShowErrorMessage(LocalizedStrings.Errors_LoadingError, LocalizedStrings.LoginPage_LoginFailed);
+        //ApplicationService.Default.ShowErrorMessage(LocalizedStrings.Errors_LoadingError, LocalizedStrings.LoginPage_LoginFailed);
     }
 
     public static event Action OnContinueLogging;
@@ -223,7 +223,7 @@ internal static class AuthorizationService
             var requestResult = await serverConnectionManager.SendGetRequestAsync("authorization/accesstoken", arguments);
             if (requestResult is null || requestResult.IsSuccess == false)
             {
-                throw new Exception("Request to USOS API has failed");
+                throw new Exception($"Request to USOS API has failed: {requestResult?.Response}");
             }
             var resultDeserialized = JsonSerializer.Deserialize<Dictionary<string, string>>(requestResult.Response);
             if (resultDeserialized is null)

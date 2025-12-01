@@ -45,9 +45,9 @@ public partial class CustomContentPageNotAnimated : ContentPage
 
     private void CustomContentPageNotAnimated_Loaded(object? sender, EventArgs e)
     {
-        tabBarSize = TabBar.Measure(double.PositiveInfinity, double.PositiveInfinity);
         if (tabBarSize is null)
         {
+            tabBarSize = TabBar.Measure(double.PositiveInfinity, double.PositiveInfinity);
         }
         SnackBarSafeArea = (GetTemplateChild("snackBarSafeArea") as VisualElement) ?? throw new NullReferenceException();
 

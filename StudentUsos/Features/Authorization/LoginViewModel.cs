@@ -8,9 +8,6 @@ namespace StudentUsos.Features.Authorization;
 
 public partial class LoginViewModel : BaseViewModel
 {
-    public Command LoginCommand { get; }
-    public Command LoginWithPinCommand { get; }
-
     IServerConnectionManager serverConnectionManager;
     ILocalDatabaseManager localDatabaseManager;
     ILocalStorageManager localStorageManager;
@@ -31,14 +28,11 @@ public partial class LoginViewModel : BaseViewModel
         AuthorizationService.OnLoginSucceeded += AuthorizationService_OnLoginSucceeded;
         AuthorizationService.OnLoginStarted += AuthorizationService_OnLoginStarted;
 
-        _ = PreloadInstallatons();
+        _ = PreloadInstallations();
 
-        if (localStorageManager.TryGettingInt(LocalStorageKeys.LoginAttemptCounter, out int attemptCount))
+        if (localStorageManager.TryGettingInt(LocalStorageKeys.LoginAttemptCounter, out int attemptCount) && attemptCount > 0)
         {
-            if (attemptCount > 0)
-            {
-                IsAdditionalLoginOptionVisible = true;
-            }
+            IsAdditionalLoginOptionVisible = true;
         }
     }
 
@@ -68,7 +62,7 @@ public partial class LoginViewModel : BaseViewModel
         IsAdditionalLoginOptionVisible = false;
     }
 
-    async Task PreloadInstallatons()
+    async Task PreloadInstallations()
     {
         if (usosInstallationsService is not UsosInstallationsService service)
         {

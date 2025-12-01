@@ -35,6 +35,7 @@ public class UsosInstallationsService : IUsosInstallationsService
         }
 
         var deserialized = JsonSerializer.Deserialize(result.Response, UsosInstallationJsonContext.Default.ListUsosInstallation);
+        UsosInstallationsCache = deserialized;
         return deserialized;
     }
 }

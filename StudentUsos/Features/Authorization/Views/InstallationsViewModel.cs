@@ -51,6 +51,7 @@ public partial class InstallationsViewModel : BaseViewModel, INavigableWithParam
                 if (Installations[i].Equals(result[i]) == false)
                 {
                     areDifferent = true;
+                    break;
                 }
             }
         }
@@ -76,7 +77,7 @@ public partial class InstallationsViewModel : BaseViewModel, INavigableWithParam
     }
 
     [ObservableProperty]
-    string editorText;
+    string editorText = string.Empty;
 
     [RelayCommand]
     void TextChanged()

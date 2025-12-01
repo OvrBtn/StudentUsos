@@ -6,6 +6,7 @@
     xmlns:controls="clr-namespace:StudentUsos.Controls"
     xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
     xmlns:menu="using:StudentUsos.Features.Menu"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     BackgroundColor="{StaticResource BackgroundColor}"
     x:DataType="menu:MoreViewModel">
 
@@ -20,7 +21,7 @@
                 <Setter Property="BackgroundColor" Value="Transparent" />
             </Style>
             <Style TargetType="Border" x:Key="ButtonBorderStyle">
-                <Setter Property="Margin" Value="0" />
+                <Setter Property="Margin" Value="5" />
                 <Setter Property="Padding" Value="0" />
                 <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor2}"></Setter>
                 <Setter Property="StrokeThickness" Value="0"></Setter>
@@ -36,8 +37,7 @@
 
     <ScrollView VerticalOptions="Fill">
 
-        <Grid RowDefinitions="180,180,180, 180" ColumnDefinitions="*, *" Margin="30,70,30,70"
-                  ColumnSpacing="10" RowSpacing="10" VerticalOptions="FillAndExpand">
+        <toolkit:UniformItemsLayout MaxColumns="2" Margin="30,70,30,70" VerticalOptions="FillAndExpand">
 
             <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource ButtonBorderStyle}">
                 <Grid VerticalOptions="FillAndExpand" CompressedLayout.IsHeadless="True">
@@ -89,7 +89,7 @@
                 </Grid>
             </Border>
 
-            <Border Grid.Row="2" Grid.Column="1" Style="{StaticResource ButtonBorderStyle}">
+            <Border x:Name="campusMapButton" Grid.Row="2" Grid.Column="1" Style="{StaticResource ButtonBorderStyle}">
                 <Grid VerticalOptions="FillAndExpand" CompressedLayout.IsHeadless="True">
                     <StackLayout Padding="15,40" Spacing="10" VerticalOptions="CenterAndExpand" CompressedLayout.IsHeadless="True">
                         <Image Source="map" ></Image>
@@ -109,7 +109,7 @@
                 </Grid>
             </Border>
 
-        </Grid>
+        </toolkit:UniformItemsLayout>
 
         <!--oryginally this page should be done using ColllectionView but it was done manually using grid to workaround performance issue-->
 

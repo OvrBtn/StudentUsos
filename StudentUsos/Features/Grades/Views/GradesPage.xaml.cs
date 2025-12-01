@@ -1,5 +1,6 @@
-﻿using System.Globalization;
-using StudentUsos.Controls;
+﻿using StudentUsos.Controls;
+using StudentUsos.Features.Authorization.Services;
+using System.Globalization;
 
 namespace StudentUsos.Features.Grades.Views;
 
@@ -7,11 +8,20 @@ public partial class GradesPage : CustomContentPageNotAnimated
 {
     GradesViewModel gradesViewModel;
     INavigationService navigationService;
-    public GradesPage(INavigationService navigationService, GradesViewModel gradesViewModel)
+    IUsosInstallationsService usosInstallationsService;
+    public GradesPage(INavigationService navigationService, GradesViewModel gradesViewModel, IUsosInstallationsService usosInstallationsService)
     {
         this.navigationService = navigationService;
+        this.usosInstallationsService = usosInstallationsService;
         BindingContext = this.gradesViewModel = gradesViewModel;
         InitializeComponent();
+
+        const string allowedInstallation = "https://usosapps.put.poznan.pl/";
+        var installation = usosInstallationsService.GetCurrentInstallation();
+        if (installation != allowedInstallation)
+        {
+            scholarshipCalculatorButton.IsVisible = false;
+        }
     }
 
     bool isViewModelSet = false;

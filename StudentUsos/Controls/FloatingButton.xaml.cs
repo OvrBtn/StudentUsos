@@ -92,6 +92,7 @@ public partial class FloatingButton : ContentView
             return;
         }
         var buttons = (childElements as Layout)?.Children.ToList() ?? new();
+        buttons = buttons.Where(x => x.Visibility == Visibility.Visible).ToList();
         if (AreButtonsVisible == false)
         {
 

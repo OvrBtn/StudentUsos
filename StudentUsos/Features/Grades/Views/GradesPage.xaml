@@ -30,7 +30,7 @@
                             </Border>
                         </Grid>
                     </controls:CustomButton>
-                    <controls:CustomButton BackgroundColor="#50000000" HorizontalOptions="End" CornerRadius="1000" OnClick="ScholarshipCalculatorButton_OnClick">
+                    <controls:CustomButton x:Name="scholarshipCalculatorButton" BackgroundColor="#50000000" HorizontalOptions="End" CornerRadius="1000" OnClick="ScholarshipCalculatorButton_OnClick">
                         <Grid ColumnDefinitions="auto, auto" Margin="5,0,0,0" ColumnSpacing="5" HorizontalOptions="End">
                             <Label Grid.Column="0" Margin="10,0,0,0" Text="{x:Static strings:LocalizedStrings.GradesPage_ScholarshipCalculator}"></Label>
                             <Border Grid.Column="1" BackgroundColor="{StaticResource Primary}" Padding="17" StrokeShape="RoundRectangle 1000">

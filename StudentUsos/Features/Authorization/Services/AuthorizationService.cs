@@ -7,7 +7,7 @@ using System.Text.Json;
 
 namespace StudentUsos.Features.Authorization.Services;
 
-internal static class AuthorizationService
+public static class AuthorizationService
 {
     static List<string> scopes = new List<string> { "email", "offline_access", "studies", "grades", "payments", "surveys_filling", "other_emails" };
     public static string AccessToken { get; set; }
@@ -56,6 +56,7 @@ internal static class AuthorizationService
 
     public static event Action OnLoginSucceeded;
     public static event Action OnLoginFailed;
+    public static event Action OnLoginStarted;
 
     public static bool HasJustLoggedIn { get; private set; }
 
@@ -149,6 +150,8 @@ internal static class AuthorizationService
     {
         try
         {
+            OnLoginStarted?.Invoke();
+
             Dictionary<string, string> arguments = new()
             {
                 { "scopes", string.Join("|", scopes) },

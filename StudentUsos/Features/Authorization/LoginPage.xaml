@@ -44,6 +44,17 @@
                     Command="{Binding LoginClickedCommand}"
                     Text="{x:Static strings:LocalizedStrings.LoginPage_Login}"
                     VerticalOptions="Center" />
+                <StackLayout IsVisible="{Binding IsAdditionalLoginOptionVisible}">
+                    <Label
+                        Margin="0,20,0,10"
+                        HorizontalTextAlignment="Center"
+                        Text="{x:Static strings:LocalizedStrings.LoginPage_IssueWithLogin}" />
+                    <Button
+                        BackgroundColor="{StaticResource Primary}"
+                        Command="{Binding LoginWithPinClickedCommand}"
+                        Text="{x:Static strings:LocalizedStrings.LoginPage_LoginWithPIN}"
+                        VerticalOptions="Center" />
+                </StackLayout>
             </StackLayout>
 
             <StackLayout Margin="50,15">
@@ -52,7 +63,10 @@
                         Grid.Column="0"
                         BackgroundColor="Gray"
                         HeightRequest="2" />
-                    <Label Grid.Column="1" Text="{x:Static strings:LocalizedStrings.Or}" TextTransform="Lowercase" />
+                    <Label
+                        Grid.Column="1"
+                        Text="{x:Static strings:LocalizedStrings.Or}"
+                        TextTransform="Lowercase" />
                     <Border
                         Grid.Column="2"
                         BackgroundColor="Gray"

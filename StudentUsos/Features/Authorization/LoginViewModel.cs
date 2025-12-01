@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using StudentUsos.Features.Authorization.Services;
 using StudentUsos.Features.Authorization.Views;
 using StudentUsos.Services.ServerConnection;
@@ -27,7 +28,44 @@ public partial class LoginViewModel : BaseViewModel
         this.navigationService = navigationService;
         this.usosInstallationsService = usosInstallationsService;
 
+        AuthorizationService.OnLoginSucceeded += AuthorizationService_OnLoginSucceeded;
+        AuthorizationService.OnLoginStarted += AuthorizationService_OnLoginStarted;
+
         _ = PreloadInstallatons();
+
+        if (localStorageManager.TryGettingInt(LocalStorageKeys.LoginAttemptCounter, out int attemptCount))
+        {
+            if (attemptCount > 0)
+            {
+                IsAdditionalLoginOptionVisible = true;
+            }
+        }
+    }
+
+    ~LoginViewModel()
+    {
+        AuthorizationService.OnLoginSucceeded -= AuthorizationService_OnLoginSucceeded;
+        AuthorizationService.OnLoginStarted -= AuthorizationService_OnLoginStarted;
+    }
+
+    private void AuthorizationService_OnLoginStarted()
+    {
+        if (localStorageManager.TryGettingInt(LocalStorageKeys.LoginAttemptCounter, out int attemptCount))
+        {
+            attemptCount++;
+            localStorageManager.SetInt(LocalStorageKeys.LoginAttemptCounter, attemptCount);
+            if (attemptCount > 0)
+            {
+                IsAdditionalLoginOptionVisible = true;
+            }
+        }
+        else localStorageManager.SetInt(LocalStorageKeys.LoginAttemptCounter, 0);
+    }
+
+    private void AuthorizationService_OnLoginSucceeded()
+    {
+        localStorageManager.SetInt(LocalStorageKeys.LoginAttemptCounter, 0);
+        IsAdditionalLoginOptionVisible = false;
     }
 
     async Task PreloadInstallatons()
@@ -54,7 +92,18 @@ public partial class LoginViewModel : BaseViewModel
     {
         SwitchToDefaultServices();
 
-        await navigationService.PushAsync<InstallationsPage>();
+        await navigationService.PushAsync<InstallationsPage, AuthorizationService.Mode>(AuthorizationService.Mode.RedirectWithCallback);
+    }
+
+    [ObservableProperty]
+    bool isAdditionalLoginOptionVisible = false;
+
+    [RelayCommand]
+    async Task OnLoginWithPinClickedAsync()
+    {
+        SwitchToDefaultServices();
+
+        await navigationService.PushAsync<InstallationsPage, AuthorizationService.Mode>(AuthorizationService.Mode.UsePinCode);
     }
 
     [RelayCommand]

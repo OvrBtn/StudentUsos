@@ -5,7 +5,7 @@ using StudentUsos.Features.Authorization.Services;
 
 namespace StudentUsos.Features.Authorization.Views;
 
-public partial class LoginResultViewModel : BaseViewModel, INavigableWithParameter<UsosInstallation>
+public partial class LoginResultViewModel : BaseViewModel, INavigableWithParameter<LoginResultParameters>
 {
     INavigationService navigationService;
     IUsosInstallationsService usosInstallationsService;
@@ -59,13 +59,18 @@ public partial class LoginResultViewModel : BaseViewModel, INavigableWithParamet
         AuthorizationService.OnLoginSucceeded -= AuthorizationService_OnLoginSucceeded;
         AuthorizationService.OnLoginFailed -= AuthorizationService_OnLoginFailed;
         App.OnResumed -= App_OnResumed;
+#if ANDROID
+        MainActivity.OnIntentRecreatedWithData -= MainActivity_OnIntentRecreatedWithData;
+#endif
     }
 
     UsosInstallation usosInstallation;
-    public void OnNavigated(UsosInstallation navigationParameter)
+    AuthorizationService.Mode suggestedDefaultMode = AuthorizationService.Mode.RedirectWithCallback;
+    public void OnNavigated(LoginResultParameters navigationParameter)
     {
-        usosInstallation = navigationParameter;
+        usosInstallation = navigationParameter.Installation;
         usosInstallationsService.SaveCurrentInstallation(usosInstallation.InstallationUrl);
+        suggestedDefaultMode = navigationParameter.DefaultMode;
     }
 
     public static class AdditionalStateKeys
@@ -87,7 +92,7 @@ public partial class LoginResultViewModel : BaseViewModel, INavigableWithParamet
 
     public async Task InitAsync()
     {
-        await InitiateSigningInAsync(AuthorizationService.Mode.RedirectWithCallback);
+        await InitiateSigningInAsync(suggestedDefaultMode);
     }
 
     AuthorizationService.Mode currentAuthorizationMode;
@@ -115,7 +120,7 @@ public partial class LoginResultViewModel : BaseViewModel, INavigableWithParamet
         MainStateKey = AdditionalStateKeys.Success;
 
         await Task.Delay(2000);
-        localStorageManager.SetString(LocalStorageKeys.LoginAttemptCounter, "0");
+        localStorageManager.SetInt(LocalStorageKeys.LoginAttemptCounter, 0);
         //create new tables from scratch or
         //drop all tables and then regenerate them in case there is something left from guest mode
         localDatabaseManager.ResetTables();

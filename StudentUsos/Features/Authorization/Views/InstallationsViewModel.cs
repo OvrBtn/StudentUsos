@@ -5,7 +5,7 @@ using StudentUsos.Features.Authorization.Services;
 
 namespace StudentUsos.Features.Authorization.Views;
 
-public partial class InstallationsViewModel : BaseViewModel, INavigableWithResult<UsosInstallation>
+public partial class InstallationsViewModel : BaseViewModel, INavigableWithParameter<AuthorizationService.Mode>
 {
     IUsosInstallationsService usosInstallationsService;
     INavigationService navigationService;
@@ -21,8 +21,6 @@ public partial class InstallationsViewModel : BaseViewModel, INavigableWithResul
     [ObservableProperty]
     List<UsosInstallation> installations = new();
     List<UsosInstallation> originalInstallations = new();
-
-    public TaskCompletionSource<UsosInstallation?> TaskCompletionSource { get; set; } = new();
 
     public async Task InitAsync()
     {
@@ -74,7 +72,7 @@ public partial class InstallationsViewModel : BaseViewModel, INavigableWithResul
     [RelayCommand]
     async Task InstallationClicked(UsosInstallation installation)
     {
-        await navigationService.PushAsync<LoginResultPage, UsosInstallation>(installation);
+        await navigationService.PushAsync<LoginResultPage, LoginResultParameters>(new(installation, suggestedDefaultMode));
     }
 
     [ObservableProperty]
@@ -120,5 +118,12 @@ public partial class InstallationsViewModel : BaseViewModel, INavigableWithResul
             .OrderByDescending(x => x.Score)
             .ThenBy(x => x.Installation.Name)
             .Select(x => x.Installation);
+    }
+
+    AuthorizationService.Mode suggestedDefaultMode = AuthorizationService.Mode.RedirectWithCallback;
+
+    void INavigableWithParameter<AuthorizationService.Mode>.OnNavigated(AuthorizationService.Mode navigationParameter)
+    {
+        suggestedDefaultMode = navigationParameter;
     }
 }

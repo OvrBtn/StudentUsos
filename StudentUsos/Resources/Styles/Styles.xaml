@@ -14,7 +14,17 @@
         <Setter Property="LabelColor" Value="White"></Setter>
         <Setter Property="FocusedLabelColor" Value="White"></Setter>
     </Style>
-    
+
+    <Style TargetType="dxe:TextEdit">
+        <Setter Property="TextColor" Value="White"></Setter>
+        <Setter Property="BorderColor" Value="{StaticResource Primary}"></Setter>
+        <Setter Property="CursorColor" Value="{StaticResource Primary}"></Setter>
+        <Setter Property="FocusedBorderColor" Value="{StaticResource Primary}"></Setter>
+        <Setter Property="MaxCharacterCountOverflowMode" Value="LimitInput"></Setter>
+        <Setter Property="LabelColor" Value="White"></Setter>
+        <Setter Property="FocusedLabelColor" Value="White"></Setter>
+    </Style>
+
     <Shadow x:Key="defaultBlackShadow" Brush="Black" Opacity="0.3" Radius="5" Offset="0,0"/>
 
     <Style TargetType="Label">

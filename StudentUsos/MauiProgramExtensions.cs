@@ -4,6 +4,8 @@ using StudentUsos.Features.Activities.Repositories;
 using StudentUsos.Features.Activities.Services;
 using StudentUsos.Features.Activities.Views;
 using StudentUsos.Features.Authorization;
+using StudentUsos.Features.Authorization.Services;
+using StudentUsos.Features.Authorization.Views;
 using StudentUsos.Features.Calendar.Repositories;
 using StudentUsos.Features.Calendar.Services;
 using StudentUsos.Features.Calendar.Views;
@@ -116,6 +118,9 @@ internal static partial class MauiProgramExtensions
         builder.Services.AddSingleton<IBackgroundJobService, BackgroundJobServiceAndroid>();
 #endif
 
+        builder.Services.AddSingleton<IUsosInstallationsService, UsosInstallationsService>();
+        builder.Services.AddSingleton(provider => new Lazy<IUsosInstallationsService>(() => provider.GetService<IUsosInstallationsService>()!));
+
         return builder;
     }
 
@@ -160,7 +165,9 @@ internal static partial class MauiProgramExtensions
         builder.Services.AddTransient<WhatsNewCarouselPage>();
 
         builder.Services.AddTransient<CampusMapPage>();
-        builder.Services.AddTransient<CampusMapViewModel>();
+
+        builder.Services.AddTransient<InstallationsPage>();
+        builder.Services.AddTransient<LoginResultPage>();
 
         return builder;
     }
@@ -203,6 +210,11 @@ internal static partial class MauiProgramExtensions
         builder.Services.AddTransient<NotificationsSubpageViewModel>();
         builder.Services.AddTransient<ApplicationSubpageViewModel>();
         builder.Services.AddTransient<NotificationsDiagnosisViewModel>();
+
+        builder.Services.AddTransient<CampusMapViewModel>();
+
+        builder.Services.AddTransient<InstallationsViewModel>();
+        builder.Services.AddTransient<LoginResultViewModel>();
 
         return builder;
     }

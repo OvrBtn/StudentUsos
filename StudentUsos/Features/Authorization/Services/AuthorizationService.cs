@@ -7,10 +7,8 @@ using System.Text.Json;
 
 namespace StudentUsos.Features.Authorization.Services;
 
-internal static class AuthorizationService
+public static class AuthorizationService
 {
-
-    public static string Installation { get; } = "https://usosapps.put.poznan.pl/";
     static List<string> scopes = new List<string> { "email", "offline_access", "studies", "grades", "payments", "surveys_filling", "other_emails" };
     public static string AccessToken { get; set; }
     public static string InternalAccessToken { get; set; }
@@ -35,6 +33,7 @@ internal static class AuthorizationService
     }
 
     static IServerConnectionManager serverConnectionManager;
+    static IUsosInstallationsService usosInstallationsService;
     static AuthorizationService()
     {
 #if ANDROID
@@ -42,6 +41,7 @@ internal static class AuthorizationService
 #endif
 
         serverConnectionManager = App.ServiceProvider?.GetService<IServerConnectionManager>()!;
+        usosInstallationsService = App.ServiceProvider?.GetService<IUsosInstallationsService>()!;
 
         var firebasePushNotificationsService = App.ServiceProvider?.GetService<FirebasePushNotificationsService>();
         if (firebasePushNotificationsService is not null)
@@ -56,6 +56,7 @@ internal static class AuthorizationService
 
     public static event Action OnLoginSucceeded;
     public static event Action OnLoginFailed;
+    public static event Action OnLoginStarted;
 
     public static bool HasJustLoggedIn { get; private set; }
 
@@ -88,6 +89,13 @@ internal static class AuthorizationService
         if (containsKeys)
         {
             RetrieveTokens();
+
+            //compatibility between versions < 4.1.0 and >= 4.1.0
+            //might be removed in the future if there are no more devices on versions < 4.1.0
+            if (usosInstallationsService.GetCurrentInstallation() is null)
+            {
+                usosInstallationsService.SaveCurrentInstallation("https://usosapps.put.poznan.pl/");
+            }
         }
         return containsKeys;
     }
@@ -142,6 +150,8 @@ internal static class AuthorizationService
     {
         try
         {
+            OnLoginStarted?.Invoke();
+
             Dictionary<string, string> arguments = new()
             {
                 { "scopes", string.Join("|", scopes) },
@@ -150,7 +160,7 @@ internal static class AuthorizationService
             var accessTokenRequestResult = await serverConnectionManager.SendGetRequestAsync("authorization/authorizeurl", arguments);
             if (accessTokenRequestResult is null || accessTokenRequestResult.IsSuccess == false)
             {
-                throw new Exception("Request to USOS API has failed");
+                throw new Exception($"Request to USOS API has failed: {accessTokenRequestResult?.Response}");
             }
             var accessTokenRequestResultDeserialized = JsonSerializer.Deserialize<Dictionary<string, string>>(accessTokenRequestResult.Response);
             if (accessTokenRequestResultDeserialized is null)
@@ -183,7 +193,7 @@ internal static class AuthorizationService
     static void OnCatch(Action onLoginFailed)
     {
         onLoginFailed?.Invoke();
-        ApplicationService.Default.ShowErrorMessage(LocalizedStrings.Errors_LoadingError, LocalizedStrings.LoginPage_LoginFailed);
+        //ApplicationService.Default.ShowErrorMessage(LocalizedStrings.Errors_LoadingError, LocalizedStrings.LoginPage_LoginFailed);
     }
 
     public static event Action OnContinueLogging;
@@ -216,7 +226,7 @@ internal static class AuthorizationService
             var requestResult = await serverConnectionManager.SendGetRequestAsync("authorization/accesstoken", arguments);
             if (requestResult is null || requestResult.IsSuccess == false)
             {
-                throw new Exception("Request to USOS API has failed");
+                throw new Exception($"Request to USOS API has failed: {requestResult?.Response}");
             }
             var resultDeserialized = JsonSerializer.Deserialize<Dictionary<string, string>>(requestResult.Response);
             if (resultDeserialized is null)

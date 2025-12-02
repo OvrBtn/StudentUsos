@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
+using StudentUsos.Controls;
 
 namespace StudentUsos.Services.Application;
 
@@ -50,7 +51,7 @@ public class ApplicationService : IApplicationService
 
         TimeSpan duration = TimeSpan.FromSeconds(3);
 
-        var snackbar = Snackbar.Make(text, action, buttonText, duration, snackbarOptions);
+        var snackbar = Snackbar.Make(text, action, buttonText, duration, snackbarOptions, CustomContentPageNotAnimated.SnackBarSafeArea);
 
         await snackbar.Show(cancellationTokenSource.Token);
     }

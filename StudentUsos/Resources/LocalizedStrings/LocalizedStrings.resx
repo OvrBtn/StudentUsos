@@ -665,4 +665,13 @@
   <data name="LoginPage_SigInAsGuest" xml:space="preserve">
     <value>Sign in as guest</value>
   </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="LoginPage_TryAgain" xml:space="preserve">
+    <value>Try again</value>
+  </data>
+  <data name="LoginPage_TryAgainWithPinCode" xml:space="preserve">
+    <value>Try again using PIN code</value>
+  </data>
 </root>

@@ -68,6 +68,14 @@ public partial class App : Application
         _ = DelayedInitializationAsync();
     }
 
+    public static event Action OnResumed;
+
+    protected override void OnResume()
+    {
+        base.OnResume();
+        OnResumed?.Invoke();
+    }
+
     async Task DelayedInitializationAsync()
     {
         await Task.Delay(2500);

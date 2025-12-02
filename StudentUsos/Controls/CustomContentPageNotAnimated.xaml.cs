@@ -26,6 +26,8 @@ public partial class CustomContentPageNotAnimated : ContentPage
     Rect DefaultContentStackLayoutLayoutBounds { get; init; }
     Rect TabBarNotVisibleContentStackLayoutLayoutBounds { get; init; }
 
+    public static VisualElement? SnackBarSafeArea { get; private set; }
+
     public CustomContentPageNotAnimated()
     {
         BindingContext = this;
@@ -36,6 +38,30 @@ public partial class CustomContentPageNotAnimated : ContentPage
         DefaultContentStackLayoutLayoutBounds = AbsoluteLayout.GetLayoutBounds(ContentContainer);
         TabBarNotVisibleContentStackLayoutLayoutBounds = new(0, 0, 1, 1);
 
+        Loaded += CustomContentPageNotAnimated_Loaded;
+    }
+
+    static Size? tabBarSize = null;
+
+    private void CustomContentPageNotAnimated_Loaded(object? sender, EventArgs e)
+    {
+        if (tabBarSize is null)
+        {
+            tabBarSize = TabBar.Measure(double.PositiveInfinity, double.PositiveInfinity);
+        }
+        SnackBarSafeArea = (GetTemplateChild("snackBarSafeArea") as VisualElement) ?? throw new NullReferenceException();
+
+        double safeAreaHeight;
+        if (TabBar.IsVisible)
+        {
+            safeAreaHeight = tabBarSize?.Height ?? 0;
+        }
+        else
+        {
+            safeAreaHeight = App.NavigationBarHeight;
+        }
+
+        SnackBarSafeArea.HeightRequest = safeAreaHeight;
     }
 
     protected override void OnDisappearing()

@@ -9,10 +9,12 @@ public class ServerConnectionManager : IServerConnectionManager
 {
     ILogger logger;
     IApplicationService applicationService;
-    public ServerConnectionManager(ILogger logger, IApplicationService applicationService)
+    IUsosInstallationsService usosInstallationsService;
+    public ServerConnectionManager(ILogger logger, IApplicationService applicationService, IUsosInstallationsService usosInstallationsService)
     {
         this.logger = logger;
         this.applicationService = applicationService;
+        this.usosInstallationsService = usosInstallationsService;
     }
 
     string apiVersion = "1";
@@ -221,7 +223,7 @@ public class ServerConnectionManager : IServerConnectionManager
     void AddStaticPublicArguments(ref Dictionary<string, string> args)
     {
         args.Add(TimestampKey, DateAndTimeProvider.Current.UtcNow.ToUnixTimeSeconds().ToString());
-        args.Add(InstallationKey, AuthorizationService.Installation);
+        args.Add(InstallationKey, usosInstallationsService.GetCurrentInstallation()!);
         args.Add(InternalConsumerKeyKey, Secrets.Default.InternalConsumerKey);
         args.Add(ApiVersionKey, apiVersion);
         args.Add(ApplicationVersionKey, applicationService.ApplicationInfo.VersionString);

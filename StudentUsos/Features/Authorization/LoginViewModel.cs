@@ -1,57 +1,75 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using StudentUsos.Features.Authorization.Services;
+using StudentUsos.Features.Authorization.Views;
 using StudentUsos.Services.ServerConnection;
 
 namespace StudentUsos.Features.Authorization;
 
 public partial class LoginViewModel : BaseViewModel
 {
-
-    [ObservableProperty]
-    bool isActivityIndicatorRunning;
-
-    [ObservableProperty]
-    bool isAdditionalLoginOptionVisible = false;
-
-    [ObservableProperty]
-    string mainStateKey = StateKey.Loaded;
-
-    public Command LoginCommand { get; }
-    public Command LoginWithPinCommand { get; }
-
-    /// <summary>
-    /// Flag to make sure that <see cref="AuthorizationService.OnLoginSucceeded"/> and <see cref="AuthorizationService.OnLoginFailed"/> are subscribed to just once
-    /// </summary>
-    static bool areEventsSet = false;
-
     IServerConnectionManager serverConnectionManager;
     ILocalDatabaseManager localDatabaseManager;
     ILocalStorageManager localStorageManager;
+    INavigationService navigationService;
+    IUsosInstallationsService usosInstallationsService;
     public LoginViewModel(IServerConnectionManager serverConnectionManager,
         ILocalDatabaseManager localDatabaseManager,
-        ILocalStorageManager localStorageManager)
+        ILocalStorageManager localStorageManager,
+        INavigationService navigationService,
+        IUsosInstallationsService usosInstallationsService)
     {
         this.serverConnectionManager = serverConnectionManager;
         this.localDatabaseManager = localDatabaseManager;
         this.localStorageManager = localStorageManager;
+        this.navigationService = navigationService;
+        this.usosInstallationsService = usosInstallationsService;
 
-        LoginCommand = new Command(OnLoginClicked);
-        LoginWithPinCommand = new Command(OnLoginWithPINClicked);
+        AuthorizationService.OnLoginSucceeded += AuthorizationService_OnLoginSucceeded;
+        AuthorizationService.OnLoginStarted += AuthorizationService_OnLoginStarted;
 
-        if (areEventsSet == false)
+        _ = PreloadInstallations();
+
+        if (localStorageManager.TryGettingInt(LocalStorageKeys.LoginAttemptCounter, out int attemptCount) && attemptCount > 0)
         {
-            AuthorizationService.OnLoginSucceeded += () => { _ = LoginSuccessAsync(); };
-            AuthorizationService.OnLoginFailed += LoginFail;
-            AuthorizationService.OnContinueLogging += () => { MainStateKey = StateKey.Loading; };
-            AuthorizationService.OnAuthorizationFinished += () => { MainStateKey = StateKey.Loaded; };
-            areEventsSet = true;
+            IsAdditionalLoginOptionVisible = true;
         }
+    }
 
-        if (localStorageManager.TryGettingString(LocalStorageKeys.LoginAttemptCounter, out string result) && int.TryParse(result, null, out int attemptCount))
+    ~LoginViewModel()
+    {
+        AuthorizationService.OnLoginSucceeded -= AuthorizationService_OnLoginSucceeded;
+        AuthorizationService.OnLoginStarted -= AuthorizationService_OnLoginStarted;
+    }
+
+    private void AuthorizationService_OnLoginStarted()
+    {
+        if (localStorageManager.TryGettingInt(LocalStorageKeys.LoginAttemptCounter, out int attemptCount))
         {
-            if (attemptCount >= 2) IsAdditionalLoginOptionVisible = true;
+            attemptCount++;
+            localStorageManager.SetInt(LocalStorageKeys.LoginAttemptCounter, attemptCount);
+            if (attemptCount > 0)
+            {
+                IsAdditionalLoginOptionVisible = true;
+            }
         }
+        else localStorageManager.SetInt(LocalStorageKeys.LoginAttemptCounter, 0);
+    }
+
+    private void AuthorizationService_OnLoginSucceeded()
+    {
+        localStorageManager.SetInt(LocalStorageKeys.LoginAttemptCounter, 0);
+        IsAdditionalLoginOptionVisible = false;
+    }
+
+    async Task PreloadInstallations()
+    {
+        if (usosInstallationsService is not UsosInstallationsService service)
+        {
+            return;
+        }
+        var installations = await service.GetUsosInstallationsAsync();
+        service.UsosInstallationsCache = installations;
     }
 
     void SwitchToDefaultServices()
@@ -63,44 +81,23 @@ public partial class LoginViewModel : BaseViewModel
         DateAndTimeProvider.SwitchProvider(new DefaultDateAndTimeProvider());
     }
 
-    private void OnLoginClicked()
+    [RelayCommand]
+    async Task OnLoginClickedAsync()
     {
         SwitchToDefaultServices();
-        IsActivityIndicatorRunning = true;
 
-        if (localStorageManager.TryGettingString(LocalStorageKeys.LoginAttemptCounter, out string result) && int.TryParse(result, null, out int attemptCount))
-        {
-            attemptCount++;
-            localStorageManager.SetString(LocalStorageKeys.LoginAttemptCounter, attemptCount.ToString());
-            if (attemptCount >= 2) IsAdditionalLoginOptionVisible = true;
-        }
-        else localStorageManager.SetString(LocalStorageKeys.LoginAttemptCounter, "1");
-
-        AuthorizationService.BeginLoginAsync(AuthorizationService.Mode.RedirectWithCallback);
+        await navigationService.PushAsync<InstallationsPage, AuthorizationService.Mode>(AuthorizationService.Mode.RedirectWithCallback);
     }
 
-    private void OnLoginWithPINClicked()
+    [ObservableProperty]
+    bool isAdditionalLoginOptionVisible = false;
+
+    [RelayCommand]
+    async Task OnLoginWithPinClickedAsync()
     {
         SwitchToDefaultServices();
-        IsActivityIndicatorRunning = true;
 
-        AuthorizationService.BeginLoginAsync(AuthorizationService.Mode.UsePinCode);
-    }
-
-    private async Task LoginSuccessAsync()
-    {
-        localStorageManager.SetString(LocalStorageKeys.LoginAttemptCounter, "0");
-        IsAdditionalLoginOptionVisible = false;
-        IsActivityIndicatorRunning = false;
-        //create new tables from scratch or
-        //drop all tables and then regenerate them in case there is something left from guest mode
-        localDatabaseManager.ResetTables();
-        await Shell.Current.GoToAsync("//DashboardPage");
-    }
-
-    private void LoginFail()
-    {
-        IsActivityIndicatorRunning = false;
+        await navigationService.PushAsync<InstallationsPage, AuthorizationService.Mode>(AuthorizationService.Mode.UsePinCode);
     }
 
     [RelayCommand]
@@ -112,6 +109,10 @@ public partial class LoginViewModel : BaseViewModel
         }
         DateAndTimeProvider.SwitchProvider(new GuestDateAndTimeProvider());
         localStorageManager.SetBool(LocalStorageKeys.IsGuestMode, true);
-        await LoginSuccessAsync();
+
+        //create new tables from scratch or
+        //drop all tables and then regenerate them in case there is something left from guest mode
+        localDatabaseManager.ResetTables();
+        await Shell.Current.GoToAsync("//DashboardPage");
     }
 }

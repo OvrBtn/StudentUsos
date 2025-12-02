@@ -916,6 +916,24 @@ namespace StudentUsos.Resources.LocalizedStrings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Try again.
+        /// </summary>
+        internal static string LoginPage_TryAgain {
+            get {
+                return ResourceManager.GetString("LoginPage_TryAgain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Try again using PIN code.
+        /// </summary>
+        internal static string LoginPage_TryAgainWithPinCode {
+            get {
+                return ResourceManager.GetString("LoginPage_TryAgainWithPinCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Log out.
         /// </summary>
         internal static string Logout {
@@ -1356,6 +1374,15 @@ namespace StudentUsos.Resources.LocalizedStrings {
         internal static string Schedule {
             get {
                 return ResourceManager.GetString("Schedule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        internal static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
             }
         }
         

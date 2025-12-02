@@ -2,7 +2,6 @@
 using Android.Content;
 using Android.Content.PM;
 using Android.OS;
-using Microsoft.Maui.Controls.Compatibility.Platform.Android;
 using StudentUsos.Platforms.Android;
 
 namespace StudentUsos;
@@ -61,6 +60,8 @@ public class MainActivity : MauiAppCompatActivity
         CheckUri(intent);
     }
 
+    public static event Action<Dictionary<string, string?>> OnIntentRecreatedWithData;
+
     void CheckUri(Intent? intent)
     {
         try
@@ -69,15 +70,29 @@ public class MainActivity : MauiAppCompatActivity
             {
                 return;
             }
+
             var uri = intent?.Data;
-            if (uri != null)
+            if (uri is null)
             {
-                var parameters = uri?.GetQueryParameters("oauth_verifier")?.ToList();
-                if (parameters != null && parameters.Count > 0)
+                return;
+            }
+
+            Dictionary<string, string?> queryParams = new();
+
+            if (uri.QueryParameterNames is not null)
+            {
+                foreach (var name in uri.QueryParameterNames)
                 {
-                    var verifier = parameters[0];
-                    OnLogInCallback?.Invoke(verifier);
+                    var value = uri.GetQueryParameter(name);
+                    queryParams[name] = value;
                 }
+            }
+
+            OnIntentRecreatedWithData?.Invoke(queryParams);
+
+            if (queryParams.TryGetValue("oauth_verifier", out var verifier) && verifier is not null)
+            {
+                OnLogInCallback?.Invoke(verifier);
             }
         }
         catch (Exception ex) { Logger.Default?.LogCatchedException(ex); }

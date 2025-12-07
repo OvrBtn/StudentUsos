@@ -10,11 +10,16 @@ public class ServerConnectionManager : IServerConnectionManager
     ILogger logger;
     IApplicationService applicationService;
     IUsosInstallationsService usosInstallationsService;
-    public ServerConnectionManager(ILogger logger, IApplicationService applicationService, IUsosInstallationsService usosInstallationsService)
+    IDevTunnelService? devTunnelService;
+    public ServerConnectionManager(ILogger logger,
+        IApplicationService applicationService,
+        IUsosInstallationsService usosInstallationsService,
+        IDevTunnelService? devTunnelService = null)
     {
         this.logger = logger;
         this.applicationService = applicationService;
         this.usosInstallationsService = usosInstallationsService;
+        this.devTunnelService = devTunnelService;
     }
 
     string apiVersion = "1";
@@ -90,7 +95,8 @@ public class ServerConnectionManager : IServerConnectionManager
     {
         try
         {
-            string fullPath = Secrets.Default.ServerUrl + "api/v" + apiVersion + "/" + endpoint;
+            string serverUrl = devTunnelService?.GetFullDevTunnelUrl() ?? Secrets.Default.ServerUrl;
+            string fullPath = serverUrl + "api/v" + apiVersion + "/" + endpoint;
 
             AddStaticPublicArguments(ref requestHeaders);
             var dictionaryToHash = AddStaticSecretArguments(requestHeaders);
@@ -143,7 +149,8 @@ public class ServerConnectionManager : IServerConnectionManager
     {
         try
         {
-            string fullPath = Secrets.Default.ServerUrl + "api/v" + apiVersion + "/" + endpoint;
+            string serverUrl = devTunnelService?.GetFullDevTunnelUrl() ?? Secrets.Default.ServerUrl;
+            string fullPath = serverUrl + "api/v" + apiVersion + "/" + endpoint;
 
             AddStaticPublicArguments(ref requestHeaders);
             var dictionaryToHash = AddStaticSecretArguments(requestHeaders);

@@ -28,5 +28,6 @@ public enum LocalStorageKeys
     ActivitiesSynchronizationBackgroundWorker_IsEnabled,
     ActivitiesSynchronizationBackgroundWorker_ShouldSendNotifications,
     IsGuestMode,
-    UsosInstallationsService_CurrentInstallation
+    UsosInstallationsService_CurrentInstallation,
+    DevTunnelService_DevTunnelId
 }

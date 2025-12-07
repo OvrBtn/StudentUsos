@@ -78,4 +78,9 @@ public partial class DiagnosisSubpage : CustomContentPageNotAnimated
         OnLocalDataReseted?.Invoke();
         applicationService?.ShowToast(LocalizedStrings.Success);
     }
+
+    private void DevTunnelButton_Clicked(object sender, EventArgs e)
+    {
+        navigationService.PushAsync<DevTunnelPage>();
+    }
 }

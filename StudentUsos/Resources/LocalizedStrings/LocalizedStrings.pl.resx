@@ -676,4 +676,13 @@
   <data name="LoginPage_TryAgainWithPinCode" xml:space="preserve">
     <value>Spróbuj ponownie przy pomocy kodu PIN</value>
   </data>
+  <data name="DevTunnelPage_RemoveTunnel" xml:space="preserve">
+    <value>Usuń tunel</value>
+  </data>
+  <data name="DevTunnelPage_KeepBetweenAppRuns" xml:space="preserve">
+    <value>Zachowaj między uruchomieniami aplikacji</value>
+  </data>
+  <data name="DevTunnelPage_Description" xml:space="preserve">
+    <value>Dev Tunnel umożliwia łączenie się z innymi serwerami przy użyciu identyfikatora Dev Tunnel. Nie wpisuj tutaj żadnych wartości, chyba że zostały podane przez dewelopera aplikacji. Jednym z głównych zastosowań Dev Tunnels jest łączenie się z serwerem deweloperskim. Jeśli po połączeniu aplikacja przestanie działać, usuń Dev Tunnel za pomocą poniższego przycisku.</value>
+  </data>
 </root>

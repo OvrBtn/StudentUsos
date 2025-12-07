@@ -674,4 +674,13 @@
   <data name="LoginPage_TryAgainWithPinCode" xml:space="preserve">
     <value>Try again using PIN code</value>
   </data>
+  <data name="DevTunnelPage_RemoveTunnel" xml:space="preserve">
+    <value>Remove tunnel</value>
+  </data>
+  <data name="DevTunnelPage_KeepBetweenAppRuns" xml:space="preserve">
+    <value>Keep between app runs</value>
+  </data>
+  <data name="DevTunnelPage_Description" xml:space="preserve">
+    <value>Dev Tunnel allows connecting to other servers using the identifier of Dev Tunnel. Do not input here any values unless given by application's developer. One of the main purposes of Dev Tunnels is connecting to development server. If you connected to one and your app stops working remove the Dev Tunnel using button below.</value>
+  </data>
 </root>

@@ -574,6 +574,33 @@ namespace StudentUsos.Resources.LocalizedStrings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dev Tunnel allows connecting to other servers using the identifier of Dev Tunnel. Do not input here any values unless given by application&apos;s developer. One of the main purposes of Dev Tunnels is connecting to development server. If you connected to one and your app stops working remove the Dev Tunnel using button below..
+        /// </summary>
+        internal static string DevTunnelPage_Description {
+            get {
+                return ResourceManager.GetString("DevTunnelPage_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keep between app runs.
+        /// </summary>
+        internal static string DevTunnelPage_KeepBetweenAppRuns {
+            get {
+                return ResourceManager.GetString("DevTunnelPage_KeepBetweenAppRuns", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove tunnel.
+        /// </summary>
+        internal static string DevTunnelPage_RemoveTunnel {
+            get {
+                return ResourceManager.GetString("DevTunnelPage_RemoveTunnel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Diagnosis.
         /// </summary>
         internal static string Diagnosis {

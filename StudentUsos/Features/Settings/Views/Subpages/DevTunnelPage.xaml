@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:CustomContentPageNotAnimated
+    x:Class="StudentUsos.Features.Settings.Views.Subpages.DevTunnelPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:StudentUsos.Controls"
+    xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
+    xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
+
+    <ScrollView>
+        <StackLayout Margin="30,70,30,30">
+
+            <Label Text="{x:Static strings:LocalizedStrings.DevTunnelPage_Description}" Margin="0,0,0,30"></Label>
+            <Label FontSize="14" HorizontalTextAlignment="Center" Text="Dev tunnel" />
+            <Border Margin="0,5,0,20" Padding="0">
+                <StackLayout>
+                    <!--<Entry x:Name="entry" TextChanged="Entry_TextChanged"></Entry>-->
+                    <dxe:TextEdit x:Name="textEdit" TextChanged="TextEdit_TextChanged" LabelText="Dev Tunnel Id" Margin="15"></dxe:TextEdit>
+                    <StackLayout BackgroundColor="#444" HeightRequest="1" Margin="20,0"/>
+                    <Button Text="{x:Static strings:LocalizedStrings.DevTunnelPage_RemoveTunnel}" Clicked="Button_Clicked" Padding="15"></Button>
+                </StackLayout>
+            </Border>
+
+        </StackLayout>
+    </ScrollView>
+
+</controls:CustomContentPageNotAnimated>

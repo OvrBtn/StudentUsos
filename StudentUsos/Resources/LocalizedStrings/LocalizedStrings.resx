@@ -133,10 +133,7 @@
     <value>Personal data</value>
   </data>
   <data name="AboutAppPage_PersonalDataText1" xml:space="preserve">
-    <value>The application does not send data outside the user's device. The only form of data collection is logs, which are used for diagnostic purposes, but they are not automatically sent. Logs can only be sent by the user from the application settings (previous page).</value>
-  </data>
-  <data name="AboutAppPage_PersonalDataText2" xml:space="preserve">
-    <value>Logs are automatically deleted from the device after 2 days.</value>
+    <value>The application does not transmit any private data outside of the user’s device. The only data it collects are diagnostic logs, which by default do not contain personal information. Users can choose to manually send logs, delete them, or adjust what information is recorded at any time in Settings → Diagnostics.</value>
   </data>
   <data name="Account" xml:space="preserve">
     <value>Account</value>
@@ -673,5 +670,26 @@
   </data>
   <data name="LoginPage_TryAgainWithPinCode" xml:space="preserve">
     <value>Try again using PIN code</value>
+  </data>
+  <data name="DevTunnelPage_RemoveTunnel" xml:space="preserve">
+    <value>Remove tunnel</value>
+  </data>
+  <data name="DevTunnelPage_KeepBetweenAppRuns" xml:space="preserve">
+    <value>Keep between app runs</value>
+  </data>
+  <data name="DevTunnelPage_Description" xml:space="preserve">
+    <value>Dev Tunnel allows connecting to other servers using the identifier of Dev Tunnel. Do not input here any values unless given by application's developer. One of the main purposes of Dev Tunnels is connecting to development server. If you connected to one and your app stops working remove the Dev Tunnel using button below.</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="Constants_Email" xml:space="preserve">
+    <value>studenckiusosput@gmail.com</value>
+  </data>
+  <data name="Constants_DiscordUrl" xml:space="preserve">
+    <value>https://discord.gg/h5pASvNG44</value>
+  </data>
+  <data name="Constants_GitHubUrl" xml:space="preserve">
+    <value>https://github.com/OvrBtn/StudentUsos</value>
   </data>
 </root>

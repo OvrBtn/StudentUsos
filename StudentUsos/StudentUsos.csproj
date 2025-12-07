@@ -239,6 +239,9 @@
 		<Compile Update="Controls\CustomContentPageNotAnimated.xaml.cs">
 			<DependentUpon>CustomContentPageNotAnimated.xaml</DependentUpon>
 		</Compile>
+		<Compile Update="Features\Authorization\Views\LoginSettingsPage.xaml.cs">
+		  <DependentUpon>LoginSettingsPage.xaml</DependentUpon>
+		</Compile>
 		<Compile Update="Features\Authorization\Views\LoginResultPage.xaml.cs">
 		  <DependentUpon>LoginResultPage.xaml</DependentUpon>
 		</Compile>
@@ -259,6 +262,9 @@
 		</Compile>
 		<Compile Update="Features\Settings\Views\LogsPage.xaml.cs">
 			<DependentUpon>LogsPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Features\Settings\Views\Subpages\DevTunnelPage.xaml.cs">
+		  <DependentUpon>DevTunnelPage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Features\Settings\Views\Subpages\AccountSubpage.xaml.cs">
 			<DependentUpon>AccountSubpage.xaml</DependentUpon>
@@ -383,6 +389,9 @@
 		<MauiXaml Update="Controls\CustomContentPageNotAnimated.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+		<MauiXaml Update="Features\Authorization\Views\LoginSettingsPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="Features\Authorization\Views\LoginResultPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
@@ -409,6 +418,9 @@
 		</MauiXaml>
 		<MauiXaml Update="Features\Settings\Views\NotificationsDiagnosis\StateContentView.xaml">
 			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Features\Settings\Views\Subpages\DevTunnelPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Features\Settings\Views\Subpages\AccountSubpage.xaml">
 			<Generator>MSBuild:Compile</Generator>

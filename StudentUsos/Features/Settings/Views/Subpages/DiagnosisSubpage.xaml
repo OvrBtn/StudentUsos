@@ -41,6 +41,13 @@
                 </StackLayout>
             </Border>
 
+            <Border Padding="0" Margin="0,0,0,20">
+                <StackLayout>
+                    <Button Text="Dev Tunnel" Padding="15"
+                            Clicked="DevTunnelButton_Clicked" CornerRadius="0"/>
+                </StackLayout>
+            </Border>
+
         </StackLayout>
     </ScrollView>
 

@@ -121,6 +121,8 @@ internal static partial class MauiProgramExtensions
         builder.Services.AddSingleton<IUsosInstallationsService, UsosInstallationsService>();
         builder.Services.AddSingleton(provider => new Lazy<IUsosInstallationsService>(() => provider.GetService<IUsosInstallationsService>()!));
 
+        builder.Services.AddSingleton<IDevTunnelService, DevTunnelService>();
+
         return builder;
     }
 
@@ -168,6 +170,10 @@ internal static partial class MauiProgramExtensions
 
         builder.Services.AddTransient<InstallationsPage>();
         builder.Services.AddTransient<LoginResultPage>();
+
+        builder.Services.AddTransient<DevTunnelPage>();
+
+        builder.Services.AddTransient<LoginSettingsPage>();
 
         return builder;
     }

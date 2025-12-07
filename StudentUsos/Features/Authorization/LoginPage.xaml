@@ -11,76 +11,87 @@
     IsTabBarVisible="False"
     Shell.TabBarIsVisible="False">
 
-    <StackLayout Margin="0,0,0,40" VerticalOptions="Center">
+    <Grid>
 
-        <StackLayout
+        <Border VerticalOptions="Start" HorizontalOptions="End" Margin="40, 70" ZIndex="5" Padding="0">
+            <Grid>
+                <Image Source="gear256" HeightRequest="32" Margin="10"></Image>
+                <Button BackgroundColor="Transparent" Clicked="Button_Clicked"></Button>
+            </Grid>
+        </Border>
+
+        <StackLayout Margin="0,0,0,40" VerticalOptions="Center" ZIndex="1">
+
+            <StackLayout
             Margin="20"
             toolkit:StateView.StateKey="Loaded"
             VerticalOptions="Center">
-            <Image
+                <Image
                 Margin="50,0,50,-20"
                 Source="app_icon_256"
                 WidthRequest="300" />
 
-            <StackLayout Margin="10,0,10,100">
-                <Label
+                <StackLayout Margin="10,0,10,100">
+                    <Label
                     FontSize="40"
                     HorizontalTextAlignment="Center"
                     Text="{x:Static strings:LocalizedStrings.AppName_FirstPart}"
                     TextColor="{StaticResource TextColor}"
                     VerticalTextAlignment="Center" />
-                <Label
+                    <Label
                     FontSize="35"
                     HorizontalTextAlignment="Center"
                     Text="{x:Static strings:LocalizedStrings.AppName_SecondPart}"
                     TextColor="{StaticResource TextColor}"
                     VerticalTextAlignment="Center" />
-            </StackLayout>
+                </StackLayout>
 
-            <StackLayout Margin="50,0">
-                <Button
+                <StackLayout Margin="50,0">
+                    <Button
                     Padding="0,12"
                     BackgroundColor="{StaticResource Primary}"
                     Command="{Binding LoginClickedCommand}"
                     Text="{x:Static strings:LocalizedStrings.LoginPage_Login}"
                     VerticalOptions="Center" />
-                <StackLayout IsVisible="{Binding IsAdditionalLoginOptionVisible}">
-                    <Label
+                    <StackLayout IsVisible="{Binding IsAdditionalLoginOptionVisible}">
+                        <Label
                         Margin="0,20,0,10"
                         HorizontalTextAlignment="Center"
                         Text="{x:Static strings:LocalizedStrings.LoginPage_IssueWithLogin}" />
-                    <Button
+                        <Button
                         BackgroundColor="{StaticResource Primary}"
                         Command="{Binding LoginWithPinClickedCommand}"
                         Text="{x:Static strings:LocalizedStrings.LoginPage_LoginWithPIN}"
                         VerticalOptions="Center" />
+                    </StackLayout>
                 </StackLayout>
-            </StackLayout>
 
-            <StackLayout Margin="50,15">
-                <Grid ColumnDefinitions="*,auto,*" ColumnSpacing="20">
-                    <Border
+                <StackLayout Margin="50,15">
+                    <Grid ColumnDefinitions="*,auto,*" ColumnSpacing="20">
+                        <Border
                         Grid.Column="0"
                         BackgroundColor="Gray"
                         HeightRequest="2" />
-                    <Label
+                        <Label
                         Grid.Column="1"
                         Text="{x:Static strings:LocalizedStrings.Or}"
                         TextTransform="Lowercase" />
-                    <Border
+                        <Border
                         Grid.Column="2"
                         BackgroundColor="Gray"
                         HeightRequest="2" />
-                </Grid>
-            </StackLayout>
+                    </Grid>
+                </StackLayout>
 
-            <Button
+                <Button
                 Margin="50,0"
                 Command="{Binding SignInAsGuestCommand}"
                 Text="{x:Static strings:LocalizedStrings.LoginPage_SigInAsGuest}" />
 
+            </StackLayout>
+
         </StackLayout>
 
-    </StackLayout>
+    </Grid>
 
 </controls:CustomContentPageNotAnimated>

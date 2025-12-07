@@ -133,10 +133,7 @@
     <value>Dane osobowe</value>
   </data>
   <data name="AboutAppPage_PersonalDataText1" xml:space="preserve">
-    <value>Aplikacja nie wysyła danych poza urządzenie użytkownika. Jedyną formą zbierania danych są logi, które służą do celów diagnostycznych, lecz nie są one automatycznie wysyłane. Logi mogą zostać przesłane jedynie przez samego użytkownika z poziomu ustawień aplikacji (poprzednia strona).</value>
-  </data>
-  <data name="AboutAppPage_PersonalDataText2" xml:space="preserve">
-    <value>Logi są automatycznie usuwane z urządzenia po 2 dniach.</value>
+    <value>Aplikacja nie przesyła żadnych prywatnych danych poza urządzenie użytkownika. Jedynymi danymi, które gromadzi, są logi diagnostyczne, które domyślnie nie zawierają danych osobowych. Użytkownik może ręcznie wysłać logi, usunąć je lub dostosować zakres zapisywanych informacji w Ustawieniach → Diagnostyka.</value>
   </data>
   <data name="Account" xml:space="preserve">
     <value>Konto</value>
@@ -675,5 +672,17 @@
   </data>
   <data name="LoginPage_TryAgainWithPinCode" xml:space="preserve">
     <value>Spróbuj ponownie przy pomocy kodu PIN</value>
+  </data>
+  <data name="DevTunnelPage_RemoveTunnel" xml:space="preserve">
+    <value>Usuń tunel</value>
+  </data>
+  <data name="DevTunnelPage_KeepBetweenAppRuns" xml:space="preserve">
+    <value>Zachowaj między uruchomieniami aplikacji</value>
+  </data>
+  <data name="DevTunnelPage_Description" xml:space="preserve">
+    <value>Dev Tunnel umożliwia łączenie się z innymi serwerami przy użyciu identyfikatora Dev Tunnel. Nie wpisuj tutaj żadnych wartości, chyba że zostały podane przez dewelopera aplikacji. Jednym z głównych zastosowań Dev Tunnels jest łączenie się z serwerem deweloperskim. Jeśli po połączeniu aplikacja przestanie działać, usuń Dev Tunnel za pomocą poniższego przycisku.</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Kontakt</value>
   </data>
 </root>

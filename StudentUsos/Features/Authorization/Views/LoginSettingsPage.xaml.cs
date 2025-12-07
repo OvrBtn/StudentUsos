@@ -29,12 +29,12 @@ public partial class LoginSettingsPage : CustomContentPageNotAnimated
 
     private async void DiscordButton_Clicked(object sender, EventArgs e)
     {
-        await Browser.OpenAsync("https://discord.gg/h5pASvNG44", BrowserLaunchMode.SystemPreferred);
+        await Browser.OpenAsync(LocalizedStrings.Constants_DiscordUrl, BrowserLaunchMode.SystemPreferred);
     }
 
     private async void GitHubButton_Clicked(object sender, EventArgs e)
     {
-        await Browser.OpenAsync("https://github.com/OvrBtn/StudentUsos", BrowserLaunchMode.SystemPreferred);
+        await Browser.OpenAsync(LocalizedStrings.Constants_GitHubUrl, BrowserLaunchMode.SystemPreferred);
     }
 
     private void LogsButton_Clicked(object sender, EventArgs e)

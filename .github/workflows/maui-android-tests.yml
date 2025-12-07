@@ -22,19 +22,19 @@ jobs:
         with:
           dotnet-version: '9.0.x'
 
-      - name: Restore MAUI workload cache
-        id: cache-maui
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.nuget/packages
-            ~/.dotnet/sdk-manifests
-            ~/.dotnet/workload
-            ~/.dotnet/workload.json
-          key: maui-workload-${{ runner.os }}-${{ hashFiles('**/global.json') }}
+      #- name: Restore MAUI workload cache
+      #  id: cache-maui
+      #  uses: actions/cache@v3
+      #  with:
+      #    path: |
+      #      ~/.nuget/packages
+      #      ~/.dotnet/sdk-manifests
+      #      ~/.dotnet/workload
+      #      ~/.dotnet/workload.json
+      #    key: maui-workload-${{ runner.os }}-${{ hashFiles('**/global.json') }}
 
       - name: Install MAUI workload
-        if: steps.cache-maui.outputs.cache-hit != 'true'
+        #if: steps.cache-maui.outputs.cache-hit != 'true'
         run: dotnet workload install maui
 
       - name: Add DevExpress NuGet Source
@@ -95,17 +95,17 @@ jobs:
       - name: Run Integration Tests
         run: dotnet test --configuration Release --no-build --filter "Category=Unit_ServerDependent"
 
-  save-cache:
-    needs: [build, unit-tests-shared, unit-tests-server-dependent]
-    runs-on: windows-latest
-    if: always()
-    steps:
-      - name: Save MAUI workload cache
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.nuget/packages
-            ~/.dotnet/sdk-manifests
-            ~/.dotnet/workload
+  #save-cache:
+  #  needs: [build, unit-tests-shared, unit-tests-server-dependent]
+  #  runs-on: windows-latest
+  #  if: always()
+  #  steps:
+  #    - name: Save MAUI workload cache
+  #      uses: actions/cache@v3
+  #      with:
+  #        path: |
+  #          ~/.nuget/packages
+  #          ~/.dotnet/sdk-manifests
+  #          ~/.dotnet/workload
             ~/.dotnet/workload.json
           key: maui-workload-${{ runner.os }}-${{ hashFiles('**/global.json') }}

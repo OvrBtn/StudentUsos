@@ -107,5 +107,5 @@ jobs:
   #          ~/.nuget/packages
   #          ~/.dotnet/sdk-manifests
   #          ~/.dotnet/workload
-            ~/.dotnet/workload.json
-          key: maui-workload-${{ runner.os }}-${{ hashFiles('**/global.json') }}
+  #          ~/.dotnet/workload.json
+  #        key: maui-workload-${{ runner.os }}-${{ hashFiles('**/global.json') }}

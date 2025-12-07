@@ -18,7 +18,6 @@ public partial class LoginPage : CustomContentPageNotAnimated
 
     private void Button_Clicked(object sender, EventArgs e)
     {
-        LoginSettingsPage page = new(navigationService, applicationService);
-        page.ShowPopup();
+        navigationService.PushAsync<LoginSettingsPage>();
     }
 }

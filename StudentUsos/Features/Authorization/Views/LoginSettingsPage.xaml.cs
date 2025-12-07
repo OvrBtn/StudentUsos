@@ -5,7 +5,7 @@ using StudentUsos.Resources.LocalizedStrings;
 
 namespace StudentUsos.Features.Authorization.Views;
 
-public partial class LoginSettingsPage : CustomBottomSheet
+public partial class LoginSettingsPage : CustomContentPageNotAnimated
 {
     INavigationService navigationService;
     IApplicationService applicationService;

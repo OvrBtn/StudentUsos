@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<controls:CustomBottomSheet
+<controls:CustomContentPageNotAnimated
     x:Class="StudentUsos.Features.Authorization.Views.LoginSettingsPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -10,11 +10,10 @@
     xmlns:models="clr-namespace:StudentUsos.Features.Authorization.Models"
     xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
     x:DataType="authorization:InstallationsViewModel"
-    HalfExpandedRatio="0.6"
     Shell.TabBarIsVisible="False">
 
     <ScrollView>
-        <StackLayout Margin="30,0,30,30">
+        <StackLayout Margin="30,70,30,30">
 
             <Border Padding="0" Margin="0,0,0,20">
                 <StackLayout>
@@ -59,4 +58,4 @@
         </StackLayout>
     </ScrollView>
 
-</controls:CustomBottomSheet>
+</controls:CustomContentPageNotAnimated>

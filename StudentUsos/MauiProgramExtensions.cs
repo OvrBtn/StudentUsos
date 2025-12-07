@@ -173,6 +173,8 @@ internal static partial class MauiProgramExtensions
 
         builder.Services.AddTransient<DevTunnelPage>();
 
+        builder.Services.AddTransient<LoginSettingsPage>();
+
         return builder;
     }
 

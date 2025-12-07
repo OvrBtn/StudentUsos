@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:CustomBottomSheet
+    x:Class="StudentUsos.Features.Authorization.Views.LoginSettingsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:StudentUsos.Controls"
+    xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:authorization="using:StudentUsos.Features.Authorization.Views"
+    xmlns:models="clr-namespace:StudentUsos.Features.Authorization.Models"
+    xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
+    x:DataType="authorization:InstallationsViewModel"
+    HalfExpandedRatio="0.6"
+    Shell.TabBarIsVisible="False">
+
+    <ScrollView>
+        <StackLayout Margin="30,0,30,30">
+
+            <Border Padding="0" Margin="0,0,0,20">
+                <StackLayout>
+                    <Button Text="{x:Static strings:LocalizedStrings.SettingsPage_AppInfo}" Padding="15"
+                        Clicked="AppInfoButton_Clicked" CornerRadius="0"/>
+                </StackLayout>
+            </Border>
+
+            <Label FontSize="14" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.Contact}" />
+            <Border Margin="0,5,0,20" Padding="0">
+                <StackLayout>
+
+                    <Grid>
+                        <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="Center">
+                            <Label FontSize="12" Text="studenckiusosput@gmail.com"></Label>
+                            <Image Source="copy_to_clipboard.png" WidthRequest="15"></Image>
+                        </StackLayout>
+                        <Button Clicked="CopyEmailToClipboard" BackgroundColor="Transparent" CornerRadius="0" Padding="15"></Button>
+                    </Grid>
+                    <StackLayout BackgroundColor="#444" HeightRequest="1" Margin="20,0"/>
+                    <Button FontSize="12" Text="Discord" Clicked="DiscordButton_Clicked" BackgroundColor="{StaticResource BackgroundColor2}" Padding="15" CornerRadius="0"></Button>
+                    <StackLayout BackgroundColor="#444" HeightRequest="1" Margin="20,0"/>
+                    <Button FontSize="12" Text="GitHub" Clicked="GitHubButton_Clicked" BackgroundColor="{StaticResource BackgroundColor2}" Padding="15" CornerRadius="0"></Button>
+
+                </StackLayout>
+            </Border>
+
+            <Label FontSize="14" HorizontalTextAlignment="Center"
+            Text="{x:Static strings:LocalizedStrings.Diagnosis}" />
+            <Border Padding="0" Margin="0,5,0,20">
+                <StackLayout>
+                    <Button Text="{x:Static strings:LocalizedStrings.SettingsPage_Logs}" Padding="15"
+                             CornerRadius="0" Clicked="LogsButton_Clicked"/>
+
+                    <StackLayout BackgroundColor="#444" HeightRequest="1" Margin="20,0"/>
+
+                    <Button Text="Dev Tunnel" Padding="15"
+                             CornerRadius="0" Clicked="DevTunnelButton_Clicked_1"/>
+                </StackLayout>
+            </Border>
+
+        </StackLayout>
+    </ScrollView>
+
+</controls:CustomBottomSheet>

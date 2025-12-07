@@ -106,20 +106,11 @@ namespace StudentUsos.Resources.LocalizedStrings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The application does not send data outside the user&apos;s device. The only form of data collection is logs, which are used for diagnostic purposes, but they are not automatically sent. Logs can only be sent by the user from the application settings (previous page)..
+        ///   Looks up a localized string similar to The application does not transmit any private data outside of the user’s device. The only data it collects are diagnostic logs, which by default do not contain personal information. Users can choose to manually send logs, delete them, or adjust what information is recorded at any time in Settings → Diagnostics..
         /// </summary>
         internal static string AboutAppPage_PersonalDataText1 {
             get {
                 return ResourceManager.GetString("AboutAppPage_PersonalDataText1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Logs are automatically deleted from the device after 2 days..
-        /// </summary>
-        internal static string AboutAppPage_PersonalDataText2 {
-            get {
-                return ResourceManager.GetString("AboutAppPage_PersonalDataText2", resourceCulture);
             }
         }
         
@@ -516,6 +507,42 @@ namespace StudentUsos.Resources.LocalizedStrings {
         internal static string Confirm {
             get {
                 return ResourceManager.GetString("Confirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://discord.gg/h5pASvNG44.
+        /// </summary>
+        internal static string Constants_DiscordUrl {
+            get {
+                return ResourceManager.GetString("Constants_DiscordUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to studenckiusosput@gmail.com.
+        /// </summary>
+        internal static string Constants_Email {
+            get {
+                return ResourceManager.GetString("Constants_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://github.com/OvrBtn/StudentUsos.
+        /// </summary>
+        internal static string Constants_GitHubUrl {
+            get {
+                return ResourceManager.GetString("Constants_GitHubUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contact.
+        /// </summary>
+        internal static string Contact {
+            get {
+                return ResourceManager.GetString("Contact", resourceCulture);
             }
         }
         

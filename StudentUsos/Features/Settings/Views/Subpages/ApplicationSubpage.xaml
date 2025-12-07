@@ -27,6 +27,25 @@
                 </StackLayout>
             </Border>
 
+            <Label FontSize="14" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.Contact}" />
+            <Border Margin="0,5,0,20" Padding="0">
+                <StackLayout>
+
+                    <Grid>
+                        <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="Center">
+                            <Label FontSize="12" Text="{x:Static strings:LocalizedStrings.Constants_Email}"></Label>
+                            <Image Source="copy_to_clipboard.png" WidthRequest="15"></Image>
+                        </StackLayout>
+                        <Button Clicked="CopyEmailToClipboard" BackgroundColor="Transparent" CornerRadius="0" Padding="15"></Button>
+                    </Grid>
+                    <StackLayout BackgroundColor="#444" HeightRequest="1" Margin="20,0"/>
+                    <Button FontSize="12" Text="Discord" Clicked="DiscordButton_Clicked" BackgroundColor="{StaticResource BackgroundColor2}" Padding="15" CornerRadius="0"></Button>
+                    <StackLayout BackgroundColor="#444" HeightRequest="1" Margin="20,0"/>
+                    <Button FontSize="12" Text="GitHub" Clicked="GitHubButton_Clicked" BackgroundColor="{StaticResource BackgroundColor2}" Padding="15" CornerRadius="0"></Button>
+
+                </StackLayout>
+            </Border>
+
             <Label FontSize="14" HorizontalTextAlignment="Center" Text="{x:Static strings:LocalizedStrings.SettingsPage_BackgroundSynchronization}" />
             <Border Margin="0,5,0,20" Padding="0">
                 <Grid ColumnDefinitions="*, auto" HorizontalOptions="Fill" Margin="20, 0">

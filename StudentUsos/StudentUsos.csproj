@@ -239,6 +239,9 @@
 		<Compile Update="Controls\CustomContentPageNotAnimated.xaml.cs">
 			<DependentUpon>CustomContentPageNotAnimated.xaml</DependentUpon>
 		</Compile>
+		<Compile Update="Features\Authorization\Views\LoginSettingsPage.xaml.cs">
+		  <DependentUpon>LoginSettingsPage.xaml</DependentUpon>
+		</Compile>
 		<Compile Update="Features\Authorization\Views\LoginResultPage.xaml.cs">
 		  <DependentUpon>LoginResultPage.xaml</DependentUpon>
 		</Compile>
@@ -385,6 +388,9 @@
 		</MauiXaml>
 		<MauiXaml Update="Controls\CustomContentPageNotAnimated.xaml">
 			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Features\Authorization\Views\LoginSettingsPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Features\Authorization\Views\LoginResultPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>

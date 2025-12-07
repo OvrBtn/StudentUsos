@@ -18,21 +18,22 @@
                 <Label Text="{x:Static strings:LocalizedStrings.AboutAppPage_DeveloperTitle}" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="18" Margin="0,0,0,10"></Label>
                 <Label Text="{x:Static strings:LocalizedStrings.AboutAppPage_Developer}"/>
                 <Label Text="{x:Static strings:LocalizedStrings.AboutAppPage_DeveloperContact}"/>
-                <controls:CustomButton Margin="10,10,10,5" OnClick="CopyEmailToClipboard">
-                    <Frame BackgroundColor="{StaticResource Primary}" Padding="0">
+                <Border BackgroundColor="{StaticResource BackgroundColor2}" Padding="0" Margin="10,10,10,10">
+                    <Grid>
                         <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="CenterAndExpand">
-                            <Label FontSize="12" Text="studenckiusosput@gmail.com"></Label>
+                            <Label FontSize="12" Text="{x:Static strings:LocalizedStrings.Constants_Email}"></Label>
                             <Image Source="copy_to_clipboard.png" WidthRequest="15"></Image>
                         </StackLayout>
-                    </Frame>
-                </controls:CustomButton>
-                <Button x:Name="button" FontSize="12" Text="Discord" Clicked="DiscordButton_Clicked" BackgroundColor="{StaticResource Primary}" Margin="10"></Button>
+                        <Button Clicked="CopyEmailToClipboard" BackgroundColor="Transparent"></Button>
+                    </Grid>
+                </Border>
+                <Button FontSize="12" Text="Discord" Clicked="DiscordButton_Clicked" BackgroundColor="{StaticResource BackgroundColor2}" Margin="10,0,10,10"></Button>
+                <Button FontSize="12" Text="GitHub" Clicked="GitHubButton_Clicked" BackgroundColor="{StaticResource BackgroundColor2}" Margin="10,0,10,0"></Button>
             </StackLayout>
 
             <StackLayout>
                 <Label Margin="0,0,0,10" Text="{x:Static strings:LocalizedStrings.AboutAppPage_PersonalData}" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="18"></Label>
                 <Label Text="{x:Static strings:LocalizedStrings.AboutAppPage_PersonalDataText1}"/>
-                <Label Text="{x:Static strings:LocalizedStrings.AboutAppPage_PersonalDataText2}"></Label>
             </StackLayout>
 
         </StackLayout>

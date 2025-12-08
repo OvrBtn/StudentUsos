@@ -100,7 +100,8 @@
                                                 <!--Grade label and type-->
                                                 <Grid ColumnDefinitions="*,30" RowDefinitions="auto, auto">
                                                     <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="FillAndExpand" Text="{Binding CourseName}" />
-                                                    <Label Grid.Column="0" Grid.Row="1" Margin="0,0,0,1" FontSize="12" Text="{Binding FirstTermGrade.ClassType}" />
+                                                    <Label Grid.Column="0" Grid.Row="1" Margin="0,0,0,1" FontSize="12" Text="{Binding FirstTermGrade.ClassType}"
+                                                           IsVisible="{Binding FirstTermGrade.IsClassTypeVisibile}"/>
                                                     <Image Grid.Column="1" Grid.RowSpan="2" WidthRequest="20" Source="pencil_square128.png"
                                                         x:DataType="views:GradesViewModel"   
                                                         IsVisible="{Binding IsEditingEnabled,Source={RelativeSource AncestorType={x:Type views:GradesViewModel}}}"></Image>

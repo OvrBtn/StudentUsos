@@ -1,6 +1,6 @@
 ﻿using StudentUsos.Features.Grades.Models;
-using StudentUsos.Features.Groups.Models;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace StudentUsos.Features.Grades.Helpers;
 
@@ -77,6 +77,25 @@ public static class GradesHelper
         }
     }
 
+    /// <summary>
+    /// Some univeristies have weird formats for grade symbols e.g. instead of doing only "4.5"
+    /// they will add something more e.g. "4.5 (bd)" which won' work with normal float.TryParse.
+    /// </summary>
+    /// <param name="gradeString">Non standard grade string</param>
+    /// <returns></returns>
+    static bool TryParseGradeFromNonStandardGradeString(string gradeString, out float parsed)
+    {
+        gradeString = gradeString.Replace(',', '.');
+        var match = Regex.Match(gradeString, @"[-+]?\d*\.?\d+");
+        if (match.Success && float.TryParse(match.Value, NumberStyles.Float, CultureInfo.InvariantCulture, out float parseResult))
+        {
+            parsed = parseResult;
+            return true;
+        }
+        parsed = 0;
+        return false;
+    }
+
     public static float CalculateGradeAverage(IEnumerable<FinalGradeGroup> gradesGroups)
     {
         try
@@ -90,28 +109,36 @@ public static class GradesHelper
                 float ectsPoints = 0;
                 foreach (var gradesGroup in allGradesGroupsForCourse)
                 {
-                    if (gradesGroup.FirstTermGrade.CountsIntoAverage == "N") continue;
+                    if (gradesGroup.FirstTermGrade.CountsIntoAverage == "N")
+                    {
+                        continue;
+                    }
+
                     float gradesFromTermsSum = 0;
                     int gradesFromTermsCount = 0;
                     FinalGrade? grade = null;
                     if (gradesGroup.SecondTermGrade.IsEmpty == false || gradesGroup.SecondTermGrade.IsModified)
                     {
                         grade = gradesGroup.SecondTermGrade;
-                        if (float.TryParse(grade.ValueSymbol.Replace('.', ','), NumberStyles.Float, new CultureInfo("pl"), out float parsed))
+                        if (float.TryParse(grade.ValueSymbol.Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture, out float parsed) ||
+                            TryParseGradeFromNonStandardGradeString(grade.ValueSymbol, out parsed))
                         {
                             gradesFromTermsSum += parsed;
                             gradesFromTermsCount++;
                         }
                     }
+
                     if (gradesGroup.FirstTermGrade.IsEmpty == false || gradesGroup.FirstTermGrade.IsModified)
                     {
                         grade = gradesGroup.FirstTermGrade;
-                        if (float.TryParse(grade.ValueSymbol.Replace('.', ','), NumberStyles.Float, new CultureInfo("pl"), out float parsed))
+                        if (float.TryParse(grade.ValueSymbol.Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture, out float parsed) ||
+                            TryParseGradeFromNonStandardGradeString(grade.ValueSymbol, out parsed))
                         {
                             gradesFromTermsSum += parsed;
                             gradesFromTermsCount++;
                         }
                     }
+
                     if (gradesFromTermsCount != 0 && grade != null)
                     {
                         gradesFromAllClassesTypes.Add(gradesFromTermsSum / gradesFromTermsCount);
@@ -136,7 +163,7 @@ public static class GradesHelper
         }
     }
 
-    public static void AssignAcademicGroupsToGrades(IEnumerable<Group> groups, IEnumerable<FinalGrade> grades)
+    public static void AssignAcademicGroupsToGrades(IEnumerable<Groups.Models.Group> groups, IEnumerable<FinalGrade> grades)
     {
         foreach (var item in grades)
         {

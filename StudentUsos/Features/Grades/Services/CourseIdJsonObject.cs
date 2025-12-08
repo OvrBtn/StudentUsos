@@ -14,6 +14,6 @@ internal class CourseIdJsonObject
     /// <summary>
     /// In case of USOS API for PUT this is always just an empty list
     /// </summary>
-    [JsonIgnore, JsonPropertyName("course_grades")]
-    public List<object>? CourseGrades = null;
+    [JsonPropertyName("course_grades")]
+    public List<Dictionary<string, FinalGrade>>? CourseGrades { get; set; }
 }

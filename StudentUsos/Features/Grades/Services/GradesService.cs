@@ -96,10 +96,14 @@ public class GradesService : IGradesService
                 if (deserialized.TryGetValue(item.FirstTermGrade.Group.TermId, out var distributionsInTerm) &&
                     distributionsInTerm.TryGetValue(item.FirstTermGrade.CourseId, out var distributions))
                 {
-                    var found = distributions.FirstOrDefault(x => x.CourseUnit.CourseUnitId == item.FirstTermGrade.CourseUnitId);
-                    if (found != null)
+                    var found = distributions.FirstOrDefault(x => x.CourseUnit?.CourseUnitId == item.FirstTermGrade.CourseUnitId);
+                    if (found is not null)
                     {
                         item.FirstTermGrade.GradeDistribution = found.GradeDistribution;
+                    }
+                    else if (distributions.Count == 1)
+                    {
+                        item.FirstTermGrade.GradeDistribution = distributions[0].GradeDistribution;
                     }
                 }
             }
@@ -153,8 +157,8 @@ public class GradesService : IGradesService
             List<FinalGrade> grades = new();
             List<FinalGradeGroup> gradesGrouped = new();
 
-            var arguments = new Dictionary<string, string> 
-            { 
+            var arguments = new Dictionary<string, string>
+            {
                 { "term_ids", academicTermId },
                 { "fields", "value_symbol|passes|value_description|exam_id|exam_session_number|counts_into_average|comment|grade_type_id|date_modified|date_acquisition|modification_author" }
             };
@@ -185,9 +189,12 @@ public class GradesService : IGradesService
                 return new();
             }
 
+            //used only when using course_grades instead of course_units_grades
+            HashSet<string> addedCourseIds = new();
+
             foreach (var group in groups)
             {
-                if(groupsJson.TryGetValue(group.CourseId, out var course) == false)
+                if (groupsJson.TryGetValue(group.CourseId, out var course) == false)
                 {
                     continue;
                 }
@@ -197,7 +204,24 @@ public class GradesService : IGradesService
                 }
 
                 var courseUnits = course.CourseUnitsGrades;
-                var courseUnit = courseUnits[group.CourseUnitId];
+
+                bool isUsingCourseUnitsGradesField = courseUnits is not null && courseUnits.Count > 0 && course.CourseGrades?.Count == 0;
+
+                List<Dictionary<string, FinalGrade>> courseUnit;
+                if (isUsingCourseUnitsGradesField)
+                {
+                    courseUnit = courseUnits![group.CourseUnitId];
+                }
+                else
+                {
+                    if (addedCourseIds.Contains(group.CourseId))
+                    {
+                        continue;
+                    }
+                    courseUnit = course.CourseGrades ?? new();
+                    addedCourseIds.Add(group.CourseId);
+                }
+
                 foreach (var term in courseUnit)
                 {
                     term.TryGetValue("1", out FinalGrade? finalGradeFirstTerm);
@@ -206,12 +230,16 @@ public class GradesService : IGradesService
                         finalGradeFirstTerm = new();
                     }
                     finalGradeFirstTerm.AssignGroup(group);
+                    finalGradeFirstTerm.IsClassTypeAgnostic = isUsingCourseUnitsGradesField == false;
+
                     term.TryGetValue("2", out FinalGrade? finalGradeSecondTerm);
                     if (finalGradeSecondTerm is null)
                     {
                         finalGradeSecondTerm = new();
                     }
                     finalGradeSecondTerm.AssignGroup(group);
+                    finalGradeSecondTerm.IsClassTypeAgnostic = isUsingCourseUnitsGradesField == false;
+
                     grades.Add(finalGradeFirstTerm);
                     grades.Add(finalGradeSecondTerm);
                 }

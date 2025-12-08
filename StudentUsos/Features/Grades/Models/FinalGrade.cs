@@ -167,6 +167,17 @@ public partial class FinalGrade : ObservableObject
         get => LocalizedStrings.Modification + " " + DateModified + " " + ModificationAuthorFirstName + " " + ModificationAuthorLastName;
     }
 
+    /// <summary>
+    /// Will be false for grades from course_units_grades field and true for grades from course_grades field.
+    /// Basically if true it means that whole subject has one grade which is a summary of all class types like lecture, laboratory or classes.
+    /// False will indicate that all class types have their own grades.
+    /// Used to decide which information should be shown.
+    /// </summary>
+    public bool IsClassTypeAgnostic { get; set; } = false;
+
+    [Ignore]
+    public bool IsClassTypeVisibile => IsClassTypeAgnostic == false;
+
     public FinalGrade()
     {
 

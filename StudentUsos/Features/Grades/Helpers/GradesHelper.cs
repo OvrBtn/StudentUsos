@@ -79,7 +79,7 @@ public static class GradesHelper
 
     /// <summary>
     /// Some univeristies have weird formats for grade symbols e.g. instead of doing only "4.5"
-    /// they will add something more e.g. "4.5 (bd)" which won' work with normal float.TryParse.
+    /// they will add something more e.g. "4.5 (bd)" which won't work with normal float.TryParse.
     /// </summary>
     /// <param name="gradeString">Non standard grade string</param>
     /// <returns></returns>

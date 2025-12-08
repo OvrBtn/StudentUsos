@@ -190,7 +190,7 @@ public static class BackwardCompatibility
             if (loggingAllowedModules is not null) localStorageManager.SetString(LocalStorageKeys.LoggingAllowedData, loggingAllowedModules);
             localStorageManager.SetBool(LocalStorageKeys.IsGuestMode, isGuestMode);
 
-            localStorageManager.SetString(LocalStorageKeys.DevTunnelService_DevTunnelId, devTunnelId);
+            if (devTunnelId is not null) localStorageManager.SetString(LocalStorageKeys.DevTunnelService_DevTunnelId, devTunnelId);
         }
         catch (Exception ex) { Logger.Logger.Default?.LogCatchedException(ex); }
     }

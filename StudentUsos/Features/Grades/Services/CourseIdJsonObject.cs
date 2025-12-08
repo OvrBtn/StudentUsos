@@ -13,7 +13,7 @@ internal class CourseIdJsonObject
     public Dictionary<string, List<Dictionary<string, FinalGrade>>> CourseUnitsGrades { get; set; }
     /// <summary>
     /// In case of USOS API for PUT this is always just an empty list.
-    /// But in this of other universities which use one total grade for all class types this will contain 
+    /// But in case of other universities which use one total grade for all class types this will contain 
     /// grades while <see cref="CourseUnitsGrades"/> will be null.
     /// </summary>
     [JsonPropertyName("course_grades")]

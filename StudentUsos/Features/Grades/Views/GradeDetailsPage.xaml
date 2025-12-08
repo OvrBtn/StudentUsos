@@ -14,7 +14,8 @@
         <StackLayout Padding="20,0,20,0" HorizontalOptions="FillAndExpand">
             <Grid ColumnDefinitions="*,30" RowDefinitions="auto, auto">
                 <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="FillAndExpand" Text="{Binding FinalGradeGroup.CourseName}" />
-                <Label Grid.Column="0" Grid.Row="1" Margin="0,0,0,1" FontSize="12" Text="{Binding FinalGradeGroup.FirstTermGrade.ClassType}" />
+                <Label Grid.Column="0" Grid.Row="1" Margin="0,0,0,1" FontSize="12" Text="{Binding FinalGradeGroup.FirstTermGrade.ClassType}"
+                       IsVisible="{Binding FinalGradeGroup.FirstTermGrade.IsClassTypeVisibile}"/>
                 <Image Grid.Column="1" Grid.RowSpan="2" WidthRequest="20" Source="pencil_square128.png"
                     Opacity="0"></Image>
             </Grid>

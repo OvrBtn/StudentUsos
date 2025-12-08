@@ -6,9 +6,12 @@ namespace StudentUsos.Features.Settings.Views.Subpages;
 
 public partial class AccountSubpage : CustomContentPageNotAnimated
 {
-    public AccountSubpage()
+    IUsosInstallationsService usosInstallationsService;
+    public AccountSubpage(IUsosInstallationsService usosInstallationsService)
     {
         InitializeComponent();
+
+        this.usosInstallationsService = usosInstallationsService;
     }
 
     private void RevokeAccessButton_Clicked(object sender, EventArgs e)
@@ -18,7 +21,7 @@ public partial class AccountSubpage : CustomContentPageNotAnimated
 
         async void ContinueRevokingAccessAsync()
         {
-            await Browser.OpenAsync("https://usosapps.put.poznan.pl/", BrowserLaunchMode.SystemPreferred);
+            await Browser.OpenAsync(usosInstallationsService.GetCurrentInstallation()!, BrowserLaunchMode.SystemPreferred);
         }
     }
 

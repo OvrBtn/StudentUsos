@@ -166,6 +166,12 @@ public static class BackwardCompatibility
             var whatsNewCarouselLastId = localStorageManager.GetString(LocalStorageKeys.WhatsNewCarouselLastId);
             var whatsNewListLastId = localStorageManager.GetString(LocalStorageKeys.WhatsNewListLastId);
 
+            var installation = localStorageManager.GetString(LocalStorageKeys.UsosInstallationsService_CurrentInstallation);
+            var loggingAllowedModules = localStorageManager.GetString(LocalStorageKeys.LoggingAllowedData);
+            var isGuestMode = localStorageManager.GetBool(LocalStorageKeys.IsGuestMode, false);
+
+            var devTunnelId = localStorageManager.GetString(LocalStorageKeys.DevTunnelService_DevTunnelId);
+
             localDatabaseManager.ResetTables();
             localStorageManager.DeleteEverything();
             localNotificationsService.RemoveAll();
@@ -179,6 +185,12 @@ public static class BackwardCompatibility
 
             if (whatsNewCarouselLastId is not null) localStorageManager.SetString(LocalStorageKeys.WhatsNewCarouselLastId, whatsNewCarouselLastId);
             if (whatsNewListLastId is not null) localStorageManager.SetString(LocalStorageKeys.WhatsNewListLastId, whatsNewListLastId);
+
+            if (installation is not null) localStorageManager.SetString(LocalStorageKeys.UsosInstallationsService_CurrentInstallation, installation);
+            if (loggingAllowedModules is not null) localStorageManager.SetString(LocalStorageKeys.LoggingAllowedData, loggingAllowedModules);
+            localStorageManager.SetBool(LocalStorageKeys.IsGuestMode, isGuestMode);
+
+            if (devTunnelId is not null) localStorageManager.SetString(LocalStorageKeys.DevTunnelService_DevTunnelId, devTunnelId);
         }
         catch (Exception ex) { Logger.Logger.Default?.LogCatchedException(ex); }
     }

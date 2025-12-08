@@ -170,6 +170,8 @@ public static class BackwardCompatibility
             var loggingAllowedModules = localStorageManager.GetString(LocalStorageKeys.LoggingAllowedData);
             var isGuestMode = localStorageManager.GetBool(LocalStorageKeys.IsGuestMode, false);
 
+            var devTunnelId = localStorageManager.GetString(LocalStorageKeys.DevTunnelService_DevTunnelId);
+
             localDatabaseManager.ResetTables();
             localStorageManager.DeleteEverything();
             localNotificationsService.RemoveAll();
@@ -187,6 +189,8 @@ public static class BackwardCompatibility
             if (installation is not null) localStorageManager.SetString(LocalStorageKeys.UsosInstallationsService_CurrentInstallation, installation);
             if (loggingAllowedModules is not null) localStorageManager.SetString(LocalStorageKeys.LoggingAllowedData, loggingAllowedModules);
             localStorageManager.SetBool(LocalStorageKeys.IsGuestMode, isGuestMode);
+
+            localStorageManager.SetString(LocalStorageKeys.DevTunnelService_DevTunnelId, devTunnelId);
         }
         catch (Exception ex) { Logger.Logger.Default?.LogCatchedException(ex); }
     }

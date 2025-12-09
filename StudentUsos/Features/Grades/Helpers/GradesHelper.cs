@@ -77,6 +77,12 @@ public static class GradesHelper
         }
     }
 
+    /// <summary>
+    /// Some univeristies have weird formats for grade symbols e.g. instead of doing only "4.5"
+    /// they will add something more e.g. "4.5 (bd)", this returns only the "4.5" part.
+    /// </summary>
+    /// <param name="gradeString">Non standard grade string</param>
+    /// <returns></returns>
     public static string GetGradeFromNonStandardGradeString(string gradeString)
     {
         gradeString = gradeString.Replace(',', '.');

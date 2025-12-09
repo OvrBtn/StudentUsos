@@ -79,15 +79,31 @@ public static class GradesHelper
 
     /// <summary>
     /// Some univeristies have weird formats for grade symbols e.g. instead of doing only "4.5"
+    /// they will add something more e.g. "4.5 (bd)", this returns only the "4.5" part.
+    /// </summary>
+    /// <param name="gradeString">Non standard grade string</param>
+    /// <returns></returns>
+    public static string GetGradeFromNonStandardGradeString(string gradeString)
+    {
+        gradeString = gradeString.Replace(',', '.');
+        var match = Regex.Match(gradeString, @"[-+]?\d*\.?\d+");
+        if (match.Success)
+        {
+            return match.Value;
+        }
+        return string.Empty;
+    }
+
+    /// <summary>
+    /// Some univeristies have weird formats for grade symbols e.g. instead of doing only "4.5"
     /// they will add something more e.g. "4.5 (bd)" which won't work with normal float.TryParse.
     /// </summary>
     /// <param name="gradeString">Non standard grade string</param>
     /// <returns></returns>
-    static bool TryParseGradeFromNonStandardGradeString(string gradeString, out float parsed)
+    public static bool TryParseGradeFromNonStandardGradeString(string gradeString, out float parsed)
     {
-        gradeString = gradeString.Replace(',', '.');
-        var match = Regex.Match(gradeString, @"[-+]?\d*\.?\d+");
-        if (match.Success && float.TryParse(match.Value, NumberStyles.Float, CultureInfo.InvariantCulture, out float parseResult))
+        string extracted = GetGradeFromNonStandardGradeString(gradeString);
+        if (float.TryParse(extracted, NumberStyles.Float, CultureInfo.InvariantCulture, out float parseResult))
         {
             parsed = parseResult;
             return true;

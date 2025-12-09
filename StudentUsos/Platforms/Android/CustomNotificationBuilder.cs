@@ -2,6 +2,7 @@
 using Plugin.FirebasePushNotifications;
 using Plugin.FirebasePushNotifications.Platforms;
 using StudentUsos.Features.Authorization.Services;
+using StudentUsos.Features.Grades.Helpers;
 using StudentUsos.Resources.LocalizedStrings;
 using StudentUsos.Services.ServerConnection;
 using System.Globalization;
@@ -114,7 +115,9 @@ public class CustomNotificationBuilder : NotificationBuilder
                 }
             }
             data["title"] = LocalizedStrings.PushNotifications_UsosNewGrade_InterpretedTitle;
-            data["large_icon"] = $"notification_new_grade_{deserialized.ValueSymbol.Replace(".", "").ToLowerInvariant()}";
+
+            string gradeNormalized = GradesHelper.GetGradeFromNonStandardGradeString(deserialized.ValueSymbol);
+            data["large_icon"] = $"notification_new_grade_{gradeNormalized.Replace(".", "").ToLowerInvariant()}";
         }
         catch (Exception ex) { data["body"] += ex.Message; }
     }

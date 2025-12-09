@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using StudentUsos.Features.Grades.Helpers;
+using System.Globalization;
 
 namespace StudentUsos.Converters;
 
@@ -14,6 +15,7 @@ public class GradeSymbolToColorConverter : IValueConverter
         {
             if (value == null) return Colors.Transparent;
             string grade = value.ToString()!;
+            grade = GradesHelper.GetGradeFromNonStandardGradeString(grade);
             if (grade.Length == 0) return Colors.Transparent;
             if (grade[0] == '5' || grade == "ZAL") return GradeColor1;
             if (grade[0] == '4') return GradeColor2;

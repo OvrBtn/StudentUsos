@@ -31,5 +31,6 @@ Currently it's not planned.
 
 # Features
 
-<img src="Resources/Features.png"/>
+<img src="Resources/Features2.png"/>
+
 

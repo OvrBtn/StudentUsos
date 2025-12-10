@@ -2,7 +2,7 @@
 
 namespace StudentUsos.Features.Settings.Views;
 
-public partial class LogsPage : CustomContentPageNotAnimated
+public partial class LogsPage : CustomContentPageNotAnimated, INavigableWithParameter<bool>
 {
     LogsViewModel viewModel;
     public LogsPage(LogsViewModel viewModel)
@@ -25,5 +25,12 @@ public partial class LogsPage : CustomContentPageNotAnimated
         {
             viewModel.Init();
         });
+    }
+
+    public void OnNavigated(bool navigationParameter)
+    {
+        this.IsTabBarVisible = navigationParameter;
+        this.removeButton.IsVisible = false;
+        this.sendButton.IsVisible = false;
     }
 }

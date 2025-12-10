@@ -3,7 +3,7 @@ using StudentUsos.Resources.LocalizedStrings;
 
 namespace StudentUsos.Features.Settings.Views;
 
-public partial class AppInfoPage : CustomContentPageNotAnimated
+public partial class AppInfoPage : CustomContentPageNotAnimated, INavigableWithParameter<bool>
 {
     IApplicationService applicationService;
     public AppInfoPage(IApplicationService applicationService)
@@ -11,6 +11,11 @@ public partial class AppInfoPage : CustomContentPageNotAnimated
         InitializeComponent();
 
         this.applicationService = applicationService;
+    }
+
+    public void OnNavigated(bool navigationParameter)
+    {
+        this.IsTabBarVisible = navigationParameter;
     }
 
     void CopyEmailToClipboard(object sender, EventArgs e)

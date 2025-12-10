@@ -10,9 +10,9 @@
     x:DataType="views:LogsViewModel">
 
     <StackLayout Margin="20,45,20,0">
-        <Button Text="{x:Static string:LocalizedStrings.LogsPage_RemoveAll}" Command="{Binding RemoveAllLogsCommand}"
+        <Button x:Name="removeButton" Text="{x:Static string:LocalizedStrings.LogsPage_RemoveAll}" Command="{Binding RemoveAllLogsCommand}"
                 Margin="5"/>
-        <Button Text="{x:Static string:LocalizedStrings.LogsPage_SendAllLogs}" Command="{Binding SendAllLogsCommand}"
+        <Button x:Name="sendButton" Text="{x:Static string:LocalizedStrings.LogsPage_SendAllLogs}" Command="{Binding SendAllLogsCommand}"
                 Margin="5"/>
         <CollectionView Margin="0" ItemsSource="{Binding Logs}" VerticalOptions="FillAndExpand">
             <CollectionView.FooterTemplate>

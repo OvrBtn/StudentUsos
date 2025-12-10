@@ -18,7 +18,7 @@ public partial class LoginSettingsPage : CustomContentPageNotAnimated
 
     private void AppInfoButton_Clicked(object sender, EventArgs e)
     {
-        navigationService.PushAsync<AppInfoPage>();
+        navigationService.PushAsync<AppInfoPage, bool>(false);
     }
 
     void CopyEmailToClipboard(object sender, EventArgs e)
@@ -39,11 +39,11 @@ public partial class LoginSettingsPage : CustomContentPageNotAnimated
 
     private void LogsButton_Clicked(object sender, EventArgs e)
     {
-        navigationService.PushAsync<LogsPage>();
+        navigationService.PushAsync<LogsPage, bool>(false);
     }
 
     private void DevTunnelButton_Clicked_1(object sender, EventArgs e)
     {
-        navigationService.PushAsync<DevTunnelPage>();
+        navigationService.PushAsync<DevTunnelPage, bool>(false);
     }
 }

@@ -3,7 +3,7 @@ using StudentUsos.Services.ServerConnection;
 
 namespace StudentUsos.Features.Settings.Views.Subpages;
 
-public partial class DevTunnelPage : CustomContentPageNotAnimated
+public partial class DevTunnelPage : CustomContentPageNotAnimated, INavigableWithParameter<bool>
 {
     IDevTunnelService devTunnelService;
     public DevTunnelPage(IDevTunnelService devTunnelService)
@@ -44,5 +44,10 @@ public partial class DevTunnelPage : CustomContentPageNotAnimated
         {
             devTunnelService.SaveDevTunnelId(text);
         }
+    }
+
+    public void OnNavigated(bool navigationParameter)
+    {
+        this.IsTabBarVisible = navigationParameter;
     }
 }

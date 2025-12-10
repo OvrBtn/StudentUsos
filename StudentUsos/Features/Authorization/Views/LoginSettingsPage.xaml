@@ -10,6 +10,7 @@
     xmlns:models="clr-namespace:StudentUsos.Features.Authorization.Models"
     xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
     x:DataType="authorization:InstallationsViewModel"
+    IsTabBarVisible="False"
     Shell.TabBarIsVisible="False">
 
     <ScrollView>

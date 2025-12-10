@@ -1,7 +1,7 @@
 <img src="https://github.com/user-attachments/assets/4f3622c9-3564-431e-af34-8d65bcd59172" width="50%" style="margin-bottom: 100px;"/>
 
 # Student USOS
-Mobile app for polish students of Poznań University of Technology providing access to all the necessary modules of USOS (University Study Organization System). 
+Mobile app for polish students providing access to all the necessary modules of USOS (University Study Organization System). 
 
 # Download
   You can get it on
@@ -32,3 +32,4 @@ Currently it's not planned.
 # Features
 
 <img src="Resources/Features.png"/>
+

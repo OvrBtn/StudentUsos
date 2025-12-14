@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Maui.Views;
+﻿using CommunityToolkit.Maui.Extensions;
+using CommunityToolkit.Maui.Views;
 
 namespace StudentUsos;
 
@@ -46,6 +47,11 @@ public partial class DatePickerPopup : Popup
             var popup = new DatePickerPopup(parameters);
             App.Current?.Windows[0].Page?.ShowPopup(popup);
         });
+    }
+
+    public void Close()
+    {
+        _ = App.Current?.Windows[0].Page?.ClosePopupAsync();
     }
 
     private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)

@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Maui.Views;
+﻿using CommunityToolkit.Maui.Extensions;
+using CommunityToolkit.Maui.Views;
 
 namespace StudentUsos;
 
@@ -70,12 +71,6 @@ public partial class PickFromListPopup : Popup
 
     static bool isPopupActive = false;
 
-    protected override Task OnClosed(object? result, bool wasDismissedByTappingOutsideOfPopup, CancellationToken token = default)
-    {
-        isPopupActive = false;
-        return base.OnClosed(result, wasDismissedByTappingOutsideOfPopup, token);
-    }
-
     public static PickFromListPopup? CreateAndShow(string title, IEnumerable<string> options, string stateKey = StateKey.Loaded, Action<PickedItem>? onPicked = null)
     {
         if (isPopupActive)
@@ -85,11 +80,17 @@ public partial class PickFromListPopup : Popup
         isPopupActive = true;
 
         var popup = new PickFromListPopup(title, options, stateKey, onPicked);
+        popup.Closed += Popup_Closed;
         ApplicationService.Default.MainThreadInvoke(() =>
         {
             App.Current?.Windows[0].Page?.ShowPopup(popup);
         });
         return popup;
+    }
+
+    private static void Popup_Closed(object? sender, EventArgs e)
+    {
+        isPopupActive = false;
     }
 
     private void OptionsButton_Clicked(object sender, EventArgs e)
@@ -105,6 +106,11 @@ public partial class PickFromListPopup : Popup
     private void BackgroundTapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
     {
         Close();
+    }
+
+    void Close()
+    {
+        _ = App.Current?.Windows[0].Page?.ClosePopupAsync();
     }
 
     public static class StateKey

@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Maui.Views;
+﻿using CommunityToolkit.Maui.Extensions;
+using CommunityToolkit.Maui.Views;
 
 namespace StudentUsos;
 
@@ -71,4 +72,10 @@ public partial class MessagePopupPage : Popup
             App.Current?.Windows[0].Page?.ShowPopup(popup);
         });
     }
+
+    public void Close()
+    {
+        _ = App.Current?.Windows[0].Page?.ClosePopupAsync();
+    }
+
 }

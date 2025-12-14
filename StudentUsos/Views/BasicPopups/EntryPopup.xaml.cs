@@ -1,4 +1,6 @@
-﻿using CommunityToolkit.Maui.Views;
+﻿using CommunityToolkit.Maui;
+using CommunityToolkit.Maui.Extensions;
+using CommunityToolkit.Maui.Views;
 
 namespace StudentUsos;
 
@@ -46,17 +48,19 @@ public partial class EntryPopup : Popup
         ApplicationService.Default.MainThreadInvoke(() =>
         {
             var popup = new EntryPopup(parameters);
-            App.Current?.Windows[0].Page?.ShowPopup(popup);
+            App.Current?.Windows[0].Page?.ShowPopup(popup, new PopupOptions()
+            {
+                OnTappingOutsideOfPopup = new(() =>
+                {
+                    parameters.CancelAction?.Invoke();
+                })
+            });
         });
     }
 
-    protected override Task OnClosed(object? result, bool wasDismissedByTappingOutsideOfPopup, CancellationToken token = default)
+    public void Close()
     {
-        //this also somehow handles navigation bar back button
-        if (wasDismissedByTappingOutsideOfPopup)
-        {
-            parameters.CancelAction?.Invoke();
-        }
-        return base.OnClosed(result, wasDismissedByTappingOutsideOfPopup, token);
+        _ = App.Current?.Windows[0].Page?.ClosePopupAsync();
     }
+
 }

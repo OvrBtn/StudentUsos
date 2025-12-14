@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Maui.Views;
+﻿using CommunityToolkit.Maui.Extensions;
+using CommunityToolkit.Maui.Views;
 
 namespace StudentUsos.Features.CampusMap.Views;
 
@@ -15,11 +16,6 @@ public partial class CampusBuildingDetailsPage : Popup
     }
 
     static bool isPopupActive = false;
-    protected override Task OnClosed(object? result, bool wasDismissedByTappingOutsideOfPopup, CancellationToken token = default)
-    {
-        isPopupActive = false;
-        return base.OnClosed(result, wasDismissedByTappingOutsideOfPopup, token);
-    }
 
     public static void CreateAndShow(CampusBuildingDetailsParameters parameters)
     {
@@ -33,12 +29,18 @@ public partial class CampusBuildingDetailsPage : Popup
         {
             var popup = new CampusBuildingDetailsPage(parameters);
             App.Current?.Windows[0]?.Page?.ShowPopup(popup);
+            popup.Closed += Popup_Closed;
         });
+    }
+
+    private static void Popup_Closed(object? sender, EventArgs e)
+    {
+        isPopupActive = false;
     }
 
     private void Button_Clicked(object sender, EventArgs e)
     {
         Parameters.GoToBuildingMap?.Invoke();
-        Close();
+        App.Current?.Windows[0]?.Page?.ClosePopupAsync(false);
     }
 }

@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Maui.Views;
+﻿using CommunityToolkit.Maui.Extensions;
+using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace StudentUsos;
@@ -97,6 +98,12 @@ public partial class MultipleChoicePopup : Popup
         });
         return popup;
     }
+
+    public void Close()
+    {
+        _ = App.Current?.Windows[0].Page?.ClosePopupAsync();
+    }
+
 
     private void BackgroundTapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
     {

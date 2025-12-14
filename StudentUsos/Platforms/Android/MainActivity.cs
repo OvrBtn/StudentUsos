@@ -10,6 +10,7 @@ namespace StudentUsos;
     MainLauncher = true,
     LaunchMode = LaunchMode.SingleTask,
     Exported = true,
+    EnableOnBackInvokedCallback = false,
     ConfigurationChanges = ConfigChanges.ScreenSize
         | ConfigChanges.Orientation
         | ConfigChanges.UiMode

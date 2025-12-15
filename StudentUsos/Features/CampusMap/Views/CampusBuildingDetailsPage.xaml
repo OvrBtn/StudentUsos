@@ -8,7 +8,7 @@
     xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
     xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
     x:DataType="local:CampusBuildingDetailsPage"
-    Color="Transparent"
+    BackgroundColor="Transparent"
     xmlns:local="clr-namespace:StudentUsos.Features.CampusMap.Views">
 
     <StackLayout Padding="10" WidthRequest="500">

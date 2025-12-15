@@ -9,7 +9,7 @@
     xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
     xmlns:models="clr-namespace:StudentUsos.Features.CampusMap.Models"
     x:DataType="local:RoomDetailsViewModel"
-    Color="Transparent"
+    BackgroundColor="Transparent"
     xmlns:local="clr-namespace:StudentUsos.Features.CampusMap.Views">
 
     <toolkit:Popup.Resources>

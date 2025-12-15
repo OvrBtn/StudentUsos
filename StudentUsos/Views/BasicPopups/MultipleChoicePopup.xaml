@@ -6,7 +6,10 @@
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
     xmlns:local="clr-namespace:StudentUsos"
-    Color="Transparent"
+    Background="Transparent"
+    Padding="0"
+    Margin="0"
+    HorizontalOptions="FillAndExpand"
     x:DataType="local:MultipleChoicePopup"
     x:Name="self">
 
@@ -33,7 +36,7 @@
 
     <StackLayout>
 
-        <Border Margin="30" Padding="30,30,30,10" VerticalOptions="Center" MaximumHeightRequest="500" StrokeShape="RoundRectangle 20"
+        <Border Margin="0" Padding="30,30,30,10" VerticalOptions="Center" MaximumHeightRequest="500" StrokeShape="RoundRectangle 20"
                 BackgroundColor="{StaticResource BackgroundColor}">
             <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <Label x:Name="titleLabel" Text="{Binding PopupTitle, Source={x:Reference self}}" Margin="0,0,0,20" FontAttributes="Bold" FontSize="15" HorizontalTextAlignment="Center" />

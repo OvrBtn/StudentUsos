@@ -40,7 +40,14 @@ public static class MauiProgram
 #pragma warning disable CA1416
         builder
             .UseMauiApp<App>()
-            .UseMauiCommunityToolkit()
+            .UseMauiCommunityToolkit(options =>
+            {
+                options.SetPopupOptionsDefaults(new DefaultPopupOptionsSettings()
+                {
+                    Shape = null,
+                    Shadow = null
+                });
+            })
 #pragma warning restore
             .UseSkiaSharp()
             .UseCustomCalendar()

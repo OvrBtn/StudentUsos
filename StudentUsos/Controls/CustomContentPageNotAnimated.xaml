@@ -4,19 +4,20 @@
              x:Class="StudentUsos.Controls.CustomContentPageNotAnimated"
              xmlns:controls="clr-namespace:StudentUsos.Controls"
              Background="{StaticResource BackgroundColor}"
+             SafeAreaEdges="None"
              x:DataType="controls:CustomContentPageNotAnimated">
 
     <ContentPage.ControlTemplate>
         <ControlTemplate>
 
-            <Grid VerticalOptions="FillAndExpand" Background="Transparent">
+            <Grid VerticalOptions="FillAndExpand" Background="Transparent" SafeAreaEdges="None">
 
                 <Border x:Name="contentContainer" StrokeThickness="0" VerticalOptions="FillAndExpand" Padding="0" StrokeShape="RoundRectangle 45" Margin="-1,0,-1,0" 
-                         BackgroundColor="{StaticResource BackgroundColor}">
+                         BackgroundColor="{StaticResource BackgroundColor}" SafeAreaEdges="None">
                     <ContentPresenter Padding="0"></ContentPresenter>
                 </Border>
-                
-                <StackLayout Margin="0, 0, 0, 0" Padding="0" x:Name="tabBar" BackgroundColor="Transparent" VerticalOptions="EndAndExpand">
+
+                <StackLayout Margin="0, 0, 0, 0" Padding="0" x:Name="tabBar" BackgroundColor="Transparent" VerticalOptions="EndAndExpand" SafeAreaEdges="None">
                     <controls:CustomTabBarXaml></controls:CustomTabBarXaml>
                 </StackLayout>
 

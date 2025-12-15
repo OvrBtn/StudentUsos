@@ -5,6 +5,14 @@
                     xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors">
 
 
+    <Style TargetType="Grid">
+        <Setter Property="SafeAreaEdges" Value="None"></Setter>
+    </Style>
+
+    <Style TargetType="StackLayout">
+        <Setter Property="SafeAreaEdges" Value="None"></Setter>
+    </Style>
+
     <Style TargetType="dxe:MultilineEdit">
         <Setter Property="TextColor" Value="White"></Setter>
         <Setter Property="BorderColor" Value="{StaticResource Primary}"></Setter>

@@ -44,7 +44,7 @@
         </ResourceDictionary>
     </toolkit:Popup.Resources>
 
-    <StackLayout Padding="10, 0" MaximumHeightRequest="500">
+    <StackLayout Padding="10, 0" MaximumHeightRequest="500" MinimumWidthRequest="350">
         <Border Margin="20, 0" Padding="10" VerticalOptions="Center" HorizontalOptions="Fill" BackgroundColor="{StaticResource BackgroundColor}">
             <StackLayout Margin="10" Spacing="15" HorizontalOptions="Fill">
 

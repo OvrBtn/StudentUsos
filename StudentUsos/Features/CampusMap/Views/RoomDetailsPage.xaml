@@ -10,6 +10,8 @@
     xmlns:models="clr-namespace:StudentUsos.Features.CampusMap.Models"
     x:DataType="local:RoomDetailsViewModel"
     BackgroundColor="Transparent"
+    Padding="0"
+    Margin="-10"
     xmlns:local="clr-namespace:StudentUsos.Features.CampusMap.Views">
 
     <toolkit:Popup.Resources>
@@ -42,23 +44,23 @@
         </ResourceDictionary>
     </toolkit:Popup.Resources>
 
-    <StackLayout Padding="10, 0" WidthRequest="500">
-        <Border Margin="20, 0" Padding="10" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource BackgroundColor}">
-            <StackLayout Margin="10" Spacing="15">
+    <StackLayout Padding="10, 0" MaximumHeightRequest="500">
+        <Border Margin="20, 0" Padding="10" VerticalOptions="Center" HorizontalOptions="Fill" BackgroundColor="{StaticResource BackgroundColor}">
+            <StackLayout Margin="10" Spacing="15" HorizontalOptions="Fill">
 
                 <StackLayout IsVisible="{Binding Parameters.HasRoomName}">
                     <Label Text="{x:Static strings:LocalizedStrings.RoomDetailsPage_RoomName}" FontSize= "20" HorizontalTextAlignment="Center"/>
                     <Label Text="{Binding Parameters.RoomName}" FontSize="20" HorizontalTextAlignment="Center"/>
                 </StackLayout>
 
-                <StackLayout IsVisible="{Binding Parameters.HasRoomName}">
+                <StackLayout IsVisible="{Binding Parameters.HasRoomName}" HorizontalOptions="Fill">
                     <Label Text="{x:Static strings:LocalizedStrings.RoomDetailsPage_AlternativeNames}" FontSize="14" HorizontalTextAlignment="Center"/>
                     <!--<Label Text="{Binding Parameters.AdditionalRoomNamesJoined}" FontSize="14" HorizontalTextAlignment="Center"/>-->
 
-                    <CollectionView ItemsSource="{Binding Parameters.FullRoomInfos}" Margin="15,0,15,0">
+                    <CollectionView ItemsSource="{Binding Parameters.FullRoomInfos}" Margin="15,0,15,0" HorizontalOptions="Fill">
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="models:RoomInfo">
-                                <Grid ColumnDefinitions="*, auto, auto" Margin="0,5,0,5">
+                                <Grid ColumnDefinitions="*,auto,auto" Margin="0,5,0,5" HorizontalOptions="Fill">
                                     <Label Grid.Column="0" Text="{Binding Name}" VerticalTextAlignment="Center"></Label>
                                     <Grid Grid.Column="1">
                                         <Image Source="thumb_up.png" HeightRequest="25" Margin="10"/>

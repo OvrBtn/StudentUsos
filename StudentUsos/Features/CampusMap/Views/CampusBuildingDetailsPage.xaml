@@ -9,9 +9,11 @@
     xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
     x:DataType="local:CampusBuildingDetailsPage"
     BackgroundColor="Transparent"
+    Padding="0"
+    Margin="0"
     xmlns:local="clr-namespace:StudentUsos.Features.CampusMap.Views">
 
-    <StackLayout Padding="10" WidthRequest="500">
+    <StackLayout Padding="10" MaximumHeightRequest="500">
         <Border Margin="0" Padding="30" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource BackgroundColor}">
             <StackLayout Margin="0" Spacing="15">
                 <Label Text="{Binding Parameters.ShortName}" FontSize= "20" HorizontalTextAlignment="Center"/>

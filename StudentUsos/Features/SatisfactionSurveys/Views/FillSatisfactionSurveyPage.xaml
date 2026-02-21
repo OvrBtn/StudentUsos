@@ -17,10 +17,9 @@
         <views:SkLottieImageSourceConverter x:Key="sKLottieImageSourceConverter"></views:SkLottieImageSourceConverter>
     </controls:CustomContentPageNotAnimated.Resources>
 
-    <AbsoluteLayout Margin="0,0,0,0">
+    <Grid Margin="0,0,0,0" SafeAreaEdges="None">
 
-        <StackLayout IsVisible="{Binding IsSuccessLottieVisible}" AbsoluteLayout.LayoutFlags="All"
-                Margin="20" AbsoluteLayout.LayoutBounds="0,0,1,1">
+        <StackLayout IsVisible="{Binding IsSuccessLottieVisible}" Margin="20">
             <skiaextended:SKLottieView
                             x:Name="successLottieAnimation"
                             VerticalOptions="FillAndExpand"
@@ -30,8 +29,7 @@
                             Source="success_lottie_animation.json"/>
         </StackLayout>
 
-        <StackLayout IsVisible="{Binding IsFailLottieVisible}" AbsoluteLayout.LayoutFlags="All"
-                Margin="20" AbsoluteLayout.LayoutBounds="0,0,1,1">
+        <StackLayout IsVisible="{Binding IsFailLottieVisible}" Margin="20">
             <StackLayout.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding TryAgainCommand}"></TapGestureRecognizer>
             </StackLayout.GestureRecognizers>
@@ -41,12 +39,13 @@
                      VerticalOptions="FillAndExpand"
                      IsAnimationEnabled="true"
                      Source="fail_lottie_animation.json"/>
-            <Button Text="{x:Static strings:LocalizedStrings.TryAgain}" Command="{Binding TryAgainCommand}" Margin="0,0,0,70"></Button>
+            <Button Text="{x:Static strings:LocalizedStrings.TryAgain}" Command="{Binding TryAgainCommand}" Margin="0,0,0,130"></Button>
         </StackLayout>
 
         <StackLayout Margin="0,0,0,0" toolkit:StateContainer.CurrentState="{Binding MainStateKey}" 
+                     Padding="0" SafeAreaEdges="None"
                      IsVisible="{Binding IsAnyLottieVisible, Converter={StaticResource NegateBoolConverter}}"
-                     AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" VerticalOptions="FillAndExpand">
+                     VerticalOptions="FillAndExpand">
 
             <toolkit:StateContainer.StateViews>
 
@@ -56,15 +55,14 @@
 
                 <Label toolkit:StateView.StateKey="ConnectionError" Text="{x:Static strings:LocalizedStrings.Errors_USOSAPIConnectionError}"></Label>
 
-                <AbsoluteLayout toolkit:StateView.StateKey="Loaded" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <Grid toolkit:StateView.StateKey="Loaded" SafeAreaEdges="None" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
 
                     <controls:CustomProgressBar x:Name="filledProgressBar" Progress="{Binding SatisfactionSurvey.FilledPercentage}"
-                                                AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" 
                                                 ProgressColor="{StaticResource Primary}"  Direction="BottomToTop"/>
 
-                    <Border AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" Padding="0" Margin="2.5" IsVisible="true"
+                    <Border AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" Padding="0" Margin="2.5" IsVisible="True"
                         BackgroundColor="{StaticResource BackgroundColor}" StrokeThickness="0" StrokeShape="RoundRectangle 45,45,45,45" >
-                        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0,60,0,0">
+                        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0,50,0,100">
 
                             <StackLayout VerticalOptions="FillAndExpand">
                                 <Label Margin="0,10,0,5" FontAttributes="Bold" FontSize="18" Text="{Binding SatisfactionSurvey.Name}" HorizontalTextAlignment="Center"></Label>
@@ -99,7 +97,7 @@
 
                                 </StackLayout>
 
-                                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="20,20,20,130" Spacing="10">
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="20,20,20,20" Spacing="10">
                                     <controls:CustomButton HorizontalOptions="FillAndExpand" Command="{Binding PreviousQuestionCommand}">
                                         <Frame Padding="10">
                                             <Image HeightRequest="30" Source="arrow_left.png"></Image>
@@ -116,12 +114,12 @@
                             </StackLayout>
                         </StackLayout>
                     </Border>
-                </AbsoluteLayout>
+                </Grid>
 
             </toolkit:StateContainer.StateViews>
 
         </StackLayout>
 
-    </AbsoluteLayout>
+    </Grid>
 
 </controls:CustomContentPageNotAnimated>

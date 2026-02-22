@@ -9,14 +9,15 @@
     xmlns:views="clr-namespace:StudentUsos.Features.Dashboard.Views"
     xmlns:views1="clr-namespace:StudentUsos.Features.Activities.Views"
     xmlns:local="clr-namespace:StudentUsos"
+    xmlns:nalu="https://nalu-development.github.com/nalu/navigation"
     Shell.NavBarIsVisible="False"
     Shell.FlyoutBehavior="Disabled"
-    Shell.TabBarIsVisible="False">
+    Shell.TabBarIsVisible="True">
 
-    <TabBar>
-        <ShellContent ContentTemplate="{DataTemplate views:DashboardPage}" Icon="house.svg" Route="DashboardPage" />
-        <ShellContent ContentTemplate="{DataTemplate views1:ActivitiesPage}" Icon="calendar2range.svg" Route="ActivitiesPage" />
-        <ShellContent ContentTemplate="{DataTemplate menu:MorePage}" Icon="grid.svg" Route="MorePage" />
+    <TabBar nalu:NaluShell.TabBarView="{local:AppShellTabBar}">
+        <ShellContent ContentTemplate="{DataTemplate views:DashboardPage}" Icon="house" Route="DashboardPage"/>
+        <ShellContent ContentTemplate="{DataTemplate views1:ActivitiesPage}" Icon="tabbar_timetable" Route="ActivitiesPage"/>
+        <ShellContent ContentTemplate="{DataTemplate menu:MorePage}" Icon="grid" Route="MorePage"/>
     </TabBar>
 
     <ShellContent Title="Login" ContentTemplate="{DataTemplate authorization:LoginPage}" FlyoutItemIsVisible="False" Route="LoginPage" />

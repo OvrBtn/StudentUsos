@@ -18,7 +18,7 @@
                 </Border>
 
                 <StackLayout Margin="0, 0, 0, 0" Padding="0" x:Name="tabBar" BackgroundColor="Transparent" VerticalOptions="EndAndExpand" SafeAreaEdges="None">
-                    <controls:CustomTabBarXaml></controls:CustomTabBarXaml>
+                    <!--<controls:CustomTabBarXaml></controls:CustomTabBarXaml>-->
                 </StackLayout>
 
                 <StackLayout x:Name="snackBarSafeArea" HeightRequest="100" HorizontalOptions="Fill" BackgroundColor="Transparent" VerticalOptions="End" CascadeInputTransparent="True"/>

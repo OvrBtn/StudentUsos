@@ -204,6 +204,7 @@
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
 		<PackageReference Include="DevExpress.Maui.Controls" Version="23.2.6" />
 		<PackageReference Include="DevExpress.Maui.Editors" Version="23.2.6" />
+		<PackageReference Include="Nalu.Maui.Navigation" Version="10.7.0" />
 		<PackageReference Include="Plugin.FirebasePushNotifications" Version="3.0.28" />
 		<!--this is used as override for transitive dependencies from CustomCalendar and CustomSchedule-->
 		<!--TODO: Update those dependencies-->
@@ -303,6 +304,9 @@
 		</Compile>
 		<Compile Update="Features\Grades\Views\ModifyGradePage.xaml.cs">
 			<DependentUpon>ModifyGradePage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\AppShellTabBar.xaml.cs">
+		  <DependentUpon>AppShellTabBar.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Views\MainLoadingPage.xaml.cs">
 			<DependentUpon>MainLoadingPage.xaml</DependentUpon>
@@ -460,6 +464,9 @@
 		</MauiXaml>
 		<MauiXaml Update="Features\Settings\Views\LogsPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\AppShellTabBar.xaml">
+		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\MainLoadingPage.xaml">
 			<Generator>MSBuild:Compile</Generator>

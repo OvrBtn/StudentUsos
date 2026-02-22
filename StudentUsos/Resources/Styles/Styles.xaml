@@ -5,6 +5,10 @@
                     xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors">
 
 
+    <Style TargetType="AbsoluteLayout">
+        <Setter Property="SafeAreaEdges" Value="None"></Setter>
+    </Style>
+    
     <Style TargetType="Grid">
         <Setter Property="SafeAreaEdges" Value="None"></Setter>
     </Style>

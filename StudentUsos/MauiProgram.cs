@@ -54,6 +54,7 @@ public static class MauiProgram
             .UseCustomSchedule()
             .UseLocalNotification()
             .UseDevExpress()
+            .UseNaluTabBar()
             //.UseFirebasePushNotifications()
             .RegisterViews()
             .RegisterViewModels()

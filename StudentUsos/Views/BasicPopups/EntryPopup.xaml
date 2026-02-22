@@ -8,7 +8,7 @@
     x:DataType="vm:EntryPopupViewModel"
     BackgroundColor="Transparent"
     Padding="0"
-    Margin="0"
+    Margin="-1"
     xmlns:local="clr-namespace:StudentUsos.Views">
 
     <StackLayout Padding="10">

@@ -8,7 +8,7 @@
     xmlns:local="clr-namespace:StudentUsos"
     Background="Transparent"
     Padding="0"
-    Margin="0"
+    Margin="-1"
     HorizontalOptions="FillAndExpand"
     x:DataType="local:MultipleChoicePopup"
     x:Name="self">

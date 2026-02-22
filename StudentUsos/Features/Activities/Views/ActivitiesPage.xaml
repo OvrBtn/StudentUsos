@@ -27,7 +27,7 @@
                     </StackLayout>
                 </controls:CustomButton>
 
-                <StackLayout Margin="30,20,30,0" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" ZIndex="5">
+                <StackLayout Margin="30,50,30,0" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" ZIndex="5">
 
                     <Label Text="{Binding Lecturer.FullName}" HorizontalOptions="CenterAndExpand" FontSize="20" Margin="0,0,0,10"
                IsVisible="{Binding Lecturer, Converter={StaticResource IsNullNegatedConverter}}"/>

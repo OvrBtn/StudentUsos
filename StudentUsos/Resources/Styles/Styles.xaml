@@ -5,6 +5,10 @@
                     xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors">
 
 
+    <Style TargetType="ScrollView">
+        <Setter Property="SafeAreaEdges" Value="None"></Setter>
+    </Style>
+
     <Style TargetType="AbsoluteLayout">
         <Setter Property="SafeAreaEdges" Value="None"></Setter>
     </Style>

@@ -20,7 +20,7 @@
             <Label Grid.Column="1" Text="{Binding PointsString}"></Label>
         </Grid>
 
-        <ScrollView Orientation="Both" VerticalOptions="FillAndExpand">
+        <ScrollView Orientation="Both" VerticalOptions="FillAndExpand" SafeAreaEdges="None">
             <StackLayout>
 
                 <StackLayout BindableLayout.ItemsSource="{Binding ScholarshipCalculatorRecords}" 
@@ -69,7 +69,7 @@
 
                 </StackLayout>
 
-                <StackLayout Margin="30"/>
+                <StackLayout Margin="60"/>
 
             </StackLayout>
         </ScrollView>

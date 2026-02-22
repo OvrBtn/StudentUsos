@@ -14,7 +14,7 @@
     <AbsoluteLayout>
 
         <controls:FloatingButton AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="1,1,-1,-1" 
-                                 ZIndex="10" Margin="40,140"
+                                 ZIndex="10" Margin="40,100"
                                  ButtonCornerRadius="1500" AnimationLength="160" AnimationSpacing="120" 
                                  ButtonClicked="FloatingButton_ButtonClicked">
             <controls:FloatingButton.ContentTemplate x:DataType="views:GradesPage">

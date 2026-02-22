@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:StudentUsos.Controls"
     x:DataType="views:GradeDetailsViewModel"
-    HalfExpandedRatio="0.6"
+    HalfExpandedRatio="0.55"
     xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
     xmlns:views="using:StudentUsos.Features.Grades.Views"
     xmlns:models="using:StudentUsos.Features.Grades.Models">

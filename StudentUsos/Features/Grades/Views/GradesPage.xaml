@@ -87,7 +87,7 @@
                                 <Label Text="{x:Static strings:LocalizedStrings.GradesPage_Empty}" Style="{StaticResource CenteredLabel}"></Label>
                             </CollectionView.EmptyView>
                             <CollectionView.Footer>
-                                <StackLayout Margin="40" />
+                                <StackLayout Margin="50" />
                             </CollectionView.Footer>
                             <CollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="models:FinalGradeGroup">

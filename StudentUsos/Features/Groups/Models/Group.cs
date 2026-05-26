@@ -6,6 +6,7 @@ using StudentUsos.Features.Person.Models;
 using StudentUsos.Resources.LocalizedStrings;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using static StudentUsos.Features.Activities.Models.Activity;
 
 namespace StudentUsos.Features.Groups.Models;
 
@@ -83,6 +84,28 @@ public partial class Group : ObservableObject, IEquatable<Group>
         }
     }
     List<Person.Models.Person> participants = new();
+
+    public ClassTypes ClassTypeEnum
+    {
+        get
+        {
+            string classTypeString = ClassTypeJson.ToString()!.ToLower();
+            if (classTypeString.Contains("lecture"))
+            {
+                return ClassTypes.Lecture;
+            }
+            else if (classTypeString.Contains("laboratory"))
+            {
+                return ClassTypes.Laboratory;
+            }
+            else if (classTypeString.Contains("classes"))
+            {
+                return ClassTypes.Classes;
+            }
+            return ClassTypes.Other;
+        }
+    }
+
     void SetLecturersFromJson(string lecturers)
     {
         if (string.IsNullOrEmpty(lecturers)) return;

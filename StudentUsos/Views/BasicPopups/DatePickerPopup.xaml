@@ -6,7 +6,9 @@
     xmlns:CustomCalendar="clr-namespace:CustomCalendar;assembly=ovrbtn.CustomCalendar.MAUI"
     xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
     xmlns:local="clr-namespace:StudentUsos.Views"
+    xmlns:viewmodels="clr-namespace:StudentUsos.ViewModels"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:DataType="viewmodels:DatePickerPopupViewModel"
     Color="Transparent"
     Size="10000, 10000"
     x:Name="self">
@@ -22,6 +24,7 @@
                     TodayBackgroundColor="{StaticResource Gray950}"
                     ClickedDayBackgroundColor="{StaticResource Primary}"
                     DayOfWeekLabels="{x:Static strings:LocalizedStrings.CalendarPage_DaysOfWeekLabels}"
+                    Events="{Binding Parameters.Events}"
                     x:Name="customCalendar"/>
             </Border>
         </AbsoluteLayout>

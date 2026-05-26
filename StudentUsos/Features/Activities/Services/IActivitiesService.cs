@@ -21,4 +21,6 @@ public interface IActivitiesService
     /// <returns><see cref="GetActivitiesResult"/> containing response status and retrieved data</returns>
     public Task<GetActivitiesResult?> GetActivitiesApiAsync(DateTime date, string userId, int numberOfDays = 1);
 
+    public Task<List<ActivityOccurence>?> GetAllOccurencesOfAllActivitiesAsync();
+
 }

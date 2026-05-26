@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Maui.Views;
+using CustomCalendar;
 
 namespace StudentUsos;
 
@@ -32,14 +33,18 @@ public partial class DatePickerPopup : Popup
     {
         public Action<DatePickerPopup, DateOnly> OnPicked { get; set; }
         public DateOnly? ActiveDay { get; set; }
+        public CustomObservableEvents Events { get; set; }
     }
 
-    public static void CreateAndShow(Action<DatePickerPopup, DateOnly> onPicked, DateOnly? activeDay = null)
+    public static void CreateAndShow(Action<DatePickerPopup, DateOnly> onPicked, DateOnly? activeDay = null, List<CustomCalendar.CustomEvent>? events = null)
     {
+        var convertedEvents = new CustomObservableEvents(events);
+
         var parameters = new DatePickerParameters()
         {
             OnPicked = onPicked,
-            ActiveDay = activeDay
+            ActiveDay = activeDay,
+            Events = convertedEvents
         };
         ApplicationService.Default.MainThreadInvoke(() =>
         {

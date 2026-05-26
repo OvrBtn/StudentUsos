@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using StudentUsos.Features.Activities.Models;
+using System.Globalization;
 
 namespace StudentUsos.Converters;
 
@@ -42,6 +43,25 @@ public class ClassTypeToColorConverter : IValueConverter
     public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
+    }
+
+    public Color Convert(Activity.ClassTypes classType)
+    {
+        try
+        {
+            return classType switch
+            {
+                Activity.ClassTypes.Classes => classesColor,
+                Activity.ClassTypes.Lecture => lectureColor,
+                Activity.ClassTypes.Laboratory => laboratoryColor,
+                _ => defaultColor
+            };
+        }
+        catch (Exception ex)
+        {
+            Logger.Default?.LogCatchedException(ex);
+            return defaultColor;
+        }
     }
 }
 

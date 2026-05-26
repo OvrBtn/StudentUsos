@@ -64,6 +64,17 @@ public class ActivitiesRepository : IActivitiesRepository
         }
     }
 
+    public List<ActivityOccurence> GetActivityOccurences()
+    {
+        return localDatabaseManager.GetAll<ActivityOccurence>();
+    }
+
+    public void SaveOccurences(List<ActivityOccurence> occurences)
+    {
+        localDatabaseManager.ClearTable<ActivityOccurence>();
+        localDatabaseManager.InsertAll(occurences);
+    }
+
     public void Replace(IEnumerable<TimetableDay> timetableDays)
     {
         localDatabaseManager.ClearTable<TimetableDay>();
@@ -234,6 +245,4 @@ public class ActivitiesRepository : IActivitiesRepository
         return $"{activity.Name}\n{activity.StartDateTime.ToString("g")} - {activity.EndDateTime.ToString("g")}\n{activity.ClassTypeName}" +
             $"\n{activity.RoomNumber} - {activity.BuildingName}";
     }
-
-
 }

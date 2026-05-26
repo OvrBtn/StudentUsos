@@ -118,6 +118,7 @@ public class LocalDatabaseManager : ILocalDatabaseManager
             dbConnection.CreateTable<CampusBuilding>();
             dbConnection.CreateTable<RoomInfo>();
             dbConnection.CreateTable<FloorMap>();
+            dbConnection.CreateTable<ActivityOccurence>();
         }
     }
 
@@ -144,6 +145,7 @@ public class LocalDatabaseManager : ILocalDatabaseManager
             dbConnection.DropTable<CampusBuilding>();
             dbConnection.DropTable<RoomInfo>();
             dbConnection.DropTable<FloorMap>();
+            dbConnection.DropTable<ActivityOccurence>();
         }
     }
 

@@ -16,4 +16,7 @@ public interface IActivitiesRepository
     public Task CompareAndScheduleNotificationsAsync(GetActivitiesResult local, GetActivitiesResult remote);
     public Task CompareAndScheduleNotificationsAsync(List<TimetableDay> local, List<TimetableDay> remote);
 
+    public List<ActivityOccurence> GetActivityOccurences();
+    public void SaveOccurences(List<ActivityOccurence> occurences);
+
 }

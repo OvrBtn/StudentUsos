@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui.Core.Extensions;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CustomCalendar;
 using CustomSchedule;
 using StudentUsos.Features.Activities.Models;
 using StudentUsos.Features.Activities.Repositories;
@@ -92,6 +93,33 @@ public partial class ActivitiesViewModel : BaseViewModel
         DateOnlyPicked = DateOnly.FromDateTime(DateAndTimeProvider.Current.Now);
 
         MainStateKey = StateKey.Loaded;
+
+        _ = Task.Run(InitActivityOccurences);
+    }
+
+    List<ActivityOccurence> occurences = new();
+    async Task InitActivityOccurences()
+    {
+        var occurencesLocal = activitiesRepository.GetActivityOccurences();
+        if (occurencesLocal is not null && occurencesLocal.Count > 0)
+        {
+            occurences = occurencesLocal.DistinctBy(x => (x.Occurence, x.ClassType)).OrderByDescending(x => x.ClassType).ToList();
+
+            if (DateTime.Now - occurencesLocal[0].CreationDate < TimeSpan.FromDays(3))
+            {
+                return;
+            }
+        }
+
+        var occurencesServer = await activitiesService.GetAllOccurencesOfAllActivitiesAsync();
+        if (occurencesServer is null)
+        {
+            return;
+        }
+
+        occurences = occurencesServer.DistinctBy(x => (x.Occurence, x.ClassType)).OrderByDescending(x => x.ClassType).ToList();
+
+        activitiesRepository.SaveOccurences(occurencesServer);
     }
 
     //Don't replace with [RelayCommand], the [RelayCommand] will generate IRelayCommand<> but CustomSchedule takes Command<> so it won't work
@@ -200,12 +228,14 @@ public partial class ActivitiesViewModel : BaseViewModel
     [RelayCommand]
     void DatePickerClicked()
     {
+        var customEvents = occurences.Select(x => new CustomEvent(x.OccuranceDateOnly, x.OccuranceDateOnly, x.GetColor())).ToList();
+
         DatePickerPopup.CreateAndShow((popup, date) =>
         {
             DatePicked = date.ToDateTime(TimeOnly.MinValue);
             DateOnlyPicked = date;
             popup.Close();
-        }, DateOnlyPicked);
+        }, DateOnlyPicked, customEvents);
     }
 
     //Used to store activities received from USOS API and saved in local database to minimize amount of webrequests

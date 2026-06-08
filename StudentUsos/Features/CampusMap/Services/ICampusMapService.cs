@@ -13,6 +13,8 @@ public interface ICampusMapService
     public Task<string?> GetFloorDataAsync(string buildingId, string floor);
     public Task<List<RoomInfo>?> GetFloorDataDeserializedAsync(string buildingId, string floor);
 
+    public Task<List<RoomInfo>?> GetAllRoomsAsync();
+
     public Task<HttpStatusCode?> SendUserSuggestionAsync(string suggestedName, string buildingId, string floor, string roomId, string studentNumber);
 
     public Task<HttpStatusCode?> UpvoteUserSuggestionAsync(string buildingId, string floor, int roomId, int suggestionId);

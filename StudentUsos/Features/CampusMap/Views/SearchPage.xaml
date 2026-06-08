@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:CustomContentPageNotAnimated
+    x:Class="StudentUsos.Features.CampusMap.Views.SearchPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:StudentUsos.Controls"
+    xmlns:strings="clr-namespace:StudentUsos.Resources.LocalizedStrings"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:campusmap="clr-namespace:StudentUsos.Features.CampusMap.Views"
+    xmlns:models="clr-namespace:StudentUsos.Features.CampusMap.Models"
+    xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
+    x:DataType="campusmap:SearchViewModel"
+    IsTabBarVisible="False"
+    Shell.TabBarIsVisible="False">
+
+    <Grid toolkit:StateContainer.CurrentState="{Binding MainStateKey}" 
+                 VerticalOptions="Fill" Margin="0,0,0,0">
+        <toolkit:StateContainer.StateViews>
+
+            <ActivityIndicator toolkit:StateView.StateKey="Loading"></ActivityIndicator>
+            <Label toolkit:StateView.StateKey="ConnectionError" Text="{x:Static strings:LocalizedStrings.Errors_ConnectionError}" VerticalOptions="Center" HorizontalOptions="Center"/>
+
+            <Grid toolkit:StateView.StateKey="Loaded" VerticalOptions="Fill" RowDefinitions="auto, *">
+
+                <dxe:TextEdit x:Name="textEdit" Grid.Row="0" LabelText="{x:Static strings:LocalizedStrings.Search}" Margin="30,70,30,0"
+                                   TextChangedCommand="{Binding TextChangedCommand}" Text="{Binding EditorText, Mode=TwoWay}"></dxe:TextEdit>
+
+                <CollectionView Grid.Row="1" ItemsSource="{Binding Rooms}" VerticalOptions="Fill">
+                    <CollectionView.Header>
+                        <StackLayout Margin="30,0,30,30">
+                        </StackLayout>
+                    </CollectionView.Header>
+                    <CollectionView.Footer>
+                        <StackLayout Margin="30"></StackLayout>
+                    </CollectionView.Footer>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:RoomInfo">
+                            <Border Margin="30,4" Padding="0">
+                                <Grid>
+                                    <StackLayout Margin="20">
+                                        <Label Text="{Binding Name}"></Label>
+                                        <Grid ColumnDefinitions="*,auto">
+                                            <Label Grid.Column="0" FontSize="10" Text="{Binding BuildingWithTitle}"></Label>
+                                            <Label Grid.Column="1" FontSize="10" Text="{Binding FloorWithTitle}"></Label>
+                                        </Grid>
+                                    </StackLayout>
+                                    <Button Command="{Binding RoomClickedCommand, x:DataType=campusmap:SearchViewModel,
+                                    Source={RelativeSource AncestorType={x:Type campusmap:SearchViewModel}}}"
+                                        CommandParameter="{Binding .}" BackgroundColor="Transparent"/>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </Grid>
+
+        </toolkit:StateContainer.StateViews>
+    </Grid>
+
+</controls:CustomContentPageNotAnimated>

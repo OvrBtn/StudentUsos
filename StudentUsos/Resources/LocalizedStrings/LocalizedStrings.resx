@@ -692,4 +692,13 @@
   <data name="Constants_GitHubUrl" xml:space="preserve">
     <value>https://github.com/OvrBtn/StudentUsos</value>
   </data>
+  <data name="SearchPage_Room" xml:space="preserve">
+    <value>Room</value>
+  </data>
+  <data name="SearchPage_Building" xml:space="preserve">
+    <value>Building</value>
+  </data>
+  <data name="SearchPage_Floor" xml:space="preserve">
+    <value>Floor</value>
+  </data>
 </root>

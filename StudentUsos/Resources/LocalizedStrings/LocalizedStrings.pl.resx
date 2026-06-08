@@ -685,4 +685,13 @@
   <data name="Contact" xml:space="preserve">
     <value>Kontakt</value>
   </data>
+  <data name="SearchPage_Room" xml:space="preserve">
+    <value>Pomieszczenie</value>
+  </data>
+  <data name="SearchPage_Building" xml:space="preserve">
+    <value>Budynek</value>
+  </data>
+  <data name="SearchPage_Floor" xml:space="preserve">
+    <value>Piętro</value>
+  </data>
 </root>

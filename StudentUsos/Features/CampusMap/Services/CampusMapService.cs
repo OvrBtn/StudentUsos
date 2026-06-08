@@ -174,4 +174,16 @@ public class CampusMapService : ICampusMapService
 
         return JsonSerializer.Deserialize(response.Response, JsonContext.Default.ListString);
     }
+
+    public async Task<List<RoomInfo>?> GetAllRoomsAsync()
+    {
+        var payload = new Dictionary<string, string>();
+        var response = await serverConnectionManager.SendAuthorizedGetRequestAsync("CampusMap/AllRooms", payload, AuthorizationMode.Full);
+        if (response is null || response.IsSuccess == false)
+        {
+            return null;
+        }
+
+        return JsonSerializer.Deserialize(response.Response, RoomInfoJsonContext.Default.ListRoomInfo);
+    }
 }

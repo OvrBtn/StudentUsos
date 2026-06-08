@@ -1441,6 +1441,33 @@ namespace StudentUsos.Resources.LocalizedStrings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Building.
+        /// </summary>
+        internal static string SearchPage_Building {
+            get {
+                return ResourceManager.GetString("SearchPage_Building", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Floor.
+        /// </summary>
+        internal static string SearchPage_Floor {
+            get {
+                return ResourceManager.GetString("SearchPage_Floor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Room.
+        /// </summary>
+        internal static string SearchPage_Room {
+            get {
+                return ResourceManager.GetString("SearchPage_Room", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Semesters.
         /// </summary>
         internal static string Semesters {

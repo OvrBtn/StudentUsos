@@ -16,17 +16,20 @@ public partial class CampusMapViewModel : BaseViewModel
     IApplicationService applicationService;
     ICampusMapRepository campusMapRepository;
     ILocalStorageManager localStorageManager;
+    INavigationService navigationService;
     public CampusMapViewModel(ICampusMapService campusMapService,
         IUserInfoRepository userInfoRepository,
         IApplicationService applicationService,
         ICampusMapRepository campusMapRepository,
-        ILocalStorageManager localStorageManager)
+        ILocalStorageManager localStorageManager,
+        INavigationService navigationService)
     {
         this.campusMapService = campusMapService;
         this.userInfoRepository = userInfoRepository;
         this.applicationService = applicationService;
         this.campusMapRepository = campusMapRepository;
         this.localStorageManager = localStorageManager;
+        this.navigationService = navigationService;
     }
 
     //it might not be very MVVM but HybridWebView doesn't really support bindings and it has to be directly referenced
@@ -409,5 +412,30 @@ public partial class CampusMapViewModel : BaseViewModel
                 _ = UpdateWebViewAsync(CurrentBuildingId, CurrentFloor);
                 OnPropertyChanged(nameof(CurrentFullLocation));
             });
+    }
+
+    [RelayCommand]
+    async Task SearchClickedAsync()
+    {
+        try
+        {
+            var room = await navigationService.PushAndReturnAsync<SearchPage, RoomInfo>();
+            if (room is null)
+            {
+                return;
+            }
+
+            CurrentBuildingIndex = Buildings.FindIndex(x => x.Id == room.BuildingId);
+            CurrentBuildingId = room.BuildingId;
+            CurrentFloor = room.Floor;
+            Floors = Buildings[CurrentBuildingIndex].FloorsList;
+
+            _ = UpdateWebViewAsync(room.BuildingId, room.Floor);
+            OnPropertyChanged(nameof(CurrentFullLocation));
+        }
+        catch (Exception)
+        {
+
+        }
     }
 }

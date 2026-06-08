@@ -76,6 +76,14 @@
                         </Grid>
 
                     </Grid>
+
+                    <Border BackgroundColor="{StaticResource Primary}" ZIndex="50" HorizontalOptions="End" VerticalOptions="End" Margin="30,140" Padding="0" StrokeThickness="0">
+                        <Grid>
+                            <Image Source="search.png" WidthRequest="25" HeightRequest="25" Margin="15"></Image>
+                            <Button BackgroundColor="Transparent" Command="{Binding SearchClickedCommand}"></Button>
+                        </Grid>
+                    </Border>
+
                 </Grid>
             </toolkit:StateContainer.StateViews>
         </Grid>

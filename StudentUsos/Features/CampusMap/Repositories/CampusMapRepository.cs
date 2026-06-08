@@ -44,6 +44,17 @@ public class CampusMapRepository : ICampusMapRepository
         return localDatabaseManager.Get<FloorMap>(x => x.BuildingId == buildingId && x.Floor == floor);
     }
 
+    public void SaveAllRooms(IEnumerable<RoomInfo> rooms)
+    {
+        localDatabaseManager.ClearTable<RoomInfo>();
+        localDatabaseManager.InsertAll(rooms);
+    }
+
+    public List<RoomInfo> GetAllRooms()
+    {
+        return localDatabaseManager.GetAll<RoomInfo>();
+    }
+
     public void SaveFloorMap(FloorMap floorMap)
     {
         localDatabaseManager.Remove<FloorMap>($"BuildingId=\"{floorMap.BuildingId}\" AND Floor=\"{floorMap.Floor}\"");

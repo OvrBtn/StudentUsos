@@ -4,12 +4,15 @@ namespace StudentUsos.Features.CampusMap.Views;
 
 public partial class CampusMapPage : ContentPage
 {
+    INavigationService navigationService;
     CampusMapViewModel viewModel;
-    public CampusMapPage(CampusMapViewModel viewModel)
+    public CampusMapPage(CampusMapViewModel viewModel, INavigationService navigationService)
     {
         InitializeComponent();
 
         this.viewModel = viewModel;
+        this.navigationService = navigationService;
+
         viewModel.SetCampusMapPage(this);
         BindingContext = viewModel;
 

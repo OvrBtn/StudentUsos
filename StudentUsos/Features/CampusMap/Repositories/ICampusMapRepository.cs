@@ -17,6 +17,9 @@ public interface ICampusMapRepository
     public List<RoomInfo> GetFloorData(string buildingId, string floor);
     public void SaveFloorData(string buildingId, string floor, List<RoomInfo> roomInfos);
 
+    public void SaveAllRooms(IEnumerable<RoomInfo> rooms);
+    public List<RoomInfo> GetAllRooms();
+
     public void MarkAsUpvoted(RoomInfo roomInfo);
     public void UnmarkAsUpvoted(RoomInfo roomInfo);
     public void MarkAsDownvoted(RoomInfo roomInfo);

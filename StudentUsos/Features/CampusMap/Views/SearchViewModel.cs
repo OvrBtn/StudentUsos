@@ -29,7 +29,7 @@ public partial class SearchViewModel : BaseViewModel, INavigableWithResult<RoomI
 
     public async Task InitAsync()
     {
-        var allRoomsLocal = campusMapRepository.GetAllRooms();
+        var allRoomsLocal = campusMapRepository.GetAllRooms().OrderBy(x => x.InternalId).ToList();
         if (allRoomsLocal.Count > 0)
         {
             originalRooms = allRoomsLocal;

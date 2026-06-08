@@ -430,8 +430,10 @@ public partial class CampusMapViewModel : BaseViewModel
             CurrentFloor = room.Floor;
             Floors = Buildings[CurrentBuildingIndex].FloorsList;
 
-            _ = UpdateWebViewAsync(room.BuildingId, room.Floor);
+            await UpdateWebViewAsync(room.BuildingId, room.Floor);
             OnPropertyChanged(nameof(CurrentFullLocation));
+
+            _ = CampusMapPage.SendActiveRoomToHybridWebView(room.Name);
         }
         catch (Exception)
         {

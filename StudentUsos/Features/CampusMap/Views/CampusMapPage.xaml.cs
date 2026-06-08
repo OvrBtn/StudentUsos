@@ -62,6 +62,14 @@ public partial class CampusMapPage : ContentPage
             [HybridWebViewJsonContext.Default.String]);
     }
 
+    public async Task SendActiveRoomToHybridWebView(string roomName)
+    {
+        await hybridWebView.InvokeJavaScriptAsync<object>("ReceiveActiveRoomName",
+            HybridWebViewJsonContext.Default.Object,
+            [roomName],
+            [HybridWebViewJsonContext.Default.String]);
+    }
+
 
     bool isWebViewIntialized = false;
     public async Task SendCampusSvgToHybridWebView(string campusSvg)

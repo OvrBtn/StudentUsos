@@ -172,6 +172,22 @@ function ReceiveFloorSvg(svg) {
     bringDoorsToFront();
 }
 
+function ReceiveActiveRoomName(roomName) {
+    const labels = document.getElementById("labels").children;
+    const rooms = document.getElementById("rooms").children;
+
+    for (let i = 0; i < rooms.length; i++) {
+        rooms[i].classList.remove("activeRoom");
+    }
+
+    for (let i = 0; i < labels.length; i++) {
+        if (labels[i].textContent.trim() === roomName) {
+            rooms[i].classList.add("activeRoom");
+            return;
+        }
+    }
+}
+
 function ReceiveCampusSvg(svg) {
     const body = document.body;
     body.innerHTML = svg;

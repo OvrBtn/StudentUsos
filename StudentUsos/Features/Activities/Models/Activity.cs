@@ -202,7 +202,7 @@ public partial class Activity : ObservableObject
             var groupsRepository = App.ServiceProvider.GetService<IGroupsRepository>()!;
             var group = groupsRepository.GetGroup(CourseId, ClassTypeName) ?? new();
             var page = App.ServiceProvider.GetService<GroupDetailsPage>()!;
-            page.Init(group, () => isBusy = false);
+            page.Init(group, () => isBusy = false, this);
             page.ShowPopup();
         }
     }

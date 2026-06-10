@@ -1,8 +1,9 @@
-﻿using System.Text.Json.Serialization;
+﻿using StudentUsos.Features.Activities.Models;
+using System.Text.Json.Serialization;
 
 namespace StudentUsos.Features.CampusMap.Views;
 
-public partial class CampusMapPage : ContentPage
+public partial class CampusMapPage : ContentPage, INavigableWithParameter<Activity>
 {
     INavigationService navigationService;
     CampusMapViewModel viewModel;
@@ -17,6 +18,22 @@ public partial class CampusMapPage : ContentPage
         BindingContext = viewModel;
 
         hybridWebView.SetInvokeJavaScriptTarget(this);
+    }
+
+    public async void OnNavigated(Activity navigationParameter)
+    {
+        if (isInitialized)
+        {
+            return;
+        }
+        Dispatcher.Dispatch(() =>
+        {
+            isInitialized = true;
+            _ = viewModel.InitAsync();
+        });
+
+        await Task.Delay(2000);
+        await viewModel.SearchClickedCommand.ExecuteAsync(navigationParameter.RoomNumber);
     }
 
 

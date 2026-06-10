@@ -99,4 +99,35 @@ class NavigationService : INavigationService
         }
         throw new InvalidOperationException($"Either page or it's binding context must implement {nameof(INavigableWithResult<TReturn>)}");
     }
+
+    public async Task<TReturn?> PushWithParametersAndReturnAsync<TPage, TParameter, TReturn>(TParameter parameter, bool isAnimated = true) where TPage : ContentPage
+    {
+        var page = _serviceProvider.GetService<TPage>();
+        if (page is null)
+        {
+            throw new ArgumentException("Page not injected into dependency container");
+        }
+
+        if (page is INavigableWithParameter<TParameter> param)
+        {
+            param.OnNavigated(parameter);
+        }
+        if (page.BindingContext is INavigableWithParameter<TParameter> paramBindingContext)
+        {
+            paramBindingContext.OnNavigated(parameter);
+        }
+
+        await navigation.PushAsync(page, isAnimated);
+
+        if (page is INavigableWithResult<TReturn> pageResultProvider)
+        {
+            return await pageResultProvider.TaskCompletionSource.Task;
+        }
+        else if (page.BindingContext is INavigableWithResult<TReturn> bindingContextResultProvider)
+        {
+            var t = navigation.NavigationStack.ToList();
+            return await bindingContextResultProvider.TaskCompletionSource.Task;
+        }
+        throw new InvalidOperationException($"Either page or it's binding context must implement {nameof(INavigableWithResult<TReturn>)}");
+    }
 }

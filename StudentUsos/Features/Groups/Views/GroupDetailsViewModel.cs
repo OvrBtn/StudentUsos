@@ -1,4 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using StudentUsos.Features.Activities.Models;
+using StudentUsos.Features.CampusMap.Views;
 using StudentUsos.Features.Groups.Models;
 using System.Collections.ObjectModel;
 
@@ -6,22 +9,35 @@ namespace StudentUsos.Features.Groups.Views;
 
 public partial class GroupDetailsViewModel : BaseViewModel
 {
-    public GroupDetailsViewModel()
+    INavigationService navigationService;
+    public GroupDetailsViewModel(INavigationService navigationService)
     {
+        this.navigationService = navigationService;
         //Group = new Group();
     }
 
-    public void Init(Group group, Action? onClose)
+    [ObservableProperty, NotifyPropertyChangedFor(nameof(IsActivitySet))]
+    Activity? passedActivity;
+    public bool IsActivitySet => PassedActivity is not null;
+
+    public void Init(Group group, Action? onClose, Activity? activity = null)
     {
         Participants = new ObservableCollection<Person.Models.Person>();
         Group = group;
         OnClose = onClose;
+        PassedActivity = activity;
 
         GetMoreParticipants = AddParticipantsToList;
 
         AddParticipantsToList();
 
         OnPropertyChanged("LecturerClickedCommand");
+    }
+
+    [RelayCommand]
+    async Task OpenCampusMapWithSeachingAsync()
+    {
+        await navigationService.PushAsync<CampusMapPage, Activity>(PassedActivity);
     }
 
     /// <summary>

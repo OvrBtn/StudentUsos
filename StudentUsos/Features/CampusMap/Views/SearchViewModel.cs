@@ -6,7 +6,7 @@ using StudentUsos.Features.CampusMap.Services;
 
 namespace StudentUsos.Features.CampusMap.Views;
 
-public partial class SearchViewModel : BaseViewModel, INavigableWithResult<RoomInfo>
+public partial class SearchViewModel : BaseViewModel, INavigableWithResult<RoomInfo>, INavigableWithParameter<string>
 {
     ICampusMapRepository campusMapRepository;
     ICampusMapService campusMapService;
@@ -34,6 +34,12 @@ public partial class SearchViewModel : BaseViewModel, INavigableWithResult<RoomI
         {
             originalRooms = allRoomsLocal;
             Rooms = allRoomsLocal;
+
+            if (EditorText != string.Empty)
+            {
+                TextChanged();
+            }
+
             MainStateKey = StateKey.Loaded;
         }
 
@@ -42,6 +48,12 @@ public partial class SearchViewModel : BaseViewModel, INavigableWithResult<RoomI
         {
             originalRooms = allRoomsRemote;
             Rooms = allRoomsRemote;
+
+            if (EditorText != string.Empty)
+            {
+                TextChanged();
+            }
+
             MainStateKey = StateKey.Loaded;
 
             campusMapRepository.SaveAllRooms(allRoomsRemote);
@@ -51,6 +63,12 @@ public partial class SearchViewModel : BaseViewModel, INavigableWithResult<RoomI
         {
             MainStateKey = StateKey.ConnectionError;
         }
+    }
+
+    public void OnNavigated(string navigationParameter)
+    {
+        EditorText = navigationParameter;
+        TextChanged();
     }
 
     [RelayCommand]

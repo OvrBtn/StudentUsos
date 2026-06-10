@@ -6,6 +6,7 @@ public interface INavigationService
     public Task<T> PushAsync<T>(bool isAnimated = true) where T : ContentPage;
     public Task<TPage> PushAsync<TPage, TParameter>(TParameter parameter, bool isAnimated = true) where TPage : ContentPage;
     public Task<TReturn?> PushAndReturnAsync<TPage, TReturn>(bool isAnimated = true) where TPage : ContentPage;
+    public Task<TReturn?> PushWithParametersAndReturnAsync<TPage, TParameter, TReturn>(TParameter parameter, bool isAnimated = true) where TPage : ContentPage;
     public Task<T> PushModalAsync<T>(bool isAnimated = true) where T : ContentPage;
     public Task PopAsync(bool isAnimated = true);
     public Task PopModalAsync(bool isAnimated = true);

@@ -415,11 +415,11 @@ public partial class CampusMapViewModel : BaseViewModel
     }
 
     [RelayCommand]
-    async Task SearchClickedAsync()
+    async Task SearchClickedAsync(string? initialRoomName = "")
     {
         try
         {
-            var room = await navigationService.PushAndReturnAsync<SearchPage, RoomInfo>();
+            var room = await navigationService.PushWithParametersAndReturnAsync<SearchPage, string, RoomInfo>(initialRoomName);
             if (room is null)
             {
                 return;
